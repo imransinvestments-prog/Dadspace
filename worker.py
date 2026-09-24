@@ -6,7 +6,7 @@ What it does, in plain English:
   2. Downloads each page and turns it into plain text.
   3. Asks Google Gemini to pull out the events (title, date, place, cost...).
   4. Throws away anything with no date, anything in the past, and anything not family-relevant.
-  5. Saves what is left into the Supabase `events` table (updating events it has seen before).
+  5. Saves what is left into the Supabase `collected_events` table (updating events it has seen before).
 
 You do not run this on your own computer. GitHub runs it for you (see collect.yml).
 Settings come from "secrets" and options set in GitHub, never from this file.
@@ -30,6 +30,7 @@ from bs4 import BeautifulSoup
 # Settings (all can be changed from GitHub without editing this file)
 # ----------------------------------------------------------------------------
 MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+EVENTS_TABLE = os.environ.get("EVENTS_TABLE", "collected_events")  # where events are saved
 LIMIT = int(os.environ.get("LIMIT", "0") or 0)              # 0 = every active source
 DRY_RUN = os.environ.get("DRY_RUN", "false").strip().lower() == "true"
 MIN_RELEVANCE = int(os.environ.get("MIN_RELEVANCE", "2"))   # 1-5; events scoring lower are dropped
@@ -315,8 +316,17 @@ def main():
         print("Setup problem: these GitHub secrets are missing or empty: " + ", ".join(missing))
         sys.exit(1)
 
+    # Tidy up the secrets: remove stray spaces, line breaks and quote marks from copy-and-paste
+    supabase_url = os.environ["SUPABASE_URL"].strip().strip("\"'").rstrip("/")
+    supabase_key = os.environ["SUPABASE_KEY"].strip().strip("\"'")
+    if not re.fullmatch(r"https://[A-Za-z0-9-]+\.supabase\.co", supabase_url):
+        print("Setup problem: the SUPABASE_URL secret does not look right.")
+        print("It should look like  https://abcdefghijklmnop.supabase.co  (starts with https://, ends with .supabase.co, nothing after it).")
+        print(f"What the worker received starts with: {supabase_url[:8]!r} and is {len(supabase_url)} characters long.")
+        sys.exit(1)
+
     from supabase import create_client
-    db = create_client(os.environ["SUPABASE_URL"], os.environ["SUPABASE_KEY"])
+    db = create_client(supabase_url, supabase_key)
     extract = make_gemini_caller()
     today = today_uk()
 
@@ -350,7 +360,7 @@ def main():
             if not rows:
                 zero_event_sources.append(source["name"])
             if rows and not DRY_RUN:
-                db.table("events").upsert(rows, on_conflict="dedupe_key").execute()
+                db.table(EVENTS_TABLE).upsert(rows, on_conflict="dedupe_key").execute()
             if DRY_RUN:
                 for row in rows[:5]:
                     print(f"      would save: {row['start_date']} | {row['title']} | {row['location']}")
