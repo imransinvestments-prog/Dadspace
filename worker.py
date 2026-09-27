@@ -30,6 +30,8 @@ from bs4 import BeautifulSoup
 # Settings (all can be changed from GitHub without editing this file)
 # ----------------------------------------------------------------------------
 MODEL = os.environ.get("GEMINI_MODEL") or "gemini-3.6-flash"   # can be changed from GitHub without editing this file
+FETCH_ENGINE = os.environ.get("FETCH_ENGINE", "requests")       # "requests" (fast, plain pages) or "browser" (slow, JS-heavy pages)
+CATEGORY_FILTER = [c.strip() for c in os.environ.get("CATEGORIES", "").split(",") if c.strip()]  # empty = every category
 EVENTS_TABLE = os.environ.get("EVENTS_TABLE", "collected_events")  # where events are saved
 LIMIT = int(os.environ.get("LIMIT", "0") or 0)              # 0 = every active source
 DRY_RUN = os.environ.get("DRY_RUN", "false").strip().lower() == "true"
@@ -106,10 +108,32 @@ def robots_allows(url):
     return False, "robots.txt does not allow this page"
 
 
-def fetch_html(url):
+def fetch_html_requests(url):
+    """Plain download - fast, works for ordinary web pages (most council and museum sites)."""
     resp = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=30)
     resp.raise_for_status()
     return resp.text
+
+
+def fetch_html_browser(url):
+    """Loads the page in a real (invisible) browser first, so JavaScript-built listings appear too.
+    Slower and needs Playwright installed - only used when FETCH_ENGINE=browser."""
+    from playwright.sync_api import sync_playwright
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        try:
+            page = browser.new_page(user_agent=USER_AGENT)
+            page.goto(url, timeout=45000, wait_until="networkidle")
+            return page.content()
+        finally:
+            browser.close()
+
+
+def fetch_html(url):
+    if FETCH_ENGINE == "browser":
+        return fetch_html_browser(url)
+    return fetch_html_requests(url)
 
 
 def _walk(node):
@@ -341,13 +365,17 @@ def main():
     extract = make_gemini_caller()
     today = today_uk()
 
-    sources = db.table("sources").select("*").eq("active", True).execute().data
+    query = db.table("sources").select("*").eq("active", True)
+    if CATEGORY_FILTER:
+        query = query.in_("category", CATEGORY_FILTER)
+    sources = query.execute().data
     # Never-checked sources first, then the ones checked longest ago
     sources.sort(key=lambda s: s.get("last_checked_at") or "")
     if LIMIT > 0:
         sources = sources[:LIMIT]
 
-    print(f"Today (UK): {today}. Sources to process: {len(sources)}. Dry run: {DRY_RUN}. Model: {MODEL}")
+    which = ", ".join(CATEGORY_FILTER) if CATEGORY_FILTER else "all categories"
+    print(f"Today (UK): {today}. Categories: {which}. Fetch engine: {FETCH_ENGINE}. Sources to process: {len(sources)}. Dry run: {DRY_RUN}. Model: {MODEL}")
     totals = {"ok": 0, "unchanged": 0, "skipped": 0, "failed": 0}
     total_events = 0
     zero_event_sources = []
