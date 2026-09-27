@@ -29,7 +29,7 @@ from bs4 import BeautifulSoup
 # ----------------------------------------------------------------------------
 # Settings (all can be changed from GitHub without editing this file)
 # ----------------------------------------------------------------------------
-MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+MODEL = os.environ.get("GEMINI_MODEL") or "gemini-3.6-flash"   # can be changed from GitHub without editing this file
 EVENTS_TABLE = os.environ.get("EVENTS_TABLE", "collected_events")  # where events are saved
 LIMIT = int(os.environ.get("LIMIT", "0") or 0)              # 0 = every active source
 DRY_RUN = os.environ.get("DRY_RUN", "false").strip().lower() == "true"
@@ -43,6 +43,10 @@ EVENT_FIELDS = [
     "title", "description", "start_date", "end_date", "time_text", "location",
     "event_url", "cost_text", "age_range", "recurrence", "family_relevance", "confidence",
 ]
+
+
+class FatalError(Exception):
+    """A problem that will affect every website (wrong model name, bad key), so the run should stop."""
 
 
 # ----------------------------------------------------------------------------
@@ -222,6 +226,13 @@ def make_gemini_caller():
                     raise ValueError("Gemini did not return a list")
                 return data
             except Exception as exc:  # retry on any temporary problem
+                text = str(exc)
+                if any(word in text for word in ("NOT_FOUND", "PERMISSION_DENIED", "UNAUTHENTICATED", "API key not valid")):
+                    raise FatalError(
+                        f"Gemini rejected the request ({text[:300]}). "
+                        "The model name may be retired (change the GEMINI_MODEL variable in GitHub) "
+                        "or the GEMINI_API_KEY secret may be wrong."
+                    )
                 last_error = exc
                 time.sleep(5 * (attempt + 1))
         raise RuntimeError(f"Gemini failed after 3 tries: {last_error}")
@@ -347,6 +358,9 @@ def main():
         update = {"last_checked_at": now_iso}
         try:
             status, rows, new_hash, message = process_source(source, extract, today)
+        except FatalError as exc:
+            print(f"{label}: STOPPING THE WHOLE RUN - {exc}")
+            sys.exit(1)
         except Exception as exc:
             status, rows, new_hash, message = "failed", [], None, f"{type(exc).__name__}: {exc}"
 
