@@ -1,0 +1,40 @@
+name: Collect all events
+
+# One manual button: civic first, activities second.
+# Activities starts only if civic finishes successfully.
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true = report only, false = save both collectors to Supabase"
+        required: true
+        type: choice
+        options:
+          - "true"
+          - "false"
+        default: "true"
+      civic_limit:
+        description: "Civic websites to process (0 = all)"
+        required: false
+        default: "0"
+      activities_limit:
+        description: "Activity websites to process (0 = all)"
+        required: false
+        default: "0"
+
+jobs:
+  civic:
+    uses: ./.github/workflows/collect-civic.yml
+    with:
+      dry_run: ${{ inputs.dry_run }}
+      limit: ${{ inputs.civic_limit }}
+    secrets: inherit
+
+  activities:
+    needs: civic
+    uses: ./.github/workflows/collect-activities.yml
+    with:
+      dry_run: ${{ inputs.dry_run }}
+      limit: ${{ inputs.activities_limit }}
+    secrets: inherit

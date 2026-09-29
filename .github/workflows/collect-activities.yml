@@ -1,0 +1,61 @@
+name: Collect events (activities & clubs)
+
+# The browser-based activity collector. Kept separate from civic so browser
+# failures do not affect the requests-based collector.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "How many websites to process (0 = all)"
+        default: "5"
+      dry_run:
+        description: "true = only show what would be saved, false = save to Supabase"
+        default: "true"
+  workflow_call:
+    inputs:
+      limit:
+        description: "How many websites to process (0 = all)"
+        required: false
+        type: string
+        default: "0"
+      dry_run:
+        description: "true = only show what would be saved, false = save to Supabase"
+        required: false
+        type: string
+        default: "true"
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-browser.txt
+      - run: playwright install --with-deps chromium
+      - name: Validate Python (syntax check)
+        run: python -m py_compile worker.py
+      - name: Self-test (no network/Gemini/Supabase calls)
+        run: python worker.py --self-test
+      - name: Run collector
+        run: python worker.py
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          CATEGORIES: "activities"
+          FETCH_ENGINE: "browser"
+          BROWSER_GOTO_TIMEOUT_MS: "30000"
+          BROWSER_SETTLE_MS: "2500"
+          MAX_CHARS: "24000"
+          MIN_DATE_HINTS_FOR_LLM: "1"
+          MAX_RUN_MINUTES: "60"
+          GEMINI_TIMEOUT_SECONDS: "90"
+          LIMIT: ${{ inputs.limit || '0' }}
+          DRY_RUN: ${{ inputs.dry_run || 'true' }}
