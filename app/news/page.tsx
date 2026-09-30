@@ -1,11 +1,12 @@
-import type { Metadata } from "next"
 import { NewsFeed } from "@/components/news/news-feed"
 import { fetchNews, type NewsItem } from "@/lib/news"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "News",
-  description: "UK news that matters to dads, summarised with why it matters.",
-}
+export const metadata = pageMetadata(
+  "News",
+  "/news",
+  "UK news that matters to dads, summarised with why it matters.",
+)
 
 // Re-check the database for new articles at most every 10 minutes.
 export const revalidate = 600

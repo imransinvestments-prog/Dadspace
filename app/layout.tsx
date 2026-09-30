@@ -4,26 +4,35 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AppShell } from "@/components/app-shell"
 import { LocationProvider } from "@/components/location-provider"
+import { defaultDescription, defaultTitle, isProduction, siteName, siteUrl } from "@/lib/seo"
 import "./globals.css"
 
 const bricolage = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage", display: "swap" })
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta", display: "swap" })
 
 export const metadata: Metadata = {
-  title: { default: "Dadspace – the hub for UK dads", template: "%s · Dadspace" },
-  description:
-    "Find family days out near you, chat with other dads, catch up on dad rights and parenting news, and grab deals on baby and kids' kit.",
-  applicationName: "Dadspace",
-  appleWebApp: { capable: true, title: "Dadspace", statusBarStyle: "black-translucent" },
+  metadataBase: new URL(siteUrl),
+  title: { default: defaultTitle, template: "%s · Dadspace" },
+  description: defaultDescription,
+  applicationName: siteName,
+  alternates: { canonical: "/" },
+  robots: isProduction ? { index: true, follow: true } : { index: false, follow: false },
+  appleWebApp: { capable: true, title: siteName, statusBarStyle: "black-translucent" },
   openGraph: {
-    title: "Dadspace – the hub for UK dads",
+    title: defaultTitle,
     description: "Days out, dad chat, news that matters and deals on kids' kit.",
-    siteName: "Dadspace",
+    url: "/",
+    siteName,
     locale: "en_GB",
     type: "website",
     images: [{ url: "/images/hero-dad.png", width: 1200, height: 630, alt: "A dad carrying his daughter on his shoulders in a park" }],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
+    images: ["/images/hero-dad.png"],
+  },
 }
 
 export const viewport: Viewport = {
