@@ -27,6 +27,30 @@ export type Article = {
   source: string | null
 }
 
+export type NewsItem = {
+  id: string
+  title: string
+  url: string | null
+  source_name: string | null
+  published_at: string | null
+  summary: string | null
+  why_it_matters: string | null
+  category: string | null
+  relevance: number | null
+}
+
+export type NewsSource = {
+  name: string
+  category: string | null
+}
+
+export type NewsPageData = {
+  items: NewsItem[]
+  sources: NewsSource[]
+  categories: string[]
+  activeCategory: string | null
+}
+
 export type Deal = {
   id: string
   title: string
