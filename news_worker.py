@@ -37,10 +37,17 @@ import requests
 # ----------------------------------------------------------------------
 # CONFIG
 # ----------------------------------------------------------------------
-SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
-SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY", "")
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+def env(name, default=""):
+    """Read a setting and remove stray spaces, new lines and quote marks."""
+    return os.environ.get(name, default).strip().strip("\"'").strip()
+
+
+SUPABASE_URL = env("SUPABASE_URL").rstrip("/")
+SUPABASE_SERVICE_KEY = env("SUPABASE_SERVICE_KEY")
+GEMINI_API_KEY = env("GEMINI_API_KEY")
+# gemini-2.5-flash is being retired by Google (and is already returning 404
+# for some people), so the default is its replacement.
+GEMINI_MODEL = env("GEMINI_MODEL") or "gemini-3.5-flash"
 
 DRY_RUN = os.environ.get("DRY_RUN", "true").strip().lower() != "false"
 MIN_RELEVANCE = int(os.environ.get("MIN_RELEVANCE", "3"))
@@ -131,9 +138,12 @@ def entry_date(entry):
 def sb(method, path, params=None, json_body=None, extra_headers=None):
     headers = {
         "apikey": SUPABASE_SERVICE_KEY,
-        "Authorization": f"Bearer {SUPABASE_SERVICE_KEY}",
         "Content-Type": "application/json",
     }
+    # Older Supabase keys (start "eyJ") go in both headers. Newer keys
+    # (start "sb_secret_") must ONLY go in "apikey", or Supabase returns 401.
+    if SUPABASE_SERVICE_KEY.startswith("eyJ"):
+        headers["Authorization"] = f"Bearer {SUPABASE_SERVICE_KEY}"
     if extra_headers:
         headers.update(extra_headers)
     r = requests.request(method, f"{SUPABASE_URL}/rest/v1/{path}",
@@ -217,7 +227,6 @@ def gemini_score(batch):
         "generationConfig": {
             "temperature": 0.1,
             "responseMimeType": "application/json",
-            "thinkingConfig": {"thinkingBudget": 0},
         },
     }
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
@@ -260,6 +269,16 @@ def self_test():
         print(f"Gemini ({GEMINI_MODEL}): OK ({len(result)} result)")
     except Exception as exc:
         problems.append(f"Gemini: {exc}")
+        try:
+            r = requests.get("https://generativelanguage.googleapis.com/v1beta/models",
+                             headers={"x-goog-api-key": GEMINI_API_KEY},
+                             params={"pageSize": 100}, timeout=30)
+            names = [m["name"].replace("models/", "") for m in r.json().get("models", [])
+                     if "generateContent" in m.get("supportedGenerationMethods", [])
+                     and "flash" in m["name"]]
+            print("Flash models your key can use right now:\n  " + "\n  ".join(names))
+        except Exception as exc2:
+            print(f"(could not list models: {exc2})")
     if problems:
         print("SELF-TEST FAILED:\n  " + "\n  ".join(problems))
         return 1
