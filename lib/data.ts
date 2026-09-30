@@ -2,7 +2,7 @@ import "server-only"
 import { getSupabase } from "./supabase"
 import { londonHour, londonToday, upcomingWeekend, formatEventDate } from "./dates"
 import { sampleArticles, sampleDeal, sampleEvents, sampleThreads } from "./sample-data"
-import type { Article, DadEvent, ForumThread, HomeData, NewsItem, NewsPageData, NewsSource } from "./types"
+import type { Article, DadEvent, ForumThread, HomeData } from "./types"
 
 const EVENT_COLUMNS =
   "id,title,description,start_date,end_date,time_text,location,event_url,cost_text,age_range,family_relevance,source_url"
@@ -81,36 +81,6 @@ async function getLatestArticles() {
     }
   }
   return { items: sampleArticles, isSample: true }
-}
-
-const NEWS_COLUMNS = "id,title,url,source_name,published_at,summary,why_it_matters,category,relevance"
-
-async function queryNews(table: "feed_items" | "news_items", category: string | null) {
-  const db = getSupabase()
-  if (!db) return null
-  let query = db
-    .from(table)
-    .select(NEWS_COLUMNS)
-    .order("published_at", { ascending: false, nullsFirst: false })
-    .limit(60)
-  if (category) query = query.eq("category", category)
-  const { data, error } = await query
-  if (error) return null
-  return (data ?? []).map((row) => ({ ...row, id: String(row.id) })) as NewsItem[]
-}
-
-export async function getNewsPageData(requestedCategory?: string): Promise<NewsPageData> {
-  const db = getSupabase()
-  const sourcesResult = db
-    ? await db.from("news_sources").select("name,category").eq("active", true).order("name")
-    : null
-  const sources = (sourcesResult?.data ?? []) as NewsSource[]
-  const categories = [...new Set(sources.map((s) => s.category).filter((c): c is string => Boolean(c)))].sort()
-
-  const activeCategory = requestedCategory && categories.includes(requestedCategory) ? requestedCategory : null
-  const items = (await queryNews("feed_items", activeCategory)) ?? (await queryNews("news_items", activeCategory)) ?? []
-
-  return { items, sources, categories, activeCategory }
 }
 
 export async function getHomeData(): Promise<HomeData> {
