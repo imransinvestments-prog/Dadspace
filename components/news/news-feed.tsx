@@ -1,8 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import useSWRInfinite from "swr/infinite"
+import { LoaderCircle, LocateFixed } from "lucide-react"
 import { EmptyState } from "@/components/empty-state"
+import { useRegionFromLocation } from "@/hooks/use-region-from-location"
 import { cn } from "@/lib/utils"
 import {
   CATEGORIES,
@@ -39,11 +41,13 @@ export function NewsFeed({ initialItems }: { initialItems: NewsItem[] | null }) 
     if (isRegion(saved)) setRegion(saved)
   }, [])
 
-  function changeRegion(value: string) {
+  const changeRegion = useCallback((value: string) => {
     if (!isRegion(value)) return
     setRegion(value)
     window.localStorage.setItem(REGION_STORAGE_KEY, value)
-  }
+  }, [])
+
+  const { locate, status: locationStatus, message: locationMessage } = useRegionFromLocation(changeRegion)
 
   // Each "page" is 20 articles. Stop asking for more once a page comes back short.
   const getKey = (pageIndex: number, previousPage: NewsItem[] | null): Key | null => {
@@ -77,21 +81,44 @@ export function NewsFeed({ initialItems }: { initialItems: NewsItem[] | null }) 
             The last two weeks of news that matters to dads, in a sentence or two.
           </p>
         </div>
-        <label className="flex flex-col gap-1 text-sm font-semibold">
-          Region
-          <select
-            value={region}
-            onChange={(e) => changeRegion(e.target.value)}
-            className="h-11 min-w-44 rounded-full border bg-card px-4 text-base font-medium text-card-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            {REGIONS.map((r) => (
-              <option key={r.value} value={r.value}>
-                {r.label}
-              </option>
-            ))}
-          </select>
-        </label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="news-region" className="text-sm font-semibold">
+            Region
+          </label>
+          <div className="flex items-center gap-2">
+            <select
+              id="news-region"
+              value={region}
+              onChange={(e) => changeRegion(e.target.value)}
+              className="h-11 min-w-44 flex-1 rounded-full border bg-card px-4 text-base font-medium text-card-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {REGIONS.map((r) => (
+                <option key={r.value} value={r.value}>
+                  {r.label}
+                </option>
+              ))}
+            </select>
+            <button
+              type="button"
+              onClick={locate}
+              disabled={locationStatus === "locating"}
+              aria-label="Use my location to set the region"
+              title="Use my location"
+              className="flex size-11 shrink-0 items-center justify-center rounded-full border bg-card text-card-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60"
+            >
+              {locationStatus === "locating" ? (
+                <LoaderCircle className="size-5 animate-spin" aria-hidden="true" />
+              ) : (
+                <LocateFixed className="size-5" aria-hidden="true" />
+              )}
+            </button>
+          </div>
+        </div>
       </header>
+
+      <p role="status" aria-live="polite" className={cn("text-sm leading-relaxed text-muted-foreground", !locationMessage && "sr-only")}>
+        {locationStatus === "locating" ? "Finding your region…" : locationMessage}
+      </p>
 
       <div
         role="group"

@@ -8,7 +8,7 @@ export function WeekendEvents({ events }: { events: HomeData["events"] }) {
     <section aria-labelledby="weekend-title" className="flex flex-col gap-4">
       <SectionHeader
         id="weekend-title"
-        title={events.isWeekend ? "This weekend near you" : "Coming up soon"}
+        title={events.isWeekend ? "This weekend" : "Coming up soon"}
         href="/events"
         linkLabel="All events"
         isSample={events.isSample}
