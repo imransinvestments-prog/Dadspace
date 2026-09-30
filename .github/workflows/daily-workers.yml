@@ -1,0 +1,65 @@
+name: Daily Dadspace workers (7am UK)
+
+on:
+  # GitHub cron is UTC and does not understand Europe/London daylight saving.
+  # Run at both possible UTC equivalents of 07:00 UK time, then gate using TZ.
+  schedule:
+    - cron: "0 6 * * *"
+    - cron: "0 7 * * *"
+
+  # Manual button for testing; manual runs bypass the 07:00 local-time gate.
+  workflow_dispatch:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.uk_time.outputs.should_run }}
+    steps:
+      - id: uk_time
+        name: Check whether it is 07:00 in the UK
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            echo "Manual run: continuing."
+            exit 0
+          fi
+
+          UK_HOUR=$(TZ=Europe/London date +%H)
+          UK_TIME=$(TZ=Europe/London date '+%Y-%m-%d %H:%M %Z')
+          echo "Current UK time: $UK_TIME"
+
+          if [ "$UK_HOUR" = "07" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            echo "It is 07:00 in Europe/London: running workers."
+          else
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+            echo "Not 07:00 in Europe/London: skipping this UTC trigger."
+          fi
+
+  news:
+    needs: gate
+    if: needs.gate.outputs.should_run == 'true'
+    uses: ./.github/workflows/news.yml
+    with:
+      dry_run: "false"
+    secrets: inherit
+
+  civic:
+    needs: gate
+    if: needs.gate.outputs.should_run == 'true'
+    uses: ./.github/workflows/collect-civic.yml
+    with:
+      dry_run: "false"
+      limit: "0"
+    secrets: inherit
+
+  activities:
+    needs: gate
+    if: needs.gate.outputs.should_run == 'true'
+    uses: ./.github/workflows/collect-activities.yml
+    with:
+      dry_run: "false"
+      limit: "0"
+    secrets: inherit
