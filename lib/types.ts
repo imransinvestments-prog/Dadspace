@@ -13,6 +13,7 @@ export type DadEvent = {
   source_url: string | null
   source_id?: string | null
   distance_miles?: number | null
+  image_url?: string | null
 }
 
 /** How the Home events were picked when the user's location is known. */
