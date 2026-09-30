@@ -2,6 +2,7 @@ import "server-only"
 import { getSupabase } from "./supabase"
 import { londonHour, londonToday, upcomingWeekend, formatEventDate } from "./dates"
 import { sampleArticles, sampleDeal, sampleEvents, sampleThreads } from "./sample-data"
+import { distanceKm, geocodeLocations, kmToMiles, locationKey, type Point } from "./geo"
 import type { Article, DadEvent, ForumThread, HomeData } from "./types"
 
 const EVENT_COLUMNS =
@@ -15,7 +16,51 @@ function greetingFor(hour: number) {
   return "Night shift, Dad?"
 }
 
-async function getWeekendEvents(saturday: string, sunday: string, today: string) {
+const NEARBY_RADIUS_MILES = 30
+const HOME_EVENT_COUNT = 3
+
+type EventsResult = HomeData["events"]
+
+async function getNearbyEvents(user: Point, saturday: string, sunday: string, today: string): Promise<EventsResult | null> {
+  const db = getSupabase()
+  if (!db) return null
+
+  const { data, error } = await db
+    .from("upcoming_events")
+    .select(`${EVENT_COLUMNS},source_id`)
+    .gte("end_date", today)
+    .order("start_date", { ascending: true })
+    .limit(500)
+  if (error || !data?.length) return null
+
+  const rows = data as DadEvent[]
+  const places = await geocodeLocations(rows)
+  const located = rows
+    .map((event) => {
+      const point = places.get(locationKey(event))
+      return point ? { ...event, distance_miles: Math.round(kmToMiles(distanceKm(user, point)) * 10) / 10 } : null
+    })
+    .filter((e): e is DadEvent & { distance_miles: number } => e !== null)
+  if (!located.length) return null
+
+  const byDistance = (a: DadEvent, b: DadEvent) =>
+    (a.distance_miles ?? 0) - (b.distance_miles ?? 0) || (b.family_relevance ?? 0) - (a.family_relevance ?? 0)
+  const nearby = located.filter((e) => e.distance_miles <= NEARBY_RADIUS_MILES)
+  const base = { isSample: false, radiusMiles: NEARBY_RADIUS_MILES }
+
+  const weekend = nearby.filter((e) => e.start_date <= sunday && (e.end_date ?? e.start_date) >= saturday)
+  if (weekend.length) {
+    return { ...base, items: weekend.sort(byDistance).slice(0, HOME_EVENT_COUNT), isWeekend: true, nearby: "weekend" }
+  }
+  if (nearby.length) {
+    const soon = [...nearby].sort((a, b) => a.start_date.localeCompare(b.start_date) || byDistance(a, b))
+    return { ...base, items: soon.slice(0, HOME_EVENT_COUNT), isWeekend: false, nearby: "soon" }
+  }
+  return { ...base, items: located.sort(byDistance).slice(0, HOME_EVENT_COUNT), isWeekend: false, nearby: "nearest" }
+}
+
+async function getWeekendEvents(saturday: string, sunday: string, today: string): Promise<EventsResult> {
+  const base = { nearby: null, radiusMiles: NEARBY_RADIUS_MILES }
   const db = getSupabase()
   if (db) {
     const weekend = await db
@@ -27,7 +72,7 @@ async function getWeekendEvents(saturday: string, sunday: string, today: string)
       .order("start_date", { ascending: true })
       .limit(3)
     if (!weekend.error && weekend.data?.length) {
-      return { items: weekend.data as DadEvent[], isSample: false, isWeekend: true }
+      return { ...base, items: weekend.data as DadEvent[], isSample: false, isWeekend: true }
     }
 
     const upcoming = await db
@@ -38,10 +83,10 @@ async function getWeekendEvents(saturday: string, sunday: string, today: string)
       .order("family_relevance", { ascending: false })
       .limit(3)
     if (!upcoming.error && upcoming.data?.length) {
-      return { items: upcoming.data as DadEvent[], isSample: false, isWeekend: false }
+      return { ...base, items: upcoming.data as DadEvent[], isSample: false, isWeekend: false }
     }
   }
-  return { items: sampleEvents(saturday, sunday), isSample: true, isWeekend: true }
+  return { ...base, items: sampleEvents(saturday, sunday), isSample: true, isWeekend: true }
 }
 
 function commentCount(value: unknown): number {
@@ -83,12 +128,24 @@ async function getLatestArticles() {
   return { items: sampleArticles, isSample: true }
 }
 
-export async function getHomeData(): Promise<HomeData> {
+async function getEvents(user: Point | null, saturday: string, sunday: string, today: string) {
+  if (user) {
+    try {
+      const nearby = await getNearbyEvents(user, saturday, sunday, today)
+      if (nearby) return nearby
+    } catch {
+      // Fall through to the unsorted list if geocoding is unavailable.
+    }
+  }
+  return getWeekendEvents(saturday, sunday, today)
+}
+
+export async function getHomeData(user: Point | null = null): Promise<HomeData> {
   const today = londonToday()
   const { saturday, sunday, sleeps } = upcomingWeekend(today)
 
   const [events, threads, articles] = await Promise.all([
-    getWeekendEvents(saturday, sunday, today),
+    getEvents(user, saturday, sunday, today),
     getTrendingThreads(),
     getLatestArticles(),
   ])
