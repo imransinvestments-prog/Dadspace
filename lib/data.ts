@@ -48,9 +48,11 @@ async function getNearbyEvents(user: Point, saturday: string, sunday: string, to
   const nearby = located.filter((e) => e.distance_miles <= NEARBY_RADIUS_MILES)
   const base = { isSample: false, radiusMiles: NEARBY_RADIUS_MILES }
 
-  const weekend = nearby.filter((e) => e.start_date <= sunday && (e.end_date ?? e.start_date) >= saturday)
-  if (weekend.length) {
-    return { ...base, items: weekend.sort(byDistance).slice(0, HOME_EVENT_COUNT), isWeekend: true, nearby: "weekend" }
+  const isThisWeekend = (e: DadEvent) => e.start_date <= sunday && (e.end_date ?? e.start_date) >= saturday
+  if (nearby.some(isThisWeekend)) {
+    // Nearby weekend events come first; any spare slots go to the next-closest weekend events beyond the radius.
+    const weekend = located.filter(isThisWeekend).sort(byDistance)
+    return { ...base, items: weekend.slice(0, HOME_EVENT_COUNT), isWeekend: true, nearby: "weekend" }
   }
   if (nearby.length) {
     const soon = [...nearby].sort((a, b) => a.start_date.localeCompare(b.start_date) || byDistance(a, b))
@@ -117,12 +119,33 @@ async function getTrendingThreads() {
   return { items: sampleThreads, isSample: true }
 }
 
+const HEADLINE_CATEGORIES = ["activities", "money", "safety", "policy"]
+const HEADLINE_COUNT = 4
+
 async function getLatestArticles() {
   const db = getSupabase()
   if (db) {
-    const { data, error } = await db.from("articles").select("id,title,source").order("id", { ascending: false }).limit(4)
+    const { data, error } = await db
+      .from("feed_items")
+      .select("id,title,url,source_name,category,published_at")
+      .not("category", "is", null)
+      .order("published_at", { ascending: false, nullsFirst: false })
+      .limit(300)
     if (!error && data?.length) {
-      return { items: data.map((a) => ({ ...a, id: String(a.id) })) as Article[], isSample: false }
+      const newestByCategory = new Map<string, (typeof data)[number]>()
+      for (const row of data) {
+        if (!newestByCategory.has(row.category)) newestByCategory.set(row.category, row)
+      }
+      // Preferred categories first, then the freshest remaining categories fill any gaps.
+      const chosen = [
+        ...HEADLINE_CATEGORIES.filter((c) => newestByCategory.has(c)),
+        ...[...newestByCategory.keys()].filter((c) => !HEADLINE_CATEGORIES.includes(c)),
+      ].slice(0, HEADLINE_COUNT)
+      const items: Article[] = chosen.map((category) => {
+        const row = newestByCategory.get(category)!
+        return { id: String(row.id), title: row.title, source: row.source_name, url: row.url, category }
+      })
+      if (items.length) return { items, isSample: false }
     }
   }
   return { items: sampleArticles, isSample: true }
