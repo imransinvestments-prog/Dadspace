@@ -19,26 +19,37 @@ function list(v: unknown): string[] {
   return []
 }
 
-// Tolerates a few likely column names so the page keeps working while the table's shape settles.
+// OSM-style `fee` values are usually "yes"/"no"; anything else is treated as price text.
+function feeInfo(fee: string | null): { is_free: boolean | null; price_text: string | null } {
+  if (!fee) return { is_free: null, price_text: null }
+  const f = fee.toLowerCase()
+  if (f === "no" || f === "free") return { is_free: true, price_text: null }
+  if (f === "yes") return { is_free: false, price_text: null }
+  return { is_free: null, price_text: fee }
+}
+
+// Maps the `venues` table (venue_name, town_city, country, website, fee…) with fallbacks for older column names.
 function toVenue(row: Row): Venue | null {
-  const name = str(row.name)
+  const name = str(row.venue_name) ?? str(row.venue_label) ?? str(row.name)
   if (!name) return null
+  const fee = feeInfo(str(row.fee))
+  const addressLines = [str(row.address_line_1), str(row.address_line_2)].filter(Boolean).join(", ")
   return {
     id: String(row.id ?? name),
     name,
     category: str(row.category)?.toLowerCase().replace(/[\s&-]+/g, "_") ?? null,
     description: str(row.description),
-    address: str(row.address),
-    town: str(row.town) ?? str(row.city),
+    address: str(row.address) ?? (addressLines || null),
+    town: str(row.town_city) ?? str(row.town) ?? str(row.city) ?? str(row.nearby_settlement),
     postcode: str(row.postcode),
-    region: str(row.region),
+    region: str(row.country) ?? str(row.region),
     latitude: num(row.latitude ?? row.lat),
     longitude: num(row.longitude ?? row.lng ?? row.lon),
-    website_url: str(row.website_url) ?? str(row.url),
+    website_url: str(row.website) ?? str(row.website_url) ?? str(row.url),
     phone: str(row.phone),
     opening_hours: str(row.opening_hours),
-    price_text: str(row.price_text) ?? str(row.cost_text),
-    is_free: bool(row.is_free),
+    price_text: str(row.price_text) ?? fee.price_text,
+    is_free: bool(row.is_free) ?? fee.is_free,
     age_range: str(row.age_range),
     indoor: bool(row.indoor),
     outdoor: bool(row.outdoor),
@@ -51,7 +62,8 @@ function toVenue(row: Row): Venue | null {
 export async function fetchVenues(): Promise<VenuesResult> {
   const supabase = getSupabase()
   if (supabase) {
-    const { data, error } = await supabase.from("venues").select("*").order("name").limit(500)
+    const { data, error } = await supabase.from("venues").select("*").order("venue_name").limit(500)
+    if (error) console.error("Failed to load venues:", error.message)
     if (!error && data?.length) {
       const venues = (data as Row[]).map(toVenue).filter((v): v is Venue => v !== null)
       if (venues.length) return { venues, isPreview: false }
