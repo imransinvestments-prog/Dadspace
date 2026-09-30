@@ -4,8 +4,6 @@ name: Collect events (activities & clubs)
 # failures do not affect the requests-based collector.
 
 on:
-  schedule:
-    - cron: "0 6 * * 1"
   workflow_dispatch:
     inputs:
       limit:
