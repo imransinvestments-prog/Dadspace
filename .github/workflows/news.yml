@@ -1,18 +1,19 @@
 name: Dadspace news
 
 on:
-  # Manual button in the Actions tab. Dry run is ON by default.
   workflow_dispatch:
     inputs:
       dry_run:
         description: "Dry run? true = only show results, false = save to database"
         default: "true"
 
-  # Automatic schedule: switched OFF for now.
-  # When you're happy with the dry-run results, delete the two "#" below
-  # (runs every 3 hours).
-  # schedule:
-  #   - cron: "15 */3 * * *"
+  workflow_call:
+    inputs:
+      dry_run:
+        description: "Dry run? true = only show results, false = save to database"
+        required: false
+        type: string
+        default: "false"
 
 jobs:
   news:
@@ -41,5 +42,4 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          # Scheduled runs have no button input, so they save for real.
-          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          DRY_RUN: ${{ inputs.dry_run || 'false' }}
