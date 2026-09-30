@@ -48,9 +48,11 @@ async function getNearbyEvents(user: Point, saturday: string, sunday: string, to
   const nearby = located.filter((e) => e.distance_miles <= NEARBY_RADIUS_MILES)
   const base = { isSample: false, radiusMiles: NEARBY_RADIUS_MILES }
 
-  const weekend = nearby.filter((e) => e.start_date <= sunday && (e.end_date ?? e.start_date) >= saturday)
-  if (weekend.length) {
-    return { ...base, items: weekend.sort(byDistance).slice(0, HOME_EVENT_COUNT), isWeekend: true, nearby: "weekend" }
+  const isThisWeekend = (e: DadEvent) => e.start_date <= sunday && (e.end_date ?? e.start_date) >= saturday
+  if (nearby.some(isThisWeekend)) {
+    // Nearby weekend events come first; any spare slots go to the next-closest weekend events beyond the radius.
+    const weekend = located.filter(isThisWeekend).sort(byDistance)
+    return { ...base, items: weekend.slice(0, HOME_EVENT_COUNT), isWeekend: true, nearby: "weekend" }
   }
   if (nearby.length) {
     const soon = [...nearby].sort((a, b) => a.start_date.localeCompare(b.start_date) || byDistance(a, b))

@@ -29,11 +29,11 @@ export function HomeDashboard({ initial }: { initial: HomeData }) {
       <WeekendEvents events={data.events} locationStatus={status} sorting={sorting} onRequestLocation={request} />
       <div className="grid gap-10 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <TrendingThreads threads={data.threads} />
+          <NewsHeadlines articles={data.articles} />
         </div>
         <TopDeal deal={data.deal} />
       </div>
-      <NewsHeadlines articles={data.articles} />
+      <TrendingThreads threads={data.threads} />
     </div>
   )
 }

@@ -35,7 +35,9 @@ function LocationNote({ events, locationStatus, sorting, onRequestLocation }: Pr
         <span>
           {events.nearby === "nearest"
             ? `Nothing within ${events.radiusMiles} miles yet, so here are the closest.`
-            : `Within ${events.radiusMiles} miles of you, closest first.`}
+            : events.items.some((e) => (e.distance_miles ?? 0) > events.radiusMiles)
+              ? `Closest first, including a few just over ${events.radiusMiles} miles away.`
+              : `Within ${events.radiusMiles} miles of you, closest first.`}
         </span>
       </>
     )
