@@ -51,13 +51,14 @@ GEMINI_MODEL = env("GEMINI_MODEL") or "gemini-3.5-flash"
 
 DRY_RUN = os.environ.get("DRY_RUN", "true").strip().lower() != "false"
 MIN_RELEVANCE = int(os.environ.get("MIN_RELEVANCE", "3"))
-BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "20"))
+BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "40"))
 MAX_ITEMS_PER_FEED = int(os.environ.get("MAX_ITEMS_PER_FEED", "30"))
 MAX_NEW_PER_RUN = int(os.environ.get("MAX_NEW_PER_RUN", "300"))
 MAX_ARTICLE_AGE_DAYS = int(os.environ.get("MAX_ARTICLE_AGE_DAYS", "14"))
 RETENTION_DAYS = int(os.environ.get("RETENTION_DAYS", "30"))
 MAX_FAILURES = int(os.environ.get("MAX_FAILURES", "5"))
 MAX_RUN_MINUTES = int(os.environ.get("MAX_RUN_MINUTES", "20"))
+SNIPPET_CHARS = int(os.environ.get("SNIPPET_CHARS", "160"))
 FEED_TIMEOUT = 15
 GEMINI_TIMEOUT = 60
 
@@ -68,24 +69,85 @@ CATEGORIES = ["policy", "money", "health", "safety", "activities",
 PROMPT = """You are the editor of Dadspace, a UK app for fathers of children aged 0-16.
 For each article below, decide how useful it is to a UK dad.
 
+Be strict. Only about a third of articles should score 3 or more.
+
 Score "relevance" from 0 to 5:
-5 = directly about dads or fatherhood, or a UK rule, benefit, deadline, recall or event that families need to act on
-4 = clearly useful to UK parents (childcare, school, health, money, safety, days out)
-3 = useful to some parents and has a real family angle
-2 = tangential
+5 = directly about dads or fatherhood, OR a UK rule, benefit, deadline or product recall that specifically affects children, babies or families and needs action
+4 = clearly useful to UK parents of children 0-16: childcare, school life for pupils, child health, family safety, family days out and activities
+3 = useful to some parents and has a real, concrete family angle
+2 = tangential: general news a parent might glance at but that isn't about families
 1 = barely connected
-0 = not relevant (celebrity gossip, sport results, adult-only topics, overseas-only news, adverts or sponsored posts, politics with no family angle)
+0 = not relevant
+
+Rules of thumb:
+- Product recalls and safety reports: 4-5 only if the product is for children or babies, or is a family product used with children (toys, car seats, cots, prams, kids' bikes and scooters, craft kits). Adult or household items (hand wash, tote bags, general appliances) score 1-2. E-bikes and adult scooters score 3.
+- Money: general banking, interest rates, mortgages, savings and scam-warning pages score 2 unless the article is specifically about childcare costs, Child Benefit, tax-free childcare, parental leave pay or the cost of raising children.
+- Education: rules and changes that affect pupils (GCSEs, school meals, SEND support, screen time, safeguarding, holidays) score 3-4. Anything about staff, academy trust admin, universities, international students, or union disputes scores 0-2, unless school closures are likely.
+- Comparisons with other countries and human-interest stories score 2 unless they give a UK dad something practical to do or know.
+- Days out, events, holidays and things to do with kids in the UK score 4; generic travel or tourism scores 1-2.
+- Adverts, sponsored posts, opinion pieces with no family angle, celebrity gossip, sport results and overseas-only news score 0-1.
 
 Also give:
 - "category": one of policy, money, health, safety, activities, parenting, wellbeing, education, other
 - "summary": one plain sentence (max 25 words) in your own words
 - "why_it_matters": max 15 words, written for a dad
+ONLY write "summary" and "why_it_matters" when relevance is 3 or more. For 0-2 use empty strings.
 
 Reply with ONLY a JSON array, one object per article, like:
 [{"i": 0, "relevance": 4, "category": "money", "summary": "...", "why_it_matters": "..."}]
 
-Articles:
+Articles, one per line as: id | source | headline | snippet (snippet may be missing)
 """
+
+# ----------------------------------------------------------------------
+# PRE-FILTER (free, runs in code BEFORE anything is sent to Gemini)
+# ----------------------------------------------------------------------
+# Feeds marked filter_mode = 'keywords' in the sources table must mention at
+# least one of these words in the headline/snippet, or they are skipped.
+FAMILY_WORDS = re.compile(
+    r"\b(child|children|kid|kids|parent|parents|parenting|dad|dads|father|fathers|"
+    r"fatherhood|baby|babies|infant|toddler|teen|teens|teenager|teenagers|pupil|pupils|"
+    r"school|schools|nursery|childcare|family|families|gcse|send|sen|ofsted|"
+    r"maternity|paternity|pregnan\w*|newborn|student|students|half.term|holidays?)\b",
+    re.IGNORECASE)
+
+# Headlines matching these are skipped for EVERY feed (obvious non-starters).
+BLOCK_WORDS = re.compile(
+    r"\b(obituary|horoscope|premier league|transfer news|match report|betting|odds|"
+    r"casino|live blog|as it happened|politics live|share price|stock market|"
+    r"crossword|quiz of the)\b",
+    re.IGNORECASE)
+
+NEAR_DUPLICATE = 0.6  # share of matching words above which two headlines are "the same"
+
+
+def prefilter(title, snippet, mode):
+    """Return a reason to skip the article, or None to let it through."""
+    text = f"{title} {snippet}"
+    if BLOCK_WORDS.search(title):
+        return "blocked_word"
+    if mode == "keywords" and not FAMILY_WORDS.search(text):
+        return "no_family_word"
+    return None
+
+
+def word_set(title):
+    """Headline reduced to a set of words (publisher suffix removed)."""
+    title = re.sub(r"\s+-\s+[^-]{2,40}$", "", title or "")
+    return frozenset(w for w in re.findall(r"[a-z0-9]+", title.lower()) if len(w) > 2)
+
+
+def is_near_duplicate(words, known_sets):
+    if len(words) < 4:
+        return False
+    for other in known_sets:
+        if len(other) < 4:
+            continue
+        overlap = len(words & other) / len(words | other)
+        if overlap >= NEAR_DUPLICATE:
+            return True
+    return False
+
 
 START = time.time()
 
@@ -160,7 +222,7 @@ def load_sources():
 def load_existing():
     """URLs and headline keys we've stored recently, so we don't re-score them."""
     cutoff = iso(now_utc() - timedelta(days=RETENTION_DAYS + 15))
-    urls, titles, start = set(), set(), 0
+    urls, titles, sets, start = set(), set(), [], 0
     while True:
         r = sb("GET", "news_items",
                params={"select": "url,title", "created_at": f"gte.{cutoff}", "order": "id"},
@@ -169,10 +231,11 @@ def load_existing():
         for row in rows:
             urls.add(row["url"])
             titles.add(title_key(row["title"]))
+            sets.append(word_set(row["title"]))
         if len(rows) < 1000:
             break
         start += 1000
-    return urls, titles
+    return urls, titles, sets
 
 
 def mark_source(src, ok, error=None):
@@ -222,8 +285,12 @@ def fetch_feed(src):
 # ----------------------------------------------------------------------
 def gemini_score(batch):
     """batch: list of {"i", "title", "source", "snippet"}. Returns list of dicts."""
+    lines = []
+    for item in batch:
+        parts = [str(item["i"]), item["source"], item["title"], item.get("snippet", "")]
+        lines.append(" | ".join(p.replace("|", "/") for p in parts).rstrip(" |"))
     body = {
-        "contents": [{"parts": [{"text": PROMPT + json.dumps(batch, ensure_ascii=False)}]}],
+        "contents": [{"parts": [{"text": PROMPT + "\n".join(lines)}]}],
         "generationConfig": {
             "temperature": 0.1,
             "responseMimeType": "application/json",
@@ -292,16 +359,20 @@ def self_test():
 def run():
     stats = {"sources_ok": 0, "sources_failed": 0, "new_articles": 0,
              "scored": 0, "kept": 0, "low_relevance": 0,
-             "saved": 0, "batches_failed": 0}
+             "saved": 0, "batches_failed": 0,
+             "skipped_blocked_word": 0, "skipped_no_family_word": 0,
+             "skipped_near_duplicate": 0}
     failed_sources = []
     kept_lines, rejected_lines = [], []
+    per_source = {}  # feed name -> [scored, kept]
+    skipped_lines = []  # what the free pre-filter removed (shown in dry run)
 
     print(f"Dadspace news worker | dry_run={DRY_RUN} | model={GEMINI_MODEL}")
 
     try:
         sources = load_sources()
         print(f"Active sources: {len(sources)}")
-        seen_urls, seen_titles = load_existing()
+        seen_urls, seen_titles, known_sets = load_existing()
 
         # ---- 1) collect new articles from every feed
         candidates = []
@@ -321,7 +392,7 @@ def run():
 
             mark_source(src, ok=True)
             stats["sources_ok"] += 1
-            added = 0
+            added = too_old = already = 0
             for e in entries:
                 title = clean_text(e.get("title"), 300)
                 link = clean_url(e.get("link", "")) if e.get("link") else ""
@@ -329,19 +400,42 @@ def run():
                     continue
                 published = entry_date(e)
                 if published and published < now_utc() - timedelta(days=MAX_ARTICLE_AGE_DAYS):
+                    too_old += 1
                     continue
                 key = title_key(title)
                 if link in seen_urls or key in seen_titles:
+                    already += 1
                     continue
                 seen_urls.add(link)
                 seen_titles.add(key)
                 publisher = (e.get("source") or {}).get("title") or src["name"]
+
+                # Snippet: short, and dropped when it only repeats the headline
+                # (Google News snippets are just the headline again = wasted tokens).
+                snippet = clean_text(e.get("summary"), SNIPPET_CHARS)
+                if "news.google.com" in src["feed_url"] or title_key(title)[:30] in title_key(snippet):
+                    snippet = ""
+
+                # Free checks before spending any Gemini tokens
+                reason = prefilter(title, snippet, src.get("filter_mode") or "none")
+                if reason:
+                    stats[f"skipped_{reason}"] += 1
+                    skipped_lines.append(f"({reason}) {title}  [{publisher}]")
+                    continue
+                words = word_set(title)
+                if is_near_duplicate(words, known_sets):
+                    stats["skipped_near_duplicate"] += 1
+                    skipped_lines.append(f"(near_duplicate) {title}  [{publisher}]")
+                    continue
+                known_sets.append(words)
+
                 candidates.append({
                     "src": src, "title": title, "url": link, "published": published,
-                    "publisher": publisher, "snippet": clean_text(e.get("summary"), 300),
+                    "publisher": publisher, "snippet": snippet,
                 })
                 added += 1
-            print(f"  ok    {src['name']}: {added} new ({time.time() - t0:.1f}s)")
+            print(f"  ok    {src['name']}: {added} new, {len(entries)} in feed, "
+                  f"{too_old} too old, {already} already seen ({time.time() - t0:.1f}s)")
 
         stats["new_articles"] = len(candidates)
         print(f"New articles to score: {len(candidates)}")
@@ -372,8 +466,11 @@ def run():
                 summary = clean_text(res.get("summary"), 300)
                 why = clean_text(res.get("why_it_matters"), 150)
                 stats["scored"] += 1
+                counts = per_source.setdefault(c["src"]["name"], [0, 0])
+                counts[0] += 1
                 line = f"[{relevance}] {c['title']}  ({c['publisher']})"
                 if relevance >= MIN_RELEVANCE:
+                    counts[1] += 1
                     stats["kept"] += 1
                     kept_lines.append(f"{line}\n      -> {why}")
                 else:
@@ -402,11 +499,23 @@ def run():
         if DRY_RUN:
             print("DRY RUN: nothing was saved.")
             print(f"\nWould KEEP ({len(kept_lines)}):")
-            for line in kept_lines[:40]:
+            for line in kept_lines[:200]:
                 print("  " + line)
-            print(f"\nSample of REJECTED ({len(rejected_lines)} total):")
-            for line in rejected_lines[:15]:
+            # Spread the rejected sample evenly so every source is represented
+            step = max(1, len(rejected_lines) // 40)
+            sample = rejected_lines[::step][:40]
+            print(f"\nSample of REJECTED ({len(rejected_lines)} total, showing {len(sample)}):")
+            for line in sample:
                 print("  " + line)
+        if DRY_RUN and skipped_lines:
+            step = max(1, len(skipped_lines) // 40)
+            print(f"\nSKIPPED BEFORE GEMINI, free ({len(skipped_lines)} total, "
+                  f"showing {len(skipped_lines[::step][:40])}). Check nothing good is in here:")
+            for line in skipped_lines[::step][:40]:
+                print("  " + line)
+        print("\nPER-SOURCE RESULTS (kept / scored)")
+        for name, (scored, kept) in per_source.items():
+            print(f"  {kept:>3} / {scored:<3}  {name}")
         print("\nSUMMARY")
         for k, v in stats.items():
             print(f"  {k}: {v}")
