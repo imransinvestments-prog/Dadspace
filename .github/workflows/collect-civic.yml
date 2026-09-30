@@ -4,8 +4,6 @@ name: Collect events (councils, heritage & niche venues)
 # These are ordinary web pages, so this uses a plain, fast page download - no browser needed.
 
 on:
-  schedule:
-    - cron: "0 5 * * 1"
   workflow_dispatch:
     inputs:
       limit:
