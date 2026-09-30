@@ -65,6 +65,7 @@ GEMINI_TIMEOUT = 60
 USER_AGENT = "Mozilla/5.0 (compatible; DadspaceNewsBot/1.0)"
 CATEGORIES = ["policy", "money", "health", "safety", "activities",
               "parenting", "wellbeing", "education", "other"]
+REGIONS = ["uk", "england", "scotland", "wales", "northern_ireland"]
 
 PROMPT = """You are the editor of Dadspace, a UK app for fathers of children aged 0-16.
 For each article below, decide how useful it is to a UK dad.
@@ -85,16 +86,24 @@ Rules of thumb:
 - Education: rules and changes that affect pupils (GCSEs, school meals, SEND support, screen time, safeguarding, holidays) score 3-4. Anything about staff, academy trust admin, universities, international students, or union disputes scores 0-2, unless school closures are likely.
 - Comparisons with other countries and human-interest stories score 2 unless they give a UK dad something practical to do or know.
 - Days out, events, holidays and things to do with kids in the UK score 4; generic travel or tourism scores 1-2.
+- Employment and workplace law: judge by what it means for dads, not by who it was written for. Articles aimed at employers or HR that explain new rights for parents (parental leave, paternity pay, bereavement leave after pregnancy loss, flexible working) still score 4-5.
+- Celebrities and royals talking about fatherhood score 2-3 at most.
+- A story that only matters in one town, council or county scores 3 at most, unless it is a UK-wide story.
+- The same story from different outlets must get the same score.
 - Adverts, sponsored posts, opinion pieces with no family angle, celebrity gossip, sport results and overseas-only news score 0-1.
 
 Also give:
 - "category": one of policy, money, health, safety, activities, parenting, wellbeing, education, other
+- "region": which part of the UK the article applies to, one of: uk, england, scotland, wales, northern_ireland
+    * "uk" = applies across the UK, or isn't tied to one nation (national campaigns, UK-wide rules such as paternity leave, product recalls, general parenting advice)
+    * Otherwise the nation it is about, including local stories (a town or council in Wales = "wales"). Education, childcare and health are devolved: Department for Education and NHS England announcements are usually "england"; Welsh Government = "wales"; Scottish Government = "scotland"; Northern Ireland Executive or Department of Education NI = "northern_ireland".
+    * If unsure, use "uk".
 - "summary": one plain sentence (max 25 words) in your own words
 - "why_it_matters": max 15 words, written for a dad
 ONLY write "summary" and "why_it_matters" when relevance is 3 or more. For 0-2 use empty strings.
 
 Reply with ONLY a JSON array, one object per article, like:
-[{"i": 0, "relevance": 4, "category": "money", "summary": "...", "why_it_matters": "..."}]
+[{"i": 0, "relevance": 4, "category": "money", "region": "uk", "summary": "...", "why_it_matters": "..."}]
 
 Articles, one per line as: id | source | headline | snippet (snippet may be missing)
 """
@@ -105,10 +114,10 @@ Articles, one per line as: id | source | headline | snippet (snippet may be miss
 # Feeds marked filter_mode = 'keywords' in the sources table must mention at
 # least one of these words in the headline/snippet, or they are skipped.
 FAMILY_WORDS = re.compile(
-    r"\b(child|children|kid|kids|parent|parents|parenting|dad|dads|father|fathers|"
-    r"fatherhood|baby|babies|infant|toddler|teen|teens|teenager|teenagers|pupil|pupils|"
-    r"school|schools|nursery|childcare|family|families|gcse|send|sen|ofsted|"
-    r"maternity|paternity|pregnan\w*|newborn|student|students|half.term|holidays?)\b",
+    r"\b(child\w*|kid\w*|parent\w*|dad\w*|father\w*|mum|mums|mummy|mother\w*|"
+    r"bab(?:y|ies)|infant\w*|toddler\w*|teen\w*|pupil\w*|school\w*|nurser(?:y|ies)|"
+    r"famil(?:y|ies)|gcse\w*|a.levels?|sats|send|sen|ofsted|maternity|paternity|"
+    r"pregnan\w*|newborn\w*|student\w*|half.term|holidays?)\b",
     re.IGNORECASE)
 
 # Headlines matching these are skipped for EVERY feed (obvious non-starters).
@@ -150,6 +159,7 @@ def is_near_duplicate(words, known_sets):
 
 
 START = time.time()
+TOKENS = {"in": 0, "out": 0, "calls": 0}  # running Gemini token totals for this run
 
 
 # ----------------------------------------------------------------------
@@ -303,7 +313,13 @@ def gemini_score(batch):
             r = requests.post(url, headers={"x-goog-api-key": GEMINI_API_KEY},
                               json=body, timeout=GEMINI_TIMEOUT)
             r.raise_for_status()
-            text = r.json()["candidates"][0]["content"]["parts"][0]["text"]
+            reply = r.json()
+            usage = reply.get("usageMetadata", {})
+            TOKENS["in"] += usage.get("promptTokenCount", 0)
+            # "thinking" tokens are billed as output, so they are counted too
+            TOKENS["out"] += usage.get("candidatesTokenCount", 0) + usage.get("thoughtsTokenCount", 0)
+            TOKENS["calls"] += 1
+            text = reply["candidates"][0]["content"]["parts"][0]["text"]
             data = json.loads(text)
             if isinstance(data, dict):
                 data = data.get("articles") or data.get("results") or [data]
@@ -328,6 +344,16 @@ def self_test():
     try:
         sb("GET", "news_sources", params={"select": "id", "limit": "1"})
         print("Supabase: OK")
+        try:
+            sb("GET", "news_items", params={"select": "region", "limit": "1"})
+            print("news_items.region column: OK")
+        except Exception:
+            problems.append("news_items has no 'region' column yet. Run the region SQL in Supabase first.")
+        try:
+            sb("GET", "pipeline_runs", params={"select": "id", "limit": "1"})
+            print("pipeline_runs table: OK")
+        except Exception:
+            problems.append("pipeline_runs table is missing. Run pipeline_runs.sql in Supabase first.")
     except Exception as exc:
         problems.append(f"Supabase: {exc}")
     try:
@@ -351,6 +377,28 @@ def self_test():
         return 1
     print("SELF-TEST PASSED")
     return 0
+
+
+# ----------------------------------------------------------------------
+# RUN LOG (one row per run in the pipeline_runs table)
+# ----------------------------------------------------------------------
+def log_run(stats):
+    skipped = sum(v for k, v in stats.items() if k.startswith("skipped_"))
+    row = {
+        "worker": "news",
+        "dry_run": DRY_RUN,
+        "input_tokens": TOKENS["in"],
+        "output_tokens": TOKENS["out"],
+        "gemini_calls": TOKENS["calls"],
+        "articles_scored": stats["scored"],
+        "skipped_prefilter": skipped,
+    }
+    try:
+        sb("POST", "pipeline_runs", json_body=row,
+           extra_headers={"Prefer": "return=minimal"})
+        print("Run logged to pipeline_runs.")
+    except Exception as exc:  # logging must never break the run
+        print(f"(could not log this run: {exc})")
 
 
 # ----------------------------------------------------------------------
@@ -463,12 +511,15 @@ def run():
                 except Exception:
                     continue
                 category = res.get("category") if res.get("category") in CATEGORIES else "other"
+                region = str(res.get("region", "uk")).strip().lower().replace(" ", "_")
+                if region not in REGIONS:
+                    region = "uk"
                 summary = clean_text(res.get("summary"), 300)
                 why = clean_text(res.get("why_it_matters"), 150)
                 stats["scored"] += 1
                 counts = per_source.setdefault(c["src"]["name"], [0, 0])
                 counts[0] += 1
-                line = f"[{relevance}] {c['title']}  ({c['publisher']})"
+                line = f"[{relevance}] ({region}) {c['title']}  ({c['publisher']})"
                 if relevance >= MIN_RELEVANCE:
                     counts[1] += 1
                     stats["kept"] += 1
@@ -482,6 +533,7 @@ def run():
                     "published_at": iso(c["published"]) if c["published"] else None,
                     "summary": summary, "why_it_matters": why,
                     "category": category, "relevance": relevance,
+                    "region": region,
                 })
             if rows and not DRY_RUN:
                 save_items(rows)
@@ -519,12 +571,16 @@ def run():
         print("\nSUMMARY")
         for k, v in stats.items():
             print(f"  {k}: {v}")
+        print(f"  gemini_calls: {TOKENS['calls']}")
+        print(f"  input_tokens: {TOKENS['in']:,}")
+        print(f"  output_tokens: {TOKENS['out']:,}")
         if failed_sources:
             print("  failing feeds:")
             for f in failed_sources:
                 print("    - " + f)
         print(f"  minutes: {(time.time() - START) / 60:.1f}")
         print("=" * 60)
+        log_run(stats)
 
 
 if __name__ == "__main__":
