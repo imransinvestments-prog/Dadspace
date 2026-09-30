@@ -3,6 +3,7 @@ import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AppShell } from "@/components/app-shell"
 import { LocationProvider } from "@/components/location-provider"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css"
 
 const bricolage = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage", display: "swap" })
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <AppShell>{children}</AppShell>
           </LocationProvider>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   )
