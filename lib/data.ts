@@ -119,12 +119,33 @@ async function getTrendingThreads() {
   return { items: sampleThreads, isSample: true }
 }
 
+const HEADLINE_CATEGORIES = ["activities", "money", "safety", "policy"]
+const HEADLINE_COUNT = 4
+
 async function getLatestArticles() {
   const db = getSupabase()
   if (db) {
-    const { data, error } = await db.from("articles").select("id,title,source").order("id", { ascending: false }).limit(4)
+    const { data, error } = await db
+      .from("feed_items")
+      .select("id,title,url,source_name,category,published_at")
+      .not("category", "is", null)
+      .order("published_at", { ascending: false, nullsFirst: false })
+      .limit(300)
     if (!error && data?.length) {
-      return { items: data.map((a) => ({ ...a, id: String(a.id) })) as Article[], isSample: false }
+      const newestByCategory = new Map<string, (typeof data)[number]>()
+      for (const row of data) {
+        if (!newestByCategory.has(row.category)) newestByCategory.set(row.category, row)
+      }
+      // Preferred categories first, then the freshest remaining categories fill any gaps.
+      const chosen = [
+        ...HEADLINE_CATEGORIES.filter((c) => newestByCategory.has(c)),
+        ...[...newestByCategory.keys()].filter((c) => !HEADLINE_CATEGORIES.includes(c)),
+      ].slice(0, HEADLINE_COUNT)
+      const items: Article[] = chosen.map((category) => {
+        const row = newestByCategory.get(category)!
+        return { id: String(row.id), title: row.title, source: row.source_name, url: row.url, category }
+      })
+      if (items.length) return { items, isSample: false }
     }
   }
   return { items: sampleArticles, isSample: true }
