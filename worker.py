@@ -1183,8 +1183,20 @@ def log_run(db, gemini_metrics):
     }
     try:
         db.table("pipeline_runs").insert(row).execute()
-        print("Run logged to pipeline_runs.")
+        print(f"Run logged to pipeline_runs as '{worker}'.")
+        return
     except Exception as exc:  # logging must never break the run
+        if "pipeline_runs_worker_check" not in str(exc) or worker == "events":
+            print(f"(could not log this run: {type(exc).__name__}: {exc})")
+            return
+    # The table's check constraint only allows 'news' and 'events' until
+    # pipeline_runs_worker_names.sql is run, so fall back to the generic name
+    # rather than lose the token counts.
+    row["worker"] = "events"
+    try:
+        db.table("pipeline_runs").insert(row).execute()
+        print(f"Run logged to pipeline_runs as 'events' ('{worker}' is not an allowed worker name yet).")
+    except Exception as exc:
         print(f"(could not log this run: {type(exc).__name__}: {exc})")
 
 
