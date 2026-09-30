@@ -48,6 +48,10 @@ GEMINI_API_KEY = env("GEMINI_API_KEY")
 # gemini-2.5-flash is being retired by Google (and is already returning 404
 # for some people), so the default is its replacement.
 GEMINI_MODEL = env("GEMINI_MODEL") or "gemini-3.5-flash"
+# How much hidden "thinking" Gemini does before answering. Thinking is billed as
+# output, and the default (medium) is far more than sorting headlines needs.
+# Options: minimal, low, medium, high, or "off" to leave it to Google's default.
+THINKING_LEVEL = (env("THINKING_LEVEL") or "low").lower()
 
 DRY_RUN = os.environ.get("DRY_RUN", "true").strip().lower() != "false"
 MIN_RELEVANCE = int(os.environ.get("MIN_RELEVANCE", "3"))
@@ -58,6 +62,7 @@ MAX_ARTICLE_AGE_DAYS = int(os.environ.get("MAX_ARTICLE_AGE_DAYS", "14"))
 RETENTION_DAYS = int(os.environ.get("RETENTION_DAYS", "30"))
 MAX_FAILURES = int(os.environ.get("MAX_FAILURES", "5"))
 MAX_RUN_MINUTES = int(os.environ.get("MAX_RUN_MINUTES", "20"))
+MAX_GROUP_ITEMS = int(os.environ.get("MAX_GROUP_ITEMS", "150"))
 SNIPPET_CHARS = int(os.environ.get("SNIPPET_CHARS", "160"))
 FEED_TIMEOUT = 15
 GEMINI_TIMEOUT = 60
@@ -158,8 +163,26 @@ def is_near_duplicate(words, known_sets):
     return False
 
 
+GROUP_PROMPT = """You are deduplicating a news feed for UK dads. Decide which new articles are about the SAME story, either as each other or as a story already in the feed.
+
+"Same story" means the same specific news event, announcement, law change, product recall, study or campaign, reported by different outlets. Two articles on the same broad topic are NOT the same story: two different toy recalls are two stories, and a paternity-leave protest and a paternity-pay study are two stories.
+
+Existing stories already in the feed, one per line as: key | headline
+{existing}
+
+New articles, one per line as: id | headline | source
+{new}
+
+Give every new article a "story" key:
+- If it is the same story as an existing one, use that existing key exactly.
+- Otherwise make up a short lowercase key of 2 to 5 words joined by hyphens (for example smyths-asbestos-recall). Use the SAME new key for every new article about the same story.
+- An article that is its own story gets its own unique key.
+
+Reply with ONLY a JSON array like: [{"id": 0, "story": "some-key"}]
+"""
+
 START = time.time()
-TOKENS = {"in": 0, "out": 0, "calls": 0}  # running Gemini token totals for this run
+TOKENS = {"in": 0, "out": 0, "think": 0, "calls": 0}  # running Gemini token totals for this run
 
 
 # ----------------------------------------------------------------------
@@ -293,19 +316,17 @@ def fetch_feed(src):
 # ----------------------------------------------------------------------
 # GEMINI
 # ----------------------------------------------------------------------
-def gemini_score(batch):
-    """batch: list of {"i", "title", "source", "snippet"}. Returns list of dicts."""
-    lines = []
-    for item in batch:
-        parts = [str(item["i"]), item["source"], item["title"], item.get("snippet", "")]
-        lines.append(" | ".join(p.replace("|", "/") for p in parts).rstrip(" |"))
+def gemini_json(prompt):
+    """Send a prompt to Gemini, count the tokens, and return the parsed JSON answer."""
     body = {
-        "contents": [{"parts": [{"text": PROMPT + "\n".join(lines)}]}],
+        "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
             "temperature": 0.1,
             "responseMimeType": "application/json",
         },
     }
+    if THINKING_LEVEL != "off":
+        body["generationConfig"]["thinkingConfig"] = {"thinkingLevel": THINKING_LEVEL.upper()}
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
     last_error = None
     for attempt in range(2):
@@ -318,16 +339,92 @@ def gemini_score(batch):
             TOKENS["in"] += usage.get("promptTokenCount", 0)
             # "thinking" tokens are billed as output, so they are counted too
             TOKENS["out"] += usage.get("candidatesTokenCount", 0) + usage.get("thoughtsTokenCount", 0)
+            TOKENS["think"] += usage.get("thoughtsTokenCount", 0)
             TOKENS["calls"] += 1
             text = reply["candidates"][0]["content"]["parts"][0]["text"]
             data = json.loads(text)
             if isinstance(data, dict):
-                data = data.get("articles") or data.get("results") or [data]
+                data = data.get("articles") or data.get("results") or data.get("stories") or [data]
             return data
         except Exception as exc:
             last_error = exc
             time.sleep(3)
     raise RuntimeError(f"Gemini failed: {last_error}")
+
+
+def gemini_score(batch):
+    """batch: list of {"i", "title", "source", "snippet"}. Returns list of dicts."""
+    lines = []
+    for item in batch:
+        parts = [str(item["i"]), item["source"], item["title"], item.get("snippet", "")]
+        lines.append(" | ".join(p.replace("|", "/") for p in parts).rstrip(" |"))
+    return gemini_json(PROMPT + "\n".join(lines))
+
+
+# ----------------------------------------------------------------------
+# STORY GROUPING (one card per story, other outlets listed underneath)
+# ----------------------------------------------------------------------
+def clean_key(key):
+    key = re.sub(r"[^a-z0-9]+", "-", str(key).lower()).strip("-")
+    return key[:60] or None
+
+
+def official_source(row):
+    return "gov" in (row.get("source_name") or "").lower()
+
+
+def load_existing_stories():
+    """Stories already showing in the feed (one row per story), so new articles
+    about the same story are merged into them instead of appearing again."""
+    cutoff = iso(now_utc() - timedelta(days=14))
+    r = sb("GET", "news_items", params={
+        "select": "story_key,title", "is_primary": "eq.true",
+        "story_key": "not.is.null", "relevance": f"gte.{MIN_RELEVANCE}",
+        "created_at": f"gte.{cutoff}", "order": "id.desc", "limit": "150"})
+    return r.json()
+
+
+def assign_stories(rows, existing):
+    """Fills in story_key and is_primary on each kept row.
+    Returns {story_key: {"members": [rows], "existing": bool}} for the report."""
+    kept = [r for r in rows if r["relevance"] >= MIN_RELEVANCE][:MAX_GROUP_ITEMS]
+    if not kept:
+        return {}
+    existing_keys = {e["story_key"] for e in existing}
+    existing_lines = "\n".join(
+        f"{e['story_key']} | {e['title'][:110].replace('|', '/')}" for e in existing) or "(none)"
+    new_lines = "\n".join(
+        f"{n} | {r['title'][:110].replace('|', '/')} | {r['source_name']}"
+        for n, r in enumerate(kept))
+    answer = gemini_json(GROUP_PROMPT.replace("{existing}", existing_lines)
+                                     .replace("{new}", new_lines))
+    keys = {}
+    for item in answer:
+        try:
+            n, key = int(item["id"]), clean_key(item["story"])
+        except Exception:
+            continue
+        if key and 0 <= n < len(kept):
+            keys[n] = key
+
+    groups = {}
+    for n, r in enumerate(kept):
+        if keys.get(n):
+            groups.setdefault(keys[n], []).append(r)
+
+    report = {}
+    for key, members in groups.items():
+        if key in existing_keys:
+            # Story already has a card in the feed: these are extra outlets.
+            for r in members:
+                r["story_key"], r["is_primary"] = key, False
+        else:
+            # New story: the highest-scoring article (official sources win ties) gets the card.
+            members.sort(key=lambda r: (-r["relevance"], 0 if official_source(r) else 1))
+            for i, r in enumerate(members):
+                r["story_key"], r["is_primary"] = key, (i == 0)
+        report[key] = {"members": members, "existing": key in existing_keys}
+    return report
 
 
 # ----------------------------------------------------------------------
@@ -349,6 +446,11 @@ def self_test():
             print("news_items.region column: OK")
         except Exception:
             problems.append("news_items has no 'region' column yet. Run the region SQL in Supabase first.")
+        try:
+            sb("GET", "news_items", params={"select": "story_key,is_primary", "limit": "1"})
+            print("news_items story columns: OK")
+        except Exception:
+            problems.append("news_items has no 'story_key'/'is_primary' columns yet. Run story_grouping.sql in Supabase first.")
         try:
             sb("GET", "pipeline_runs", params={"select": "id", "limit": "1"})
             print("pipeline_runs table: OK")
@@ -408,14 +510,17 @@ def run():
     stats = {"sources_ok": 0, "sources_failed": 0, "new_articles": 0,
              "scored": 0, "kept": 0, "low_relevance": 0,
              "saved": 0, "batches_failed": 0,
+             "duplicates_merged": 0, "stories_shown": 0,
              "skipped_blocked_word": 0, "skipped_no_family_word": 0,
              "skipped_near_duplicate": 0}
     failed_sources = []
     kept_lines, rejected_lines = [], []
     per_source = {}  # feed name -> [scored, kept]
     skipped_lines = []  # what the free pre-filter removed (shown in dry run)
+    story_lines = []  # duplicate stories that were merged (shown in dry run)
+    all_rows = []  # every scored article, saved together after grouping
 
-    print(f"Dadspace news worker | dry_run={DRY_RUN} | model={GEMINI_MODEL}")
+    print(f"Dadspace news worker | dry_run={DRY_RUN} | model={GEMINI_MODEL} | thinking={THINKING_LEVEL}")
 
     try:
         sources = load_sources()
@@ -535,9 +640,33 @@ def run():
                     "category": category, "relevance": relevance,
                     "region": region,
                 })
-            if rows and not DRY_RUN:
-                save_items(rows)
-                stats["saved"] += len(rows)
+            all_rows.extend(rows)
+
+        # ---- 2b) group articles that are the same story
+        for r in all_rows:
+            r["story_key"], r["is_primary"] = None, True
+        if all_rows and not out_of_time():
+            try:
+                story_groups = assign_stories(all_rows, load_existing_stories())
+                stats["duplicates_merged"] = sum(1 for r in all_rows if not r["is_primary"])
+                for key, info in story_groups.items():
+                    members = info["members"]
+                    if len(members) < 2 and not info["existing"]:
+                        continue
+                    tag = " [already in feed]" if info["existing"] else ""
+                    story_lines.append(f"{key} ({len(members)} articles){tag}")
+                    for r in members:
+                        mark = "SHOWN " if r["is_primary"] else "merged"
+                        story_lines.append(f"    {mark} [{r['relevance']}] {r['title'][:100]}  ({r['source_name']})")
+            except Exception as exc:
+                print(f"  Story grouping failed, saving without grouping: {exc}")
+                for r in all_rows:
+                    r["story_key"], r["is_primary"] = None, True
+        stats["stories_shown"] = stats["kept"] - stats["duplicates_merged"]
+
+        if all_rows and not DRY_RUN:
+            save_items(all_rows)
+            stats["saved"] = len(all_rows)
 
         # ---- 3) tidy up
         if not DRY_RUN:
@@ -559,6 +688,11 @@ def run():
             print(f"\nSample of REJECTED ({len(rejected_lines)} total, showing {len(sample)}):")
             for line in sample:
                 print("  " + line)
+        if DRY_RUN and story_lines:
+            print(f"\nSTORY GROUPS: same story from several outlets ({stats['duplicates_merged']} "
+                  f"merged, so the feed would show {stats['stories_shown']} cards):")
+            for line in story_lines:
+                print("  " + line)
         if DRY_RUN and skipped_lines:
             step = max(1, len(skipped_lines) // 40)
             print(f"\nSKIPPED BEFORE GEMINI, free ({len(skipped_lines)} total, "
@@ -573,7 +707,8 @@ def run():
             print(f"  {k}: {v}")
         print(f"  gemini_calls: {TOKENS['calls']}")
         print(f"  input_tokens: {TOKENS['in']:,}")
-        print(f"  output_tokens: {TOKENS['out']:,}")
+        print(f"  output_tokens: {TOKENS['out']:,}  (of which thinking: {TOKENS['think']:,})")
+        print(f"  thinking_level: {THINKING_LEVEL}")
         if failed_sources:
             print("  failing feeds:")
             for f in failed_sources:
