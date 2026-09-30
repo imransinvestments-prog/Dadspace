@@ -1,14 +1,25 @@
 import type { MetadataRoute } from "next"
-
-const base = "https://dadspace.vercel.app"
+import { siteUrl } from "@/lib/seo"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["", "/events", "/forum", "/news", "/deals"]
+  const now = new Date()
+  const pages: Array<{
+    path: string
+    changeFrequency: "daily" | "weekly"
+    priority: number
+  }> = [
+    { path: "", changeFrequency: "daily", priority: 1 },
+    { path: "/news", changeFrequency: "daily", priority: 0.9 },
+    { path: "/events", changeFrequency: "daily", priority: 0.9 },
+    { path: "/venues", changeFrequency: "weekly", priority: 0.8 },
+    { path: "/deals", changeFrequency: "daily", priority: 0.8 },
+    { path: "/forum", changeFrequency: "daily", priority: 0.7 },
+  ]
 
-  return pages.map((path) => ({
-    url: `${base}${path}`,
-    lastModified: new Date(),
-    changeFrequency: "daily",
-    priority: path === "" ? 1 : 0.8,
+  return pages.map(({ path, changeFrequency, priority }) => ({
+    url: `${siteUrl}${path}`,
+    lastModified: now,
+    changeFrequency,
+    priority,
   }))
 }
