@@ -4,11 +4,11 @@ export type NavItem = { href: string; label: string; icon: LucideIcon; mobile: b
 
 export const NAV_ITEMS: NavItem[] = [
   { href: "/", label: "Home", icon: Home, mobile: true },
-  { href: "/events", label: "Events", icon: CalendarHeart, mobile: true },
-  { href: "/venues", label: "Venues", icon: MapPinned, mobile: false },
-  { href: "/forum", label: "Forum", icon: MessagesSquare, mobile: true },
   { href: "/news", label: "News", icon: Newspaper, mobile: true },
+  { href: "/venues", label: "Venues", icon: MapPinned, mobile: false },
   { href: "/deals", label: "Deals", icon: Tag, mobile: true },
+  { href: "/events", label: "Events", icon: CalendarHeart, mobile: true },
+  { href: "/forum", label: "Forum", icon: MessagesSquare, mobile: true },
   { href: "/profile", label: "Profile", icon: UserRound, mobile: false },
 ]
 
