@@ -669,6 +669,7 @@ def make_gemini_caller():
         "input_chars_sent": 0,
         "prompt_tokens": 0,
         "output_tokens": 0,
+        "thinking_tokens": 0,
         "total_tokens": 0,
     }
 
@@ -694,7 +695,10 @@ def make_gemini_caller():
                 usage = getattr(response, "usage_metadata", None)
                 if usage is not None:
                     metrics["prompt_tokens"] += int(getattr(usage, "prompt_token_count", 0) or 0)
-                    metrics["output_tokens"] += int(getattr(usage, "candidates_token_count", 0) or 0)
+                    # Thinking tokens are billed as output, so they count towards output_tokens.
+                    thinking = int(getattr(usage, "thoughts_token_count", 0) or 0)
+                    metrics["thinking_tokens"] += thinking
+                    metrics["output_tokens"] += int(getattr(usage, "candidates_token_count", 0) or 0) + thinking
                     metrics["total_tokens"] += int(getattr(usage, "total_token_count", 0) or 0)
                 data = json.loads(response.text)
                 if not isinstance(data, list):
@@ -1163,6 +1167,40 @@ def self_test():
 
 
 # ----------------------------------------------------------------------------
+# Run log (one row per run in the pipeline_runs table, same as news_worker.py)
+# ----------------------------------------------------------------------------
+def log_run(db, gemini_metrics):
+    worker = (os.environ.get("WORKER_NAME") or "").strip()
+    if not worker:
+        worker = "events-" + ("-".join(CATEGORY_FILTER) if CATEGORY_FILTER else "all")
+    row = {
+        "worker": worker,
+        "dry_run": DRY_RUN,
+        "input_tokens": gemini_metrics.get("prompt_tokens", 0),
+        "output_tokens": gemini_metrics.get("output_tokens", 0),
+        # API attempts include retries and timeouts, since those can still be billed.
+        "gemini_calls": gemini_metrics.get("api_attempts", 0),
+    }
+    try:
+        db.table("pipeline_runs").insert(row).execute()
+        print(f"Run logged to pipeline_runs as '{worker}'.")
+        return
+    except Exception as exc:  # logging must never break the run
+        if "pipeline_runs_worker_check" not in str(exc) or worker == "events":
+            print(f"(could not log this run: {type(exc).__name__}: {exc})")
+            return
+    # The table's check constraint only allows 'news' and 'events' until
+    # pipeline_runs_worker_names.sql is run, so fall back to the generic name
+    # rather than lose the token counts.
+    row["worker"] = "events"
+    try:
+        db.table("pipeline_runs").insert(row).execute()
+        print(f"Run logged to pipeline_runs as 'events' ('{worker}' is not an allowed worker name yet).")
+    except Exception as exc:
+        print(f"(could not log this run: {type(exc).__name__}: {exc})")
+
+
+# ----------------------------------------------------------------------------
 # Main
 # ----------------------------------------------------------------------------
 def main():
@@ -1324,10 +1362,12 @@ def main():
             f"api_attempts={gemini_metrics.get('api_attempts', 0)}, "
             f"input_chars_sent={gemini_metrics.get('input_chars_sent', 0)}, "
             f"prompt_tokens={gemini_metrics.get('prompt_tokens', 0)}, "
-            f"output_tokens={gemini_metrics.get('output_tokens', 0)}, "
+            f"output_tokens={gemini_metrics.get('output_tokens', 0)} "
+            f"(of which thinking: {gemini_metrics.get('thinking_tokens', 0)}), "
             f"total_tokens={gemini_metrics.get('total_tokens', 0)}"
         )
         print(f"Expired events: {expired_note}")
+        log_run(db, gemini_metrics)
         if zero_event_sources:
             print("Worked but found 0 events (worth a look): " + "; ".join(zero_event_sources))
 

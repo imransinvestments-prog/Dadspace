@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react"
 import useSWRInfinite from "swr/infinite"
-import { LoaderCircle, LocateFixed } from "lucide-react"
+import { LoaderCircle, LocateFixed, MapPin, Newspaper, Zap } from "lucide-react"
 import { EmptyState } from "@/components/empty-state"
 import { useRegionFromLocation } from "@/hooks/use-region-from-location"
 import { cn } from "@/lib/utils"
@@ -74,23 +74,34 @@ export function NewsFeed({ initialItems }: { initialItems: NewsItem[] | null }) 
 
   return (
     <div className="flex flex-col gap-6">
-      <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div className="flex flex-col gap-1">
-          <h1 className="font-heading text-3xl font-extrabold tracking-tight text-balance md:text-4xl">News for dads</h1>
-          <p className="leading-relaxed text-muted-foreground text-pretty">
-            The last two weeks of news that matters to dads, in a sentence or two.
-          </p>
-        </div>
-        <div className="flex flex-col gap-1">
-          <label htmlFor="news-region" className="text-sm font-semibold">
+      <header className="flex flex-col gap-2">
+        <p className="flex items-center gap-2 text-sm font-bold tracking-wide text-primary uppercase">
+          <Newspaper className="size-4" aria-hidden="true" />
+          The dad briefing
+        </p>
+        <h1 className="font-heading text-4xl font-extrabold tracking-tight text-balance md:text-5xl">News for dads</h1>
+        <p className="max-w-2xl leading-relaxed text-muted-foreground text-pretty">
+          Two weeks of news that actually matters to you, each with a quick{" "}
+          <span className="inline-flex items-center gap-1 font-semibold text-foreground">
+            <Zap className="size-3.5 fill-highlight text-highlight" aria-hidden="true" />
+            why it matters
+          </span>{" "}
+          so you can skim it in the time it takes the kettle to boil.
+        </p>
+      </header>
+
+      <div className="sticky top-[69px] z-20 -mx-4 flex items-center gap-2 border-b border-border/60 bg-background/80 px-4 py-3 backdrop-blur-md lg:top-0 lg:mx-0 lg:rounded-b-xl lg:px-0">
+        <div className="flex shrink-0 items-center gap-1 rounded-full border bg-card p-1">
+          <label htmlFor="news-region" className="sr-only">
             Region
           </label>
-          <div className="flex items-center gap-2">
+          <div className="relative flex items-center">
+            <MapPin className="pointer-events-none absolute left-2.5 size-4 text-accent" aria-hidden="true" />
             <select
               id="news-region"
               value={region}
               onChange={(e) => changeRegion(e.target.value)}
-              className="h-11 min-w-44 flex-1 rounded-full border bg-card px-4 text-base font-medium text-card-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="h-9 cursor-pointer appearance-none rounded-full bg-transparent pr-3 pl-8 text-sm font-semibold text-card-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {REGIONS.map((r) => (
                 <option key={r.value} value={r.value}>
@@ -98,51 +109,51 @@ export function NewsFeed({ initialItems }: { initialItems: NewsItem[] | null }) 
                 </option>
               ))}
             </select>
-            <button
-              type="button"
-              onClick={locate}
-              disabled={locationStatus === "locating"}
-              aria-label="Use my location to set the region"
-              title="Use my location"
-              className="flex size-11 shrink-0 items-center justify-center rounded-full border bg-card text-card-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60"
-            >
-              {locationStatus === "locating" ? (
-                <LoaderCircle className="size-5 animate-spin" aria-hidden="true" />
-              ) : (
-                <LocateFixed className="size-5" aria-hidden="true" />
-              )}
-            </button>
           </div>
+          <button
+            type="button"
+            onClick={locate}
+            disabled={locationStatus === "locating"}
+            aria-label="Use my location to set the region"
+            title="Use my location"
+            className="flex size-9 shrink-0 items-center justify-center rounded-full text-card-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60"
+          >
+            {locationStatus === "locating" ? (
+              <LoaderCircle className="size-4 animate-spin" aria-hidden="true" />
+            ) : (
+              <LocateFixed className="size-4" aria-hidden="true" />
+            )}
+          </button>
         </div>
-      </header>
 
-      <p role="status" aria-live="polite" className={cn("text-sm leading-relaxed text-muted-foreground", !locationMessage && "sr-only")}>
+        <span aria-hidden="true" className="h-6 w-px shrink-0 bg-border" />
+
+        <div role="group" aria-label="Filter by topic" className="flex min-w-0 flex-1 gap-2 overflow-x-auto [scrollbar-width:none]">
+          {CATEGORIES.map((c) => {
+            const active = c.value === category
+            return (
+              <button
+                key={c.value}
+                type="button"
+                aria-pressed={active}
+                onClick={() => setCategory(c.value)}
+                className={cn(
+                  "h-9 shrink-0 rounded-full border px-4 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-95",
+                  active
+                    ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/30"
+                    : "border-border bg-card/60 text-card-foreground hover:border-primary/50 hover:bg-card",
+                )}
+              >
+                {c.label}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      <p role="status" aria-live="polite" className={cn("-mt-3 text-sm leading-relaxed text-muted-foreground", !locationMessage && "sr-only")}>
         {locationStatus === "locating" ? "Finding your region…" : locationMessage}
       </p>
-
-      <div
-        role="group"
-        aria-label="Filter by topic"
-        className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] md:mx-0 md:flex-wrap md:px-0"
-      >
-        {CATEGORIES.map((c) => {
-          const active = c.value === category
-          return (
-            <button
-              key={c.value}
-              type="button"
-              aria-pressed={active}
-              onClick={() => setCategory(c.value)}
-              className={cn(
-                "h-10 shrink-0 rounded-full border px-4 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                active ? "border-navy bg-navy text-navy-foreground dark:border-primary dark:bg-primary dark:text-primary-foreground" : "bg-card text-card-foreground hover:bg-muted",
-              )}
-            >
-              {c.label}
-            </button>
-          )
-        })}
-      </div>
 
       <section aria-label="Articles" aria-busy={isLoading} className="flex flex-col gap-4">
         {error && !items.length ? (
@@ -168,13 +179,21 @@ export function NewsFeed({ initialItems }: { initialItems: NewsItem[] | null }) 
           <EmptyState title="Nothing new here yet, check back soon." body="Try another topic or region in the meantime." />
         ) : (
           <>
-            <ul className="flex flex-col gap-3">
-              {items.map((item) => (
-                <li key={item.id}>
-                  <NewsCard item={item} />
-                </li>
-              ))}
-            </ul>
+            <NewsCard item={items[0]} variant="hero" priority />
+
+            {items.length > 1 && (
+              <ul className="grid gap-4 md:grid-cols-2">
+                {items.slice(1).map((item, index) => {
+                  // Every fifth card goes wide across both columns to break up the grid.
+                  const wide = index % 5 === 4
+                  return (
+                    <li key={item.id} className={cn(wide && "md:col-span-2")}>
+                      <NewsCard item={item} variant={wide ? "wide" : "tile"} />
+                    </li>
+                  )
+                })}
+              </ul>
+            )}
 
             {error && (
               <p role="alert" className="text-center text-sm text-muted-foreground">

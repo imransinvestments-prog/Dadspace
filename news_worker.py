@@ -474,6 +474,8 @@ def self_test():
             print("Flash models your key can use right now:\n  " + "\n  ".join(names))
         except Exception as exc2:
             print(f"(could not list models: {exc2})")
+    if TOKENS["calls"]:
+        log_run({"scored": 0}, worker="news-selftest", dry_run=True)
     if problems:
         print("SELF-TEST FAILED:\n  " + "\n  ".join(problems))
         return 1
@@ -484,11 +486,11 @@ def self_test():
 # ----------------------------------------------------------------------
 # RUN LOG (one row per run in the pipeline_runs table)
 # ----------------------------------------------------------------------
-def log_run(stats):
+def log_run(stats, worker="news", dry_run=None):
     skipped = sum(v for k, v in stats.items() if k.startswith("skipped_"))
     row = {
-        "worker": "news",
-        "dry_run": DRY_RUN,
+        "worker": worker,
+        "dry_run": DRY_RUN if dry_run is None else dry_run,
         "input_tokens": TOKENS["in"],
         "output_tokens": TOKENS["out"],
         "gemini_calls": TOKENS["calls"],

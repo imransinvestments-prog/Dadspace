@@ -49,6 +49,7 @@ jobs:
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          WORKER_NAME: "events-activities"
           CATEGORIES: "activities"
           FETCH_ENGINE: "browser"
           BROWSER_GOTO_TIMEOUT_MS: "30000"
