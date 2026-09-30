@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Clock, MapPin } from "lucide-react"
+import { Clock, MapPin, Navigation } from "lucide-react"
 import { formatEventDate } from "@/lib/dates"
 import type { DadEvent } from "@/lib/types"
 
@@ -9,6 +9,12 @@ function imageFor(event: DadEvent) {
   if (/story|museum|library|read|book|history|science|exhibit/.test(text)) return "/images/event-story.png"
   if (/craft|art|lego|paint|make|build|draw|messy|music|sing/.test(text)) return "/images/event-crafts.png"
   return "/images/event-outdoor.png"
+}
+
+function formatMiles(miles: number) {
+  if (miles < 1) return "Under a mile away"
+  const rounded = Math.round(miles)
+  return `${rounded} ${rounded === 1 ? "mile" : "miles"} away`
 }
 
 function isFree(cost: string | null) {
@@ -51,6 +57,12 @@ export function EventCard({ event, index = 0 }: { event: DadEvent; index?: numbe
             <li className="flex items-start gap-2">
               <MapPin className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
               <span className="line-clamp-1">{event.location}</span>
+            </li>
+          )}
+          {event.distance_miles != null && (
+            <li className="flex items-start gap-2">
+              <Navigation className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
+              <span className="font-semibold text-foreground">{formatMiles(event.distance_miles)}</span>
             </li>
           )}
           {event.time_text && (

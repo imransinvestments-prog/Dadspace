@@ -11,7 +11,12 @@ export type DadEvent = {
   age_range: string | null
   family_relevance: number | null
   source_url: string | null
+  source_id?: string | null
+  distance_miles?: number | null
 }
+
+/** How the Home events were picked when the user's location is known. */
+export type NearbyScope = "weekend" | "soon" | "nearest"
 
 export type ForumThread = {
   id: string
@@ -44,7 +49,7 @@ export type HomeData = {
   greeting: string
   sleepsToWeekend: number
   weekendLabel: string
-  events: Sourced<DadEvent[]> & { isWeekend: boolean }
+  events: Sourced<DadEvent[]> & { isWeekend: boolean; nearby: NearbyScope | null; radiusMiles: number }
   threads: Sourced<ForumThread[]>
   articles: Sourced<Article[]>
   deal: Sourced<Deal>
