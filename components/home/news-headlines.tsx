@@ -7,7 +7,7 @@ import { CATEGORY_LABELS } from "@/lib/news"
 import { SectionHeader } from "./section-header"
 import type { Article, HomeData } from "@/lib/types"
 
-const ROTATE_MS = 30_000
+const ROTATE_MS = 9_000
 
 const cardClass =
   "flex flex-col gap-1 rounded-lg border bg-card p-4 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-navy/10"
@@ -25,29 +25,59 @@ function HeadlineBody({ article }: { article: Article }) {
   )
 }
 
-function useRotationTick(enabled: boolean, paused: boolean) {
+function useSlotTick(enabled: boolean, paused: boolean, offsetMs: number) {
   const [tick, setTick] = useState(0)
   useEffect(() => {
     if (!enabled || paused) return
-    const id = window.setInterval(() => {
+    const advance = () => {
       if (document.visibilityState === "visible") setTick((t) => t + 1)
-    }, ROTATE_MS)
-    return () => window.clearInterval(id)
-  }, [enabled, paused])
+    }
+    let intervalId: number | undefined
+    const startId = window.setTimeout(() => {
+      advance()
+      intervalId = window.setInterval(advance, ROTATE_MS)
+    }, offsetMs)
+    return () => {
+      window.clearTimeout(startId)
+      window.clearInterval(intervalId)
+    }
+  }, [enabled, paused, offsetMs])
   return tick
 }
 
+function RotatingHeadline({
+  list,
+  paused,
+  offsetMs,
+}: {
+  list: Article[]
+  paused: boolean
+  offsetMs: number
+}) {
+  const tick = useSlotTick(list.length > 1, paused, offsetMs)
+  const article = list[tick % list.length]
+
+  return article.url ? (
+    <a href={article.url} target="_blank" rel="noopener noreferrer" className={cardClass}>
+      <HeadlineBody article={article} />
+      <span className="sr-only">(opens in a new tab)</span>
+    </a>
+  ) : (
+    <Link href="/news" className={cardClass}>
+      <HeadlineBody article={article} />
+    </Link>
+  )
+}
+
 export function NewsHeadlines({ articles }: { articles: HomeData["articles"] }) {
-  const pool = articles.pool ?? articles.items.map((article) => [article])
-  const canRotate = pool.some((list) => list.length > 1)
+  const pool = (articles.pool ?? articles.items.map((article) => [article])).filter((list) => list.length > 0)
   const [paused, setPaused] = useState(false)
-  const tick = useRotationTick(canRotate, paused)
-  const current = pool.map((list) => list[tick % list.length])
+  const staggerMs = pool.length ? Math.round(ROTATE_MS / pool.length) : 0
 
   return (
     <section aria-labelledby="news-title" className="flex flex-col gap-4">
       <SectionHeader id="news-title" title="Latest headlines" href="/news" linkLabel="News" isSample={articles.isSample} />
-      {current.length ? (
+      {pool.length ? (
         <ul
           className="flex flex-col gap-3"
           onMouseEnter={() => setPaused(true)}
@@ -57,18 +87,9 @@ export function NewsHeadlines({ articles }: { articles: HomeData["articles"] }) 
             if (!e.currentTarget.contains(e.relatedTarget)) setPaused(false)
           }}
         >
-          {current.map((article, slot) => (
+          {pool.map((list, slot) => (
             <li key={slot}>
-              {article.url ? (
-                <a href={article.url} target="_blank" rel="noopener noreferrer" className={cardClass}>
-                  <HeadlineBody article={article} />
-                  <span className="sr-only">(opens in a new tab)</span>
-                </a>
-              ) : (
-                <Link href="/news" className={cardClass}>
-                  <HeadlineBody article={article} />
-                </Link>
-              )}
+              <RotatingHeadline list={list} paused={paused} offsetMs={staggerMs * (slot + 1)} />
             </li>
           ))}
         </ul>
