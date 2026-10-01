@@ -12,7 +12,9 @@ from supabase import create_client
 
 def main():
     url = os.environ["SUPABASE_URL"]
-    key = os.environ["SUPABASE_SERVICE_KEY"]
+    key = (os.environ.get("SUPABASE_SERVICE_KEY") or os.environ.get("SUPABASE_KEY") or "").strip()
+    if not key:
+        raise RuntimeError("SUPABASE_SERVICE_KEY or SUPABASE_KEY is required")
     db = create_client(url, key)
 
     rows = []
