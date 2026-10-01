@@ -1,13 +1,14 @@
-name: Daily Dadspace workers (7am UK)
+name: Dadspace workers (every 2 days, 7am UK)
 
 on:
   # GitHub cron is UTC and does not understand Europe/London daylight saving.
-  # Run at both possible UTC equivalents of 07:00 UK time, then gate using TZ.
+  # Trigger both possible UTC equivalents of 07:00 UK time each day, then gate
+  # to 07:00 Europe/London and every second calendar day from 2026-10-01.
   schedule:
     - cron: "0 6 * * *"
     - cron: "0 7 * * *"
 
-  # Manual button for testing; manual runs bypass the 07:00 local-time gate.
+  # Manual runs bypass both the time and every-other-day gates.
   workflow_dispatch:
 
 jobs:
@@ -17,7 +18,7 @@ jobs:
       should_run: ${{ steps.uk_time.outputs.should_run }}
     steps:
       - id: uk_time
-        name: Check whether it is 07:00 in the UK
+        name: Check UK time and two-day cadence
         shell: bash
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -27,15 +28,26 @@ jobs:
           fi
 
           UK_HOUR=$(TZ=Europe/London date +%H)
+          UK_DATE=$(TZ=Europe/London date +%F)
           UK_TIME=$(TZ=Europe/London date '+%Y-%m-%d %H:%M %Z')
           echo "Current UK time: $UK_TIME"
 
-          if [ "$UK_HOUR" = "07" ]; then
+          if [ "$UK_HOUR" != "07" ]; then
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+            echo "Not 07:00 in Europe/London: skipping duplicate UTC trigger."
+            exit 0
+          fi
+
+          ANCHOR_EPOCH=$(date -u -d '2026-10-01' +%s)
+          TODAY_EPOCH=$(date -u -d "$UK_DATE" +%s)
+          DAYS_SINCE=$(( (TODAY_EPOCH - ANCHOR_EPOCH) / 86400 ))
+
+          if [ $(( DAYS_SINCE % 2 )) -eq 0 ]; then
             echo "should_run=true" >> "$GITHUB_OUTPUT"
-            echo "It is 07:00 in Europe/London: running workers."
+            echo "Every-two-days cadence matched: running workers."
           else
             echo "should_run=false" >> "$GITHUB_OUTPUT"
-            echo "Not 07:00 in Europe/London: skipping this UTC trigger."
+            echo "Off day in every-two-days cadence: skipping workers."
           fi
 
   news:
