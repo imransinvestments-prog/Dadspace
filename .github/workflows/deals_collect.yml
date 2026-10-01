@@ -18,10 +18,10 @@ on:
         description: "Keep low-value deals whose discount is unknown"
         type: boolean
         default: false
-  # TURN THIS ON ONLY AFTER THE DRY RUN LOOKS GOOD (remove the # at the start of the next 2 lines).
+  # TURN THIS ON ONLY AFTER THE DRY RUN LOOKS GOOD.
   # Scheduled runs are LIVE runs and will save deals.
   # schedule:
-  #   - cron: "0 7,13,19 * * *"   # 7am, 1pm and 7pm UTC
+  #   - cron: "0 7,13,19 * * *"
 
 permissions:
   contents: read
@@ -29,7 +29,7 @@ permissions:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -42,17 +42,26 @@ jobs:
       - name: Run deals worker
         env:
           PYTHONUNBUFFERED: "1"
-          # Scheduled runs are live; manual runs follow the tick-box above.
           DRY_RUN: ${{ github.event_name == 'schedule' && 'false' || inputs.dry_run }}
           SAMPLE_SIZE: ${{ inputs.sample_size || '40' }}
           KEEP_UNKNOWN_DISCOUNT_LOW: ${{ inputs.keep_unknown_discount_low || 'false' }}
-          # The worker uses whichever of these secrets exist in your repo.
+
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+
+          # Optional source credentials. Sources remain independently controlled
+          # by deal_sources.active, so missing credentials do not affect RSS.
+          AWIN_API_TOKEN: ${{ secrets.AWIN_API_TOKEN }}
+          AWIN_PUBLISHER_ID: ${{ secrets.AWIN_PUBLISHER_ID }}
+          FMTC_API_TOKEN: ${{ secrets.FMTC_API_TOKEN }}
+          PEPPER_API_KEY: ${{ secrets.PEPPER_API_KEY }}
+
         run: python deals_worker_db.py ${{ inputs.self_test && '--self-test' || '' }}
 
       - name: Upload review files
