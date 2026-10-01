@@ -1,7 +1,6 @@
 name: Collect events (councils, heritage & niche venues)
 
-# The "reliable" track: councils, museums, heritage sites and niche venues you add by hand.
-# These are ordinary web pages, so this uses a plain, fast page download - no browser needed.
+# The reliable track: councils, museums, heritage sites and niche venues.
 
 on:
   workflow_dispatch:
@@ -36,11 +35,11 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - name: Validate Python (syntax check)
-        run: python -m py_compile worker.py
+        run: python -m py_compile worker.py events_worker.py
       - name: Self-test (no network/Gemini/Supabase calls)
-        run: python worker.py --self-test
+        run: python events_worker.py --self-test
       - name: Run collector
-        run: python worker.py
+        run: python events_worker.py
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
