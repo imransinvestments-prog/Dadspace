@@ -1,7 +1,7 @@
-import Image from "next/image"
+import { VenuePhoto } from "@/components/venues/venue-photo"
 import { Accessibility, Baby, Clock, Coffee, Dog, Globe, MapPin, Navigation, Phone, SquareParking, type LucideIcon } from "lucide-react"
 import { directionsUrl, formatMiles } from "@/components/venues/venue-spotlight"
-import { FACILITY_LABELS, categoryLabel, venueImage, type Venue } from "@/lib/venue-meta"
+import { FACILITY_LABELS, categoryLabel, type Venue } from "@/lib/venue-meta"
 
 const FACILITY_ICONS: Record<string, LucideIcon> = {
   baby_changing: Baby,
@@ -19,7 +19,6 @@ function setting(venue: Venue) {
 }
 
 export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distance: number | null; index?: number }) {
-  const image = venueImage(venue)
   const place = [venue.town, venue.postcode].filter(Boolean).join(", ") || venue.address
   const where = setting(venue)
 
@@ -29,11 +28,8 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
       style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}
     >
       <div className="relative aspect-[16/10] overflow-hidden">
-        <Image
-          src={image || "/placeholder.svg"}
-          alt=""
-          fill
-          unoptimized={image.startsWith("http")}
+        <VenuePhoto
+          venue={venue}
           sizes="(min-width: 1280px) 30vw, (min-width: 640px) 50vw, 100vw"
           className="object-cover transition duration-500 group-hover:scale-105"
         />
@@ -50,7 +46,7 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
           </span>
         ) : null}
         {distance != null && (
-          <span className="absolute bottom-3 left-3 flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-xs font-extrabold text-primary-foreground">
+          <span className="absolute top-14 left-3 flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-xs font-extrabold text-primary-foreground">
             <Navigation className="size-3" aria-hidden />
             {formatMiles(distance)}
           </span>
