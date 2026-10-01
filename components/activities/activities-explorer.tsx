@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { MapPin, Search } from "lucide-react"
 import { activitySlug } from "@/lib/activity-slug"
-import { ACTIVITY_PAGE_SIZE, type ActivityPage } from "@/lib/activities"
+import { ACTIVITY_PAGE_SIZE, type ActivityPage } from "@/lib/activity-shared"
 import type { DadActivity } from "@/lib/types"
 
 function priceLabel(value: string | null) {
