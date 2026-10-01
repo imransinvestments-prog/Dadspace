@@ -6,7 +6,7 @@ on:
       dry_run:
         description: "Dry run (saves nothing, writes review files)"
         type: boolean
-        default: true
+        default: false
       self_test:
         description: "Only check that everything is connected (no deals fetched)"
         type: boolean
@@ -18,10 +18,11 @@ on:
         description: "Keep low-value deals whose discount is unknown"
         type: boolean
         default: false
-  # TURN THIS ON ONLY AFTER THE DRY RUN LOOKS GOOD.
-  # Scheduled runs are LIVE runs and will save deals.
-  # schedule:
-  #   - cron: "0 7,13,19 * * *"
+
+  # GitHub cron uses UTC. Trigger both GMT/BST equivalents and gate against
+  # Europe/London so the worker runs at 07:00, 13:00 and 19:00 UK local time.
+  schedule:
+    - cron: "0 6,7,12,13,18,19 * * *"
 
 permissions:
   contents: read
@@ -31,17 +32,47 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
+      - id: uk_time
+        name: Check UK schedule
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            echo "Manual run: continuing."
+            exit 0
+          fi
+
+          UK_HOUR=$(TZ=Europe/London date +%H)
+          UK_TIME=$(TZ=Europe/London date '+%Y-%m-%d %H:%M %Z')
+          echo "Current UK time: $UK_TIME"
+
+          case "$UK_HOUR" in
+            07|13|19)
+              echo "should_run=true" >> "$GITHUB_OUTPUT"
+              echo "Scheduled UK deals run: continuing."
+              ;;
+            *)
+              echo "should_run=false" >> "$GITHUB_OUTPUT"
+              echo "Duplicate UTC trigger: skipping."
+              ;;
+          esac
+
       - uses: actions/checkout@v4
+        if: steps.uk_time.outputs.should_run == 'true'
 
       - uses: actions/setup-python@v5
+        if: steps.uk_time.outputs.should_run == 'true'
         with:
           python-version: "3.12"
 
       - run: pip install requests
+        if: steps.uk_time.outputs.should_run == 'true'
 
       - name: Run deals worker
+        if: steps.uk_time.outputs.should_run == 'true'
         env:
           PYTHONUNBUFFERED: "1"
+          # Scheduled runs are always live. Manual runs use the checkbox above.
           DRY_RUN: ${{ github.event_name == 'schedule' && 'false' || inputs.dry_run }}
           SAMPLE_SIZE: ${{ inputs.sample_size || '40' }}
           KEEP_UNKNOWN_DISCOUNT_LOW: ${{ inputs.keep_unknown_discount_low || 'false' }}
@@ -65,7 +96,7 @@ jobs:
         run: python deals_worker_db.py ${{ inputs.self_test && '--self-test' || '' }}
 
       - name: Upload review files
-        if: always()
+        if: always() && steps.uk_time.outputs.should_run == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: deals-dry-run-review
