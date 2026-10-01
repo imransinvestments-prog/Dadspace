@@ -1,4 +1,5 @@
 import { VenuesDirectory } from "@/components/venues/venues-directory"
+import { VenuesJsonLd } from "@/components/venues/venues-json-ld"
 import { fetchVenues } from "@/lib/venues"
 import { pageMetadata } from "@/lib/seo"
 
@@ -12,5 +13,10 @@ export const revalidate = 600
 
 export default async function VenuesPage() {
   const { venues, isPreview } = await fetchVenues()
-  return <VenuesDirectory venues={venues} isPreview={isPreview} />
+  return (
+    <>
+      {venues.length ? <VenuesJsonLd venues={venues} /> : null}
+      <VenuesDirectory venues={venues} isPreview={isPreview} />
+    </>
+  )
 }

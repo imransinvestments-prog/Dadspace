@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AppShell } from "@/components/app-shell"
 import { LocationProvider } from "@/components/location-provider"
+import { SiteJsonLd } from "@/components/seo/json-ld"
 import { defaultDescription, defaultTitle, isProduction, siteName, siteUrl } from "@/lib/seo"
 import "./globals.css"
 
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-GB" suppressHydrationWarning className={`${bricolage.variable} ${jakarta.variable} bg-background`}>
       <body className="font-sans antialiased">
+        <SiteJsonLd />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <LocationProvider>
             <AppShell>{children}</AppShell>

@@ -12,8 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/news", changeFrequency: "daily", priority: 0.9 },
     { path: "/events", changeFrequency: "daily", priority: 0.9 },
     { path: "/venues", changeFrequency: "weekly", priority: 0.8 },
-    { path: "/deals", changeFrequency: "daily", priority: 0.8 },
-    { path: "/forum", changeFrequency: "daily", priority: 0.7 },
   ]
 
   return pages.map(({ path, changeFrequency, priority }) => ({
