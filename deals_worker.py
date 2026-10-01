@@ -123,6 +123,10 @@ MID_WORDS = ["sterilis", "steriliz", "warmer", "gate", "bath", "bottle", "ticket
              "paddling", "play gym", "bookshelf"]
 
 
+STATS = {"gemini_candidates": 0, "gemini_calls": 0, "gemini_errors": 0,
+         "tokens_in": 0, "tokens_out": 0}
+
+
 # ---------------------------------------------------------------- HELPERS
 def log(*a):
     print(*a, flush=True)
@@ -429,6 +433,13 @@ def value_check(d):
     return None
 
 
+class GeminiError(RuntimeError):
+    """A Gemini failure. Carries any tokens that were still used."""
+    def __init__(self, msg, tin=0, tout=0):
+        super().__init__(msg)
+        self.tin, self.tout = tin, tout
+
+
 def gemini_classify(batch):
     """batch: list of {'id','title','retailer','feed_category'}.
     Returns (answers_by_id, input_tokens, output_tokens)."""
@@ -473,16 +484,21 @@ def gemini_classify(batch):
     usage = data.get("usageMetadata", {})
     tin = usage.get("promptTokenCount", 0)
     tout = usage.get("candidatesTokenCount", 0) + usage.get("thoughtsTokenCount", 0)
-    text = data["candidates"][0]["content"]["parts"][0]["text"]
-    text = re.sub(r"^```(?:json)?|```$", "", text.strip(), flags=re.M).strip()
-    arr = json.loads(text)
-    return {int(a["id"]): a for a in arr if isinstance(a, dict) and "id" in a}, tin, tout
+    try:
+        text = data["candidates"][0]["content"]["parts"][0]["text"]
+        text = re.sub(r"^```(?:json)?|```$", "", text.strip(), flags=re.M).strip()
+        arr = json.loads(text)
+        return {int(a["id"]): a for a in arr if isinstance(a, dict) and "id" in a}, tin, tout
+    except Exception as e:  # noqa: BLE001
+        raise GeminiError(f"could not read Gemini answer: {e}", tin, tout)
 
 
 def process_items(deals, entries, exclusions, classify_fn=None):
     """Runs layers 1-3 and the value check on already-validated deals.
     Adds 'decision', 'reason' etc. to each deal. Returns token counts and stats."""
-    stats = {"gemini_candidates": 0, "gemini_calls": 0, "tokens_in": 0, "tokens_out": 0}
+    stats = STATS
+    for k in stats:
+        stats[k] = 0
     candidates = []
     for d in deals:
         if d.get("decision") == "rejected":
@@ -521,6 +537,12 @@ def process_items(deals, entries, exclusions, classify_fn=None):
                     answers, tin, tout = classify_fn(payload)
                 except Exception as ex:  # noqa: BLE001
                     log(f"  Gemini batch failed: {ex}")
+                    stats["gemini_errors"] += 1
+                    tin, tout = getattr(ex, "tin", 0), getattr(ex, "tout", 0)
+                    if tin or tout:  # the call happened and used tokens
+                        stats["gemini_calls"] += 1
+                        stats["tokens_in"] += tin
+                        stats["tokens_out"] += tout
                     for d in chunk:
                         reject(d, "gemini_error")
                     continue
@@ -629,8 +651,10 @@ def write_review(all_deals, source_results, stats, started):
     A(f"- Items fetched: {len(all_deals)}")
     A(f"- Kept: {len(kept)}")
     A(f"- Rejected: {len(rejected)}")
-    A(f"- Sent to Gemini: {stats['gemini_candidates']} in {stats['gemini_calls']} calls "
-      f"({stats['tokens_in']} tokens in, {stats['tokens_out']} out)")
+    A(f"- Sent to Gemini: {stats['gemini_candidates']} deals in {stats['gemini_calls']} calls "
+      f"({stats['gemini_errors']} failed)")
+    A(f"- Tokens: {stats['tokens_in']} in + {stats['tokens_out']} out = "
+      f"{stats['tokens_in'] + stats['tokens_out']} total")
     with_price = sum(1 for d in all_deals if d["price"] is not None)
     with_disc = sum(1 for d in all_deals if d["discount_pct"] is not None)
     A(f"- Price found on {with_price} of {len(all_deals)} items; discount found on {with_disc}")
@@ -690,14 +714,48 @@ def update_source_health(src, status):
        headers={"Prefer": "return=minimal"})
 
 
-def log_run(stats, n_fetched, n_skips):
+def stage_of(reason):
+    if reason.startswith("gemini"):
+        return "gemini"
+    if reason.startswith("discount_too_small") or reason.startswith("low_value"):
+        return "value"
+    return "prefilter"  # validation or free keyword rules, no Gemini involved
+
+
+def build_details(all_deals, source_results, started, status="ok", error=None):
+    rej = {}
+    for d in all_deals:
+        if d.get("decision") == "rejected":
+            k = d["reason"].split(" (")[0]
+            rej[k] = rej.get(k, 0) + 1
+    by_group = {}
+    for d in all_deals:
+        if d.get("decision") == "kept":
+            by_group[d["display_group"]] = by_group.get(d["display_group"], 0) + 1
+    return {
+        "status": status, "error": error, "model": GEMINI_MODEL,
+        "seconds": round((now_utc() - started).total_seconds(), 1),
+        "total_tokens": STATS["tokens_in"] + STATS["tokens_out"],
+        "gemini_errors": STATS["gemini_errors"],
+        "fetched": len(all_deals),
+        "kept": sum(1 for d in all_deals if d.get("decision") == "kept"),
+        "kept_by_group": by_group, "rejected_by_reason": rej,
+        "sources": [{"name": r["name"], "status": r["status"], "items": r["items"]}
+                    for r in source_results],
+    }
+
+
+def log_run(skipped_prefilter, details):
+    """One row in pipeline_runs, same columns as the news worker."""
     try:
         sb("POST", "pipeline_runs", json={
             "worker": "deals", "dry_run": DRY_RUN,
-            "input_tokens": stats["tokens_in"], "output_tokens": stats["tokens_out"],
-            "articles_scored": stats["gemini_candidates"], "prefilter_skips": n_skips,
-            "details": {"fetched": n_fetched, "model": GEMINI_MODEL},
+            "input_tokens": STATS["tokens_in"], "output_tokens": STATS["tokens_out"],
+            "gemini_calls": STATS["gemini_calls"],
+            "articles_scored": STATS["gemini_candidates"],
+            "skipped_prefilter": skipped_prefilter, "details": details,
         }, headers={"Prefer": "return=minimal"})
+        log(f"Run logged to pipeline_runs (total tokens: {details['total_tokens']}).")
     except Exception as ex:  # noqa: BLE001
         log(f"(run log to pipeline_runs skipped: {ex})")
 
@@ -770,7 +828,8 @@ def run():
     stats = process_items(all_deals, entries, exclusions,
                           gemini_classify if _GEMINI_KEY else None)
     kept = [d for d in all_deals if d.get("decision") == "kept"]
-    skips = sum(1 for d in all_deals if d.get("decision") == "rejected")
+    skips = sum(1 for d in all_deals
+                if d.get("decision") == "rejected" and stage_of(d["reason"]) == "prefilter")
     write_review(all_deals, source_results, stats, started)
 
     if DRY_RUN:
@@ -778,7 +837,7 @@ def run():
     else:
         save_live(kept, {})
         log(f"\nLIVE: saved {len(kept)} deals and expired deals not seen for {EXPIRE_AFTER_DAYS} days.")
-    log_run(stats, n_fetched, skips)
+    log_run(skips, build_details(all_deals, source_results, started))
     return 0
 
 
@@ -787,7 +846,10 @@ if __name__ == "__main__":
         if "--self-test" in sys.argv:
             sys.exit(0 if self_test() else 1)
         sys.exit(run())
-    except Exception:  # noqa: BLE001
+    except Exception as crash:  # noqa: BLE001
         import traceback
         traceback.print_exc()
+        if _SB_URL and _SB_KEY:
+            log_run(0, {"status": "crashed", "error": str(crash)[:300], "model": GEMINI_MODEL,
+                        "total_tokens": STATS["tokens_in"] + STATS["tokens_out"]})
         sys.exit(1)
