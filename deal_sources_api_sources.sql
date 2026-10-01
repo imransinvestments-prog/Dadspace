@@ -1,5 +1,5 @@
 -- Dadspace deal source adapters: Awin, FMTC and Pepper/HotUKDeals API.
--- Run once in the Supabase SQL editor.
+-- Safe to run more than once in the Supabase SQL editor.
 --
 -- New API sources are deliberately INACTIVE. Turn each on only when its
 -- credentials/endpoint are ready. Existing RSS sources are not changed.
@@ -23,27 +23,29 @@ begin
 end $$;
 
 alter table public.deal_sources
+  drop constraint if exists deal_sources_source_type_check;
+
+alter table public.deal_sources
   add constraint deal_sources_source_type_check
   check (source_type in ('rss', 'awin', 'fmtc', 'pepper'));
 
--- Awin Offers API. The adapter will use its standard publisher promotions
--- endpoint when URL is blank; credentials live in GitHub Actions secrets.
+-- The url column is UNIQUE in Dadspace. Awin and FMTC use unique config://
+-- sentinel URLs here; the Python adapters recognise these and substitute the
+-- provider's real API endpoint at runtime.
 insert into public.deal_sources (name, url, source_type, active)
-select 'Awin Offers API', '', 'awin', false
+select 'Awin Offers API', 'config://awin', 'awin', false
 where not exists (
   select 1 from public.deal_sources where source_type = 'awin'
 );
 
--- FMTC Deal Feed. URL may be left blank to use the adapter default endpoint.
 insert into public.deal_sources (name, url, source_type, active)
-select 'FMTC Deal Feed', '', 'fmtc', false
+select 'FMTC Deal Feed', 'config://fmtc', 'fmtc', false
 where not exists (
   select 1 from public.deal_sources where source_type = 'fmtc'
 );
 
--- Pepper / HotUKDeals REST API. Pepper documents the API beneath
--- https://www.hotukdeals.com/rest_api/v2. Replace this URL with the exact
--- thread-list/deal-list endpoint from your Pepper API documentation before
+-- Pepper / HotUKDeals REST API. Replace this base URL with the exact
+-- thread-list/deal-list endpoint from the Pepper API documentation before
 -- activating the row.
 insert into public.deal_sources (name, url, source_type, active)
 select 'HotUKDeals - Pepper API', 'https://www.hotukdeals.com/rest_api/v2', 'pepper', false
