@@ -62,7 +62,7 @@ jobs:
     secrets: inherit
 
   civic:
-    needs: news
+    needs: [gate, news]
     if: needs.gate.outputs.should_run == 'true' && needs.news.result == 'success'
     uses: ./.github/workflows/collect-civic.yml
     with:
@@ -71,7 +71,7 @@ jobs:
     secrets: inherit
 
   activities:
-    needs: civic
+    needs: [gate, civic]
     if: needs.gate.outputs.should_run == 'true' && needs.civic.result == 'success'
     uses: ./.github/workflows/collect-activities.yml
     with:
@@ -80,7 +80,7 @@ jobs:
     secrets: inherit
 
   deals:
-    needs: activities
+    needs: [gate, activities]
     if: needs.gate.outputs.should_run == 'true' && needs.activities.result == 'success'
     uses: ./.github/workflows/deals_collect.yml
     with:
