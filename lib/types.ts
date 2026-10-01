@@ -13,8 +13,35 @@ export type DadEvent = {
   source_url: string | null
   source_id?: string | null
   recurrence?: string | null
+  category?: string | null
+  is_holiday_camp?: boolean
+  venue_name?: string | null
+  venue_address?: string | null
+  postcode?: string | null
+  venue_id?: string | null
   distance_miles?: number | null
   image_url?: string | null
+}
+
+export type DadActivity = {
+  id: string
+  title: string
+  description: string | null
+  schedule_text: string | null
+  time_text: string | null
+  location: string | null
+  event_url: string | null
+  cost_text: string | null
+  age_range: string | null
+  family_relevance: number | null
+  source_url: string | null
+  source_id?: string | null
+  category?: string | null
+  venue_name?: string | null
+  venue_address?: string | null
+  postcode?: string | null
+  venue_id?: string | null
+  last_seen_at?: string | null
 }
 
 /** How the Home events were picked when the user's location is known. */
