@@ -66,7 +66,10 @@ def fetch_awin(source):
     publisher_id = os.getenv("AWIN_PUBLISHER_ID", "").strip()
     if not token or not publisher_id:
         return "configuration_missing", [], "AWIN_API_TOKEN or AWIN_PUBLISHER_ID not configured"
-    url = (source.get("url") or f"https://api.awin.com/publisher/{publisher_id}/promotions").strip()
+    default_url = f"https://api.awin.com/publisher/{publisher_id}/promotions"
+    url = (source.get("url") or default_url).strip()
+    if url == "config://awin":
+        url = default_url
     headers = {
         "Authorization": f"Bearer {token}",
         "Accept": "application/json",
@@ -119,7 +122,10 @@ def fetch_fmtc(source):
     token = os.getenv("FMTC_API_TOKEN", "").strip()
     if not token:
         return "configuration_missing", [], "FMTC_API_TOKEN not configured"
-    url = (source.get("url") or "https://s3.fmtc.co/api/4.2.0/deals").strip()
+    default_url = "https://s3.fmtc.co/api/4.2.0/deals"
+    url = (source.get("url") or default_url).strip()
+    if url == "config://fmtc":
+        url = default_url
     params = {"api_token": token, "format": "JSON", "active": 1, "country": "GB"}
     try:
         response = requests.get(url, params=params, headers={"User-Agent": USER_AGENT}, timeout=(10, 60))
