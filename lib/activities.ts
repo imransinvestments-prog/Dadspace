@@ -1,8 +1,11 @@
 import "server-only"
 import { getSupabase } from "./supabase"
+import { ACTIVITY_PAGE_SIZE, type ActivityPage } from "./activity-shared"
 import type { DadActivity } from "./types"
 
-export const ACTIVITY_PAGE_SIZE = 24
+export { ACTIVITY_PAGE_SIZE } from "./activity-shared"
+export type { ActivityPage } from "./activity-shared"
+
 const MAX_CATEGORY_ROWS = 1000
 const text = (value: unknown) => (typeof value === "string" && value.trim() ? value.trim() : null)
 
@@ -31,14 +34,6 @@ function toActivity(row: Record<string, unknown>): DadActivity {
 
 function safeSearch(value: string | null | undefined) {
   return (value ?? "").trim().replace(/[,%()]/g, " ").replace(/\s+/g, " ").slice(0, 100)
-}
-
-export type ActivityPage = {
-  activities: DadActivity[]
-  total: number
-  offset: number
-  limit: number
-  hasMore: boolean
 }
 
 export async function fetchActivityPage(options?: {
