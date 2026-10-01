@@ -1,8 +1,15 @@
 import type { DadEvent } from "./types"
 
-export type EventCategory = "seasonal" | "swim" | "stage" | "active" | "outdoor" | "crafts" | "story" | "music" | "family"
+export type EventCategory = "holiday_camps" | "seasonal" | "swim" | "stage" | "active" | "outdoor" | "crafts" | "story" | "music" | "family"
 
 type CategoryDef = { key: EventCategory; label: string; pattern: RegExp; images: string[] }
+
+const HOLIDAY_CAMPS: CategoryDef = {
+  key: "holiday_camps",
+  label: "Holiday camps",
+  pattern: /holiday camp|half[- ]?term camp|summer camp|easter camp|christmas camp|school holiday camp|multi[- ]?activity camp|football camp|sports camp|dance camp|drama camp|performing arts camp/,
+  images: ["/images/events/active-play.png", "/images/events/family-day.png"],
+}
 
 // Prefer specific intent words. Broad words such as "show", "play" and a venue
 // containing "park" are deliberately avoided because they caused false matches.
@@ -58,15 +65,36 @@ const CATEGORIES: CategoryDef[] = [
 ]
 
 const FAMILY: CategoryDef = { key: "family", label: "Family days out", pattern: /./, images: ["/images/events/family-day.png"] }
+const ALL_DEFS = [HOLIDAY_CAMPS, ...CATEGORIES, FAMILY]
 
-export const EVENT_CATEGORIES: { key: EventCategory; label: string }[] = [...CATEGORIES, FAMILY].map(({ key, label }) => ({ key, label }))
+export const EVENT_CATEGORIES: { key: EventCategory; label: string }[] = ALL_DEFS.map(({ key, label }) => ({ key, label }))
 
-function definitionFor(event: Pick<DadEvent, "title" | "description" | "location">): CategoryDef {
+const STORED_CATEGORY_MAP: Record<string, EventCategory> = {
+  holiday_camps: "holiday_camps",
+  sports: "active",
+  swimming: "swim",
+  outdoors_nature: "outdoor",
+  film_theatre: "stage",
+  arts_crafts: "crafts",
+  museums_heritage: "story",
+  farms_animals: "outdoor",
+  libraries: "story",
+  baby_toddler: "family",
+  family_days_out: "family",
+  other: "family",
+}
+
+function definitionFor(event: Pick<DadEvent, "title" | "description" | "location" | "category" | "is_holiday_camp">): CategoryDef {
+  if (event.is_holiday_camp) return HOLIDAY_CAMPS
+  const stored = event.category ? STORED_CATEGORY_MAP[event.category] : undefined
+  if (stored) return ALL_DEFS.find((c) => c.key === stored) ?? FAMILY
+
   const title = event.title.toLowerCase()
   const description = (event.description ?? "").toLowerCase()
+  const holidayMatch = HOLIDAY_CAMPS.pattern.test(`${title} ${description}`)
+  if (holidayMatch) return HOLIDAY_CAMPS
 
-  // Title is the strongest signal. Only fall back to description when the title
-  // is genuinely unclear; location alone never decides a category.
+  // Legacy rows without an extracted category still use the safer heuristic.
   const titleMatch = CATEGORIES.find((c) => c.pattern.test(title))
   if (titleMatch) return titleMatch
   const descriptionMatch = CATEGORIES.find((c) => c.pattern.test(description))
@@ -74,7 +102,7 @@ function definitionFor(event: Pick<DadEvent, "title" | "description" | "location
   return FAMILY
 }
 
-export function eventCategory(event: Pick<DadEvent, "title" | "description" | "location">): EventCategory {
+export function eventCategory(event: Pick<DadEvent, "title" | "description" | "location" | "category" | "is_holiday_camp">): EventCategory {
   return definitionFor(event).key
 }
 
@@ -88,7 +116,6 @@ function hash(value: string) {
   return Math.abs(h)
 }
 
-/** The event's own image from the database when there is one, otherwise a stock image for its category. */
 export function eventImage(event: DadEvent): { src: string; isOwn: boolean } {
   if (event.image_url) return { src: event.image_url, isOwn: true }
   const { images } = definitionFor(event)
