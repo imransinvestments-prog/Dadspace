@@ -51,7 +51,7 @@ export default async function EventDetailPage({ params }: PageProps) {
     startDate: event.start_date,
     endDate: event.end_date || event.start_date,
     url: canonical,
-    eventStatus: ended ? "https://schema.org/EventCancelled" : "https://schema.org/EventScheduled",
+    eventStatus: ended ? undefined : "https://schema.org/EventScheduled",
     image: image.src.startsWith("http") ? image.src : `${siteUrl}${image.src}`,
     location: event.location
       ? { "@type": "Place", name: event.location, address: event.location }
@@ -121,14 +121,14 @@ export default async function EventDetailPage({ params }: PageProps) {
               </div>
             )}
 
-            {officialUrl && !ended && (
+            {officialUrl && (
               <a
                 href={officialUrl}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-navy px-6 py-3.5 text-sm font-bold text-navy-foreground transition hover:-translate-y-0.5 hover:shadow-lg sm:w-fit"
               >
-                Book / check official site
+                {ended ? "View organiser's page" : "Book / check official site"}
                 <ExternalLink className="size-4" aria-hidden />
               </a>
             )}
