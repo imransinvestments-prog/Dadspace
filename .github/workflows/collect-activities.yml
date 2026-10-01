@@ -1,7 +1,7 @@
 name: Collect events (activities & clubs)
 
-# The browser-based activity collector. Kept separate from civic so browser
-# failures do not affect the requests-based collector.
+# Browser-based activity collector. Kept separate from civic so browser failures
+# do not affect the requests-based collector.
 
 on:
   workflow_dispatch:
@@ -37,11 +37,25 @@ jobs:
       - run: pip install -r requirements-browser.txt
       - run: playwright install --with-deps chromium
       - name: Validate Python (syntax check)
-        run: python -m py_compile worker.py
+        run: python -m py_compile worker.py events_worker.py scripts/export_events_backup.py
       - name: Self-test (no network/Gemini/Supabase calls)
-        run: python worker.py --self-test
+        run: python events_worker.py --self-test
+      - name: Back up events before any live write
+        if: ${{ (inputs.dry_run || 'true') == 'false' }}
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python scripts/export_events_backup.py
+      - name: Upload pre-write event backup
+        if: ${{ (inputs.dry_run || 'true') == 'false' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: events-before-activities-write-${{ github.run_id }}
+          path: event-backup/
+          retention-days: 30
+          if-no-files-found: error
       - name: Run collector
-        run: python worker.py
+        run: python events_worker.py
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
@@ -56,5 +70,6 @@ jobs:
           MIN_DATE_HINTS_FOR_LLM: "1"
           MAX_RUN_MINUTES: "60"
           GEMINI_TIMEOUT_SECONDS: "90"
+          EXPIRED_RETENTION_DAYS: "730"
           LIMIT: ${{ inputs.limit || '0' }}
           DRY_RUN: ${{ inputs.dry_run || 'true' }}

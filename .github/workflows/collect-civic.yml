@@ -1,9 +1,15 @@
 name: Collect events (councils, heritage & niche venues)
 
-# The "reliable" track: councils, museums, heritage sites and niche venues you add by hand.
-# These are ordinary web pages, so this uses a plain, fast page download - no browser needed.
+# The reliable track: councils, museums, heritage sites and niche venues.
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "events_worker.py"
+      - "scripts/export_events_backup.py"
+      - "scripts/audit_and_merge_event_duplicates.py"
+      - ".github/workflows/collect-civic.yml"
   workflow_dispatch:
     inputs:
       limit:
@@ -25,8 +31,42 @@ on:
         type: string
         default: "true"
 
+permissions:
+  contents: read
+
 jobs:
+  review-safety:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Export current events (read only)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python scripts/export_events_backup.py
+      - name: Build duplicate review plan (read only)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python scripts/audit_and_merge_event_duplicates.py
+      - name: Upload safety review artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: events-quality-review-safety-${{ github.run_id }}
+          path: |
+            event-backup/
+            duplicate-review/
+          retention-days: 30
+          if-no-files-found: error
+
   collect:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -36,11 +76,25 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - name: Validate Python (syntax check)
-        run: python -m py_compile worker.py
+        run: python -m py_compile worker.py events_worker.py scripts/export_events_backup.py scripts/audit_and_merge_event_duplicates.py
       - name: Self-test (no network/Gemini/Supabase calls)
-        run: python worker.py --self-test
+        run: python events_worker.py --self-test
+      - name: Back up events before any live write
+        if: ${{ (inputs.dry_run || 'true') == 'false' }}
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python scripts/export_events_backup.py
+      - name: Upload pre-write event backup
+        if: ${{ (inputs.dry_run || 'true') == 'false' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: events-before-civic-write-${{ github.run_id }}
+          path: event-backup/
+          retention-days: 30
+          if-no-files-found: error
       - name: Run collector
-        run: python worker.py
+        run: python events_worker.py
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
@@ -51,5 +105,6 @@ jobs:
           FETCH_ENGINE: "requests"
           MAX_RUN_MINUTES: "45"
           GEMINI_TIMEOUT_SECONDS: "60"
+          EXPIRED_RETENTION_DAYS: "730"
           LIMIT: ${{ inputs.limit || '0' }}
           DRY_RUN: ${{ inputs.dry_run || 'true' }}

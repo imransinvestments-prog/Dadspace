@@ -33,8 +33,7 @@ export default async function EventsPage() {
             Family events and things to do with the kids
           </h1>
           <p className="max-w-xl leading-relaxed text-pretty opacity-85">
-            Story times, swimming, sport, crafts and days out from councils, libraries and venues across the UK. Updated
-            daily, so the weekend plan is sorted before the kids are.
+            Story times, swimming, sport, crafts and days out from councils, libraries and venues across the UK. Refreshed regularly, so the weekend plan is easier to sort before the kids are.
           </p>
           <dl className="flex flex-wrap gap-x-8 gap-y-2 pt-2">
             <div className="flex items-baseline gap-2">
