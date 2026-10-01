@@ -21,6 +21,35 @@ const HOME_EVENT_COUNT = 3
 
 type EventsResult = HomeData["events"]
 
+function locationBucket(event: DadEvent) {
+  const parts = (event.location ?? "")
+    .split(",")
+    .map((part) => part.trim().toLowerCase())
+    .filter(Boolean)
+  return parts[parts.length - 1] || String(event.id)
+}
+
+function pickLocationMix(events: DadEvent[], count = HOME_EVENT_COUNT) {
+  const selected: DadEvent[] = []
+  const seen = new Set<string>()
+
+  for (const event of events) {
+    const bucket = locationBucket(event)
+    if (seen.has(bucket)) continue
+    selected.push(event)
+    seen.add(bucket)
+    if (selected.length === count) return selected
+  }
+
+  for (const event of events) {
+    if (selected.some((item) => item.id === event.id)) continue
+    selected.push(event)
+    if (selected.length === count) break
+  }
+
+  return selected
+}
+
 async function getNearbyEvents(user: Point, saturday: string, sunday: string, today: string): Promise<EventsResult | null> {
   const db = getSupabase()
   if (!db) return null
@@ -72,9 +101,14 @@ async function getWeekendEvents(saturday: string, sunday: string, today: string)
       .gte("end_date", saturday)
       .order("family_relevance", { ascending: false })
       .order("start_date", { ascending: true })
-      .limit(3)
+      .limit(30)
     if (!weekend.error && weekend.data?.length) {
-      return { ...base, items: weekend.data as DadEvent[], isSample: false, isWeekend: true }
+      return {
+        ...base,
+        items: pickLocationMix(weekend.data as DadEvent[]),
+        isSample: false,
+        isWeekend: true,
+      }
     }
 
     const upcoming = await db
@@ -83,9 +117,14 @@ async function getWeekendEvents(saturday: string, sunday: string, today: string)
       .gte("end_date", today)
       .order("start_date", { ascending: true })
       .order("family_relevance", { ascending: false })
-      .limit(3)
+      .limit(30)
     if (!upcoming.error && upcoming.data?.length) {
-      return { ...base, items: upcoming.data as DadEvent[], isSample: false, isWeekend: false }
+      return {
+        ...base,
+        items: pickLocationMix(upcoming.data as DadEvent[]),
+        isSample: false,
+        isWeekend: false,
+      }
     }
   }
   return { ...base, items: sampleEvents(saturday, sunday), isSample: true, isWeekend: true }
