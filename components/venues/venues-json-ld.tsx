@@ -1,6 +1,6 @@
 import { JsonLd, absoluteUrl } from "@/components/seo/json-ld"
 import { siteUrl } from "@/lib/seo"
-import { categoryLabel, venueImage, type Venue } from "@/lib/venue-meta"
+import { categoryLabel, venuePhotoUrl, type Venue } from "@/lib/venue-meta"
 
 const MAX_ITEMS = 100
 
@@ -21,7 +21,7 @@ function venueSchema(venue: Venue) {
     "@type": (venue.category && SCHEMA_TYPES[venue.category]) || "TouristAttraction",
     name: venue.name,
     description: venue.description || `${categoryLabel(venue.category)}${venue.town ? ` in ${venue.town}` : ""}, family-friendly.`,
-    image: absoluteUrl(venueImage(venue)),
+    image: venuePhotoUrl(venue) ? absoluteUrl(venuePhotoUrl(venue)!) : undefined,
     url: venue.website_url || undefined,
     telephone: venue.phone || undefined,
     address: {

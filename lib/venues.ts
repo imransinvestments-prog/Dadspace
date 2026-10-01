@@ -19,6 +19,7 @@ function list(v: unknown): string[] {
   return []
 }
 
+// OSM-style `fee` values are usually "yes"/"no"; anything else is treated as price text.
 function feeInfo(fee: string | null): { is_free: boolean | null; price_text: string | null } {
   if (!fee) return { is_free: null, price_text: null }
   const f = fee.toLowerCase()
@@ -27,6 +28,7 @@ function feeInfo(fee: string | null): { is_free: boolean | null; price_text: str
   return { is_free: null, price_text: fee }
 }
 
+// Maps the `venues` table (venue_name, town_city, country, website, fee…) with fallbacks for older column names.
 function toVenue(row: Row): Venue | null {
   const name = str(row.venue_name) ?? str(row.venue_label) ?? str(row.name)
   if (!name) return null
@@ -53,19 +55,20 @@ function toVenue(row: Row): Venue | null {
     outdoor: bool(row.outdoor),
     facilities: list(row.facilities),
     image_url: str(row.image_url),
+    image_source_url: str(row.image_source_url),
+    image_attribution: str(row.image_attribution),
+    image_license: str(row.image_license),
+    image_license_url: str(row.image_license_url),
+    image_title: str(row.image_title),
+    image_credit: str(row.image_credit),
   }
 }
 
-/** Public directory: service-role reads still explicitly exclude hidden/discovered venues. */
+/** Read-only: selects from `venues`. Falls back to labelled preview venues until the table exists and has rows. */
 export async function fetchVenues(): Promise<VenuesResult> {
   const supabase = getSupabase()
   if (supabase) {
-    const { data, error } = await supabase
-      .from("venues")
-      .select("*")
-      .eq("public_visible", true)
-      .order("venue_name")
-      .limit(500)
+    const { data, error } = await supabase.from("venues").select("*").eq("public_visible", true).order("venue_name").limit(500)
     if (error) console.error("Failed to load venues:", error.message)
     if (!error && data?.length) {
       const venues = (data as Row[]).map(toVenue).filter((v): v is Venue => v !== null)

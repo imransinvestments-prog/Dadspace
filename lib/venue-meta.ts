@@ -19,6 +19,12 @@ export type Venue = {
   outdoor: boolean | null
   facilities: string[]
   image_url: string | null
+  image_source_url?: string | null
+  image_attribution?: string | null
+  image_license?: string | null
+  image_license_url?: string | null
+  image_title?: string | null
+  image_credit?: string | null
 }
 
 export const CATEGORY_LABELS: Record<string, string> = {
@@ -47,12 +53,12 @@ type CategoryTheme = { match: RegExp; label: string; plural: string; image: stri
 
 const CATEGORY_THEMES: CategoryTheme[] = [
   { match: /soft_play|indoor/, label: "Soft play", plural: "Soft play", image: "/images/venues/soft-play.png" },
-  { match: /playground|park$|^park/, label: "Playground", plural: "Playgrounds", image: "/images/venues/playground.png" },
   { match: /museum/, label: "Museum", plural: "Museums", image: "/images/venues/museum.png" },
   { match: /arcade/, label: "Arcade", plural: "Arcades", image: "/images/venues/arcade.png" },
   { match: /zoo|animal|farm/, label: "Zoo & animals", plural: "Zoos & animals", image: "/images/venues/zoo.png" },
   { match: /water_park|swim|leisure/, label: "Water park", plural: "Water parks", image: "/images/venues/water-park.png" },
   { match: /theme_park|attraction/, label: "Theme park", plural: "Theme parks", image: "/images/venues/theme-park.png" },
+  { match: /playground|park$|^park/, label: "Playground", plural: "Playgrounds", image: "/images/venues/playground.png" },
   { match: /trampoline/, label: "Trampolines", plural: "Trampolines", image: "/images/venues/trampoline.png" },
   { match: /aquarium/, label: "Aquarium", plural: "Aquariums", image: "/images/venues/aquarium.png" },
   { match: /library/, label: "Library", plural: "Libraries", image: "/images/event-story.png" },
@@ -82,7 +88,20 @@ export function categoryImage(category: string | null) {
 }
 
 export function venueImage(venue: Venue) {
-  return venue.image_url || categoryImage(venue.category)
+  return venuePhotoUrl(venue) || categoryImage(venue.category)
+}
+
+export function venuePhotoUrl(venue: Venue): string | null {
+  if (!venue.image_url || !venue.image_attribution || !venue.image_license) return null
+  try {
+    const image = new URL(venue.image_url)
+    const source = new URL(venue.image_source_url ?? "")
+    const licence = new URL(venue.image_license_url ?? "")
+    if (image.protocol !== "https:" || !["upload.wikimedia.org", "thumb.wikimedia.org"].includes(image.hostname)) return null
+    if (source.protocol !== "https:" || source.hostname !== "commons.wikimedia.org") return null
+    if (licence.protocol !== "https:" || licence.hostname !== "creativecommons.org") return null
+    return image.href
+  } catch { return null }
 }
 
 export function milesBetween(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {

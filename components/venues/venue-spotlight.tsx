@@ -1,6 +1,6 @@
-import Image from "next/image"
+import { VenuePhoto } from "@/components/venues/venue-photo"
 import { Dices, Globe, MapPin, Navigation, X } from "lucide-react"
-import { categoryLabel, venueImage, type Venue } from "@/lib/venue-meta"
+import { categoryLabel, type Venue } from "@/lib/venue-meta"
 import { cn } from "@/lib/utils"
 
 export function directionsUrl(venue: Venue) {
@@ -26,7 +26,6 @@ type Props = {
 }
 
 export function VenueSpotlight({ venue, distance, rolling, onReroll, onClose }: Props) {
-  const image = venueImage(venue)
   const place = [venue.town, venue.postcode].filter(Boolean).join(", ") || venue.address
 
   return (
@@ -36,11 +35,8 @@ export function VenueSpotlight({ venue, distance, rolling, onReroll, onClose }: 
       className="animate-rise relative grid overflow-hidden rounded-2xl border-2 border-primary bg-card text-card-foreground md:grid-cols-[1.1fr_1fr]"
     >
       <div className="relative aspect-[16/10] md:aspect-auto md:min-h-72">
-        <Image
-          src={image || "/placeholder.svg"}
-          alt=""
-          fill
-          unoptimized={image.startsWith("http")}
+        <VenuePhoto
+          venue={venue}
           sizes="(min-width: 768px) 50vw, 100vw"
           className={cn("object-cover transition duration-150", rolling && "scale-105 blur-[2px]")}
         />
