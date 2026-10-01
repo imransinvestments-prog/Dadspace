@@ -3,14 +3,12 @@
 
 Each adapter returns ``(status, raw_items, info)``. ``raw_items`` deliberately
 uses the same shape as the existing RSS parser so the rest of the Dadspace
-pipeline (normalisation, validation, relevance, Gemini, value checks, review
-files and persistence) stays shared across every source.
+pipeline stays shared across every source.
 """
 
 import json
 import os
 from datetime import datetime, timezone
-
 import requests
 
 USER_AGENT = "DadspaceDealsWorker/0.2"
@@ -49,8 +47,7 @@ def _iso_to_rfc2822(value):
         return str(value)
 
 
-def _raw(*, title, description="", link="", guid="", published="", category="",
-         merchant="", price="", image=""):
+def _raw(*, title, description="", link="", guid="", published="", category="", merchant="", price="", image=""):
     return {
         "title_raw": _text(title).strip(),
         "description_raw": _text(description).strip(),
@@ -65,12 +62,10 @@ def _raw(*, title, description="", link="", guid="", published="", category="",
 
 
 def fetch_awin(source):
-    """Fetch offers from Awin's publisher promotions endpoint."""
     token = os.getenv("AWIN_API_TOKEN", "").strip()
     publisher_id = os.getenv("AWIN_PUBLISHER_ID", "").strip()
     if not token or not publisher_id:
         return "configuration_missing", [], "AWIN_API_TOKEN or AWIN_PUBLISHER_ID not configured"
-
     url = (source.get("url") or f"https://api.awin.com/publisher/{publisher_id}/promotions").strip()
     headers = {
         "Authorization": f"Bearer {token}",
@@ -78,15 +73,8 @@ def fetch_awin(source):
         "Content-Type": "application/json",
         "User-Agent": USER_AGENT,
     }
-
-    # Awin's Offers API is POST /publisher/{publisherId}/promotions. Keep the
-    # request conservative: joined programmes only and UK-facing/current offers.
     body = {
-        "filters": {
-            "membership": "joined",
-            "region": "GB",
-            "status": "active",
-        },
+        "filters": {"membership": "joined", "region": "GB", "status": "active"},
         "pagination": {"page": 1, "pageSize": 200},
     }
     try:
@@ -101,9 +89,7 @@ def fetch_awin(source):
         return f"http_{response.status_code}", [], response.text[:180]
 
     data = response.json()
-    offers = data if isinstance(data, list) else (
-        data.get("offers") or data.get("promotions") or data.get("data") or data.get("results") or []
-    )
+    offers = data if isinstance(data, list) else (data.get("offers") or data.get("promotions") or data.get("data") or data.get("results") or [])
     out = []
     for offer in offers:
         if not isinstance(offer, dict):
@@ -120,7 +106,7 @@ def fetch_awin(source):
             description=description,
             link=_first(offer, "trackingUrl", "trackingURL", "deeplink", "url", "link", default=""),
             guid=_first(offer, "id", "promotionId", "offerId", default=""),
-            published=_first(offer, "startDate", "start_date", "createdAt", default=""),
+            published="",
             category=_first(offer, "category", "promotionCategory", "type", default=""),
             merchant=advertiser,
             price=_first(offer, "salePrice", "price", default=""),
@@ -130,18 +116,11 @@ def fetch_awin(source):
 
 
 def fetch_fmtc(source):
-    """Fetch active UK deals from FMTC Deal Feed 4.2.0."""
     token = os.getenv("FMTC_API_TOKEN", "").strip()
     if not token:
         return "configuration_missing", [], "FMTC_API_TOKEN not configured"
-
     url = (source.get("url") or "https://s3.fmtc.co/api/4.2.0/deals").strip()
-    params = {
-        "api_token": token,
-        "format": "JSON",
-        "active": 1,
-        "country": "GB",
-    }
+    params = {"api_token": token, "format": "JSON", "active": 1, "country": "GB"}
     try:
         response = requests.get(url, params=params, headers={"User-Agent": USER_AGENT}, timeout=(10, 60))
     except requests.RequestException as exc:
@@ -162,7 +141,6 @@ def fetch_fmtc(source):
         merchant = deal.get("merchant") or deal.get("merchant_name") or ""
         if isinstance(merchant, dict):
             merchant = _first(merchant, "name", "merchant_name", default="")
-
         title = _text(_first(deal, "label", "title", "name", default=""))
         sale_price = _first(deal, "sale_price", "price", default="")
         was_price = _first(deal, "was_price", default="")
@@ -171,26 +149,21 @@ def fetch_fmtc(source):
             title = f"{title} was £{was_price} now £{sale_price}"
         elif percent and str(percent) not in {"0", "0.0"}:
             title = f"{title} {percent}% off"
-
         code = _first(deal, "coupon_code", "code", default="")
         description = _text(_first(deal, "description", "restrictions", default=""))
         if code:
             description = f"{description} Coupon code: {code}".strip()
-
         categories = deal.get("categories") or []
         if isinstance(categories, list):
-            category = ", ".join(
-                _text(c.get("name") if isinstance(c, dict) else c) for c in categories
-            )
+            category = ", ".join(_text(c.get("name") if isinstance(c, dict) else c) for c in categories)
         else:
             category = _text(categories)
-
         out.append(_raw(
             title=title,
             description=description,
             link=_first(deal, "subaffiliate_url", "fmtc_url", "cascading_full_url", "url", default=""),
             guid=_first(deal, "id", "coupon_id", "couponid", default=""),
-            published=_first(deal, "start_date", "created_at", "added", default=""),
+            published="",
             category=category,
             merchant=merchant,
             price=sale_price,
@@ -203,16 +176,10 @@ def fetch_fmtc(source):
 
 
 def fetch_pepper(source):
-    """Fetch Pepper/HotUKDeals REST API JSON from deal_sources.url.
-
-    Pepper documents a REST API under ``https://{hostname}/rest_api/v2`` with
-    JSON responses. The exact list endpoint is stored in ``deal_sources.url`` so
-    it can be changed in Supabase without a code deployment.
-    """
+    """Fetch Pepper/HotUKDeals REST API JSON from deal_sources.url."""
     url = (source.get("url") or "").strip()
     if not url:
         return "configuration_missing", [], "Pepper API endpoint is not configured in deal_sources.url"
-
     api_key = os.getenv("PEPPER_API_KEY", "").strip()
     headers = {"Accept": "application/json", "User-Agent": USER_AGENT}
     if api_key:
@@ -238,7 +205,6 @@ def fetch_pepper(source):
             deals = payload.get("items") or payload.get("results") or payload.get("threads") or []
         else:
             deals = payload
-
     out = []
     for deal in deals:
         if not isinstance(deal, dict):
