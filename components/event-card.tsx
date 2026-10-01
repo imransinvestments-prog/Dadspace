@@ -15,6 +15,8 @@ export function EventCard({ event, index = 0, showCategory = false }: { event: D
   const free = isFreeEvent(event.cost_text)
   const image = eventImage(event)
   const endDate = event.end_date ?? event.start_date
+  const priceLabel = event.cost_text ? (free ? "Free" : event.cost_text) : "Price not listed"
+  const timeLabel = event.time_text || "Time not listed"
 
   const body = (
     <>
@@ -33,17 +35,17 @@ export function EventCard({ event, index = 0, showCategory = false }: { event: D
         >
           {formatEventDate(event.start_date, event.end_date)}
         </time>
-        {event.cost_text && (
-          <span
-            className={
-              free
-                ? "absolute top-3 right-3 rounded-full bg-highlight px-3 py-1 text-xs font-bold text-highlight-foreground"
-                : "absolute top-3 right-3 max-w-[45%] truncate rounded-full bg-navy px-3 py-1 text-xs font-bold text-navy-foreground"
-            }
-          >
-            {free ? "Free" : event.cost_text}
-          </span>
-        )}
+        <span
+          className={
+            free
+              ? "absolute top-3 right-3 rounded-full bg-highlight px-3 py-1 text-xs font-bold text-highlight-foreground"
+              : event.cost_text
+                ? "absolute top-3 right-3 max-w-[45%] truncate rounded-full bg-navy px-3 py-1 text-xs font-bold text-navy-foreground"
+                : "absolute top-3 right-3 rounded-full bg-card/95 px-3 py-1 text-xs font-semibold text-muted-foreground"
+          }
+        >
+          {priceLabel}
+        </span>
       </div>
       <div className="flex flex-1 flex-col gap-3 p-4">
         {showCategory && (
@@ -66,12 +68,10 @@ export function EventCard({ event, index = 0, showCategory = false }: { event: D
               <span className="font-semibold text-foreground">{formatMiles(event.distance_miles)}</span>
             </li>
           )}
-          {event.time_text && (
-            <li className="flex items-start gap-2">
-              <Clock className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
-              <span>{event.time_text}</span>
-            </li>
-          )}
+          <li className="flex items-start gap-2">
+            <Clock className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
+            <span>{timeLabel}</span>
+          </li>
         </ul>
         {event.age_range && (
           <p className="mt-auto w-fit rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">Ages {event.age_range}</p>
