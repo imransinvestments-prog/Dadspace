@@ -4,6 +4,10 @@
 Default mode is READ-ONLY and writes a CSV plan. `--apply` requires a backup
 manifest created by export_events_backup.py. Recurring/weekly classes and events
 at different venues are never merged automatically.
+
+Automatic merge candidates must point to the exact same official event URL,
+have the same start date, and name the same/sufficiently similar venue. This is
+intentionally conservative: ambiguous pairs stay for human review.
 """
 
 from __future__ import annotations
@@ -30,18 +34,20 @@ def normalise(value):
     return re.sub(r"\s+", " ", text).strip()
 
 
-def tokens(title):
-    stop = {"the", "and", "for", "with", "at", "in", "of", "to", "a", "an"}
-    return {w for w in normalise(title).split() if len(w) > 1 and w not in stop}
+def token_similarity(a, b):
+    aa = set(normalise(a).split())
+    bb = set(normalise(b).split())
+    if not aa or not bb:
+        return 0.0
+    return len(aa & bb) / len(aa | bb)
 
 
-def similar_title(a, b):
-    if normalise(a) == normalise(b):
-        return True
-    aa, bb = tokens(a), tokens(b)
-    if len(aa) < 3 or len(bb) < 3:
+def same_venue(a, b):
+    aa = normalise(a)
+    bb = normalise(b)
+    if not aa or not bb:
         return False
-    return len(aa & bb) / len(aa | bb) >= 0.8
+    return aa == bb or aa in bb or bb in aa or token_similarity(aa, bb) >= 0.75
 
 
 def protected(row):
@@ -71,17 +77,20 @@ def candidates(rows):
         for i, left in enumerate(same_day):
             if left.get("id") in already_removed or protected(left):
                 continue
-            left_venue = normalise(left.get("location"))
-            if not left_venue:
+            left_url = str(left.get("event_url") or "").strip()
+            left_venue = left.get("location")
+            if not left_url or not left_venue:
                 continue
+
             for right in same_day[i + 1:]:
                 if right.get("id") in already_removed or protected(right):
                     continue
-                right_venue = normalise(right.get("location"))
-                if not right_venue or left_venue != right_venue:
+                right_url = str(right.get("event_url") or "").strip()
+                if not right_url or left_url != right_url:
                     continue
-                if not similar_title(left.get("title"), right.get("title")):
+                if not same_venue(left_venue, right.get("location")):
                     continue
+
                 keep, remove = choose_keep(left, right)
                 plan.append({
                     "date": date,
@@ -92,7 +101,8 @@ def candidates(rows):
                     "removed_title": remove.get("title") or "",
                     "kept_source_id": keep.get("source_id") or "",
                     "removed_source_id": remove.get("source_id") or "",
-                    "reason": "same date + same venue + strongly similar title; non-recurring",
+                    "event_url": left_url,
+                    "reason": "same official event URL + same date + same/similar venue; non-recurring",
                 })
                 already_removed.add(remove.get("id"))
                 if remove is left:
@@ -146,7 +156,7 @@ def main():
 
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    fields = ["date", "venue", "kept_id", "kept_title", "removed_id", "removed_title", "kept_source_id", "removed_source_id", "reason"]
+    fields = ["date", "venue", "kept_id", "kept_title", "removed_id", "removed_title", "kept_source_id", "removed_source_id", "event_url", "reason"]
     with output.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
