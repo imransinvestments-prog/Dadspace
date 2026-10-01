@@ -10,6 +10,12 @@ const photo = {
   image_license_url: 'https://creativecommons.org/licenses/by-sa/4.0/',
 }
 assert.equal(venuePhotoUrl(photo), photo.image_url)
+const stored = 'https://ebebkbrdqmceckmhlcpw.supabase.co/storage/v1/object/public/venue-images/12345678-1234-1234-1234-123456789abc/0123456789abcdef.webp'
+assert.equal(venuePhotoUrl({ ...photo, image_url: stored }), stored)
+assert.equal(venuePhotoUrl({ ...photo, image_url: stored.replace('venue-images', 'avatars') }), null)
+assert.equal(venuePhotoUrl({ ...photo, image_url: stored.replace('ebebkbrdqmceckmhlcpw', 'another-project') }), null)
+assert.equal(venuePhotoUrl({ ...photo, image_url: stored.replace('https://', 'https://user:password@') }), null)
+assert.equal(venuePhotoUrl({ ...photo, image_url: stored, image_attribution: null }), null)
 assert.equal(venueImage({ ...photo, image_attribution: null }), categoryImage('museum'))
 assert.equal(venuePhotoUrl({ ...photo, image_source_url: 'javascript:alert(1)' }), null)
 assert.equal(venuePhotoUrl({ ...photo, image_url: 'https://thumb.wikimedia.org.evil.example/image.jpg' }), null)

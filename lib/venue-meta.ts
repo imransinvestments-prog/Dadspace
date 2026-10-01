@@ -97,7 +97,10 @@ export function venuePhotoUrl(venue: Venue): string | null {
     const image = new URL(venue.image_url)
     const source = new URL(venue.image_source_url ?? "")
     const licence = new URL(venue.image_license_url ?? "")
-    if (image.protocol !== "https:" || !["upload.wikimedia.org", "thumb.wikimedia.org"].includes(image.hostname)) return null
+    const commonsImage = ["upload.wikimedia.org", "thumb.wikimedia.org"].includes(image.hostname)
+    const storedImage = image.hostname === "ebebkbrdqmceckmhlcpw.supabase.co"
+      && /^\/storage\/v1\/object\/public\/venue-images\/[0-9a-f-]{36}\/[0-9a-f]{16}\.webp$/.test(image.pathname)
+    if (image.protocol !== "https:" || image.username || image.password || image.port || (!commonsImage && !storedImage)) return null
     if (source.protocol !== "https:" || source.hostname !== "commons.wikimedia.org") return null
     if (licence.protocol !== "https:" || licence.hostname !== "creativecommons.org") return null
     return image.href

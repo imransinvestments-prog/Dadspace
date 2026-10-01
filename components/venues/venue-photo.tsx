@@ -34,7 +34,7 @@ export function VenuePhoto({ venue, sizes, className }: { venue: Venue; sizes: s
                 {venue.image_license} licence
               </a>
               {venue.image_credit && <p>{venue.image_credit}</p>}
-              <p>Preview cropped to fit. Open the source for the full image.</p>
+              <p>Preview resized, compressed and cropped to fit. Open the source for the original image.</p>
             </div>
           </details>
         ) : <span>Category illustration · venue photo not available</span>}
