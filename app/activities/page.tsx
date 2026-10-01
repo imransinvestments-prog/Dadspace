@@ -1,5 +1,5 @@
 import { ActivitiesExplorer } from "@/components/activities/activities-explorer"
-import { fetchCurrentActivities } from "@/lib/activities"
+import { ACTIVITY_PAGE_SIZE, fetchActivityCategories, fetchActivityPage } from "@/lib/activities"
 import { pageMetadata } from "@/lib/seo"
 
 export const metadata = pageMetadata(
@@ -11,7 +11,10 @@ export const metadata = pageMetadata(
 export const revalidate = 600
 
 export default async function ActivitiesPage() {
-  const activities = await fetchCurrentActivities()
+  const [initialPage, categories] = await Promise.all([
+    fetchActivityPage({ limit: ACTIVITY_PAGE_SIZE }),
+    fetchActivityCategories(),
+  ])
 
   return (
     <div className="flex flex-col gap-10">
@@ -23,7 +26,7 @@ export default async function ActivitiesPage() {
         </p>
       </header>
 
-      <ActivitiesExplorer activities={activities} />
+      <ActivitiesExplorer initialPage={initialPage} categories={categories} />
     </div>
   )
 }
