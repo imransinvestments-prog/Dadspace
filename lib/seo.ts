@@ -1,8 +1,10 @@
 import type { Metadata } from "next"
 
-const fallbackUrl = "https://dadspace.vercel.app"
+const canonicalSiteUrl = "https://www.dad-space.co.uk"
 
-export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || fallbackUrl).replace(/\/$/, "")
+// The public custom domain is the canonical SEO origin. NEXT_PUBLIC_SITE_URL
+// can still override it deliberately for another production deployment.
+export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || canonicalSiteUrl).replace(/\/$/, "")
 export const isProduction = process.env.VERCEL_ENV === "production" || process.env.NODE_ENV === "production"
 
 export const siteName = "Dadspace"
