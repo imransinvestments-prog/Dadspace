@@ -18,6 +18,9 @@ on:
       dry_run:
         description: "true = only show what would be saved, false = save to Supabase"
         default: "true"
+      force_reread:
+        description: "true = ignore saved page hashes and fully re-read sources"
+        default: "false"
   workflow_call:
     inputs:
       limit:
@@ -30,6 +33,11 @@ on:
         required: false
         type: string
         default: "true"
+      force_reread:
+        description: "true = ignore saved page hashes and fully re-read sources"
+        required: false
+        type: string
+        default: "false"
 
 permissions:
   contents: read
@@ -108,3 +116,4 @@ jobs:
           EXPIRED_RETENTION_DAYS: "730"
           LIMIT: ${{ inputs.limit || '0' }}
           DRY_RUN: ${{ inputs.dry_run || 'true' }}
+          FORCE_REREAD: ${{ inputs.force_reread || 'false' }}
