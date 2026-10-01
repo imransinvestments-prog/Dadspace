@@ -1,4 +1,4 @@
-import { CalendarHeart, Home, MapPinned, MessagesSquare, Newspaper, Tag, UserRound, type LucideIcon } from "lucide-react"
+import { CalendarHeart, Dumbbell, Home, MapPinned, MessagesSquare, Newspaper, Tag, UserRound, type LucideIcon } from "lucide-react"
 
 export type NavItem = { href: string; label: string; icon: LucideIcon; mobile: boolean }
 
@@ -8,6 +8,7 @@ export const NAV_ITEMS: NavItem[] = [
   { href: "/venues", label: "Venues", icon: MapPinned, mobile: false },
   { href: "/deals", label: "Deals", icon: Tag, mobile: true },
   { href: "/events", label: "Events", icon: CalendarHeart, mobile: true },
+  { href: "/activities", label: "Activities", icon: Dumbbell, mobile: false },
   { href: "/forum", label: "Forum", icon: MessagesSquare, mobile: true },
   { href: "/profile", label: "Profile", icon: UserRound, mobile: false },
 ]

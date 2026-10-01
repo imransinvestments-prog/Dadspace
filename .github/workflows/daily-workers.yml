@@ -11,6 +11,9 @@ on:
   # Manual runs bypass both the time and every-other-day gates.
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   gate:
     runs-on: ubuntu-latest
@@ -59,8 +62,8 @@ jobs:
     secrets: inherit
 
   civic:
-    needs: gate
-    if: needs.gate.outputs.should_run == 'true'
+    needs: [gate, news]
+    if: needs.gate.outputs.should_run == 'true' && needs.news.result == 'success'
     uses: ./.github/workflows/collect-civic.yml
     with:
       dry_run: "false"
@@ -68,10 +71,21 @@ jobs:
     secrets: inherit
 
   activities:
-    needs: gate
-    if: needs.gate.outputs.should_run == 'true'
+    needs: [gate, civic]
+    if: needs.gate.outputs.should_run == 'true' && needs.civic.result == 'success'
     uses: ./.github/workflows/collect-activities.yml
     with:
       dry_run: "false"
       limit: "0"
+    secrets: inherit
+
+  deals:
+    needs: [gate, activities]
+    if: needs.gate.outputs.should_run == 'true' && needs.activities.result == 'success'
+    uses: ./.github/workflows/deals_collect.yml
+    with:
+      dry_run: "false"
+      self_test: "false"
+      sample_size: "40"
+      keep_unknown_discount_low: "false"
     secrets: inherit

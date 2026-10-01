@@ -24,7 +24,7 @@ function toEvent(row: Record<string, unknown>): DadEvent {
     id: String(row.id),
     title: String(row.title ?? "Family event"),
     description: text(row.description),
-    start_date: String(row.start_date),
+    start_date: text(row.start_date) ?? "",
     end_date: text(row.end_date),
     time_text: text(row.time_text),
     location: text(row.location),
@@ -35,6 +35,12 @@ function toEvent(row: Record<string, unknown>): DadEvent {
     source_url: text(row.source_url),
     source_id: row.source_id == null ? null : String(row.source_id),
     recurrence: text(row.recurrence),
+    category: text(row.category),
+    is_holiday_camp: row.is_holiday_camp === true,
+    venue_name: text(row.venue_name),
+    venue_address: text(row.venue_address),
+    postcode: text(row.postcode),
+    venue_id: row.venue_id == null ? null : String(row.venue_id),
     image_url: imageFrom(row),
   }
 }
@@ -77,8 +83,8 @@ function similarTitle(a: string, b: string) {
 }
 
 function sameVenue(a: DadEvent, b: DadEvent) {
-  const aa = normalise(a.location)
-  const bb = normalise(b.location)
+  const aa = normalise(a.venue_name ?? a.location)
+  const bb = normalise(b.venue_name ?? b.location)
   if (!aa || !bb) return false
   return aa === bb || aa.includes(bb) || bb.includes(aa) || tokenSimilarity(aa, bb) >= 0.75
 }
@@ -98,12 +104,7 @@ function sameExactListingOccurrence(a: DadEvent, b: DadEvent) {
   )
 }
 
-/**
- * Conservative display dedupe. Recurring classes are never collapsed across
- * different dates. The one safe exception is two rows pointing to the exact
- * same event URL for the exact same date and same/similar venue: that is one
- * occurrence accidentally collected twice, not two weekly sessions.
- */
+/** Conservative display dedupe for legacy Event rows. */
 export function dedupeEvents(events: DadEvent[]): DadEvent[] {
   const kept: DadEvent[] = []
   for (const event of events) {
@@ -131,8 +132,8 @@ function suspiciousTime(event: DadEvent) {
 }
 
 function seasonConflict(event: DadEvent) {
-  const date = event.start_date.slice(0, 10)
-  const month = Number(date.slice(5, 7))
+  if (!event.start_date) return true
+  const month = Number(event.start_date.slice(5, 7))
   const context = `${event.title} ${event.description ?? ""}`.toLowerCase()
   if (context.includes("summer") && [10, 11, 12, 1, 2, 3].includes(month)) return true
   if (/christmas|santa|festive/.test(context) && ![11, 12, 1].includes(month)) return true
@@ -151,7 +152,7 @@ function teenOnly(event: DadEvent) {
 /** Hide obviously bad legacy rows without changing Supabase. */
 function qualityForDisplay(events: DadEvent[]): DadEvent[] {
   return events
-    .filter((event) => !seasonConflict(event) && !teenOnly(event))
+    .filter((event) => !!event.start_date && !seasonConflict(event) && !teenOnly(event))
     .map((event) => (suspiciousTime(event) ? { ...event, time_text: null } : event))
 }
 
@@ -198,7 +199,7 @@ export async function fetchUpcomingEvents(): Promise<EventsListing> {
     const { data, error } = await db
       .from("upcoming_events")
       .select("*")
-      .gte("end_date", today)
+      .gte("start_date", today)
       .order("start_date", { ascending: true })
       .order("family_relevance", { ascending: false })
       .limit(MAX_EVENTS)
@@ -215,9 +216,16 @@ export async function fetchUpcomingEvents(): Promise<EventsListing> {
 export async function fetchEventById(id: string): Promise<DadEvent | null> {
   const db = getSupabase()
   if (!db || !id) return null
-  const { data, error } = await db.from("collected_events").select("*").eq("id", id).limit(1).maybeSingle()
+  const { data, error } = await db
+    .from("collected_events")
+    .select("*")
+    .eq("id", id)
+    .eq("listing_type", "event")
+    .limit(1)
+    .maybeSingle()
   if (error || !data) return null
-  return toEvent(data as Record<string, unknown>)
+  const event = toEvent(data as Record<string, unknown>)
+  return qualityForDisplay([event])[0] ?? null
 }
 
 export async function fetchSimilarUpcomingEvents(event: DadEvent, limit = 6): Promise<DadEvent[]> {
@@ -227,7 +235,7 @@ export async function fetchSimilarUpcomingEvents(event: DadEvent, limit = 6): Pr
   const { data, error } = await db
     .from("upcoming_events")
     .select("*")
-    .gte("end_date", today)
+    .gte("start_date", today)
     .neq("id", event.id)
     .order("start_date", { ascending: true })
     .order("family_relevance", { ascending: false })
