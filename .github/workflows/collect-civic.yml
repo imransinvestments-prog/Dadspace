@@ -35,9 +35,23 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - name: Validate Python (syntax check)
-        run: python -m py_compile worker.py events_worker.py
+        run: python -m py_compile worker.py events_worker.py scripts/export_events_backup.py
       - name: Self-test (no network/Gemini/Supabase calls)
         run: python events_worker.py --self-test
+      - name: Back up events before any live write
+        if: ${{ (inputs.dry_run || 'true') == 'false' }}
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python scripts/export_events_backup.py
+      - name: Upload pre-write event backup
+        if: ${{ (inputs.dry_run || 'true') == 'false' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: events-before-civic-write-${{ github.run_id }}
+          path: event-backup/
+          retention-days: 30
+          if-no-files-found: error
       - name: Run collector
         run: python events_worker.py
         env:
