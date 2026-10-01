@@ -7,6 +7,7 @@ import type { DadEvent } from "./types"
 
 const MAX_EVENTS = 500
 const IMAGE_KEYS = ["image_url", "image", "thumbnail_url", "photo_url", "og_image"] as const
+const PROTECTED_RECURRING = /\b(weekly|every\s+(?:mon|tue|wed|thu|fri|sat|sun)|term[- ]?time|class|lesson|session|club|course)\b/i
 
 function imageFrom(row: Record<string, unknown>): string | null {
   for (const key of IMAGE_KEYS) {
@@ -32,7 +33,7 @@ function toEvent(row: Record<string, unknown>): DadEvent {
     age_range: text(row.age_range),
     family_relevance: typeof row.family_relevance === "number" ? row.family_relevance : null,
     source_url: text(row.source_url),
-    source_id: text(row.source_id),
+    source_id: row.source_id == null ? null : String(row.source_id),
     recurrence: text(row.recurrence),
     image_url: imageFrom(row),
   }
@@ -72,6 +73,11 @@ function sameVenue(a: DadEvent, b: DadEvent) {
   return !!aa && !!bb && aa === bb
 }
 
+function protectedRecurring(event: DadEvent) {
+  if ((event.recurrence ?? "").toLowerCase() === "recurring") return true
+  return PROTECTED_RECURRING.test(`${event.title} ${event.description ?? ""}`)
+}
+
 /**
  * Conservative display dedupe. It never merges recurring/weekly classes and it
  * never merges same-named events at different venues. This does not alter the
@@ -80,14 +86,14 @@ function sameVenue(a: DadEvent, b: DadEvent) {
 export function dedupeEvents(events: DadEvent[]): DadEvent[] {
   const kept: DadEvent[] = []
   for (const event of events) {
-    if ((event.recurrence ?? "").toLowerCase() === "recurring") {
+    if (protectedRecurring(event)) {
       kept.push(event)
       continue
     }
     const start = event.start_date.slice(0, 10)
     const duplicate = kept.some(
       (other) =>
-        (other.recurrence ?? "").toLowerCase() !== "recurring" &&
+        !protectedRecurring(other) &&
         other.start_date.slice(0, 10) === start &&
         sameVenue(event, other) &&
         similarTitle(event.title, other.title),
