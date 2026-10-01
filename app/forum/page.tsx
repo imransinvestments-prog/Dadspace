@@ -5,6 +5,7 @@ export const metadata = pageMetadata(
   "Dad Forum",
   "/forum",
   "A UK community space for dads to talk parenting, family life, rights, money, relationships and everything in between.",
+  { noIndex: true },
 )
 
 export default function ForumPage() {

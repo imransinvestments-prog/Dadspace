@@ -5,6 +5,7 @@ export const metadata = pageMetadata(
   "Family Deals",
   "/deals",
   "Find family-focused discounts, offers and bargains on baby gear, kids' essentials, days out and more.",
+  { noIndex: true },
 )
 
 export default function DealsPage() {

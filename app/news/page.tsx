@@ -1,4 +1,5 @@
 import { NewsFeed } from "@/components/news/news-feed"
+import { NewsJsonLd } from "@/components/news/news-json-ld"
 import { fetchNews, type NewsItem } from "@/lib/news"
 import { pageMetadata } from "@/lib/seo"
 
@@ -21,5 +22,10 @@ export default async function NewsPage() {
     initialItems = null
   }
 
-  return <NewsFeed initialItems={initialItems} />
+  return (
+    <>
+      {initialItems?.length ? <NewsJsonLd items={initialItems} /> : null}
+      <NewsFeed initialItems={initialItems} />
+    </>
+  )
 }
