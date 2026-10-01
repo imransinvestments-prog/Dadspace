@@ -12,6 +12,7 @@ export type DadEvent = {
   family_relevance: number | null
   source_url: string | null
   source_id?: string | null
+  recurrence?: string | null
   distance_miles?: number | null
   image_url?: string | null
 }
