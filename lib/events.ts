@@ -54,6 +54,15 @@ function titleTokens(title: string) {
   return new Set(normalise(title).split(" ").filter((word) => word.length > 1 && !stop.has(word)))
 }
 
+function tokenSimilarity(a: string | null | undefined, b: string | null | undefined) {
+  const aa = new Set(normalise(a).split(" ").filter(Boolean))
+  const bb = new Set(normalise(b).split(" ").filter(Boolean))
+  if (!aa.size || !bb.size) return 0
+  let shared = 0
+  for (const token of aa) if (bb.has(token)) shared += 1
+  return shared / new Set([...aa, ...bb]).size
+}
+
 function similarTitle(a: string, b: string) {
   const na = normalise(a)
   const nb = normalise(b)
@@ -70,7 +79,8 @@ function similarTitle(a: string, b: string) {
 function sameVenue(a: DadEvent, b: DadEvent) {
   const aa = normalise(a.location)
   const bb = normalise(b.location)
-  return !!aa && !!bb && aa === bb
+  if (!aa || !bb) return false
+  return aa === bb || aa.includes(bb) || bb.includes(aa) || tokenSimilarity(aa, bb) >= 0.75
 }
 
 function protectedRecurring(event: DadEvent) {
@@ -78,29 +88,71 @@ function protectedRecurring(event: DadEvent) {
   return PROTECTED_RECURRING.test(`${event.title} ${event.description ?? ""}`)
 }
 
+function sameExactListingOccurrence(a: DadEvent, b: DadEvent) {
+  return (
+    !!a.event_url &&
+    !!b.event_url &&
+    a.event_url === b.event_url &&
+    a.start_date.slice(0, 10) === b.start_date.slice(0, 10) &&
+    sameVenue(a, b)
+  )
+}
+
 /**
- * Conservative display dedupe. It never merges recurring/weekly classes and it
- * never merges same-named events at different venues. This does not alter the
- * database; it only prevents obvious cross-source duplicates being shown twice.
+ * Conservative display dedupe. Recurring classes are never collapsed across
+ * different dates. The one safe exception is two rows pointing to the exact
+ * same event URL for the exact same date and same/similar venue: that is one
+ * occurrence accidentally collected twice, not two weekly sessions.
  */
 export function dedupeEvents(events: DadEvent[]): DadEvent[] {
   const kept: DadEvent[] = []
   for (const event of events) {
-    if (protectedRecurring(event)) {
-      kept.push(event)
-      continue
-    }
-    const start = event.start_date.slice(0, 10)
-    const duplicate = kept.some(
-      (other) =>
-        !protectedRecurring(other) &&
-        other.start_date.slice(0, 10) === start &&
+    const duplicate = kept.some((other) => {
+      if (sameExactListingOccurrence(event, other)) return true
+      if (protectedRecurring(event) || protectedRecurring(other)) return false
+      return (
+        other.start_date.slice(0, 10) === event.start_date.slice(0, 10) &&
         sameVenue(event, other) &&
-        similarTitle(event.title, other.title),
-    )
+        similarTitle(event.title, other.title)
+      )
+    })
     if (!duplicate) kept.push(event)
   }
   return kept
+}
+
+function suspiciousTime(event: DadEvent) {
+  if (!event.time_text) return false
+  const context = `${event.title} ${event.description ?? ""}`.toLowerCase()
+  if (/overnight|sunrise|dawn|early morning/.test(context)) return false
+  if (/\b0[0-5]:[0-5]\d\b/.test(event.time_text)) return true
+  const match = event.time_text.match(/\b(1[0-2]|[1-9]):[0-5]\d\s*am\b/i)
+  return !!match && Number(match[1]) <= 5
+}
+
+function seasonConflict(event: DadEvent) {
+  const date = event.start_date.slice(0, 10)
+  const month = Number(date.slice(5, 7))
+  const context = `${event.title} ${event.description ?? ""}`.toLowerCase()
+  if (context.includes("summer") && [10, 11, 12, 1, 2, 3].includes(month)) return true
+  if (/christmas|santa|festive/.test(context) && ![11, 12, 1].includes(month)) return true
+  if (/\bnew year\s+20\d{2}\b/.test(context) && ![1, 2].includes(month)) return true
+  return false
+}
+
+function teenOnly(event: DadEvent) {
+  const ages = (event.age_range ?? "").toLowerCase()
+  const context = `${event.title} ${ages}`.toLowerCase()
+  if (/\bteen(?:ager|agers|s)?\b/.test(context)) return true
+  if (/\badults?\s+only\b/.test(context)) return true
+  return false
+}
+
+/** Hide obviously bad legacy rows without changing Supabase. */
+function qualityForDisplay(events: DadEvent[]): DadEvent[] {
+  return events
+    .filter((event) => !seasonConflict(event) && !teenOnly(event))
+    .map((event) => (suspiciousTime(event) ? { ...event, time_text: null } : event))
 }
 
 function locationBucket(event: DadEvent) {
@@ -151,7 +203,8 @@ export async function fetchUpcomingEvents(): Promise<EventsListing> {
       .order("family_relevance", { ascending: false })
       .limit(MAX_EVENTS)
     if (!error && data?.length) {
-      const clean = dedupeEvents(data.map((row) => toEvent(row as Record<string, unknown>)))
+      const mapped = data.map((row) => toEvent(row as Record<string, unknown>))
+      const clean = dedupeEvents(qualityForDisplay(mapped))
       return { events: geographicallyBalanceEvents(clean), today, saturday, sunday, isSample: false }
     }
   }
@@ -181,7 +234,8 @@ export async function fetchSimilarUpcomingEvents(event: DadEvent, limit = 6): Pr
     .limit(80)
   if (error || !data) return []
 
-  const candidates = dedupeEvents(data.map((row) => toEvent(row as Record<string, unknown>)))
+  const mapped = data.map((row) => toEvent(row as Record<string, unknown>))
+  const candidates = dedupeEvents(qualityForDisplay(mapped))
   const wantedCategory = eventCategory(event)
   const place = normalise(event.location)
 
