@@ -23,11 +23,12 @@ export function HeroGreeting({ greeting, sleeps, weekendLabel }: { greeting: str
       />
       <div className="-z-10 absolute inset-0 bg-navy/60 md:bg-transparent md:[background:linear-gradient(90deg,var(--navy)_42%,transparent_75%)]" aria-hidden />
 
-      <div className="flex min-h-80 flex-col justify-between gap-8 p-6 md:max-w-md md:p-10">
+      <div className="flex min-h-80 flex-col justify-between gap-8 p-6 md:max-w-lg md:p-10">
         <div className="flex flex-col gap-3">
           <p className="text-sm font-semibold tracking-wide text-highlight uppercase">{weekendLabel}</p>
+          <p className="text-lg font-semibold text-navy-foreground/90">{greeting}</p>
           <h1 id="hero-title" className="font-heading text-4xl leading-none font-extrabold tracking-tight text-balance md:text-5xl">
-            {greeting}
+            Days out, news and deals for UK dads
           </h1>
         </div>
 
