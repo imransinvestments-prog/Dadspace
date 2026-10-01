@@ -70,5 +70,6 @@ jobs:
           MIN_DATE_HINTS_FOR_LLM: "1"
           MAX_RUN_MINUTES: "60"
           GEMINI_TIMEOUT_SECONDS: "90"
+          EXPIRED_RETENTION_DAYS: "730"
           LIMIT: ${{ inputs.limit || '0' }}
           DRY_RUN: ${{ inputs.dry_run || 'true' }}
