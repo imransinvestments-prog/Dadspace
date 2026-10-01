@@ -64,5 +64,6 @@ jobs:
           FETCH_ENGINE: "requests"
           MAX_RUN_MINUTES: "45"
           GEMINI_TIMEOUT_SECONDS: "60"
+          EXPIRED_RETENTION_DAYS: "730"
           LIMIT: ${{ inputs.limit || '0' }}
           DRY_RUN: ${{ inputs.dry_run || 'true' }}
