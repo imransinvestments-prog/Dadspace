@@ -16,6 +16,10 @@ import worker as base
 
 _ORIGINAL_BUILD_PROMPT = base.build_prompt
 _ORIGINAL_CLEAN_EVENTS = base.clean_events
+_PROTECTED_RECURRING = re.compile(
+    r"\b(weekly|every\s+(?:mon|tue|wed|thu|fri|sat|sun)|term[- ]?time|class|lesson|session|club|course)\b",
+    re.I,
+)
 
 
 def _normalise_words(value: str | None) -> str:
@@ -26,6 +30,13 @@ def _normalise_words(value: str | None) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+def _protected_recurring(row: dict) -> bool:
+    if (row.get("recurrence") or "").lower() == "recurring":
+        return True
+    text = f"{row.get('title') or ''} {row.get('description') or ''}"
+    return bool(_PROTECTED_RECURRING.search(text))
+
+
 def _quality_dedupe_key(row: dict) -> str:
     """Conservative cross-source key.
 
@@ -33,11 +44,10 @@ def _quality_dedupe_key(row: dict) -> str:
     merged across sources. One-off/seasonal events can merge only when date AND
     normalised venue/location agree.
     """
-    recurrence = (row.get("recurrence") or "").lower()
     title = _normalise_words(row.get("title"))
     location = _normalise_words(row.get("location"))
     date = str(row.get("start_date") or "")
-    if recurrence == "recurring":
+    if _protected_recurring(row):
         raw = f"recurring|{row.get('source_id')}|{title}|{date}|{location}"
     else:
         raw = f"event|{title}|{date}|{location}"
@@ -69,8 +79,6 @@ def _suspicious_time(value: str | None, title: str, description: str | None) -> 
     context = f"{title} {description or ''}".lower()
     if any(word in context for word in ("overnight", "sunrise", "dawn", "early morning")):
         return False
-    # Catch both 04:15 and 4:15 am forms. Ordinary family events in these hours
-    # are much more likely to be an extraction/AM-PM error than genuine listings.
     if re.search(r"\b0[0-5]:[0-5]\d\b", value):
         return True
     match = re.search(r"\b(1[0-2]|[1-9]):[0-5]\d\s*am\b", value, re.I)
@@ -124,15 +132,12 @@ def clean_events(raw_events, source, page_url, method, today, stats=None):
             continue
 
         if _suspicious_time(row.get("time_text"), title, description):
-            # Keep the useful event but do not publish a plainly implausible time.
             row["time_text"] = None
             stats["suspicious_time_cleared"] = stats.get("suspicious_time_cleared", 0) + 1
 
         row["dedupe_key"] = _quality_dedupe_key(row)
         kept.append(row)
 
-    # The base cleaner already counted these rows as kept. Reconcile the count
-    # so the run summary stays truthful after our extra quality checks.
     removed = len(rows) - len(kept)
     if removed:
         stats["kept"] = max(0, stats.get("kept", 0) - removed)
