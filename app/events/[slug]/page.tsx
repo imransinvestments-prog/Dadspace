@@ -125,7 +125,7 @@ export default async function EventDetailPage({ params }: PageProps) {
               <a
                 href={officialUrl}
                 target="_blank"
-                rel="noopener noreferrer sponsored"
+                rel="noopener noreferrer"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-navy px-6 py-3.5 text-sm font-bold text-navy-foreground transition hover:-translate-y-0.5 hover:shadow-lg sm:w-fit"
               >
                 {ended ? "View organiser's page" : "Book / check official site"}
