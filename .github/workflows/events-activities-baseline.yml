@@ -1,0 +1,92 @@
+name: Events/Activities split - backup and baseline
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "scripts/export_pre_split_backup.py"
+      - "scripts/baseline_event_tokens.py"
+      - ".github/workflows/events-activities-baseline.yml"
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Export collected_events and venues (read only)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python scripts/export_pre_split_backup.py
+      - name: Upload pre-split backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: events-activities-pre-split-backup-${{ github.run_id }}
+          path: pre-split-backup/
+          retention-days: 30
+          if-no-files-found: error
+
+  baseline-civic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Fixed civic baseline (read only, forced reread)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          FETCH_ENGINE: requests
+          MAX_RUN_MINUTES: "40"
+          GEMINI_TIMEOUT_SECONDS: "90"
+          MAX_CHARS: "40000"
+        run: python scripts/baseline_event_tokens.py --categories councils,heritage_parks,niche_venues --count 5 --label before-civic
+      - name: Upload civic baseline
+        uses: actions/upload-artifact@v4
+        with:
+          name: events-activities-before-civic-${{ github.run_id }}
+          path: baseline-review/
+          retention-days: 30
+          if-no-files-found: error
+
+  baseline-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-browser.txt
+      - run: playwright install --with-deps chromium
+      - name: Fixed activities-source baseline (read only, forced reread)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          FETCH_ENGINE: browser
+          BROWSER_GOTO_TIMEOUT_MS: "30000"
+          BROWSER_SETTLE_MS: "2500"
+          MIN_DATE_HINTS_FOR_LLM: "1"
+          MAX_RUN_MINUTES: "55"
+          GEMINI_TIMEOUT_SECONDS: "90"
+          MAX_CHARS: "24000"
+        run: python scripts/baseline_event_tokens.py --categories activities --count 5 --label before-browser
+      - name: Upload browser baseline
+        uses: actions/upload-artifact@v4
+        with:
+          name: events-activities-before-browser-${{ github.run_id }}
+          path: baseline-review/
+          retention-days: 30
+          if-no-files-found: error
