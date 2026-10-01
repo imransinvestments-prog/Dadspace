@@ -4,7 +4,8 @@ export type EventCategory = "seasonal" | "swim" | "stage" | "active" | "outdoor"
 
 type CategoryDef = { key: EventCategory; label: string; pattern: RegExp; images: string[] }
 
-// Order matters: the first match wins, so specific themes sit above broad ones.
+// Prefer specific intent words. Broad words such as "show", "play" and a venue
+// containing "park" are deliberately avoided because they caused false matches.
 const CATEGORIES: CategoryDef[] = [
   {
     key: "seasonal",
@@ -13,16 +14,16 @@ const CATEGORIES: CategoryDef[] = [
     images: ["/images/events/seasonal.png"],
   },
   {
-    key: "swim",
-    label: "Swimming",
-    pattern: /swim|water babies|splash|aqua|\bpool\b/,
-    images: ["/images/events/swim.png"],
-  },
-  {
     key: "stage",
     label: "Film & theatre",
-    pattern: /film|cinema|cinemagic|screening|movie|theatre|theater|musical|puppet|circus|comedy|\bshow\b|\bplay\b.*\bstage\b/,
+    pattern: /\bfilm\b|cinema|cinemagic|screening|\bmovie\b|theatre|theater|musical|puppet|circus|comedy|performance/,
     images: ["/images/events/stage.png"],
+  },
+  {
+    key: "swim",
+    label: "Swimming",
+    pattern: /\bswimming\b|swim session|swim lesson|water babies|aqua (?:class|session)|pool session|learn to swim/,
+    images: ["/images/events/swim.png"],
   },
   {
     key: "active",
@@ -33,44 +34,43 @@ const CATEGORIES: CategoryDef[] = [
   {
     key: "outdoor",
     label: "Outdoors & nature",
-    pattern: /forest school|nature|wildlife|bat walk|\bwalk\b|woodland|\bfarm\b|beach|\btrail|garden|country park|bird|bug hunt|pond/,
+    pattern: /forest school|nature|wildlife|bat walk|guided walk|woodland|\bfarm\b|beach|nature trail|garden trail|country park activity|bird|bug hunt|pond dipping/,
     images: ["/images/event-outdoor.png"],
   },
   {
     key: "crafts",
     label: "Arts & crafts",
-    pattern: /craft|\bart\b|arts|paint|lego|draw|messy|workshop|clay|pottery|sewing|build/,
+    pattern: /craft|\bart\b|arts|paint|lego|draw|messy|creative workshop|clay|pottery|sewing|model making/,
     images: ["/images/event-crafts.png"],
   },
   {
     key: "story",
     label: "Stories & learning",
-    pattern: /story|stories|book|library|read|phonics|homework|science|museum|history|stem|coding|learn|exhibit|club/,
+    pattern: /story|stories|book|library|read|phonics|homework|science|museum activity|history workshop|stem|coding|learning session|exhibit/,
     images: ["/images/event-story.png"],
   },
   {
     key: "music",
     label: "Music & dance",
-    pattern: /music|sing|rhyme|danc|disco|ballet|\bband\b|choir|bounce|concert/,
+    pattern: /music|sing|rhyme|danc|disco|ballet|\bband\b|choir|concert/,
     images: ["/images/events/music.png"],
   },
 ]
 
 const FAMILY: CategoryDef = { key: "family", label: "Family days out", pattern: /./, images: ["/images/events/family-day.png"] }
-const LOOSE_OUTDOOR = /\bpark\b|outdoor|field|meadow/
 
 export const EVENT_CATEGORIES: { key: EventCategory; label: string }[] = [...CATEGORIES, FAMILY].map(({ key, label }) => ({ key, label }))
 
 function definitionFor(event: Pick<DadEvent, "title" | "description" | "location">): CategoryDef {
   const title = event.title.toLowerCase()
-  const withDescription = `${title} ${event.description ?? ""}`.toLowerCase()
-  for (const text of [title, withDescription]) {
-    const match = CATEGORIES.find((c) => c.pattern.test(text))
-    if (match) return match
-  }
-  if (LOOSE_OUTDOOR.test(`${withDescription} ${event.location ?? ""}`.toLowerCase())) {
-    return CATEGORIES.find((c) => c.key === "outdoor")!
-  }
+  const description = (event.description ?? "").toLowerCase()
+
+  // Title is the strongest signal. Only fall back to description when the title
+  // is genuinely unclear; location alone never decides a category.
+  const titleMatch = CATEGORIES.find((c) => c.pattern.test(title))
+  if (titleMatch) return titleMatch
+  const descriptionMatch = CATEGORIES.find((c) => c.pattern.test(description))
+  if (descriptionMatch) return descriptionMatch
   return FAMILY
 }
 
