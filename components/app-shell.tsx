@@ -2,8 +2,8 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { UserRound } from "lucide-react"
 import { Logo } from "./logo"
+import { HeaderUserButton, SidebarUserMenu } from "./auth/user-menu"
 import { ThemeToggle } from "./theme-toggle"
 import { InstallPrompt } from "./install-prompt"
 import { NAV_ITEMS, isActive } from "./nav-items"
@@ -44,6 +44,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </nav>
         <div className="mt-auto flex flex-col gap-4">
           <InstallPrompt variant="card" />
+          <SidebarUserMenu />
           <div className="flex items-center justify-between">
             <p className="text-xs text-muted-foreground">Made for UK dads</p>
             <ThemeToggle />
@@ -55,14 +56,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <Logo />
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <Link
-            href="/profile"
-            aria-label="Your profile"
-            aria-current={isActive(pathname, "/profile") ? "page" : undefined}
-            className="inline-flex size-11 items-center justify-center rounded-full bg-highlight text-highlight-foreground"
-          >
-            <UserRound className="size-5" aria-hidden />
-          </Link>
+          <HeaderUserButton />
         </div>
       </header>
 
