@@ -1,7 +1,7 @@
 name: Collect events (activities & clubs)
 
-# The browser-based activity collector. Kept separate from civic so browser
-# failures do not affect the requests-based collector.
+# Browser-based activity collector. Kept separate from civic so browser failures
+# do not affect the requests-based collector.
 
 on:
   workflow_dispatch:
@@ -37,11 +37,11 @@ jobs:
       - run: pip install -r requirements-browser.txt
       - run: playwright install --with-deps chromium
       - name: Validate Python (syntax check)
-        run: python -m py_compile worker.py
+        run: python -m py_compile worker.py events_worker.py
       - name: Self-test (no network/Gemini/Supabase calls)
-        run: python worker.py --self-test
+        run: python events_worker.py --self-test
       - name: Run collector
-        run: python worker.py
+        run: python events_worker.py
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
