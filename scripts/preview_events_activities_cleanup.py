@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Read-only preview for classifying existing collected_events rows.
 
-Never writes to Supabase.  Recurring rows become Activity candidates unless they
-look like school-holiday camps.  Activity merge groups use title + venue/location.
+Never writes to Supabase. Recurrence is the primary legacy signal, with explicit
+exceptions for camps and seasonal/special listings which remain Events.
+Activity merge groups use title + venue/location.
 """
 
 from __future__ import annotations
@@ -15,9 +16,13 @@ from pathlib import Path
 
 from supabase import create_client
 
-HOLIDAY_CAMP = re.compile(
-    r"\b(?:holiday camp|half[- ]?term camp|summer camp|easter camp|christmas camp|school holiday camp|"
-    r"multi[- ]?activity camp|football camp|sports camp|dance camp|drama camp|performing arts camp)\b",
+# Existing data is imperfect, so treat any standalone "camp/camps" wording as
+# a camp for the migration preview. This is deliberately safer than converting
+# a school-holiday camp into an undated Activity.
+HOLIDAY_CAMP = re.compile(r"\bcamps?\b", re.I)
+SEASONAL_OR_SPECIAL_EVENT = re.compile(
+    r"\b(?:summer|christmas|halloween|easter|heritage open days?|open days?|"
+    r"steaming days?|steaming weekend|badger watch|festival)\b",
     re.I,
 )
 
@@ -54,7 +59,18 @@ def main():
         recurrence = (row.get("recurrence") or "unknown").lower()
         text = f"{row.get('title') or ''} {row.get('description') or ''}"
         holiday = bool(HOLIDAY_CAMP.search(text))
-        proposed = "activity" if recurrence == "recurring" and not holiday else "event"
+        special_event = bool(SEASONAL_OR_SPECIAL_EVENT.search(text))
+        proposed = "activity" if recurrence == "recurring" and not holiday and not special_event else "event"
+        reason = ""
+        if holiday:
+            reason = "camp stays an Event"
+        elif special_event:
+            reason = "seasonal/special listing stays an Event"
+        elif recurrence == "recurring":
+            reason = "stored recurrence=recurring"
+        else:
+            reason = f"stored recurrence={recurrence or 'unknown'}"
+
         venue = row.get("venue_name") or row.get("location") or ""
         group_key = ""
         if proposed == "activity":
@@ -67,6 +83,7 @@ def main():
             "location": row.get("location"),
             "recurrence": row.get("recurrence"),
             "proposed_listing_type": proposed,
+            "classification_reason": reason,
             "proposed_is_holiday_camp": holiday,
             "activity_group_key": group_key,
         })
@@ -88,8 +105,8 @@ def main():
     out.mkdir(exist_ok=True)
     fields = [
         "id", "title", "start_date", "location", "recurrence", "proposed_listing_type",
-        "proposed_is_holiday_camp", "activity_group_key", "activity_group_size",
-        "proposed_action", "proposed_keep_id",
+        "classification_reason", "proposed_is_holiday_camp", "activity_group_key",
+        "activity_group_size", "proposed_action", "proposed_keep_id",
     ]
     with (out / "cleanup_preview.csv").open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields)
@@ -99,11 +116,13 @@ def main():
     activity_rows = [p for p in preview if p["proposed_listing_type"] == "activity"]
     merge_rows = [p for p in activity_rows if p["proposed_action"] == "merge into activity"]
     holiday_rows = [p for p in preview if p["proposed_is_holiday_camp"]]
+    special_rows = [p for p in preview if p["classification_reason"] == "seasonal/special listing stays an Event"]
     print(f"Rows inspected: {len(preview)}")
     print(f"Proposed Events: {len(preview) - len(activity_rows)}")
     print(f"Proposed Activities: {len(activity_rows)}")
     print(f"Activity rows that would merge: {len(merge_rows)}")
-    print(f"Holiday-camp rows kept as Events: {len(holiday_rows)}")
+    print(f"Camp rows kept as Events: {len(holiday_rows)}")
+    print(f"Seasonal/special rows protected as Events: {len(special_rows)}")
     print("READ ONLY: no database rows changed")
 
 
