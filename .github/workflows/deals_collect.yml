@@ -1,29 +1,43 @@
-name: Deals collect (every 2 days)
+name: Dadspace deals
 
 on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "Dry run (saves nothing, writes review files)"
-        type: boolean
-        default: false
+        description: "true = only show results and review files, false = save to Supabase"
+        default: "true"
       self_test:
-        description: "Only check that everything is connected (no deals fetched)"
-        type: boolean
-        default: false
+        description: "true = only check connections/configuration"
+        default: "false"
       sample_size:
         description: "Number of deals in the review sample"
         default: "40"
       keep_unknown_discount_low:
-        description: "Keep low-value deals whose discount is unknown"
-        type: boolean
-        default: false
+        description: "true = keep low-value deals whose discount is unknown"
+        default: "false"
 
-  # Trigger both UTC equivalents of 07:00 UK time daily, then gate to every
-  # second calendar day from 2026-10-01. Manual runs bypass the cadence.
-  schedule:
-    - cron: "0 6 * * *"
-    - cron: "0 7 * * *"
+  workflow_call:
+    inputs:
+      dry_run:
+        description: "true = only show results and review files, false = save to Supabase"
+        required: false
+        type: string
+        default: "false"
+      self_test:
+        description: "true = only check connections/configuration"
+        required: false
+        type: string
+        default: "false"
+      sample_size:
+        description: "Number of deals in the review sample"
+        required: false
+        type: string
+        default: "40"
+      keep_unknown_discount_low:
+        description: "true = keep low-value deals whose discount is unknown"
+        required: false
+        type: string
+        default: "false"
 
 permissions:
   contents: read
@@ -33,55 +47,38 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - id: uk_time
-        name: Check UK time and two-day cadence
-        shell: bash
-        run: |
-          if [ "${{ github.event_name }}" != "schedule" ]; then
-            echo "should_run=true" >> "$GITHUB_OUTPUT"
-            echo "Manual run: continuing."
-            exit 0
-          fi
-
-          UK_HOUR=$(TZ=Europe/London date +%H)
-          UK_DATE=$(TZ=Europe/London date +%F)
-          UK_TIME=$(TZ=Europe/London date '+%Y-%m-%d %H:%M %Z')
-          echo "Current UK time: $UK_TIME"
-
-          if [ "$UK_HOUR" != "07" ]; then
-            echo "should_run=false" >> "$GITHUB_OUTPUT"
-            echo "Not 07:00 in Europe/London: skipping duplicate UTC trigger."
-            exit 0
-          fi
-
-          ANCHOR_EPOCH=$(date -u -d '2026-10-01' +%s)
-          TODAY_EPOCH=$(date -u -d "$UK_DATE" +%s)
-          DAYS_SINCE=$(( (TODAY_EPOCH - ANCHOR_EPOCH) / 86400 ))
-
-          if [ $(( DAYS_SINCE % 2 )) -eq 0 ]; then
-            echo "should_run=true" >> "$GITHUB_OUTPUT"
-            echo "Every-two-days cadence matched: running deals worker."
-          else
-            echo "should_run=false" >> "$GITHUB_OUTPUT"
-            echo "Off day in every-two-days cadence: skipping deals worker."
-          fi
-
       - uses: actions/checkout@v4
-        if: steps.uk_time.outputs.should_run == 'true'
 
       - uses: actions/setup-python@v5
-        if: steps.uk_time.outputs.should_run == 'true'
         with:
           python-version: "3.12"
 
-      - run: pip install requests
-        if: steps.uk_time.outputs.should_run == 'true'
+      - name: Install
+        run: pip install requests
+
+      - name: Validate Python (syntax check)
+        run: python -m py_compile deals_worker.py deals_worker_db.py deals_source_adapters.py
+
+      - name: Self-test
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          AWIN_API_TOKEN: ${{ secrets.AWIN_API_TOKEN }}
+          AWIN_PUBLISHER_ID: ${{ secrets.AWIN_PUBLISHER_ID }}
+          FMTC_API_TOKEN: ${{ secrets.FMTC_API_TOKEN }}
+          PEPPER_API_KEY: ${{ secrets.PEPPER_API_KEY }}
+        run: python deals_worker_db.py --self-test
 
       - name: Run deals worker
-        if: steps.uk_time.outputs.should_run == 'true'
+        if: ${{ (inputs.self_test || 'false') != 'true' }}
         env:
           PYTHONUNBUFFERED: "1"
-          DRY_RUN: ${{ github.event_name == 'schedule' && 'false' || inputs.dry_run }}
+          DRY_RUN: ${{ inputs.dry_run || 'true' }}
           SAMPLE_SIZE: ${{ inputs.sample_size || '40' }}
           KEEP_UNKNOWN_DISCOUNT_LOW: ${{ inputs.keep_unknown_discount_low || 'false' }}
 
@@ -98,14 +95,13 @@ jobs:
           AWIN_PUBLISHER_ID: ${{ secrets.AWIN_PUBLISHER_ID }}
           FMTC_API_TOKEN: ${{ secrets.FMTC_API_TOKEN }}
           PEPPER_API_KEY: ${{ secrets.PEPPER_API_KEY }}
-
-        run: python deals_worker_db.py ${{ inputs.self_test && '--self-test' || '' }}
+        run: python deals_worker_db.py
 
       - name: Upload review files
-        if: always() && steps.uk_time.outputs.should_run == 'true'
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: deals-dry-run-review
+          name: deals-review-${{ github.run_id }}
           path: review/
           if-no-files-found: ignore
           retention-days: 14
