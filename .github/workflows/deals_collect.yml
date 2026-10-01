@@ -1,4 +1,4 @@
-name: Deals collect
+name: Deals collect (every 2 days)
 
 on:
   workflow_dispatch:
@@ -19,10 +19,11 @@ on:
         type: boolean
         default: false
 
-  # GitHub cron uses UTC. Trigger both GMT/BST equivalents and gate against
-  # Europe/London so the worker runs at 07:00, 13:00 and 19:00 UK local time.
+  # Trigger both UTC equivalents of 07:00 UK time daily, then gate to every
+  # second calendar day from 2026-10-01. Manual runs bypass the cadence.
   schedule:
-    - cron: "0 6,7,12,13,18,19 * * *"
+    - cron: "0 6 * * *"
+    - cron: "0 7 * * *"
 
 permissions:
   contents: read
@@ -33,7 +34,7 @@ jobs:
     timeout-minutes: 30
     steps:
       - id: uk_time
-        name: Check UK schedule
+        name: Check UK time and two-day cadence
         shell: bash
         run: |
           if [ "${{ github.event_name }}" != "schedule" ]; then
@@ -43,19 +44,27 @@ jobs:
           fi
 
           UK_HOUR=$(TZ=Europe/London date +%H)
+          UK_DATE=$(TZ=Europe/London date +%F)
           UK_TIME=$(TZ=Europe/London date '+%Y-%m-%d %H:%M %Z')
           echo "Current UK time: $UK_TIME"
 
-          case "$UK_HOUR" in
-            07|13|19)
-              echo "should_run=true" >> "$GITHUB_OUTPUT"
-              echo "Scheduled UK deals run: continuing."
-              ;;
-            *)
-              echo "should_run=false" >> "$GITHUB_OUTPUT"
-              echo "Duplicate UTC trigger: skipping."
-              ;;
-          esac
+          if [ "$UK_HOUR" != "07" ]; then
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+            echo "Not 07:00 in Europe/London: skipping duplicate UTC trigger."
+            exit 0
+          fi
+
+          ANCHOR_EPOCH=$(date -u -d '2026-10-01' +%s)
+          TODAY_EPOCH=$(date -u -d "$UK_DATE" +%s)
+          DAYS_SINCE=$(( (TODAY_EPOCH - ANCHOR_EPOCH) / 86400 ))
+
+          if [ $(( DAYS_SINCE % 2 )) -eq 0 ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            echo "Every-two-days cadence matched: running deals worker."
+          else
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+            echo "Off day in every-two-days cadence: skipping deals worker."
+          fi
 
       - uses: actions/checkout@v4
         if: steps.uk_time.outputs.should_run == 'true'
@@ -72,7 +81,6 @@ jobs:
         if: steps.uk_time.outputs.should_run == 'true'
         env:
           PYTHONUNBUFFERED: "1"
-          # Scheduled runs are always live. Manual runs use the checkbox above.
           DRY_RUN: ${{ github.event_name == 'schedule' && 'false' || inputs.dry_run }}
           SAMPLE_SIZE: ${{ inputs.sample_size || '40' }}
           KEEP_UNKNOWN_DISCOUNT_LOW: ${{ inputs.keep_unknown_discount_low || 'false' }}
@@ -86,8 +94,6 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
 
-          # Optional source credentials. Sources remain independently controlled
-          # by deal_sources.active, so missing credentials do not affect RSS.
           AWIN_API_TOKEN: ${{ secrets.AWIN_API_TOKEN }}
           AWIN_PUBLISHER_ID: ${{ secrets.AWIN_PUBLISHER_ID }}
           FMTC_API_TOKEN: ${{ secrets.FMTC_API_TOKEN }}
