@@ -4,12 +4,18 @@ on:
   pull_request:
     branches: [main]
     paths:
+      - "events_worker.py"
+      - "lib/activities.ts"
+      - "lib/venues.ts"
+      - "app/activities/**"
+      - "components/activities/**"
+      - "scripts/preview_events_activities_cleanup.py"
       - "scripts/export_pre_split_backup.py"
       - "scripts/baseline_event_tokens.py"
       - ".github/workflows/events-activities-baseline.yml"
 
 jobs:
-  backup:
+  backup-and-preview:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -18,20 +24,29 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
+      - name: Validate Python
+        run: python -m py_compile worker.py events_worker.py scripts/baseline_event_tokens.py scripts/preview_events_activities_cleanup.py
       - name: Export collected_events and venues (read only)
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: python scripts/export_pre_split_backup.py
-      - name: Upload pre-split backup
+      - name: Build existing-row split preview (read only)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python scripts/preview_events_activities_cleanup.py
+      - name: Upload backup and cleanup preview
         uses: actions/upload-artifact@v4
         with:
-          name: events-activities-pre-split-backup-${{ github.run_id }}
-          path: pre-split-backup/
+          name: events-activities-review-${{ github.run_id }}
+          path: |
+            pre-split-backup/
+            events-activities-cleanup-preview/
           retention-days: 30
           if-no-files-found: error
 
-  baseline-civic:
+  after-civic:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -40,7 +55,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - name: Fixed civic baseline (read only, forced reread)
+      - name: Fixed civic after baseline (read only, forced reread)
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
@@ -50,16 +65,20 @@ jobs:
           MAX_RUN_MINUTES: "40"
           GEMINI_TIMEOUT_SECONDS: "90"
           MAX_CHARS: "40000"
-        run: python scripts/baseline_event_tokens.py --categories councils,heritage_parks,niche_venues --count 5 --label before-civic
-      - name: Upload civic baseline
+        run: >-
+          python scripts/baseline_event_tokens.py
+          --categories councils,heritage_parks,niche_venues
+          --source-ids 0b2bc50c-3684-4a83-8078-3d7aacf9dcd1,0f773e80-abe5-437d-9359-08ce37a1c947,0f9f8b83-c3d6-4657-9a0c-f4ccd46b90bc,16fa8449-3afa-4f4b-b3e6-17c989e9047a,1b2fd4c8-5e46-44f5-82c9-48ef3ac74490
+          --label after-civic
+      - name: Upload civic after baseline
         uses: actions/upload-artifact@v4
         with:
-          name: events-activities-before-civic-${{ github.run_id }}
+          name: events-activities-after-civic-${{ github.run_id }}
           path: baseline-review/
           retention-days: 30
           if-no-files-found: error
 
-  baseline-browser:
+  after-browser:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -69,7 +88,7 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements-browser.txt
       - run: playwright install --with-deps chromium
-      - name: Fixed activities-source baseline (read only, forced reread)
+      - name: Fixed activities-source after baseline (read only, forced reread)
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
@@ -82,11 +101,15 @@ jobs:
           MAX_RUN_MINUTES: "55"
           GEMINI_TIMEOUT_SECONDS: "90"
           MAX_CHARS: "24000"
-        run: python scripts/baseline_event_tokens.py --categories activities --count 5 --label before-browser
-      - name: Upload browser baseline
+        run: >-
+          python scripts/baseline_event_tokens.py
+          --categories activities
+          --source-ids 254f1361-8385-4374-8a0f-d4fbef2415e5,2df575ca-a90a-4386-903f-ae0a1c43135e,4196176c-b668-42b6-91f7-24322f318941,50950a1b-4160-4193-b11d-c6b33af64313,8b8b950e-11d9-4b92-a83c-f9284a8fa732
+          --label after-browser
+      - name: Upload browser after baseline
         uses: actions/upload-artifact@v4
         with:
-          name: events-activities-before-browser-${{ github.run_id }}
+          name: events-activities-after-browser-${{ github.run_id }}
           path: baseline-review/
           retention-days: 30
           if-no-files-found: error
