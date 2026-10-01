@@ -1,10 +1,11 @@
 "use client"
 
-import { useMemo, useState } from "react"
-import { ExternalLink, MapPin, Search } from "lucide-react"
+import Link from "next/link"
+import { useEffect, useRef, useState } from "react"
+import { MapPin, Search } from "lucide-react"
+import { activitySlug } from "@/lib/activity-slug"
+import { ACTIVITY_PAGE_SIZE, type ActivityPage } from "@/lib/activities"
 import type { DadActivity } from "@/lib/types"
-
-const PAGE_SIZE = 24
 
 function priceLabel(value: string | null) {
   return value?.trim() || "Check price on site"
@@ -15,38 +16,73 @@ function categoryLabel(value: string | null | undefined) {
   return value.replace(/_/g, " ").replace(/\b\w/g, (m) => m.toUpperCase())
 }
 
-export function ActivitiesExplorer({ activities }: { activities: DadActivity[] }) {
+async function fetchPage({ offset, query, category, signal }: {
+  offset: number
+  query: string
+  category: string
+  signal?: AbortSignal
+}): Promise<ActivityPage> {
+  const params = new URLSearchParams({ offset: String(offset), limit: String(ACTIVITY_PAGE_SIZE) })
+  if (query.trim()) params.set("q", query.trim())
+  if (category !== "all") params.set("category", category)
+  const response = await fetch(`/api/activities?${params.toString()}`, { signal })
+  if (!response.ok) throw new Error("Could not load activities")
+  return response.json() as Promise<ActivityPage>
+}
+
+export function ActivitiesExplorer({ initialPage, categories }: { initialPage: ActivityPage; categories: string[] }) {
   const [query, setQuery] = useState("")
   const [category, setCategory] = useState("all")
-  const [visible, setVisible] = useState(PAGE_SIZE)
+  const [activities, setActivities] = useState<DadActivity[]>(initialPage.activities)
+  const [total, setTotal] = useState(initialPage.total)
+  const [hasMore, setHasMore] = useState(initialPage.hasMore)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
+  const firstRun = useRef(true)
 
-  const categories = useMemo(
-    () => [...new Set(activities.map((a) => a.category).filter((v): v is string => !!v))].sort(),
-    [activities],
-  )
+  useEffect(() => {
+    if (firstRun.current) {
+      firstRun.current = false
+      return
+    }
+    const controller = new AbortController()
+    const timer = window.setTimeout(async () => {
+      setLoading(true)
+      setError("")
+      try {
+        const page = await fetchPage({ offset: 0, query, category, signal: controller.signal })
+        setActivities(page.activities)
+        setTotal(page.total)
+        setHasMore(page.hasMore)
+      } catch (err) {
+        if ((err as Error).name !== "AbortError") setError("Activities could not be refreshed. Please try again.")
+      } finally {
+        if (!controller.signal.aborted) setLoading(false)
+      }
+    }, 250)
+    return () => {
+      window.clearTimeout(timer)
+      controller.abort()
+    }
+  }, [query, category])
 
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase()
-    return activities.filter((activity) => {
-      if (category !== "all" && activity.category !== category) return false
-      if (!q) return true
-      const haystack = [
-        activity.title,
-        activity.description,
-        activity.schedule_text,
-        activity.location,
-        activity.venue_name,
-        activity.postcode,
-        activity.age_range,
-      ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase()
-      return haystack.includes(q)
-    })
-  }, [activities, category, query])
-
-  const shown = filtered.slice(0, visible)
+  async function loadMore() {
+    setLoading(true)
+    setError("")
+    try {
+      const page = await fetchPage({ offset: activities.length, query, category })
+      setActivities((current) => {
+        const seen = new Set(current.map((item) => item.id))
+        return [...current, ...page.activities.filter((item) => !seen.has(item.id))]
+      })
+      setTotal(page.total)
+      setHasMore(page.hasMore)
+    } catch {
+      setError("More activities could not be loaded. Please try again.")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <section className="flex flex-col gap-6">
@@ -56,20 +92,14 @@ export function ActivitiesExplorer({ activities }: { activities: DadActivity[] }
           <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 opacity-60" />
           <input
             value={query}
-            onChange={(e) => {
-              setQuery(e.target.value)
-              setVisible(PAGE_SIZE)
-            }}
+            onChange={(e) => setQuery(e.target.value)}
             placeholder="Search classes, clubs, venues or ages"
             className="w-full rounded-xl border bg-background py-2.5 pl-9 pr-3"
           />
         </label>
         <select
           value={category}
-          onChange={(e) => {
-            setCategory(e.target.value)
-            setVisible(PAGE_SIZE)
-          }}
+          onChange={(e) => setCategory(e.target.value)}
           className="rounded-xl border bg-background px-3 py-2.5"
           aria-label="Activity category"
         >
@@ -80,16 +110,21 @@ export function ActivitiesExplorer({ activities }: { activities: DadActivity[] }
         </select>
       </div>
 
-      <p className="text-sm opacity-70">{filtered.length} current {filtered.length === 1 ? "activity" : "activities"}</p>
+      <p className="text-sm opacity-70" aria-live="polite">
+        {loading && !activities.length ? "Loading activities…" : `${total} current ${total === 1 ? "activity" : "activities"}`}
+      </p>
+      {error && <p className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm text-amber-950">{error}</p>}
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {shown.map((activity) => (
+        {activities.map((activity) => (
           <article key={activity.id} className="flex flex-col gap-3 rounded-2xl border bg-card p-5 shadow-sm">
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-wide text-highlight">{categoryLabel(activity.category)}</p>
-                <h2 className="font-heading text-xl font-extrabold leading-tight">{activity.title}</h2>
-              </div>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wide text-highlight">{categoryLabel(activity.category)}</p>
+              <h2 className="font-heading text-xl font-extrabold leading-tight">
+                <Link href={`/activities/${activitySlug(activity)}`} className="hover:underline">
+                  {activity.title}
+                </Link>
+              </h2>
             </div>
 
             {activity.schedule_text && <p className="font-semibold">{activity.schedule_text}</p>}
@@ -105,31 +140,28 @@ export function ActivitiesExplorer({ activities }: { activities: DadActivity[] }
 
             {activity.description && <p className="line-clamp-3 text-sm leading-relaxed opacity-80">{activity.description}</p>}
 
-            {activity.event_url && (
-              <a
-                href={activity.event_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-auto inline-flex items-center gap-2 font-semibold underline underline-offset-4"
-              >
-                Check official site <ExternalLink className="size-4" />
-              </a>
-            )}
+            <Link
+              href={`/activities/${activitySlug(activity)}`}
+              className="mt-auto inline-flex items-center font-semibold underline underline-offset-4"
+            >
+              View activity details
+            </Link>
           </article>
         ))}
       </div>
 
-      {shown.length < filtered.length && (
+      {hasMore && (
         <button
           type="button"
-          onClick={() => setVisible((count) => count + PAGE_SIZE)}
-          className="mx-auto rounded-xl border px-5 py-2.5 font-semibold"
+          onClick={loadMore}
+          disabled={loading}
+          className="mx-auto rounded-xl border px-5 py-2.5 font-semibold disabled:opacity-60"
         >
-          Load more
+          {loading ? "Loading…" : "Load more"}
         </button>
       )}
 
-      {!filtered.length && <p className="rounded-2xl border bg-card p-6 text-center">No activities match those filters yet.</p>}
+      {!loading && !activities.length && <p className="rounded-2xl border bg-card p-6 text-center">No activities match those filters yet.</p>}
     </section>
   )
 }
