@@ -1,7 +1,9 @@
 import Image from "next/image"
+import Link from "next/link"
 import { Clock, MapPin, Navigation } from "lucide-react"
 import { formatEventDate } from "@/lib/dates"
 import { categoryLabel, eventCategory, eventImage, isFreeEvent } from "@/lib/event-meta"
+import { eventSlug } from "@/lib/event-slug"
 import type { DadEvent } from "@/lib/types"
 
 function formatMiles(miles: number) {
@@ -11,11 +13,11 @@ function formatMiles(miles: number) {
 }
 
 export function EventCard({ event, index = 0, showCategory = false }: { event: DadEvent; index?: number; showCategory?: boolean }) {
-  const href = event.event_url || event.source_url
+  const href = `/events/${eventSlug(event)}`
   const free = isFreeEvent(event.cost_text)
   const image = eventImage(event)
   const endDate = event.end_date ?? event.start_date
-  const priceLabel = event.cost_text ? (free ? "Free" : event.cost_text) : "Price not listed"
+  const priceLabel = event.cost_text ? (free ? "Free" : event.cost_text) : "Check price on site"
   const timeLabel = event.time_text || "Time not listed"
 
   const body = (
@@ -84,14 +86,10 @@ export function EventCard({ event, index = 0, showCategory = false }: { event: D
   const className =
     "group animate-rise flex h-full flex-col overflow-hidden rounded-lg border bg-card text-card-foreground transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10"
 
-  return href ? (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={className} style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}>
+  return (
+    <Link href={href} className={className} style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}>
       {body}
-      <span className="sr-only">(opens event details in a new tab)</span>
-    </a>
-  ) : (
-    <article className={className} style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}>
-      {body}
-    </article>
+      <span className="sr-only">View event details on Dadspace</span>
+    </Link>
   )
 }
