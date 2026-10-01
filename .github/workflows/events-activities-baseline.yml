@@ -14,6 +14,10 @@ on:
       - "scripts/baseline_event_tokens.py"
       - ".github/workflows/events-activities-baseline.yml"
 
+concurrency:
+  group: events-activities-baseline-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   backup-and-preview:
     runs-on: ubuntu-latest
