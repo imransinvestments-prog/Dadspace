@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Read-only preview for classifying existing collected_events rows.
+"""Read-only audit/preview for classifying legacy collected_events rows.
 
-Never writes to Supabase. Recurrence is the primary legacy signal, with explicit
-exceptions for camps and seasonal/special listings which remain Events.
+The production one-off cleanup was applied on 2026-10-01 after user approval.
+This script remains read-only so future audits can reproduce the classification
+logic without mutating Supabase. Recurrence is the primary legacy signal, with
+explicit exceptions for camps and seasonal/special listings which remain Events.
 Activity merge groups use title + venue/location.
 """
 
@@ -16,9 +18,6 @@ from pathlib import Path
 
 from supabase import create_client
 
-# Existing data is imperfect, so treat any standalone "camp/camps" wording as
-# a camp for the migration preview. This is deliberately safer than converting
-# a school-holiday camp into an undated Activity.
 HOLIDAY_CAMP = re.compile(r"\bcamps?\b", re.I)
 SEASONAL_OR_SPECIAL_EVENT = re.compile(
     r"\b(?:summer|christmas|halloween|easter|heritage open days?|open days?|"
