@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Accessibility, Baby, Clock, Coffee, Dog, Globe, MapPin, Navigation, Phone, SquareParking, type LucideIcon } from "lucide-react"
+import { directionsUrl, formatMiles } from "@/components/venues/venue-spotlight"
 import { FACILITY_LABELS, categoryLabel, venueImage, type Venue } from "@/lib/venue-meta"
 
 const FACILITY_ICONS: Record<string, LucideIcon> = {
@@ -8,12 +9,6 @@ const FACILITY_ICONS: Record<string, LucideIcon> = {
   cafe: Coffee,
   accessible: Accessibility,
   dog_friendly: Dog,
-}
-
-function formatMiles(miles: number) {
-  if (miles < 1) return "Under a mile"
-  const rounded = Math.round(miles)
-  return `${rounded} ${rounded === 1 ? "mile" : "miles"}`
 }
 
 function setting(venue: Venue) {
@@ -30,32 +25,32 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
 
   return (
     <article
-      className="animate-rise flex h-full flex-col overflow-hidden rounded-lg border bg-card text-card-foreground"
+      className="group animate-rise flex h-full flex-col overflow-hidden rounded-2xl border bg-card text-card-foreground transition duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10"
       style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}
     >
-      <div className="relative aspect-[16/9] overflow-hidden">
+      <div className="relative aspect-[16/10] overflow-hidden">
         <Image
           src={image || "/placeholder.svg"}
           alt=""
           fill
           unoptimized={image.startsWith("http")}
           sizes="(min-width: 1280px) 30vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover"
+          className="object-cover transition duration-500 group-hover:scale-105"
         />
-        <span className="absolute top-3 left-3 rounded-full bg-card px-3 py-1 text-xs font-bold text-card-foreground">
+        <span className="absolute top-3 left-3 -rotate-2 rounded-md bg-card px-2.5 py-1 text-xs font-extrabold text-card-foreground shadow-sm transition group-hover:rotate-0">
           {categoryLabel(venue.category)}
         </span>
         {venue.is_free ? (
-          <span className="absolute top-3 right-3 rounded-full bg-highlight px-3 py-1 text-xs font-bold text-highlight-foreground">
-            Free entry
+          <span className="absolute top-3 right-3 rotate-3 rounded-md bg-highlight px-2.5 py-1 text-xs font-extrabold text-highlight-foreground shadow-sm">
+            Free!
           </span>
         ) : venue.price_text ? (
-          <span className="absolute top-3 right-3 rounded-full bg-navy px-3 py-1 text-xs font-bold text-navy-foreground">
+          <span className="absolute top-3 right-3 rounded-md bg-navy px-2.5 py-1 text-xs font-bold text-navy-foreground">
             {venue.price_text}
           </span>
         ) : null}
         {distance != null && (
-          <span className="absolute bottom-3 left-3 flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
+          <span className="absolute bottom-3 left-3 flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-xs font-extrabold text-primary-foreground">
             <Navigation className="size-3" aria-hidden />
             {formatMiles(distance)}
           </span>
@@ -64,7 +59,7 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
 
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="flex flex-col gap-1">
-          <h2 className="font-heading text-lg leading-snug font-bold text-pretty">{venue.name}</h2>
+          <h3 className="font-heading text-lg leading-snug font-bold text-pretty">{venue.name}</h3>
           {venue.description && <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">{venue.description}</p>}
         </div>
 
@@ -78,7 +73,7 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
           {venue.opening_hours && (
             <li className="flex items-start gap-2">
               <Clock className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
-              <span>{venue.opening_hours}</span>
+              <span className="line-clamp-1">{venue.opening_hours}</span>
             </li>
           )}
         </ul>
@@ -118,13 +113,22 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
                 href={venue.website_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 rounded-full bg-navy px-3 py-2 text-xs font-bold text-navy-foreground transition hover:opacity-90"
+                className="flex size-9 items-center justify-center rounded-full text-foreground transition hover:bg-muted"
               >
-                <Globe className="size-3.5" aria-hidden />
-                Website
-                <span className="sr-only">for {venue.name}</span>
+                <Globe className="size-4" aria-hidden />
+                <span className="sr-only">Website for {venue.name}</span>
               </a>
             )}
+            <a
+              href={directionsUrl(venue)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 rounded-full bg-navy px-3 py-2 text-xs font-bold text-navy-foreground transition hover:bg-primary hover:text-primary-foreground dark:bg-muted dark:text-foreground dark:hover:bg-primary dark:hover:text-primary-foreground"
+            >
+              <Navigation className="size-3.5" aria-hidden />
+              Directions
+              <span className="sr-only">to {venue.name}</span>
+            </a>
           </div>
         </div>
       </div>

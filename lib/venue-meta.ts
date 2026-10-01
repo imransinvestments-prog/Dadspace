@@ -43,25 +43,46 @@ export const FACILITY_LABELS: Record<string, string> = {
   pram_friendly: "Pram friendly",
 }
 
+type CategoryTheme = { match: RegExp; label: string; plural: string; image: string }
+
+const CATEGORY_THEMES: CategoryTheme[] = [
+  { match: /soft_play|indoor/, label: "Soft play", plural: "Soft play", image: "/images/venues/soft-play.png" },
+  { match: /playground|park$|^park/, label: "Playground", plural: "Playgrounds", image: "/images/venues/playground.png" },
+  { match: /museum/, label: "Museum", plural: "Museums", image: "/images/venues/museum.png" },
+  { match: /arcade/, label: "Arcade", plural: "Arcades", image: "/images/venues/arcade.png" },
+  { match: /zoo|animal|farm/, label: "Zoo & animals", plural: "Zoos & animals", image: "/images/venues/zoo.png" },
+  { match: /water_park|swim|leisure/, label: "Water park", plural: "Water parks", image: "/images/venues/water-park.png" },
+  { match: /theme_park|attraction/, label: "Theme park", plural: "Theme parks", image: "/images/venues/theme-park.png" },
+  { match: /trampoline/, label: "Trampolines", plural: "Trampolines", image: "/images/venues/trampoline.png" },
+  { match: /aquarium/, label: "Aquarium", plural: "Aquariums", image: "/images/venues/aquarium.png" },
+  { match: /library/, label: "Library", plural: "Libraries", image: "/images/event-story.png" },
+  { match: /nature|walk/, label: "Nature & walks", plural: "Nature & walks", image: "/images/event-outdoor.png" },
+]
+
+function themeFor(category: string | null) {
+  if (!category) return null
+  return CATEGORY_THEMES.find((t) => t.match.test(category)) ?? null
+}
+
 export function categoryLabel(category: string | null) {
   if (!category) return "Venue"
-  return CATEGORY_LABELS[category] ?? category.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase())
+  return (
+    themeFor(category)?.label ??
+    CATEGORY_LABELS[category] ??
+    category.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase())
+  )
+}
+
+export function categoryPlural(category: string) {
+  return themeFor(category)?.plural ?? categoryLabel(category)
+}
+
+export function categoryImage(category: string | null) {
+  return themeFor(category)?.image ?? "/images/event-outdoor.png"
 }
 
 export function venueImage(venue: Venue) {
-  if (venue.image_url) return venue.image_url
-  switch (venue.category) {
-    case "soft_play":
-    case "cafe":
-      return "/images/event-crafts.png"
-    case "museum":
-    case "library":
-      return "/images/event-story.png"
-    case "leisure":
-      return "/images/event-sport.png"
-    default:
-      return "/images/event-outdoor.png"
-  }
+  return venue.image_url || categoryImage(venue.category)
 }
 
 export function milesBetween(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
