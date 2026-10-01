@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AppShell } from "@/components/app-shell"
 import { LocationProvider } from "@/components/location-provider"
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </LocationProvider>
         </ThemeProvider>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   )
