@@ -5,10 +5,12 @@ import { SectionHeader } from "./section-header"
 import type { HomeData } from "@/lib/types"
 
 export function TrendingThreads({ threads }: { threads: HomeData["threads"] }) {
+  const hasRealThreads = !threads.isSample && threads.items.length > 0
+
   return (
     <section aria-labelledby="trending-title" className="flex flex-col gap-4">
-      <SectionHeader id="trending-title" title="Trending in the forum" href="/forum" linkLabel="Forum" isSample={threads.isSample} />
-      {threads.items.length ? (
+      <SectionHeader id="trending-title" title="Trending in the forum" href="/forum" linkLabel="Forum" />
+      {hasRealThreads ? (
         <ol className="flex flex-col overflow-hidden rounded-lg border bg-card">
           {threads.items.map((thread) => (
             <li key={thread.id} className="border-b last:border-b-0">
@@ -28,7 +30,10 @@ export function TrendingThreads({ threads }: { threads: HomeData["threads"] }) {
           ))}
         </ol>
       ) : (
-        <EmptyState title="Tumbleweed." body="Nobody's posted yet. Be the dad who breaks the ice." />
+        <EmptyState
+          title="Forum coming soon."
+          body="We're keeping sample usernames and made-up discussions off the live homepage until real community posts are ready."
+        />
       )}
     </section>
   )
