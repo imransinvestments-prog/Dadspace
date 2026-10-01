@@ -13,6 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "", changeFrequency: "daily", priority: 1 },
     { path: "/news", changeFrequency: "daily", priority: 0.9 },
     { path: "/events", changeFrequency: "daily", priority: 0.9 },
+    { path: "/activities", changeFrequency: "daily", priority: 0.9 },
     { path: "/deals", changeFrequency: "daily", priority: 0.9 },
     { path: "/venues", changeFrequency: "weekly", priority: 0.8 },
   ]
@@ -30,6 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { data, error } = await db
     .from("collected_events")
     .select("id,title,last_verified_at")
+    .eq("listing_type", "event")
     .order("last_verified_at", { ascending: false })
     .limit(1000)
 
