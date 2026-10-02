@@ -1,7 +1,10 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
+import { useLocation } from "@/components/location-provider"
+import { LocationControls } from "@/components/location-controls"
+import { useDirectoryPage } from "@/hooks/use-directory-page"
 import { MapPin, Search } from "lucide-react"
 import { activitySlug } from "@/lib/activity-slug"
 import { ACTIVITY_PAGE_SIZE, type ActivityPage } from "@/lib/activity-shared"
@@ -16,76 +19,22 @@ function categoryLabel(value: string | null | undefined) {
   return value.replace(/_/g, " ").replace(/\b\w/g, (m) => m.toUpperCase())
 }
 
-async function fetchPage({ offset, query, category, signal }: {
-  offset: number
-  query: string
-  category: string
-  signal?: AbortSignal
-}): Promise<ActivityPage> {
-  const params = new URLSearchParams({ offset: String(offset), limit: String(ACTIVITY_PAGE_SIZE) })
-  if (query.trim()) params.set("q", query.trim())
-  if (category !== "all") params.set("category", category)
-  const response = await fetch(`/api/activities?${params.toString()}`, { signal })
-  if (!response.ok) throw new Error("Could not load activities")
-  return response.json() as Promise<ActivityPage>
-}
-
 export function ActivitiesExplorer({ initialPage, categories }: { initialPage: ActivityPage; categories: string[] }) {
-  const [query, setQuery] = useState("")
-  const [category, setCategory] = useState("all")
-  const [activities, setActivities] = useState<DadActivity[]>(initialPage.activities)
-  const [total, setTotal] = useState(initialPage.total)
-  const [hasMore, setHasMore] = useState(initialPage.hasMore)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
-  const firstRun = useRef(true)
-
-  useEffect(() => {
-    if (firstRun.current) {
-      firstRun.current = false
-      return
-    }
-    const controller = new AbortController()
-    const timer = window.setTimeout(async () => {
-      setLoading(true)
-      setError("")
-      try {
-        const page = await fetchPage({ offset: 0, query, category, signal: controller.signal })
-        setActivities(page.activities)
-        setTotal(page.total)
-        setHasMore(page.hasMore)
-      } catch (err) {
-        if ((err as Error).name !== "AbortError") setError("Activities could not be refreshed. Please try again.")
-      } finally {
-        if (!controller.signal.aborted) setLoading(false)
-      }
-    }, 250)
-    return () => {
-      window.clearTimeout(timer)
-      controller.abort()
-    }
-  }, [query, category])
-
-  async function loadMore() {
-    setLoading(true)
-    setError("")
-    try {
-      const page = await fetchPage({ offset: activities.length, query, category })
-      setActivities((current) => {
-        const seen = new Set(current.map((item) => item.id))
-        return [...current, ...page.activities.filter((item) => !seen.has(item.id))]
-      })
-      setTotal(page.total)
-      setHasMore(page.hasMore)
-    } catch {
-      setError("More activities could not be loaded. Please try again.")
-    } finally {
-      setLoading(false)
-    }
-  }
-
+  const {coords,browseAll}=useLocation()
+  const [query,setQuery]=useState("")
+  const [category,setCategory]=useState("all")
+  const params=new URLSearchParams({q:query,category,limit:String(ACTIVITY_PAGE_SIZE)})
+  if(coords){params.set('lat',String(coords.lat));params.set('lng',String(coords.lng))}
+  const enabled=Boolean(coords)||browseAll
+  const feed=useDirectoryPage<ActivityPage>('/api/activities?'+params,enabled)
+  const activities=feed.pages.flatMap(p=>p.activities)
+  const total=feed.pages.at(-1)?.total??0
+  const hasMore=feed.pages.at(-1)?.hasMore??false
+  const {loading,error}=feed
+  const loadMore=()=>feed.loadMore(activities.length)
   return (
     <section className="flex flex-col gap-6">
+      <LocationControls />
       <div className="grid gap-3 rounded-2xl border bg-card p-4 md:grid-cols-[1fr_220px]">
         <label className="relative">
           <span className="sr-only">Search activities</span>
@@ -111,9 +60,9 @@ export function ActivitiesExplorer({ initialPage, categories }: { initialPage: A
       </div>
 
       <p className="text-sm opacity-70" aria-live="polite">
-        {loading && !activities.length ? "Loading activities…" : `${total} current ${total === 1 ? "activity" : "activities"}`}
+        {loading && !activities.length ? "Loading activitiesâ€¦" : enabled ? `${total} current ${total === 1 ? "activity" : "activities"}${coords ? ", nearest first" : ""}` : "Choose a location or browse all UK to see activities."}
       </p>
-      {error && <p className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm text-amber-950">{error}</p>}
+      {error && <p role="alert">{error} <button onClick={feed.retry} className="underline">Retry</button></p>}
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {activities.map((activity) => (
@@ -138,6 +87,7 @@ export function ActivitiesExplorer({ initialPage, categories }: { initialPage: A
               </p>
             )}
 
+            {coords && <p className="text-sm font-semibold">{activity.distance_miles == null ? 'Distance unavailable' : `About ${activity.distance_miles < 1 ? 'less than 1' : Math.round(activity.distance_miles)} miles away`}</p>}
             {activity.description && <p className="line-clamp-3 text-sm leading-relaxed opacity-80">{activity.description}</p>}
 
             <Link
@@ -157,11 +107,11 @@ export function ActivitiesExplorer({ initialPage, categories }: { initialPage: A
           disabled={loading}
           className="mx-auto rounded-xl border px-5 py-2.5 font-semibold disabled:opacity-60"
         >
-          {loading ? "Loading…" : "Load more"}
+          {loading ? "Loadingâ€¦" : "Load more"}
         </button>
       )}
 
-      {!loading && !activities.length && <p className="rounded-2xl border bg-card p-6 text-center">No activities match those filters yet.</p>}
+      {enabled && !loading && !error && !activities.length && <p className="rounded-2xl border bg-card p-6 text-center">No activities match those filters yet.</p>}
     </section>
   )
 }

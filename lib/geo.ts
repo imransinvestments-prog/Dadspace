@@ -110,7 +110,8 @@ function namesMatch(name: string | undefined, query: string) {
   return n === q || n.startsWith(`${q}-`) || n.startsWith(`${q} `)
 }
 
-async function candidatesFor(location: string, osmBudget: { left: number }): Promise<Candidate[]> {
+async function candidatesFor(location: string, osmBudget: { left: number }, strict = false): Promise<Candidate[]> {
+  if (VAGUE.test(location)) return []
   const postcode = location.match(POSTCODE)
   if (postcode) {
     const point = await lookupPostcode(`${postcode[1]}${postcode[2]}`.toUpperCase())
@@ -121,10 +122,10 @@ async function candidatesFor(location: string, osmBudget: { left: number }): Pro
     const places = await lookupPlaces(query.text)
     const exact = places.filter((p) => namesMatch(p.name, query.text))
     if (exact.length) return exact
-    if (!query.strict && places.length && query.text.split(" ").length > 1) return places
+    if (!strict && !query.strict && places.length && query.text.split(" ").length > 1) return places
   }
 
-  if (VAGUE.test(location) || osmBudget.left <= 0) return []
+  if (strict || osmBudget.left <= 0) return []
   osmBudget.left -= 1
   return lookupOsm(location)
 }
@@ -150,7 +151,7 @@ export function locationKey(item: Locatable) {
  * Picks, for each ambiguous place name, the candidate that sits closest to the
  * other venues from the same source (e.g. "Bampton" next to other Oxfordshire libraries).
  */
-function resolveBySource(entries: { key: string; source: string; candidates: Candidate[] }[]) {
+function resolveBySource(entries: { key: string; source: string; candidates: Candidate[] }[], strict = false) {
   const bySource = new Map<string, typeof entries>()
   for (const entry of entries) {
     if (!entry.candidates.length) continue
@@ -165,6 +166,7 @@ function resolveBySource(entries: { key: string; source: string; candidates: Can
       let best = entry.candidates[0]
       if (entry.candidates.length > 1) {
         let bestScore = -1
+        let tied = false
         for (const candidate of entry.candidates) {
           const score = group.filter(
             (other) => other !== entry && other.candidates.some((c) => distanceKm(candidate, c) < CLUSTER_KM),
@@ -172,8 +174,12 @@ function resolveBySource(entries: { key: string; source: string; candidates: Can
           if (score > bestScore) {
             best = candidate
             bestScore = score
+            tied = false
+          } else if (score === bestScore) {
+            tied = true
           }
         }
+        if (strict && (bestScore <= 0 || tied)) continue
       }
       resolved.set(entry.key, { lat: best.lat, lng: best.lng })
     }
@@ -184,24 +190,24 @@ function resolveBySource(entries: { key: string; source: string; candidates: Can
 let memo: { signature: string; at: number; result: Promise<Map<string, Point>> } | null = null
 
 /** Geocodes event venues without touching the database; results live in the Next.js cache. */
-export function geocodeLocations(items: Locatable[]): Promise<Map<string, Point>> {
+export function geocodeLocations(items: Locatable[], strict = false): Promise<Map<string, Point>> {
   const unique = new Map<string, { key: string; source: string; location: string }>()
   for (const item of items) {
     if (!item.location?.trim()) continue
     const key = locationKey(item)
     unique.set(key, { key, source: item.source_id ?? "", location: item.location.trim() })
   }
-  const signature = [...unique.keys()].sort().join("\n")
+  const signature = `${strict}|${[...unique.keys()].sort().join("\n")}`
   if (memo && memo.signature === signature && Date.now() - memo.at < MEMO_TTL_MS) return memo.result
 
   const osmBudget = { left: MAX_OSM_LOOKUPS }
   const result = mapWithLimit([...unique.values()], 6, async (entry) => {
     try {
-      return { ...entry, candidates: await candidatesFor(entry.location, osmBudget) }
+      return { ...entry, candidates: await candidatesFor(entry.location, osmBudget, strict) }
     } catch {
       return { ...entry, candidates: [] as Candidate[] }
     }
-  }).then(resolveBySource)
+  }).then((entries) => resolveBySource(entries, strict))
 
   memo = { signature, at: Date.now(), result }
   result.catch(() => {

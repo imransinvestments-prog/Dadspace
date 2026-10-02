@@ -1,6 +1,9 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
+import { useLocation } from "@/components/location-provider"
+import { LocationControls } from "@/components/location-controls"
+import { useDirectoryPage } from "@/hooks/use-directory-page"
 import { Search, X } from "lucide-react"
 import { EventCard } from "@/components/event-card"
 import { addDays } from "@/lib/dates"
@@ -22,7 +25,7 @@ const WHEN: { key: When; label: string }[] = [
 const AGES: { key: Age; label: string }[] = [
   { key: "all", label: "Any age" },
   { key: "under5", label: "Under 5" },
-  { key: "primary", label: "5–11" },
+  { key: "primary", label: "5â€“11" },
   { key: "older", label: "12+" },
   { key: "family", label: "Whole family" },
 ]
@@ -62,6 +65,12 @@ function matchesAge(event: DadEvent, age: Age) {
 }
 
 export function EventsExplorer({ events, today, saturday, sunday }: Props) {
+  const {coords,browseAll}=useLocation()
+  const enabled=Boolean(coords)||browseAll
+  const params=new URLSearchParams()
+  if(coords){params.set('lat',String(coords.lat));params.set('lng',String(coords.lng))}
+  const feed=useDirectoryPage<{events:DadEvent[]}>('/api/events?'+params,enabled)
+  const currentEvents=feed.pages[0]?.events??[]
   const [query, setQuery] = useState("")
   const [when, setWhen] = useState<When>("all")
   const [category, setCategory] = useState<EventCategory | "all">("all")
@@ -69,7 +78,7 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
   const [freeOnly, setFreeOnly] = useState(false)
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
-  const withCategory = useMemo(() => events.map((event) => ({ event, category: eventCategory(event) })), [events])
+  const withCategory = useMemo(() => currentEvents.map((event) => ({ event, category: eventCategory(event) })), [currentEvents])
 
   const categoryCounts = useMemo(() => {
     const counts = new Map<EventCategory, number>()
@@ -96,9 +105,10 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
       .map(({ event }) => event)
   }, [withCategory, category, freeOnly, age, when, query, saturday, sunday, weekEnd])
 
-  useEffect(() => setVisibleCount(PAGE_SIZE), [query, when, category, age, freeOnly])
+  useEffect(() => setVisibleCount(PAGE_SIZE), [query, when, category, age, freeOnly, coords])
 
   const groups = useMemo(() => {
+    if(coords)return [["Nearest events",matches.slice(0,visibleCount)]] as [string,DadEvent[]][]
     const buckets = new Map<string, DadEvent[]>()
     const push = (label: string, event: DadEvent) => buckets.set(label, [...(buckets.get(label) ?? []), event])
     for (const event of matches.slice(0, visibleCount)) {
@@ -108,7 +118,7 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
       else push(monthFmt.format(new Date(`${starts(event)}T00:00:00Z`)), event)
     }
     return [...buckets.entries()]
-  }, [matches, visibleCount, today, saturday, sunday, weekEnd])
+  }, [matches, visibleCount, today, saturday, sunday, weekEnd, coords])
 
   const filtered = query !== "" || when !== "all" || category !== "all" || age !== "all" || freeOnly
   const clear = () => {
@@ -124,6 +134,9 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
 
   return (
     <div className="flex flex-col gap-8">
+      <LocationControls />
+      {feed.loading && <p role="status">Finding nearby events…</p>}
+      {feed.error && <p role="alert">{feed.error} <button onClick={feed.retry} className="underline">Retry</button></p>}
       <div className="sticky top-[69px] z-20 -mx-4 flex flex-col gap-3 border-b border-border/60 bg-background/85 px-4 py-3 backdrop-blur-md lg:top-0 lg:mx-0 lg:px-0">
         <div className="flex flex-col gap-3 md:flex-row md:items-center">
           <label className="relative flex-1">
@@ -190,7 +203,7 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
         )}
       </p>
 
-      {matches.length === 0 ? (
+      {!enabled || feed.loading || feed.error ? null : matches.length === 0 ? (
         <div className="flex flex-col items-center gap-2 rounded-lg border border-dashed bg-card px-6 py-14 text-center">
           <p className="font-heading text-xl font-bold">Nothing on for that one.</p>
           <p className="max-w-sm leading-relaxed text-muted-foreground">
@@ -209,6 +222,7 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
                 {items.map((event) => (
                   <li key={event.id}>
                     <EventCard event={event} index={cardIndex++} showCategory />
+                    {coords && event.distance_miles == null && <p className="text-sm text-muted-foreground">Distance unavailable</p>}
                   </li>
                 ))}
               </ul>
