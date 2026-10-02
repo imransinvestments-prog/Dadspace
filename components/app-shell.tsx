@@ -74,7 +74,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           {NAV_ITEMS.filter((i) => i.mobile).map(({ href, label, icon: Icon }) => {
             const active = isActive(pathname, href)
             return (
-              <li key={href} className="flex-1">
+              <li key={href} className="min-w-0 flex-1">
                 <Link
                   href={href}
                   aria-current={active ? "page" : undefined}
@@ -83,7 +83,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     active ? "text-primary" : "text-muted-foreground",
                   )}
                 >
-                  <span className={cn("flex h-8 w-14 items-center justify-center rounded-full transition", active && "bg-primary/15")}>
+                  <span className={cn("flex h-8 w-full max-w-14 items-center justify-center rounded-full transition", active && "bg-primary/15")}>
                     <Icon className="size-5" aria-hidden />
                   </span>
                   {label}
