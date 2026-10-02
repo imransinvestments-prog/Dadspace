@@ -2,6 +2,8 @@ import "server-only"
 import { getSupabase } from "./supabase"
 import { ACTIVITY_PAGE_SIZE, type ActivityPage } from "./activity-shared"
 import type { DadActivity } from "./types"
+import { nearestFirst, type Point } from './distance'
+import { withDistances } from './listing-distance'
 
 export { ACTIVITY_PAGE_SIZE } from "./activity-shared"
 export type { ActivityPage } from "./activity-shared"
@@ -41,6 +43,7 @@ export async function fetchActivityPage(options?: {
   limit?: number
   query?: string | null
   category?: string | null
+  point?: Point | null
 }): Promise<ActivityPage> {
   const db = getSupabase()
   const offset = Math.max(0, options?.offset ?? 0)
@@ -52,7 +55,7 @@ export async function fetchActivityPage(options?: {
     .select("*", { count: "exact" })
     .order("family_relevance", { ascending: false })
     .order("title", { ascending: true })
-    .range(offset, offset + limit - 1)
+    .order("id", { ascending: true })
 
   const category = (options?.category ?? "").trim()
   if (category && category !== "all") request = request.eq("category", category)
@@ -65,7 +68,18 @@ export async function fetchActivityPage(options?: {
     )
   }
 
-  const { data, error, count } = await request
+  if(options?.point){
+    const rows: Record<string,unknown>[]=[]
+    for(let start=0;;start+=500){
+      const {data,error}=await request.range(start,start+499)
+      if(error)throw new Error('Activities unavailable')
+      rows.push(...(data??[]))
+      if((data?.length??0)<500)break
+    }
+    const sorted=nearestFirst(await withDistances(rows.map(toActivity),options.point),(a,b)=>(b.family_relevance??0)-(a.family_relevance??0)||a.title.localeCompare(b.title))
+    return {activities:sorted.slice(offset,offset+limit),total:sorted.length,offset,limit,hasMore:offset+limit<sorted.length}
+  }
+  const { data, error, count } = await request.range(offset, offset + limit - 1)
   if (error || !data) {
     if (error) console.error("Failed to load activities:", error.message)
     return { activities: [], total: 0, offset, limit, hasMore: false }

@@ -1,8 +1,10 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Dices, Info, LocateFixed, Search, X } from "lucide-react"
+import { Dices, Info, Search, X } from "lucide-react"
 import { useLocation } from "@/components/location-provider"
+import { LocationControls } from "@/components/location-controls"
+import { useDirectoryPage } from "@/hooks/use-directory-page"
 import { CategoryRail } from "@/components/venues/category-rail"
 import { VenueCard } from "@/components/venues/venue-card"
 import { VenueSpotlight } from "@/components/venues/venue-spotlight"
@@ -22,8 +24,8 @@ const SPIN_INTERVAL_MS = 70
 
 type Result = { venue: Venue; distance: number | null }
 
-export function VenuesDirectory({ venues, isPreview }: { venues: Venue[]; isPreview: boolean }) {
-  const { coords, status, request } = useLocation()
+export function VenuesDirectory({ venues, isPreview, allCategories = [] }: { venues: Venue[]; isPreview: boolean; allCategories?: {key:string;count:number}[] }) {
+  const { coords, browseAll } = useLocation()
   const [query, setQuery] = useState("")
   const [category, setCategory] = useState("all")
   const [toggles, setToggles] = useState<Set<Toggle>>(new Set())
@@ -32,22 +34,31 @@ export function VenuesDirectory({ venues, isPreview }: { venues: Venue[]; isPrev
   const spinTimer = useRef<number | null>(null)
   const spotlightRef = useRef<HTMLDivElement>(null)
 
+  const enabled=Boolean(coords)||browseAll
+  const params=new URLSearchParams({q:query,category,free:String(toggles.has('free')),indoor:String(toggles.has('indoor')),outdoor:String(toggles.has('outdoor'))})
+  if(coords){params.set('lat',String(coords.lat));params.set('lng',String(coords.lng))}
+  const feed=useDirectoryPage<{venues:Venue[];total:number;hasMore:boolean}>('/api/venues?'+params,enabled&&!isPreview)
+  const currentVenues=isPreview?(enabled?venues:[]):feed.pages.flatMap(p=>p.venues)
+  const total=isPreview?currentVenues.length:feed.pages.at(-1)?.total??0
+  const hasMore=feed.pages.at(-1)?.hasMore??false
+  useEffect(()=>{stopSpin();setPick(null);setRolling(false)},[coords,query,category,toggles,browseAll])
   useEffect(() => () => stopSpin(), [])
 
   const categories = useMemo(() => {
+    if(allCategories.length)return allCategories
     const counts = new Map<string, number>()
     for (const v of venues) if (v.category) counts.set(v.category, (counts.get(v.category) ?? 0) + 1)
     return Array.from(counts, ([key, count]) => ({ key, count })).sort((a, b) => b.count - a.count)
-  }, [venues])
+  }, [venues,allCategories])
 
   const results = useMemo<Result[]>(() => {
     const q = query.trim().toLowerCase()
-    return venues
-      .filter((v) => category === "all" || v.category === category)
-      .filter((v) => !toggles.has("free") || v.is_free)
-      .filter((v) => !toggles.has("indoor") || v.indoor)
-      .filter((v) => !toggles.has("outdoor") || v.outdoor)
-      .filter((v) => !q || [v.name, v.town, v.postcode, v.description].some((s) => s?.toLowerCase().includes(q)))
+    return currentVenues
+      .filter((v) => !isPreview || category === "all" || v.category === category)
+      .filter((v) => !isPreview || !toggles.has("free") || v.is_free)
+      .filter((v) => !isPreview || !toggles.has("indoor") || v.indoor)
+      .filter((v) => !isPreview || !toggles.has("outdoor") || v.outdoor)
+      .filter((v) => !isPreview || !q || [v.name, v.town, v.postcode, v.description].some((s) => s?.toLowerCase().includes(q)))
       .map((v) => ({
         venue: v,
         distance:
@@ -59,7 +70,7 @@ export function VenuesDirectory({ venues, isPreview }: { venues: Venue[]; isPrev
         if (b.distance != null) return 1
         return a.venue.name.localeCompare(b.venue.name)
       })
-  }, [venues, query, category, toggles, coords])
+  }, [currentVenues, query, category, toggles, coords, isPreview])
 
   function stopSpin() {
     if (spinTimer.current != null) window.clearInterval(spinTimer.current)
@@ -135,11 +146,15 @@ export function VenuesDirectory({ venues, isPreview }: { venues: Venue[]; isPrev
             className="group flex items-center gap-2.5 rounded-full bg-primary px-6 py-3 font-heading text-base font-extrabold text-primary-foreground shadow-[0_6px_0_0] shadow-primary/40 transition hover:-translate-y-0.5 active:translate-y-1 active:shadow-none disabled:opacity-60"
           >
             <Dices className={cn("size-5 transition", rolling ? "animate-spin" : "group-hover:rotate-45")} aria-hidden />
-            {rolling ? "Rolling…" : "Surprise me"}
+            {rolling ? "Rollingâ€¦" : "Surprise me"}
           </button>
-          <LocationStatus status={status} onRetry={request} />
+
         </div>
       </header>
+
+      <LocationControls />
+      {feed.loading && <p role="status">Finding nearby venues…</p>}
+      {feed.error && <p role="alert">{feed.error} <button onClick={feed.retry} className="underline">Retry</button></p>}
 
       {isPreview && (
         <div role="note" className="flex items-start gap-3 rounded-lg border border-dashed bg-card p-4 text-sm leading-relaxed">
@@ -170,7 +185,7 @@ export function VenuesDirectory({ venues, isPreview }: { venues: Venue[]; isPrev
         )}
       </div>
 
-      <CategoryRail categories={categories} total={venues.length} selected={category} onSelect={setCategory} />
+      <CategoryRail categories={categories} total={categories.reduce((sum,c)=>sum+Number(c.count),0)} selected={category} onSelect={setCategory} />
 
       <div className="sticky top-[69px] z-20 -mx-4 flex flex-col gap-3 border-b border-border/60 bg-background/85 px-4 py-3 backdrop-blur-md lg:top-0 lg:mx-0 lg:px-0">
         <label className="relative block">
@@ -215,16 +230,17 @@ export function VenuesDirectory({ venues, isPreview }: { venues: Venue[]; isPrev
       <div className="flex items-baseline justify-between gap-3">
         <h2 className="font-heading text-2xl font-extrabold">{heading}</h2>
         <p className="text-sm font-semibold text-muted-foreground" aria-live="polite">
-          {results.length} {results.length === 1 ? "place" : "places"}
+          {total} {total === 1 ? "place" : "places"}
           {coords ? ", nearest first" : ""}
         </p>
       </div>
 
-      {results.length > 0 ? (
+      {!enabled || (feed.loading&&!results.length) || feed.error ? null : results.length > 0 ? (
         <ul className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {results.map(({ venue, distance }, i) => (
             <li key={venue.id}>
               <VenueCard venue={venue} distance={distance} index={i} />
+              {coords && distance == null && <p className="text-sm text-muted-foreground">Distance unavailable</p>}
             </li>
           ))}
         </ul>
@@ -238,30 +254,8 @@ export function VenuesDirectory({ venues, isPreview }: { venues: Venue[]; isPrev
           </button>
         </div>
       )}
+      {hasMore && <button type="button" onClick={()=>feed.loadMore(currentVenues.length)} disabled={feed.loading} className="mx-auto rounded-full border px-5 py-3 font-semibold disabled:opacity-50">{feed.loading?'Loading…':'Load more'}</button>}
     </div>
   )
 }
 
-function LocationStatus({ status, onRetry }: { status: string; onRetry: () => void }) {
-  if (status === "ready") {
-    return (
-      <p className="flex items-center gap-2 text-sm font-semibold text-accent">
-        <LocateFixed className="size-4" aria-hidden />
-        Sorted by distance from you
-      </p>
-    )
-  }
-  if (status === "locating") {
-    return <p className="text-sm text-muted-foreground">Finding your location…</p>
-  }
-  return (
-    <button
-      type="button"
-      onClick={onRetry}
-      className="flex w-fit items-center gap-2 rounded-full border bg-card px-4 py-2.5 text-sm font-bold transition hover:bg-muted"
-    >
-      <LocateFixed className="size-4 text-accent" aria-hidden />
-      Use my location
-    </button>
-  )
-}

@@ -4,6 +4,8 @@ import { londonToday, upcomingWeekend } from "./dates"
 import { sampleEvents } from "./sample-data"
 import { eventCategory } from "./event-meta"
 import type { DadEvent } from "./types"
+import { nearestFirst, type Point } from './distance'
+import { withDistances } from './listing-distance'
 
 const MAX_EVENTS = 500
 const IMAGE_KEYS = ["image_url", "image", "thumbnail_url", "photo_url", "og_image"] as const
@@ -190,24 +192,28 @@ export function geographicallyBalanceEvents(events: DadEvent[]): DadEvent[] {
 
 export type EventsListing = { events: DadEvent[]; today: string; saturday: string; sunday: string; isSample: boolean }
 
-export async function fetchUpcomingEvents(): Promise<EventsListing> {
+export async function fetchUpcomingEvents(point?: Point | null): Promise<EventsListing> {
   const today = londonToday()
   const { saturday, sunday } = upcomingWeekend(today)
   const db = getSupabase()
 
   if (db) {
-    const { data, error } = await db
-      .from("upcoming_events")
-      .select("*")
-      .gte("start_date", today)
-      .order("start_date", { ascending: true })
-      .order("family_relevance", { ascending: false })
-      .limit(MAX_EVENTS)
+    const data: Record<string,unknown>[] = []
+    let error = false
+    for(let offset=0;;offset+=MAX_EVENTS){
+      const page=await db.from('upcoming_events').select('*').order('start_date').order('id').range(offset,offset+MAX_EVENTS-1)
+      if(page.error){error=true;break}
+      data.push(...(page.data??[]))
+      if((page.data?.length??0)<MAX_EVENTS)break
+    }
     if (!error && data?.length) {
       const mapped = data.map((row) => toEvent(row as Record<string, unknown>))
       const clean = dedupeEvents(qualityForDisplay(mapped))
-      return { events: geographicallyBalanceEvents(clean), today, saturday, sunday, isSample: false }
+      const events=point?nearestFirst(await withDistances(clean,point),(a,b)=>a.start_date.localeCompare(b.start_date)):geographicallyBalanceEvents(clean)
+      return { events, today, saturday, sunday, isSample: false }
     }
+    if (point && error) throw new Error('Events unavailable')
+    if (!error) return { events: [], today, saturday, sunday, isSample: false }
   }
 
   return { events: sampleEvents(saturday, sunday), today, saturday, sunday, isSample: true }

@@ -29,7 +29,7 @@ function feeInfo(fee: string | null): { is_free: boolean | null; price_text: str
 }
 
 // Maps the `venues` table (venue_name, town_city, country, website, fee…) with fallbacks for older column names.
-function toVenue(row: Row): Venue | null {
+export function toVenue(row: Row): Venue | null {
   const name = str(row.venue_name) ?? str(row.venue_label) ?? str(row.name)
   if (!name) return null
   const fee = feeInfo(str(row.fee))
