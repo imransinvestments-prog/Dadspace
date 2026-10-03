@@ -100,6 +100,10 @@ export function venuePhotoUrl(venue: Venue): string | null {
     if (image.protocol !== "https:" || !["upload.wikimedia.org", "thumb.wikimedia.org"].includes(image.hostname)) return null
     if (source.protocol !== "https:" || source.hostname !== "commons.wikimedia.org") return null
     if (licence.protocol !== "https:" || licence.hostname !== "creativecommons.org") return null
+    // Commons thumbnail geometry is in the path. Tracking queries can return 403
+    // from the thumbnail CDN, causing valid venue photos to fall back to illustrations.
+    image.search = ""
+    image.hash = ""
     return image.href
   } catch { return null }
 }
@@ -111,3 +115,4 @@ export function milesBetween(a: { lat: number; lng: number }, b: { lat: number; 
   const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(dLng / 2) ** 2
   return 2 * 3958.8 * Math.asin(Math.sqrt(h))
 }
+
