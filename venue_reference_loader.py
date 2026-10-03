@@ -36,7 +36,7 @@ def db():
 def load_existing(client):
     out=[]; start=0
     while True:
-        rows=client.table('venues').select('id,venue_name,postcode,address,town_city,latitude,longitude,website,operator,category,public_visible').range(start,start+999).execute().data or []
+        rows=client.table('venues').select('id,venue_name,postcode,address,town_city,latitude,longitude,website,operator,category,public_visible,source_url').range(start,start+999).execute().data or []
         out.extend(rows)
         if len(rows)<1000: break
         start+=1000
@@ -71,10 +71,19 @@ def enrich(client,v,c):
     if patch and not DRY_RUN: client.table('venues').update(patch).eq('id',v['id']).execute()
 
 def create_hidden_library(client,c):
-    row={'venue_name':c['venue_name'],'category':'library','address':c.get('address'),'town_city':c.get('town_city'),'postcode':c.get('postcode'),'latitude':c.get('latitude'),'longitude':c.get('longitude'),'website':c.get('website'),'source':c['source_name'],'source_url':f"reference:{c['source_name']}:{c['source_record_id']}",'discovered_source_url':c['source_url'],'discovery_status':'discovered','public_visible':False,'licence':'Open Government Licence v3.0','review_reason':'New public library from reference dataset; review before publishing'}
+    synthetic=f"reference:{c['source_name']}:{c['source_record_id']}"
+    existing=client.table('venues').select('id').eq('source_url',synthetic).limit(1).execute().data or []
+    if existing:
+        return str(existing[0]['id'])
+    row={'venue_name':c['venue_name'],'category':'library','address':c.get('address'),'town_city':c.get('town_city'),'postcode':c.get('postcode'),'latitude':c.get('latitude'),'longitude':c.get('longitude'),'website':c.get('website'),'source':c['source_name'],'source_url':synthetic,'discovered_source_url':c['source_url'],'discovery_status':'discovered','public_visible':False,'licence':'Open Government Licence v3.0','review_reason':'New public library from reference dataset; review before publishing'}
     if DRY_RUN:return None
-    data=client.table('venues').insert(row).execute().data or []
-    return str(data[0]['id']) if data else None
+    try:
+        data=client.table('venues').insert(row).execute().data or []
+        return str(data[0]['id']) if data else None
+    except Exception:
+        existing=client.table('venues').select('id').eq('source_url',synthetic).limit(1).execute().data or []
+        if existing:return str(existing[0]['id'])
+        raise
 
 def active_candidates():
     offset=0
@@ -115,9 +124,10 @@ def run_source(client,bypc,rows,allow_create):
             enrich(client,v,c); provenance(client,str(v['id']),c,method,conf); matched+=1
         elif allow_create:
             vid=create_hidden_library(client,c)
-            if vid: provenance(client,vid,c,'new_reference_venue',1.0)
-            created+=1
-    return {'seen':seen,'matched':matched,'created_or_would_create':created,'ambiguous':ambiguous}
+            if vid:
+                provenance(client,vid,c,'new_reference_venue',1.0)
+                created+=1
+    return {'seen':seen,'matched':matched,'created_or_existing_hidden':created,'ambiguous':ambiguous}
 
 def main():
     client=db(); bypc=load_existing(client)
