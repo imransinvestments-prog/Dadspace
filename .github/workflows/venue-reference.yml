@@ -1,0 +1,47 @@
+name: Sync venue reference data
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true = reconcile/report only, false = write matches/new hidden venues"
+        required: true
+        type: choice
+        options: ["true", "false"]
+        default: "true"
+      limit:
+        description: "Maximum records to process (0 = all)"
+        required: false
+        default: "0"
+  workflow_call:
+    inputs:
+      dry_run:
+        required: false
+        type: string
+        default: "true"
+      limit:
+        required: false
+        type: string
+        default: "0"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Syntax check
+        run: python -m py_compile venue_reference_worker.py
+      - name: Reconcile venue reference datasets
+        run: python venue_reference_worker.py
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          ACTIVE_PLACES_DATA_URL: ${{ secrets.ACTIVE_PLACES_DATA_URL }}
+          LIBRARY_DATA_URLS: ${{ vars.LIBRARY_DATA_URLS }}
+          DRY_RUN: ${{ inputs.dry_run || 'true' }}
+          LIMIT: ${{ inputs.limit || '0' }}

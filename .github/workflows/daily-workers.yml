@@ -61,6 +61,17 @@ jobs:
       dry_run: "false"
     secrets: inherit
 
+  # Venue-reference data is enrichment, not a dependency of event collection.
+  # A reference-source outage must not stop civic/activity/deals pipelines.
+  venue_reference:
+    needs: gate
+    if: needs.gate.outputs.should_run == 'true'
+    uses: ./.github/workflows/venue-reference.yml
+    with:
+      dry_run: "false"
+      limit: "0"
+    secrets: inherit
+
   civic:
     needs: [gate, news]
     if: needs.gate.outputs.should_run == 'true' && needs.news.result == 'success'
