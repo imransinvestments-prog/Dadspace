@@ -11,6 +11,11 @@ export function directionsUrl(venue: Venue) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`
 }
 
+export function mapsPlaceUrl(venue: Venue) {
+  const q = [venue.name, venue.address ?? venue.town, venue.postcode].filter(Boolean).join(", ")
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`
+}
+
 export function formatMiles(miles: number) {
   if (miles < 1) return "Under a mile"
   const rounded = Math.round(miles)

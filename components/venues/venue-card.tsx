@@ -1,6 +1,6 @@
 import { VenuePhoto } from "@/components/venues/venue-photo"
 import { Accessibility, Baby, Clock, Coffee, Dog, Globe, MapPin, Navigation, Phone, SquareParking, type LucideIcon } from "lucide-react"
-import { directionsUrl, formatMiles } from "@/components/venues/venue-spotlight"
+import { directionsUrl, formatMiles, mapsPlaceUrl } from "@/components/venues/venue-spotlight"
 import { FACILITY_LABELS, categoryLabel, type Venue } from "@/lib/venue-meta"
 
 const FACILITY_ICONS: Record<string, LucideIcon> = {
@@ -24,9 +24,18 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
 
   return (
     <article
-      className="group animate-rise flex h-full flex-col overflow-hidden rounded-2xl border bg-card text-card-foreground transition duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10"
+      className="group animate-rise relative flex h-full flex-col overflow-hidden rounded-2xl border bg-card text-card-foreground transition duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10 has-[a[data-card-link]:focus-visible]:outline-2 has-[a[data-card-link]:focus-visible]:outline-ring"
       style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}
     >
+      <a
+        data-card-link
+        href={mapsPlaceUrl(venue)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute inset-0 z-[5] focus-visible:outline-none"
+      >
+        <span className="sr-only">Open {venue.name} on Google Maps</span>
+      </a>
       <div className="relative aspect-[16/10] overflow-hidden">
         <VenuePhoto
           venue={venue}
@@ -94,7 +103,7 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
             {venue.age_range && <span className="rounded-full bg-accent/15 px-2.5 py-1 text-accent">Ages {venue.age_range}</span>}
             {where && <span className="rounded-full bg-muted px-2.5 py-1 text-muted-foreground">{where}</span>}
           </div>
-          <div className="flex items-center gap-1">
+          <div className="relative z-10 flex items-center gap-1">
             {venue.phone && (
               <a
                 href={`tel:${venue.phone.replace(/\s+/g, "")}`}

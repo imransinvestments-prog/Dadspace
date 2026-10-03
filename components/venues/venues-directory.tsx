@@ -8,7 +8,7 @@ import { useDirectoryPage } from "@/hooks/use-directory-page"
 import { CategoryRail } from "@/components/venues/category-rail"
 import { VenueCard } from "@/components/venues/venue-card"
 import { VenueSpotlight } from "@/components/venues/venue-spotlight"
-import { categoryPlural, milesBetween, type Venue } from "@/lib/venue-meta"
+import { categoryPlural, milesBetween, venuePhotoUrl, type Venue } from "@/lib/venue-meta"
 import { cn } from "@/lib/utils"
 
 type Toggle = "free" | "indoor" | "outdoor"
@@ -24,6 +24,9 @@ const SPIN_INTERVAL_MS = 70
 
 type Result = { venue: Venue; distance: number | null }
 
+const photosFirst = (list: Venue[]) =>
+  [...list].sort((a, b) => Number(Boolean(venuePhotoUrl(b))) - Number(Boolean(venuePhotoUrl(a))))
+
 export function VenuesDirectory({ venues, isPreview, allCategories = [] }: { venues: Venue[]; isPreview: boolean; allCategories?: {key:string;count:number}[] }) {
   const { coords, browseAll } = useLocation()
   const [query, setQuery] = useState("")
@@ -38,7 +41,8 @@ export function VenuesDirectory({ venues, isPreview, allCategories = [] }: { ven
   const params=new URLSearchParams({q:query,category,free:String(toggles.has('free')),indoor:String(toggles.has('indoor')),outdoor:String(toggles.has('outdoor'))})
   if(coords){params.set('lat',String(coords.lat));params.set('lng',String(coords.lng))}
   const feed=useDirectoryPage<{venues:Venue[];total:number;hasMore:boolean}>('/api/venues?'+params,enabled&&!isPreview)
-  const currentVenues=isPreview?(enabled?venues:[]):feed.pages.flatMap(p=>p.venues)
+  // Without a location there's no distance to respect, so lead each page with venues that have real photos.
+  const currentVenues=isPreview?(enabled?venues:[]):feed.pages.flatMap(p=>coords?p.venues:photosFirst(p.venues))
   const total=isPreview?currentVenues.length:feed.pages.at(-1)?.total??0
   const hasMore=feed.pages.at(-1)?.hasMore??false
   useEffect(()=>{stopSpin();setPick(null);setRolling(false)},[coords,query,category,toggles,browseAll])
