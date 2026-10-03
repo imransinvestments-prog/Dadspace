@@ -14,6 +14,7 @@ public.sources once its data-access route is configured and verified.
 from __future__ import annotations
 
 import csv
+import datetime as dt
 import difflib
 import io
 import json
@@ -185,9 +186,6 @@ def venue_candidates(db, c: Candidate):
     if c.postcode:
         return db.table("venues").select(fields).ilike("postcode", c.postcode).limit(30).execute().data or []
     if c.latitude is not None and c.longitude is not None:
-        # Supabase client has no portable radius primitive here; keep fallback
-        # bounded and rely on name matching. Reference datasets should normally
-        # include postcodes in the UK.
         return db.table("venues").select(fields).ilike("venue_name", f"%{c.venue_name[:40]}%").limit(20).execute().data or []
     return []
 
@@ -215,11 +213,13 @@ def choose_match(c: Candidate, existing: list[dict]):
 
 
 def upsert_provenance(db, venue_id: str, c: Candidate, method: str, confidence: float):
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
     row = {
         "venue_id": venue_id, "source_name": c.source_name,
         "source_record_id": c.source_record_id, "source_url": c.source_url,
         "source_role": "venue_reference", "match_method": method,
         "match_confidence": confidence, "source_payload": c.payload or {},
+        "last_seen_at": now, "updated_at": now,
     }
     if not DRY_RUN:
         db.table("venue_sources").upsert(row, on_conflict="source_name,source_record_id").execute()
@@ -289,8 +289,6 @@ def main():
                 if result:
                     venue, method, confidence = result
                     if method == "postcode_fuzzy_name" and confidence < 0.95:
-                        # Preserve the existing Dadspace policy: plausible same-postcode
-                        # name mismatches go to review rather than auto-creating duplicates.
                         flag_ambiguous(db, str(venue["id"]), c)
                         ambiguous += 1
                         continue
