@@ -1,6 +1,6 @@
 -- Source roles + canonical venue provenance for Dadspace.
--- Existing collectors keep using category/fetch_method; these fields describe
--- what a source is responsible for, independently of how it is fetched.
+-- Category remains compatible with the existing event workers, while
+-- source_role describes business responsibility independently of fetch method.
 
 alter table public.sources
   add column if not exists source_role text,
@@ -16,6 +16,17 @@ where source_role is null;
 
 alter table public.sources
   alter column source_role set default 'event_listing';
+
+alter table public.sources drop constraint if exists sources_category_check;
+alter table public.sources
+  add constraint sources_category_check
+  check (category = any (array[
+    'activities'::text,
+    'councils'::text,
+    'heritage_parks'::text,
+    'niche_venues'::text,
+    'venue_reference'::text
+  ]));
 
 create index if not exists idx_sources_role_active
   on public.sources (source_role, active);
@@ -53,26 +64,27 @@ insert into public.sources
 values
   ('Sport England Active Places',
    'https://apiportal.activeplacespower.com/',
-   'venue_reference', 'facility_registry', 'sport_england',
-   'sports facilities and venue verification', 'England', null, 'api',
+   'venue_reference', 'event_listing', 'sport_england',
+   'sports facilities and venue verification', 'England', null, 'unknown',
    false,
    'Authoritative venue-reference source. Activate only after ACTIVE_PLACES_DATA_URL/API credentials are configured; not an activity listing feed.',
    'venue_reference', 'active_places'),
   ('Public Library Open Data',
    'https://schema.librarydata.uk/libraries',
-   'venue_reference', 'library_registry', 'public_libraries',
-   'library venue verification and enrichment', 'United Kingdom', null, 'data',
+   'venue_reference', 'event_listing', 'public_libraries',
+   'library venue verification and enrichment', 'United Kingdom', null, 'unknown',
    false,
    'Schema/standard rather than one current national feed. Use for reconciliation/enrichment when a conforming dataset URL is configured; never bulk-insert without matching existing venues first.',
    'venue_reference', 'library_open_data'),
   ('NCT Local Activities & Meet-ups',
    'https://www.nct.org.uk/local-activities-meet-ups',
    'activities', 'event_listing', 'charity',
-   'parent, baby and family groups/events', 'United Kingdom', null, 'browser',
+   'parent, baby and family groups/events', 'United Kingdom', null, 'js_render',
    false,
    'Strong Dadspace activity fit. Kept inactive until approved data-access/republishing route is confirmed; adapter should use NCT branch/group discovery rather than treating the postcode landing page as a single generic page.',
    'activity_listing', 'nct_group_finder')
 on conflict (url) do update set
+  category = excluded.category,
   source_role = excluded.source_role,
   source_adapter = excluded.source_adapter,
   notes = excluded.notes;
