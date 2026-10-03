@@ -1,6 +1,10 @@
 name: Sync venue reference data
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "venue_reference_loader.py"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -35,13 +39,11 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - name: Syntax check
-        run: python -m py_compile venue_reference_worker.py
+        run: python -m py_compile venue_reference_loader.py
       - name: Reconcile venue reference datasets
-        run: python venue_reference_worker.py
+        run: python venue_reference_loader.py
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-          ACTIVE_PLACES_DATA_URL: ${{ secrets.ACTIVE_PLACES_DATA_URL }}
-          LIBRARY_DATA_URLS: ${{ vars.LIBRARY_DATA_URLS }}
-          DRY_RUN: ${{ inputs.dry_run || 'true' }}
+          DRY_RUN: ${{ github.event_name == 'push' && 'false' || inputs.dry_run || 'true' }}
           LIMIT: ${{ inputs.limit || '0' }}
