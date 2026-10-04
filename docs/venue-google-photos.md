@@ -1,10 +1,22 @@
 # Google Places venue photos
 
 The bulk script searches all categories in `public.venues`, validates the venue
-name and UK location, and adds a Google place ID for missing photos. It preserves
+name and UK location, and adds a Google place ID for missing photos. It excludes
+all playground categories before any billable request and preserves
 existing Wikimedia photos and skips ambiguous results, unnamed venues, closed
 businesses and distant branches. Coordinates must be within 300 metres (2 km for
-large parks/zoos); without coordinates an exact postcode is required.
+large parks/zoos); without coordinates an exact postcode is required. Searches
+use coordinates as a location bias and a concise name/postcode query. A Google
+Maps URL containing an explicit place ID is resolved directly, with location
+verification. Official website URLs are compared with Google's website field:
+an exact branch path can identify a renamed venue, while a shared chain homepage
+still requires name and location evidence. Arbitrary website URLs are not treated
+as Google place IDs or scraped for unverified photos.
+
+The `websiteUri` field is requested only for records with an eligible website.
+Google bills these lookups at the corresponding higher field tier; the request
+cap still applies. Reports record the match method and rejection reasons, so a
+low match count can be diagnosed without repeating the entire batch.
 
 Google photos are retrieved only when a public venue card enters the viewport.
 The server fetches fresh photo metadata, a current photo URL, the direct source

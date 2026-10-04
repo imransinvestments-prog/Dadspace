@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import { mkdir, appendFile } from 'node:fs/promises'
 import { dirname } from 'node:path'
 import { googleApiKey, placesJson, PHOTO_MARKER, PlacesError } from '../lib/google-venue-photos.mjs'
-import { searchableVenue, matchVenue } from '../lib/google-venue-match.mjs'
+import { searchableVenue, matchVenue, isPlayground, linkedPlaceId, websiteIdentity, venueSearchBody } from '../lib/google-venue-match.mjs'
 
 import { pathToFileURL } from 'node:url'
 
@@ -11,23 +11,28 @@ if (![limit,maxCalls].every(n => Number.isSafeInteger(n) && n > 0)) throw new Er
 if (after && !/^[a-f0-9-]{36}$/i.test(after)) throw new Error('after must be a venue UUID from the report')
 await mkdir(dirname(report),{recursive:true})
 let cursor = after, scanned = 0, calls = 0, updated = 0, matched = 0, stopped = false
-const fields = 'places.id,places.displayName,places.location,places.addressComponents,places.businessStatus,places.photos'
+const fields = 'id,displayName,location,addressComponents,businessStatus,photos'
 while (scanned < limit && calls < maxCalls) {
-  let query = db.from('venues').select('id,venue_name,venue_label,category,address,address_line_1,address_line_2,town_city,postcode,latitude,longitude,image_url').is('image_url',null).order('id').limit(Math.min(500,limit-scanned))
+  let query = db.from('venues').select('id,venue_name,venue_label,category,address,address_line_1,address_line_2,town_city,postcode,latitude,longitude,website,source_url,image_url').is('image_url',null).or('category.is.null,and(category.not.ilike.%play%ground%,category.not.ilike.%play%park%)').order('id').limit(Math.min(500,limit-scanned))
   if (cursor) query = query.gt('id',cursor)
   const {data,error} = await query
   if (error) throw new Error(`Database read: ${error.message}`)
   if (!data?.length) break
   for (const row of data) {
     if (calls >= maxCalls) break
+    if (row.image_url || isPlayground(row)) {cursor=row.id;continue}
     let result = {status:'insufficient_identity'}
     if (searchableVenue(row)) {
-      const textQuery = [...new Set([row.venue_name || row.venue_label,row.address || [row.address_line_1,row.address_line_2].filter(Boolean).join(', '),row.town_city,row.postcode,'United Kingdom'].filter(Boolean))].join(', ')
+      const placeId=linkedPlaceId(row)
+      const selectedFields=fields+(websiteIdentity(row.website)?',websiteUri':'')
       calls++
       try {
-        const response = await placesJson('places:searchText',{apiKey,fields,fetcher,body:{textQuery,regionCode:'GB',languageCode:'en',pageSize:5}})
-        result = matchVenue(row,response.places || [])
-        if (result.status === 'matched' && !response.places.find(p=>p.id===result.placeId)?.photos?.length) result = {status:'no_photo'}
+        const response = placeId
+          ? await placesJson(`places/${placeId}`,{apiKey,fields:selectedFields,fetcher})
+          : await placesJson('places:searchText',{apiKey,fields:selectedFields.split(',').map(f=>`places.${f}`).join(','),fetcher,body:venueSearchBody(row)})
+        const candidates=placeId?[response]:response.places || []
+        result = matchVenue(row,candidates)
+        if (result.status === 'matched' && !candidates.find(p=>p.id===result.placeId)?.photos?.length) result = {status:'no_photo'}
       } catch (error) {
         // Stop on credential/quota errors. Leave this row available for retry.
         if (error instanceof PlacesError && [401,403,429].includes(error.status)) {
@@ -49,7 +54,7 @@ while (scanned < limit && calls < maxCalls) {
           image_attribution: 'Google Maps', image_license: 'Google Maps Platform',
           image_license_url: 'https://cloud.google.com/maps-platform/terms/',
           image_title: null, image_credit: null,
-          image_match_method: 'google_places_verified_location',image_updated_at: new Date().toISOString(),
+          image_match_method: `google_places_verified_${result.method}`,image_updated_at: new Date().toISOString(),
         }
         const {data:saved,error:writeError} = await db.from('venues').update(patch).eq('id',row.id).is('image_url',null).select('id')
         if (writeError) throw new Error(`Database update: ${writeError.message}`)
@@ -59,7 +64,7 @@ while (scanned < limit && calls < maxCalls) {
     }
     cursor=row.id;scanned++
     // Persist only our IDs and decisions, not Google names/photos/API content.
-    await appendFile(report,JSON.stringify({venueId:row.id,status:result.status,...(result.placeId ? {placeId:result.placeId} : {})})+'\n')
+    await appendFile(report,JSON.stringify({venueId:row.id,status:result.status,...(result.placeId ? {placeId:result.placeId,method:result.method} : {}),...(result.reasons?{reasons:result.reasons}:{})})+'\n')
     if (scanned%50===0) console.log(JSON.stringify({scanned,calls,matched,updated,cursor}))
   }
   if (stopped) break

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { matchVenue } from '../lib/google-venue-match.mjs'
+import { matchVenue, linkedPlaceId, venueSearchBody, searchableVenue } from '../lib/google-venue-match.mjs'
 import { fetchVenuePhoto, googlePlaceId, safeGoogleUrl, PlacesError } from '../lib/google-venue-photos.mjs'
 const id = 'ChIJvalidPlaceId123'
 const venue = {venue_name:'Jump Factory',postcode:'M1 1AA',latitude:53.48,longitude:-2.24}
@@ -11,6 +11,21 @@ assert.equal(matchVenue({...venue,latitude:null,longitude:null},[place]).status,
 assert.equal(matchVenue({...venue,postcode:'M2 2BB',latitude:null,longitude:null},[place]).status,'no_match')
 assert.equal(matchVenue(venue,[{...place,businessStatus:'CLOSED_PERMANENTLY'}]).status,'no_match')
 assert.equal(matchVenue(venue,[{...place,displayName:{text:'Other Business'}}]).status,'no_match')
+assert.equal(searchableVenue({...venue,category:'Children’s playground'}),false)
+assert.equal(searchableVenue({...venue,category:'play_ground'}),false)
+assert.equal(searchableVenue({...venue,image_url:'existing.jpg'}),false)
+assert.equal(matchVenue({...venue,category:'Playground'},[place]).status,'excluded_playground')
+assert.deepEqual(venueSearchBody(venue).locationBias.circle.center,{latitude:53.48,longitude:-2.24})
+assert.equal(linkedPlaceId({...venue,website:`https://www.google.com/maps/search/?api=1&query_place_id=${id}`}),id)
+assert.equal(linkedPlaceId({...venue,website:`https://evil.example/maps/?query_place_id=${id}`}),null)
+assert.equal(searchableVenue({...venue,venue_name:null,website:`https://www.google.com/maps/?query_place_id=${id}`}),true)
+const branch={...venue,website:'https://www.jumpfactory.co.uk/locations/manchester/'}
+const renamed={...place,displayName:{text:'Renamed Adventure Centre'},websiteUri:'https://jumpfactory.co.uk/locations/manchester'}
+assert.equal(matchVenue(branch,[renamed]).method,'website_location')
+assert.equal(matchVenue(branch,[{...renamed,websiteUri:'https://jumpfactory.co.uk/locations/leeds'}]).status,'no_match')
+assert.equal(matchVenue({...venue,website:'https://jumpfactory.co.uk'},[{...renamed,websiteUri:'https://jumpfactory.co.uk'}]).status,'no_match')
+assert.equal(matchVenue(branch,[{...renamed,location:{latitude:51.5,longitude:-.1}}]).status,'no_match')
+assert.equal(matchVenue({...venue,website:`https://www.google.com/maps/?q=place_id:${id}`},[renamed]).method,'linked_place_id_location')
 assert.equal(googlePlaceId(`google-places:${id}`),id)
 assert.equal(googlePlaceId('google-places:../attack'),null)
 assert.equal(safeGoogleUrl('https://googleusercontent.com.evil.example/image',true),null)

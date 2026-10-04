@@ -3,6 +3,7 @@ import { mkdtemp, readFile, unlink, rmdir } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { runBackfill } from './backfill-venue-photos.mjs'
+import { isPlayground } from '../lib/google-venue-match.mjs'
 const directory=await mkdtemp(join(tmpdir(),'dadspace-photo-test-'))
 const report=join(directory,'report.jsonl')
 const uuid=n=>`00000000-0000-0000-0000-${String(n).padStart(12,'0')}`
@@ -14,6 +15,7 @@ function database(count) {
     let patch=null,after='',id=null,limit=500,guard=false
     const builder={
       select(){return builder},is(column,value){assert.equal(column,'image_url');assert.equal(value,null);guard=true;return builder},
+      or(value){assert.ok(value.includes('category.not.ilike.%play%ground%'));return builder},
       order(column){assert.equal(column,'id');return builder},limit(value){limit=value;return builder},
       gt(column,value){assert.equal(column,'id');after=value;return builder},
       eq(column,value){assert.equal(column,'id');id=value;return builder},update(value){patch=value;return builder},
@@ -25,7 +27,7 @@ function database(count) {
             if (row) {Object.assign(row,patch);updates.push(patch)}
             return Promise.resolve({data:row?[{id:row.id}]:[],error:null}).then(resolve,reject)
           }
-          reads++;return Promise.resolve({data:rows.filter(r=>r.id>after && r.image_url===null).slice(0,limit),error:null}).then(resolve,reject)
+          reads++;return Promise.resolve({data:rows.filter(r=>r.id>after && r.image_url===null && !isPlayground(r)).slice(0,limit),error:null}).then(resolve,reject)
         } catch(e){return Promise.reject(e).then(resolve,reject)}
       }
     };return builder
@@ -48,5 +50,15 @@ try {
  const noPhoto=database(1)
  const missing=await runBackfill({db:noPhoto,apiKey:'key',apply:true,report,fetcher:async()=>({ok:true,json:async()=>({places:[{id:'ChIJvalidPlaceId123',displayName:{text:'Jump Factory'},location:{latitude:53.48,longitude:-2.24},addressComponents:[{types:['country'],shortText:'GB'}]}]})}),sleep:async()=>{}})
  assert.equal(missing.updated,0)
+ const excluded=database(2)
+ excluded.rows[0].category='Children’s playground'
+ excluded.rows[1].image_url='https://existing.example/photo.jpg'
+ const skip=await runBackfill({db:excluded,apiKey:'key',report,fetcher:async()=>{throw new Error('Excluded rows must never make a billable call')},sleep:async()=>{}})
+ assert.equal(skip.calls,0);assert.equal(skip.scanned,0)
+ let request
+ const linked=database(1)
+ linked.rows[0].website='https://www.google.com/maps/?query_place_id=ChIJvalidPlaceId123'
+ const direct=await runBackfill({db:linked,apiKey:'key',report,fetcher:async(url,options)=>{request={url,options};return {ok:true,json:async()=> (await fetcher()).json().then(x=>x.places[0])}},sleep:async()=>{}})
+ assert.equal(direct.matched,1);assert.ok(request.url.endsWith('/places/ChIJvalidPlaceId123'));assert.equal(request.options.method,'GET')
  console.log('Backfill tests passed: keyset pagination, write guards, ID-only storage, dry run, request cap, quota resume and missing-photo handling.')
 } finally {await unlink(report);await rmdir(directory)}
