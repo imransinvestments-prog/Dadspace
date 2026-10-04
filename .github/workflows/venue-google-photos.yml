@@ -1,0 +1,55 @@
+name: Match missing venue photos with Google Places
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: 'Write matched place IDs (deploy the photo UI first)'
+        type: boolean
+        default: false
+      limit:
+        description: 'Maximum rows and billable search requests'
+        type: string
+        default: '100'
+      after:
+        description: 'Resume after venue UUID from the previous report (optional)'
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+concurrency:
+  group: venue-google-photos
+  cancel-in-progress: false
+
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install --global pnpm@10.34.3
+      - run: pnpm install --frozen-lockfile
+      - run: node scripts/test-google-venue-photos.mjs
+      - name: Match venues
+        run: |
+          args=("--limit=$BATCH_LIMIT" "--max-api-calls=$BATCH_LIMIT")
+          if [ "$APPLY" = "true" ]; then args+=("--apply"); fi
+          if [ -n "$AFTER" ]; then args+=("--after=$AFTER"); fi
+          node scripts/backfill-venue-photos.mjs "${args[@]}"
+        env:
+          BATCH_LIMIT: ${{ inputs.limit }}
+          APPLY: ${{ inputs.apply }}
+          AFTER: ${{ inputs.after }}
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY || secrets.GCP_API_KEY_2 || secrets.GCP_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: venue-photo-match-report
+          path: outputs/venue-google-photos.jsonl
+          if-no-files-found: ignore
