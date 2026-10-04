@@ -7,7 +7,6 @@ import { TrendingThreads } from "./trending-threads"
 import { NewsHeadlines } from "./news-headlines"
 import { TopDeal } from "./top-deal"
 import { useLocation } from "@/components/location-provider"
-import { LocationControls } from "@/components/location-controls"
 import type { HomeData } from "@/lib/types"
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json() as Promise<HomeData>)
@@ -27,7 +26,6 @@ export function HomeDashboard({ initial }: { initial: HomeData }) {
   return (
     <div className="flex flex-col gap-10">
       <HeroGreeting greeting={data.greeting} sleeps={data.sleepsToWeekend} weekendLabel={data.weekendLabel} />
-      <LocationControls />
       <WeekendEvents events={data.events} locationStatus={status} sorting={sorting} onRequestLocation={request} />
       <div className="grid gap-10 lg:grid-cols-3">
         <div className="lg:col-span-2">

@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react"
 import { useLocation } from "@/components/location-provider"
-import { LocationControls } from "@/components/location-controls"
 import { useDirectoryPage } from "@/hooks/use-directory-page"
 import { Search, X } from "lucide-react"
 import { EventCard } from "@/components/event-card"
@@ -134,7 +133,6 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
 
   return (
     <div className="flex flex-col gap-8">
-      <LocationControls />
       {feed.loading && <p role="status">Finding nearby events…</p>}
       {feed.error && <p role="alert">{feed.error} <button onClick={feed.retry} className="underline">Retry</button></p>}
       <div className="sticky top-[69px] z-20 -mx-4 flex flex-col gap-3 border-b border-border/60 bg-background/85 px-4 py-3 backdrop-blur-md lg:top-0 lg:mx-0 lg:px-0">
