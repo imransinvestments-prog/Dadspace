@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Dices, Info, Search, X } from "lucide-react"
 import { useLocation } from "@/components/location-provider"
-import { LocationControls } from "@/components/location-controls"
 import { useDirectoryPage } from "@/hooks/use-directory-page"
 import { CategoryRail } from "@/components/venues/category-rail"
 import { VenueCard } from "@/components/venues/venue-card"
@@ -152,7 +151,6 @@ export function VenuesDirectory({ venues, isPreview, allCategories = [] }: { ven
         </div>
       </header>
 
-      <LocationControls />
       {feed.loading && <p role="status">Finding nearby venues…</p>}
       {feed.error && <p role="alert">{feed.error} <button onClick={feed.retry} className="underline">Retry</button></p>}
 
@@ -195,7 +193,7 @@ export function VenuesDirectory({ venues, isPreview, allCategories = [] }: { ven
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search by name, town or postcode"
+            placeholder="Search by venue name"
             className="h-12 w-full rounded-full border bg-card pr-4 pl-11 text-base text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring"
           />
         </label>

@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { useState } from "react"
 import { useLocation } from "@/components/location-provider"
-import { LocationControls } from "@/components/location-controls"
 import { useDirectoryPage } from "@/hooks/use-directory-page"
 import { MapPin, Search } from "lucide-react"
 import { activitySlug } from "@/lib/activity-slug"
@@ -34,7 +33,6 @@ export function ActivitiesExplorer({ initialPage, categories }: { initialPage: A
   const loadMore=()=>feed.loadMore(activities.length)
   return (
     <section className="flex flex-col gap-6">
-      <LocationControls />
       <div className="grid gap-3 rounded-2xl border bg-card p-4 md:grid-cols-[1fr_220px]">
         <label className="relative">
           <span className="sr-only">Search activities</span>
