@@ -86,8 +86,12 @@ def flush(db,batch):
     if not batch:return 0
     unique={row['dedupe_key']:row for row in batch}
     rows=list(unique.values())
-    if not DRY_RUN:db.table('collected_events').upsert(rows,on_conflict='dedupe_key').execute()
-    return len(rows)
+    if DRY_RUN:return len(rows)
+    written=0
+    for row in rows:
+        db.table('collected_events').upsert(row,on_conflict='dedupe_key').execute()
+        written+=1
+    return written
 
 def main():
     db=create_client(os.environ['SUPABASE_URL'],os.environ['SUPABASE_KEY'])
@@ -107,9 +111,9 @@ def main():
             if dk in seen_keys:
                 duplicates+=1;continue
             seen_keys.add(dk);row['source_id']=source['id'];batch.append(row);total+=1
-            if len(batch)>=200:
+            if len(batch)>=100:
                 written+=flush(db,batch);batch=[]
-        if i%25==0:print(f'progress {i}/{len(branches)} branches, {total} unique events, {duplicates} cross-branch duplicates')
+        if i%25==0:print(f'progress {i}/{len(branches)} branches, {total} unique events, {duplicates} cross-branch duplicates, {written} written')
         time.sleep(0.15)
     written+=flush(db,batch)
     print({'dry_run':DRY_RUN,'branches':len(branches),'branches_with_events':branches_with_events,'unique_events':total,'duplicates_skipped':duplicates,'written':written})
