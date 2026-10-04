@@ -1,0 +1,29 @@
+name: Initial 100-request venue photo check
+on:
+  push:
+    branches: [codex/google-venue-photos]
+    paths: [.github/workflows/venue-photo-initial-check.yml]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install --global pnpm@10.34.3
+      - run: pnpm install --frozen-lockfile
+      - run: node scripts/backfill-venue-photos.mjs --limit=100 --max-api-calls=100
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY || secrets.GCP_API_KEY_2 || secrets.GCP_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: initial-venue-photo-report
+          path: outputs/venue-google-photos.jsonl
+          if-no-files-found: ignore

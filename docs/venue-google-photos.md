@@ -29,8 +29,8 @@ of Use and Privacy Policy incorporating Google's required terms before launch.
 
 ## Run
 
-For a browser-only run, open GitHub Actions â†’ **Match missing venue photos with
-Google Places** â†’ **Run workflow**. Leave the limit at 100 for the initial batch.
+For a browser-only run, open GitHub Actions → **Match missing venue photos with
+Google Places** → **Run workflow**. Leave the limit at 100 for the initial batch.
 Set `GOOGLE_PLACES_API_KEY`, `SUPABASE_URL` and `SUPABASE_KEY` as repository
 secrets first. The Google key must also exist in Dadspace's hosting environment
 for cards to resolve their photos. The workflow only runs manually and downloads

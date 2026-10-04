@@ -37,14 +37,14 @@ export const CATEGORY_LABELS: Record<string, string> = {
   library: "Library",
   leisure: "Leisure & sport",
   attraction: "Attraction",
-  cafe: "Family cafÃ©",
+  cafe: "Family café",
   nature: "Nature & walks",
 }
 
 export const FACILITY_LABELS: Record<string, string> = {
   baby_changing: "Baby changing",
   parking: "Parking",
-  cafe: "CafÃ©",
+  cafe: "Café",
   accessible: "Step-free access",
   dog_friendly: "Dog friendly",
   toilets: "Toilets",

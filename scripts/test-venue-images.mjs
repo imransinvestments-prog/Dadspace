@@ -17,7 +17,7 @@ assert.equal(venuePhotoUrl({ ...photo, image_url: 'https://thumb.wikimedia.org.e
 assert.equal(venuePhotoUrl({ ...photo, image_license_url: 'https://example.com/license' }), null)
 assert.equal(categoryImage('theme_park'), '/images/venues/theme-park.png')
 assert.equal(categoryImage('water_park'), '/images/venues/water-park.png')
-assert.equal(categoryImage('childrenâ€™s_playground'), '/images/venues/playground.png')
+assert.equal(categoryImage('children’s_playground'), '/images/venues/playground.png')
 assert.equal(venueImage({ category: null, image_url: null }), '/images/event-outdoor.png')
 console.log('Venue image tests passed: credit requirements, safe source URLs, category fallbacks and park categories.')
 const google = {id:'01234567-89ab-cdef-0123-456789abcdef',image_url:'google-places:ChIJvalidPlaceId123'}

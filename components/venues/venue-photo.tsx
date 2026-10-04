@@ -59,11 +59,11 @@ export function VenuePhoto({ venue, sizes, className }: { venue: Venue; sizes: s
         ) : photo ? (
           <details>
             <summary className="cursor-pointer focus-visible:outline-2 focus-visible:outline-white">
-              Photo: {venue.image_attribution} Â· {venue.image_license}
+              Photo: {venue.image_attribution} · {venue.image_license}
             </summary>
             <div className="mt-2 max-h-32 space-y-1 overflow-y-auto">
               <a href={venue.image_source_url!} target="_blank" rel="noopener noreferrer" className="block underline">
-                {venue.image_title || venue.name} â€” Wikimedia Commons
+                {venue.image_title || venue.name} — Wikimedia Commons
               </a>
               <a href={venue.image_license_url!} target="_blank" rel="noopener noreferrer" className="block underline">
                 {venue.image_license} licence
@@ -72,7 +72,7 @@ export function VenuePhoto({ venue, sizes, className }: { venue: Venue; sizes: s
               <p>Preview cropped to fit. Open the source for the full image.</p>
             </div>
           </details>
-        ) : <span>Category illustration Â· venue photo not available</span>}
+        ) : <span>Category illustration · venue photo not available</span>}
       </div>
     </div>
   )
