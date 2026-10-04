@@ -1,0 +1,41 @@
+name: ONE-OFF production venue photo backfill
+
+on:
+  push:
+    branches:
+      - dev/venue-image-identifier-matching
+    paths:
+      - '.github/workflows/venue-google-photos-production-backfill.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: venue-google-photos-production-backfill
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install --global pnpm@10.34.3
+      - run: pnpm install --frozen-lockfile
+      - run: node scripts/test-google-venue-photos.mjs
+      - run: node scripts/test-venue-photo-backfill.mjs
+      - name: Backfill existing non-playground venues
+        run: node scripts/backfill-venue-photos.mjs --apply --limit=7151 --max-api-calls=7151 --report=outputs/venue-google-photos-production-backfill.jsonl
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY || secrets.GCP_API_KEY_2 || secrets.GCP_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: venue-photo-production-backfill-report
+          path: outputs/venue-google-photos-production-backfill.jsonl
+          if-no-files-found: ignore
