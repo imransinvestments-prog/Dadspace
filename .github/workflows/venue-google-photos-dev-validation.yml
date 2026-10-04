@@ -1,0 +1,41 @@
+name: DEV validate venue image matching
+
+on:
+  push:
+    branches:
+      - dev/venue-image-identifier-matching
+    paths:
+      - '.github/workflows/venue-google-photos-dev-validation.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: venue-google-photos-dev-validation
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install --global pnpm@10.34.3
+      - run: pnpm install --frozen-lockfile
+      - run: node scripts/test-google-venue-photos.mjs
+      - run: node scripts/test-venue-photo-backfill.mjs
+      - name: Dry-run 250 venue image matches
+        run: node scripts/backfill-venue-photos.mjs --limit=250 --max-api-calls=250 --report=outputs/venue-google-photos-dev-validation.jsonl
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY || secrets.GCP_API_KEY_2 || secrets.GCP_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: venue-photo-dev-validation-report
+          path: outputs/venue-google-photos-dev-validation.jsonl
+          if-no-files-found: ignore
