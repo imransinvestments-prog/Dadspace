@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 import datetime as dt, hashlib, os, re, time
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urlparse
 import requests
 from bs4 import BeautifulSoup
 from supabase import create_client
@@ -61,13 +61,13 @@ def page_events(branch_url,page):
         location=info[1].get_text(' ',strip=True) if len(info)>1 else None
         pc=postcode(location)
         venue=(location.split(',')[0].strip() if location and location.lower()!='online' else location)
-        category='parent_baby_group'
-        tl=title.lower()
+        category='parent_baby_group';tl=title.lower()
         if 'first aid' in tl:category='first_aid'
         elif 'nearly new' in tl or 'sale' in tl:category='family_market'
         elif 'walk' in tl:category='walks_outdoors'
         elif 'feeding' in tl or 'breastfeed' in tl:category='feeding_support'
-        row={'title':title,'description':f'NCT local activity from {urlparse(branch_url).path.rsplit("/",1)[-1].replace("-"," ").title()}.','start_date':start.isoformat(),'end_date':start.isoformat(),'time_text':time_text,'location':location,'event_url':detail,'source_url':branch_url,'cost_text':None,'age_range':'Pregnant parents, babies and young children','recurrence':None,'family_relevance':5,'confidence':0.99,'extraction_method':'nct_html_adapter','dedupe_key':key(title,start.isoformat(),location),'listing_type':'activity','is_holiday_camp':False,'schedule_text':time_text,'category':category,'venue_name':venue,'venue_address':location,'postcode':pc,'last_seen_at':dt.datetime.now(dt.timezone.utc).isoformat(),'last_verified_at':dt.datetime.now(dt.timezone.utc).isoformat()}
+        now=dt.datetime.now(dt.timezone.utc).isoformat()
+        row={'title':title,'description':f'NCT local activity from {urlparse(branch_url).path.rsplit("/",1)[-1].replace("-"," ").title()}.','start_date':start.isoformat(),'end_date':start.isoformat(),'time_text':time_text,'location':location,'event_url':detail,'source_url':branch_url,'cost_text':None,'age_range':'Pregnant parents, babies and young children','recurrence':None,'family_relevance':5,'confidence':0.99,'extraction_method':'nct_html_adapter','dedupe_key':key(title,start.isoformat(),location),'listing_type':'activity','is_holiday_camp':False,'schedule_text':time_text,'category':category,'venue_name':venue,'venue_address':location,'postcode':pc,'last_seen_at':now,'last_verified_at':now}
         out.append((str(event_id),row))
     return out
 
@@ -77,7 +77,7 @@ def collect_branch(branch_url):
         events=page_events(branch_url,page)
         fresh=[(eid,row) for eid,row in events if eid not in seen]
         if not fresh:break
-        rows.extend(row for eid,row in fresh); seen.update(eid for eid,row in fresh)
+        rows.extend(row for eid,row in fresh);seen.update(eid for eid,row in fresh)
         if len(events)<4:break
         time.sleep(0.15)
     return rows
@@ -87,11 +87,11 @@ def main():
     source=(db.table('sources').select('id,active').eq('name',SOURCE_NAME).limit(1).execute().data or [None])[0]
     if not source or not source.get('active'):
         print('NCT source inactive; nothing loaded');return
-    branches=discover_branches()
+    branches=discover_branches();print(f'Discovered {len(branches)} NCT branch candidates')
     if MAX_BRANCHES:branches=branches[:MAX_BRANCHES]
-    total=branches_with_events=0; batch=[]
+    total=branches_with_events=0;batch=[]
     for i,b in enumerate(branches,1):
-        try: rows=collect_branch(b)
+        try:rows=collect_branch(b)
         except Exception as e:
             print(f'FAILED {b}: {type(e).__name__}: {e}');continue
         if rows:branches_with_events+=1
