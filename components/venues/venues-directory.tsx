@@ -195,7 +195,7 @@ export function VenuesDirectory({ venues, isPreview, allCategories = [] }: { ven
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search by name, town or postcode"
+            placeholder="Search by venue name"
             className="h-12 w-full rounded-full border bg-card pr-4 pl-11 text-base text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring"
           />
         </label>

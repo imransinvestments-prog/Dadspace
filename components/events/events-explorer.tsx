@@ -146,7 +146,7 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by event, town or age"
+              placeholder="Search by event or age"
               className="h-11 w-full rounded-full border bg-card pr-4 pl-10 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
           </label>
