@@ -21,3 +21,4 @@ for tag in s.find_all('script',type='application/ld+json'):
 print('\nSITEMAPS')
 rr=requests.get('https://www.nct.org.uk/robots.txt',timeout=30,headers={'User-Agent':'Mozilla/5.0'})
 print(rr.status_code,rr.text[-3000:])
+print('probe complete')
