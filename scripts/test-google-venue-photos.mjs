@@ -5,6 +5,7 @@ const id = 'ChIJvalidPlaceId123'
 const venue = {venue_name:'Jump Factory',category:'Trampoline venue',postcode:'M1 1AA',latitude:53.48,longitude:-2.24}
 const place = {id,location:{latitude:53.4801,longitude:-2.24},types:['sports_complex'],primaryType:'sports_complex',addressComponents:[{types:['country'],shortText:'GB'},{types:['postal_code'],longText:'M1 1AA'}]}
 assert.equal(matchVenue(venue,[place]).status,'matched')
+assert.equal(matchVenue(venue,[{...place,addressComponents:[{types:['country'],shortText:'GB'}]}]).status,'review')
 assert.equal(matchVenue(venue,[{...place,location:{latitude:51.5,longitude:-.1}}]).status,'no_match')
 assert.equal(matchVenue(venue,[place,{...place,id:'otherPlaceId'}]).status,'ambiguous')
 assert.equal(matchVenue({...venue,latitude:null,longitude:null},[place]).status,'matched')
@@ -41,4 +42,4 @@ assert.ok(calls.every(c=>c.options.cache==='no-store' && !c.url.includes('test-s
 assert.equal(await fetchVenuePhoto('invalid/path','key',fetcher),null)
 await assert.rejects(()=>fetchVenuePhoto(id,'key',async()=>({ok:false,status:429})),PlacesError)
 await assert.rejects(()=>fetchVenuePhoto(id,'test-secret',async()=>({ok:false,status:400,json:async()=>({error:{message:'Invalid credential test-secret'}})})),error=>error.message.includes('[redacted]') && !error.message.includes('test-secret'))
-console.log('Google venue photo tests passed: identifier-first matching, ambiguity protection, safe URLs, fresh photo references and attribution.')
+console.log('Google venue photo tests passed: identifier-first matching, coordinate-only review, ambiguity protection, safe URLs, fresh photo references and attribution.')
