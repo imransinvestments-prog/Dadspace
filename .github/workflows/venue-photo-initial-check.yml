@@ -16,7 +16,7 @@ jobs:
           node-version: '24'
       - run: npm install --global pnpm@10.34.3
       - run: pnpm install --frozen-lockfile
-      - run: node scripts/backfill-venue-photos.mjs --limit=100 --max-api-calls=100
+      - run: node scripts/backfill-venue-photos.mjs --limit=99 --max-api-calls=99
         env:
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY || secrets.GCP_API_KEY_2 || secrets.GCP_API_KEY }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
