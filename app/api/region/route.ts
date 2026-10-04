@@ -58,7 +58,9 @@ export async function GET(request: Request) {
     return NextResponse.json({
       region: COUNTRY_TO_REGION[place.country] ?? null,
       geoRegion: slug(place.region),
-      adminArea: slug(place.admin_district ?? place.admin_county),
+      // Prefer the county when one exists so county-wide stories remain relevant;
+      // unitary areas such as Peterborough naturally fall back to admin_district.
+      adminArea: slug(place.admin_county ?? place.admin_district),
       locality: slug(place.parish ?? place.admin_ward ?? place.admin_district),
     })
   } catch {
