@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "venue_reference_loader.py"
+      - "venue_reference_loader_v2.py"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -39,9 +39,9 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - name: Syntax check
-        run: python -m py_compile venue_reference_loader.py
+        run: python -m py_compile venue_reference_loader_v2.py
       - name: Reconcile venue reference datasets
-        run: python venue_reference_loader.py
+        run: python venue_reference_loader_v2.py
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
