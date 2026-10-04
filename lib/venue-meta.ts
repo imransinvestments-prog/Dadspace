@@ -1,3 +1,5 @@
+import { googlePlaceId } from './google-venue-photos.mjs'
+
 export type Venue = {
   id: string
   name: string
@@ -106,6 +108,11 @@ export function venuePhotoUrl(venue: Venue): string | null {
     image.hash = ""
     return image.href
   } catch { return null }
+}
+
+export function venueGooglePhotoEndpoint(venue: Venue): string | null {
+  return googlePlaceId(venue.image_url) && /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(venue.id)
+    ? `/api/venues/${venue.id}/photo` : null
 }
 
 export function milesBetween(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
