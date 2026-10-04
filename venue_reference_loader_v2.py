@@ -59,7 +59,9 @@ def enrich(db,v,c):
         if v.get(k) is None and c.get(k) is not None:patch[k]=c[k]
     if patch and not DRY_RUN:db.table('venues').update(patch).eq('id',v['id']).execute()
 def flush_prov(db,rows):
-    if rows and not DRY_RUN:db.table('venue_sources').upsert(rows,on_conflict='source_name,source_record_id').execute()
+    if not rows or DRY_RUN:return
+    unique={(r['source_name'],r['source_record_id']):r for r in rows}
+    db.table('venue_sources').upsert(list(unique.values()),on_conflict='source_name,source_record_id').execute()
 
 def active_rows():
     offset=0
@@ -79,8 +81,8 @@ def library_rows():
     for row in csv.DictReader(io.StringIO(r.content.decode('utf-8-sig','replace'))):
         name=first(row,'Library name','Library Name','Name');p=pc(first(row,'Postcode','Post code'))
         if not name:continue
-        uprn=str(first(row,'UPRN','uprn','Unique property reference number') or '')
-        rid='|'.join([uprn,norm(str(name)),p])
+        uprn=str(first(row,'UPRN','uprn','Unique property reference number') or '').strip()
+        rid=uprn or f'{norm(str(name))}|{p}'
         yield {'source_name':'Public Library Open Data','source_record_id':rid,'source_url':LIBRARY_URL,'venue_name':str(name),'postcode':p,'address':first(row,'Address','Address 1','Address line 1'),'town_city':first(row,'Town','Local authority','Upper Tier Local Authority'),'website':first(row,'Website','Web address','URL'),'operator':None,'latitude':fnum(first(row,'Latitude')),'longitude':fnum(first(row,'Longitude')),'payload':row}
 
 def run_active(db,bypc):
