@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import { mkdir, appendFile } from 'node:fs/promises'
 import { dirname } from 'node:path'
 import { googleApiKey, placesJson, PHOTO_MARKER, PlacesError } from '../lib/google-venue-photos.mjs'
-import { searchableVenue, matchVenue, isPlayground, linkedPlaceId, websiteIdentity, venueSearchBody } from '../lib/google-venue-match.mjs'
+import { searchableVenue, matchVenue, isPlayground, linkedPlaceId, websiteIdentity, venueSearchRequest } from '../lib/google-venue-match.mjs'
 
 import { pathToFileURL } from 'node:url'
 
@@ -11,9 +11,9 @@ if (![limit,maxCalls].every(n => Number.isSafeInteger(n) && n > 0)) throw new Er
 if (after && !/^[a-f0-9-]{36}$/i.test(after)) throw new Error('after must be a venue UUID from the report')
 await mkdir(dirname(report),{recursive:true})
 let cursor = after, scanned = 0, calls = 0, updated = 0, matched = 0, stopped = false
-const fields = 'id,displayName,location,addressComponents,businessStatus,photos'
+const fields = 'id,location,addressComponents,businessStatus,photos,types,primaryType'
 while (scanned < limit && calls < maxCalls) {
-  let query = db.from('venues').select('id,venue_name,venue_label,category,address,address_line_1,address_line_2,town_city,postcode,latitude,longitude,website,source_url,image_url').is('image_url',null).or('category.is.null,and(category.not.ilike.%play%ground%,category.not.ilike.%play%park%)').order('id').limit(Math.min(500,limit-scanned))
+  let query = db.from('venues').select('id,venue_name,venue_label,category,address,address_line_1,address_line_2,town_city,postcode,latitude,longitude,website,source_url,additional_source_url,google_maps_url,image_url').is('image_url',null).or('category.is.null,and(category.not.ilike.%play%ground%,category.not.ilike.%play%park%)').order('id').limit(Math.min(500,limit-scanned))
   if (cursor) query = query.gt('id',cursor)
   const {data,error} = await query
   if (error) throw new Error(`Database read: ${error.message}`)
@@ -27,10 +27,16 @@ while (scanned < limit && calls < maxCalls) {
       const selectedFields=fields+(websiteIdentity(row.website)?',websiteUri':'')
       calls++
       try {
-        const response = placeId
-          ? await placesJson(`places/${placeId}`,{apiKey,fields:selectedFields,fetcher})
-          : await placesJson('places:searchText',{apiKey,fields:selectedFields.split(',').map(f=>`places.${f}`).join(','),fetcher,body:venueSearchBody(row)})
-        const candidates=placeId?[response]:response.places || []
+        let candidates
+        if (placeId) {
+          const response=await placesJson(`places/${placeId}`,{apiKey,fields:selectedFields,fetcher})
+          candidates=[response]
+        } else {
+          const request=venueSearchRequest(row)
+          const mask=selectedFields.split(',').map(f=>`places.${f}`).join(',')
+          const response=await placesJson(request.path,{apiKey,fields:mask,fetcher,body:request.body})
+          candidates=response.places || []
+        }
         result = matchVenue(row,candidates)
         if (result.status === 'matched' && !candidates.find(p=>p.id===result.placeId)?.photos?.length) result = {status:'no_photo'}
       } catch (error) {
@@ -63,7 +69,7 @@ while (scanned < limit && calls < maxCalls) {
       }
     }
     cursor=row.id;scanned++
-    // Persist only our IDs and decisions, not Google names/photos/API content.
+    // Persist only Dadspace IDs, provider IDs and matching decisions; never persist Google photo payloads.
     await appendFile(report,JSON.stringify({venueId:row.id,status:result.status,...(result.placeId ? {placeId:result.placeId,method:result.method} : {}),...(result.reasons?{reasons:result.reasons}:{})})+'\n')
     if (scanned%50===0) console.log(JSON.stringify({scanned,calls,matched,updated,cursor}))
   }

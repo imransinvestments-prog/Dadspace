@@ -33,7 +33,7 @@ function database(count) {
     };return builder
   }}
 }
-const fetcher=async()=>({ok:true,json:async()=>({places:[{id:'ChIJvalidPlaceId123',displayName:{text:'Jump Factory'},location:{latitude:53.4801,longitude:-2.24},addressComponents:[{types:['country'],shortText:'GB'}],photos:[{name:'temporary-photo-resource'}]}]})})
+const fetcher=async()=>({ok:true,json:async()=>({places:[{id:'ChIJvalidPlaceId123',displayName:{text:'Jump Factory'},location:{latitude:53.4801,longitude:-2.24},addressComponents:[{types:['country'],shortText:'GB'},{types:['postal_code'],longText:'M1 1AA'}],photos:[{name:'temporary-photo-resource'}]}]})})
 try {
  const db=database(501)
  const result=await runBackfill({db,apiKey:'test-key',limit:501,maxCalls:501,apply:true,report,fetcher,sleep:async()=>{}})
@@ -48,7 +48,7 @@ try {
  const quota=await runBackfill({db:database(5),apiKey:'key',report,fetcher:async()=>({ok:false,status:429}),sleep:async()=>{}})
  assert.equal(quota.stopped,true);assert.equal(quota.scanned,0);assert.equal(quota.resumeAfter,'')
  const noPhoto=database(1)
- const missing=await runBackfill({db:noPhoto,apiKey:'key',apply:true,report,fetcher:async()=>({ok:true,json:async()=>({places:[{id:'ChIJvalidPlaceId123',displayName:{text:'Jump Factory'},location:{latitude:53.48,longitude:-2.24},addressComponents:[{types:['country'],shortText:'GB'}]}]})}),sleep:async()=>{}})
+ const missing=await runBackfill({db:noPhoto,apiKey:'key',apply:true,report,fetcher:async()=>({ok:true,json:async()=>({places:[{id:'ChIJvalidPlaceId123',displayName:{text:'Jump Factory'},location:{latitude:53.48,longitude:-2.24},addressComponents:[{types:['country'],shortText:'GB'},{types:['postal_code'],longText:'M1 1AA'}]}]})}),sleep:async()=>{}})
  assert.equal(missing.updated,0)
  const excluded=database(2)
  excluded.rows[0].category='Children’s playground'
