@@ -82,6 +82,13 @@ def collect_branch(branch_url):
         time.sleep(0.15)
     return rows
 
+def flush(db,batch):
+    if not batch:return 0
+    unique={row['dedupe_key']:row for row in batch}
+    rows=list(unique.values())
+    if not DRY_RUN:db.table('collected_events').upsert(rows,on_conflict='dedupe_key').execute()
+    return len(rows)
+
 def main():
     db=create_client(os.environ['SUPABASE_URL'],os.environ['SUPABASE_KEY'])
     source=(db.table('sources').select('id,active').eq('name',SOURCE_NAME).limit(1).execute().data or [None])[0]
@@ -89,19 +96,21 @@ def main():
         print('NCT source inactive; nothing loaded');return
     branches=discover_branches();print(f'Discovered {len(branches)} NCT branch candidates')
     if MAX_BRANCHES:branches=branches[:MAX_BRANCHES]
-    total=branches_with_events=0;batch=[]
+    total=written=duplicates=branches_with_events=0;batch=[];seen_keys=set()
     for i,b in enumerate(branches,1):
         try:rows=collect_branch(b)
         except Exception as e:
             print(f'FAILED {b}: {type(e).__name__}: {e}');continue
         if rows:branches_with_events+=1
         for row in rows:
-            row['source_id']=source['id'];batch.append(row);total+=1
+            dk=row['dedupe_key']
+            if dk in seen_keys:
+                duplicates+=1;continue
+            seen_keys.add(dk);row['source_id']=source['id'];batch.append(row);total+=1
             if len(batch)>=200:
-                if not DRY_RUN:db.table('collected_events').upsert(batch,on_conflict='dedupe_key').execute()
-                batch=[]
-        if i%25==0:print(f'progress {i}/{len(branches)} branches, {total} events')
+                written+=flush(db,batch);batch=[]
+        if i%25==0:print(f'progress {i}/{len(branches)} branches, {total} unique events, {duplicates} cross-branch duplicates')
         time.sleep(0.15)
-    if batch and not DRY_RUN:db.table('collected_events').upsert(batch,on_conflict='dedupe_key').execute()
-    print({'dry_run':DRY_RUN,'branches':len(branches),'branches_with_events':branches_with_events,'events':total})
+    written+=flush(db,batch)
+    print({'dry_run':DRY_RUN,'branches':len(branches),'branches_with_events':branches_with_events,'unique_events':total,'duplicates_skipped':duplicates,'written':written})
 if __name__=='__main__':main()
