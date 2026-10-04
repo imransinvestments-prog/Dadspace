@@ -7,10 +7,30 @@ const COUNTRY_TO_REGION: Record<string, string> = {
   "Northern Ireland": "northern_ireland",
 }
 
-type PostcodesResponse = { result: { country: string }[] | null }
+type PostcodeResult = {
+  country: string
+  region?: string | null
+  admin_district?: string | null
+  admin_county?: string | null
+  parish?: string | null
+  admin_ward?: string | null
+}
+
+type PostcodesResponse = { result: PostcodeResult[] | null }
+
+function slug(value?: string | null) {
+  if (!value) return null
+  const cleaned = value
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "")
+  return cleaned || null
+}
 
 /**
- * Turns a phone's coordinates into a UK nation using postcodes.io (free, no key).
+ * Turns coordinates into a coarse UK news location using postcodes.io (free, no key).
  * Coordinates are rounded to ~1km before leaving the server and are never stored.
  */
 export async function GET(request: Request) {
@@ -32,8 +52,15 @@ export async function GET(request: Request) {
     const res = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(8000) })
     if (!res.ok) return NextResponse.json({ region: null })
     const body = (await res.json()) as PostcodesResponse
-    const country = body.result?.[0]?.country
-    return NextResponse.json({ region: (country && COUNTRY_TO_REGION[country]) ?? null })
+    const place = body.result?.[0]
+    if (!place) return NextResponse.json({ region: null })
+
+    return NextResponse.json({
+      region: COUNTRY_TO_REGION[place.country] ?? null,
+      geoRegion: slug(place.region),
+      adminArea: slug(place.admin_district ?? place.admin_county),
+      locality: slug(place.parish ?? place.admin_ward ?? place.admin_district),
+    })
   } catch {
     return NextResponse.json({ error: "lookup_failed" }, { status: 502 })
   }
