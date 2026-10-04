@@ -1,0 +1,35 @@
+name: Collect NCT activities
+on:
+  push:
+    branches: [main]
+    paths: ["nct_activity_loader.py"]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true = report only, false = save activities"
+        required: true
+        type: choice
+        options: ["true", "false"]
+        default: "true"
+      limit:
+        description: "Maximum branch pages to process (0 = all)"
+        required: false
+        default: "0"
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m py_compile nct_activity_loader.py
+      - name: Collect NCT branch activities
+        run: python nct_activity_loader.py
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          DRY_RUN: ${{ github.event_name == 'push' && 'false' || inputs.dry_run || 'true' }}
+          LIMIT: ${{ inputs.limit || '0' }}
