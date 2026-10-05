@@ -7,6 +7,7 @@
  *   in the database can be changed from here.
  */
 import { createClient, type SupabaseClient } from "@supabase/supabase-js"
+import { isNewsToken, NEWS_LOCATION_VERSION, newsArea, newsGeoRegion } from "./news-geography"
 
 /** How many articles to show at a time before the "Load more" button. */
 export const PAGE_SIZE = 20
@@ -41,6 +42,7 @@ export type RegionFilter = (typeof REGIONS)[number]["value"]
 export type CategoryFilter = (typeof CATEGORIES)[number]["value"]
 
 export type NewsLocation = {
+  version: number
   region: RegionFilter | null
   geoRegion?: string | null
   adminArea?: string | null
@@ -75,6 +77,41 @@ export const CATEGORY_LABELS: Record<string, string> = {
 /** Checks a value (e.g. one saved in the browser) is a real region choice. */
 export function isRegion(value: unknown): value is RegionFilter {
   return REGIONS.some((r) => r.value === value)
+}
+
+/** Old ward-based locations expire once; malformed browser/API data is ignored. */
+export function parseNewsLocation(value: unknown): NewsLocation | null {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null
+  const row = value as Record<string, unknown>
+  if (row.version !== NEWS_LOCATION_VERSION || !isRegion(row.region) || row.region === "all") return null
+  if (![row.geoRegion, row.adminArea, row.locality].every(isNewsToken)) return null
+  return {
+    version: NEWS_LOCATION_VERSION,
+    region: row.region,
+    geoRegion: row.region === "england" ? newsGeoRegion(row.geoRegion) : null,
+    adminArea: newsArea(row.adminArea),
+    locality: newsArea(row.locality),
+  }
+}
+
+/** Country/region guards stay outside every location match. */
+export function newsLocationFilter(region: RegionFilter, input?: NewsLocation | null): string | null {
+  if (region === "all") return null
+  const location = parseNewsLocation(input)
+  if (!location || location.region !== region || !(location.geoRegion || location.adminArea || location.locality)) {
+    return `region.eq.uk,region.eq.${region}`
+  }
+  const matches = [
+    "region.eq.uk",
+    `and(region.eq.${region},geo_scope.eq.nationwide)`,
+    `and(region.eq.${region},geo_scope.is.null)`,
+  ]
+  if (location.geoRegion) matches.push(`and(region.eq.${region},geo_scope.eq.regional,geo_region.eq.${location.geoRegion})`)
+  if (location.locality) matches.push(`and(region.eq.${region},geo_scope.eq.local,locality.eq.${location.locality})`)
+  // A named district takes precedence over county context on the story.
+  // County-wide stories deliberately have no district/locality.
+  if (location.adminArea) matches.push(`and(region.eq.${region},geo_scope.eq.local,locality.is.null,admin_area.eq.${location.adminArea})`)
+  return matches.join(",")
 }
 
 let client: SupabaseClient | null = null
@@ -123,23 +160,8 @@ export async function fetchNews({
 
   if (category !== "all") query = query.eq("category", category)
 
-  if (region !== "all") {
-    const hasLocality = Boolean(location && location.region === region && (location.geoRegion || location.adminArea || location.locality))
-    if (!hasLocality) {
-      query = query.or(`region.eq.uk,region.eq.${region}`)
-    } else {
-      const matches = [
-        "region.eq.uk",
-        `and(region.eq.${region},geo_scope.eq.nationwide)`,
-        // Backwards-compatible rows collected before geo_scope was introduced.
-        `and(region.eq.${region},geo_scope.is.null)`,
-      ]
-      if (location.geoRegion) matches.push(`and(region.eq.${region},geo_scope.eq.regional,geo_region.eq.${location.geoRegion})`)
-      if (location.adminArea) matches.push(`and(region.eq.${region},geo_scope.eq.local,admin_area.eq.${location.adminArea})`)
-      if (location.locality) matches.push(`and(region.eq.${region},geo_scope.eq.local,locality.eq.${location.locality})`)
-      query = query.or(matches.join(","))
-    }
-  }
+  const filter = newsLocationFilter(region, location)
+  if (filter) query = query.or(filter)
 
   const { data, error } = await query
   if (error) throw new Error(error.message)

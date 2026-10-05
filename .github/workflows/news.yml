@@ -1,6 +1,20 @@
 name: Dadspace news
 
 on:
+  pull_request:
+    paths:
+      - '.github/workflows/news.yml'
+      - 'app/api/region/**'
+      - 'components/news/**'
+      - 'hooks/use-region-from-location.ts'
+      - 'lib/news*.ts'
+      - 'lib/distance.ts'
+      - 'news*'
+      - 'scripts/test*news*'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'tsconfig.json'
+
   workflow_dispatch:
     inputs:
       dry_run:
@@ -15,8 +29,42 @@ on:
         type: string
         default: "false"
 
+permissions:
+  contents: read
+
 jobs:
+  checks:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pnpm install --frozen-lockfile
+      - run: pip install requests feedparser
+      - name: Locality regression checks
+        run: |
+          node scripts/test-news-locality.mjs
+          python scripts/test_news_locality.py
+      - name: Production build
+        run: pnpm build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+
   news:
+    needs: checks
+    # Keep scheduled/manual behaviour, and run a dry review on same-repo PRs.
+    # Never expose worker secrets to forked pull requests.
+    if: >-
+      always() && (github.event_name != 'pull_request' ||
+      (needs.checks.result == 'success' && github.event.pull_request.head.repo.full_name == github.repository))
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -35,6 +83,7 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          NEWS_LOCALITY_REPORT_PATH: news-locality-review.jsonl
 
       - name: Run news worker
         run: python news_worker_locality.py
@@ -42,4 +91,16 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          DRY_RUN: ${{ inputs.dry_run || 'false' }}
+          DRY_RUN: ${{ github.event_name == 'pull_request' && 'true' || inputs.dry_run || 'false' }}
+          MAX_NEW_PER_RUN: ${{ github.event_name == 'pull_request' && '40' || '300' }}
+          MAX_RUN_MINUTES: ${{ github.event_name == 'pull_request' && '8' || '20' }}
+          NEWS_LOCALITY_REPORT_PATH: news-locality-review.jsonl
+
+      - name: Upload locality review evidence
+        if: always() && (github.event_name == 'pull_request' || inputs.dry_run == 'true')
+        uses: actions/upload-artifact@v4
+        with:
+          name: news-locality-review
+          path: news-locality-review.jsonl
+          if-no-files-found: warn
+          retention-days: 14

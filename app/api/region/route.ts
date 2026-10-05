@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server"
+import { parsePoint } from "@/lib/distance"
+import { NEWS_LOCATION_VERSION, newsArea, newsGeoRegion } from "@/lib/news-geography"
 
 const COUNTRY_TO_REGION: Record<string, string> = {
   England: "england",
@@ -18,33 +20,20 @@ type PostcodeResult = {
 
 type PostcodesResponse = { result: PostcodeResult[] | null }
 
-function slug(value?: string | null) {
-  if (!value) return null
-  const cleaned = value
-    .trim()
-    .toLowerCase()
-    .replace(/&/g, " and ")
-    .replace(/[^a-z0-9]+/g, "_")
-    .replace(/^_+|_+$/g, "")
-  return cleaned || null
-}
-
 /**
  * Turns coordinates into a coarse UK news location using postcodes.io (free, no key).
  * Coordinates are rounded to ~1km before leaving the server and are never stored.
  */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
-  const lat = Number(searchParams.get("lat"))
-  const lng = Number(searchParams.get("lng"))
-
-  if (!Number.isFinite(lat) || !Number.isFinite(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) {
+  const point = parsePoint(searchParams)
+  if (!point) {
     return NextResponse.json({ error: "invalid_coordinates" }, { status: 400 })
   }
 
   const url = new URL("https://api.postcodes.io/postcodes")
-  url.searchParams.set("lat", lat.toFixed(2))
-  url.searchParams.set("lon", lng.toFixed(2))
+  url.searchParams.set("lat", point.lat.toFixed(2))
+  url.searchParams.set("lon", point.lng.toFixed(2))
   url.searchParams.set("radius", "2000")
   url.searchParams.set("limit", "1")
 
@@ -56,12 +45,12 @@ export async function GET(request: Request) {
     if (!place) return NextResponse.json({ region: null })
 
     return NextResponse.json({
+      version: NEWS_LOCATION_VERSION,
       region: COUNTRY_TO_REGION[place.country] ?? null,
-      geoRegion: slug(place.region),
-      // Prefer the county when one exists so county-wide stories remain relevant;
-      // unitary areas such as Peterborough naturally fall back to admin_district.
-      adminArea: slug(place.admin_county ?? place.admin_district),
-      locality: slug(place.parish ?? place.admin_ward ?? place.admin_district),
+      geoRegion: place.country === "England" ? newsGeoRegion(place.region) : null,
+      adminArea: newsArea(place.admin_county) ?? newsArea(place.admin_district),
+      // Match the worker's council district, never a parish or electoral ward.
+      locality: newsArea(place.admin_district),
     })
   } catch {
     return NextResponse.json({ error: "lookup_failed" }, { status: 502 })

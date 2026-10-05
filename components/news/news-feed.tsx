@@ -12,6 +12,7 @@ import {
   REGIONS,
   fetchNews,
   isRegion,
+  parseNewsLocation,
   type CategoryFilter,
   type NewsItem,
   type NewsLocation,
@@ -40,16 +41,17 @@ export function NewsFeed({ initialItems }: { initialItems: NewsItem[] | null }) 
 
   // Restore the region/location the dad picked last time.
   useEffect(() => {
-    const saved = window.localStorage.getItem(REGION_STORAGE_KEY)
-    if (isRegion(saved)) setRegion(saved)
-
-    const rawLocation = window.localStorage.getItem(LOCATION_STORAGE_KEY)
-    if (!rawLocation) return
     try {
-      const parsed = JSON.parse(rawLocation) as NewsLocation
-      if (isRegion(parsed.region) && parsed.region !== "all") setLocation(parsed)
+      const saved = window.localStorage.getItem(REGION_STORAGE_KEY)
+      if (isRegion(saved)) setRegion(saved)
+      const rawLocation = window.localStorage.getItem(LOCATION_STORAGE_KEY)
+      if (!rawLocation) return
+      const parsed = parseNewsLocation(JSON.parse(rawLocation))
+      if (parsed && parsed.region === saved) setLocation(parsed)
+      else window.localStorage.removeItem(LOCATION_STORAGE_KEY)
     } catch {
-      window.localStorage.removeItem(LOCATION_STORAGE_KEY)
+      // Storage can be blocked; the feed still works for this session.
+      try { window.localStorage.removeItem(LOCATION_STORAGE_KEY) } catch { /* Storage is blocked. */ }
     }
   }, [])
 
@@ -57,16 +59,20 @@ export function NewsFeed({ initialItems }: { initialItems: NewsItem[] | null }) 
     if (!isRegion(value)) return
     setRegion(value)
     setLocation(null)
-    window.localStorage.setItem(REGION_STORAGE_KEY, value)
-    window.localStorage.removeItem(LOCATION_STORAGE_KEY)
+    try {
+      window.localStorage.setItem(REGION_STORAGE_KEY, value)
+      window.localStorage.removeItem(LOCATION_STORAGE_KEY)
+    } catch { /* Session-only selection when storage is blocked. */ }
   }, [])
 
   const applyLocation = useCallback((value: NewsLocation) => {
     if (!isRegion(value.region) || value.region === "all") return
     setRegion(value.region)
     setLocation(value)
-    window.localStorage.setItem(REGION_STORAGE_KEY, value.region)
-    window.localStorage.setItem(LOCATION_STORAGE_KEY, JSON.stringify(value))
+    try {
+      window.localStorage.setItem(REGION_STORAGE_KEY, value.region)
+      window.localStorage.setItem(LOCATION_STORAGE_KEY, JSON.stringify(value))
+    } catch { /* Session-only selection when storage is blocked. */ }
   }, [])
 
   const { locate, status: locationStatus, message: locationMessage } = useRegionFromLocation(applyLocation)
@@ -87,7 +93,7 @@ export function NewsFeed({ initialItems }: { initialItems: NewsItem[] | null }) 
         region: r,
         category: c,
         page,
-        location: locKey === "none" ? null : (JSON.parse(locKey) as NewsLocation),
+        location: locKey === "none" ? null : parseNewsLocation(JSON.parse(locKey)),
       }),
     {
       fallbackData: isDefaultView && initialItems ? [initialItems] : undefined,

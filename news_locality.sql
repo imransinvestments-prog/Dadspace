@@ -13,9 +13,9 @@ comment on column public.news_items.geo_scope is
 comment on column public.news_items.geo_region is
   'Normalised broad region within a UK nation, e.g. east_of_england.';
 comment on column public.news_items.admin_area is
-  'Normalised council/county/admin area for local news matching.';
+  'Normalised administrative county/authority. Matches only when locality is NULL.';
 comment on column public.news_items.locality is
-  'Normalised town/city/locality for local news matching.';
+  'Normalised local-authority district/unitary-authority name, matching postcodes.io admin_district.';
 
 create or replace view public.feed_items as
 select
@@ -35,5 +35,15 @@ select
   locality
 from public.news_items
 where relevance >= 3
+  and coalesce(is_primary, true)
   and coalesce(published_at, created_at) > now() - interval '14 days'
 order by coalesce(published_at, created_at) desc;
+
+-- news_items has RLS enabled and no public policies. This restricted public-feed
+-- projection intentionally uses its existing owner permissions; security_invoker
+-- would hide all news. Do not grant underlying table access to fix that.
+-- Keep public clients read-only even though the simple view is updatable.
+revoke insert, update, delete, truncate, references, trigger
+  on public.feed_items from anon, authenticated;
+grant select on public.feed_items to anon, authenticated;
+notify pgrst, 'reload schema';

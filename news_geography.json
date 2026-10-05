@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "regions": ["east_midlands", "east_of_england", "london", "north_east", "north_west", "south_east", "south_west", "west_midlands", "yorkshire_and_the_humber"],
+  "regionAliases": {
+    "yorkshire_and_humber": "yorkshire_and_the_humber",
+    "greater_london": "london"
+  },
+  "areaAliases": {
+    "glasgow": "glasgow_city",
+    "edinburgh": "city_of_edinburgh",
+    "bristol": "bristol_city_of",
+    "city_of_bristol": "bristol_city_of",
+    "herefordshire": "herefordshire_county_of",
+    "city_of_nottingham": "nottingham",
+    "city_of_leicester": "leicester",
+    "kingston_upon_hull": "kingston_upon_hull_city_of",
+    "hull": "kingston_upon_hull_city_of"
+  }
+}

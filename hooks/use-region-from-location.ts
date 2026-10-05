@@ -1,7 +1,8 @@
 "use client"
 
 import { useCallback, useState } from "react"
-import { isRegion, type NewsLocation, type RegionFilter } from "@/lib/news"
+import { parseNewsLocation, type NewsLocation } from "@/lib/news"
+import { parsePoint } from "@/lib/distance"
 
 type Status = "idle" | "locating" | "error"
 
@@ -44,11 +45,12 @@ export function useRegionFromLocation(onLocation: (location: NewsLocation) => vo
     }
 
     try {
-      const { latitude, longitude } = position.coords
-      const res = await fetch(`/api/region?lat=${latitude}&lng=${longitude}`)
+      const point = parsePoint(new URLSearchParams({ lat: String(position.coords.latitude), lng: String(position.coords.longitude) }))
+      if (!point) return fail(MESSAGES.unavailable)
+      const res = await fetch(`/api/region?lat=${point.lat}&lng=${point.lng}`)
       if (!res.ok) return fail(MESSAGES.failed)
-      const result = (await res.json()) as NewsLocation
-      if (!isRegion(result.region) || result.region === "all") return fail(MESSAGES.outside)
+      const result = parseNewsLocation(await res.json())
+      if (!result) return fail(MESSAGES.outside)
       onLocation(result)
       setStatus("idle")
     } catch {
