@@ -1,54 +1,52 @@
 # Dadspace worker roles
 
-The worker boundary is based on **business responsibility**, not only fetch technology.
+Updated 5 October 2026 against main commit `15fb332882494cefcc950136ee0ed798ef5105b7`.
 
-## Civic / event collector
+Business responsibility determines the worker role; fetch technology is a separate choice. Both generic collectors can extract dated events and recurring activities.
 
-Workflow: `.github/workflows/collect-civic.yml`
+| Role | Workflow | Actual entry point | Responsibility |
+| --- | --- | --- | --- |
+| News | news.yml | news_worker.py | Fetch configured news sources, classify/summarise, store and group news |
+| Civic/event collector | collect-civic.yml | events_worker.py | Councils, heritage/parks and niche venue pages; requests fetch engine |
+| Activities/browser collector | collect-activities.yml | events_worker.py | Activities/clubs sources; browser/Playwright fetch engine |
+| NCT activities | nct-activities.yml | nct_activity_loader.py | Dedicated NCT branch extraction into shared listing storage |
+| Venue references | venue-reference.yml | venue_reference_loader_v2.py | Reconcile Active Places and Public Library reference records |
+| Deals | deals_collect.yml | deals_worker_db.py | Database-driven relevance rules and source adapters, reviews and offer writes |
+| Venue photo matching | venue-google-photos.yml | scripts/backfill-venue-photos.mjs | Manual identifier-based Google matching for missing images |
 
-Purpose: collect dated family events from councils, heritage/park sources and ordinary server-rendered venue/event pages.
+Workflow paths are under `.github/workflows/`. `worker.py` remains the generic fetching, source selection, retries, extraction metrics and upsert engine. `events_worker.py` wraps it with listing classification, quality checks and venue resolution without adding another Gemini call.
 
-Typical fetch path: `requests`.
+## Schedule and dependencies
 
-It owns **what is happening and when** for event-oriented sources. It may resolve a venue for an event, but it does not own authoritative venue registries.
+`daily-workers.yml` triggers at 06:00 and 07:00 UTC each day. A gate allows only hour 07 in Europe/London and every second calendar day from 1 October 2026. Manual dispatch bypasses the time and day gates. GitHub delivery may be delayed; this is a gate on actual run time, not a guaranteed start time.
 
-## Activities collector
+```mermaid
+flowchart LR
+  Gate[UK time and two-day gate] --> News
+  News --> Civic
+  Civic --> Activities
+  Activities --> Deals
+  Gate --> References[Venue references]
+```
 
-Workflow: `.github/workflows/collect-activities.yml`
+The downstream chain requires upstream success. News failure can therefore skip civic, activities and deals; civic failure can skip activities and deals. Venue reference failure does not block that chain. Scheduled calls explicitly request live writes.
 
-Purpose: collect recurring or directory-style family activities/classes/groups, especially JS-rendered listings.
+`collect-all.yml` is a manual civic-then-activities orchestrator, with dry run defaulting to true. NCT and Google photo matching are not called by the daily orchestrator. NCT runs manually or on a matching main-branch file change; venue references also have a matching push trigger.
 
-Typical fetch path: browser/Playwright.
+## Venue reference implementation
 
-NCT belongs to this business role because its useful records are parent/baby/family groups and events. NCT should use a dedicated `nct_group_finder` adapter when an approved data-access route is available, rather than treating the postcode landing page as a generic single-page source.
+The scheduled entry point is loader v2, not `venue_reference_worker.py`. The older worker remains in the repository and its hidden-new-venue policy does not describe every v2 path.
 
-## Venue reference worker
+Loader v2 reads active reference source names from `sources`, matches existing venues using postcode/name evidence, fills missing fields and records `venue_sources` provenance. Uncertain fuzzy matches set a review reason.
 
-Workflow: `.github/workflows/venue-reference.yml`
-Worker: `venue_reference_worker.py`
-
-Purpose: reconcile authoritative/reference facility datasets against the canonical `venues` table.
-
-Initial adapters:
-- Sport England Active Places (`active_places`)
-- Public Library Open Data-compatible feeds (`library_open_data`)
-
-Rules:
-1. Existing Dadspace venues are canonical.
-2. Match before insert, with postcode + normalised name as the strongest routine signal and coordinates as supporting evidence.
-3. Enrich existing venue fields only when they are missing.
-4. Same-postcode/fuzzy-name uncertainty goes to review rather than creating a duplicate.
-5. Only clearly new venues are inserted, and they start with `public_visible=false` and `discovery_status='discovered'`.
-6. Every accepted reference relationship is stored in `venue_sources`, allowing one venue to have multiple authoritative/discovery sources.
-7. Reference-data failures must not block event/activity collection.
+Active Places enriches matched venues and does not insert unmatched records. New reference libraries are upserted with `discovery_status='verified'` and `public_visible=true`. Its counter label `hidden_or_existing` is misleading for these new rows. Event/activity discovery instead creates hidden records pending review.
 
 ## Source metadata
 
-`public.sources.source_role` describes responsibility:
-- `event_listing`
-- `activity_listing`
-- `venue_reference`
+`sources.source_role` defines event_listing, activity_listing or venue_reference responsibility; `source_adapter` identifies specialised handling. The generic collectors also use workflow-selected categories and fetch-engine settings. Do not assume source_role alone routes every source.
 
-`source_adapter` identifies source-specific handling where a generic page collector is insufficient.
+NCT has a dedicated loader in this baseline; the earlier suggestion to wait for a future generic NCT adapter is superseded.
 
-Fetch method remains an implementation detail. A source's role should not change merely because its website moves from HTML to JavaScript or an API.
+## Supporting workflows
+
+`events-activities-baseline.yml` produces read-only backup, cleanup preview and fixed-source extraction baselines when matching PR paths change. `check_hukd_feed.yml` is a diagnostic workflow, not the main deals collector. Review workflow triggers before manually running them; names alone do not establish dry-run behaviour.
