@@ -15,6 +15,7 @@ export type LiveDeal = {
   relevance: number | null
   audience_evidence: string | null
   classified_by: string | null
+  matched_item?: string | null
   status: string
 }
 
@@ -55,9 +56,51 @@ function score(deal: LiveDeal, now: number) {
     (dealBenefit(deal) ? 15 : Math.min(savings, 50) / 5 + Math.min(Number(deal.discount_pct), 50) / 5)
 }
 
-/** One eligible pool for both /deals and the homepage; diversity affects order only. */
+const itemTypes: [string, RegExp][] = [
+  ["wipes", /\b(?:wipes?|waterwipes)\b/i],
+  ["nappy-bin-refills", /\b(?:nappy|diaper)\s+bin\b.*\b(?:refills?|cassettes?)\b/i],
+  ["nappy-bins", /\b(?:nappy|diaper)\s+bin\b/i],
+  ["rash-cream", /\b(?:rash|healing|barrier)\s+cream\b|\bsudocrem\b/i],
+  ["nappies", /\b(?:nappies|nappy|diapers?)\b/i],
+  ["pushchairs", /\b(?:pushchairs?|strollers?|prams?|bugg(?:y|ies)|travel system)\b/i],
+  ["booster-seats", /\b(?:booster|high back booster)\s+(?:car\s+)?seats?\b/i],
+  ["car-seat-bases", /\b(?:car seat|isofix)\s+base\b/i],
+  ["car-seats", /\bcar\s+seats?\b/i],
+  ["baby-monitors", /\bbaby\s+monitors?\b/i],
+  ["travel-cots", /\btravel\s+cots?\b/i],
+  ["cots-cribs", /\b(?:cots?|cribs?|co[- ]?sleepers?)\b/i],
+  ["baby-carriers", /\bbaby\s+carriers?\b/i],
+  ["sterilisers", /\bsterili[sz]ers?\b/i],
+  ["safety-gates", /\b(?:stair|safety|baby)\s+gates?\b/i],
+  ["play-gyms", /\bplay\s+gyms?\b/i],
+  ["bath-bombs", /\bbath\s+bombs?\b/i],
+]
+
+/** Brands and pack sizes share an item type; unrelated unknown products stay separate. */
+export function dealItemKey(deal: LiveDeal) {
+  // Different restaurants/attractions remain useful distinct family offers.
+  const benefit = dealBenefit(deal)
+  if (benefit) return `benefit:${benefit.toLowerCase()}:${(deal.retailer || deal.title).toLowerCase()}`
+  // Title first: old keyword matches can label rash cream and nappy bins as diapers.
+  for (const [key, pattern] of itemTypes) if (pattern.test(deal.title)) return `item:${key}`
+  const matched = deal.matched_item?.trim()
+  if (matched) {
+    for (const [key, pattern] of itemTypes) if (pattern.test(matched)) return `item:${key}`
+    return `matched:${matched.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim()}`
+  }
+  return `title:${deal.title.toLowerCase().replace(/£\s*[\d,.]+/g, "").replace(/[^a-z0-9]+/g, " ").trim()}`
+}
+
+/** Keep the strongest eligible offer per item type, then diversify the shared feed. */
 export function selectDeals(rows: LiveDeal[], count = 100, now = Date.now()) {
-  const remaining = rows.filter((row) => eligibleDeal(row, now))
+  const ranked = rows.filter((row) => eligibleDeal(row, now))
+    .sort((a, b) => score(b, now) - score(a, now) || String(a.id).localeCompare(String(b.id)))
+  const items = new Map<string, LiveDeal>()
+  for (const row of ranked) {
+    const key = dealItemKey(row)
+    if (!items.has(key)) items.set(key, row)
+  }
+  const remaining = [...items.values()]
   const selected: LiveDeal[] = []
   const merchants = new Map<string, number>()
   const groups = new Map<string, number>()
