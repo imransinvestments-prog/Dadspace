@@ -8,8 +8,12 @@ export const dynamic = "force-dynamic"
 export const maxDuration = 60
 
 export async function GET(request: Request) {
-  const point = parsePoint(new URL(request.url).searchParams)
-  if (!point) return Response.json({ error: "A valid location is required." }, { status: 400 })
+  const params = new URL(request.url).searchParams
+  const validated = parsePoint(params)
+  if (!validated) return Response.json({ error: "A valid location is required." }, { status: 400 })
+  // Preserve the supplied postcode centre after validation. Production device
+  // coordinates are already approximated by the location provider.
+  const point = { lat: Number(params.get("lat")), lng: Number(params.get("lng")) }
   const db = getSupabase()
   if (!db) return Response.json({ error: "Local places are unavailable." }, { status: 503 })
   try {
