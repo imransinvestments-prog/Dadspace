@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { parsePoint } from "@/lib/distance"
-import { NEWS_LOCATION_VERSION, newsArea, newsGeoRegion } from "@/lib/news-geography"
+import { NEWS_LOCATION_VERSION, newsCounty, newsDistrict, newsGeoRegion } from "@/lib/news-geography"
 
 const COUNTRY_TO_REGION: Record<string, string> = {
   England: "england",
@@ -43,14 +43,15 @@ export async function GET(request: Request) {
     const body = (await res.json()) as PostcodesResponse
     const place = body.result?.[0]
     if (!place) return NextResponse.json({ region: null })
+    const nation = COUNTRY_TO_REGION[place.country] ?? null
 
     return NextResponse.json({
       version: NEWS_LOCATION_VERSION,
-      region: COUNTRY_TO_REGION[place.country] ?? null,
+      region: nation,
       geoRegion: place.country === "England" ? newsGeoRegion(place.region) : null,
-      adminArea: newsArea(place.admin_county) ?? newsArea(place.admin_district),
+      adminArea: nation ? newsCounty(place.admin_county, nation) ?? newsDistrict(place.admin_district, nation) : null,
       // Match the worker's council district, never a parish or electoral ward.
-      locality: newsArea(place.admin_district),
+      locality: nation ? newsDistrict(place.admin_district, nation) : null,
     })
   } catch {
     return NextResponse.json({ error: "lookup_failed" }, { status: 502 })

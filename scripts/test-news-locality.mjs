@@ -82,6 +82,8 @@ assert.equal(newsArea('Bristol'), 'bristol_city_of')
 assert.equal(newsArea('(pseudo) England (UA/MD/LB)'), null)
 assert.equal(newsGeoRegion('Yorkshire and Humber'), 'yorkshire_and_the_humber')
 assert.equal(newsGeoRegion('South Wales'), null)
+assert.equal(parseNewsLocation({ ...location, locality: 'ballycastle', adminArea: 'made_up_county' }).locality, null)
+assert.equal(parseNewsLocation({ ...location, region: 'wales' }).locality, null)
 
 const originalFetch = globalThis.fetch
 try {

@@ -7,7 +7,7 @@
  *   in the database can be changed from here.
  */
 import { createClient, type SupabaseClient } from "@supabase/supabase-js"
-import { isNewsToken, NEWS_LOCATION_VERSION, newsArea, newsGeoRegion } from "./news-geography"
+import { isNewsToken, NEWS_LOCATION_VERSION, newsCounty, newsDistrict, newsGeoRegion } from "./news-geography"
 
 /** How many articles to show at a time before the "Load more" button. */
 export const PAGE_SIZE = 20
@@ -89,8 +89,8 @@ export function parseNewsLocation(value: unknown): NewsLocation | null {
     version: NEWS_LOCATION_VERSION,
     region: row.region,
     geoRegion: row.region === "england" ? newsGeoRegion(row.geoRegion) : null,
-    adminArea: newsArea(row.adminArea),
-    locality: newsArea(row.locality),
+    adminArea: newsCounty(row.adminArea, row.region) ?? newsDistrict(row.adminArea, row.region),
+    locality: newsDistrict(row.locality, row.region),
   }
 }
 

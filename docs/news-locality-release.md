@@ -13,21 +13,21 @@ Status: draft PR #27; pending approval. Do not merge or apply the corrected SQL 
 ## Technical changes
 
 - Fix strict TypeScript errors that reproduced the failed production build at the previous PR head.
-- Share geography normalisation and supported-region aliases between the client/API and existing worker adapter.
+- Share geography normalisation and supported-region aliases between the client/API and existing worker adapter, with a pinned ONS May 2026 reference of 361 council districts and 21 administrative counties. No runtime reference lookup or update job is added.
 - Validate persisted/API location values before building raw PostgREST filters; reject malformed tokens, old versions, and conflicting saved nation/location pairs.
 - Round coordinates in the browser before sending them to the region endpoint; reject missing/blank coordinates; ignore pseudo-counties.
 - Extend the existing self-test scoring call with eight representative geographic cases. Missing raw geography now fails the test instead of passing through defaults.
-- Print and retain raw/normalised geography and warnings during dry runs. Malformed or unsupported geography remains explicitly unclassified rather than being relabelled nationwide.
+- Print and retain raw/normalised geography, snippets and warnings during dry runs. Malformed, unsupported or unsubstantiated geography remains explicitly unclassified rather than being relabelled nationwide. Only named council/county/region evidence can narrow a story; publisher catchment and unrecognised town names cannot.
 - Add PR build/regression checks and a same-repository classification dry run to the existing news workflow. Production schedules are unchanged; forked PRs do not receive worker secrets.
 - Prepare the existing news_locality.sql correction, preserving the view's column order, age/relevance rules and public read access. Remove public mutation permissions on the updatable view; the underlying news table stays protected by its existing RLS.
 
 ## Scope and limitations
 
-Local matching uses the council district/unitary authority, not a street-level radius or every named village. The scoring prompt requests official district names and the same normalisation is applied on both sides. LLM classification still needs review.
+Local matching uses the council district/unitary authority, not a street-level radius or every named village. Official district/county names and their nation are checked against the pinned reference; source geography cannot be inferred solely from a publisher. Articles naming only a town within a larger district remain unclassified unless the council is also named. LLM classification still needs review.
 
 Postcodes.io supplies the supported English regions. Unsupported broad labels such as South Wales remain unclassified and use the nation fallback; they are included in the review warnings. Council-level local stories work across all four UK nations.
 
-No article backfill is performed. No additional worker, scheduler or model call is introduced. Existing self-test and scoring calls receive additional geography instructions/cases, so their token counts may increase.
+No article backfill is performed. No additional worker, scheduler or model call is introduced. Existing self-test and scoring calls receive additional geography instructions/cases, so their token counts may increase. Refresh the pinned reference manually if council boundaries change; its publisher, edition, source and licence are stored in news_geography.json.
 
 ## Database release step
 

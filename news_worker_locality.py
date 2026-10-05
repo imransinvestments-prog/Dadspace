@@ -11,6 +11,7 @@ import news_worker as core
 
 GEOGRAPHY = json.loads(Path(__file__).with_name("news_geography.json").read_text())
 SCOPES = {"nationwide", "regional", "local"}
+SCOPE_ALIASES = {"admin_area": "local", "county": "local", "district": "local"}
 GEO_KEYS = ("geo_scope", "geo_region", "admin_area", "locality")
 UNKNOWN_GEO = dict.fromkeys(GEO_KEYS)
 _geo_by_article = {}
@@ -35,14 +36,19 @@ Also return geographic metadata for EVERY result, including low-relevance items:
   For a unitary/council-wide story use that authority's name as locality.
 Use official names without "Council" suffixes. Glasgow = Glasgow City;
 Edinburgh = City of Edinburgh; Bristol = Bristol, City of.
-For local stories about towns within larger districts, use the district ONLY when
-clear (Stamford = South Kesteven); do not use a ward or infer from the publisher.
+For towns that are not themselves council districts, do not guess the district.
 General parenting advice, product recalls, and rights affecting the whole selected
 nation are nationwide. Clear local news must never be labelled nationwide merely
 because its exact council is uncertain: keep local with empty geography in that
 case so it is explicitly reported as unclassified. Likewise an unsupported broad
 region (e.g. South Wales) stays regional with its named geo_region for review.
-Clear place evidence must come from headline, snippet, source or named public body.
+Return geo_scope=local for county-wide stories too (NEVER admin_area or county).
+Clear place evidence must come from the headline or snippet, or a named council
+in the source. A publisher's catchment is NOT evidence. Never infer Brighton from
+The Argus, Warrington from Bents, or a district from an unnamed attraction.
+Only use a council/county name that is actually named in that text, or a standard
+city alias such as Glasgow/Edinburgh/Bristol. If only a town is named and it is
+not itself a council district, keep geography empty for review instead of guessing.
 Every object must include all four geography fields, using "" for unused fields.
 """.replace("{regions}", ", ".join(GEOGRAPHY["regions"]))
 
@@ -107,7 +113,48 @@ def geo_region(value):
     return token if token in GEOGRAPHY["regions"] else None
 
 
-def raw_geo_problem(result):
+def scope_of(result):
+    value = result.get("geo_scope")
+    return SCOPE_ALIASES.get(value, value) if isinstance(value, str) else None
+
+
+def district(value, nation):
+    token = area(value)
+    row = GEOGRAPHY["districts"].get(token, {})
+    return token if row.get("nation") == nation else None
+
+
+def county(value, nation):
+    token = area(value)
+    return token if GEOGRAPHY["counties"].get(token) == nation else None
+
+
+def named_in_item(token, item):
+    if item is None:
+        return True  # Pure normalisation tests; scoring always supplies the item.
+    source = item.get("source", "")
+    text = " ".join([item.get("title", ""), item.get("snippet", ""),
+                     source if re.search(r"\bcouncil\b", source, re.I) else ""])
+    # Evidence text is longer than filter tokens; normalise without truncating.
+    haystack = "_" + re.sub(r"[^a-z0-9]+", "_", text.lower().replace("&", " and ")).strip("_") + "_"
+    aliases = [token] + [key for key, value in GEOGRAPHY["areaAliases"].items() if value == token]
+    aliases += [key for key, value in GEOGRAPHY["regionAliases"].items() if value == token]
+    return any("_" + name + "_" in haystack for name in aliases)
+
+
+def local_places(result):
+    nation = result["region"]
+    local = district(result["locality"], nation)
+    admin = county(result["admin_area"], nation)
+    if local:
+        # County context comes from the reference, never an invented model county.
+        return local, GEOGRAPHY["districts"][local]["county"]
+    if result["locality"]:
+        return None, None  # Never broaden a town-only/unrecognised district to county.
+    return district(result["admin_area"], nation), admin
+
+
+def raw_geo_problem(result, item=None):
     """Validate actual returned fields BEFORE supplying any defaults."""
     if not isinstance(result, dict):
         return "result is not an object"
@@ -115,30 +162,37 @@ def raw_geo_problem(result):
         return "missing/invalid nation"
     if any(key not in result for key in GEO_KEYS):
         return "missing geography fields"
-    if result.get("geo_scope") not in SCOPES:
+    if scope_of(result) not in SCOPES:
         return "missing/invalid geo_scope"
     if any(result[key] is not None and not isinstance(result[key], str) for key in GEO_KEYS[1:]):
         return "geography fields must be strings or null"
-    scope = result["geo_scope"]
+    scope = scope_of(result)
     if scope != "nationwide" and result["region"] == "uk":
         return "UK-wide nation conflicts with narrow scope"
     if scope == "regional" and (result["region"] != "england" or not geo_region(result["geo_region"])):
         return "unsupported/missing sub-national region"
-    if scope == "local" and not (area(result["admin_area"]) or area(result["locality"])):
-        return "local scope without usable council/county"
+    if scope == "regional" and not named_in_item(geo_region(result["geo_region"]), item):
+        return "regional scope without named region evidence"
+    if scope == "local":
+        local, admin = local_places(result)
+        if not (local or admin):
+            return "local scope without a recognised council/county in this nation"
+        if not named_in_item(local or admin, item):
+            return "local scope without named council/county evidence"
     return None
 
 
-def normalise_geo(result):
-    if raw_geo_problem(result):
+def normalise_geo(result, item=None):
+    if raw_geo_problem(result, item):
         # Keep legacy behaviour without falsely recording local news as nationwide.
         return UNKNOWN_GEO.copy()
-    scope = result["geo_scope"]
+    scope = scope_of(result)
+    local, admin = local_places(result) if scope == "local" else (None, None)
     return {
         "geo_scope": scope,
         "geo_region": geo_region(result["geo_region"]) if scope == "regional" else None,
-        "admin_area": area(result["admin_area"]) if scope == "local" else None,
-        "locality": area(result["locality"]) if scope == "local" else None,
+        "admin_area": admin,
+        "locality": local,
     }
 
 
@@ -156,12 +210,13 @@ def gemini_score_with_geo(batch):
             seen.add(index)
         except (ValueError, TypeError, KeyError):
             continue
-        problem = raw_geo_problem(result)
-        geo = normalise_geo(result)
+        problem = raw_geo_problem(result, item)
+        geo = normalise_geo(result, item)
         _geo_by_article[(item.get("title", ""), item.get("source", ""))] = geo
         review = {
             "stage": "self-test" if _self_testing else "collection",
             "i": index, "title": item.get("title"), "source": item.get("source"),
+            "snippet": item.get("snippet", ""),
             "region": result.get("region"), "raw": {key: result.get(key) for key in GEO_KEYS},
             "normalised": geo, "warning": problem,
         }
@@ -247,7 +302,8 @@ def run():
     _geo_by_article.clear()
     core.run()
     # The core logs a failed batch but returns normally. Make this review gate visible.
-    if core.DRY_RUN and (_run_stats is None or _run_stats.get("batches_failed")):
+    missing_results = any(row.get("warning") == "missing/duplicate/out-of-range article results" for row in _review)
+    if core.DRY_RUN and (_run_stats is None or _run_stats.get("batches_failed") or missing_results or not _run_stats.get("sources_ok")):
         return 1
     if not _run_stats.get("scored"):
         print("No new articles scored; inspect the self-test sample for classification evidence.")

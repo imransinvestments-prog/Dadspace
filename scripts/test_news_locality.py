@@ -41,6 +41,26 @@ class LocalityTests(unittest.TestCase):
         data = result(); data.update(locality="", admin_area="")
         self.assertEqual(worker.normalise_geo(data), worker.UNKNOWN_GEO)
 
+    def test_publisher_or_town_does_not_invent_a_council(self):
+        data = result(); data.update(locality="Brighton and Hove", admin_area="East Sussex")
+        item = {"title": "Free half-term play days announced", "source": "The Argus", "snippet": ""}
+        self.assertEqual(worker.normalise_geo(data, item), worker.UNKNOWN_GEO)
+        data.update(region="northern_ireland", locality="Ballycastle", admin_area="Causeway Coast and Glens")
+        self.assertEqual(worker.normalise_geo(data), worker.UNKNOWN_GEO)
+        data.update(region="wales", locality="Cambridge", admin_area="")
+        self.assertEqual(worker.normalise_geo(data), worker.UNKNOWN_GEO)
+
+    def test_official_county_context_and_county_scope_alias(self):
+        data = result(); data.update(locality="Warrington", admin_area="Greater Manchester")
+        geo = worker.normalise_geo(data, {"title": "Warrington council opens family sessions"})
+        self.assertEqual(geo["locality"], "warrington")
+        self.assertIsNone(geo["admin_area"])
+        data.update(geo_scope="admin_area", admin_area="Norfolk", locality="")
+        geo = worker.normalise_geo(data, {"title": "Family days out across Norfolk"})
+        self.assertEqual(geo["geo_scope"], "local")
+        self.assertEqual(geo["admin_area"], "norfolk")
+        self.assertIsNone(geo["locality"])
+
     def test_save_attaches_metadata_and_safe_unknown(self):
         worker._geo_by_article[("A", "Source")] = worker.normalise_geo(result())
         rows = [{"title": "A", "source_name": "Source"}, {"title": "B", "source_name": "Source"}]

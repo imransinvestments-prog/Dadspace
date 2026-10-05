@@ -63,7 +63,7 @@ jobs:
     # Keep scheduled/manual behaviour, and run a dry review on same-repo PRs.
     # Never expose worker secrets to forked pull requests.
     if: >-
-      always() && (github.event_name != 'pull_request' ||
+      !cancelled() && (github.event_name != 'pull_request' ||
       (needs.checks.result == 'success' && github.event.pull_request.head.repo.full_name == github.repository))
     runs-on: ubuntu-latest
     timeout-minutes: 30
