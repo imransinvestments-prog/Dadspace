@@ -76,7 +76,7 @@ export function NewsHeadlines({ articles }: { articles: HomeData["articles"] }) 
 
   return (
     <section aria-labelledby="news-title" className="flex flex-col gap-4">
-      <SectionHeader id="news-title" title="Latest headlines" href="/news" linkLabel="News" isSample={articles.isSample} />
+      <SectionHeader id="news-title" title="Latest news" href="/news" linkLabel="View all news" isSample={articles.isSample} />
       {pool.length ? (
         <ul
           className="flex flex-col gap-3"

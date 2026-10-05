@@ -3,8 +3,10 @@ import { activitySlug } from "@/lib/activity-slug"
 import { eventSlug } from "@/lib/event-slug"
 import { getSupabase } from "@/lib/supabase"
 import { siteUrl } from "@/lib/seo"
+import { COMING_SOON } from "@/lib/launch"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  if (COMING_SOON) return [{ url: siteUrl, changeFrequency: "weekly", priority: 1 }]
   const pages: Array<{
     path: string
     changeFrequency: "daily" | "weekly"
