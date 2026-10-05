@@ -1,6 +1,6 @@
 # Dadspace data flows
 
-Updated 5 October 2026 against main commit `15fb332882494cefcc950136ee0ed798ef5105b7`.
+Updated 5 October 2026 against main commit `29275e17dab42804ecebec529dda2f596ea6cdc7`.
 
 ## Events and recurring activities
 
@@ -51,6 +51,8 @@ Museum imports and other one-off backfills are separate from the scheduled refer
 ## News
 
 `news_sources` → fetching → Gemini classification/summaries → `news_items` upsert by URL → story grouping/primary selection → `feed_items` → news page and homepage.
+
+Before saving relevant articles, `news_links.py` attempts to resolve Google News wrapper links to original publisher URLs; failed resolution preserves the original link.
 
 The worker checks for region and story grouping fields, updates source health, implements retention cleanup and logs runs. The news client reads summaries, relevance, category and region. Nation filters include UK-wide stories. The exact deployed view definition must be inspected separately if feed publication logic is being changed.
 

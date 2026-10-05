@@ -1,6 +1,6 @@
 # Dadspace architecture
 
-Updated 5 October 2026 against main commit `15fb332882494cefcc950136ee0ed798ef5105b7`.
+Updated 5 October 2026 against main commit `29275e17dab42804ecebec529dda2f596ea6cdc7`.
 
 ## System
 

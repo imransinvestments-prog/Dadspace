@@ -1,6 +1,6 @@
 # Dadspace technical documentation
 
-Updated 5 October 2026. Code baseline: main commit `15fb332882494cefcc950136ee0ed798ef5105b7`.
+Updated 5 October 2026. Code baseline: main commit `29275e17dab42804ecebec529dda2f596ea6cdc7`.
 
 - [Architecture](architecture.md): application, collectors, database, access boundaries and launch state.
 - [Worker roles](worker-roles.md): workflow entry points, responsibilities and scheduling.
