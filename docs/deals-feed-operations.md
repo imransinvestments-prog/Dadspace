@@ -20,6 +20,8 @@ Incorrect standalone nappy aliases were removed from liners, cream, bins and ref
 
 DB changes are additive migrations. The pre-change audit and controlled data-change SQL are retained as delivery evidence. Restore those audited taxonomy values if rollback is needed; disable individual new sources by URL, without deleting offer history. Frontend rollback may leave additive fields in place.
 
+The reviewed data changes are recorded in `docs/deals-reviewed-data.sql` for replay against an existing canonical taxonomy after the additive migrations. They were already applied to the shared Dadspace database; the replay does not create a competing taxonomy.
+
 ## Coverage and source matrix
 
 Every HUKD tag is one provider, not an independent source company. All listed active RSS routes returned 30 parseable entries during the 5 October trial. Source-listed claims remain distinct from checkout verification. No commission field affects ranking.
@@ -38,6 +40,21 @@ Every HUKD tag is one provider, not an independent source company. All listed ac
 Priority follow-ups: holidays need specific dates/party/mandatory-fee packages, not generic 'from' prices. Tuition needs comparable sessions and ongoing costs, not a free sales consultation. Uniforms, car seats and bicycles have validated working discovery routes; the final run report records accepted and rejected examples rather than promising a constant discount supply.
 
 Additional trials: HUKD `bicycles`, `toys`, `school-shoes` returned 404 (correct working variants differ). PizzaExpress terms were readable, but its current offers page did not advertise the kids-eat-free campaign, so the reviewed recipe fails closed and is not active. Beefeater redirected to a generic Premier Inn page and cannot be counted as independent supply. Dunelm's cafe page advertises a spend-based benefit, but has not passed the current eligibility recipe and stays out. Halfords' weaker £8/10% Sweetie offer fails the existing value thresholds. Awin, FMTC and Pepper remain inactive/unvalidated for this release.
+
+An Ocado school-dress product page was found through public search, but the actual collector request returned HTTP 403. A search result alone cannot renew freshness or establish availability, so this is a source-access gap, not an accepted offer. No paid proxy or protection bypass was introduced.
+
+## Initial live evidence — 5 October 2026
+
+Testing commit `3e7f4c58a0fde50d45abb0972ca5e0c50fcea3a0` passed 41 Python tests, 15 public-selector tests, TypeScript checks and the Vercel preview build. Two manually dispatched live collections succeeded:
+
+| Run | Candidates | Verified offers | Collector time | AI calls / tokens |
+| --- | --- | --- | --- | --- |
+| [11](https://github.com/imransinvestments-prog/Dadspace/actions/runs/37381540276) | 274 | 4 | 37.4 seconds | 0 / 0 |
+| [12](https://github.com/imransinvestments-prog/Dadspace/actions/runs/37382206326) | 274 | 4 | 32.7 seconds | 0 / 0 |
+
+All eleven active routes fetched successfully. The repeat run refreshed the same deal IDs 4, 103, 104 and 105; the database contained zero duplicate ingestion identities. The public pool contains one Argos booster seat, one Premier Inn breakfast benefit, and two distinct bike types from Halfords. This is three independent discovery providers, three canonical groups, two priority groups with offers, and 50% Halfords concentration. It falls short of the four-group and three-priority-group targets; no human approval or seven-day reliability result is claimed.
+
+The populated preview showed four cards, truthful benefit/price conditions, all eight canonical group filters, two bike cards in the populated outdoors category, and an honest empty clothes category. Homepage cards use the same pool. Full published-pool review remains blank for the owner/content reviewer. Artifacts on both runs include published JSON, review CSVs, taxonomy coverage, source counts and feed-health reports. These two manual runs are repeat-ingestion evidence, **not** the required two scheduled collections.
 
 ## Run and recovery
 
