@@ -129,7 +129,7 @@ def run_libraries(db,bypc,bysource):
             synthetic=f"reference:{c['source_name']}:{c['source_record_id']}"
             existing=bysource.get(synthetic)
             if existing:provs.append(prov(existing['id'],c,'new_reference_venue',1.0));hidden+=1
-            else:pending.append(({'venue_name':c['venue_name'],'category':'library','address':c.get('address'),'town_city':c.get('town_city'),'postcode':c.get('postcode'),'latitude':c.get('latitude'),'longitude':c.get('longitude'),'website':c.get('website'),'source':c['source_name'],'source_url':synthetic,'discovered_source_url':LIBRARY_URL,'discovery_status':'discovered','public_visible':False,'licence':'Open Government Licence v3.0','review_reason':'New public library from reference dataset; review before publishing'},c))
+            else:pending.append(({'venue_name':c['venue_name'],'category':'library','address':c.get('address'),'town_city':c.get('town_city'),'postcode':c.get('postcode'),'latitude':c.get('latitude'),'longitude':c.get('longitude'),'website':c.get('website'),'source':c['source_name'],'source_url':synthetic,'discovered_source_url':LIBRARY_URL,'discovery_status':'verified','public_visible':True,'licence':'Open Government Licence v3.0','review_reason':None},c))
         if len(pending)>=100:flush_pending()
         if len(provs)>=200:flush_prov(db,provs);provs=[]
     flush_pending();flush_prov(db,provs)
