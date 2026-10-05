@@ -1,101 +1,23 @@
-"use client"
-
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import { EmptyState } from "@/components/empty-state"
 import { CATEGORY_LABELS } from "@/lib/news"
 import { SectionHeader } from "./section-header"
-import type { Article, HomeData } from "@/lib/types"
-
-const ROTATE_MS = 9_000
-
-const cardClass =
-  "flex flex-col gap-1 rounded-lg border bg-card p-4 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-navy/10"
-
-function HeadlineBody({ article }: { article: Article }) {
-  const categoryLabel = article.category ? (CATEGORY_LABELS[article.category] ?? article.category) : null
-  return (
-    <span key={article.id} className="animate-fade flex flex-col gap-1">
-      <span className="flex flex-wrap items-center gap-x-2 text-xs font-bold tracking-wide uppercase">
-        {categoryLabel && <span className="text-primary">{categoryLabel}</span>}
-        {article.source && <span className="text-muted-foreground">{article.source}</span>}
-      </span>
-      <span className="leading-snug font-semibold text-pretty">{article.title}</span>
-    </span>
-  )
-}
-
-function useSlotTick(enabled: boolean, paused: boolean, offsetMs: number) {
-  const [tick, setTick] = useState(0)
-  useEffect(() => {
-    if (!enabled || paused) return
-    const advance = () => {
-      if (document.visibilityState === "visible") setTick((t) => t + 1)
-    }
-    let intervalId: number | undefined
-    const startId = window.setTimeout(() => {
-      advance()
-      intervalId = window.setInterval(advance, ROTATE_MS)
-    }, offsetMs)
-    return () => {
-      window.clearTimeout(startId)
-      window.clearInterval(intervalId)
-    }
-  }, [enabled, paused, offsetMs])
-  return tick
-}
-
-function RotatingHeadline({
-  list,
-  paused,
-  offsetMs,
-}: {
-  list: Article[]
-  paused: boolean
-  offsetMs: number
-}) {
-  const tick = useSlotTick(list.length > 1, paused, offsetMs)
-  const article = list[tick % list.length]
-
-  return article.url ? (
-    <a href={article.url} target="_blank" rel="noopener noreferrer" className={cardClass}>
-      <HeadlineBody article={article} />
-      <span className="sr-only">(opens in a new tab)</span>
-    </a>
-  ) : (
-    <Link href="/news" className={cardClass}>
-      <HeadlineBody article={article} />
-    </Link>
-  )
-}
+import type { HomeData } from "@/lib/types"
 
 export function NewsHeadlines({ articles }: { articles: HomeData["articles"] }) {
-  const pool = (articles.pool ?? articles.items.map((article) => [article])).filter((list) => list.length > 0)
-  const [paused, setPaused] = useState(false)
-  const staggerMs = pool.length ? Math.round(ROTATE_MS / pool.length) : 0
-
-  return (
-    <section aria-labelledby="news-title" className="flex flex-col gap-4">
-      <SectionHeader id="news-title" title="Latest news" href="/news" linkLabel="View all news" isSample={articles.isSample} />
-      {pool.length ? (
-        <ul
-          className="flex flex-col gap-3"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocus={() => setPaused(true)}
-          onBlur={(e) => {
-            if (!e.currentTarget.contains(e.relatedTarget)) setPaused(false)
-          }}
-        >
-          {pool.map((list, slot) => (
-            <li key={slot}>
-              <RotatingHeadline list={list} paused={paused} offsetMs={staggerMs * (slot + 1)} />
-            </li>
-          ))}
+  return <section aria-labelledby="news-title" className="flex flex-col gap-4">
+    <SectionHeader id="news-title" title="Latest news" href="/news" linkLabel="View all news" isSample={articles.isSample}/>
+    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {articles.items.slice(0,8).map(article => <article key={article.id} className="flex min-w-0 flex-col gap-3 rounded-xl border bg-card p-5">
+        <p className="text-xs font-bold uppercase tracking-wide text-accent">{CATEGORY_LABELS[article.category ?? "other"] ?? article.category}</p>
+        <h3 className="font-heading text-lg font-bold leading-snug"><a href={article.url || "/news"} target={article.url ? "_blank" : undefined} rel="noopener noreferrer" className="hover:underline">{article.title}</a></h3>
+        <p className="text-xs text-muted-foreground">{article.source}{article.published_at && <span> · {new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",timeZone:"Europe/London"}).format(new Date(article.published_at))}</span>}</p>
+        <p className="text-xs font-bold uppercase tracking-wide">Key takeaways</p>
+        <ul className="list-disc space-y-2 pl-4 text-sm leading-relaxed text-muted-foreground">
+          {[article.summary,article.why_it_matters].filter((v): v is string => Boolean(v?.trim())).map((text,i)=><li key={i}>{text}</li>)}
+          {!article.summary && !article.why_it_matters && <li>Read the article for the full details.</li>}
         </ul>
-      ) : (
-        <EmptyState title="No news is good news." body="Or the feed's having a lie-in." />
-      )}
-    </section>
-  )
+        <a className="mt-auto pt-2 text-sm font-semibold text-accent hover:underline" href={article.url || "/news"} target={article.url ? "_blank" : undefined} rel="noopener noreferrer">Read article<span className="sr-only">{article.url ? " (opens in a new tab)" : ""}</span> →</a>
+      </article>)}
+    </div>
+    {!articles.items.length && <p className="text-muted-foreground">News is temporarily unavailable.</p>}
+  </section>
 }

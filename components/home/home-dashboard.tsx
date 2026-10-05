@@ -6,7 +6,8 @@ import { DadJoke } from "./dad-joke"
 import { LocalPlaces } from "./local-places"
 import { TrendingThreads } from "./trending-threads"
 import { NewsHeadlines } from "./news-headlines"
-import { TopDeal } from "./top-deal"
+import { NearbyWeek } from "./nearby-week"
+import { HomeDeals } from "./home-deals"
 import { useLocation } from "@/components/location-provider"
 import type { HomeData } from "@/lib/types"
 
@@ -35,17 +36,9 @@ export function HomeDashboard({ initial }: { initial: HomeData }) {
         <DadJoke />
       </div>
       <LocalPlaces />
-      <section aria-labelledby="more-for-dad" className="flex flex-col gap-4">
-        <h2 id="more-for-dad" className="font-heading text-2xl font-extrabold tracking-tight">A little more for dad</h2>
-        <div className="grid items-start gap-5 xl:grid-cols-2">
-        <div className="min-w-0 rounded-xl border bg-card p-5">
-          <NewsHeadlines articles={data.articles} />
-        </div>
-        <div className="min-w-0 rounded-xl border bg-card p-5">
-        <TopDeal deal={data.deal} />
-        </div>
-        </div>
-      </section>
+      <NewsHeadlines articles={data.articles} />
+      <NearbyWeek />
+      <HomeDeals />
       <TrendingThreads threads={data.threads} />
     </div>
   )

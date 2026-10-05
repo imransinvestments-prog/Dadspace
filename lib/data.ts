@@ -1,4 +1,5 @@
 import "server-only"
+import { selectNewsCards } from "./home-selection"
 import { getSupabase } from "./supabase"
 import { londonHour, londonToday, upcomingWeekend, formatEventDate } from "./dates"
 import { sampleArticles, sampleDeal, sampleEvents, sampleThreads } from "./sample-data"
@@ -158,36 +159,19 @@ async function getTrendingThreads() {
   return { items: sampleThreads, isSample: true }
 }
 
-const HEADLINE_CATEGORIES = ["activities", "money", "safety", "policy"]
-const HEADLINE_COUNT = 4
-const HEADLINES_PER_CATEGORY = 6
-
 async function getLatestArticles(): Promise<HomeData["articles"]> {
   const db = getSupabase()
   if (db) {
-    const { data, error } = await db
-      .from("feed_items")
-      .select("id,title,url,source_name,category,published_at")
-      .not("category", "is", null)
-      .order("published_at", { ascending: false, nullsFirst: false })
-      .limit(300)
+    const { data, error } = await db.from("feed_items")
+      .select("id,title,url,source_name,category,published_at,summary,why_it_matters")
+      .order("published_at", { ascending: false, nullsFirst: false }).limit(300)
     if (!error && data?.length) {
-      const newestByCategory = new Map<string, Article[]>()
-      for (const row of data) {
-        const list = newestByCategory.get(row.category) ?? []
-        if (list.length < HEADLINES_PER_CATEGORY) {
-          list.push({ id: String(row.id), title: row.title, source: row.source_name, url: row.url, category: row.category })
-          newestByCategory.set(row.category, list)
-        }
-      }
-      // Preferred categories first, then the freshest remaining categories fill any gaps.
-      const chosen = [
-        ...HEADLINE_CATEGORIES.filter((c) => newestByCategory.has(c)),
-        ...[...newestByCategory.keys()].filter((c) => !HEADLINE_CATEGORIES.includes(c)),
-      ].slice(0, HEADLINE_COUNT)
-      const pool = chosen.map((category) => newestByCategory.get(category)!)
-      const items = pool.map((list) => list[0])
-      if (items.length) return { items, pool, isSample: false }
+      const items = selectNewsCards(data.map(row => ({
+        id: String(row.id), title: row.title, source: row.source_name, url: row.url,
+        category: row.category, published_at: row.published_at,
+        summary: row.summary, why_it_matters: row.why_it_matters,
+      })))
+      return { items, isSample: false }
     }
   }
   return { items: sampleArticles, isSample: true }
