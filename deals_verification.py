@@ -6,6 +6,14 @@ import requests
 
 
 def verify_offer(deal):
+    if deal.get("merchant_product_id"):
+        from deals_halfords import allowed, verify_halfords
+        if allowed(deal["link"]):
+            return verify_halfords(deal)
+    if deal.get("verified_source_page") == deal.get("link"):
+        from deals_direct_sources import RECIPES
+        if deal["link"] in RECIPES:
+            return None, "source-page"
     if deal.get("source_status") == "active":
         return None, "source-api"  # Explicit current provider status, not a merchant claim.
     url = urlsplit(deal["link"])
@@ -52,10 +60,15 @@ def verify_offer(deal):
     return None, "source-page"
 
 
-def verify_kept(deals, reject):
+def verify_kept(deals, reject, max_checks=120):
+    checked = 0
     for deal in deals:
         if deal.get("decision") != "kept":
             continue
+        if checked >= max_checks:
+            reject(deal, "verification_budget: retry next run")
+            continue
+        checked += 1
         reason, method = verify_offer(deal)
         if reason:
             reject(deal, reason)

@@ -257,6 +257,9 @@ def fetch_source(source, rss_fetcher):
     source_type = (source.get("source_type") or "rss").strip().lower()
     if source_type == "rss":
         return rss_fetcher(source)
+    if source_type == "direct":
+        from deals_direct_sources import fetch_direct
+        return fetch_direct(source)
     if source_type == "awin":
         return fetch_awin(source)
     if source_type == "fmtc":

@@ -22,7 +22,12 @@ export function DealCard({ deal }: { deal: LiveDeal }) {
             {" · "}{Math.round(Number(deal.discount_pct))}% below source comparison ({gbp.format(Number(deal.was_price))})
           </p>
         )}
-        <p className="text-sm leading-6 text-muted-foreground">{deal.description || "Check the source for full terms and availability."}</p>
+        {deal.description && deal.description.length > 400 ? (
+          <details className="text-sm leading-6 text-muted-foreground">
+            <summary className="cursor-pointer">Offer details and conditions</summary>
+            <p className="mt-2">{deal.description}</p>
+          </details>
+        ) : <p className="text-sm leading-6 text-muted-foreground">{deal.description || "Check the source for full terms and availability."}</p>}
         <p className="text-xs text-muted-foreground">
           Listed by source · Last seen {new Date(deal.last_seen!).toLocaleString("en-GB", { timeZone: "Europe/London" })}.
           {deal.expires_at ? ` Ends ${new Date(deal.expires_at).toLocaleDateString("en-GB", { timeZone: "Europe/London" })}.` : " End date not supplied."}

@@ -3,6 +3,15 @@ import assert from "node:assert/strict"
 import { eligibleDeal, selectDeals, dealItemKey } from "../lib/deals-selection.ts"
 
 const now = Date.parse("2026-10-05T12:00:00Z")
+
+test("canonical equivalence collapses wipes without merging other taxonomy items", () => {
+  const rows = [row({ id: 1, title: "Brand A wipes", item_id: 8 }), row({ id: 2, title: "Reusable cloth wipes", item_id: 9, equivalent_item_id: 8, link: "https://example.com/other" }), row({ id: 3, title: "Different nursery item", item_id: 40, link: "https://example.com/third" })]
+  assert.deepEqual(selectDeals(rows, 100, now).map(r => r.id).sort(), [1, 3])
+})
+
+test("breakfast offers accept explicit under-16 eligibility without a guessed percentage", () => {
+  assert.equal(eligibleDeal(row({ title: "Kids eat free breakfast", description: "Two children under 16 with a full adult breakfast", price: null, was_price: null, discount_pct: null }), now), true)
+})
 const row = (changes = {}) => ({ id: 1, title: "Baby cot now £150 was £200", description: "UK delivery £5", retailer: "Shop A", price: 150, was_price: 200, discount_pct: 25, image_url: null, display_group: "Nursery, Beds & Sleep", link: "https://example.com/cot?variant=blue", posted_at: null, last_seen: "2026-10-05T11:00:00Z", expires_at: null, relevance: 4, audience_evidence: "Baby cot", classified_by: "quality-v1:source-page:rules", status: "live", ...changes })
 
 test("supported fresh offer eligible", () => assert.equal(eligibleDeal(row(), now), true))

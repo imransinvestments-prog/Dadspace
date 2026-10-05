@@ -1,5 +1,6 @@
 import { Tag } from "lucide-react"
-import { getDeals } from "@/lib/deals"
+import { getDeals, getDealGroups } from "@/lib/deals"
+import Link from "next/link"
 import { DealCard } from "@/components/deal-card"
 import { pageMetadata } from "@/lib/seo"
 
@@ -11,8 +12,10 @@ export const metadata = pageMetadata(
 
 export const revalidate = 900
 
-export default async function DealsPage() {
-  const { items: deals, loadFailed } = await getDeals()
+export default async function DealsPage({ searchParams }: { searchParams: Promise<{ group?: string }> }) {
+  const [{ items, loadFailed }, groups, params] = await Promise.all([getDeals(), getDealGroups(), searchParams])
+  const group = groups.includes(params.group ?? "") ? params.group : undefined
+  const deals = group ? items.filter(deal => deal.display_group === group) : items
 
   return (
     <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -27,13 +30,24 @@ export default async function DealsPage() {
         </p>
       </section>
 
+      <nav aria-label="Deal categories" className="mb-6 flex flex-wrap gap-2">
+        {["All offers", ...groups].map(label => {
+          const active = label === (group ?? "All offers")
+          return <Link key={label} href={label === "All offers" ? "/deals" : `/deals?group=${encodeURIComponent(label)}`}
+            aria-current={active ? "page" : undefined}
+            className={`rounded-full border px-4 py-2 text-sm ${active ? "bg-orange-500 text-slate-950" : "bg-card"}`}>
+            {label}
+          </Link>
+        })}
+      </nav>
+
       {loadFailed ? (
         <div className="rounded-2xl border border-white/10 bg-card p-6 text-muted-foreground">
           We couldn&apos;t load deals just now. Please try again shortly.
         </div>
       ) : deals.length === 0 ? (
         <div className="rounded-2xl border border-white/10 bg-card p-6 text-muted-foreground">
-          No offers meet our quality checks right now. Check back soon.
+          {group ? `No ${group.toLowerCase()} offers meet our quality checks right now.` : "No offers meet our quality checks right now."} Check back soon.
         </div>
       ) : (
         <>

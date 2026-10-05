@@ -1,0 +1,1 @@
+alter table public.deal_sources drop constraint deal_sources_source_type_check; alter table public.deal_sources add constraint deal_sources_source_type_check check (source_type in ('rss','awin','fmtc','pepper','direct'));

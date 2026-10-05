@@ -61,6 +61,7 @@ MAX_AGE_DAYS = _env_int("MAX_AGE_DAYS", 30)    # ignore deals posted longer ago
 MIN_RELEVANCE = _env_int("MIN_RELEVANCE", 3)   # Gemini score needed (1-5)
 GEMINI_BATCH = _env_int("GEMINI_BATCH", 15)    # deals per Gemini call
 MAX_GEMINI_ITEMS = _env_int("MAX_GEMINI_ITEMS", 150)  # cap per run
+ENABLE_PAID_AI = _env_bool("ENABLE_PAID_AI", False)
 DEACTIVATE_AFTER_FAILURES = _env_int("DEACTIVATE_AFTER_FAILURES", 5)
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "").strip() or "gemini-2.5-flash"
 
@@ -180,7 +181,7 @@ def compile_items(rows):
     """Turn the active rows of the items list into match patterns."""
     entries, seen = [], {}
     for r in rows:
-        if r["active"].strip().lower() != "yes":
+        if str(r["active"]).strip().lower() not in {"yes", "true", "1"}:
             continue
         terms = [t.strip() for t in r["uk_terms"].split(";") if t.strip()]
         variants = []
@@ -194,7 +195,8 @@ def compile_items(rows):
         for idx, t_norm in variants:
             if len(t_norm) < 3:
                 continue
-            strong = (
+            requires_child = str(r.get("needs_child_evidence", False)).lower() in {"true", "yes", "1"}
+            strong = not requires_child and (
                 (idx == 0 and r["tier"] == "A")
                 or t_norm in STRONG_TERMS
                 or bool(CHILD_RE.search(t_norm))
@@ -207,6 +209,9 @@ def compile_items(rows):
                 "group": r["display_group"],
                 "tier": r["tier"],
                 "band": r["value_band"],
+                "item_id": r.get("id"),
+                "deal_type": r.get("deal_type", "product"),
+                "requires_child": requires_child,
             }
             old = seen.get(t_norm)
             if old is None or (e["strong"] and not old["strong"]):
@@ -334,6 +339,8 @@ def normalise(raw):
         "feed_category": raw["feed_category"],
         "expires_at": raw.get("expires_at"), "starts_at": raw.get("starts_at"),
         "source_status": raw.get("source_status"),
+        "verified_source_page": raw.get("verified_source_page"),
+        "merchant_product_id": raw.get("merchant_product_id"),
     }
 
 
@@ -343,6 +350,12 @@ def validate_deal(d):
         return "missing_title"
     if not canonical_link(d["link"]):
         return "bad_link"
+    retailers = {"m&s": "marks and spencer", "marks & spencer": "marks and spencer", "marks and spencer": "marks and spencer", "amazon": "amazon", "argos": "argos", "halfords": "halfords", "ocado": "ocado", "tesco": "tesco", "asda": "asda"}
+    claimed = norm_text(d.get("retailer") or "")
+    claimed = retailers.get(claimed, claimed)
+    explicit = re.search(r"£\s*([\d,.]+)\s+(?:at|from)\s+(marks & spencer|marks and spencer|m&s|amazon|argos|halfords|ocado|tesco|asda)\b", d["description"][:200], re.I)
+    if claimed and explicit and money(explicit.group(1)) == d.get("price") and retailers[explicit.group(2).lower()] != claimed:
+        return "merchant_conflict: current-price text disagrees with source retailer"
     if d.get("source_status") not in (None, "", "active"):
         return "source_unavailable"
     for field, expired in (("expires_at", True), ("starts_at", False)):
@@ -357,7 +370,7 @@ def validate_deal(d):
                 return "invalid_offer_date"
     if re.search(r"\b(?:expired|sold out|out of stock|no longer available)\b", d["title"], re.I):
         return "source_unavailable"
-    if d["price"] is not None and (d["price"] < 0 or d["price"] > 3000):
+    if d["price"] is not None and (d["price"] < 0 or d["price"] > 10000):
         return "implausible_price"
     if d["posted_at"] and d["posted_at"] < now_utc() - timedelta(days=MAX_AGE_DAYS):
         return "too_old"
@@ -390,9 +403,10 @@ def layer1_match(d, entries):
     Returns ('strong'|'weak', entry) or (None, None)."""
     title = norm_text(d["title"])
     weak = None
-    for e in entries:  # strong entries come first
+    # Prefer the specific item phrase over a shorter, supposedly strong alias.
+    for e in sorted(entries, key=lambda e: -len(e["term"])):
         if e["rx"].search(title):
-            if e["strong"]:
+            if e["strong"] or has_child_signal(d["title"] + " " + d["description"]):
                 return "strong", e
             if weak is None:
                 weak = e
@@ -496,7 +510,7 @@ def process_items(deals, entries, exclusions, classify_fn=None):
         benefit = family_benefit(d["title"] + " " + d["description"])
         if benefit:
             accept(d, "Days Out & Family Fun", "", "", "mid", 5, benefit, "rules")
-        elif kind == "strong":
+        elif kind == "strong" or (kind == "weak" and signal):
             accept(d, e["group"], e["item"], e["tier"], e["band"], 4, e["term"], "rules")
         elif kind == "weak" and not signal:
             reject(d, "generic_item_no_child_signal")
@@ -508,9 +522,9 @@ def process_items(deals, entries, exclusions, classify_fn=None):
     # Layer 2 + 3: Gemini for the unclear ones only
     stats["gemini_candidates"] = len(candidates)
     if candidates:
-        if classify_fn is None:
+        if classify_fn is None or not ENABLE_PAID_AI:
             for d in candidates:
-                reject(d, "gemini_skipped (no GEMINI key)")
+                reject(d, "unmapped_item: needs a reviewed taxonomy alias")
         else:
             to_send, over = candidates[:MAX_GEMINI_ITEMS], candidates[MAX_GEMINI_ITEMS:]
             for d in over:
@@ -559,6 +573,15 @@ def process_items(deals, entries, exclusions, classify_fn=None):
     # Value check on everything kept
     for d in deals:
         if d.get("decision") == "kept":
+            _, entry = layer1_match(d, entries)
+            if family_benefit(d["title"] + " " + d["description"]):
+                # Benefits still need a stable taxonomy identity, not a separate hardcoded category.
+                entry = next((e for e in entries if e["item"] == "Kids meals at restaurants"), entry) if re.search(r"\beat\s+free\b", d["title"] + " " + d["description"], re.I) else entry
+            if entry:
+                d["item_id"] = entry.get("item_id")
+                d["deal_type"] = entry.get("deal_type")
+                d["matched_item"] = entry["item"]
+                d["display_group"] = entry["group"]
             why = value_check(d)
             if why:
                 reject(d, why)
@@ -596,7 +619,7 @@ def stratified_sample(items, key, total, min_per, seed):
 
 # ------------------------------------------------------------ REVIEW FILES
 REVIEW_COLS = ["source", "decision", "reason", "display_group", "title", "description", "retailer", "price",
-               "was_price", "discount_pct", "heat", "matched_item", "tier", "value_band",
+               "was_price", "discount_pct", "heat", "matched_item", "item_id", "deal_type", "tier", "value_band",
                "relevance", "evidence", "classified_by", "link", "expires_at", "starts_at",
                "human_relevant", "human_valuable", "human_terms_clear", "human_link_works",
                "human_not_expired", "human_savings_supported", "reviewer_notes"]
@@ -631,7 +654,7 @@ def write_review(all_deals, source_results, stats, started):
     lines = []
     A = lines.append
     A("# Dadspace deals: " + ("DRY RUN" if DRY_RUN else "LIVE RUN") + " review")
-    A(f"Started {started:%Y-%m-%d %H:%M} UTC. Model: {GEMINI_MODEL}. Sample seed: {SAMPLE_SEED}.\n")
+    A(f"Started {started:%Y-%m-%d %H:%M} UTC. Mode: {'optional AI' if ENABLE_PAID_AI else 'rules-only'}. Sample seed: {SAMPLE_SEED}.\n")
     A("## Sources")
     for s in source_results:
         A(f"- {s['name']}: {s['status']}, {s['items']} items. {s['info']}")
@@ -639,7 +662,7 @@ def write_review(all_deals, source_results, stats, started):
     A(f"- Items fetched: {len(all_deals)}")
     A(f"- Kept: {len(kept)}")
     A(f"- Rejected: {len(rejected)}")
-    A(f"- Sent to Gemini: {stats['gemini_candidates']} deals in {stats['gemini_calls']} calls "
+    A(f"- Unclear candidates: {stats['gemini_candidates']}. AI calls: {stats['gemini_calls']} "
       f"({stats['gemini_errors']} failed)")
     A(f"- Tokens: {stats['tokens_in']} in + {stats['tokens_out']} out = "
       f"{stats['tokens_in'] + stats['tokens_out']} total")
@@ -674,6 +697,7 @@ def save_live(kept, source_id_by_name, reviewed=None):
             "price": d["price"], "was_price": d["was_price"], "discount_pct": d["discount_pct"],
             "image_url": d["image_url"], "display_group": d["display_group"],
             "matched_item": d["matched_item"] or None, "tier": d["tier"] or None,
+            "item_id": d.get("item_id"),
             "value_band": d["value_band"], "relevance": d["relevance"],
             "audience_evidence": d["evidence"], "classified_by": d["classified_by"],
             "heat": d["heat"], "posted_at": d["posted_at"].isoformat() if d["posted_at"] else None,
@@ -695,7 +719,7 @@ def save_live(kept, source_id_by_name, reviewed=None):
         reason = d.get("reason", "")
         if reason == "expired":
             patch = {"status": "expired"}
-        elif reason.startswith(("unsupported_value", "weak_value", "excluded:", "not_started", "invalid_offer_date", "source_unavailable")):
+        elif reason.startswith(("unsupported_value", "weak_value", "missing_applicability", "merchant_conflict", "excluded:", "not_started", "invalid_offer_date", "source_unavailable")):
             patch = {"status": "review"}
         else:
             continue  # Missing entries and model/network failures never revoke an offer.
@@ -706,17 +730,18 @@ def save_live(kept, source_id_by_name, reviewed=None):
        json={"status": "expired"}, headers={"Prefer": "return=minimal"})
 
 
-def update_source_health(src, status):
+def update_source_health(src, status, counts=None):
     failed = status not in ("ok", "empty")
     fails = (src.get("consecutive_failures") or 0) + 1 if failed else 0
     patch = {"last_status": status, "last_checked_at": now_utc().isoformat(),
              "consecutive_failures": fails}
     if not failed:
         patch["last_success_at"] = now_utc().isoformat()
-    if failed and fails >= DEACTIVATE_AFTER_FAILURES:
-        patch["active"] = False
-        patch["notes"] = f"auto-deactivated after {fails} failed runs (last: {status})"
-        log(f"  ! {src['name']} switched off after {fails} failures")
+    if counts is not None:
+        patch["last_counts"] = counts
+        if counts.get("verified", 0):
+            patch["last_verified_at"] = now_utc().isoformat()
+    # Transient outages remain eligible for a later retry. Do not silently turn off supply.
     sb("PATCH", "deal_sources", params={"id": f"eq.{src['id']}"}, json=patch,
        headers={"Prefer": "return=minimal"})
 
@@ -742,7 +767,7 @@ def build_details(all_deals, source_results, started, status="ok", error=None):
         if d.get("decision") == "kept":
             by_group[d["display_group"]] = by_group.get(d["display_group"], 0) + 1
     return {
-        "status": status, "error": error, "model": GEMINI_MODEL,
+        "status": status, "error": error, "model": GEMINI_MODEL if ENABLE_PAID_AI else "rules-only",
         "seconds": round((now_utc() - started).total_seconds(), 1),
         "total_tokens": STATS["tokens_in"] + STATS["tokens_out"],
         "gemini_errors": STATS["gemini_errors"],
