@@ -1,7 +1,8 @@
 import "server-only"
+import { getDeals } from "./deals"
 import { getSupabase } from "./supabase"
 import { londonHour, londonToday, upcomingWeekend, formatEventDate } from "./dates"
-import { sampleArticles, sampleDeal, sampleEvents, sampleThreads } from "./sample-data"
+import { sampleArticles, sampleEvents, sampleThreads } from "./sample-data"
 import { distanceKm, geocodeLocations, kmToMiles, locationKey, type Point } from "./geo"
 import type { Article, DadEvent, ForumThread, HomeData } from "./types"
 
@@ -209,10 +210,11 @@ export async function getHomeData(user: Point | null = null): Promise<HomeData> 
   const today = londonToday()
   const { saturday, sunday, sleeps } = upcomingWeekend(today)
 
-  const [events, threads, articles] = await Promise.all([
+  const [events, threads, articles, deals] = await Promise.all([
     getEvents(user, saturday, sunday, today),
     getTrendingThreads(),
     getLatestArticles(),
+    getDeals(),
   ])
 
   return {
@@ -222,7 +224,7 @@ export async function getHomeData(user: Point | null = null): Promise<HomeData> 
     events,
     threads,
     articles,
-    // No deals table exists yet, so the top deal is always sample content.
-    deal: { items: sampleDeal, isSample: true },
+    deal: { items: deals.items[0] ?? null, isSample: false, loadFailed: deals.loadFailed },
   }
 }
+

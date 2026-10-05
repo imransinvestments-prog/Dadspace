@@ -12,9 +12,7 @@ on:
       sample_size:
         description: "Number of deals in the review sample"
         default: "40"
-      keep_unknown_discount_low:
-        description: "true = keep low-value deals whose discount is unknown"
-        default: "false"
+
 
   workflow_call:
     inputs:
@@ -33,11 +31,7 @@ on:
         required: false
         type: string
         default: "40"
-      keep_unknown_discount_low:
-        description: "true = keep low-value deals whose discount is unknown"
-        required: false
-        type: string
-        default: "false"
+
 
 permissions:
   contents: read
@@ -57,7 +51,10 @@ jobs:
         run: pip install requests
 
       - name: Validate Python (syntax check)
-        run: python -m py_compile deals_worker.py deals_worker_db.py deals_source_adapters.py
+        run: python -m py_compile deals_worker.py deals_worker_db.py deals_source_adapters.py deals_quality.py deals_verification.py
+
+      - name: Deals regression checks
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
 
       - name: Self-test
         env:
@@ -80,7 +77,6 @@ jobs:
           PYTHONUNBUFFERED: "1"
           DRY_RUN: ${{ inputs.dry_run || 'true' }}
           SAMPLE_SIZE: ${{ inputs.sample_size || '40' }}
-          KEEP_UNKNOWN_DISCOUNT_LOW: ${{ inputs.keep_unknown_discount_low || 'false' }}
 
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
@@ -105,3 +101,4 @@ jobs:
           path: review/
           if-no-files-found: ignore
           retention-days: 14
+

@@ -1,3 +1,5 @@
+import type { LiveDeal } from "./deals-selection"
+
 export type DadEvent = {
   id: string
   title: string
@@ -85,5 +87,6 @@ export type HomeData = {
   threads: Sourced<ForumThread[]>
   /** `pool[i]` holds the newest articles for the category shown in card `i`, newest first. */
   articles: Sourced<Article[]> & { pool?: Article[][] }
-  deal: Sourced<Deal>
+  deal: Sourced<LiveDeal | null> & { loadFailed: boolean }
 }
+
