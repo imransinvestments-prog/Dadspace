@@ -27,7 +27,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install
-        run: pip install requests feedparser
+        run: pip install requests feedparser googlenewsdecoder==0.2.1 selectolax==0.4.12
 
       - name: Self-test
         run: python news_worker.py --self-test

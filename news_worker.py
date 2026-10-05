@@ -33,6 +33,7 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 import feedparser
 import requests
+from news_links import resolve_article_urls
 
 # ----------------------------------------------------------------------
 # CONFIG
@@ -665,6 +666,12 @@ def run():
                 for r in all_rows:
                     r["story_key"], r["is_primary"] = None, True
         stats["stories_shown"] = stats["kept"] - stats["duplicates_merged"]
+
+        # Resolve only relevant articles, after scoring and grouping.
+        kept = [row for row in all_rows if row["relevance"] >= MIN_RELEVANCE]
+        destinations = resolve_article_urls([row["url"] for row in kept])
+        for row, destination in zip(kept, destinations):
+            row["url"] = clean_url(destination)
 
         if all_rows and not DRY_RUN:
             save_items(all_rows)
