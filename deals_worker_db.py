@@ -54,8 +54,9 @@ def load_database_list(path):
 def gemini_classify_38(batch):
     prompt = (
         "You classify UK shopping deals for Dadspace, an app for dads and parents of children aged 0 to 12.\n"
-        "For each deal decide whether it is a genuinely useful PRODUCT deal for babies, children up to about 12, or their parents.\n"
-        "Reject: pet products, adult-only items, teen (13+) items, second-hand items, services, tuition, insurance, general groceries (baby food is fine), games consoles and video games, cleaning products.\n"
+        "For each deal decide whether it is a genuinely useful product or family days-out offer for babies, children up to about 12, or their parents.\n"
+        "Include family attraction tickets and kids-eat-free offers with explicit child eligibility. Use Days Out & Family Fun.\n"
+        "Reject: pet products, adult-only items, teen (13+) items, second-hand items, adult-only services, tuition, insurance, general groceries (baby food is fine), games consoles and video games, cleaning products.\n"
         "Return ONLY a JSON array with one object per deal:\n"
         '{"id": <id>, "relevant": true or false, "group": one of '
         + json.dumps(worker.GROUPS)
@@ -204,10 +205,6 @@ def run():
 
         for raw in raw_items:
             deal = worker.normalise(raw)
-            # worker.normalise() intentionally strips query parameters for RSS
-            # dedupe. Affiliate tracking URLs need those parameters retained.
-            if source_type in {"awin", "fmtc"} and str(raw.get("link") or "").startswith("http"):
-                deal["link"] = str(raw["link"]).strip()
             deal.update({"source": source.get("name"), "source_id": source.get("id")})
             why = worker.validate_deal(deal)
             if not why and deal["dedupe_key"] in seen_keys:
@@ -221,6 +218,7 @@ def run():
             time.sleep(1.5)
 
     stats = worker.process_items(all_deals, entries, exclusions, gemini_classify_38 if worker._GEMINI_KEY else None)
+    worker.verify_kept(all_deals, worker.reject)
     kept = [d for d in all_deals if d.get("decision") == "kept"]
     skipped_prefilter = sum(1 for d in all_deals if d.get("decision") == "rejected" and worker.stage_of(d["reason"]) == "prefilter")
     worker.write_review(all_deals, source_results, stats, started)
@@ -228,8 +226,8 @@ def run():
     if worker.DRY_RUN:
         worker.log("\nDRY RUN: nothing was saved. Download the 'deals-dry-run-review' artifact to review.")
     else:
-        worker.save_live(kept, {})
-        worker.log(f"\nLIVE: saved {len(kept)} deals and expired deals not seen for {worker.EXPIRE_AFTER_DAYS} days.")
+        worker.save_live(kept, {}, all_deals)
+        worker.log(f"\nLIVE: saved {len(kept)} deals and expired only offers with known expiry dates.")
 
     worker.log_run(skipped_prefilter, enhanced_details(all_deals, source_results, started))
     return 0
@@ -262,3 +260,4 @@ if __name__ == "__main__":
                 "total_tokens": worker.STATS["tokens_in"] + worker.STATS["tokens_out"],
             })
         sys.exit(1)
+

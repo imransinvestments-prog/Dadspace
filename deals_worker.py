@@ -35,6 +35,8 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 
 import requests
+from deals_quality import VERSION, canonical_link, prices, value_reason, family_benefit
+from deals_verification import verify_kept
 
 # ---------------------------------------------------------------- SETTINGS
 def _env_bool(name, default):
@@ -59,17 +61,8 @@ MAX_AGE_DAYS = _env_int("MAX_AGE_DAYS", 30)    # ignore deals posted longer ago
 MIN_RELEVANCE = _env_int("MIN_RELEVANCE", 3)   # Gemini score needed (1-5)
 GEMINI_BATCH = _env_int("GEMINI_BATCH", 15)    # deals per Gemini call
 MAX_GEMINI_ITEMS = _env_int("MAX_GEMINI_ITEMS", 150)  # cap per run
-EXPIRE_AFTER_DAYS = _env_int("EXPIRE_AFTER_DAYS", 3)  # not seen for this long = gone
 DEACTIVATE_AFTER_FAILURES = _env_int("DEACTIVATE_AFTER_FAILURES", 5)
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "").strip() or "gemini-2.5-flash"
-# HotUKDeals feeds rarely show the old price. False = drop low-value deals whose
-# discount is unknown; True = keep them (they will all be shown in the review).
-KEEP_UNKNOWN_DISCOUNT_LOW = _env_bool("KEEP_UNKNOWN_DISCOUNT_LOW", False)
-
-# Smallest discount (percent) worth showing, by value band. The band comes
-# from the items list (big / mid / low). Unknown discounts are kept for
-# big and mid items but dropped for low-value items.
-BAND_MIN_DISCOUNT = {"big": 15, "mid": 25, "low": 40}
 
 GROUPS = [
     "Car Seats & Pushchairs",
@@ -319,27 +312,9 @@ def normalise(raw):
     if m:
         heat = int(m.group(1))
         title = HEAT_RE.sub("", title, count=1).strip()
-    desc = strip_html(raw["description_raw"])[:600]
+    desc = strip_html(raw["description_raw"])[:4000]
 
-    amounts = [money(x) for x in POUND_RE.findall(title)]
-    price = amounts[0] if amounts else None
-    if price is None and raw["merchant_price"]:
-        price = money(re.sub(r"[^\d.]", "", raw["merchant_price"]))
-
-    was = None
-    for text in (title, desc):
-        mm = WAS_RE.search(text)
-        if mm:
-            was = money(mm.group(1))
-            break
-    discount = None
-    if price is not None and was is not None and was > price > 0:
-        discount = round((was - price) / was * 100, 1)
-    else:
-        was = None
-        mm = PCT_RE.search(title) or PCT_RE.search(desc)
-        if mm:
-            discount = float(mm.group(1))
+    price, was, discount = prices(raw, title, desc)
 
     posted = None
     if raw["pub_date"]:
@@ -350,13 +325,15 @@ def normalise(raw):
         except (TypeError, ValueError):
             posted = None
 
-    link = raw["link"].split("?")[0].strip()
+    link = raw["link"].strip()
     return {
         "title": title, "description": desc, "link": link,
-        "dedupe_key": link or raw["guid"], "retailer": raw["merchant_name"] or None,
+        "dedupe_key": raw.get("identity") or canonical_link(link) or raw["guid"], "retailer": raw["merchant_name"] or None,
         "price": price, "was_price": was, "discount_pct": discount, "heat": heat,
         "image_url": raw["image_url"], "posted_at": posted,
         "feed_category": raw["feed_category"],
+        "expires_at": raw.get("expires_at"), "starts_at": raw.get("starts_at"),
+        "source_status": raw.get("source_status"),
     }
 
 
@@ -364,9 +341,23 @@ def normalise(raw):
 def validate_deal(d):
     if not d["title"]:
         return "missing_title"
-    if not d["link"].startswith("http"):
+    if not canonical_link(d["link"]):
         return "bad_link"
-    if d["price"] is not None and (d["price"] < 1 or d["price"] > 3000):
+    if d.get("source_status") not in (None, "", "active"):
+        return "source_unavailable"
+    for field, expired in (("expires_at", True), ("starts_at", False)):
+        if d.get(field):
+            try:
+                date = datetime.fromisoformat(d[field].replace("Z", "+00:00"))
+                if date.tzinfo is None:
+                    date = date.replace(tzinfo=timezone.utc)
+                if (expired and date <= now_utc()) or (not expired and date > now_utc()):
+                    return "expired" if expired else "not_started"
+            except (ValueError, TypeError):
+                return "invalid_offer_date"
+    if re.search(r"\b(?:expired|sold out|out of stock|no longer available)\b", d["title"], re.I):
+        return "source_unavailable"
+    if d["price"] is not None and (d["price"] < 0 or d["price"] > 3000):
         return "implausible_price"
     if d["posted_at"] and d["posted_at"] < now_utc() - timedelta(days=MAX_AGE_DAYS):
         return "too_old"
@@ -413,7 +404,7 @@ def layer1_match(d, entries):
 def accept(d, group, matched, tier, band, relevance, evidence, by):
     d.update({"decision": "kept", "reason": "", "display_group": group,
               "matched_item": matched, "tier": tier, "value_band": band,
-              "relevance": relevance, "evidence": evidence, "classified_by": by})
+              "relevance": relevance, "evidence": evidence, "classified_by": VERSION + by})
 
 
 def reject(d, reason):
@@ -421,16 +412,7 @@ def reject(d, reason):
 
 
 def value_check(d):
-    """Keep only deals that make a difference. Returns reason or None."""
-    band = d.get("value_band") or "low"
-    need = BAND_MIN_DISCOUNT.get(band, 40)
-    if d["discount_pct"] is not None:
-        if d["discount_pct"] < need:
-            return f"discount_too_small ({band}: needs {need}%)"
-        return None
-    if band == "low" and not KEEP_UNKNOWN_DISCOUNT_LOW:
-        return "low_value_unknown_discount"
-    return None
+    return value_reason(d)
 
 
 class GeminiError(RuntimeError):
@@ -446,10 +428,11 @@ def gemini_classify(batch):
     prompt = (
         "You classify UK shopping deals for Dadspace, an app for dads and parents of "
         "children aged 0 to 12.\n"
-        "For each deal decide whether it is a genuinely useful PRODUCT deal for babies, "
+        "For each deal decide whether it is a genuinely useful product or family days-out offer for babies, "
         "children up to about 12, or their parents.\n"
+        "Include family attraction tickets and kids-eat-free offers with explicit child eligibility. Use Days Out & Family Fun.\n"
         "Reject: pet products, adult-only items, teen (13+) items, second-hand items, "
-        "services, tuition, insurance, general groceries (baby food is fine), games "
+        "adult-only services, tuition, insurance, general groceries (baby food is fine), games "
         "consoles and video games, cleaning products.\n"
         "Return ONLY a JSON array with one object per deal:\n"
         '{"id": <id>, "relevant": true or false, "group": one of '
@@ -510,7 +493,10 @@ def process_items(deals, entries, exclusions, classify_fn=None):
         kind, e = layer1_match(d, entries)
         signal = has_child_signal(d["title"] + " " + d["description"]) or \
             d["feed_category"].lower() == "family & kids"
-        if kind == "strong":
+        benefit = family_benefit(d["title"] + " " + d["description"])
+        if benefit:
+            accept(d, "Days Out & Family Fun", "", "", "mid", 5, benefit, "rules")
+        elif kind == "strong":
             accept(d, e["group"], e["item"], e["tier"], e["band"], 4, e["term"], "rules")
         elif kind == "weak" and not signal:
             reject(d, "generic_item_no_child_signal")
@@ -609,9 +595,11 @@ def stratified_sample(items, key, total, min_per, seed):
 
 
 # ------------------------------------------------------------ REVIEW FILES
-REVIEW_COLS = ["source", "decision", "reason", "display_group", "title", "retailer", "price",
+REVIEW_COLS = ["source", "decision", "reason", "display_group", "title", "description", "retailer", "price",
                "was_price", "discount_pct", "heat", "matched_item", "tier", "value_band",
-               "relevance", "evidence", "classified_by", "link"]
+               "relevance", "evidence", "classified_by", "link", "expires_at", "starts_at",
+               "human_relevant", "human_valuable", "human_terms_clear", "human_link_works",
+               "human_not_expired", "human_savings_supported", "reviewer_notes"]
 
 
 def write_review(all_deals, source_results, stats, started):
@@ -676,11 +664,11 @@ def write_review(all_deals, source_results, stats, started):
 
 
 # ------------------------------------------------------------ SAVE (LIVE)
-def save_live(kept, source_id_by_name):
+def save_live(kept, source_id_by_name, reviewed=None):
     now_iso = now_utc().isoformat()
     rows = []
     for d in kept:
-        rows.append({
+        row = {
             "source_id": d["source_id"], "dedupe_key": d["dedupe_key"], "link": d["link"],
             "title": d["title"], "description": d["description"], "retailer": d["retailer"],
             "price": d["price"], "was_price": d["was_price"], "discount_pct": d["discount_pct"],
@@ -690,12 +678,31 @@ def save_live(kept, source_id_by_name):
             "audience_evidence": d["evidence"], "classified_by": d["classified_by"],
             "heat": d["heat"], "posted_at": d["posted_at"].isoformat() if d["posted_at"] else None,
             "status": "live", "last_seen": now_iso,
-        })
-    for i in range(0, len(rows), 100):
-        sb("POST", "deals", params={"on_conflict": "dedupe_key"}, json=rows[i:i + 100],
-           headers={"Prefer": "resolution=merge-duplicates,return=minimal"})
-    cutoff = (now_utc() - timedelta(days=EXPIRE_AFTER_DAYS)).isoformat()
-    sb("PATCH", "deals", params={"status": "eq.live", "last_seen": f"lt.{cutoff}"},
+        }
+        if d.get("expires_at"):
+            row["expires_at"] = d["expires_at"]
+        rows.append(row)
+    # Omitted dates preserve known expiry; uniform keys keep PostgREST batches valid.
+    for dated in (False, True):
+        batch = [row for row in rows if ("expires_at" in row) == dated]
+        for i in range(0, len(batch), 100):
+            sb("POST", "deals", params={"on_conflict": "dedupe_key"}, json=batch[i:i + 100],
+               headers={"Prefer": "resolution=merge-duplicates,return=minimal"})
+    accepted_keys = {d["dedupe_key"] for d in kept}
+    for d in reviewed or []:
+        if d.get("decision") != "rejected" or d["dedupe_key"] in accepted_keys:
+            continue
+        reason = d.get("reason", "")
+        if reason == "expired":
+            patch = {"status": "expired"}
+        elif reason.startswith(("unsupported_value", "weak_value", "excluded:", "not_started", "invalid_offer_date", "source_unavailable")):
+            patch = {"status": "review"}
+        else:
+            continue  # Missing entries and model/network failures never revoke an offer.
+        sb("PATCH", "deals", params={"dedupe_key": "eq." + d["dedupe_key"]}, json=patch,
+           headers={"Prefer": "return=minimal"})
+    # Feed windows and outages do not establish expiry. Only a known expiry does.
+    sb("PATCH", "deals", params={"status": "eq.live", "expires_at": f"lte.{now_iso}"},
        json={"status": "expired"}, headers={"Prefer": "return=minimal"})
 
 
@@ -717,8 +724,10 @@ def update_source_health(src, status):
 def stage_of(reason):
     if reason.startswith("gemini"):
         return "gemini"
-    if reason.startswith("discount_too_small") or reason.startswith("low_value"):
+    if reason.startswith(("unsupported_value", "weak_value", "discount_too_small", "low_value")):
         return "value"
+    if reason.startswith("verification") or reason == "source_unavailable":
+        return "verification"
     return "prefilter"  # validation or free keyword rules, no Gemini involved
 
 
@@ -746,6 +755,9 @@ def build_details(all_deals, source_results, started, status="ok", error=None):
 
 
 def log_run(skipped_prefilter, details):
+    if DRY_RUN:
+        log("DRY RUN: pipeline run details are in the local review files; no DB log written.")
+        return
     """One row in pipeline_runs, same columns as the news worker."""
     try:
         sb("POST", "pipeline_runs", json={
@@ -827,6 +839,7 @@ def run():
 
     stats = process_items(all_deals, entries, exclusions,
                           gemini_classify if _GEMINI_KEY else None)
+    verify_kept(all_deals, reject)
     kept = [d for d in all_deals if d.get("decision") == "kept"]
     skips = sum(1 for d in all_deals
                 if d.get("decision") == "rejected" and stage_of(d["reason"]) == "prefilter")
@@ -835,8 +848,8 @@ def run():
     if DRY_RUN:
         log("\nDRY RUN: nothing was saved. Download the 'deals-dry-run-review' artifact to review.")
     else:
-        save_live(kept, {})
-        log(f"\nLIVE: saved {len(kept)} deals and expired deals not seen for {EXPIRE_AFTER_DAYS} days.")
+        save_live(kept, {}, all_deals)
+        log(f"\nLIVE: saved {len(kept)} deals and expired only offers with known expiry dates.")
     log_run(skips, build_details(all_deals, source_results, started))
     return 0
 
@@ -853,3 +866,4 @@ if __name__ == "__main__":
             log_run(0, {"status": "crashed", "error": str(crash)[:300], "model": GEMINI_MODEL,
                         "total_tokens": STATS["tokens_in"] + STATS["tokens_out"]})
         sys.exit(1)
+
