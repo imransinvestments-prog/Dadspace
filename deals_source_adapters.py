@@ -14,6 +14,34 @@ import requests
 USER_AGENT = "DadspaceDealsWorker/0.2"
 
 
+def _pages(request_page, keys, page_size, provider):
+    records, signatures = [], set()
+    for page in range(1, 21):
+        try:
+            response = request_page(page)
+            if response.status_code != 200:
+                return f"http_{response.status_code}", [], f"{provider} HTTP {response.status_code}"
+            payload = response.json()
+        except (requests.RequestException, ValueError):
+            return "fetch_error", [], f"{provider} page {page} could not be read"
+        if not isinstance(payload, (list, dict)):
+            return "invalid_payload", [], f"{provider} returned an invalid response"
+        items = payload if isinstance(payload, list) else _first(payload, *keys, default=[])
+        if not isinstance(items, list):
+            return "invalid_payload", [], f"{provider} returned an invalid offer list"
+        signature = json.dumps(items, sort_keys=True)
+        if items and signature in signatures:
+            return "incomplete", [], f"{provider} repeated a page; no partial batch published"
+        signatures.add(signature)
+        records.extend(items)
+        meta = (payload.get("meta") or {}) if isinstance(payload, dict) else {}
+        last_page = meta.get("last_page") if isinstance(meta, dict) else None
+        complete = page >= last_page if isinstance(last_page, int) else len(items) < page_size
+        if complete:
+            return "ok", records, ""
+    return "incomplete", [], f"{provider} exceeded the 20-page safety limit; no partial batch published"
+
+
 def _text(value):
     if value is None:
         return ""
@@ -47,7 +75,7 @@ def _iso_to_rfc2822(value):
         return str(value)
 
 
-def _raw(*, title, description="", link="", guid="", published="", category="", merchant="", price="", image=""):
+def _raw(*, title, description="", link="", guid="", published="", category="", merchant="", price="", image="", expires="", starts="", status="", identity=""):
     return {
         "title_raw": _text(title).strip(),
         "description_raw": _text(description).strip(),
@@ -58,6 +86,10 @@ def _raw(*, title, description="", link="", guid="", published="", category="", 
         "merchant_name": _text(merchant).strip(),
         "merchant_price": _text(price).strip(),
         "image_url": _text(image).strip() or None,
+        "expires_at": _text(expires).strip() or None,
+        "starts_at": _text(starts).strip() or None,
+        "source_status": _text(status).strip().lower() or None,
+        "identity": _text(identity).strip() or None,
     }
 
 
@@ -77,22 +109,15 @@ def fetch_awin(source):
         "User-Agent": USER_AGENT,
     }
     body = {
-        "filters": {"membership": "joined", "region": "GB", "status": "active"},
+        "filters": {"membership": "joined", "regionCodes": ["GB"], "status": "active"},
         "pagination": {"page": 1, "pageSize": 200},
     }
-    try:
-        response = requests.post(url, headers=headers, json=body, timeout=(10, 45))
-    except requests.RequestException as exc:
-        return "network_error", [], str(exc)[:180]
-    if response.status_code == 429:
-        return "rate_limited_429", [], "Awin rate limited (429)"
-    if response.status_code in (401, 403):
-        return "auth_error", [], f"Awin HTTP {response.status_code}"
-    if response.status_code >= 300:
-        return f"http_{response.status_code}", [], response.text[:180]
-
-    data = response.json()
-    offers = data if isinstance(data, list) else (data.get("offers") or data.get("promotions") or data.get("data") or data.get("results") or [])
+    status, offers, info = _pages(
+        lambda page: requests.post(url, headers=headers,
+                                   json={**body, "pagination": {"page": page, "pageSize": 200}}, timeout=(10, 45)),
+        ("offers", "promotions", "data", "results"), 200, "Awin")
+    if status != "ok":
+        return status, [], info
     out = []
     for offer in offers:
         if not isinstance(offer, dict):
@@ -100,20 +125,24 @@ def fetch_awin(source):
         advertiser = _first(offer, "advertiser", "advertiserName", "merchant", default="")
         if isinstance(advertiser, dict):
             advertiser = _first(advertiser, "name", "advertiserName", default="")
-        description = _text(_first(offer, "description", "terms", "details", default=""))
-        voucher = _first(offer, "voucherCode", "voucher_code", "code", default="")
+        description = " ".join(_text(offer.get(key)) for key in ("description", "terms", "details") if offer.get(key))
+        voucher_data = offer.get("voucher") or {}
+        voucher = voucher_data.get("code") if isinstance(voucher_data, dict) else ""
+        voucher = voucher or _first(offer, "voucherCode", "voucher_code", "code", default="")
         if voucher:
             description = f"{description} Voucher code: {voucher}".strip()
         out.append(_raw(
             title=_first(offer, "title", "name", "headline", default=""),
             description=description,
-            link=_first(offer, "trackingUrl", "trackingURL", "deeplink", "url", "link", default=""),
+            link=_first(offer, "urlTracking", "trackingUrl", "trackingURL", "deeplink", "url", "link", default=""),
             guid=_first(offer, "id", "promotionId", "offerId", default=""),
             published="",
             category=_first(offer, "category", "promotionCategory", "type", default=""),
             merchant=advertiser,
             price=_first(offer, "salePrice", "price", default=""),
             image=_first(offer, "imageUrl", "image", "logoUrl", default=""),
+            expires=offer.get("endDate"), starts=offer.get("startDate"), status="active",
+            identity="awin:" + _text(_first(offer, "promotionId", "id", "offerId")) if _first(offer, "promotionId", "id", "offerId") else "",
         ))
     return ("ok" if out else "empty"), out, f"Awin promotions: {len(out)}"
 
@@ -126,20 +155,12 @@ def fetch_fmtc(source):
     url = (source.get("url") or default_url).strip()
     if url == "config://fmtc":
         url = default_url
-    params = {"api_token": token, "format": "JSON", "active": 1, "country": "GB"}
-    try:
-        response = requests.get(url, params=params, headers={"User-Agent": USER_AGENT}, timeout=(10, 60))
-    except requests.RequestException as exc:
-        return "network_error", [], str(exc)[:180]
-    if response.status_code == 429:
-        return "rate_limited_429", [], "FMTC rate limited (429)"
-    if response.status_code in (401, 403):
-        return "auth_error", [], f"FMTC HTTP {response.status_code}"
-    if response.status_code >= 300:
-        return f"http_{response.status_code}", [], response.text[:180]
-
-    data = response.json()
-    deals = data if isinstance(data, list) else data.get("data") or data.get("deals") or []
+    params = {"api_token": token, "format": "JSON", "active": 1, "country": "GB", "page_size": 100}
+    status, deals, info = _pages(
+        lambda page: requests.get(url, params={**params, "page": page}, headers={"User-Agent": USER_AGENT}, timeout=(10, 60)),
+        ("data", "deals"), 100, "FMTC")
+    if status != "ok":
+        return status, [], info
     out = []
     for deal in deals:
         if not isinstance(deal, dict):
@@ -156,7 +177,7 @@ def fetch_fmtc(source):
         elif percent and str(percent) not in {"0", "0.0"}:
             title = f"{title} {percent}% off"
         code = _first(deal, "coupon_code", "code", default="")
-        description = _text(_first(deal, "description", "restrictions", default=""))
+        description = " ".join(_text(deal.get(key)) for key in ("description", "restrictions") if deal.get(key))
         if code:
             description = f"{description} Coupon code: {code}".strip()
         categories = deal.get("categories") or []
@@ -167,17 +188,17 @@ def fetch_fmtc(source):
         out.append(_raw(
             title=title,
             description=description,
-            link=_first(deal, "subaffiliate_url", "fmtc_url", "cascading_full_url", "url", default=""),
+            link=_first(deal, "subaffiliate_url", "affiliate_url", "fmtc_url", "cascading_full_url", "direct_link", "url", default=""),
             guid=_first(deal, "id", "coupon_id", "couponid", default=""),
             published="",
             category=category,
             merchant=merchant,
             price=sale_price,
             image=_first(deal, "image", "image_url", default=""),
+            expires=deal.get("end_date"), starts=deal.get("start_date"), status=deal.get("status"),
+            identity="fmtc:" + _text(_first(deal, "id", "coupon_id", "couponid")) if _first(deal, "id", "coupon_id", "couponid") else "",
         ))
-    meta = data.get("meta", {}) if isinstance(data, dict) else {}
-    total = meta.get("total") if isinstance(meta, dict) else None
-    info = f"FMTC active GB deals: {len(out)}" + (f" of {total}" if total is not None else "")
+    info = f"FMTC active GB deals: {len(out)}"
     return ("ok" if out else "empty"), out, info
 
 
@@ -243,3 +264,4 @@ def fetch_source(source, rss_fetcher):
     if source_type in {"pepper", "pepper_api", "hotukdeals_api"}:
         return fetch_pepper(source)
     return "unsupported_source_type", [], f"unsupported source_type={source_type}"
+
