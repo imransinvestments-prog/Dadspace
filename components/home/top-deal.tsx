@@ -11,12 +11,12 @@ export function TopDeal({ deal }: { deal: HomeData["deal"] }) {
 
   return (
     <section aria-labelledby="deal-title" className="flex flex-col gap-4">
-      <SectionHeader id="deal-title" title="Today's top deal" href="/deals" linkLabel="Deals" isSample={deal.isSample} />
+      <SectionHeader id="deal-title" title="Deals worth a look" href="/deals" linkLabel="View all deals" isSample={deal.isSample} />
       <Link
         href="/deals"
         className="group flex flex-col overflow-hidden rounded-lg border bg-card transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10"
       >
-        <div className="relative aspect-[4/3] bg-muted">
+        <div className="relative aspect-[16/9] bg-muted">
           <Image src={d.image || "/placeholder.svg"} alt={d.title} fill sizes="(min-width: 1024px) 30vw, 100vw" className="object-cover transition duration-500 group-hover:scale-105" />
           <span className="absolute top-3 left-3 flex size-16 -rotate-12 flex-col items-center justify-center rounded-full bg-highlight font-heading leading-none font-extrabold text-highlight-foreground">
             <span className="text-lg">{discount}%</span>

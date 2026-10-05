@@ -74,12 +74,13 @@ export function WeekendEvents(props: Props) {
       <div className="flex flex-col gap-2">
         <SectionHeader
           id="weekend-title"
-          title={titleFor(events)}
+          title="Make this weekend count"
           href="/events"
-          linkLabel="All events"
+          linkLabel="View all events"
           isSample={events.isSample}
         />
         <p role="status" aria-live="polite" className="flex flex-wrap items-center gap-2 text-sm leading-relaxed text-muted-foreground">
+          <span className="font-semibold">{titleFor(events)}.</span>
           <LocationNote {...props} />
         </p>
       </div>

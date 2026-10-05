@@ -4,6 +4,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AppShell } from "@/components/app-shell"
 import { LocationProvider } from "@/components/location-provider"
+import { LaunchComingSoon } from "@/components/launch-coming-soon"
+import { COMING_SOON } from "@/lib/launch"
 import { SiteJsonLd } from "@/components/seo/json-ld"
 import { defaultDescription, defaultTitle, isProduction, siteName, siteUrl } from "@/lib/seo"
 import "./globals.css"
@@ -13,14 +15,14 @@ const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakart
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: defaultTitle, template: "%s · Dadspace" },
-  description: defaultDescription,
+  title: { default: COMING_SOON ? "Dadspace · Coming soon" : defaultTitle, template: "%s · Dadspace" },
+  description: COMING_SOON ? "Dadspace is coming soon. Family days out, local activities, news, deals and dad jokes for UK dads." : defaultDescription,
   applicationName: siteName,
   alternates: { canonical: "/" },
   robots: isProduction ? { index: true, follow: true } : { index: false, follow: false },
   appleWebApp: { capable: true, title: siteName, statusBarStyle: "black-translucent" },
   openGraph: {
-    title: defaultTitle,
+    title: COMING_SOON ? "Dadspace · Coming soon" : defaultTitle,
     description: "Days out, dad chat, news that matters and deals on kids' kit.",
     url: "/",
     siteName,
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: defaultTitle,
+    title: COMING_SOON ? "Dadspace · Coming soon" : defaultTitle,
     description: defaultDescription,
     images: ["/images/hero-dad.png"],
   },
@@ -52,9 +54,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased">
         <SiteJsonLd />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <LocationProvider>
+          {COMING_SOON ? <LaunchComingSoon /> : <LocationProvider>
             <AppShell>{children}</AppShell>
-          </LocationProvider>
+          </LocationProvider>}
         </ThemeProvider>
         <SpeedInsights />
       </body>

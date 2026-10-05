@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { CalendarHeart } from "lucide-react"
+import { ArrowRight, CalendarHeart } from "lucide-react"
 
 function countdownCopy(sleeps: number) {
   if (sleeps === 0) return { big: "It's the weekend", small: "Snacks packed? Wipes? Spare wipes?" }
@@ -12,39 +12,32 @@ export function HeroGreeting({ greeting, sleeps, weekendLabel }: { greeting: str
   const copy = countdownCopy(sleeps)
 
   return (
-    <section aria-labelledby="hero-title" className="animate-rise relative isolate overflow-hidden rounded-xl bg-navy text-navy-foreground">
+    <section aria-labelledby="weekend-countdown" className="animate-rise relative isolate min-w-0 overflow-hidden rounded-xl bg-[#12203f] text-[#f5f6fa]">
       <Image
         src="/images/hero-dad.png"
         alt="A dad carrying his laughing daughter on his shoulders through a sunny park"
         fill
         priority
-        sizes="(min-width: 1024px) 60vw, 100vw"
-        className="-z-10 object-cover object-center opacity-70 md:left-auto md:w-3/5 md:opacity-100"
+        sizes="(min-width: 1280px) 48vw, (min-width: 768px) 60vw, 100vw"
+        className="-z-10 object-cover object-[65%_center]"
       />
-      <div className="-z-10 absolute inset-0 bg-navy/60 md:bg-transparent md:[background:linear-gradient(90deg,var(--navy)_42%,transparent_75%)]" aria-hidden />
+      <div className="-z-10 absolute inset-0 bg-[linear-gradient(90deg,#12203f_0%,#12203fe6_35%,#12203f20_100%)]" aria-hidden />
 
-      <div className="flex min-h-80 flex-col justify-between gap-8 p-6 md:max-w-lg md:p-10">
-        <div className="flex flex-col gap-3">
-          <p className="text-sm font-semibold tracking-wide text-highlight uppercase">{weekendLabel}</p>
-          <p className="text-lg font-semibold text-navy-foreground/90">{greeting}</p>
-          <h1 id="hero-title" className="font-heading text-4xl leading-none font-extrabold tracking-tight text-balance md:text-5xl">
-            Days out, news and deals for UK dads
-          </h1>
-        </div>
-
-        <div className="flex flex-col gap-5">
-          <p className="flex flex-col">
-            <span className="font-heading text-5xl leading-none font-extrabold text-primary md:text-6xl">{copy.big}</span>
-            <span className="mt-2 text-base leading-relaxed text-navy-foreground/85">{copy.small}</span>
-          </p>
+      <div className="flex min-h-[320px] flex-col items-start justify-center gap-7 p-6 sm:min-h-[360px] sm:p-8">
+          <p className="text-xs font-bold tracking-wider uppercase">This weekend · {weekendLabel}</p>
+          <h2 id="weekend-countdown" className="flex max-w-full flex-col">
+            <span className="font-heading text-6xl leading-none font-extrabold tracking-tight text-[#ffc94a] sm:text-7xl">{copy.big}</span>
+            <span className="mt-3 text-base leading-snug font-semibold sm:text-lg">{copy.small}</span>
+          </h2>
+          <span className="sr-only">{greeting}</span>
           <Link
             href="/events"
-            className="inline-flex h-12 w-fit items-center gap-2 rounded-full bg-primary px-6 font-semibold text-primary-foreground transition hover:-translate-y-0.5 hover:shadow-lg"
+            className="inline-flex min-h-12 max-w-full items-center gap-2 rounded-full bg-primary px-5 py-3 font-semibold text-primary-foreground transition hover:-translate-y-0.5 hover:shadow-lg"
           >
             <CalendarHeart className="size-5" aria-hidden />
             Plan the weekend
+            <ArrowRight className="ml-1 size-4 shrink-0" aria-hidden />
           </Link>
-        </div>
       </div>
     </section>
   )
