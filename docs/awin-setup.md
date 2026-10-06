@@ -54,3 +54,6 @@ unavailable until registered on the default branch. They were removed after the 
 the final workflow remains manual. Production/default-branch scheduling is unchanged.
 Do not interpret the successful API response as advertiser membership or useful supply.
 Review/join suitable advertiser programmes in AWIN; acceptance remains open.
+
+Owner confirmed the Vercel configuration now applies to all environments.
+A fresh testing deployment is required to pick up the publisher ID.
