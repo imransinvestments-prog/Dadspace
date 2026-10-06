@@ -69,6 +69,8 @@ def prices(raw, title, description):
 
 def value_reason(deal):
     """Value is independent of audience relevance and affiliate commission."""
+    if deal.get("value_evidence_status") == "unsupported_shopify_comparison":
+        return "unsupported_value: Shopify catalogue requires reviewed comparison evidence"
     price, was, pct = deal.get("price"), deal.get("was_price"), deal.get("discount_pct")
     text = deal.get("title", "") + " " + deal.get("description", "")
     applicability = applicability_reason(deal)

@@ -6,6 +6,9 @@ import requests
 
 
 def verify_offer(deal):
+    if deal.get("shopify_variant_id"):
+        from deals_shopify import verify_shopify
+        return verify_shopify(deal)
     if deal.get("merchant_product_id"):
         from deals_halfords import allowed, verify_halfords
         if allowed(deal["link"]):

@@ -1,0 +1,48 @@
+name: Shopify two-merchant pilot
+on:
+  push:
+    branches: [codex/mvp-testing]
+    paths: [.github/workflows/shopify-pilot.yml]
+  workflow_dispatch:
+    inputs:
+      register_inactive:
+        description: Register the two sources inactive after a successful dry run
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: dadspace-shared-deals-collection
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Dry-run the normal worker with the two Shopify sources
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          DRY_RUN: 'true'
+          ENABLE_PAID_AI: 'false'
+          REGISTER_INACTIVE: ${{ inputs.register_inactive || github.event_name == 'push' }}
+        run: |
+          if [ "$REGISTER_INACTIVE" = "true" ]; then
+            python scripts/shopify-pilot.py --register
+          else
+            python scripts/shopify-pilot.py
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shopify-pilot-review
+          path: review/
+          retention-days: 14

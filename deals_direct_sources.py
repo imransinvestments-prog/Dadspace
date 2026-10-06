@@ -50,6 +50,9 @@ def page_text(url):
 
 
 def fetch_direct(source):
+    from deals_shopify import SHOPS, fetch_shopify
+    if source.get("url") in SHOPS:
+        return fetch_shopify(source)
     from deals_halfords import SOURCE_URL, fetch_halfords
     if source.get("url") == SOURCE_URL:
         return fetch_halfords(source)

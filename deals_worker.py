@@ -341,6 +341,8 @@ def normalise(raw):
         "source_status": raw.get("source_status"),
         "verified_source_page": raw.get("verified_source_page"),
         "merchant_product_id": raw.get("merchant_product_id"),
+        "shopify_variant_id": raw.get("shopify_variant_id"),
+        "value_evidence_status": raw.get("value_evidence_status"),
     }
 
 
