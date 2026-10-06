@@ -5,10 +5,10 @@ from urllib.parse import urlsplit
 import requests
 
 
-def verify_offer(deal):
+def verify_offer(deal, shopify_pages=None):
     if deal.get("shopify_variant_id"):
         from deals_shopify import verify_shopify
-        return verify_shopify(deal)
+        return verify_shopify(deal, shopify_pages)
     if deal.get("merchant_product_id"):
         from deals_halfords import allowed, verify_halfords
         if allowed(deal["link"]):
@@ -65,6 +65,7 @@ def verify_offer(deal):
 
 def verify_kept(deals, reject, max_checks=120):
     checked = 0
+    shopify_pages = {}
     for deal in deals:
         if deal.get("decision") != "kept":
             continue
@@ -72,7 +73,7 @@ def verify_kept(deals, reject, max_checks=120):
             reject(deal, "verification_budget: retry next run")
             continue
         checked += 1
-        reason, method = verify_offer(deal)
+        reason, method = verify_offer(deal, shopify_pages)
         if reason:
             reject(deal, reason)
         else:

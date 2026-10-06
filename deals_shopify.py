@@ -106,6 +106,7 @@ def read(url, shop):
 
 def product_json(text, handle):
     decoder = json.JSONDecoder()
+    candidates = []
     # Themes expose complete product JSON either in a JSON script or an assignment.
     # Decode objects without evaluating scripts; verify exact handle and structure.
     for block in re.findall(r"<script\b[^>]*>(.*?)</script>", text, re.I | re.S):
@@ -119,7 +120,54 @@ def product_json(text, handle):
                     value["variants"] and all(isinstance(v, dict) and isinstance(v.get("price"), int)
                                                and not isinstance(v.get("price"), bool) and "available" in v
                                                for v in value["variants"])):
-                return value
+                candidates.append(value)
+    if not candidates:
+        return None
+    def description(value):
+        desc = value.get("description")
+        return clean_text(desc) if isinstance(desc, str) else ""
+    # Analytics/theme summaries can have placeholder descriptions. Prefer the
+    # complete product object, then same-product JSON-LD as a description fallback.
+    product = dict(max(candidates, key=lambda value: len(description(value))))
+    for block in re.findall(r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', text, re.I | re.S):
+        try:
+            value = json.loads(block)
+        except ValueError:
+            continue
+        values = value if isinstance(value, list) else [value]
+        for item in values:
+            if (isinstance(item, dict) and item.get("@type") == "Product" and
+                    urlsplit(str(item.get("url", ""))).path == "/products/" + handle and
+                    item.get("name") == product["title"] and
+                    len(description(item)) > len(description(product))):
+                product["description"] = item["description"]
+    product["description"] = description(product)
+    return product
+
+
+def clean_text(value):
+    value = re.sub(r"<(script|style)\b[^>]*>.*?</\1>", " ", value, flags=re.I | re.S)
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]*>", " ", value))).strip()
+
+
+def taxonomy_label(product):
+    """Reviewed merchant types resolve to the existing canonical labels/IDs.
+
+    Unknown types are left for review, not assigned to a catch-all category.
+    """
+    kind = str(product.get("type", "")).strip().lower()
+    direct = {"hats": "Kids hats", "mittens": "Kids mittens", "gloves": "Kids gloves",
+              "trousers": "Kids trousers", "leggings": "Kids leggings", "pyjamas": "Kids pajamas",
+              "pajamas": "Kids pajamas", "sleepsuits": "Baby sleepers", "socks": "Kids socks",
+              "t-shirts": "Kids T-shirts", "shirts": "Kids shirts", "jumpers": "Kids sweaters"}
+    if kind in direct:
+        return direct[kind]
+    text = (product["title"] + " " + product.get("description", "")).lower()
+    if kind == "outerwear":
+        if re.search(r"\b(?:waterproof|raincoat|splash coat)\b", text):
+            return "Kids raincoats"
+        if re.search(r"\b(?:winter|padded|quilted|insulat\w*|cocoon|warm|fleece lined)\b", text):
+            return "Kids winter coats"
     return None
 
 
@@ -144,25 +192,46 @@ def rows(product, url, shop):
         title = f"{product['title']} — {variant.get('title', 'Default')}"
         age = re.search(r"(?:^|/)\s*(\d{1,2})(?:\s*-\s*(\d{1,2}))?\s*(months?|m|years?|y)\b",
                         str(variant.get("title", "")), re.I)
+        child = False
+        audience_invalid = bool(re.search(r"\b(?:men'?s|women'?s|adult)\b", product["title"], re.I))
         if age:
             lower, upper = int(age[1]), int(age[2] or age[1])
             months = age[3].lower().startswith("m")
             if lower <= upper and ((months and upper <= 24) or (not months and upper <= 12)):
                 title = ("Baby " if months else "Children's ") + title
-        description = html.unescape(re.sub(r"<[^>]*>", " ", product.get("description") or ""))
+                child = True
+            else:
+                audience_invalid = True
+        description = clean_text(product.get("description") or "")
         # Do not copy marketing/RRP/compare-at amounts into the value parser.
         description = re.sub(r"£\s*[\d,.]+", "[unverified amount]", description)
-        raw = _raw(title=title, description=description + " " + shop["delivery"] +
+        comparison = variant.get("compare_at_price")
+        sale = (isinstance(comparison, int) and not isinstance(comparison, bool) and comparison > price > 0)
+        claim = ("Merchant-advertised sale offer. The merchant's comparison price is not independently verified as a previous selling price."
+                 if sale else "No supported sale comparison supplied.")
+        image = product.get("featured_image") or product.get("image")
+        if isinstance(image, dict):
+            image = image.get("src") or image.get("url")
+        if isinstance(image, str) and image.startswith("//"):
+            image = "https:" + image
+        if not isinstance(image, str) or urlsplit(image).scheme != "https":
+            image = None
+        raw = _raw(title=title, description=description[:3000] + " " + shop["delivery"] +
                    " Delivery terms: " + shop["delivery_url"] +
-                   " Catalogue comparison price is unverified; value review required.",
+                   " " + claim,
                    link=url + "?variant=" + vid, merchant=shop["name"], price=price / 100,
+                   image=image,
                    guid=f"shopify:{shop['host']}:{product['id']}:{vid}",
                    identity=f"shopify:{shop['host']}:{product['id']}:{vid}",
                    status="active" if variant.get("available") is True and not variant.get("requires_selling_plan") else "unavailable")
         raw["shopify_variant_id"] = vid
         raw["shopify_compare_at_price"] = variant.get("compare_at_price")
-        # Explicit rejection prevents incidental marketing copy becoming value evidence.
-        raw["value_evidence_status"] = "unsupported_shopify_comparison"
+        raw["shopify_audience_invalid"] = audience_invalid
+        raw["taxonomy_item_label"] = taxonomy_label(product) if child and not audience_invalid else None
+        raw["value_evidence_status"] = "merchant_advertised" if sale else "unsupported_shopify_comparison"
+        if sale:
+            raw["comparison_basis"] = "merchant_advertised"
+            raw["merchant_comparison_price"] = comparison / 100
         out.append(raw)
     return out
 
@@ -214,10 +283,10 @@ def fetch_shopify(source):
             reviewed_comparison(raw, product, text)
         out.extend(variants)
     return ("ok" if out else "empty"), out, (f"Reviewed Shopify catalogue: {len(links[:MAX_PRODUCTS])} products, {len(out)} variants; "
-                                              f"bounded sample (not full catalogue); comparison evidence needs review")
+                                              f"bounded sample (not full catalogue); sale comparisons are merchant-advertised")
 
 
-def verify_shopify(deal):
+def verify_shopify(deal, pages=None):
     from urllib.parse import parse_qs
     p = urlsplit(deal["link"])
     shop = next((s for s in SHOPS.values() if s["host"] == p.hostname), None)
@@ -225,7 +294,12 @@ def verify_shopify(deal):
     if not shop or not allowed(deal["link"], shop) or len(variant) != 1 or variant[0] != deal.get("shopify_variant_id"):
         return "verification_unsupported_source", None
     url = f"https://{p.hostname}{p.path}"
-    status, text = read(url, shop)
+    if pages is not None and url in pages:
+        status, text = pages[url]
+    else:
+        status, text = read(url, shop)
+        if pages is not None:
+            pages[url] = status, text
     if status != "ok":
         return "verification_unavailable", None
     product = product_json(text, p.path.rsplit("/", 1)[-1])
@@ -237,6 +311,10 @@ def verify_shopify(deal):
     if float(row["merchant_price"]) != deal.get("price"):
         return "price_changed", None
     reviewed_comparison(row, product, text)
-    if row["value_evidence_status"] != "reviewed" or row.get("merchant_comparison_price") != deal.get("was_price"):
+    if row["value_evidence_status"] not in {"reviewed", "merchant_advertised"} or row.get("merchant_comparison_price") != deal.get("was_price"):
         return "comparison_unconfirmed", None
-    return None, "merchant-variant"
+    if row["value_evidence_status"] != deal.get("value_evidence_status"):
+        return "comparison_unconfirmed", None
+    if row["shopify_audience_invalid"]:
+        return "outside_audience", None
+    return None, ("source-page:merchant-advertised" if row["value_evidence_status"] == "merchant_advertised" else "source-page")

@@ -25,14 +25,16 @@ class ShopifyTests(unittest.TestCase):
             self.assertFalse(s.allowed("https://user@" + self.shop["host"] + "/products/hat", self.shop))
             get.assert_not_called()
 
-    def test_variant_identity_and_compare_at_not_value(self):
+    def test_variant_identity_and_merchant_advertised_value(self):
         raw = s.rows(product(), self.url, self.shop)[0]
         deal = worker.normalise(raw)
         self.assertEqual(deal["price"], 9)
         self.assertIn("variant=2", deal["link"])
         self.assertEqual(deal["dedupe_key"], worker.normalise(raw)["dedupe_key"])
-        self.assertTrue(value_reason(deal).startswith("unsupported_value"))
-        self.assertIsNone(deal["was_price"])
+        self.assertEqual(deal["value_evidence_status"], "merchant_advertised")
+        self.assertIsNone(value_reason(deal))
+        self.assertEqual(deal["was_price"], 18)
+        self.assertIn("not independently verified", raw["description_raw"])
 
     def test_sold_out_subscription_and_invalid_prices(self):
         self.assertEqual(s.rows(product(False), self.url, self.shop)[0]["source_status"], "unavailable")
@@ -74,7 +76,7 @@ class ShopifyTests(unittest.TestCase):
 
     def test_variant_reverification_price_and_stock(self):
         deal = worker.normalise(s.rows(product(), self.url, self.shop)[0])
-        for p, expected in ((product(), "comparison_unconfirmed"), (product(False), "source_unavailable"), (product(price=1000), "price_changed")):
+        for p, expected in ((product(), None), (product(False), "source_unavailable"), (product(price=1000), "price_changed")):
             with patch.object(s, "read", return_value=("ok", '<script>' + json.dumps(p) + '</script>currency="GBP"')):
                 self.assertEqual(verify_offer(deal)[0], expected)
 
@@ -97,13 +99,70 @@ class ShopifyTests(unittest.TestCase):
         with patch.object(s.Path, "read_text", return_value=json.dumps(evidence)):
             fresh = s.rows(product(), self.url, self.shop)[0]
             s.reviewed_comparison(fresh, product(), text)
-            self.assertEqual(fresh["value_evidence_status"], "unsupported_shopify_comparison")
+            self.assertEqual(fresh["value_evidence_status"], "merchant_advertised")
+
+    def test_description_uses_complete_product_then_same_product_schema(self):
+        stub = product(); stub["description"] = "1"
+        complete = product(); complete["description"] = "<p>Soft organic cotton for babies.</p>"
+        text = '<script>' + json.dumps(stub) + '</script><script>' + json.dumps(complete) + '</script>'
+        self.assertEqual(s.product_json(text, "baby-hat")["description"], "Soft organic cotton for babies.")
+        schema = {"@type": "Product", "name": "Baby hat", "url": self.url, "description": "A warm fleece-lined hat for babies."}
+        text = '<script>' + json.dumps(stub) + '</script><script type="application/ld+json">' + json.dumps(schema) + '</script>'
+        self.assertEqual(s.product_json(text, "baby-hat")["description"], schema["description"])
+        schema["url"] = self.url.replace("baby-hat", "adult-hat")
+        text = '<script>' + json.dumps(stub) + '</script><script type="application/ld+json">' + json.dumps(schema) + '</script>'
+        self.assertEqual(s.product_json(text, "baby-hat")["description"], "1")
+
+    def test_structured_mapping_uses_active_canonical_identity(self):
+        p = product(); p["type"] = "Hats"; p["title"] = "Hygge flower fable"
+        raw = s.rows(p, self.url, self.shop)[0]; d = worker.normalise(raw)
+        entries = worker.compile_items([{"id": 136, "active": "yes", "item_or_service": "Kids hats", "uk_terms": "kids hats", "display_group": "Kids' Clothes & Shoes", "tier": "B", "value_band": "low"}])
+        worker.process_items([d], entries, [])
+        self.assertEqual(d["decision"], "kept"); self.assertEqual(d["item_id"], 136)
+        d = worker.normalise(raw); worker.process_items([d], [], [])
+        self.assertEqual(d["decision"], "rejected")
+        p["variants"][0]["title"] = "13-16 years"
+        d = worker.normalise(s.rows(p, self.url, self.shop)[0])
+        self.assertTrue(worker.validate_deal(d).startswith("outside_audience"))
+        self.assertIsNone(d["taxonomy_item_label"])
+
+    def test_specific_outerwear_and_unknown_types(self):
+        p = product(); p.update(type="Outerwear", title="Splash Coat", description="Warm waterproof coat")
+        self.assertEqual(s.taxonomy_label(p), "Kids raincoats")
+        p.update(title="Quilted Cocoon Coat", description="Warm winter coat")
+        self.assertEqual(s.taxonomy_label(p), "Kids winter coats")
+        p["type"] = "Dungarees"
+        self.assertIsNone(s.taxonomy_label(p))
+
+    def test_missing_invalid_and_changed_compare_prices_still_reject(self):
+        for comparison in (None, 0, 900, 800, True, "1800"):
+            p = product(); p["variants"][0]["compare_at_price"] = comparison
+            d = worker.normalise(s.rows(p, self.url, self.shop)[0])
+            self.assertTrue(value_reason(d).startswith("unsupported_value"))
+        d = worker.normalise(s.rows(product(), self.url, self.shop)[0])
+        p = product(); p["variants"][0]["compare_at_price"] = 2000
+        with patch.object(s, "read", return_value=("ok", '<script>' + json.dumps(p) + '</script>currency="GBP"')):
+            self.assertEqual(verify_offer(d)[0], "comparison_unconfirmed")
+        p = product(price=1790)
+        self.assertTrue(value_reason(worker.normalise(s.rows(p, self.url, self.shop)[0])).startswith("weak_value"))
 
     def test_currency_is_not_inferred_from_a_stale_schema(self):
         self.assertFalse(s.gbp('Shopify.currency = {"active":"USD"}; "priceCurrency":"GBP"'))
         self.assertFalse(s.gbp('currency="USD"'))
         self.assertFalse(s.gbp('no currency'))
         self.assertTrue(s.gbp('Shopify.currency = {"active":"GBP"};'))
+
+    def test_verification_snapshot_is_shared_only_within_one_run(self):
+        d = worker.normalise(s.rows(product(), self.url, self.shop)[0])
+        text = '<script>' + json.dumps(product()) + '</script>currency="GBP"'
+        from deals_verification import verify_kept
+        deals = [{**d, "decision": "kept", "classified_by": "quality-v1:rules"} for _ in range(2)]
+        with patch.object(s, "read", return_value=("ok", text)) as read:
+            verify_kept(deals, worker.reject)
+            self.assertEqual(read.call_count, 1)
+            self.assertTrue(all(x["classified_by"] == "quality-v1:source-page:merchant-advertised:rules" for x in deals))
+            verify_kept([{**d, "decision": "kept", "classified_by": "quality-v1:rules"}], worker.reject)
+            self.assertEqual(read.call_count, 2)
 
     def test_redirects_blocked_and_oversize_rejected(self):
         with patch.object(s.requests, "get") as get:

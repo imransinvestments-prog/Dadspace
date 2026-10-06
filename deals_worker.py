@@ -343,11 +343,15 @@ def normalise(raw):
         "merchant_product_id": raw.get("merchant_product_id"),
         "shopify_variant_id": raw.get("shopify_variant_id"),
         "value_evidence_status": raw.get("value_evidence_status"),
+        "taxonomy_item_label": raw.get("taxonomy_item_label"),
+        "shopify_audience_invalid": raw.get("shopify_audience_invalid"),
     }
 
 
 # ------------------------------------------------------------ 8. VALIDATE
 def validate_deal(d):
+    if d.get("shopify_audience_invalid"):
+        return "outside_audience: adult or unsupported child age range"
     if not d["title"]:
         return "missing_title"
     if not canonical_link(d["link"]):
@@ -403,6 +407,11 @@ def layer1_exclusions(d, exclusions):
 def layer1_match(d, entries):
     """Try to match the deal title to the items list.
     Returns ('strong'|'weak', entry) or (None, None)."""
+    if d.get("shopify_variant_id") and d.get("taxonomy_item_label"):
+        entry = next((e for e in entries if e["item"] == d["taxonomy_item_label"]), None)
+        if entry and has_child_signal(d["title"]) and not d.get("shopify_audience_invalid"):
+            return "strong", {**entry, "term": d["title"]}
+        return None, None
     title = norm_text(d["title"])
     weak = None
     # Prefer the specific item phrase over a shorter, supposedly strong alias.
@@ -509,7 +518,7 @@ def process_items(deals, entries, exclusions, classify_fn=None):
         kind, e = layer1_match(d, entries)
         signal = has_child_signal(d["title"] + " " + d["description"]) or \
             d["feed_category"].lower() == "family & kids"
-        benefit = family_benefit(d["title"] + " " + d["description"])
+        benefit = None if d.get("shopify_variant_id") else family_benefit(d["title"] + " " + d["description"])
         if benefit:
             accept(d, "Days Out & Family Fun", "", "", "mid", 5, benefit, "rules")
         elif kind == "strong" or (kind == "weak" and signal):

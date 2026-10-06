@@ -1,6 +1,6 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { eligibleDeal, selectDeals, dealItemKey } from "../lib/deals-selection.ts"
+import { eligibleDeal, selectDeals, dealItemKey, merchantAdvertised, dealBenefit } from "../lib/deals-selection.ts"
 
 const now = Date.parse("2026-10-05T12:00:00Z")
 
@@ -15,6 +15,16 @@ test("breakfast offers accept explicit under-16 eligibility without a guessed pe
 const row = (changes = {}) => ({ id: 1, title: "Baby cot now £150 was £200", description: "UK delivery £5", retailer: "Shop A", price: 150, was_price: 200, discount_pct: 25, image_url: null, display_group: "Nursery, Beds & Sleep", link: "https://example.com/cot?variant=blue", posted_at: null, last_seen: "2026-10-05T11:00:00Z", expires_at: null, relevance: 4, audience_evidence: "Baby cot", classified_by: "quality-v1:source-page:rules", status: "live", ...changes })
 
 test("supported fresh offer eligible", () => assert.equal(eligibleDeal(row(), now), true))
+test("merchant advertised sales use explicit provenance and existing value/freshness gates", () => {
+  const sale = row({ classified_by: "quality-v1:source-page:merchant-advertised:rules", item_id: 136 })
+  assert.equal(merchantAdvertised(sale), true)
+  assert.equal(eligibleDeal(sale, now), true)
+  assert.equal(merchantAdvertised(row()), false)
+  assert.equal(eligibleDeal({ ...sale, price: 199, was_price: 200, discount_pct: 0.5 }, now), false)
+  assert.equal(eligibleDeal({ ...sale, was_price: null }, now), false)
+  assert.equal(eligibleDeal({ ...sale, last_seen: "2026-09-01T00:00:00Z" }, now), false)
+  assert.equal(dealBenefit({ ...sale, title: "Kids eat free", description: "With an adult meal" }), null)
+})
 test("legacy, unsupported, stale and unsafe records excluded", () => {
   for (const changes of [{ classified_by: "rules" }, { was_price: null }, { discount_pct: 99 }, { relevance: 2 }, { audience_evidence: null }, { status: "review" }, { last_seen: "2026-10-01T00:00:00Z" }, { last_seen: "bad" }, { last_seen: "2026-10-06T00:00:00Z" }, { link: "javascript:alert(1)" }, { link: "https://user:secret@example.com" }, { expires_at: "2026-10-05T12:00:00Z" }, { expires_at: "bad" }]) {
     assert.equal(eligibleDeal(row(changes), now), false, JSON.stringify(changes))

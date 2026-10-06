@@ -58,10 +58,10 @@ def prices(raw, title, description):
             if (before and number(before[-1]) == price) or (after and number(after.group(1)) == price) or amounts == {price, number(candidate.group(2))}:
                 comparison = candidate
     was = number(comparison.group(2)) if comparison else None
-    if raw.get("comparison_basis") == "retailer_regular":
+    if raw.get("comparison_basis") in {"retailer_regular", "merchant_advertised"}:
         was = number(raw.get("merchant_comparison_price"))
     # RRP is a manufacturer reference, not proof of a previous selling price.
-    if comparison and comparison.group(1).lower() == "rrp":
+    if comparison and comparison.group(1).lower() == "rrp" and raw.get("comparison_basis") != "merchant_advertised":
         was = None
     discount = round((was - price) / was * 100, 1) if was and price is not None and 0 <= price < was else None
     return price, was if discount is not None else None, discount
@@ -76,7 +76,7 @@ def value_reason(deal):
     applicability = applicability_reason(deal)
     if applicability:
         return applicability
-    if family_benefit(text):
+    if deal.get("value_evidence_status") != "merchant_advertised" and family_benefit(text):
         return None
     if price is None or was is None or pct is None:
         return "unsupported_value: needs an explicit current and comparison price"

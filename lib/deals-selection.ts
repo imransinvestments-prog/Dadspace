@@ -30,7 +30,12 @@ export function familyBenefit(text: string) {
   return benefit && terms ? benefit[0] : null
 }
 
+export function merchantAdvertised(deal: LiveDeal) {
+  return /^quality-v1:source-page:merchant-advertised:/.test(deal.classified_by ?? "")
+}
+
 export function dealBenefit(deal: LiveDeal) {
+  if (merchantAdvertised(deal)) return null
   return familyBenefit(`${deal.title} ${deal.description ?? ""}`)
 }
 
