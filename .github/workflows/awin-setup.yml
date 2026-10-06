@@ -30,7 +30,7 @@ jobs:
       - run: python -m unittest discover -s tests -p 'test_*.py'
       - name: Validate access and optionally activate
         env:
-          ACTIVATE: ${{ inputs.activate }}
+          ACTIVATE: ${{ github.event_name == 'push' || inputs.activate }}
           AWIN_API_TOKEN: ${{ secrets.AWIN_API_TOKEN }}
           AWIN_PUBLISHER_ID: ${{ secrets.AWIN_PUBLISHER_ID }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
@@ -46,7 +46,7 @@ jobs:
           fi
   collect:
     needs: validate
-    if: inputs.activate
+    if: github.event_name == 'push' || inputs.activate
     uses: ./.github/workflows/deals_collect.yml
     with:
       dry_run: "false"
