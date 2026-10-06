@@ -1,0 +1,50 @@
+name: Validate and enable Awin
+
+on:
+  workflow_dispatch:
+    inputs:
+      activate:
+        description: "Enable the source after successful validation, then collect live"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: dadspace-shared-deals-collection
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: python -m unittest discover -s tests -p 'test_*.py'
+      - name: Validate access and optionally activate
+        env:
+          ACTIVATE: ${{ inputs.activate }}
+          AWIN_API_TOKEN: ${{ secrets.AWIN_API_TOKEN }}
+          AWIN_PUBLISHER_ID: ${{ secrets.AWIN_PUBLISHER_ID }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          ENABLE_PAID_AI: "false"
+        run: |
+          if [ "$ACTIVATE" = "true" ]; then
+            python scripts/enable-awin.py --activate
+          else
+            python scripts/enable-awin.py
+          fi
+  collect:
+    needs: validate
+    if: inputs.activate
+    uses: ./.github/workflows/deals_collect.yml
+    with:
+      dry_run: "false"
+    secrets: inherit

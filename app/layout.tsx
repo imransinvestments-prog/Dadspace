@@ -59,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </LocationProvider>}
         </ThemeProvider>
         <SpeedInsights />
+        <script src="https://www.dwin2.com/pub.3111278.min.js"></script>
       </body>
     </html>
   )
