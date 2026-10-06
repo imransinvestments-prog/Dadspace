@@ -123,6 +123,14 @@ def product_json(text, handle):
     return None
 
 
+def gbp(text):
+    active = re.search(r"Shopify\.currency\s*=\s*\{\s*['\"]active['\"]\s*:\s*['\"]([A-Z]{3})", text)
+    if active:
+        return active.group(1) == "GBP"
+    declared = re.findall(r"(?:currency\s*[=:]\s*['\"]|currency['\"]\s*:\s*['\"]|priceCurrency['\"]\s*:\s*['\"])([A-Z]{3})", text)
+    return bool(declared) and set(declared) == {"GBP"}
+
+
 def rows(product, url, shop):
     from deals_source_adapters import _raw
     out = []
@@ -190,7 +198,7 @@ def fetch_shopify(source):
         if not re.search(r"cdn\.shopify\.com|Shopify\.shop|/cdn/shop/", text):
             return "platform_unconfirmed", [], "Expected Shopify product page"
         product = product_json(text, urlsplit(url).path.rsplit("/", 1)[-1])
-        if not product or not re.search(r"(?:currency\s*[=:]\s*['\"]GBP|currency['\"]\s*:\s*['\"]GBP|priceCurrency['\"]\s*:\s*['\"]GBP|Shopify\.currency\s*=\s*\{\s*['\"]active['\"]\s*:\s*['\"]GBP)", text):
+        if not product or not gbp(text):
             return "product_unconfirmed", [], "Complete variant data/GBP evidence missing"
         if len(product["variants"]) > 250:
             return "incomplete", [], "Variant limit exceeded; no partial batch published"
@@ -214,7 +222,7 @@ def verify_shopify(deal):
     if status != "ok":
         return "verification_unavailable", None
     product = product_json(text, p.path.rsplit("/", 1)[-1])
-    if not product:
+    if not product or not gbp(text):
         return "verification_unavailable", None
     row = next((r for r in rows(product, url, shop) if r["shopify_variant_id"] == variant[0]), None)
     if not row or row["source_status"] != "active":

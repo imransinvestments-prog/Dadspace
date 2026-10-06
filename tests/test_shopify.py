@@ -67,7 +67,7 @@ class ShopifyTests(unittest.TestCase):
     def test_variant_reverification_price_and_stock(self):
         deal = worker.normalise(s.rows(product(), self.url, self.shop)[0])
         for p, expected in ((product(), "comparison_unconfirmed"), (product(False), "source_unavailable"), (product(price=1000), "price_changed")):
-            with patch.object(s, "read", return_value=("ok", '<script>' + json.dumps(p) + '</script>')):
+            with patch.object(s, "read", return_value=("ok", '<script>' + json.dumps(p) + '</script>currency="GBP"')):
                 self.assertEqual(verify_offer(deal)[0], expected)
 
     def test_reviewed_evidence_allows_value_and_is_rechecked(self):
@@ -75,7 +75,7 @@ class ShopifyTests(unittest.TestCase):
         evidence = {raw["identity"]: {"reviewer": "Test reviewer", "evidence_url": self.url,
                     "current_price": 9, "regular_price": 18, "regular_price_phrase": "Regular price £18",
                     "valid_until": "2099-01-01T00:00:00Z"}}
-        text = '<script>' + json.dumps(product()) + '</script>Regular price £18'
+        text = '<script>' + json.dumps(product()) + '</script>Regular price £18 currency="GBP"'
         with patch.object(s.Path, "read_text", return_value=json.dumps(evidence)):
             s.reviewed_comparison(raw, product(), text)
             deal = worker.normalise(raw)
@@ -90,6 +90,12 @@ class ShopifyTests(unittest.TestCase):
             fresh = s.rows(product(), self.url, self.shop)[0]
             s.reviewed_comparison(fresh, product(), text)
             self.assertEqual(fresh["value_evidence_status"], "unsupported_shopify_comparison")
+
+    def test_currency_is_not_inferred_from_a_stale_schema(self):
+        self.assertFalse(s.gbp('Shopify.currency = {"active":"USD"}; "priceCurrency":"GBP"'))
+        self.assertFalse(s.gbp('currency="USD"'))
+        self.assertFalse(s.gbp('no currency'))
+        self.assertTrue(s.gbp('Shopify.currency = {"active":"GBP"};'))
 
     def test_redirects_blocked_and_oversize_rejected(self):
         with patch.object(s.requests, "get") as get:

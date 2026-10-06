@@ -2,7 +2,7 @@ name: Shopify two-merchant pilot
 on:
   push:
     branches: [codex/mvp-testing]
-    paths: [.github/workflows/shopify-pilot.yml]
+    paths: [.github/workflows/shopify-pilot.yml, deals_shopify.py, shopify-value-reviews.json]
   workflow_dispatch:
     inputs:
       register_inactive:
