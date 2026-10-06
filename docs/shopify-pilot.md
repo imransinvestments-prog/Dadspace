@@ -28,8 +28,11 @@ retry. Product requests are spaced. Repeated pages, malformed data, inaccessible
 products and missing GBP/variant evidence fail closed without partial publication.
 Products with more than 250 variants are reported incomplete. Prices are taken
 from the exact variant in embedded product JSON; JavaScript is never executed.
-Sold-out/subscription-only variants are rejected. Identity includes merchant,
-product and variant, and links preserve the selected variant. Existing canonical
+Sold-out/subscription-only variants are rejected.
+Explicit variant ages up to 24 months or 12 years supply child evidence in titles;
+adult/teen sizes and generic S/M/L labels do not. Missing canonical aliases remain
+review gaps; the adapter does not create a competing taxonomy.
+Identity includes merchant, product and variant, and links preserve the selected variant. Existing canonical
 taxonomy and equivalent-item ranking prevent variant proliferation on the site.
 
 ## Value evidence and publication

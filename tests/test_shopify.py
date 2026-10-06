@@ -41,6 +41,14 @@ class ShopifyTests(unittest.TestCase):
         for value in (True, -1, float("nan"), "900"):
             self.assertEqual(s.rows(product(price=value), self.url, self.shop), [])
 
+    def test_age_size_is_evidence_but_adult_and_teen_sizes_are_not(self):
+        for size, prefix in (("0-12 months", "Baby "), ("Navy / 0 - 3 M", "Baby "),
+                             ("1-3 years", "Children's "), ("Adult / M", ""),
+                             ("13-16 years", ""), ("120 cm", "")):
+            p = product(); p["title"] = "Cosy hat"; p["variants"][0]["title"] = size
+            title = s.rows(p, self.url, self.shop)[0]["title_raw"]
+            self.assertEqual(title.startswith("Baby ") or title.startswith("Children's "), bool(prefix))
+
     def test_json_never_executes_and_requires_handle(self):
         text = '<script>window.product = ' + json.dumps(product()) + '; danger();</script>'
         self.assertEqual(s.product_json(text, "baby-hat")["id"], 1)

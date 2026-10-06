@@ -142,6 +142,13 @@ def rows(product, url, shop):
             continue
         vid = str(variant["id"])
         title = f"{product['title']} — {variant.get('title', 'Default')}"
+        age = re.search(r"(?:^|/)\s*(\d{1,2})(?:\s*-\s*(\d{1,2}))?\s*(months?|m|years?|y)\b",
+                        str(variant.get("title", "")), re.I)
+        if age:
+            lower, upper = int(age[1]), int(age[2] or age[1])
+            months = age[3].lower().startswith("m")
+            if lower <= upper and ((months and upper <= 24) or (not months and upper <= 12)):
+                title = ("Baby " if months else "Children's ") + title
         description = html.unescape(re.sub(r"<[^>]*>", " ", product.get("description") or ""))
         # Do not copy marketing/RRP/compare-at amounts into the value parser.
         description = re.sub(r"£\s*[\d,.]+", "[unverified amount]", description)
