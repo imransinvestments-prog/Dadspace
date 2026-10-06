@@ -47,7 +47,7 @@ publisher ID and rebuild to remove the tag. Preserve historical offers and evide
 - [Read-only validation](https://github.com/imransinvestments-prog/Dadspace/actions/runs/37462485900): API access succeeded, zero joined active GB promotions; no database changes.
 - [Activation and live collection](https://github.com/imransinvestments-prog/Dadspace/actions/runs/37462551609): saved source activation confirmed by database readback; normal collector and health/export steps passed. Four offers saved/published across three canonical groups and three providers; zero AI calls/tokens. AWIN returned zero candidates, and health explicitly reports zero verified AWIN supply and a 3/4 group coverage shortfall.
 - [CI](https://github.com/imransinvestments-prog/Dadspace/actions/runs/37457202212): 45 Python tests, 15 selector tests, TypeScript and Next production build succeeded.
-- [Populated preview](https://dadspace-git-codex-awin-deals-imransinvestments-6859.vercel.app/deals): Premier Inn breakfast, Argos booster seat and Halfords junior/balance bikes visible. MasterTag script absent in the preview inspected after activation; Vercel Preview publisher ID/rebuild still needs confirmation. AWIN account plugins have not been activated.
+- [Populated preview](https://dadspace-git-codex-awin-deals-imransinvestments-6859.vercel.app/deals): Premier Inn breakfast, Argos booster seat and Halfords junior/balance bikes visible. After all-environment configuration and a fresh successful Vercel build, the preview contains `https://www.dwin2.com/pub.3111278.min.js` in the body. A direct request to that script returned HTTP 404; successful script delivery/tracking remains unverified. Confirm the account's Add Javascript code and activate the chosen MasterTag plugin. AWIN account plugins have not been activated.
 
 Branch-only push triggers were temporarily used because a new dispatch workflow is
 unavailable until registered on the default branch. They were removed after the run;
@@ -56,4 +56,4 @@ Do not interpret the successful API response as advertiser membership or useful 
 Review/join suitable advertiser programmes in AWIN; acceptance remains open.
 
 Owner confirmed the Vercel configuration now applies to all environments.
-A fresh testing deployment is required to pick up the publisher ID.
+Fresh testing deployment `80297b556100575832d148c8825963a8b9f9f54c` succeeded and picked up publisher ID 3111278. AWIN browser access requires sign-in, so account configuration could not be checked.
