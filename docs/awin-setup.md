@@ -26,11 +26,11 @@ collector succeeded. The current joined-programme active GB response contains no
 
 ## Publisher MasterTag
 
-Set `AWIN_PUBLISHER_ID` in Vercel for the relevant preview/production environment
-and rebuild. The root layout adds the script as the final body element when
-the app is visible and the ID is valid. The coming-soon page has no affiliate links
-and does not load the tag. Only the publisher ID enters the rendered script URL;
-the API token is never used by the website.
+The shared root layout includes the owner's exact public publisher script,
+`<script src="https://www.dwin2.com/pub.3111278.min.js"></script>`, as its final
+body element on every page, including coming-soon and authentication pages.
+The browser script does not depend on Vercel environment variables. The API token
+remains server-only; `AWIN_PUBLISHER_ID` is still required for collector API access.
 
 Following [AWIN's installation guide](https://success.awin.com/s/article/what-is-publisher-mastertag?language=en_US),
 check the browser Network tab for `dwin`, confirm the publisher ID and successful
@@ -39,8 +39,7 @@ Publisher MasterTag** to review permissions and activate the desired plugin.
 Installing the script does not activate plugins. Review Tracking Optimisation
 first; optional Convert-a-Link and other plugins require a separate account choice.
 
-Rollback: set the AWIN source `active=false` to stop collection; remove the Vercel
-publisher ID and rebuild to remove the tag. Preserve historical offers and evidence.
+Rollback: set the AWIN source `active=false` to stop collection; remove the script from `app/layout.tsx` and rebuild to remove the tag. Preserve historical offers and evidence.
 
 ## Live evidence — 6 October 2026
 
