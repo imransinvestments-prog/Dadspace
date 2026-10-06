@@ -49,8 +49,6 @@ export const viewport: Viewport = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const publisherId = process.env.AWIN_PUBLISHER_ID?.trim()
-  const masterTagEnabled = !COMING_SOON && publisherId && /^[1-9]\d*$/.test(publisherId)
   return (
     <html lang="en-GB" suppressHydrationWarning className={`${bricolage.variable} ${jakarta.variable} bg-background`}>
       <body className="font-sans antialiased">
@@ -61,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </LocationProvider>}
         </ThemeProvider>
         <SpeedInsights />
-        {masterTagEnabled && <script src={`https://www.dwin2.com/pub.${publisherId}.min.js`} />}
+        <script src="https://www.dwin2.com/pub.3111278.min.js"></script>
       </body>
     </html>
   )
