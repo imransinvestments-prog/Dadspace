@@ -1,6 +1,9 @@
 name: Validate and enable Awin
 
 on:
+  push:
+    branches: [codex/awin-deals]
+    paths: [.github/workflows/awin-setup.yml]
   workflow_dispatch:
     inputs:
       activate:
