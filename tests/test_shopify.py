@@ -174,6 +174,47 @@ class ShopifyTests(unittest.TestCase):
             response.iter_content.return_value = [b"x" * (s.MAX_BYTES + 1)]
             self.assertEqual(s.read(self.url, self.shop)[0], "oversize_page")
 
+    def test_reviewed_new_store_mapping_requires_product_evidence(self):
+        shop = s.SHOPS['https://www.babipur.co.uk/collections/all-sale-at-babipur.atom']
+        p = product(); p.update(title='Frugi Navigator Backpack - Snow', description="A children's backpack for school.")
+        p['variants'][0]['title'] = 'Default Title'
+        d = worker.normalise(s.rows(p, 'https://www.babipur.co.uk/products/backpack', shop)[0])
+        entries = worker.compile_items([{'id':166,'active':True,'item_or_service':'Backpacks','uk_terms':'backpacks',
+            'display_group':'School & Learning','tier':'B','value_band':'mid','needs_child_evidence':True}])
+        self.assertEqual(worker.layer1_match(d, entries)[1]['item_id'], 166)
+        self.assertIn('school', worker.layer1_match(d, entries)[1]['term'])
+        d['shopify_audience_evidence'] = 'Invented children evidence'
+        d['description'] = 'General-purpose bag.'
+        self.assertEqual(worker.layer1_match(d, entries), (None,None))
+        p.update(title='Replacement Backpack Strap', description='For children at school')
+        d = worker.normalise(s.rows(p, self.url, shop)[0])
+        self.assertIsNone(d['taxonomy_item_label'])
+        self.assertEqual(worker.layer1_match(d, entries), (None,None))
+
+    def test_inherent_baby_goods_do_not_need_clothing_size(self):
+        examples = [('https://www.babipur.co.uk/collections/all-sale-at-babipur.atom','GroVia AIO Petal','Cloth diapers'),
+                    ('https://www.cheekyrascals.co.uk/collections/sale.atom','Baby Brezza Food Maker Deluxe','Baby food maker'),
+                    ('https://www.snuz.co.uk/collections/outlet.atom','SnuzFino Cot Bed - Slate','Cot bed'),
+                    ('https://babygo.uk/collections/baby-proofing.atom','BABYGO Baby Gate For Stairs','Baby gate')]
+        for feed,title,label in examples:
+            p=product();p.update(title=title,description='');p['variants'][0]['title']='Default Title'
+            raw=s.rows(p,'https://'+s.SHOPS[feed]['host']+'/products/item',s.SHOPS[feed])[0]
+            self.assertEqual(raw['taxonomy_item_label'],label)
+        snuz=s.SHOPS[examples[2][0]]
+        for title in ('SnuzFino Cot Bed Conversion Rail','SnuzFino Cot Bed Bundle','SnuzFino Cot Bed Replacement Mattress'):
+            p=product();p['title']=title
+            self.assertIsNone(s.taxonomy_label(p,snuz))
+
+    def test_verification_budget_shares_sources_and_items(self):
+        from deals_verification import verify_kept
+        rows=[{'source_id':1,'item_id':118,'link':str(i),'decision':'kept','classified_by':'quality-v1:rules'} for i in range(4)]
+        rows += [{'source_id':1,'item_id':130,'link':'coat','decision':'kept','classified_by':'quality-v1:rules'},
+                 {'source_id':2,'item_id':90,'link':'gate','decision':'kept','classified_by':'quality-v1:rules'}]
+        with patch('deals_verification.verify_offer',return_value=(None,'source-page')) as verify:
+            verify_kept(rows,worker.reject,max_checks=3)
+        self.assertEqual([call.args[0]['link'] for call in verify.call_args_list],['0','gate','coat'])
+        self.assertEqual(sum(r['decision']=='kept' for r in rows),3)
+
 
 if __name__ == "__main__":
     unittest.main()

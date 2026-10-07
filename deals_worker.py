@@ -344,6 +344,8 @@ def normalise(raw):
         "shopify_variant_id": raw.get("shopify_variant_id"),
         "value_evidence_status": raw.get("value_evidence_status"),
         "taxonomy_item_label": raw.get("taxonomy_item_label"),
+        "shopify_taxonomy_required": raw.get("shopify_taxonomy_required", False),
+        "shopify_audience_evidence": raw.get("shopify_audience_evidence", ""),
         "shopify_audience_invalid": raw.get("shopify_audience_invalid"),
     }
 
@@ -407,10 +409,13 @@ def layer1_exclusions(d, exclusions):
 def layer1_match(d, entries):
     """Try to match the deal title to the items list.
     Returns ('strong'|'weak', entry) or (None, None)."""
-    if d.get("shopify_variant_id") and d.get("taxonomy_item_label"):
+    if d.get("shopify_variant_id") and (d.get("taxonomy_item_label") or d.get("shopify_taxonomy_required")):
         entry = next((e for e in entries if e["item"] == d["taxonomy_item_label"]), None)
-        if entry and has_child_signal(d["title"]) and not d.get("shopify_audience_invalid"):
-            return "strong", {**entry, "term": d["title"]}
+        evidence = d.get("shopify_audience_evidence", "")
+        evidence = evidence if evidence and evidence in d["description"] and has_child_signal(evidence) else ""
+        if entry and not d.get("shopify_audience_invalid") and (
+                has_child_signal(d["title"]) or evidence or (d.get("shopify_taxonomy_required") and not entry["requires_child"])):
+            return "strong", {**entry, "term": evidence or d["title"]}
         return None, None
     title = norm_text(d["title"])
     weak = None

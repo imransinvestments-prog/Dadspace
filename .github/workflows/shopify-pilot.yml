@@ -1,4 +1,4 @@
-name: Shopify two-merchant pilot
+name: Reviewed Shopify sources pilot
 on:
   push:
     branches: [codex/mvp-testing]
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       register_inactive:
-        description: Register the two sources inactive after a successful dry run
+        description: Register reviewed sources inactive after a successful dry run
         type: boolean
         default: false
 permissions:
@@ -25,7 +25,7 @@ jobs:
           python-version: '3.12'
       - run: pip install requests
       - run: python -m unittest discover -s tests -p 'test_*.py' -v
-      - name: Dry-run the normal worker with the two Shopify sources
+      - name: Dry-run the normal worker with reviewed Shopify sources
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}

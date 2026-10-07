@@ -1,4 +1,4 @@
-"""Two reviewed public Shopify collection feeds; no Admin API or browser dependency.
+"""Reviewed public Shopify collection feeds; no Admin API or browser dependency.
 
 Catalogue compare-at prices deliberately never establish a verified saving.
 Only embedded product JSON is read; merchant JavaScript is never executed.
@@ -25,6 +25,45 @@ SHOPS = {
         "delivery": "UK standard Evri delivery: £4.50; free over £75. UK islands have different charges. Check current delivery terms.",
         "delivery_url": "https://babymori.com/pages/delivery",
         "keywords": ["baby", "children", "sleepsuit", "pyjamas", "sleeping bag"],
+    },
+    "https://www.babipur.co.uk/collections/all-sale-at-babipur.atom": {
+        "name": "Babipur", "host": "www.babipur.co.uk", "require_mapping": True,
+        "delivery": "UK standard delivery £3.95, free over £50. Priority/remote delivery can differ; check checkout.",
+        "delivery_url": "https://www.babipur.co.uk/policies/shipping-policy",
+        "keywords": ["reusable nappies", "school bags", "children", "toys"],
+        "title_rules": [(r"^GroVia AIO\b", "Cloth diapers"),
+                        (r"^Frugi Navigator Backpack\b", "Backpacks"),
+                        (r"^Frugi Pack A Lunch Bag\b", "Lunch boxes"),
+                        (r"^Frugi Puddle Buster Coat\b", "Kids raincoats")],
+    },
+    "https://www.cheekyrascals.co.uk/collections/sale.atom": {
+        "name": "Cheeky Rascals", "host": "www.cheekyrascals.co.uk", "require_mapping": True,
+        "delivery": "Most UK mainland delivery £4.99 (£5.99 for listed central London postcodes), free over £50. Highlands, islands and Northern Ireland have separate charges. Check delivery terms.",
+        "delivery_url": "https://www.cheekyrascals.co.uk/pages/our-delivery-promise",
+        "keywords": ["baby feeding", "swaddles", "child safety"],
+        "title_rules": [(r"^Baby Brezza Bottle & Breast Milk Warmer$", "Bottle warmer"),
+                        (r"^Baby Brezza Food Maker Deluxe$", "Baby food maker"),
+                        (r"^Fred Safety .*Stairgate$", "Baby gate"),
+                        (r"^Love To Dream Stage 1 Swaddle Up", "Swaddles")],
+    },
+    "https://www.snuz.co.uk/collections/outlet.atom": {
+        "name": "Snuz", "host": "www.snuz.co.uk", "require_mapping": True,
+        "delivery": "UK delivery available; service, cost and lead time depend on item and postcode. Check delivery terms and the final checkout total before buying.",
+        "delivery_url": "https://www.snuz.co.uk/pages/delivery",
+        "keywords": ["cot bed", "nursery", "sleeping bags"],
+        "title_rules": [(r"^SnuzFino Cot Bed\b", "Cot bed"),
+                        (r"^Snuz(?:Fino|Kot).*Changing Unit\b", "Changing table")],
+    },
+    "https://babygo.uk/collections/baby-proofing.atom": {
+        "name": "BABYGO", "host": "babygo.uk", "require_mapping": True,
+        "delivery": "UK standard delivery £3.99, free over £40; listed remote postcodes £9.99. No PO boxes or Channel Islands. Check current checkout charges.",
+        "delivery_url": "https://babygo.uk/pages/delivery-information",
+        "keywords": ["baby proofing", "baby gate", "child safety locks"],
+        "title_rules": [(r"\bBaby Gate (?:For Stairs|for stairs)\b", "Baby gate"),
+                        (r"\bBaby Proofing Kit\b", "Babyproofing kit"),
+                        (r"\bMagnetic Child Safety Locks\b", "Cabinet locks"),
+                        (r"\bChild Safety Straps\b", "Cabinet locks"),
+                        (r"\bCorner Protectors?\b", "Corner guards")],
     },
 }
 MAX_PAGES = 2
@@ -150,11 +189,16 @@ def clean_text(value):
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]*>", " ", value))).strip()
 
 
-def taxonomy_label(product):
+def taxonomy_label(product, shop=None):
     """Reviewed merchant types resolve to the existing canonical labels/IDs.
 
     Unknown types are left for review, not assigned to a catch-all category.
     """
+    if shop and shop.get("require_mapping"):
+        title = product["title"]
+        if re.search(r"\b(?:bundle|set|pre[- ]?loved|refurbished|preorder|pre-order|replacement|conversion|liner)\b", title, re.I):
+            return None
+        return next((label for pattern, label in shop["title_rules"] if re.search(pattern, title, re.I)), None)
     kind = str(product.get("type", "")).strip().lower()
     direct = {"hats": "Kids hats", "mittens": "Kids mittens", "gloves": "Kids gloves",
               "trousers": "Kids trousers", "leggings": "Kids leggings", "pyjamas": "Kids pajamas",
@@ -227,7 +271,14 @@ def rows(product, url, shop):
         raw["shopify_variant_id"] = vid
         raw["shopify_compare_at_price"] = variant.get("compare_at_price")
         raw["shopify_audience_invalid"] = audience_invalid
-        raw["taxonomy_item_label"] = taxonomy_label(product) if child and not audience_invalid else None
+        label = taxonomy_label(product, shop)
+        raw["shopify_taxonomy_required"] = bool(shop.get("require_mapping"))
+        # Non-clothing goods use reviewed exact title rules. Child-specific generic
+        # items still require explicit evidence from this product's own description.
+        raw["shopify_audience_evidence"] = next((m.group(0) for m in re.finditer(
+            r"[^.!?]*(?:\bbab(?:y|ies)\b|\bchild(?:ren)?\b|\bkids?\b|\bschool\b|\bnursery\b)[^.!?]*",
+            clean_text(product.get("description") or ""), re.I)), "")[:300] if shop.get("require_mapping") else ""
+        raw["taxonomy_item_label"] = label if not audience_invalid and (child or shop.get("require_mapping")) else None
         raw["value_evidence_status"] = "merchant_advertised" if sale else "unsupported_shopify_comparison"
         if sale:
             raw["comparison_basis"] = "merchant_advertised"

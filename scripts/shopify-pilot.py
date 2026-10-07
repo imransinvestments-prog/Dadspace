@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Normal worker dry run for the two reviewed sources; optionally register inactive.
+"""Normal worker dry run for reviewed sources; optionally register inactive.
 
 No live deal writes or activation. Uses canonical database taxonomy and exclusions.
 """

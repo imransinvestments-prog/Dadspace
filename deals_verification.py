@@ -64,11 +64,27 @@ def verify_offer(deal, shopify_pages=None):
 
 
 def verify_kept(deals, reject, max_checks=120):
+    from collections import deque
+    # Round-robin sources and canonical items before spending the bounded budget.
+    # A clothing store's many size variants must not starve other categories.
+    sources = {}
+    for deal in deals:
+        if deal.get("decision") == "kept":
+            items = sources.setdefault(deal.get("source_id"), {})
+            items.setdefault(deal.get("item_id") or deal.get("matched_item") or deal.get("link"), deque()).append(deal)
+    sources = {source: deque(items.values()) for source, items in sources.items()}
+    ordered = []
+    while sources:
+        for source, items in list(sources.items()):
+            variants = items.popleft()
+            ordered.append(variants.popleft())
+            if variants:
+                items.append(variants)
+            if not items:
+                del sources[source]
     checked = 0
     shopify_pages = {}
-    for deal in deals:
-        if deal.get("decision") != "kept":
-            continue
+    for deal in ordered:
         if checked >= max_checks:
             reject(deal, "verification_budget: retry next run")
             continue
