@@ -48,7 +48,7 @@ SHOPS = {
     },
     "https://www.snuz.co.uk/collections/outlet.atom": {
         "name": "Snuz", "host": "www.snuz.co.uk", "require_mapping": True, "max_pages": 1, "public_product_json": True,
-        "delivery": "UK delivery available; service, cost and lead time depend on item and postcode. Check delivery terms and the final checkout total before buying.",
+        "delivery": "Mainland UK delivery free from £50 (£4.95 below £50). Eligible nursery furniture uses free two-person delivery within 1-2 weeks. Postcode exclusions apply; check delivery terms and the final checkout total.",
         "delivery_url": "https://www.snuz.co.uk/pages/delivery",
         "keywords": ["cot bed", "nursery", "sleeping bags"],
         "title_rules": [(r"^SnuzFino Cot Bed\b", "Cot bed"),
