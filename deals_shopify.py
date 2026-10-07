@@ -133,7 +133,7 @@ def read(url, shop):
         try:
             with requests.get(url, headers={"User-Agent": AGENT}, timeout=(5, 15),
                               allow_redirects=False, stream=True) as response:
-                if response.status_code in (429, 502, 503) and attempt == 0:
+                if response.status_code in (429, 500, 502, 503) and attempt == 0:
                     time.sleep(1)
                     continue
                 if response.status_code != 200:
