@@ -199,6 +199,19 @@ class ShopifyTests(unittest.TestCase):
             response.iter_content.return_value = [b"x" * (s.MAX_BYTES + 1)]
             self.assertEqual(s.read(self.url, self.shop)[0], "oversize_page")
 
+    def test_transient_server_error_recovers_once_without_unbounded_retries(self):
+        with patch.object(s.requests, "get") as get, patch.object(s.time, "sleep"):
+            response = get.return_value.__enter__.return_value
+            response.status_code = 500
+            self.assertEqual(s.read(self.url, self.shop), ("http_500", ""))
+            self.assertEqual(get.call_count, 2)
+            get.reset_mock()
+            type(response).status_code = property(lambda self: next(statuses))
+            statuses = iter([500, 200, 200])
+            response.iter_content.return_value = [b"public merchant page"]
+            self.assertEqual(s.read(self.url, self.shop), ("ok", "public merchant page"))
+            self.assertEqual(get.call_count, 2)
+
     def test_reviewed_new_store_mapping_requires_product_evidence(self):
         shop = s.SHOPS['https://www.babipur.co.uk/collections/all-sale-at-babipur.atom']
         p = product(); p.update(title='Frugi Navigator Backpack - Snow', description="A children's backpack for school.")

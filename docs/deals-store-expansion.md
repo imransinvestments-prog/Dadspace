@@ -12,7 +12,7 @@ No schema, paid service, AI classifier or competing taxonomy was introduced.
 | Cheeky Rascals | 38 | https://www.cheekyrascals.co.uk/collections/sale.atom | Baby Brezza bottle warmer (24), food maker (47); reviewed Fred stairgate (90), Love To Dream swaddles (63) | https://www.cheekyrascals.co.uk/pages/our-delivery-promise |
 | Snuz | 39 | https://www.snuz.co.uk/collections/outlet.atom | Cot beds (929), changing tables (71) | https://www.snuz.co.uk/pages/delivery |
 | BABYGO | 40 | https://babygo.uk/collections/baby-proofing.atom | Baby gates (90), babyproofing kits (96), cabinet locks (92), corner guards (93) | https://babygo.uk/pages/delivery-information |
-| Trunki | Registration pending final pilot | https://www.trunki.co.uk/collections/the-explorers-sale.atom | Dougie/Peppa children's luggage (561), Una neck pillow (567) | https://www.trunki.co.uk/pages/delivery-cancellations |
+| Trunki | 41 | https://www.trunki.co.uk/collections/the-explorers-sale.atom | Dougie/Peppa children's luggage (561), Una neck pillow (567) | https://www.trunki.co.uk/pages/delivery-cancellations |
 
 Primary merchant collection/product pages establish the shortlist; these are
 public catalogue sources, not newly agreed affiliate partnerships. Keyword discovery
@@ -80,8 +80,32 @@ suitable child-sized/value supply. These stores were not activated.
 4. To pause a source, set only its exact registered `active` flag false. Existing
    offers age out under the normal 72-hour freshness rule; deactivation is not
    immediate offer removal. For immediate rollback, separately mark that source's
-   offer records inactive using the existing supported status workflow.
+   offer records `expired`; review this separately from disabling ingestion.
 
 Default-branch scheduling remains a separate release decision. Manual verification
 does not satisfy two consecutive scheduled runs or the seven-day observation and
 human-quality acceptance in issue #48.
+
+## Published result
+
+Sources 37–41 are active with readback confirmed. Two successful manual live runs,
+[run 16](https://github.com/imransinvestments-prog/Dadspace/actions/runs/37659708992)
+and [run 17](https://github.com/imransinvestments-prog/Dadspace/actions/runs/37660431447),
+each fetched 521 candidates and persisted 120 reverified offers, with zero AI calls
+or tokens. The shared public selector displays 18 cards across all eight groups
+and ten providers. Each group includes at least one priced product, including
+Trunki luggage/pillow in Days Out rather than counting only the breakfast benefit.
+New-source yields are Babipur 19, Cheeky Rascals 2, Snuz 5, BABYGO 4 and Trunki 2
+verified variants. The 32 new-source variant identities and stored IDs were unchanged
+on repeat ingestion, with zero duplicate ingestion keys in the database.
+
+All eight category filters were checked against rendered cards and prices. The
+homepage's first three deals match the same selected pool. Merchant comparisons,
+exact variant links and each new store's delivery disclosure were checked.
+See [release notes for owner approval](deals-store-expansion-release.md).
+
+Dougie's dog-themed Trunki remains rejected by the existing pet-keyword exclusion;
+Peppa and the child travel pillow qualify. This conservative false positive is a
+review gap, not a reason to bypass the global pet exclusion. Prices/supply can change;
+bounded catalogue sampling and freshness gates intentionally cannot guarantee a
+permanent product in every group.
