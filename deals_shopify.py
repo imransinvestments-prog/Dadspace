@@ -27,7 +27,7 @@ SHOPS = {
         "keywords": ["baby", "children", "sleepsuit", "pyjamas", "sleeping bag"],
     },
     "https://www.babipur.co.uk/collections/all-sale-at-babipur.atom": {
-        "name": "Babipur", "host": "www.babipur.co.uk", "require_mapping": True,
+        "name": "Babipur", "host": "www.babipur.co.uk", "require_mapping": True, "max_pages": 1,
         "delivery": "UK standard delivery £3.95, free over £50. Priority/remote delivery can differ; check checkout.",
         "delivery_url": "https://www.babipur.co.uk/policies/shipping-policy",
         "keywords": ["reusable nappies", "school bags", "children", "toys"],
@@ -37,7 +37,7 @@ SHOPS = {
                         (r"^Frugi Puddle Buster Coat\b", "Kids raincoats")],
     },
     "https://www.cheekyrascals.co.uk/collections/sale.atom": {
-        "name": "Cheeky Rascals", "host": "www.cheekyrascals.co.uk", "require_mapping": True,
+        "name": "Cheeky Rascals", "host": "www.cheekyrascals.co.uk", "require_mapping": True, "max_pages": 1,
         "delivery": "Most UK mainland delivery £4.99 (£5.99 for listed central London postcodes), free over £50. Highlands, islands and Northern Ireland have separate charges. Check delivery terms.",
         "delivery_url": "https://www.cheekyrascals.co.uk/pages/our-delivery-promise",
         "keywords": ["baby feeding", "swaddles", "child safety"],
@@ -47,7 +47,7 @@ SHOPS = {
                         (r"^Love To Dream Stage 1 Swaddle Up", "Swaddles")],
     },
     "https://www.snuz.co.uk/collections/outlet.atom": {
-        "name": "Snuz", "host": "www.snuz.co.uk", "require_mapping": True,
+        "name": "Snuz", "host": "www.snuz.co.uk", "require_mapping": True, "max_pages": 1, "public_product_json": True,
         "delivery": "UK delivery available; service, cost and lead time depend on item and postcode. Check delivery terms and the final checkout total before buying.",
         "delivery_url": "https://www.snuz.co.uk/pages/delivery",
         "keywords": ["cot bed", "nursery", "sleeping bags"],
@@ -55,11 +55,12 @@ SHOPS = {
                         (r"^Snuz(?:Fino|Kot).*Changing Unit\b", "Changing table")],
     },
     "https://babygo.uk/collections/baby-proofing.atom": {
-        "name": "BABYGO", "host": "babygo.uk", "require_mapping": True,
+        "name": "BABYGO", "host": "babygo.uk", "require_mapping": True, "max_pages": 1,
         "delivery": "UK standard delivery £3.99, free over £40; listed remote postcodes £9.99. No PO boxes or Channel Islands. Check current checkout charges.",
         "delivery_url": "https://babygo.uk/pages/delivery-information",
         "keywords": ["baby proofing", "baby gate", "child safety locks"],
-        "title_rules": [(r"\bBaby Gate (?:For Stairs|for stairs)\b", "Baby gate"),
+        "title_rules": [(r"\bBaby Gate\b", "Baby gate"),
+                        (r"\bHome Safety Kit\b", "Babyproofing kit"),
                         (r"\bBaby Proofing Kit\b", "Babyproofing kit"),
                         (r"\bMagnetic Child Safety Locks\b", "Cabinet locks"),
                         (r"\bChild Safety Straps\b", "Cabinet locks"),
@@ -110,6 +111,7 @@ def allowed(url, shop):
                 p.port in (None, 443) and not p.username and not p.password and
                 not p.fragment and ((re.fullmatch(r"/products/[a-z0-9-]+", p.path) and
                                      (not p.query or re.fullmatch(r"variant=\d+", p.query))) or
+                (shop.get("public_product_json") and re.fullmatch(r"/products/[a-z0-9-]+\.js", p.path) and not p.query) or
                 any(url == feed or re.fullmatch(re.escape(feed) + r"\?page=[12]", url)
                     for feed, entry in SHOPS.items() if entry is shop)))
     except ValueError:
@@ -187,6 +189,44 @@ def product_json(text, handle):
 def clean_text(value):
     value = re.sub(r"<(script|style)\b[^>]*>.*?</\1>", " ", value, flags=re.I | re.S)
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]*>", " ", value))).strip()
+
+
+def load_product(text, url, shop, pages=None):
+    """Read reviewed public product JSON when the theme omits stock data.
+
+    Corroborate the handle and product ID against the same HTML page. This is
+    Shopify's public storefront endpoint, with no credentials or script execution.
+    """
+    handle = urlsplit(url).path.rsplit("/", 1)[-1]
+    product = product_json(text, handle)
+    if product or not shop.get("public_product_json"):
+        return product
+    endpoint = url + ".js"
+    if pages is not None and endpoint in pages:
+        status, body = pages[endpoint]
+    else:
+        status, body = read(endpoint, shop)
+        if pages is not None:
+            pages[endpoint] = status, body
+    if status != "ok":
+        return None
+    try:
+        json.loads(body)
+    except ValueError:
+        return None
+    product = product_json("<script>" + body + "</script>", handle)
+    if not product:
+        return None
+    decoder = json.JSONDecoder()
+    for block in re.findall(r"<script\b[^>]*>(.*?)</script>", text, re.I | re.S):
+        for match in re.finditer(r'\{\s*"(?:id|handle)"\s*:', block):
+            try:
+                value, _ = decoder.raw_decode(block[match.start():])
+            except ValueError:
+                continue
+            if isinstance(value, dict) and value.get("id") == product["id"] and value.get("handle") == handle:
+                return product
+    return None
 
 
 def taxonomy_label(product, shop=None):
@@ -294,7 +334,7 @@ def fetch_shopify(source):
         return "unsupported_url", [], "Shopify merchant/collection has not been reviewed"
     links, signatures = [], set()
     ns = {"a": "http://www.w3.org/2005/Atom"}
-    for page in range(1, MAX_PAGES + 1):
+    for page in range(1, min(MAX_PAGES, shop.get("max_pages", MAX_PAGES)) + 1):
         status, text = read(feed if page == 1 else feed + f"?page={page}", shop)
         if status != "ok":
             return status, [], "Collection unavailable; no freshness renewed"
@@ -307,7 +347,9 @@ def fetch_shopify(source):
         if root.tag != "{http://www.w3.org/2005/Atom}feed":
             return "invalid_feed", [], "Expected Atom collection"
         entries = root.findall("a:entry", ns)
-        found = [link.get("href") for entry in entries for link in entry.findall("a:link", ns)
+        found = [link.get("href") for entry in entries
+                 if not shop.get("require_mapping") or taxonomy_label({"title": entry.findtext("a:title", default="", namespaces=ns)}, shop)
+                 for link in entry.findall("a:link", ns)
                  if link.get("rel", "alternate") == "alternate" and allowed(link.get("href", ""), shop)]
         signature = tuple(found)
         if found and signature in signatures:
@@ -324,7 +366,7 @@ def fetch_shopify(source):
             return status, [], "Product unavailable; no partial batch published"
         if not re.search(r"cdn\.shopify\.com|Shopify\.shop|/cdn/shop/", text):
             return "platform_unconfirmed", [], "Expected Shopify product page"
-        product = product_json(text, urlsplit(url).path.rsplit("/", 1)[-1])
+        product = load_product(text, url, shop)
         if not product or not gbp(text):
             return "product_unconfirmed", [], "Complete variant data/GBP evidence missing"
         if len(product["variants"]) > 250:
@@ -353,7 +395,7 @@ def verify_shopify(deal, pages=None):
             pages[url] = status, text
     if status != "ok":
         return "verification_unavailable", None
-    product = product_json(text, p.path.rsplit("/", 1)[-1])
+    product = load_product(text, url, shop, pages)
     if not product or not gbp(text):
         return "verification_unavailable", None
     row = next((r for r in rows(product, url, shop) if r["shopify_variant_id"] == variant[0]), None)

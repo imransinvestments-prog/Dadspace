@@ -56,8 +56,9 @@ def main():
     source_map = {s["id"]: s for s in sources}
     from urllib.parse import urlsplit
     providers = Counter(urlsplit(source_map.get(d.get("source_id"), {}).get("url", "")).hostname for d in published)
-    if len(groups) < 4:
-        alerts.append(f"Coverage shortfall: {len(groups)}/4 target groups")
+    missing_groups = [group for group in worker.GROUPS if not groups[group]]
+    if missing_groups:
+        alerts.append(f"Coverage shortfall: {len(groups)}/{len(worker.GROUPS)} target groups; missing: {', '.join(missing_groups)}")
     if published and max(merchants.values()) > len(published)/2:
         alerts.append("Merchant concentration above 50%")
     report = {"checked_at": now.isoformat(), "published": len(published), "by_group": groups, "by_merchant": merchants, "by_provider": providers, "by_item": Counter(d.get("item_id") for d in published), "stale_hidden": sum(d["status"] == "live" and (age_hours(d.get("last_seen"), now) or 0) > 72 for d in rows), "alerts": alerts, "sources": active_sources, "observation_days": 7, "runs": [{"id":r["id"], "ran_at":r["ran_at"], "dry_run":r["dry_run"], "details":r["details"]} for r in runs]}

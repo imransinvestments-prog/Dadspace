@@ -59,6 +59,31 @@ class ShopifyTests(unittest.TestCase):
         mixed = '<script>' + json.dumps(analytics) + '</script>' + text
         self.assertEqual(s.product_json(mixed, "baby-hat")["variants"][0]["price"], 900)
 
+    def test_reviewed_public_json_requires_same_page_identity_and_stock(self):
+        shop = next(v for v in s.SHOPS.values() if v["name"] == "Snuz")
+        url = "https://www.snuz.co.uk/products/baby-hat"
+        metadata = '<script>' + json.dumps({"id": 1, "handle": "baby-hat"}) + '</script>'
+        pages = {}
+        with patch.object(s, "read", return_value=("ok", json.dumps(product()))) as read:
+            self.assertEqual(s.load_product(metadata, url, shop, pages)["id"], 1)
+            self.assertEqual(s.load_product(metadata, url, shop, pages)["id"], 1)
+            read.assert_called_once_with(url + ".js", shop)
+            self.assertIsNone(s.load_product(metadata.replace('"id": 1', '"id": 9'), url, shop, pages))
+        unavailable = product(); del unavailable["variants"][0]["available"]
+        with patch.object(s, "read", return_value=("ok", json.dumps(unavailable))):
+            self.assertIsNone(s.load_product(metadata, url, shop))
+        self.assertTrue(s.allowed(url + ".js", shop))
+        self.assertFalse(s.allowed(url + ".js", self.shop))
+        self.assertFalse(s.allowed(url + ".js?token=anything", shop))
+
+    def test_reviewed_collection_skips_unmapped_products_before_fetch(self):
+        feed, shop = next((k, v) for k, v in s.SHOPS.items() if v["name"] == "Cheeky Rascals")
+        url = "https://www.cheekyrascals.co.uk/products/baby-hat"
+        xml = '<feed xmlns="http://www.w3.org/2005/Atom"><entry><title>Pre-loved warmer</title><link href="' + url + '"/></entry></feed>'
+        with patch.object(s, "read", return_value=("ok", xml)) as read:
+            self.assertEqual(s.fetch_shopify({"url": feed})[:2], ("empty", []))
+            read.assert_called_once_with(feed, shop)
+
     def test_feed_dispatch_and_duplicate_product_links(self):
         feed = f'<feed xmlns="http://www.w3.org/2005/Atom"><entry><link href="{self.url}"/></entry><entry><link href="{self.url}"/></entry></feed>'
         page = '<script>' + json.dumps(product()) + '</script><script>Shopify.shop="kite"; currency="GBP";</script>'
