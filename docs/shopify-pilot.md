@@ -1,4 +1,13 @@
-# Shopify two-merchant MVP pilot
+# Reviewed Shopify MVP sources
+
+The original two-merchant scope below is expanded by the
+[7 October store review](deals-store-expansion.md). Use the **Reviewed Shopify
+sources pilot** workflow. Newly reviewed stores sample one Atom page, selecting
+only reviewed product titles before fetching up to 12 products. Snuz and Trunki
+also use their same-host public `/products/<handle>.js` storefront endpoint where
+their themes omit complete stock data. The endpoint's handle and product ID must
+match metadata on the GBP product page. No Admin API or credentials are used.
+Existing Kite/MORI bounds and publication rules continue to apply.
 
 The worker reuses its existing `direct` source type, canonical Supabase taxonomy,
 verification, equivalent-item selection and health reporting. No new database

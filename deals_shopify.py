@@ -66,6 +66,14 @@ SHOPS = {
                         (r"\bChild Safety Straps\b", "Cabinet locks"),
                         (r"\bCorner Protectors?\b", "Corner guards")],
     },
+    "https://www.trunki.co.uk/collections/the-explorers-sale.atom": {
+        "name": "Trunki", "host": "www.trunki.co.uk", "require_mapping": True, "max_pages": 1, "public_product_json": True,
+        "delivery": "UK Yodel delivery £1.50, free on orders over £30; usually 2-3 days. Check current delivery terms, checkout and airline luggage limits.",
+        "delivery_url": "https://www.trunki.co.uk/pages/delivery-cancellations",
+        "keywords": ["kids luggage", "children suitcase", "travel pillow"],
+        "title_rules": [(r"^(?:Dougie the Dog|Peppa Pig) Trunki$", "Kids luggage"),
+                        (r"^Travel Pillow Turquoise - Una$", "Kids neck pillow")],
+    },
 }
 MAX_PAGES = 2
 MAX_PRODUCTS = 12
