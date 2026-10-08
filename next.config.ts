@@ -4,6 +4,9 @@ const canonicalHost = "www.dad-space.co.uk"
 const legacyHost = "dadspace.vercel.app"
 
 const nextConfig: NextConfig = {
+  // Resolve route metadata before committing headers, for users and crawlers alike.
+  // Discovery metadata performs existence checks so missing records retain HTTP 404.
+  htmlLimitedBots: /.*/,
   async redirects() {
     return [
       {
