@@ -1,6 +1,6 @@
 # Dadspace news locality — release candidate
 
-Status: draft PR #27; pending approval. Do not merge or apply the corrected SQL until the checks and classification report have been reviewed.
+Status: production release approved by the owner on 8 October 2026, following successful integrated regression checks and production build. See [production launch](production-launch-2026-10-08.md) for the rollout record. The earlier inspection and draft-review notes below are historical.
 
 ## User-visible changes
 

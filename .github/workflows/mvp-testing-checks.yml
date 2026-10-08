@@ -2,7 +2,7 @@ name: MVP testing integration checks
 
 on:
   push:
-    branches: [codex/mvp-testing]
+    branches: [codex/mvp-testing, codex/production-launch-2026-10-08, main]
   workflow_dispatch:
 
 permissions:
