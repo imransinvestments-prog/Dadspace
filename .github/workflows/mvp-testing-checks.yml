@@ -1,0 +1,36 @@
+name: MVP testing integration checks
+
+on:
+  push:
+    branches: [codex/mvp-testing]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pnpm install --frozen-lockfile
+      - run: pip install requests feedparser googlenewsdecoder==0.2.1 selectolax==0.4.12
+      - name: Offline regression checks
+        run: |
+          python -m unittest discover -s tests -v
+          python scripts/test_news_locality.py
+          node scripts/test-news-locality.mjs
+          node --test tests/deals-selection.test.mjs
+      - name: Production build
+        run: pnpm build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'

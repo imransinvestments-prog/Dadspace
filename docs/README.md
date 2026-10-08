@@ -1,5 +1,7 @@
 # Dadspace technical documentation
 
+For the current testing branch, start with the [8 October integration summary](mvp-testing-integration-2026-10-08.md). It records merged features and supersedes the older baseline statements below where testing differs.
+
 Updated 5 October 2026. Code baseline: main commit `29275e17dab42804ecebec529dda2f596ea6cdc7`.
 
 - [Architecture](architecture.md): application, collectors, database, access boundaries and launch state.
