@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: "24"
       - uses: pnpm/action-setup@v4
-      - run: pip install requests
+      - run: pip install requests beautifulsoup4
       - run: python -m unittest discover -s tests -p 'test_*.py' -v
       - run: node --test tests/deals-selection.test.mjs
       - run: pnpm install --frozen-lockfile
