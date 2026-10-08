@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Dices, Info, Search, X } from "lucide-react"
+import { Dices, Search, X } from "lucide-react"
 import { useLocation } from "@/components/location-provider"
 import { useDirectoryPage } from "@/hooks/use-directory-page"
 import { CategoryRail } from "@/components/venues/category-rail"
@@ -23,7 +23,7 @@ const SPIN_INTERVAL_MS = 70
 
 type Result = { venue: Venue; distance: number | null }
 
-export function VenuesDirectory({ venues, isPreview, allCategories = [] }: { venues: Venue[]; isPreview: boolean; allCategories?: {key:string;count:number}[] }) {
+export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialPage = 1, allCategories = [] }: { venues: Venue[]; initialTotal: number; initialHasMore: boolean; initialPage?: number; allCategories?: {key:string;count:number}[] }) {
   const { coords, browseAll } = useLocation()
   const [query, setQuery] = useState("")
   const [category, setCategory] = useState("all")
@@ -33,12 +33,16 @@ export function VenuesDirectory({ venues, isPreview, allCategories = [] }: { ven
   const spinTimer = useRef<number | null>(null)
   const spotlightRef = useRef<HTMLDivElement>(null)
 
-  const enabled=Boolean(coords)||browseAll
+  const enabled=true
   const params=new URLSearchParams({q:query,category,free:String(toggles.has('free')),indoor:String(toggles.has('indoor')),outdoor:String(toggles.has('outdoor'))})
   if(coords){params.set('lat',String(coords.lat));params.set('lng',String(coords.lng))}
-  const feed=useDirectoryPage<{venues:Venue[];total:number;hasMore:boolean}>('/api/venues?'+params,enabled&&!isPreview)
-  const currentVenues=isPreview?(enabled?venues:[]):feed.pages.flatMap(p=>p.venues)
-  const total=isPreview?currentVenues.length:feed.pages.at(-1)?.total??0
+  const isDefault=!coords&&!query&&category==='all'&&toggles.size===0
+  if(isDefault&&initialPage>1)params.set('offset',String((initialPage-1)*24))
+  const seedParams=new URLSearchParams({q:'',category:'all',free:'false',indoor:'false',outdoor:'false'})
+  if(initialPage>1)seedParams.set('offset',String((initialPage-1)*24))
+  const feed=useDirectoryPage<{venues:Venue[];total:number;hasMore:boolean}>('/api/venues?'+params,enabled,{url:'/api/venues?'+seedParams,page:{venues,total:initialTotal,hasMore:initialHasMore}})
+  const currentVenues=feed.pages.flatMap(p=>p.venues)
+  const total=feed.pages.at(-1)?.total??0
   const hasMore=feed.pages.at(-1)?.hasMore??false
   useEffect(()=>{stopSpin();setPick(null);setRolling(false)},[coords,query,category,toggles,browseAll])
   useEffect(() => () => stopSpin(), [])
@@ -51,13 +55,8 @@ export function VenuesDirectory({ venues, isPreview, allCategories = [] }: { ven
   }, [venues,allCategories])
 
   const results = useMemo<Result[]>(() => {
-    const q = query.trim().toLowerCase()
+
     return currentVenues
-      .filter((v) => !isPreview || category === "all" || v.category === category)
-      .filter((v) => !isPreview || !toggles.has("free") || v.is_free)
-      .filter((v) => !isPreview || !toggles.has("indoor") || v.indoor)
-      .filter((v) => !isPreview || !toggles.has("outdoor") || v.outdoor)
-      .filter((v) => !isPreview || !q || [v.name, v.town, v.postcode, v.description].some((s) => s?.toLowerCase().includes(q)))
       .map((v) => ({
         venue: v,
         distance:
@@ -69,7 +68,7 @@ export function VenuesDirectory({ venues, isPreview, allCategories = [] }: { ven
         if (b.distance != null) return 1
         return a.venue.name.localeCompare(b.venue.name)
       })
-  }, [currentVenues, query, category, toggles, coords, isPreview])
+  }, [currentVenues, query, category, toggles, coords])
 
   function stopSpin() {
     if (spinTimer.current != null) window.clearInterval(spinTimer.current)
@@ -127,12 +126,11 @@ export function VenuesDirectory({ venues, isPreview, allCategories = [] }: { ven
           Days out
         </p>
         <h1 className="max-w-3xl font-heading text-4xl leading-[1.05] font-extrabold text-balance md:text-6xl">
-          Where are we{" "}
+          UK venues for{" "}
           <span className="relative inline-block">
-            <span className="relative z-10">off to</span>
+            <span className="relative z-10">family days out</span>
             <span className="absolute inset-x-0 bottom-1 -z-0 h-3 -rotate-1 rounded-sm bg-primary/70 md:h-4" aria-hidden />
           </span>{" "}
-          today?
         </h1>
         <p className="max-w-xl leading-relaxed text-pretty text-muted-foreground">
           Playgrounds, museums, soft play, zoos and more. Pick a type, or let the dice decide and get out the door.
@@ -154,18 +152,6 @@ export function VenuesDirectory({ venues, isPreview, allCategories = [] }: { ven
       {feed.loading && <p role="status">Finding nearby venues…</p>}
       {feed.error && <p role="alert">{feed.error} <button onClick={feed.retry} className="underline">Retry</button></p>}
 
-      {isPreview && (
-        <div role="note" className="flex items-start gap-3 rounded-lg border border-dashed bg-card p-4 text-sm leading-relaxed">
-          <Info className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
-          <p>
-            <span className="font-bold">Preview layout.</span>{" "}
-            <span className="text-muted-foreground">
-              These are sample venues. The page will switch to your <code className="font-mono">venues</code> table automatically once it has
-              data.
-            </span>
-          </p>
-        </div>
-      )}
 
       <div ref={spotlightRef} className="scroll-mt-28">
         {pick && (
@@ -252,8 +238,7 @@ export function VenuesDirectory({ venues, isPreview, allCategories = [] }: { ven
           </button>
         </div>
       )}
-      {hasMore && <button type="button" onClick={()=>feed.loadMore(currentVenues.length)} disabled={feed.loading} className="mx-auto rounded-full border px-5 py-3 font-semibold disabled:opacity-50">{feed.loading?'Loading…':'Load more'}</button>}
+      {hasMore && <button type="button" onClick={()=>feed.loadMore((isDefault?(initialPage-1)*24:0)+currentVenues.length)} disabled={feed.loading} className="mx-auto rounded-full border px-5 py-3 font-semibold disabled:opacity-50">{feed.loading?'Loading…':'Load more'}</button>}
     </div>
   )
 }
-

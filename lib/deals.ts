@@ -1,8 +1,9 @@
 import "server-only"
 import { getSupabase } from "./supabase"
 import { selectDeals, type LiveDeal } from "./deals-selection"
+import { cache } from "react"
 
-export async function getDeals(): Promise<{ items: LiveDeal[]; loadFailed: boolean }> {
+export const getDeals = cache(async (): Promise<{ items: LiveDeal[]; loadFailed: boolean }> => {
   const db = getSupabase()
   if (!db) return { items: [], loadFailed: true }
   try {
@@ -20,7 +21,7 @@ export async function getDeals(): Promise<{ items: LiveDeal[]; loadFailed: boole
     })
     return { items: selectDeals(rows as LiveDeal[]), loadFailed: false }
   } catch { return { items: [], loadFailed: true } }
-}
+})
 
 export async function getDealGroups(): Promise<string[]> {
   const db = getSupabase()
@@ -28,4 +29,3 @@ export async function getDealGroups(): Promise<string[]> {
   const { data, error } = await db.from("parent_discount_items").select("display_group").eq("active", true).not("display_group", "is", null).limit(1000)
   return error ? [] : [...new Set((data ?? []).map(row => row.display_group as string))].sort()
 }
-

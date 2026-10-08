@@ -7,6 +7,7 @@ export const metadata = pageMetadata(
   "News",
   "/news",
   "UK news that matters to dads, summarised with why it matters.",
+  {image:"/images/news/parenting.png"},
 )
 
 // Re-check the database for new articles at most every 10 minutes.

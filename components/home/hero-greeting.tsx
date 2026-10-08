@@ -15,6 +15,7 @@ export function HeroGreeting({ greeting, sleeps, weekendLabel }: { greeting: str
     <section aria-labelledby="weekend-countdown" className="animate-rise relative isolate min-w-0 overflow-hidden rounded-xl bg-[#12203f] text-[#f5f6fa]">
       <Image
         src="/images/hero-dad.png"
+        quality={60}
         alt="A dad carrying his laughing daughter on his shoulders through a sunny park"
         fill
         priority

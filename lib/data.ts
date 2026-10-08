@@ -3,7 +3,6 @@ import { selectNewsCards } from "./home-selection"
 import { getDeals } from "./deals"
 import { getSupabase } from "./supabase"
 import { londonHour, londonToday, upcomingWeekend, formatEventDate } from "./dates"
-import { sampleArticles, sampleEvents, sampleThreads } from "./sample-data"
 import { distanceKm, geocodeLocations, kmToMiles, locationKey, type Point } from "./geo"
 import type { Article, DadEvent, ForumThread, HomeData } from "./types"
 
@@ -129,7 +128,7 @@ async function getWeekendEvents(saturday: string, sunday: string, today: string)
       }
     }
   }
-  return { ...base, items: sampleEvents(saturday, sunday), isSample: true, isWeekend: true }
+  return { ...base, items: [], isSample: false, isWeekend: true }
 }
 
 function commentCount(value: unknown): number {
@@ -157,25 +156,25 @@ async function getTrendingThreads() {
       return { items, isSample: false }
     }
   }
-  return { items: sampleThreads, isSample: true }
+  return { items: [], isSample: false }
 }
 
 async function getLatestArticles(): Promise<HomeData["articles"]> {
   const db = getSupabase()
   if (db) {
     const { data, error } = await db.from("feed_items")
-      .select("id,title,url,source_name,category,published_at,summary,why_it_matters")
+      .select("id,title,url,source_name,category,published_at,summary,why_it_matters,relevance")
       .order("published_at", { ascending: false, nullsFirst: false }).limit(300)
     if (!error && data?.length) {
       const items = selectNewsCards(data.map(row => ({
         id: String(row.id), title: row.title, source: row.source_name, url: row.url,
-        category: row.category, published_at: row.published_at,
+        category: row.category, published_at: row.published_at, relevance: row.relevance,
         summary: row.summary, why_it_matters: row.why_it_matters,
       })))
       return { items, isSample: false }
     }
   }
-  return { items: sampleArticles, isSample: true }
+  return { items: [], isSample: false }
 }
 
 async function getEvents(user: Point | null, saturday: string, sunday: string, today: string) {
@@ -211,4 +210,3 @@ export async function getHomeData(user: Point | null = null): Promise<HomeData> 
     deal: { items: deals.items[0] ?? null, isSample: false, loadFailed: deals.loadFailed },
   }
 }
-

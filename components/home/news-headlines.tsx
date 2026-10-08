@@ -7,7 +7,7 @@ export function NewsHeadlines({ articles }: { articles: HomeData["articles"] }) 
     <SectionHeader id="news-title" title="Latest news" href="/news" linkLabel="View all news" isSample={articles.isSample}/>
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       {articles.items.slice(0,8).map(article => <article key={article.id} className="flex min-w-0 flex-col gap-3 rounded-xl border bg-card p-5">
-        <p className="text-xs font-bold uppercase tracking-wide text-accent">{CATEGORY_LABELS[article.category ?? "other"] ?? article.category}</p>
+        <p className="text-xs font-bold uppercase tracking-wide text-accent">{article.category === "safety" ? "Child safety · sensitive topic" : CATEGORY_LABELS[article.category ?? "other"] ?? article.category}</p>
         <h3 className="font-heading text-lg font-bold leading-snug"><a href={article.url || "/news"} target={article.url ? "_blank" : undefined} rel="noopener noreferrer" className="hover:underline">{article.title}</a></h3>
         <p className="text-xs text-muted-foreground">{article.source}{article.published_at && <span> · {new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",timeZone:"Europe/London"}).format(new Date(article.published_at))}</span>}</p>
         {article.summary?.trim() && <p className="text-sm leading-relaxed text-muted-foreground">{article.summary}</p>}

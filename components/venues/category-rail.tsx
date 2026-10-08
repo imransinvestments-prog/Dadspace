@@ -32,6 +32,7 @@ export function CategoryRail({ categories, total, selected, onSelect }: Props) {
             src={categoryImage(key) || "/placeholder.svg"}
             alt=""
             fill
+            quality={60}
             sizes="144px"
             className="object-cover transition duration-500 group-hover:scale-110"
           />

@@ -2,15 +2,20 @@
 import { useEffect, useRef, useState } from 'react'
 
 /** A location/filter change hides the previous page immediately and cancels stale requests. */
-export function useDirectoryPage<T>(url:string,enabled:boolean){
-  const [state,setState]=useState<{url:string;pages:T[]}>({url:'',pages:[]})
+export function useDirectoryPage<T>(url:string,enabled:boolean,seed?:{url:string;page:T;error?:string}){
+  const [state,setState]=useState<{url:string;pages:T[]}>({url:seed?.url??'',pages:seed?[seed.page]:[]})
   const [loading,setLoading]=useState(false)
-  const [error,setError]=useState('')
+  const [error,setError]=useState(seed?.error??'')
   const [retry,setRetry]=useState(0)
   const controller=useRef<AbortController|null>(null)
   const busy=useRef(false)
   useEffect(()=>{
     if(!enabled)return
+    if(seed&&url===seed.url&&retry===0){
+      const c=new AbortController();controller.current=c;busy.current=false
+      setState({url,pages:[seed.page]});setLoading(false);setError(seed.error??'')
+      return ()=>c.abort()
+    }
     const c=new AbortController();controller.current=c
     setState({url,pages:[]});setLoading(true);setError('');busy.current=true
     const timer=setTimeout(async()=>{

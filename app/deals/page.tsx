@@ -8,6 +8,7 @@ export const metadata = pageMetadata(
   "Family Deals",
   "/deals",
   "Find family-focused discounts, offers and bargains on baby gear, kids' essentials, toys and more.",
+  {image:"/images/news/money.png"},
 )
 
 export const revalidate = 900
@@ -60,4 +61,3 @@ export default async function DealsPage({ searchParams }: { searchParams: Promis
     </main>
   )
 }
-

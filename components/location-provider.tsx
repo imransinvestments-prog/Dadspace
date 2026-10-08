@@ -65,12 +65,14 @@ export function LocationProvider({children}:{children:React.ReactNode}) {
     }catch{}
     return ()=>{generation.current++;searchGeneration.current++}
   },[request])
-  return <LocationContext.Provider value={{coords,status,label,request,setLocation,browseAll:false}}>
-    {authorized ? children : <main className="flex min-h-dvh items-center justify-center px-4 py-10">
+  return <LocationContext.Provider value={{coords,status,label,request,setLocation,browseAll:!coords}}>
+    <div className="mx-auto w-full max-w-6xl px-4 pt-4 lg:pl-72">
+      <details className="rounded-xl border bg-card p-4">
+        <summary className="cursor-pointer font-semibold">{authorized ? `Search near ${label} · change location` : "Choose a location for nearby results (optional)"}</summary>
       <section aria-labelledby="location-title" className="w-full max-w-md rounded-2xl border bg-card p-6 shadow-sm">
         <p className="mb-3 text-sm font-semibold text-primary">Dadspace</p>
-        <h1 id="location-title" className="text-2xl font-bold">Find your starting location</h1>
-        <p className="mt-3 text-muted-foreground">Find activities and days out near you. Use your device location or enter a town, city or UK postcode to continue.</p>
+        <h2 id="location-title" className="text-2xl font-bold">Find your starting location</h2>
+        <p className="mt-3 text-muted-foreground">Browse UK places below, or use your device location or a town, city or UK postcode for nearby results.</p>
         <p className="mt-3 text-sm text-muted-foreground">You can search manually without sharing your device location.</p>
         <div aria-live="polite" className="mt-4 text-sm">
           {status==="locating"&&<p>Finding your location…</p>}
@@ -89,7 +91,9 @@ export function LocationProvider({children}:{children:React.ReactNode}) {
           </div>
         </form>
       </section>
-    </main>}
+      </details>
+    </div>
+    {children}
   </LocationContext.Provider>
 }
 export const useLocation=()=>useContext(LocationContext)

@@ -40,6 +40,7 @@ export function VenuePhoto({ venue, sizes, className }: { venue: Venue; sizes: s
         src={photo ?? categoryImage(venue.category)}
         alt={photo ? `Photo of ${venue.name}` : `${categoryLabel(venue.category)} illustration, not a photo of this venue`}
         fill
+        quality={60}
         unoptimized={Boolean(photo)}
         sizes={sizes}
         className={className}

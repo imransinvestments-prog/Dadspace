@@ -6,6 +6,7 @@ export const metadata = pageMetadata(
   "Kids' Activities, Classes & Clubs",
   "/activities",
   "Regular family activities across the UK: weekly classes, clubs, toddler groups, swimming, sport and term-time sessions for children and parents.",
+  {image:"/images/event-outdoor.png"},
 )
 
 export const revalidate = 600

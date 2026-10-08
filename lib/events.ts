@@ -1,7 +1,6 @@
 import "server-only"
 import { getSupabase } from "./supabase"
 import { londonToday, upcomingWeekend } from "./dates"
-import { sampleEvents } from "./sample-data"
 import { eventCategory } from "./event-meta"
 import type { DadEvent } from "./types"
 import { nearestFirst, type Point } from './distance'
@@ -216,7 +215,7 @@ export async function fetchUpcomingEvents(point?: Point | null): Promise<EventsL
     if (!error) return { events: [], today, saturday, sunday, isSample: false }
   }
 
-  return { events: sampleEvents(saturday, sunday), today, saturday, sunday, isSample: true }
+  return { events: [], today, saturday, sunday, isSample: false }
 }
 
 export async function fetchEventById(id: string): Promise<DadEvent | null> {

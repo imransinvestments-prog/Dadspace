@@ -1,8 +1,9 @@
 import { CalendarHeart, Dumbbell, Home, MapPinned, MessagesSquare, Newspaper, Tag, UserRound, type LucideIcon } from "lucide-react"
+import { FORUM_ENABLED } from "@/lib/launch"
 
 export type NavItem = { href: string; label: string; icon: LucideIcon; mobile: boolean }
 
-export const NAV_ITEMS: NavItem[] = [
+export const NAV_ITEMS: NavItem[] = ([
   { href: "/", label: "Home", icon: Home, mobile: true },
   { href: "/news", label: "News", icon: Newspaper, mobile: true },
   { href: "/venues", label: "Venues", icon: MapPinned, mobile: true },
@@ -11,7 +12,7 @@ export const NAV_ITEMS: NavItem[] = [
   { href: "/activities", label: "Activities", icon: Dumbbell, mobile: true },
   { href: "/forum", label: "Forum", icon: MessagesSquare, mobile: true },
   { href: "/profile", label: "Profile", icon: UserRound, mobile: false },
-]
+] satisfies NavItem[]).filter(item => item.href !== "/forum" || FORUM_ENABLED)
 
 export function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname.startsWith(href)

@@ -1,5 +1,6 @@
 import { JsonLd, absoluteUrl } from "@/components/seo/json-ld"
 import { siteUrl } from "@/lib/seo"
+import { venueSlug } from "@/lib/venue-slug"
 import { categoryLabel, venuePhotoUrl, type Venue } from "@/lib/venue-meta"
 
 const MAX_ITEMS = 100
@@ -16,13 +17,13 @@ const SCHEMA_TYPES: Record<string, string> = {
   aquarium: "Aquarium",
 }
 
-function venueSchema(venue: Venue) {
+export function venueSchema(venue: Venue) {
   return {
     "@type": (venue.category && SCHEMA_TYPES[venue.category]) || "TouristAttraction",
     name: venue.name,
-    description: venue.description || `${categoryLabel(venue.category)}${venue.town ? ` in ${venue.town}` : ""}, family-friendly.`,
+    description: venue.description || `${categoryLabel(venue.category)}${venue.town ? ` in ${venue.town}` : ""}.`,
     image: venuePhotoUrl(venue) ? absoluteUrl(venuePhotoUrl(venue)!) : undefined,
-    url: venue.website_url || undefined,
+    url: `${siteUrl}/venues/${venueSlug(venue)}`,
     telephone: venue.phone || undefined,
     address: {
       "@type": "PostalAddress",
@@ -44,7 +45,7 @@ function venueSchema(venue: Venue) {
   }
 }
 
-export function VenuesJsonLd({ venues }: { venues: Venue[] }) {
+export function VenuesJsonLd({ venues, path = "/venues", title = "Venues across the UK" }: { venues: Venue[]; path?: string; title?: string }) {
   const listed = venues.slice(0, MAX_ITEMS)
 
   return (
@@ -54,17 +55,17 @@ export function VenuesJsonLd({ venues }: { venues: Venue[] }) {
         "@graph": [
           {
             "@type": "CollectionPage",
-            "@id": `${siteUrl}/venues#page`,
-            url: `${siteUrl}/venues`,
-            name: "Family-friendly venues across the UK",
+            "@id": `${siteUrl}${path}#page`,
+            url: `${siteUrl}${path}`,
+            name: title,
             description: "Soft play, parks, museums, libraries and more across the UK, with facilities, prices and opening times for dads and families.",
             inLanguage: "en-GB",
             isPartOf: { "@id": `${siteUrl}/#website` },
-            mainEntity: { "@id": `${siteUrl}/venues#list` },
+            mainEntity: { "@id": `${siteUrl}${path}#list` },
           },
           {
             "@type": "ItemList",
-            "@id": `${siteUrl}/venues#list`,
+            "@id": `${siteUrl}${path}#list`,
             numberOfItems: listed.length,
             itemListElement: listed.map((venue, i) => ({ "@type": "ListItem", position: i + 1, item: venueSchema(venue) })),
           },
