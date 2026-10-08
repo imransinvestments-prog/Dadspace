@@ -4,6 +4,17 @@ export const dynamic="force-dynamic"
 const headers={"Cache-Control":"private, no-store"}
 export async function GET(request:Request) {
   const params=new URL(request.url).searchParams
+  // Vercel supplies coarse IP geolocation; never forward or return the visitor's IP.
+  if(params.get("estimate")==="1") {
+    const point=parsePoint(new URLSearchParams({
+      lat:request.headers.get("x-vercel-ip-latitude")||"",
+      lng:request.headers.get("x-vercel-ip-longitude")||"",
+    }))
+    let city=""
+    try {city=decodeURIComponent(request.headers.get("x-vercel-ip-city")||"").trim().replace(/[\u0000-\u001f\u007f]/g,"").slice(0,100)} catch {}
+    const inUK=request.headers.get("x-vercel-ip-country")==="GB"
+    return NextResponse.json({location:inUK&&point&&city?{...point,label:city+" (approximate)"}:null},{headers})
+  }
   const query=(params.get("q")||params.get("postcode")||"").trim()
   if (query.length<2||query.length>100) return NextResponse.json({error:"Enter a town, city or full UK postcode."},{status:400,headers})
   const postcode=query.replace(/\s/g,"").toUpperCase()
