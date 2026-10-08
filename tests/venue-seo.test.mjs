@@ -2,7 +2,13 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { venueSlug, venueIdFromSlug, browsePage } from '../lib/venue-slug.ts'
 import { urlset, xmlEscape } from '../lib/sitemap-xml.ts'
+import { isUnreleasedForumUrl } from '../scripts/sitemap-checks.mjs'
 const id = '39197fb6-17ef-4bd9-95c5-51a0260d0216'
+test('forum exclusion checks the route rather than legitimate venue names',()=>{
+  assert(isUnreleasedForumUrl('https://www.dad-space.co.uk/forum'))
+  assert(isUnreleasedForumUrl('https://www.dad-space.co.uk/forum/rooms'))
+  assert(!isUnreleasedForumUrl('https://www.dad-space.co.uk/venues/forum-place-playground--'+id))
+})
 test('stable identity survives accents, punctuation and renamed venues',()=>{
   const old=venueSlug({id,name:'Café & Museum'}), updated=venueSlug({id,name:'New museum name'})
   assert.equal(old,`cafe-museum--${id}`)

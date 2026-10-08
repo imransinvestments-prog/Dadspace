@@ -41,6 +41,24 @@ Rollback: revert the delivery PR and redeploy the previous production commit. No
 
 Ticket #53 stays open until deployment/live checks and recorded outstanding acceptance decisions are complete. Preserve PageSpeed failures honestly rather than manufacturing a score.
 
+## Production rollout — 8 October 2026
+
+Owner approved production deployment in chat. PR #54 merged as `693edc92867105ed36953764225348aa6746074f`; Vercel reports success, and the custom domain serves the new public HTML. Fresh anonymous browser reading works without a location choice. Production HTTP checks passed homepage, directory pages 1/2, Hounslow/Manchester/London pilot pages, detail routes, a hidden UUID (404), malformed routes (404) and renamed slugs (308). Production metadata is indexable where eligible; the below-threshold Manchester soft-play page remains noindex. Robots advertises the sitemap index.
+
+The core sitemap contains 644 URLs. Sixteen venue shards contain exactly 58,500 unique URLs, matching the read-only public count, with no cross-shard duplicates, no unreleased forum routes and no tested hidden UUID. Each response is under 50MB and 50,000 URLs. The checker now examines actual URL pathnames: the legitimate `Forum Place Playground` venue must not be mistaken for the `/forum` route. It can verify an expected catalogue count and a supplied hidden UUID through environment variables.
+
+At 390px/DPR 1, a 128px category tile selected a 256px WebP response (quality 60, 12,152 bytes, encoded 256×143). Observed srcset candidates 384/640 also returned valid WebP variants (24,138/50,070 bytes). These candidates correspond to expected DPR 2/3 selection from `sizes=144px`; actual browser selection at DPR 2/3 remains unmeasured because the available viewport control exposes dimensions only. Offscreen tiles remain lazy. No 3840px tile request was observed.
+
+Publication eligibility is the existing canonical `public_visible` policy. The later read-only status snapshot is 55,568 public `existing`, 2,932 public `verified`, and 592 hidden `discovered`; this release does not claim a new human verification of 55,568 historical records. Keep historical quality remediation in #34 and upstream publication/review guarantees in #33.
+
+The latest-20 news record audit and the additional homepage selections are recorded in [news-seo-audit-2026-10-08.md](news-seo-audit-2026-10-08.md). Every sampled stored URL points directly to a publisher. Editorial correctness/approval remains #35; stored relevance scores are not independent verification of a report's claims.
+
+Three production homepage and directory PageSpeed runs are captured separately for mobile and desktop. Homepage median performance is 94 mobile / 99 desktop; median mobile LCP 3.0s, TBT 30ms, CLS 0.001. Directory median performance is 97 mobile / 100 desktop; median mobile LCP 2.6s, TBT 10ms, CLS 0.001. These are Lighthouse 13.5.0 lab results on the initial-load Moto G Power/slow-4G profile, not CrUX p75 values or INP. No CrUX data is available. Exact per-run links and pilot results are attached to #53. No reproducible pre-release production PageSpeed baseline was obtained because the initial domain-resolution/API-quota measurements failed; do not invent a before/after improvement percentage.
+
+Pilot diagnostics identified a skipped heading level (H1 directly to card H3); add a results H2 for accessible structure. Detail share images should use matching category art when no licensed photo exists. Remaining measured diagnostics include image savings/unused JavaScript, brand-text contrast, and lab LCP render delay. The sampled slow category run's LCP element is its introductory paragraph, not a tile; prioritising additional images is not a justified fix for that finding.
+
+Remaining acceptance: actual DPR 2/3 selections, agreed latency/payload budgets and query plans for additional filters, external schema validation, Search Console property-owner inspection/sitemap evidence, and historical/editorial quality decisions. Field observation continues when CrUX data exists. Keep #53 open until these are recorded or explicitly resolved; deployment alone does not check every acceptance box.
+
 ## Preview delivery evidence
 
 PR #54 implements the public rendering, canonical routes, sitemap shards, launch flag and truthful source-backed states. GitHub checks run the production build, TypeScript and 22 regression tests. Removing the root loading boundary and blocking metadata for every user agent preserves 404/308 before headers are committed; this is identical rendering policy for users and bots, with a possible first-byte latency tradeoff.
