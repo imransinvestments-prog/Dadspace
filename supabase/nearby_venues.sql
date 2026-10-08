@@ -7,7 +7,10 @@ create or replace function public.nearby_venue_page(
 ) returns jsonb language sql stable security invoker set search_path = public
 as $$
   with filtered as materialized (
-    select v.*, case when p_lat between -90 and 90 and p_lng between -180 and 180
+    -- Keep the full-directory working set narrow. Materialising v.* spilled
+    -- venue descriptions/image metadata to disk and exceeded the API timeout.
+    select v.id, coalesce(nullif(v.venue_name,''),v.venue_label) as sort_name,
+      case when p_lat between -90 and 90 and p_lng between -180 and 180
       and v.latitude between -90 and 90 and v.longitude between -180 and 180
       then 7917.6 * asin(sqrt(least(1.0, greatest(0.0,
         power(sin(radians(v.latitude-p_lat)/2),2) + cos(radians(p_lat))*cos(radians(v.latitude))*power(sin(radians(v.longitude-p_lng)/2),2)
@@ -20,10 +23,13 @@ as $$
       and (not p_outdoor or to_jsonb(v)->>'outdoor' = 'true')
       and (coalesce(p_query,'') = '' or strpos(lower(concat_ws(' ',v.venue_name,v.venue_label,v.town_city,v.postcode,v.address)),lower(left(p_query,100))) > 0)
   ), page as (
-    select * from filtered order by distance_miles nulls last, coalesce(nullif(venue_name,''),venue_label), id
+    select * from filtered order by distance_miles nulls last, sort_name, id
     offset greatest(0,p_offset) limit least(48,greatest(1,p_limit))
   )
-  select jsonb_build_object('rows',coalesce((select jsonb_agg(to_jsonb(p) order by p.distance_miles nulls last, coalesce(nullif(p.venue_name,''),p.venue_label), p.id) from page p),'[]'::jsonb),
+  select jsonb_build_object('rows',coalesce((select jsonb_agg(
+      to_jsonb(v) || jsonb_build_object('distance_miles',p.distance_miles)
+      order by p.distance_miles nulls last, p.sort_name, p.id)
+    from page p join public.venues v on v.id = p.id),'[]'::jsonb),
     'total',(select count(*) from filtered));
 $$;
 revoke all on function public.nearby_venue_page(double precision,double precision,text,text,boolean,boolean,boolean,integer,integer) from public,anon,authenticated;
