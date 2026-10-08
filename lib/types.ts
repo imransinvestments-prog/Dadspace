@@ -87,7 +87,7 @@ export type HomeData = {
   greeting: string
   sleepsToWeekend: number
   weekendLabel: string
-  events: Sourced<DadEvent[]> & { isWeekend: boolean; nearby: NearbyScope | null; radiusMiles: number }
+  events: Sourced<DadEvent[]> & { isWeekend: boolean; nearby: NearbyScope | null; radiusMiles: number; loadFailed: boolean }
   threads: Sourced<ForumThread[]>
   /** `pool[i]` holds the newest articles for the category shown in card `i`, newest first. */
   articles: Sourced<Article[]> & { pool?: Article[][]; loadFailed: boolean }

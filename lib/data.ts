@@ -76,7 +76,7 @@ async function getNearbyEvents(user: Point, saturday: string, sunday: string, to
   const byDistance = (a: DadEvent, b: DadEvent) =>
     (a.distance_miles ?? 0) - (b.distance_miles ?? 0) || (b.family_relevance ?? 0) - (a.family_relevance ?? 0)
   const nearby = located.filter((e) => e.distance_miles <= NEARBY_RADIUS_MILES)
-  const base = { isSample: false, radiusMiles: NEARBY_RADIUS_MILES }
+  const base = { isSample: false, radiusMiles: NEARBY_RADIUS_MILES, loadFailed: false }
 
   const isThisWeekend = (e: DadEvent) => e.start_date <= sunday && (e.end_date ?? e.start_date) >= saturday
   if (nearby.some(isThisWeekend)) {
@@ -93,8 +93,10 @@ async function getNearbyEvents(user: Point, saturday: string, sunday: string, to
 
 async function getWeekendEvents(saturday: string, sunday: string, today: string): Promise<EventsResult> {
   const base = { nearby: null, radiusMiles: NEARBY_RADIUS_MILES }
+  const unavailable = { ...base, items: [], isSample: false, isWeekend: true, loadFailed: true }
   const db = getSupabase()
-  if (db) {
+  if (!db) return unavailable
+  try {
     const weekend = await db
       .from("upcoming_events")
       .select(EVENT_COLUMNS)
@@ -103,12 +105,14 @@ async function getWeekendEvents(saturday: string, sunday: string, today: string)
       .order("family_relevance", { ascending: false })
       .order("start_date", { ascending: true })
       .limit(30)
-    if (!weekend.error && weekend.data?.length) {
+    if (weekend.error) return unavailable
+    if (weekend.data?.length) {
       return {
         ...base,
         items: pickLocationMix(weekend.data as DadEvent[]),
         isSample: false,
         isWeekend: true,
+        loadFailed: false,
       }
     }
 
@@ -119,16 +123,20 @@ async function getWeekendEvents(saturday: string, sunday: string, today: string)
       .order("start_date", { ascending: true })
       .order("family_relevance", { ascending: false })
       .limit(30)
-    if (!upcoming.error && upcoming.data?.length) {
+    if (upcoming.error) return unavailable
+    if (upcoming.data?.length) {
       return {
         ...base,
         items: pickLocationMix(upcoming.data as DadEvent[]),
         isSample: false,
         isWeekend: false,
+        loadFailed: false,
       }
     }
+  } catch {
+    return unavailable
   }
-  return { ...base, items: [], isSample: false, isWeekend: true }
+  return { ...base, items: [], isSample: false, isWeekend: true, loadFailed: false }
 }
 
 function commentCount(value: unknown): number {
