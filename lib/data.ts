@@ -161,20 +161,22 @@ async function getTrendingThreads() {
 
 async function getLatestArticles(): Promise<HomeData["articles"]> {
   const db = getSupabase()
-  if (db) {
+  const unavailable = { items: [], isSample: false, loadFailed: true }
+  if (!db) return unavailable
+  try {
     const { data, error } = await db.from("feed_items")
       .select("id,title,url,source_name,category,published_at,summary,why_it_matters,relevance")
       .order("published_at", { ascending: false, nullsFirst: false }).limit(300)
-    if (!error && data?.length) {
-      const items = selectNewsCards(data.map(row => ({
-        id: String(row.id), title: row.title, source: row.source_name, url: row.url,
-        category: row.category, published_at: row.published_at, relevance: row.relevance,
-        summary: row.summary, why_it_matters: row.why_it_matters,
-      })))
-      return { items, isSample: false }
-    }
+    if (error) return unavailable
+    const items = selectNewsCards((data ?? []).map(row => ({
+      id: String(row.id), title: row.title, source: row.source_name, url: row.url,
+      category: row.category, published_at: row.published_at, relevance: row.relevance,
+      summary: row.summary, why_it_matters: row.why_it_matters,
+    })))
+    return { items, isSample: false, loadFailed: false }
+  } catch {
+    return unavailable
   }
-  return { items: [], isSample: false }
 }
 
 async function getEvents(user: Point | null, saturday: string, sunday: string, today: string) {
