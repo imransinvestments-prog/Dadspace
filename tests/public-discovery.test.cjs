@@ -13,6 +13,10 @@ test('public reads exclude hidden rows, bound first page and fail honestly',asyn
   const {module:m}=load('lib/venue-discovery.ts',{'server-only':{},react:{cache:f=>f},'./supabase':{getSupabase:()=>configured?db:null},'./venues':{toVenue:r=>({id:r.id,name:r.venue_name})}})
   const page=await m.publicVenuePage();assert.deepEqual(Array.from(page.venues,v=>v.id),['visible']);assert.deepEqual(calls.at(-1).range,[0,23])
   assert.equal(await m.publicVenueById('hidden'),null)
+  records[0].public_visible=false
+  assert.equal(await m.publicVenueById('visible'),null)
+  assert.equal((await m.publicVenuePage()).venues.length,0)
+  records[0].public_visible=true
   error={message:'offline'};assert.equal((await m.publicVenuePage()).loadFailed,true);assert.equal((await m.publicVenuePage()).venues.length,0)
   configured=false;assert.equal((await m.publicVenuePage()).loadFailed,true);await assert.rejects(m.publicVenueById('visible'),/temporarily unavailable/)
   assert(!calls[0].columns.includes('notes'));assert(!calls[0].columns.includes('review_reason'))

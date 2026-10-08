@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   // Resolve route metadata before committing headers, for users and crawlers alike.
   // Discovery metadata performs existence checks so missing records retain HTTP 404.
   htmlLimitedBots: /.*/,
+  images: { qualities: [60, 75] },
   async redirects() {
     return [
       {
