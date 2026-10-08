@@ -59,10 +59,25 @@ export function LocationProvider({children}:{children:React.ReactNode}) {
       const saved=JSON.parse(sessionStorage.getItem(KEY)||"null")
       if(saved?.authorized&&typeof saved.label==="string"){
         const point=parsePoint(new URLSearchParams({lat:String(saved.point?.lat),lng:String(saved.point?.lng)}))
-        if(point){setCoords(point);setLabel(saved.label);setStatus("ready")}
+        if(point){setCoords(point);setLabel(saved.label);setStatus("ready");return ()=>{generation.current++;searchGeneration.current++}}
       }
     }catch{}
-    return ()=>{generation.current++;searchGeneration.current++}
+    const ticket=++generation.current
+    const controller=new AbortController()
+    const timeout=setTimeout(()=>controller.abort(),5000)
+    fetch("/api/location?estimate=1",{cache:"no-store",signal:controller.signal})
+      .then(async response=>{
+        if(!response.ok)return
+        const data=await response.json()
+        if(ticket!==generation.current||controller.signal.aborted)return
+        const guess=data.location
+        if(!guess||typeof guess.label!=="string")return
+        const point=parsePoint(new URLSearchParams({lat:String(guess.lat),lng:String(guess.lng)}))
+        if(point){setCoords(point);setLabel(guess.label);setStatus("ready")}
+      })
+      .catch(()=>{}) // Missing or failed estimates leave the London fallback usable.
+      .finally(()=>clearTimeout(timeout))
+    return ()=>{controller.abort();clearTimeout(timeout);generation.current++;searchGeneration.current++}
   },[request])
   return <LocationContext.Provider value={{coords,status,label,request,setLocation,browseAll:false}}>
     <div className="mx-auto w-full max-w-6xl px-4 pt-4 lg:pl-72">
