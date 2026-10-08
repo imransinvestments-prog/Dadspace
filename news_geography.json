@@ -1,0 +1,1505 @@
+{
+  "version": 2,
+  "regions": [
+    "east_midlands",
+    "east_of_england",
+    "london",
+    "north_east",
+    "north_west",
+    "south_east",
+    "south_west",
+    "west_midlands",
+    "yorkshire_and_the_humber"
+  ],
+  "regionAliases": {
+    "yorkshire_and_humber": "yorkshire_and_the_humber",
+    "greater_london": "london"
+  },
+  "areaAliases": {
+    "glasgow": "glasgow_city",
+    "edinburgh": "city_of_edinburgh",
+    "bristol": "bristol_city_of",
+    "city_of_bristol": "bristol_city_of",
+    "herefordshire": "herefordshire_county_of",
+    "city_of_nottingham": "nottingham",
+    "city_of_leicester": "leicester",
+    "kingston_upon_hull": "kingston_upon_hull_city_of",
+    "hull": "kingston_upon_hull_city_of"
+  },
+  "reference": {
+    "edition": "May 2026",
+    "publisher": "Office for National Statistics",
+    "licence": "Open Government Licence v3.0",
+    "source": "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/WD26_LAD26_CTYUA26_RGN26_CTRY26_UK_LU/FeatureServer/0",
+    "retrieved": "2026-10-05"
+  },
+  "districts": {
+    "aberdeen_city": {
+      "nation": "scotland",
+      "county": null
+    },
+    "aberdeenshire": {
+      "nation": "scotland",
+      "county": null
+    },
+    "adur": {
+      "nation": "england",
+      "county": "west_sussex"
+    },
+    "amber_valley": {
+      "nation": "england",
+      "county": "derbyshire"
+    },
+    "angus": {
+      "nation": "scotland",
+      "county": null
+    },
+    "antrim_and_newtownabbey": {
+      "nation": "northern_ireland",
+      "county": null
+    },
+    "ards_and_north_down": {
+      "nation": "northern_ireland",
+      "county": null
+    },
+    "argyll_and_bute": {
+      "nation": "scotland",
+      "county": null
+    },
+    "armagh_city_banbridge_and_craigavon": {
+      "nation": "northern_ireland",
+      "county": null
+    },
+    "arun": {
+      "nation": "england",
+      "county": "west_sussex"
+    },
+    "ashfield": {
+      "nation": "england",
+      "county": "nottinghamshire"
+    },
+    "ashford": {
+      "nation": "england",
+      "county": "kent"
+    },
+    "babergh": {
+      "nation": "england",
+      "county": "suffolk"
+    },
+    "barking_and_dagenham": {
+      "nation": "england",
+      "county": null
+    },
+    "barnet": {
+      "nation": "england",
+      "county": null
+    },
+    "barnsley": {
+      "nation": "england",
+      "county": null
+    },
+    "basildon": {
+      "nation": "england",
+      "county": "essex"
+    },
+    "basingstoke_and_deane": {
+      "nation": "england",
+      "county": "hampshire"
+    },
+    "bassetlaw": {
+      "nation": "england",
+      "county": "nottinghamshire"
+    },
+    "bath_and_north_east_somerset": {
+      "nation": "england",
+      "county": null
+    },
+    "bedford": {
+      "nation": "england",
+      "county": null
+    },
+    "belfast": {
+      "nation": "northern_ireland",
+      "county": null
+    },
+    "bexley": {
+      "nation": "england",
+      "county": null
+    },
+    "birmingham": {
+      "nation": "england",
+      "county": null
+    },
+    "blaby": {
+      "nation": "england",
+      "county": "leicestershire"
+    },
+    "blackburn_with_darwen": {
+      "nation": "england",
+      "county": null
+    },
+    "blackpool": {
+      "nation": "england",
+      "county": null
+    },
+    "blaenau_gwent": {
+      "nation": "wales",
+      "county": null
+    },
+    "bolsover": {
+      "nation": "england",
+      "county": "derbyshire"
+    },
+    "bolton": {
+      "nation": "england",
+      "county": null
+    },
+    "boston": {
+      "nation": "england",
+      "county": "lincolnshire"
+    },
+    "bournemouth_christchurch_and_poole": {
+      "nation": "england",
+      "county": null
+    },
+    "bracknell_forest": {
+      "nation": "england",
+      "county": null
+    },
+    "bradford": {
+      "nation": "england",
+      "county": null
+    },
+    "braintree": {
+      "nation": "england",
+      "county": "essex"
+    },
+    "breckland": {
+      "nation": "england",
+      "county": "norfolk"
+    },
+    "brent": {
+      "nation": "england",
+      "county": null
+    },
+    "brentwood": {
+      "nation": "england",
+      "county": "essex"
+    },
+    "bridgend": {
+      "nation": "wales",
+      "county": null
+    },
+    "brighton_and_hove": {
+      "nation": "england",
+      "county": null
+    },
+    "bristol_city_of": {
+      "nation": "england",
+      "county": null
+    },
+    "broadland": {
+      "nation": "england",
+      "county": "norfolk"
+    },
+    "bromley": {
+      "nation": "england",
+      "county": null
+    },
+    "bromsgrove": {
+      "nation": "england",
+      "county": "worcestershire"
+    },
+    "broxbourne": {
+      "nation": "england",
+      "county": "hertfordshire"
+    },
+    "broxtowe": {
+      "nation": "england",
+      "county": "nottinghamshire"
+    },
+    "buckinghamshire": {
+      "nation": "england",
+      "county": null
+    },
+    "burnley": {
+      "nation": "england",
+      "county": "lancashire"
+    },
+    "bury": {
+      "nation": "england",
+      "county": null
+    },
+    "caerphilly": {
+      "nation": "wales",
+      "county": null
+    },
+    "calderdale": {
+      "nation": "england",
+      "county": null
+    },
+    "cambridge": {
+      "nation": "england",
+      "county": "cambridgeshire"
+    },
+    "camden": {
+      "nation": "england",
+      "county": null
+    },
+    "cannock_chase": {
+      "nation": "england",
+      "county": "staffordshire"
+    },
+    "canterbury": {
+      "nation": "england",
+      "county": "kent"
+    },
+    "cardiff": {
+      "nation": "wales",
+      "county": null
+    },
+    "carmarthenshire": {
+      "nation": "wales",
+      "county": null
+    },
+    "castle_point": {
+      "nation": "england",
+      "county": "essex"
+    },
+    "causeway_coast_and_glens": {
+      "nation": "northern_ireland",
+      "county": null
+    },
+    "central_bedfordshire": {
+      "nation": "england",
+      "county": null
+    },
+    "ceredigion": {
+      "nation": "wales",
+      "county": null
+    },
+    "charnwood": {
+      "nation": "england",
+      "county": "leicestershire"
+    },
+    "chelmsford": {
+      "nation": "england",
+      "county": "essex"
+    },
+    "cheltenham": {
+      "nation": "england",
+      "county": "gloucestershire"
+    },
+    "cherwell": {
+      "nation": "england",
+      "county": "oxfordshire"
+    },
+    "cheshire_east": {
+      "nation": "england",
+      "county": null
+    },
+    "cheshire_west_and_chester": {
+      "nation": "england",
+      "county": null
+    },
+    "chesterfield": {
+      "nation": "england",
+      "county": "derbyshire"
+    },
+    "chichester": {
+      "nation": "england",
+      "county": "west_sussex"
+    },
+    "chorley": {
+      "nation": "england",
+      "county": "lancashire"
+    },
+    "city_of_edinburgh": {
+      "nation": "scotland",
+      "county": null
+    },
+    "city_of_london": {
+      "nation": "england",
+      "county": null
+    },
+    "clackmannanshire": {
+      "nation": "scotland",
+      "county": null
+    },
+    "colchester": {
+      "nation": "england",
+      "county": "essex"
+    },
+    "conwy": {
+      "nation": "wales",
+      "county": null
+    },
+    "cornwall": {
+      "nation": "england",
+      "county": null
+    },
+    "cotswold": {
+      "nation": "england",
+      "county": "gloucestershire"
+    },
+    "county_durham": {
+      "nation": "england",
+      "county": null
+    },
+    "coventry": {
+      "nation": "england",
+      "county": null
+    },
+    "crawley": {
+      "nation": "england",
+      "county": "west_sussex"
+    },
+    "croydon": {
+      "nation": "england",
+      "county": null
+    },
+    "cumberland": {
+      "nation": "england",
+      "county": null
+    },
+    "dacorum": {
+      "nation": "england",
+      "county": "hertfordshire"
+    },
+    "darlington": {
+      "nation": "england",
+      "county": null
+    },
+    "dartford": {
+      "nation": "england",
+      "county": "kent"
+    },
+    "denbighshire": {
+      "nation": "wales",
+      "county": null
+    },
+    "derby": {
+      "nation": "england",
+      "county": null
+    },
+    "derbyshire_dales": {
+      "nation": "england",
+      "county": "derbyshire"
+    },
+    "derry_city_and_strabane": {
+      "nation": "northern_ireland",
+      "county": null
+    },
+    "doncaster": {
+      "nation": "england",
+      "county": null
+    },
+    "dorset": {
+      "nation": "england",
+      "county": null
+    },
+    "dover": {
+      "nation": "england",
+      "county": "kent"
+    },
+    "dudley": {
+      "nation": "england",
+      "county": null
+    },
+    "dumfries_and_galloway": {
+      "nation": "scotland",
+      "county": null
+    },
+    "dundee_city": {
+      "nation": "scotland",
+      "county": null
+    },
+    "ealing": {
+      "nation": "england",
+      "county": null
+    },
+    "east_ayrshire": {
+      "nation": "scotland",
+      "county": null
+    },
+    "east_cambridgeshire": {
+      "nation": "england",
+      "county": "cambridgeshire"
+    },
+    "east_devon": {
+      "nation": "england",
+      "county": "devon"
+    },
+    "east_dunbartonshire": {
+      "nation": "scotland",
+      "county": null
+    },
+    "east_hampshire": {
+      "nation": "england",
+      "county": "hampshire"
+    },
+    "east_hertfordshire": {
+      "nation": "england",
+      "county": "hertfordshire"
+    },
+    "east_lindsey": {
+      "nation": "england",
+      "county": "lincolnshire"
+    },
+    "east_lothian": {
+      "nation": "scotland",
+      "county": null
+    },
+    "east_renfrewshire": {
+      "nation": "scotland",
+      "county": null
+    },
+    "east_riding_of_yorkshire": {
+      "nation": "england",
+      "county": null
+    },
+    "east_staffordshire": {
+      "nation": "england",
+      "county": "staffordshire"
+    },
+    "east_suffolk": {
+      "nation": "england",
+      "county": "suffolk"
+    },
+    "eastbourne": {
+      "nation": "england",
+      "county": "east_sussex"
+    },
+    "eastleigh": {
+      "nation": "england",
+      "county": "hampshire"
+    },
+    "elmbridge": {
+      "nation": "england",
+      "county": "surrey"
+    },
+    "enfield": {
+      "nation": "england",
+      "county": null
+    },
+    "epping_forest": {
+      "nation": "england",
+      "county": "essex"
+    },
+    "epsom_and_ewell": {
+      "nation": "england",
+      "county": "surrey"
+    },
+    "erewash": {
+      "nation": "england",
+      "county": "derbyshire"
+    },
+    "exeter": {
+      "nation": "england",
+      "county": "devon"
+    },
+    "falkirk": {
+      "nation": "scotland",
+      "county": null
+    },
+    "fareham": {
+      "nation": "england",
+      "county": "hampshire"
+    },
+    "fenland": {
+      "nation": "england",
+      "county": "cambridgeshire"
+    },
+    "fermanagh_and_omagh": {
+      "nation": "northern_ireland",
+      "county": null
+    },
+    "fife": {
+      "nation": "scotland",
+      "county": null
+    },
+    "flintshire": {
+      "nation": "wales",
+      "county": null
+    },
+    "folkestone_and_hythe": {
+      "nation": "england",
+      "county": "kent"
+    },
+    "forest_of_dean": {
+      "nation": "england",
+      "county": "gloucestershire"
+    },
+    "fylde": {
+      "nation": "england",
+      "county": "lancashire"
+    },
+    "gateshead": {
+      "nation": "england",
+      "county": null
+    },
+    "gedling": {
+      "nation": "england",
+      "county": "nottinghamshire"
+    },
+    "glasgow_city": {
+      "nation": "scotland",
+      "county": null
+    },
+    "gloucester": {
+      "nation": "england",
+      "county": "gloucestershire"
+    },
+    "gosport": {
+      "nation": "england",
+      "county": "hampshire"
+    },
+    "gravesham": {
+      "nation": "england",
+      "county": "kent"
+    },
+    "great_yarmouth": {
+      "nation": "england",
+      "county": "norfolk"
+    },
+    "greenwich": {
+      "nation": "england",
+      "county": null
+    },
+    "guildford": {
+      "nation": "england",
+      "county": "surrey"
+    },
+    "gwynedd": {
+      "nation": "wales",
+      "county": null
+    },
+    "hackney": {
+      "nation": "england",
+      "county": null
+    },
+    "halton": {
+      "nation": "england",
+      "county": null
+    },
+    "hammersmith_and_fulham": {
+      "nation": "england",
+      "county": null
+    },
+    "harborough": {
+      "nation": "england",
+      "county": "leicestershire"
+    },
+    "haringey": {
+      "nation": "england",
+      "county": null
+    },
+    "harlow": {
+      "nation": "england",
+      "county": "essex"
+    },
+    "harrow": {
+      "nation": "england",
+      "county": null
+    },
+    "hart": {
+      "nation": "england",
+      "county": "hampshire"
+    },
+    "hartlepool": {
+      "nation": "england",
+      "county": null
+    },
+    "hastings": {
+      "nation": "england",
+      "county": "east_sussex"
+    },
+    "havant": {
+      "nation": "england",
+      "county": "hampshire"
+    },
+    "havering": {
+      "nation": "england",
+      "county": null
+    },
+    "herefordshire_county_of": {
+      "nation": "england",
+      "county": null
+    },
+    "hertsmere": {
+      "nation": "england",
+      "county": "hertfordshire"
+    },
+    "high_peak": {
+      "nation": "england",
+      "county": "derbyshire"
+    },
+    "highland": {
+      "nation": "scotland",
+      "county": null
+    },
+    "hillingdon": {
+      "nation": "england",
+      "county": null
+    },
+    "hinckley_and_bosworth": {
+      "nation": "england",
+      "county": "leicestershire"
+    },
+    "horsham": {
+      "nation": "england",
+      "county": "west_sussex"
+    },
+    "hounslow": {
+      "nation": "england",
+      "county": null
+    },
+    "huntingdonshire": {
+      "nation": "england",
+      "county": "cambridgeshire"
+    },
+    "hyndburn": {
+      "nation": "england",
+      "county": "lancashire"
+    },
+    "inverclyde": {
+      "nation": "scotland",
+      "county": null
+    },
+    "ipswich": {
+      "nation": "england",
+      "county": "suffolk"
+    },
+    "isle_of_anglesey": {
+      "nation": "wales",
+      "county": null
+    },
+    "isle_of_wight": {
+      "nation": "england",
+      "county": null
+    },
+    "isles_of_scilly": {
+      "nation": "england",
+      "county": null
+    },
+    "islington": {
+      "nation": "england",
+      "county": null
+    },
+    "kensington_and_chelsea": {
+      "nation": "england",
+      "county": null
+    },
+    "king_s_lynn_and_west_norfolk": {
+      "nation": "england",
+      "county": "norfolk"
+    },
+    "kingston_upon_hull_city_of": {
+      "nation": "england",
+      "county": null
+    },
+    "kingston_upon_thames": {
+      "nation": "england",
+      "county": null
+    },
+    "kirklees": {
+      "nation": "england",
+      "county": null
+    },
+    "knowsley": {
+      "nation": "england",
+      "county": null
+    },
+    "lambeth": {
+      "nation": "england",
+      "county": null
+    },
+    "lancaster": {
+      "nation": "england",
+      "county": "lancashire"
+    },
+    "leeds": {
+      "nation": "england",
+      "county": null
+    },
+    "leicester": {
+      "nation": "england",
+      "county": null
+    },
+    "lewes": {
+      "nation": "england",
+      "county": "east_sussex"
+    },
+    "lewisham": {
+      "nation": "england",
+      "county": null
+    },
+    "lichfield": {
+      "nation": "england",
+      "county": "staffordshire"
+    },
+    "lincoln": {
+      "nation": "england",
+      "county": "lincolnshire"
+    },
+    "lisburn_and_castlereagh": {
+      "nation": "northern_ireland",
+      "county": null
+    },
+    "liverpool": {
+      "nation": "england",
+      "county": null
+    },
+    "luton": {
+      "nation": "england",
+      "county": null
+    },
+    "maidstone": {
+      "nation": "england",
+      "county": "kent"
+    },
+    "maldon": {
+      "nation": "england",
+      "county": "essex"
+    },
+    "malvern_hills": {
+      "nation": "england",
+      "county": "worcestershire"
+    },
+    "manchester": {
+      "nation": "england",
+      "county": null
+    },
+    "mansfield": {
+      "nation": "england",
+      "county": "nottinghamshire"
+    },
+    "medway": {
+      "nation": "england",
+      "county": null
+    },
+    "melton": {
+      "nation": "england",
+      "county": "leicestershire"
+    },
+    "merthyr_tydfil": {
+      "nation": "wales",
+      "county": null
+    },
+    "merton": {
+      "nation": "england",
+      "county": null
+    },
+    "mid_and_east_antrim": {
+      "nation": "northern_ireland",
+      "county": null
+    },
+    "mid_devon": {
+      "nation": "england",
+      "county": "devon"
+    },
+    "mid_suffolk": {
+      "nation": "england",
+      "county": "suffolk"
+    },
+    "mid_sussex": {
+      "nation": "england",
+      "county": "west_sussex"
+    },
+    "mid_ulster": {
+      "nation": "northern_ireland",
+      "county": null
+    },
+    "middlesbrough": {
+      "nation": "england",
+      "county": null
+    },
+    "midlothian": {
+      "nation": "scotland",
+      "county": null
+    },
+    "milton_keynes": {
+      "nation": "england",
+      "county": null
+    },
+    "mole_valley": {
+      "nation": "england",
+      "county": "surrey"
+    },
+    "monmouthshire": {
+      "nation": "wales",
+      "county": null
+    },
+    "moray": {
+      "nation": "scotland",
+      "county": null
+    },
+    "na_h_eileanan_siar": {
+      "nation": "scotland",
+      "county": null
+    },
+    "neath_port_talbot": {
+      "nation": "wales",
+      "county": null
+    },
+    "new_forest": {
+      "nation": "england",
+      "county": "hampshire"
+    },
+    "newark_and_sherwood": {
+      "nation": "england",
+      "county": "nottinghamshire"
+    },
+    "newcastle_under_lyme": {
+      "nation": "england",
+      "county": "staffordshire"
+    },
+    "newcastle_upon_tyne": {
+      "nation": "england",
+      "county": null
+    },
+    "newham": {
+      "nation": "england",
+      "county": null
+    },
+    "newport": {
+      "nation": "wales",
+      "county": null
+    },
+    "newry_mourne_and_down": {
+      "nation": "northern_ireland",
+      "county": null
+    },
+    "north_ayrshire": {
+      "nation": "scotland",
+      "county": null
+    },
+    "north_devon": {
+      "nation": "england",
+      "county": "devon"
+    },
+    "north_east_derbyshire": {
+      "nation": "england",
+      "county": "derbyshire"
+    },
+    "north_east_lincolnshire": {
+      "nation": "england",
+      "county": null
+    },
+    "north_hertfordshire": {
+      "nation": "england",
+      "county": "hertfordshire"
+    },
+    "north_kesteven": {
+      "nation": "england",
+      "county": "lincolnshire"
+    },
+    "north_lanarkshire": {
+      "nation": "scotland",
+      "county": null
+    },
+    "north_lincolnshire": {
+      "nation": "england",
+      "county": null
+    },
+    "north_norfolk": {
+      "nation": "england",
+      "county": "norfolk"
+    },
+    "north_northamptonshire": {
+      "nation": "england",
+      "county": null
+    },
+    "north_somerset": {
+      "nation": "england",
+      "county": null
+    },
+    "north_tyneside": {
+      "nation": "england",
+      "county": null
+    },
+    "north_warwickshire": {
+      "nation": "england",
+      "county": "warwickshire"
+    },
+    "north_west_leicestershire": {
+      "nation": "england",
+      "county": "leicestershire"
+    },
+    "north_yorkshire": {
+      "nation": "england",
+      "county": null
+    },
+    "northumberland": {
+      "nation": "england",
+      "county": null
+    },
+    "norwich": {
+      "nation": "england",
+      "county": "norfolk"
+    },
+    "nottingham": {
+      "nation": "england",
+      "county": null
+    },
+    "nuneaton_and_bedworth": {
+      "nation": "england",
+      "county": "warwickshire"
+    },
+    "oadby_and_wigston": {
+      "nation": "england",
+      "county": "leicestershire"
+    },
+    "oldham": {
+      "nation": "england",
+      "county": null
+    },
+    "orkney_islands": {
+      "nation": "scotland",
+      "county": null
+    },
+    "oxford": {
+      "nation": "england",
+      "county": "oxfordshire"
+    },
+    "pembrokeshire": {
+      "nation": "wales",
+      "county": null
+    },
+    "pendle": {
+      "nation": "england",
+      "county": "lancashire"
+    },
+    "perth_and_kinross": {
+      "nation": "scotland",
+      "county": null
+    },
+    "peterborough": {
+      "nation": "england",
+      "county": null
+    },
+    "plymouth": {
+      "nation": "england",
+      "county": null
+    },
+    "portsmouth": {
+      "nation": "england",
+      "county": null
+    },
+    "powys": {
+      "nation": "wales",
+      "county": null
+    },
+    "preston": {
+      "nation": "england",
+      "county": "lancashire"
+    },
+    "reading": {
+      "nation": "england",
+      "county": null
+    },
+    "redbridge": {
+      "nation": "england",
+      "county": null
+    },
+    "redcar_and_cleveland": {
+      "nation": "england",
+      "county": null
+    },
+    "redditch": {
+      "nation": "england",
+      "county": "worcestershire"
+    },
+    "reigate_and_banstead": {
+      "nation": "england",
+      "county": "surrey"
+    },
+    "renfrewshire": {
+      "nation": "scotland",
+      "county": null
+    },
+    "rhondda_cynon_taf": {
+      "nation": "wales",
+      "county": null
+    },
+    "ribble_valley": {
+      "nation": "england",
+      "county": "lancashire"
+    },
+    "richmond_upon_thames": {
+      "nation": "england",
+      "county": null
+    },
+    "rochdale": {
+      "nation": "england",
+      "county": null
+    },
+    "rochford": {
+      "nation": "england",
+      "county": "essex"
+    },
+    "rossendale": {
+      "nation": "england",
+      "county": "lancashire"
+    },
+    "rother": {
+      "nation": "england",
+      "county": "east_sussex"
+    },
+    "rotherham": {
+      "nation": "england",
+      "county": null
+    },
+    "rugby": {
+      "nation": "england",
+      "county": "warwickshire"
+    },
+    "runnymede": {
+      "nation": "england",
+      "county": "surrey"
+    },
+    "rushcliffe": {
+      "nation": "england",
+      "county": "nottinghamshire"
+    },
+    "rushmoor": {
+      "nation": "england",
+      "county": "hampshire"
+    },
+    "rutland": {
+      "nation": "england",
+      "county": null
+    },
+    "salford": {
+      "nation": "england",
+      "county": null
+    },
+    "sandwell": {
+      "nation": "england",
+      "county": null
+    },
+    "scottish_borders": {
+      "nation": "scotland",
+      "county": null
+    },
+    "sefton": {
+      "nation": "england",
+      "county": null
+    },
+    "sevenoaks": {
+      "nation": "england",
+      "county": "kent"
+    },
+    "sheffield": {
+      "nation": "england",
+      "county": null
+    },
+    "shetland_islands": {
+      "nation": "scotland",
+      "county": null
+    },
+    "shropshire": {
+      "nation": "england",
+      "county": null
+    },
+    "slough": {
+      "nation": "england",
+      "county": null
+    },
+    "solihull": {
+      "nation": "england",
+      "county": null
+    },
+    "somerset": {
+      "nation": "england",
+      "county": null
+    },
+    "south_ayrshire": {
+      "nation": "scotland",
+      "county": null
+    },
+    "south_cambridgeshire": {
+      "nation": "england",
+      "county": "cambridgeshire"
+    },
+    "south_derbyshire": {
+      "nation": "england",
+      "county": "derbyshire"
+    },
+    "south_gloucestershire": {
+      "nation": "england",
+      "county": null
+    },
+    "south_hams": {
+      "nation": "england",
+      "county": "devon"
+    },
+    "south_holland": {
+      "nation": "england",
+      "county": "lincolnshire"
+    },
+    "south_kesteven": {
+      "nation": "england",
+      "county": "lincolnshire"
+    },
+    "south_lanarkshire": {
+      "nation": "scotland",
+      "county": null
+    },
+    "south_norfolk": {
+      "nation": "england",
+      "county": "norfolk"
+    },
+    "south_oxfordshire": {
+      "nation": "england",
+      "county": "oxfordshire"
+    },
+    "south_ribble": {
+      "nation": "england",
+      "county": "lancashire"
+    },
+    "south_staffordshire": {
+      "nation": "england",
+      "county": "staffordshire"
+    },
+    "south_tyneside": {
+      "nation": "england",
+      "county": null
+    },
+    "southampton": {
+      "nation": "england",
+      "county": null
+    },
+    "southend_on_sea": {
+      "nation": "england",
+      "county": null
+    },
+    "southwark": {
+      "nation": "england",
+      "county": null
+    },
+    "spelthorne": {
+      "nation": "england",
+      "county": "surrey"
+    },
+    "st_albans": {
+      "nation": "england",
+      "county": "hertfordshire"
+    },
+    "st_helens": {
+      "nation": "england",
+      "county": null
+    },
+    "stafford": {
+      "nation": "england",
+      "county": "staffordshire"
+    },
+    "staffordshire_moorlands": {
+      "nation": "england",
+      "county": "staffordshire"
+    },
+    "stevenage": {
+      "nation": "england",
+      "county": "hertfordshire"
+    },
+    "stirling": {
+      "nation": "scotland",
+      "county": null
+    },
+    "stockport": {
+      "nation": "england",
+      "county": null
+    },
+    "stockton_on_tees": {
+      "nation": "england",
+      "county": null
+    },
+    "stoke_on_trent": {
+      "nation": "england",
+      "county": null
+    },
+    "stratford_on_avon": {
+      "nation": "england",
+      "county": "warwickshire"
+    },
+    "stroud": {
+      "nation": "england",
+      "county": "gloucestershire"
+    },
+    "sunderland": {
+      "nation": "england",
+      "county": null
+    },
+    "surrey_heath": {
+      "nation": "england",
+      "county": "surrey"
+    },
+    "sutton": {
+      "nation": "england",
+      "county": null
+    },
+    "swale": {
+      "nation": "england",
+      "county": "kent"
+    },
+    "swansea": {
+      "nation": "wales",
+      "county": null
+    },
+    "swindon": {
+      "nation": "england",
+      "county": null
+    },
+    "tameside": {
+      "nation": "england",
+      "county": null
+    },
+    "tamworth": {
+      "nation": "england",
+      "county": "staffordshire"
+    },
+    "tandridge": {
+      "nation": "england",
+      "county": "surrey"
+    },
+    "teignbridge": {
+      "nation": "england",
+      "county": "devon"
+    },
+    "telford_and_wrekin": {
+      "nation": "england",
+      "county": null
+    },
+    "tendring": {
+      "nation": "england",
+      "county": "essex"
+    },
+    "test_valley": {
+      "nation": "england",
+      "county": "hampshire"
+    },
+    "tewkesbury": {
+      "nation": "england",
+      "county": "gloucestershire"
+    },
+    "thanet": {
+      "nation": "england",
+      "county": "kent"
+    },
+    "three_rivers": {
+      "nation": "england",
+      "county": "hertfordshire"
+    },
+    "thurrock": {
+      "nation": "england",
+      "county": null
+    },
+    "tonbridge_and_malling": {
+      "nation": "england",
+      "county": "kent"
+    },
+    "torbay": {
+      "nation": "england",
+      "county": null
+    },
+    "torfaen": {
+      "nation": "wales",
+      "county": null
+    },
+    "torridge": {
+      "nation": "england",
+      "county": "devon"
+    },
+    "tower_hamlets": {
+      "nation": "england",
+      "county": null
+    },
+    "trafford": {
+      "nation": "england",
+      "county": null
+    },
+    "tunbridge_wells": {
+      "nation": "england",
+      "county": "kent"
+    },
+    "uttlesford": {
+      "nation": "england",
+      "county": "essex"
+    },
+    "vale_of_glamorgan": {
+      "nation": "wales",
+      "county": null
+    },
+    "vale_of_white_horse": {
+      "nation": "england",
+      "county": "oxfordshire"
+    },
+    "wakefield": {
+      "nation": "england",
+      "county": null
+    },
+    "walsall": {
+      "nation": "england",
+      "county": null
+    },
+    "waltham_forest": {
+      "nation": "england",
+      "county": null
+    },
+    "wandsworth": {
+      "nation": "england",
+      "county": null
+    },
+    "warrington": {
+      "nation": "england",
+      "county": null
+    },
+    "warwick": {
+      "nation": "england",
+      "county": "warwickshire"
+    },
+    "watford": {
+      "nation": "england",
+      "county": "hertfordshire"
+    },
+    "waverley": {
+      "nation": "england",
+      "county": "surrey"
+    },
+    "wealden": {
+      "nation": "england",
+      "county": "east_sussex"
+    },
+    "welwyn_hatfield": {
+      "nation": "england",
+      "county": "hertfordshire"
+    },
+    "west_berkshire": {
+      "nation": "england",
+      "county": null
+    },
+    "west_devon": {
+      "nation": "england",
+      "county": "devon"
+    },
+    "west_dunbartonshire": {
+      "nation": "scotland",
+      "county": null
+    },
+    "west_lancashire": {
+      "nation": "england",
+      "county": "lancashire"
+    },
+    "west_lindsey": {
+      "nation": "england",
+      "county": "lincolnshire"
+    },
+    "west_lothian": {
+      "nation": "scotland",
+      "county": null
+    },
+    "west_northamptonshire": {
+      "nation": "england",
+      "county": null
+    },
+    "west_oxfordshire": {
+      "nation": "england",
+      "county": "oxfordshire"
+    },
+    "west_suffolk": {
+      "nation": "england",
+      "county": "suffolk"
+    },
+    "westminster": {
+      "nation": "england",
+      "county": null
+    },
+    "westmorland_and_furness": {
+      "nation": "england",
+      "county": null
+    },
+    "wigan": {
+      "nation": "england",
+      "county": null
+    },
+    "wiltshire": {
+      "nation": "england",
+      "county": null
+    },
+    "winchester": {
+      "nation": "england",
+      "county": "hampshire"
+    },
+    "windsor_and_maidenhead": {
+      "nation": "england",
+      "county": null
+    },
+    "wirral": {
+      "nation": "england",
+      "county": null
+    },
+    "woking": {
+      "nation": "england",
+      "county": "surrey"
+    },
+    "wokingham": {
+      "nation": "england",
+      "county": null
+    },
+    "wolverhampton": {
+      "nation": "england",
+      "county": null
+    },
+    "worcester": {
+      "nation": "england",
+      "county": "worcestershire"
+    },
+    "worthing": {
+      "nation": "england",
+      "county": "west_sussex"
+    },
+    "wrexham": {
+      "nation": "wales",
+      "county": null
+    },
+    "wychavon": {
+      "nation": "england",
+      "county": "worcestershire"
+    },
+    "wyre": {
+      "nation": "england",
+      "county": "lancashire"
+    },
+    "wyre_forest": {
+      "nation": "england",
+      "county": "worcestershire"
+    },
+    "york": {
+      "nation": "england",
+      "county": null
+    }
+  },
+  "counties": {
+    "cambridgeshire": "england",
+    "derbyshire": "england",
+    "devon": "england",
+    "east_sussex": "england",
+    "essex": "england",
+    "gloucestershire": "england",
+    "hampshire": "england",
+    "hertfordshire": "england",
+    "kent": "england",
+    "lancashire": "england",
+    "leicestershire": "england",
+    "lincolnshire": "england",
+    "norfolk": "england",
+    "nottinghamshire": "england",
+    "oxfordshire": "england",
+    "staffordshire": "england",
+    "suffolk": "england",
+    "surrey": "england",
+    "warwickshire": "england",
+    "west_sussex": "england",
+    "worcestershire": "england"
+  }
+}
