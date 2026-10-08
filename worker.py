@@ -975,6 +975,17 @@ def save_events(db, rows):
         db.table(EVENTS_TABLE).upsert(rows, on_conflict="dedupe_key").execute()
         return None
     except Exception as exc:
+        # The identity trigger can rewrite distinct dedupe keys to one existing
+        # key. PostgreSQL rejects such a batch atomically (SQLSTATE 21000).
+        # Retry ONLY this collision one row at a time; other failures remain
+        # failures and the caller never advances the source hash on partial save.
+        if getattr(exc, "code", None) == "21000" or "21000" in str(exc):
+            try:
+                for row in rows:
+                    db.table(EVENTS_TABLE).upsert(row, on_conflict="dedupe_key").execute()
+                return None
+            except Exception as retry_exc:
+                return f"{type(retry_exc).__name__}: {retry_exc}"
         return f"{type(exc).__name__}: {exc}"
 
 

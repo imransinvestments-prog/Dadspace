@@ -1,0 +1,46 @@
+name: Activity venue source review
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'activity_source_discovery.py'
+      - 'scripts/validate_venue_activity_sources.py'
+      - 'artefacts/data/activities-source-candidates.json'
+      - '.github/workflows/activity-venue-source-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: activity-venue-review-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -p test_activity_ingestion.py -v
+      - run: python scripts/validate_venue_activity_sources.py
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          DRY_RUN: 'true'
+          FETCH_ENGINE: requests
+          ACTIVITY_DETAIL_PAGES: '4'
+          REQUEST_TIMEOUT: '15'
+          MAX_RETRIES: '0'
+          GEMINI_TIMEOUT_SECONDS: '60'
+          MAX_CHARS: '24000'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: activity-venue-source-review-${{ github.run_id }}
+          path: venue-source-review/
+          if-no-files-found: error
+          retention-days: 30

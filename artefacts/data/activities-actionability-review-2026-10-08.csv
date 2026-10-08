@@ -1,0 +1,423 @@
+id,title,decision,reasons,event_url
+6603ecef-4146-4efc-99e0-1164811feed5,Page One Creative Workshops,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+b65cacab-cdae-4af7-8848-e132f52f5c5e,LEGO Workshops,needs_detail_review,missing_actionable_schedule,https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY_NAME=BS&ENTRY=lego&ENTRY_TYPE=K&NRECS=10&SORTS=ESD.SDTE%5DESD.STIM&SEARCH_FORM=%2Fcgi-bin%2Fspydus.exe%2FMSGTRN%2FOPAC%2FBSEARCH_EVSES&_SPQ=1&FORM_DESC=Events+-+Quick+search&ISGLB=0&GQ=lego&EDTE=%3E%3DTODAY&EDTE_TEXT=Upcoming+events
+b5c28104-804a-488e-9b5c-ef54b2e8eae4,Storytime,needs_detail_review,missing_actionable_schedule,https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY=storytime&ENTRY_NAME=BS&ENTRY_TYPE=K&SORTS=ESD.SDTE%5DESD.STIM&GQ=storytime&ISGLB=0&NRECS=10&QRY=EVSEDTE%3A+%22%3E%3D+TODAY%22&QRYTEXT=Upcoming+events&_SPQ=2
+e4348942-60a7-4a33-a576-dc6c81f86f23,Baby Rhyme Time,needs_detail_review,missing_actionable_schedule,https://www.hertfordshire.gov.uk/babyrhymetime
+0d54658f-16ee-48e5-b917-acd4ba9b7992,Family Lego Club,structurally_actionable_pending_source_verification,,https://ni4kids.com/whatson/family-lego-club/2027-05-01/
+f9709eb7-1cf4-491e-85a8-8861f797f523,KNT Dance School,needs_detail_review,missing_location;missing_actionable_schedule,https://hoop.co.uk/e/lOZ8ka/
+1a77fde5-98f1-413f-83c0-05ab17690393,Preschool Phonics with Robot Reg Birchwood,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+b95c4d87-254f-4889-b027-948bfc0afff9,"Water Babies at Pictor Academy, Timperley",needs_detail_review,missing_specific_url,
+0196a4a2-bb76-422d-ac8b-56f686861362,Toddler Rhyme Time,needs_detail_review,missing_location;missing_actionable_schedule,https://hoop.co.uk/e/EneZmzg/
+b57e4f55-e603-4345-b1c6-3364048dced7,All Little Dancers,needs_detail_review,missing_location;missing_actionable_schedule,https://hoop.co.uk/the-lesley-taylor-school-of-dance/ObVIae-all-little-dancers/
+d2a8030b-4507-4bd1-aebc-c4808b668408,Minis Phonics with Robot Reg Birchwood,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/phonics-with-robot-reg-warrington-and-knutsford/GAeC9Tf-minis-phonics-with-robot-reg-birchwood/
+7aaaad57-1b38-447d-a75b-b294a34b3844,Tumble Tots at Altrincham FC (Friday),structurally_actionable_pending_source_verification,,https://hoop.co.uk/Tumble-Tots-Trafford/iuFqgjS-tumble-tots-at-altrincham-fc/
+30d588c3-cd05-4e99-9010-ec1b641ec2f7,Poynton Rugbytots (Friday),structurally_actionable_pending_source_verification,,https://hoop.co.uk/rugbytots-se-cheshire-and-staffordshire-moorlands/c97vIvj-poynton-rugbytots-friday/
+4d892006-5304-42a1-b1e6-97f88dfb4cc6,"Water Babies at Delamere School, Flixton",structurally_actionable_pending_source_verification,,https://hoop.co.uk/water-babies-south-manchester/ukd8lf-water-babies-at-delamere-school-flixton/
+43ee5fe4-dd13-4aee-a7d1-fc2736c43d17,Tumble Tots at Altrincham FC (Thursday),structurally_actionable_pending_source_verification,,https://hoop.co.uk/Tumble-Tots-Trafford/CdmES8g-tumble-tots-at-altrincham-fc/
+7dfaccb1-a986-4688-a6a0-62d116cd6c16,Junior Novas martial arts classes,needs_detail_review,missing_location,https://hoop.co.uk/novas-freestyle-martial-arts-academy/Ap6OFu-junior-novas-martial-arts-classes/
+1f7bbd66-4182-4d89-afc1-670b10037a09,Mini novas martial arts classes,needs_detail_review,missing_location,https://hoop.co.uk/novas-freestyle-martial-arts-academy/NXRbZw-mini-novas-martial-arts-classes/
+5e600ff8-b668-453d-811f-242a13480b0a,Baby Bounce And Rhyme,needs_detail_review,missing_location;missing_actionable_schedule,https://hoop.co.uk/e/QXm0Oio/
+2ef3eac1-c392-4f9c-9b00-89cebcf5f136,Preschool Phonics with Robot Reg Lymm,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/phonics-with-robot-reg-warrington-and-knutsford/ckUPNbS-preschool-phonics-with-robot-reg-lymm/
+7edccfd1-4f1c-4d60-bc10-36f914dfee6f,Minis Phonics with Robot Reg Lymm,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/phonics-with-robot-reg-warrington-and-knutsford/173JPTG-minis-phonics-with-robot-reg-lymm/
+1d6c99bd-8e7f-4a07-8d46-5e0ffb9b6482,Little Forts Playgroup,structurally_actionable_pending_source_verification,,https://hoop.co.uk/e/CdAXHY/
+f8d7507d-55cc-45b5-9459-a018bc9eb2c1,Lego Club,needs_detail_review,missing_location;missing_specific_url;missing_actionable_schedule,
+61046b4a-ef13-4c42-9c4a-c571f2b3f5e2,General Stay and Play,needs_detail_review,missing_location;missing_specific_url;missing_actionable_schedule,
+d38fc520-2ca6-42e2-99f9-d0010d52fda5,Hartbeeps - Baby Bells @ Grove Church SYDENHAM,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+e7af3902-2f4a-4497-b278-2eebacb0ddcc,Baby Bells - Hargrave Hall Community Centre,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+1814d869-a305-4082-a2e7-52d0546e9d11,Hartbeeps - Baby Beeps @ Grove Church SYDENHAM,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+fde13f1a-a650-400a-8597-547cccf8a457,Karate for children in North London and herts,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+4efac06f-642f-4fda-8f1b-fc49cea3a464,Baby Beeps - Hargrave Hall Community Centre,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+c7973b68-84e6-4494-9878-f24806932793,Ballet Classe for Ages 2+ to 18years old,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+76292fb9-51b5-4fc8-aff5-9ce277daccd9,Mum & Baby Pilates with Lottie,needs_detail_review,missing_specific_url,
+7eb92f63-fc0e-4a26-8dc5-88b5aa9924b5,Tiny Dancers,needs_detail_review,missing_location;missing_actionable_schedule,https://hoop.co.uk/eos-dance/TjvluS-tiny-dancers/
+e3df841a-0907-41e8-a2a1-b81e159504e8,Tiny Tunes Music & Dance Classes 3 mths - 5 yrs: Claygate,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/tiny-tunes/I8FcIg-tiny-tunes-music-dance-classes-3-mths-5-yrs-claygate/
+8f1be09a-d10c-4574-aab3-661f55c51576,Hartbeeps Happy House @ Grove Church SYDENHAM,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/hartbeeps/B6QTGLZ-hartbeeps-happy-house-grove-church-sydenham/
+38dc7aca-19d0-4261-a4c5-af0514ced5e2,Tiny Tunes Music & Dance Classes 3 mths - 5 yrs: Teddington,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/tiny-tunes/mq0as5-tiny-tunes-music-dance-classes-3-mths-5-yrs-teddington/
+c0267b2c-341f-45d7-8378-8320a5cf7a23,Jolly Jumpers Stay and Play,needs_detail_review,missing_location,https://hoop.co.uk/e/BVskDS/
+43d852ca-c1f4-4f64-b0ee-ff334e3f73cc,"Rhymetime Music Classes: The Orchard Tavern, Shepherds Bush",needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/rhymetime/Drct98-rhymetime-music-classes-the-orchard-tavern-shepherds-bush/
+a44ab8f8-7edc-49ba-8b1b-faac1f41d7c3,Stay and Play with Messy Play,needs_detail_review,missing_location;missing_actionable_schedule,https://hoop.co.uk/ivystreetfamilycentre/MZL6ih-stay-and-play-with-messy-play/
+669bfff9-1bec-4b68-855e-ef8cce57dcba,Big & Small,needs_detail_review,missing_location;missing_actionable_schedule,https://hoop.co.uk/eos-dance/aOQsUA-big-small/
+725e184a-9e55-4a0e-b04b-d9cabd6ae7f9,Little Kickers - Wallington Roundshaw Park,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/little-kickers-Brighton/2clPEW-little-kickers-wallington-roundshaw-park-18months-4-years-free-trial-available/
+2ed53532-f8af-48b7-ae0a-d561faf2a94a,Footy4kidz - Pendleton Sixth Form College,needs_detail_review,missing_actionable_schedule,https://footy4kidz.classforkids.io?venueName=Pendleton Sixth Form College
+a75c093e-637a-46da-addd-4d9f34f682ae,"Moo Music Rochdale, Heywood & Middleton",needs_detail_review,missing_actionable_schedule,https://moo-music-rochdale.classforkids.io?venueName=BLACKLEY - Higher Blackley Community Centre
+1467d566-08d1-4874-b36f-205eb86aa0b9,Kitty Watson Academy of Performing Arts,needs_detail_review,missing_actionable_schedule,https://kittywatsonacting.classforkids.io?venueName=Christ Church West Didsbury
+cf81b8f9-7509-48e9-ba3c-889f54e6c41f,Junior Sport Stars - Chorlton CE Primary School,needs_detail_review,missing_actionable_schedule,https://junior-sport-stars.classforkids.io?venueName=Chorlton CE Primary School
+a80c0e71-d83a-468e-9987-6ec97dde6ea5,Tactile Arts - West Didsbury CE Primary School,needs_detail_review,missing_actionable_schedule,https://tactilearts.classforkids.io?venueName=West Didsbury CE Primary School
+0b8e69fa-dac4-4b15-9649-08c6b9d85778,We Will Rock You Project - The Edge Theatre & Arts Centre,needs_detail_review,missing_actionable_schedule,https://we-will-rock-you-project.classforkids.io?venueName=The Edge Theatre & Arts Centre
+7d5db570-d36f-4086-b0bb-e72148fb7131,Tactile Arts - Cavendish Community Primary School,needs_detail_review,missing_actionable_schedule,https://tactilearts.classforkids.io?venueName=Cavendish Community Primary School
+759c4833-d4fc-4957-aada-5ec60e4ed02d,Footy4kidz - Salford Sports Village,needs_detail_review,missing_actionable_schedule,https://footy4kidz.classforkids.io?venueName=Salford Sports Village
+50fb734a-6dd4-4569-86af-afff43694cb3,Footytotz Salford,needs_detail_review,missing_actionable_schedule,https://footytotzsalford.classforkids.io?venueName=Emmanuel Church Salford
+c3313707-4b2e-4e27-88d6-0b2e93c5c161,Tumble Tots Bolton & Bury - Prestwich,needs_detail_review,missing_actionable_schedule,https://tumble-tots-bolton.classforkids.io?venueName=Manchester Maccabi Community and Sports Club (Prestwich)
+10c86ad4-fbdf-41a9-b5a2-28e0e59066e8,Nextsteps Football FC (Chorlton Boys),needs_detail_review,missing_actionable_schedule,https://nextsteps-football-fc-chorlton-boys.classforkids.io?venueName=Houghend Astroturf Pitches
+fa11126d-5164-49fb-afd0-e2079c3f675f,P3 Performing Arts,needs_detail_review,missing_actionable_schedule,"https://p3-performing-arts.classforkids.io?venueName=St. Werburgh’s Church, Chorlton"
+2763dead-462b-45de-ae37-b382e59865d5,First Gymnastics South Manchester (Pre-School),needs_detail_review,missing_actionable_schedule,https://firstgymnastics-south-manchester.classforkids.io?venueName=CHS South (PS)
+2136eef5-f34e-44af-bc81-70b0e56242e4,First Gymnastics South Manchester (Ages 4-12),needs_detail_review,missing_actionable_schedule,https://firstgymnastics-south-manchester.classforkids.io?venueName=CHS South
+02778e05-c373-4dba-8c14-049f6a2cae7a,Development In Sport & PE Sports Class,needs_detail_review,missing_actionable_schedule,https://development-in-sport-pe.classforkids.io?venueName=Seymour Park Primary School
+5c1270aa-6ebb-460c-bbf9-87eaa6f908e6,Tucum Capoeira Manchester - St John's Centre,needs_detail_review,missing_actionable_schedule,https://capoeira-manchester.classforkids.io?venueName=St John's Centre
+b896053b-2010-40a6-95e4-bc01f1bb6bc5,Tucum Capoeira Manchester - Ukrainian Cultural Centre,needs_detail_review,missing_actionable_schedule,https://capoeira-manchester.classforkids.io?venueName=Ukrainian Cultural Centre
+2d35401f-f55b-4083-9bd1-46e4e419d591,We Will Rock You Project,needs_detail_review,missing_actionable_schedule,https://we-will-rock-you-project.classforkids.io?venueName=Kingdom Life Youth Centre
+a098b5c4-325a-4382-98b9-2ee8964cf246,Junior Sport Stars - Football & Multi Sport,needs_detail_review,missing_actionable_schedule,https://junior-sport-stars.classforkids.io?venueName=Co-op Academy New Islington
+21a8c14c-9239-4b5a-a00f-6dd441aa4057,SSA Manchester Central Football Class,needs_detail_review,missing_actionable_schedule,https://soccer-star-academy-manchester-central.classforkids.io?venueName=Trinity Sports Centre
+9542a777-3f73-46a1-9424-ac3c58902f5e,Tucum Capoeira Manchester - Fighting Fit Manchester,needs_detail_review,missing_actionable_schedule,https://capoeira-manchester.classforkids.io?venueName=Fighting Fit Manchester
+dae21fb9-4163-4645-a65b-3524cbc1880b,"KNT Danceworks - Ballet, Street Dance & Multi Dance",needs_detail_review,missing_actionable_schedule,https://kntdanceworks.classforkids.io?venueName=MCR Dance Studios - Curve Studio
+3b44dd44-4bd4-4f24-891d-227a446d6d92,KNT Danceworks - Street Dance & Multi Dance,needs_detail_review,missing_actionable_schedule,https://kntdanceworks.classforkids.io?venueName=MCR Dance Studios - Stomp Studio
+e9f3d75c-62bb-47fa-b921-5cc4d6b6e267,KNT Danceworks - Ballet & Other Dance,needs_detail_review,missing_actionable_schedule,https://kntdanceworks.classforkids.io?venueName=MCR Dance Studios - Waltz Studio
+0bb71fef-b2aa-4ca4-85c4-076d00a05a20,CREATIVE ARTS KIDS,needs_detail_review,missing_actionable_schedule,https://creative-arts-kids.classforkids.io
+31ab081b-15e6-4443-af6b-0ef837a18ead,Active Youth Sports Club,needs_detail_review,missing_actionable_schedule,https://active-youth-sports-club.classforkids.io
+ed992693-fcc4-49d3-b3d7-2a3c9e9670a1,Theatre Peckham,needs_detail_review,missing_actionable_schedule,https://theatre-peckham.classforkids.io
+951c7554-2098-45f9-bfc1-ab7fc48aa5c2,Pro Elite South London,needs_detail_review,missing_actionable_schedule,https://proelite-southlondon.classforkids.io
+c123c4e8-106d-4a14-afe6-822ad3ce2e3d,Tennis Time,needs_detail_review,missing_actionable_schedule,https://tennis-time.classforkids.io
+a14ebae3-032a-4446-a86c-d195d010d61d,Penguins Palace,needs_detail_review,missing_actionable_schedule,https://penguins-palace.classforkids.io
+d7b3859d-ad99-4943-af81-ddfcd1443f78,Pro Elite South London,needs_detail_review,missing_actionable_schedule,https://proelite-southlondon.classforkids.io
+f0fb9987-239a-4315-9835-99bd9f8ec2ca,J'ace Rotherhithe Gymnastics,needs_detail_review,missing_actionable_schedule,https://j-ace-rotherhithe-gymnastics.classforkids.io
+d032c15c-2d92-4ada-9bba-d95829de5fe8,Pro Elite South London,needs_detail_review,missing_actionable_schedule,https://proelite-southlondon.classforkids.io
+096a997e-7eed-4929-b68a-0e295e022efe,Unity FC,needs_detail_review,missing_actionable_schedule,https://unity-fc.classforkids.io
+b4877b7a-1a12-4e93-a990-9915ae188dbc,Lambeth Tigers Football Club,needs_detail_review,missing_actionable_schedule,https://lambeth-tigers-football-club.classforkids.io
+faed4a96-d994-4c8d-a91a-a8372dcf8f0e,Active Youth Sports Club,needs_detail_review,missing_actionable_schedule,https://active-youth-sports-club.classforkids.io
+8ed06705-7d27-46dd-b087-f04e88df1c86,Grace & Poise Academy CIC,needs_detail_review,missing_actionable_schedule,https://grace-poise-academy.classforkids.io
+ffdeff4a-40fb-4419-9bf9-722e78e89bcc,Let’s Get Active (LGA),needs_detail_review,missing_actionable_schedule,https://let-s-get-active.classforkids.io
+235ca29c-c686-498a-a6e2-26b80d77c9ea,Gymlab,needs_detail_review,missing_actionable_schedule,https://gymlab-hackney.classforkids.io
+11f358b4-3d02-4edb-9869-74b220417dfc,El Recreo Spanish Eltham,needs_detail_review,missing_actionable_schedule,https://el-recreo-spanish-eltham.classforkids.io
+4c64d56e-b1f2-493d-bc72-157c3c657993,Little Movers Gym,needs_detail_review,missing_actionable_schedule,https://little-movers-gym.classforkids.io
+cbd29ec6-4ff5-4db2-b81a-fc80dcf3a5df,Pro Elite South London,needs_detail_review,missing_actionable_schedule,https://proelite-southlondon.classforkids.io
+7999906b-b19d-4cdd-9e45-726c485171f1,Penguins Palace,needs_detail_review,missing_actionable_schedule,https://penguins-palace.classforkids.io
+21da9862-53e7-4f7d-8964-551ef3f61b82,TeachMajor,needs_detail_review,missing_actionable_schedule,https://teachmajor.classforkids.io
+4905ae57-f240-48b7-a38e-eefddd95188d,Wolfpack Dance Collective,needs_detail_review,missing_actionable_schedule,https://wolfpack-dance-collective.classforkids.io
+f299e57f-aee8-4c60-b61f-be064b16b5ee,El Recreo Spanish Online for Kids,needs_detail_review,missing_actionable_schedule,https://El-Recreo-Spanish-Online-for-Kids.classforkids.io
+06f0353a-f066-48c0-b51f-a9e13fba55f1,Creative Writing Club,needs_detail_review,missing_actionable_schedule,https://creative-writing-club.classforkids.io
+194fa725-deae-4074-bc85-0c62923cf618,Shredder Skate School,needs_detail_review,missing_location;missing_actionable_schedule,https://haysouthcambs.co.uk/activities/shredder-skate-school/
+e61ceeb7-baeb-4f12-b8c1-73736bc9202f,Sing and Sign,needs_detail_review,missing_location;missing_actionable_schedule,https://haysouthcambs.co.uk/activities/sing-and-sign/
+ea4db9a9-6232-452a-b4d4-52293624d528,"Shake, Rattle and Roll",needs_detail_review,missing_location;missing_actionable_schedule,https://haysouthcambs.co.uk/activities/shake-rattle-and-roll/
+2c3c79bf-ebac-4afa-ab89-4cec834810fc,MiniMe Mindfulness Cambridge,needs_detail_review,missing_actionable_schedule,https://haysouthcambs.co.uk/activities/minime-mindfulness-cambridge/
+e33f67e2-c93d-4211-9f9f-bd5221a44f55,Mini Athletics,needs_detail_review,missing_location;missing_actionable_schedule,https://haysouthcambs.co.uk/activities/mini-athletics/
+eef13c90-de1b-4f73-aeb1-5e0e59a99eba,junior parkrun,needs_detail_review,missing_location;missing_actionable_schedule,https://haysouthcambs.co.uk/activities/junior-parkrun/
+f5b34fb4-83d1-4202-b628-f84b08f8c06a,Wildlings at Milton Country Park,needs_detail_review,missing_actionable_schedule,https://haysouthcambs.co.uk/activities/wildlings-at-milton-country-park/
+d439f22f-6a3a-4bb2-ac1e-1bb941d1cbef,Sports Coaching Sessions for Children - GK Fit,needs_detail_review,missing_location;missing_actionable_schedule,https://haysouthcambs.co.uk/activities/sports-coaching-sessions-for-children-gk-fit/
+f4b39ed5-9dcb-4b32-9d65-11cd42b54122,Hands on the Circle (HonC!) Stay and Play Groups,needs_detail_review,missing_location;missing_actionable_schedule,https://haysouthcambs.co.uk/activities/hands-on-the-circle-honc-stay-and-play-groups/
+6a7bcd76-62cf-4780-8b29-895d093e77f8,Saturdads at St John's Church Waterbeach,needs_detail_review,missing_actionable_schedule,https://haysouthcambs.co.uk/activities/saturdads-at-st-johns-church-waterbeach/
+2673c9e1-8d65-4b0f-80bc-1994031fab9d,Music Classes for Under-Fives - Canada Water Library,needs_detail_review,missing_actionable_schedule,https://www.southwark.gov.uk/southwark-presents/music-classes-under-fives-canada-water-library
+89364293-7066-4f90-a195-218792bba818,"Move, Share & Exchange",needs_detail_review,missing_actionable_schedule,https://www.southwark.gov.uk/southwark-presents/move-share-exchange
+979ed418-c648-4f43-b978-d7d26b8d874c,StoryMakers - Under 5's free class,needs_detail_review,missing_actionable_schedule,https://www.southwark.gov.uk/southwark-presents/storymakers-under-5s-free-class
+07f3ec2b-87cf-4ee0-95a1-5fd36d769afc,Baby Gym,needs_detail_review,missing_location;missing_actionable_schedule,https://salfordcommunityleisure.co.uk/event/baby-gym-53/
+301ae80d-df77-41b6-954a-3be6d12ee300,BAYSE Multi-Sports,needs_detail_review,missing_location;missing_actionable_schedule,https://salfordcommunityleisure.co.uk/event/bayse-multi-sports-4/
+92bb3f62-1bd8-4db8-bd80-9072a4a03389,Afterschool Lego Club,structurally_actionable_pending_source_verification,,https://salfordcommunityleisure.co.uk/event/afterschool-lego-club-5/
+162848db-2615-4063-b761-589b2bc6b15c,Tots Time,needs_detail_review,missing_actionable_schedule,https://www.coventry.gov.uk/events/event/8828/tots-time
+f8b143e1-141f-4a0f-9a38-b11d69720659,FAB Club,needs_detail_review,missing_actionable_schedule,https://www.redbridge.gov.uk/discover/events/fab-club/
+9ee3175d-6482-452c-8f17-171283cb0e42,Homework Help Club,needs_detail_review,missing_actionable_schedule,https://www.redbridge.gov.uk/discover/events/homework-help-club/
+1acad649-49e7-4edf-964d-fe9a20d2730a,Adapted Water Sports (for children with disabilities),needs_detail_review,missing_actionable_schedule,https://www.redbridge.gov.uk/discover/events/adapted-water-sports-for-children-with-disabilities/
+06bf0b4d-eec2-43fe-8fb7-b33276df6834,Headington Library: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/headington-library-rhymetime
+a47e9304-8319-475e-b76f-69be98f06ce8,Blackbird Leys: Rhymetime and Stay and Play,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/blackbird-leys-rhymetime-and-stay-and-play
+9dab09c7-706b-4b60-b679-cac95a96a104,Woodcote Library: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/woodcote-library-rhymetime
+0b36020f-9bb2-4a12-b21e-61c64269efbf,Witney: Stay And Play,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/witney-stay-and-play
+270793e6-0009-4a4d-9ba9-a0c73ac90b44,Adderbury: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/adderbury-rhymetime
+2b714fb6-5218-4077-99d7-b6802251ff3a,Thursday board games,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/family-activities/thursday-board-games
+e6290b7e-0ecf-4cb9-886b-456b29e11b02,Littlemore: Lego Play,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/littlemore-lego-play-0
+a282df52-3ca1-4baa-b541-80d1bbe96654,"Oxford Westgate: Stay, Play & Learn",needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/oxford-westgate-stay-play-learn-1
+9927c25f-4db7-4bca-b562-99d902c6d321,Abingdon: Stay and Play,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/abingdon-stay-and-play
+71873f7b-acfc-459d-8c08-3dace49d841a,Didcot: Stay and Play,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/didcot-stay-and-play
+89c21b94-efee-4541-b01f-0533eb5493be,Banbury: Lego Club,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/banbury-lego-club
+920b3f39-a584-429c-ae51-5f3f0b83f76d,Blackbird Leys: Lego Club,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/blackbird-leys-lego-club-0
+5c0fc03e-2747-4db0-9927-9f2a16c54602,Witney: Lego Club,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/witney-lego-club
+25f7b7c1-f324-4a2b-8cd7-ca9589291f05,Curiosity Club,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/exhibitions-oxfordshire-museum/curiosity-club
+142442ed-4ad7-4c6f-a9ab-490491f05b32,Oxford Westgate Library : Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/oxford-westgate-library-rhymetime
+fd85c723-3722-4eb2-9e31-417fc4d47fce,Chipping Norton: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/chipping-norton-rhymetime-0
+8174a638-18f1-47db-a25a-9015f3fff915,Berinsfield: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/berinsfield-rhymetime
+4c0b1668-7ca4-40db-adfd-634fd1b7d6a4,Cowley: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/cowley-rhymetime
+14068de2-95e3-455f-af83-dd9fcf5debb3,Henley: Sing Sing,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/henley-sing-sing
+2cc76f94-8c28-41f5-9634-0af665de6657,Abingdon: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/abingdon-rhymetime-1
+f64c2642-ddf3-4b19-b980-73da2855fda8,Wantage: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/wantage-rhymetime
+589cfd21-dfd2-49ac-9453-c37e189c5acc,Forest School sessions for Home Ed: Danbury Country Park,structurally_actionable_pending_source_verification,,https://www.explore-essex.com/whats-on/home-education-sessions
+29d05865-6ef3-41ed-94d4-5804eed4907a,Woodland Play under five's Forest School: Danbury Country Park,structurally_actionable_pending_source_verification,,https://www.explore-essex.com/whats-on/woodland-play-at-danbury-country-park
+6973c527-f576-42fe-955b-df4a142b0bc7,Parkrun Junior: Great Notley Country Park,structurally_actionable_pending_source_verification,,https://www.explore-essex.com/whats-on/great-notley-junior-parkrun
+229f7e5d-60dd-4346-b425-2ed1016dd944,Sky Ropes and Sky Ropes Junior at Great Notley,structurally_actionable_pending_source_verification,,https://www.explore-essex.com/whats-on/sky-ropes-and-sky-ropes-junior-at-great-notley
+368a7430-a54b-4c02-9af7-0d4702d740dc,Rhymetimes for Babies and Toddlers,needs_detail_review,missing_location;missing_actionable_schedule,https://www.library.live/our-answers-blog/zd5f1gmmgrq47os18452njc80yev2o-A4pDD
+bbc6d669-367b-4eb4-9cde-18372c8afe77,Storytimes for Under 5s,needs_detail_review,missing_location;missing_actionable_schedule,https://www.library.live/our-answers-blog/storytimes-HXEoS
+e8618e35-26fd-4a49-aebf-3ef0f5e2e8ea,Lego Club,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+0c6178f3-7119-4955-90b5-ea1ec950dce2,Tweenies Dance Class,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/e/luXJaZ/
+ce9574e0-5b32-4170-9707-a12561ae39a4,Story Time,structurally_actionable_pending_source_verification,,https://hoop.co.uk/e/1El7g0h/
+06114cbf-99f3-4fa4-b469-0f1f4b7965ab,mummy and Me sensory music and movement class,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/e/Lofiio/
+41e132a1-8afa-4e1d-9d79-26b32eb711cc,Junior Novas martial arts classes,structurally_actionable_pending_source_verification,,https://hoop.co.uk/novas-freestyle-martial-arts-academy/Ap6OFu-junior-novas-martial-arts-classes/
+cbb7c805-0230-46a1-8ebc-d3cfcdca492b,Mini novas martial arts classes,structurally_actionable_pending_source_verification,,https://hoop.co.uk/novas-freestyle-martial-arts-academy/NXRbZw-mini-novas-martial-arts-classes/
+cc154cd9-4792-414b-a7d2-1b28aa984f4a,Little Forts Stay & Play,structurally_actionable_pending_source_verification,,https://hoop.co.uk/e/Ui9kO6/
+0a2981c9-4da9-43e7-b437-b8788484c960,"Water Babies at Waterside Hotel, Didsbury",structurally_actionable_pending_source_verification,,https://hoop.co.uk/water-babies-south-manchester/lz6pjD-water-babies-at-waterside-hotel-didsbury/
+d618c764-5e0a-4702-b163-6da327f0b2cd,Preschool Phonics with Robot Reg Knutsford,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/phonics-with-robot-reg-warrington-and-knutsford/zIVcihD-preschool-phonics-with-robot-reg-knutsford/
+cd38956c-9be1-4348-a0e3-90c55b474802,Mini Phonics with Robot Reg Knutsford,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/phonics-with-robot-reg-warrington-and-knutsford/JEIfPZ4-mini-phonics-with-robot-reg-knutsford/
+2f0f90af-acc0-44f9-8f5e-dbb7f882adc2,Tumble Tots at Altrincham FC,structurally_actionable_pending_source_verification,,https://hoop.co.uk/Tumble-Tots-Trafford/QyFIfzp-tumble-tots-at-altrincham-fc/
+79c8d226-6016-41fe-98a0-683fb6e5504c,Bea’s Babymusic School,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/beas-baby-music-school/LGkRXWn-beas-babymusic-school/
+226b56b4-15cc-4f64-89df-6258190d4b01,Tiny Dancers,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/eos-dance/cZEciJ-tiny-dancers/
+e810eac7-38b6-4cef-9a9b-3f8daa891bc7,Hartbeeps Happy House @ Christ Church - East Dulwich,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/hartbeeps/U9C3ouR-hartbeeps-happy-house-christ-church-east-dulwich/
+b820a21e-6a66-4d3b-9995-4440d64be172,Munchkins Class,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/musical-mayhem-london/3z888iS-munchkins-class/
+9c3a77e2-2041-4269-afb4-2b6cd440310b,Tiny Tunes Music & Dance Classes 3 mths - 5 yrs - Ashtead,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/tiny-tunes/8kjuNP-tiny-tunes-music-dance-classes-3-mths-5-yrs-ashtead/
+5b0dbd0f-d8a7-4827-8665-a1313ee64266,Jolly Jumpers Stay and Play,structurally_actionable_pending_source_verification,,https://hoop.co.uk/e/BVskDS/
+b0f2042e-a2ff-4474-9f70-6f16958e1b1e,Mini tennis Orange,structurally_actionable_pending_source_verification,,https://hoop.co.uk/e/K07VKv/
+d2c5c8d8-8323-4588-a617-9f1a932ff337,Big & Small,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/eos-dance/273iNl-big-small/
+13551c02-ad29-4f32-a4ac-b09637bc981d,I can do,structurally_actionable_pending_source_verification,,https://hoop.co.uk/e/h38o4V/
+06c4068d-e465-429f-a539-bffec0bf291d,Little Beans,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/e/2Ij50F/
+b4422394-ebf1-44f0-8e6b-254b0f3aaf17,Rhymetime Music Classes: Chiswick Methodist Church,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/rhymetime/qHVhoc-rhymetime-music-classes-chiswick-methodist-church/
+21559a24-9f0f-4ceb-a02a-e99c4fe5be98,Tiny Tunes Music & Dance classes 3mths-5yrs - Surbiton,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/tiny-tunes/Cgyhoo-tiny-tunes-music-dance-classes-3mths-5yrs-surbiton/
+b676d499-13c9-4dd2-9534-abc4274fdc1d,Toddler groups in East Ham,structurally_actionable_pending_source_verification,,https://hoop.co.uk/bonnydowns-community-association/TN7e90-toddler-groups-in-east-ham/
+2e02eaab-3a6c-4eba-97b8-82a9f2e50d0e,Happy House - Friends Meeting House - Muswell Hill,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/e/lvmDuEX/
+0df38c71-5337-4c81-9a63-b119a8a5f4d7,Watch Me Play,structurally_actionable_pending_source_verification,,https://hoop.co.uk/e/kEcjKt/
+c9da1e50-3558-46bb-a02c-85915392c9aa,Little Kicks (Toddler Football),needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/little-kickers-blackheath-greenwich-hither-green-lewisham-and-lee/ux86Tx-little-kicks-toddler-football/
+3b117b91-e261-4581-b39d-2db2ed9ecc48,Mini tennis Red,structurally_actionable_pending_source_verification,,https://hoop.co.uk/e/RBe3FD/
+669b75e6-335c-4b67-84c6-44f9e63946a2,BilinguaSing Birmingham South,needs_detail_review,missing_actionable_schedule,https://bilinguasing-birmingham-south.classforkids.io
+3c057f8e-877f-4389-ac59-3c9d0512e190,Edgeahead,needs_detail_review,missing_actionable_schedule,https://edgeahead.classforkids.io
+292a7c1d-09da-4f6c-9c2c-f61d80198fbb,CITY OF BIRMINGHAM ROCKETS BASKETBALL CLUB,needs_detail_review,missing_actionable_schedule,https://city-of-birmingham-rockets-basketball-club.classforkids.io
+82046bfd-9588-467f-b628-f6917a8ba7e7,Drama Tots Birmingham South,needs_detail_review,missing_actionable_schedule,https://drama-tots-birmingham-south.classforkids.io
+dae9e6b2-f143-4f8e-b419-118b7d528cda,Drama Tots Birmingham South,needs_detail_review,missing_actionable_schedule,https://drama-tots-birmingham-south.classforkids.io
+af84a3a8-e805-4f7f-b2fc-0125acad07b3,VIBEDANCE,needs_detail_review,missing_actionable_schedule,https://vibedance.classforkids.io
+71925e15-1936-4655-bd45-7c735f692bf2,Moo Music - Higher Blackley Community Centre,needs_detail_review,missing_actionable_schedule,https://moo-music-rochdale.classforkids.io?venueName=BLACKLEY - Higher Blackley Community Centre
+cc642aff-00ee-4490-935e-1ee79f95ccc0,KittyWatsonAcademy - Christ Church West Didsbury,needs_detail_review,missing_actionable_schedule,https://kittywatsonacting.classforkids.io?venueName=Christ Church West Didsbury
+464df992-e640-4d8c-8e82-acecf6d6ae29,FootytotzSalford - Emmanuel Church Salford,needs_detail_review,missing_actionable_schedule,https://footytotzsalford.classforkids.io?venueName=Emmanuel Church Salford
+0bc4358b-5dfb-4493-a42d-fcec3ec0a982,Tumble Tots - Manchester Maccabi Community and Sports Club,needs_detail_review,missing_actionable_schedule,https://tumble-tots-bolton.classforkids.io?venueName=Manchester Maccabi Community and Sports Club (Prestwich)
+0a11bb89-d55e-4611-8287-3510032641f8,Nextsteps Football FC - Houghend Astroturf Pitches,needs_detail_review,missing_actionable_schedule,https://nextsteps-football-fc-chorlton-boys.classforkids.io?venueName=Houghend Astroturf Pitches
+e9bf6dc1-f2fc-47ca-bfbb-7f5089befcde,"P3 Performing Arts - St. Werburgh’s Church, Chorlton",needs_detail_review,missing_actionable_schedule,"https://p3-performing-arts.classforkids.io?venueName=St. Werburgh’s Church, Chorlton"
+988cbbdb-e4ca-4956-b9fc-f625b8d4d28a,First Gymnastics South Manchester - CHS South (PS),needs_detail_review,missing_actionable_schedule,https://firstgymnastics-south-manchester.classforkids.io?venueName=CHS South (PS)
+cab793c0-6534-44f6-9f91-06b4fe7927a4,First Gymnastics South Manchester - CHS South,needs_detail_review,missing_actionable_schedule,https://firstgymnastics-south-manchester.classforkids.io?venueName=CHS South
+d3cdf8c8-cf5b-4b63-a4c8-935f5f3aa67f,Development In Sport & PE - Seymour Park Primary School,needs_detail_review,missing_actionable_schedule,https://development-in-sport-pe.classforkids.io?venueName=Seymour Park Primary School
+8d737b0d-ddb5-49c4-b0fb-d110edeac665,We Will Rock You Project - Kingdom Life Youth Centre,needs_detail_review,missing_actionable_schedule,https://we-will-rock-you-project.classforkids.io?venueName=Kingdom Life Youth Centre
+de826ad8-8d28-431c-8767-9df8a70a210b,Junior Sport Stars - Co-op Academy New Islington,needs_detail_review,missing_actionable_schedule,https://junior-sport-stars.classforkids.io?venueName=Co-op Academy New Islington
+d8cca276-45bc-46a4-a76b-ce75f98935fb,SSA Manchester Central - Trinity Sports Centre,needs_detail_review,missing_actionable_schedule,https://soccer-star-academy-manchester-central.classforkids.io?venueName=Trinity Sports Centre
+bf703867-bdec-4123-a6cd-be77e24e9e2c,KNT Danceworks - MCR Dance Studios - Stomp Studio,needs_detail_review,missing_actionable_schedule,https://kntdanceworks.classforkids.io?venueName=MCR Dance Studios - Stomp Studio
+91902926-8ac7-4a3e-9143-96cc5cf6435b,KNT Danceworks - MCR Dance Studios - Curve Studio,needs_detail_review,missing_actionable_schedule,https://kntdanceworks.classforkids.io?venueName=MCR Dance Studios - Curve Studio
+a5e6ddb5-83c3-483d-8917-2c55f991ffb2,KNT Danceworks - MCR Dance Studios - Waltz Studio,needs_detail_review,missing_actionable_schedule,https://kntdanceworks.classforkids.io?venueName=MCR Dance Studios - Waltz Studio
+6f6b01bd-526c-4ad5-902a-ac54ad9df182,Kids' non-contact boxing classes,needs_detail_review,missing_actionable_schedule,https://www.southwark.gov.uk/southwark-presents/kids-non-contact-boxing-classes
+c12434d5-36fc-4d26-b055-9ae4cab1c9cd,Young Flyers Aerial Classes,needs_detail_review,missing_actionable_schedule,https://www.southwark.gov.uk/southwark-presents/young-flyers-aerial-classes
+31cec798-a604-4b4e-9524-8ef2fe062c11,Carterton: Rhyme Time,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/carterton-rhyme-time
+705564eb-09c2-4fdb-b97d-1bb343cf131b,Banbury: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/banbury-rhymetime
+8d710e1d-7e64-476f-9b7a-e6edf9e5dcec,Bampton: Children's Art Club,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/bampton-childrens-art-club
+0236de13-df5c-42ed-aeb9-9ef552babd51,Abingdon: Lego Club,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/abingdon-lego-club
+ea51b4b1-62a1-43a3-bcba-4699ee96fffe,Deddington: Lego Club,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/deddington-lego-club
+1e2ce923-05e1-42ca-b479-d7864f19dbf8,Chipping Norton: Lego Club,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/chipping-norton-lego-club
+f782d46f-cebd-4c0a-8d53-cad729cce5ed,Cowley: Baby Club '26,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/cowley-baby-club-26
+c4644505-4316-4243-8704-36d55608f4c5,Thame Library: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/thame-library-rhymetime
+d2dbde70-ae71-4250-92ba-9b33c7c9e45a,Banbury: Stay & Play,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/banbury-stay-play
+f2c15da9-b731-4ddc-acad-85969d3eabf8,Witney: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/witney-rhymetime
+084db16d-03b4-445a-a799-b5693e90d2f5,Bicester: Stay and Play,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/bicester-stay-and-play
+f77cf9d7-c692-4d39-91ec-6c3b7b310ea2,Henley: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/henley-rhymetime
+6ec0ad69-3fdf-404b-aca9-dfa71e6a5d3e,North Essex Astronomical Society at Great Notley,needs_detail_review,missing_actionable_schedule,https://www.explore-essex.com/whats-on/north-essex-astronomical-society-at-great-notley
+0ef0331d-ce78-44c3-88a6-d37a558cb6ec,Family Forest School: Danbury Country Park,needs_detail_review,missing_actionable_schedule,https://www.explore-essex.com/whats-on/family-forest-school-at-danbury-country-park
+be647c2e-4b0b-4c74-9c79-37c7a8807055,NCT Wolverhampton Walk & Talk,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/wolverhampton/nct-wolverhampton-walk-talk-37
+48301e45-6c44-4b93-84d9-28d84664358b,NCT Wokingham Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/wokingham/nct-wokingham-baby-cafe-33
+b0f48655-1957-4c3c-adc1-96761d845d66,NCT Woking Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/woking/nct-woking-baby-cafe-76
+7e4bd71b-b955-456b-8459-2cd4f7bdb9e4,NCT Woking Bumps & Babies,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/woking/nct-woking-bumps-babies-76
+e4be2e00-f16c-42e8-881f-b696920653b4,NCT Woking Sling & Nappy Library,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/woking/nct-woking-sling-nappy-library-18
+242bdd05-69b1-44ba-a50f-ac1d8667a5cc,NCT Woking Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/woking/nct-woking-nearly-new-sale-1
+0a768474-ba3c-48d5-9682-9f73e31d2683,NCT Woking  In Person Baby and Child First Aid Course,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/woking/nct-woking-person-baby-and-child-first-aid-course-0
+bb2d7f94-2c07-47f5-ba34-cd97c91d73bb,NCT Winchester Bumps and Babies Play,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/winchester-district/nct-winchester-bumps-and-babies-play-41
+0a33fc96-de26-4bd4-af3a-b0bf778efb2b,NCT Winchester Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/winchester-district/nct-winchester-baby-cafe-3
+980fa4a8-60c8-4d00-b7db-92d9e53ced6a,NCT Winchester and District Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/winchester-district/nct-winchester-and-district-nearly-new-sale-0
+1181b7f6-c940-4a5e-8e61-692b9bd0a2e3,NCT Wimbledon Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/wimbledon-and-wandsworth/nct-wimbledon-baby-cafe-87
+b3b07a84-f2ba-418f-a732-e3168b0c7798,NCT Watford Baby & Child First Aid,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/watford/nct-watford-baby-child-first-aid-8
+b7c87295-f5d8-49c9-aa00-b7c6f4a64038,NCT Watford Bumps and Babies group - Christmas Photoshoot,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/watford/nct-watford-bumps-and-babies-group-christmas-photoshoot-2
+03d9bab1-0e12-4b9c-bcdd-d147dd19740a,NCT Watford Walk & Talk - Rickmansworth Aquadrome,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/watford/nct-watford-walk-talk-rickmansworth-aquadrome-33
+4693ca87-4ebb-4134-84e2-76111459b83c,NCT Watford Bumps and Babies,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/watford/nct-watford-bumps-and-babies-10
+61bc9e23-3a43-440e-9a7f-d7220a8e71a3,NCT Watford Baby & Child First Aid,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/watford/nct-watford-baby-child-first-aid-9
+91d9905f-0a8d-4e4f-8cf5-cde26747055e,NCT Warwickshire Central Bumps and Babies Play,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/warwickshire-central/nct-warwickshire-central-bumps-and-babies-play-23
+9b847637-d9c0-417b-9c16-bc469897bf7f,NCT Vale of Evesham Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/vale-evesham/nct-vale-evesham-nearly-new-sale-0
+f741c231-f580-4e3d-9335-828b8d37469c,NCT Lampton Baby Café,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/twickenham-hounslow-and-district/nct-lampton-baby-cafe-18
+55c6fa4b-17ae-4345-bb3a-6f19e5352d21,NCT Twickenham Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/twickenham-hounslow-and-district/nct-twickenham-baby-cafe-27
+bc1ee5d9-77d8-4284-95db-037da0c2eacf,NCT Brentford Walk & Talk,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/twickenham-hounslow-and-district/nct-brentford-walk-talk-9
+a793340c-6833-4eb3-9e0b-3b8ed18c2877,NCT Alf King Baby Café,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/twickenham-hounslow-and-district/nct-alf-king-baby-cafe-17
+ec251ee1-732a-4a66-b201-a4fd86b395a6,NCT Lampton Park Walk & Talk,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/twickenham-hounslow-and-district/nct-lampton-park-walk-talk-16
+0a439639-231d-472a-aabe-56a90163005f,NCT South Isleworth Baby Café,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/twickenham-hounslow-and-district/nct-south-isleworth-baby-cafe-16
+4feaee3a-61bf-4005-9d18-96de11d27ade,NCT Chiswick Baby Café,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/twickenham-hounslow-and-district/nct-chiswick-baby-cafe-15
+443c1efc-e10e-433b-85a4-8cd95df4f9be,NCT Boston Manor Park Walk & Talk,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/twickenham-hounslow-and-district/nct-boston-manor-park-walk-talk-8
+40410879-0255-4cc6-918e-91ff2f6d0889,NCT Tring Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/tring-and-district/nct-tring-nearly-new-sale-1
+6b4af44b-df67-4492-a6dd-8d063ba6e02a,NCT Teesside Bumps and Babies Chat and Play,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/teesside/nct-teesside-bumps-and-babies-chat-and-play-23
+ec2bb948-908f-4b67-9956-f01b79c76a92,NCT Sutton Coldfield Baby & Child First Aid Course,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/sutton-coldfield/nct-sutton-coldfield-baby-child-first-aid-course-23
+a95c7cce-23a5-4294-84c9-12e4885d7dda,"NCT Staines, Ashford and Egham Nearly New Sale",needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/staines-ashford-egham-surrounding-areas/nct-staines-ashford-and-egham-nearly-new-sale-1
+2781fe5c-eb29-4b6d-8042-9747c3330939,St Marks Church Bumps and Babies NCT Group,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/southampton/st-marks-church-bumps-and-babies-nct-group-34
+26d033bc-9b48-4506-8276-f92c0a15f0c9,NCT Southam Bumps & Babies,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/southam-and-villages/nct-southam-bumps-babies-20
+1cfc12d5-b01e-4ff0-8bcc-525ac10a8cf7,NCT Southam Sling Library,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/southam-and-villages/nct-southam-sling-library-13
+fb4d38aa-27ff-4b8b-9bf5-ebe3768a8eea,NCT Southam and Villages Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/southam-and-villages/nct-southam-and-villages-nearly-new-sale-0
+1a7e8d0c-8e91-4dc8-97a6-ebbc0572fe69,NCT Solihull Nearly New Sale 17th October 2026,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/solihull-and-south-birmingham/nct-solihull-nearly-new-sale-17th-october-2026
+3fd918f0-8c31-45c1-b5e3-b3d8c41d954d,Little Monkeys Stay and play,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/skipton-and-district/little-monkeys-stay-and-play-8
+56b75f63-3b92-47d1-a013-4596c79f1db9,NCT Sheffield Baby Cafe (in person),needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/sheffield/nct-sheffield-baby-cafe-person-36
+27a61f07-0adc-49da-857d-2d2cbfc97300,NCT Sheffield Baby Cafe (online),needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/sheffield/nct-sheffield-baby-cafe-online-57
+33e68b63-2777-49b9-8e9f-1137d89146b9,NCT Sevenoaks and Tonbridge Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/sevenoaks-and-tonbridge/nct-sevenoaks-and-tonbridge-nearly-new-sale-0
+ac95b277-3549-4cc1-ae45-736dd9fa204b,NCT Royston Bumps and Babies Play,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/royston-and-villages/nct-royston-bumps-and-babies-play-18
+a40f8bb7-a6d8-42ab-ad34-cd10801a7222,NCT Royston Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/royston-and-villages/nct-royston-nearly-new-sale
+01360a13-c15e-4094-8107-501c07ac3eef,Royston Fundraising Event (Halloween pottery),needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/royston-and-villages/royston-fundraising-event-halloween-pottery
+0e688341-3b1c-41b1-8759-ee6d07c213fb,NCT Rotherham Baby Cafe (online),needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/rotherham/nct-rotherham-baby-cafe-online-105
+5f4a3ab5-8998-4d94-a642-c22e9b7efa97,NCT Rotherham Baby Cafe (in person),needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/rotherham/nct-rotherham-baby-cafe-person-45
+32ee31b1-0b0c-4340-92c7-b47822e0025b,NCT Redditch Baby & Child First Aid course,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/redditch/nct-redditch-baby-child-first-aid-course-19
+69e67899-1245-4537-a09f-6e392e8c206c,NCT Reading Bumps and Babies with Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/reading/nct-reading-bumps-and-babies-baby-cafe-22
+d193ae58-6cc5-4bf9-8769-519db7bf5bd8,NCT Breastfeeding and Infant Feeding Support Group,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/preston-fylde-and-district/nct-breastfeeding-and-infant-feeding-support-group-66
+908590e1-8efc-4924-b904-212aa84fdce8,NCT Breastfeeding and Infant Feeding Support Group,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/preston-fylde-and-district/nct-breastfeeding-and-infant-feeding-support-group-65
+7f65d090-0daa-4618-a562-6b90c1e7e3b8,NCT Plymouth Bumps and Babies,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/plymouth-and-west-devon/nct-plymouth-bumps-and-babies-49
+3bd09cf1-4810-48f7-93b0-64158ff9b455,NCT Plymouth Home Birth Support Group,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/plymouth-and-west-devon/nct-plymouth-home-birth-support-group-4
+15d86134-ec49-4780-bd29-60e14793580f,NCT Plymouth and West Devon Walk and Talk,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/plymouth-and-west-devon/nct-plymouth-and-west-devon-walk-and-talk-19
+29d2796d-1974-4c49-88f4-e0cd7059d2da,NCT Plymouth and West Devon Walk and Talk,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/plymouth-and-west-devon/nct-plymouth-and-west-devon-walk-and-talk-18
+d01d33c2-96e9-47de-b8ca-96e88222a85a,Jake’s Sensory Sessions at NAC,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/north-liverpool/jakes-sensory-sessions-nac-3
+3da923aa-110d-4f94-9923-9b4b6558b775,NCT North Beds Sling Library,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/north-bedfordshire/nct-north-beds-sling-library-147
+04fa5e85-173a-4280-9c97-35bf4c022d1b,NCT North Beds Sling Hire,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/north-bedfordshire/nct-north-beds-sling-hire-10
+6a1a109a-7860-4e74-8f70-884c246bb54f,NCT North Beds  Bumps & Babies,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/north-bedfordshire/nct-north-beds-bumps-babies-55
+3108a8ec-cd96-4833-a81a-f40b0d7569fb,NCT North Beds Sling Hire,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/north-bedfordshire/nct-north-beds-sling-hire-12
+7dd3d8f0-7069-44bc-aa65-511945189217,NCT North Beds Walk & Talk,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/north-bedfordshire/nct-north-beds-walk-talk-2
+091e988a-b721-4ec1-b5f0-9be294cb74e3,NCT North Beds Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/north-bedfordshire/nct-north-beds-nearly-new-sale-0
+2fa1269c-eec7-493f-aac0-96ae73e9ed1b,NCT Newham Peer Support Drop-In,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/newham/nct-newham-peer-support-drop-12
+af9c81e3-9c93-4740-9d89-e3a84c4a7a16,NCT Newham Bumps &  Babies Play,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/newham/nct-newham-bumps-babies-play-8
+6893c5e5-d7a3-4d6b-a3e3-dcda4d331db6,NCT Mid Cheshire Baby & Child first aid course,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/mid-cheshire/nct-mid-cheshire-baby-child-first-aid-course-4
+36bb3e67-a1df-477e-a0ab-9275b11a49f4,NCT Mid Bedfordshire Bumps and Babies,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/mid-bedfordshire/nct-mid-bedfordshire-bumps-and-babies-80
+e655aefb-511a-443f-8240-c66ba724d11b,NCT Mid Beds Baby & Child  First Aid,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/mid-bedfordshire/nct-mid-beds-baby-child-first-aid-7
+5a874299-d504-436c-bd8f-8948283f5ad5,NCT Medway Walk & Talk,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/medway/nct-medway-walk-talk-11
+f5d0ad1c-6317-4aeb-a73a-f44f74488aec,NCT Medway Baby & Child First Aid,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/medway/nct-medway-baby-child-first-aid-4
+47b54e7d-a3c3-41a3-b19d-3e95090b5747,NCT Malvern Happy Hills Stay and Play,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/malvern-hills/nct-malvern-happy-hills-stay-and-play-4
+b1128507-3469-4535-9e7d-75952f8187b5,NCT Malvern Hills Baby & Child First Aid Course,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/malvern-hills/nct-malvern-hills-baby-child-first-aid-course-1
+80c278fb-d8b0-49d4-9a78-7a29666771f7,NCT Malvern Hills Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/malvern-hills/nct-malvern-hills-nearly-new-sale-0
+b7893208-a5fd-4220-9a69-0c83156d1bd7,NCT Malvern Hills Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/malvern-hills/nct-malvern-hills-baby-cafe-49
+6627eb6e-a21d-46d0-894d-63d31cc7d082,NCT Leighton Buzzard Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/leighton-buzzard/nct-leighton-buzzard-nearly-new-sale-1
+ef795a60-974c-43af-9fff-c68b61de7a57,NCT Breastfeeding and Infant Feeding Support Group,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/lancaster-morecambe-and-district/nct-breastfeeding-and-infant-feeding-support-group-64
+504acc60-a410-4399-b34e-cdfd10a4634f,NCT Breastfeeding and Infant Feeding Support Group,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/lancaster-morecambe-and-district/nct-breastfeeding-and-infant-feeding-support-group-33
+6d503239-bfdf-4790-a0b5-fa86f7cbb5a7,NCT Kingston Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/kingston-upon-thames/nct-kingston-baby-cafe-57
+550a90b2-a6d9-4bb0-995a-4b7ec79b005c,NCT Herts North Baby Cafe Hitchin,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/herts-north/nct-herts-north-baby-cafe-hitchin-20
+3e146e87-6ca8-4f57-b482-da8e09985764,NCT Herts North Sling Library,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/herts-north/nct-herts-north-sling-library-15
+fbb8777e-c78c-494f-8c4f-cf4bba97ccd8,NCT Herts North Baby & Child First Aid Course,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/herts-north/nct-herts-north-baby-child-first-aid-course-13
+277c380b-8b2f-4f75-9536-e4852649104f,NCT North Herts Walk & Talk Hitchin Oughton Head Nature Reserve,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/herts-north/nct-north-herts-walk-talk-hitchin-oughton-head-nature-reserve-11
+7af9235c-6c3e-4f43-ad8e-b94d07fc9438,NCT Herts North Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/herts-north/nct-herts-north-nearly-new-sale-1
+5b435b1c-6708-4de5-b1af-9c21bd067feb,NCT Herts North Walk & Talk Letchworth (Norton Common),needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/herts-north/nct-herts-north-walk-talk-letchworth-norton-common-14
+54918842-b2b9-483f-bb49-aac0ac76d852,NCT Havering Walk & Talk,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/havering/nct-havering-walk-talk-40
+62af8533-424c-45bb-9da5-4ebfcad54fd6,NCT Haslemere and Midhurst Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/haslemere-and-midhurst/nct-haslemere-and-midhurst-nearly-new-sale-1
+f2fa0c7f-3a40-4ead-86f0-911789ac9a91,NCT Hackney Infant Feeding Support - Chill + Chat,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/hackney/nct-hackney-infant-feeding-support-chill-chat-18
+6808b8a2-a7b1-4855-a6ac-2c99f13b3679,NCT Hackney Infant Feeding Support - Peer Support Group,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/hackney/nct-hackney-infant-feeding-support-peer-support-group-17
+1de73677-6c5c-41c5-b9bb-4e0cfbeeef4b,NCT Hackney Infant Feeding Support - Peer Support Group ONLINE,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/hackney/nct-hackney-infant-feeding-support-peer-support-group-online-8
+942103eb-64cb-4bf7-87b7-4ba5d4dfb406,NCT Hackney Infant Feeding Support - Chill + Chat,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/hackney/nct-hackney-infant-feeding-support-chill-chat-17
+b94b859b-f3c7-487c-98d6-1496afb498f7,NCT Hackney Infant Feeding Support - Peer Support Group,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/hackney/nct-hackney-infant-feeding-support-peer-support-group-16
+b520c0a7-1ab3-46c1-a4de-14b1f3868798,NCT Guildford Bumps & Babies,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/guildford/nct-guildford-bumps-babies-44
+76f18e82-7cb8-4f16-b7b8-53fc1fa65adc,"Play, Connect and Free-cycle",needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/exeter-and-east-devon/play-connect-and-free-cycle-5
+95f1bf51-f2ed-47a2-8df0-1f06a1a4aff3,"NCT Eastleigh Walk and Talk, Sit and Chat",needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/eastleigh-and-district/nct-eastleigh-walk-and-talk-sit-and-chat-50
+192f6203-7bd3-4cdf-aabf-9e4bb8475d3d,NCT Eastleigh Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/eastleigh-and-district/nct-eastleigh-baby-cafe-55
+74b75964-292e-4e6a-9488-1544ed873979,NCT Eastleigh Bumps and Babies with feeding support,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/eastleigh-and-district/nct-eastleigh-bumps-and-babies-feeding-support-46
+3c9d4448-15c4-477b-aede-7c8c9ad4de65,NCT Eastleigh Baby & Child First Aid Course,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/eastleigh-and-district/nct-eastleigh-baby-child-first-aid-course-11
+2b5e1299-27d4-462c-ac4c-f1086d80abfc,NCT Breastfeeding and Infant Feeding Support Group,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/east-lancashire/nct-breastfeeding-and-infant-feeding-support-group-170
+0a3ecc35-bbed-4381-8f04-9d32e7ac053e,NCT Breastfeeding and Infant Feeding Support Group,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/east-lancashire/nct-breastfeeding-and-infant-feeding-support-group-168
+8552999c-90c4-4622-bfbe-8e3cc8d56ee4,NCT Breastfeeding and Infant Feeding Support Group,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/east-lancashire/nct-breastfeeding-and-infant-feeding-support-group-164
+0124135a-4e87-4ed8-aeca-7324f38dc8bc,NCT Breastfeeding and Infant Feeding Support Group,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/east-lancashire/nct-breastfeeding-and-infant-feeding-support-group-162
+9c43884b-81d8-4dbf-ba45-8f548bf41ddb,NCT Breastfeeding and Infant Feeding Support Group,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/east-lancashire/nct-breastfeeding-and-infant-feeding-support-group-161
+f339e81f-36e2-4bac-8c59-a2f8e6829c1a,Bumps. Babies & Beyond Playgroup,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/doncaster/bumps-babies-beyond-playgroup-45
+d5008018-452c-40a8-b768-80fe70c9b012,NCT Doncaster Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/doncaster/nct-doncaster-baby-cafe-125
+8e69de64-f507-4c1f-a221-855ba5f34b82,NCT Doncaster Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/doncaster/nct-doncaster-baby-cafe-140
+0a456811-14ae-430f-a972-84176792413d,NCT Crowthorne Bumps and Babies,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/crowthorne-and-sandhurst/nct-crowthorne-bumps-and-babies-57
+208a6709-fee5-426c-9ef0-424b03aaf2b0,NCT Crowthorne and Sandhurst Bumps and Babies (Little Monsters),needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/crowthorne-and-sandhurst/nct-crowthorne-and-sandhurst-bumps-and-babies-little-monsters-43
+fb9d255d-83b8-4193-a9aa-52cf1529ed98,NCT Crowthorne and Sandhurst Walk & Talk (Buckler's Park),needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/crowthorne-and-sandhurst/nct-crowthorne-and-sandhurst-walk-talk-bucklers-park-14
+d124805c-d02a-4755-8358-4b000362decc,NCT Breastfeeding and Infant Feeding Support Group,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/chorley-and-leyland/nct-breastfeeding-and-infant-feeding-support-group-32
+a177c5d6-d214-4fc0-b65e-48b6267ea295,Buckshaw Bumps Babies & Beyond,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/chorley-and-leyland/buckshaw-bumps-babies-beyond-16
+50bd118e-10e9-459f-ad3f-eb15002b114a,NCT Chester Baby & Child First Aid,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/chester/nct-chester-baby-child-first-aid-1
+d2b80635-79df-4ae4-a09e-3a449c12c892,NCT Cottenham Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/cambridge/nct-cottenham-baby-cafe-17
+7cbd7899-07dc-45a2-ab87-00ac62bd3452,NCT Bromley Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/bromley-and-chislehurst/nct-bromley-baby-cafe-59
+9e74517f-2696-466b-952b-0ffa988f6fc8,NCT BRENTWOOD NEARLY NEW SALE,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/brentwood/nct-brentwood-nearly-new-sale-1
+f415318c-339e-4345-a39f-1338dfd6e62a,NCT Birmingham West Baby First Aid Course,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/birmingham-west/nct-birmingham-west-baby-first-aid-course-10
+789d67ca-4fee-4605-983f-e1e67e8ae412,NCT Birmingham West - Northfield Baby Café,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/birmingham-west/nct-birmingham-west-northfield-baby-cafe-22
+c5b2da90-9e5f-4873-95dc-28150b82424d,NCT Biggleswade and Sandy Nearly New Sale Autumn 2026,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/biggleswade-sandy-and-district/nct-biggleswade-and-sandy-nearly-new-sale-autumn-2026
+35541285-d68d-4baa-a5a9-6161d77f6632,NCT Beckenham & Borders Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/beckenham-and-borders/nct-beckenham-borders-baby-cafe-59
+c5e0067b-e81f-483f-b744-f395aebf6d96,NCT Beckenham & Borders Baby Cafe,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/beckenham-and-borders/nct-beckenham-borders-baby-cafe-58
+131ab45c-3438-4326-8a8e-f0705b4aa3f6,NCT Beckenham & Borders Bumps and Babies,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/beckenham-and-borders/nct-beckenham-borders-bumps-and-babies-28
+c4407f9d-fb17-4c92-a14f-433536ba3917,NCT Bassetlaw Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/bassetlaw/nct-bassetlaw-nearly-new-sale-1
+099a1428-806f-419e-9cfb-b04b40973e75,NCT Aylesbury & District Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/aylesbury-risborough-thame-and-district/nct-aylesbury-district-nearly-new-sale-1
+63d79756-beb8-44bd-af99-6b4dddd00906,NCT Alton Baby Café,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/alton-and-bordon/nct-alton-baby-cafe-45
+4c8d8c81-0428-4a55-b7f3-aafd60a95b49,NCT Alton and Bordon Nearly New Sale,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/alton-and-bordon/nct-alton-and-bordon-nearly-new-sale-0
+433da8ec-7bb6-407d-b501-f4b8bab90e65,Kids at Ferryhill,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/aberdeen-city-and-shire/kids-ferryhill-2
+847e455d-0cd8-488e-80c9-a81402d7bbb4,"Bumps, Babies and beyond",needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/aberdeen-city-and-shire/bumps-babies-and-beyond-1
+2e78948f-f8f2-474d-b216-d8f2865f8da0,Dani Rose Photo Session,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/aberdeen-city-and-shire/dani-rose-photo-session
+8baa0d81-55c5-467a-8b86-a820133e68c6,Walk and Talk - Seaton Park,needs_detail_review,missing_actionable_schedule,https://www.nct.org.uk/events/aberdeen-city-and-shire/walk-and-talk-seaton-park-2
+aaf73209-de15-41dc-95c9-392f8cf1c775,Page One Creative Workshops,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+2001286e-3787-4b95-9f30-7bdf661f017b,LEGO Workshops,needs_detail_review,missing_actionable_schedule,https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY_NAME=BS&ENTRY=lego&ENTRY_TYPE=K&NRECS=10&SORTS=ESD.SDTE%5DESD.STIM&SEARCH_FORM=%2Fcgi-bin%2Fspydus.exe%2FMSGTRN%2FOPAC%2FBSEARCH_EVSES&_SPQ=1&FORM_DESC=Events+-+Quick+search&ISGLB=0&GQ=lego&EDTE=%3E%3DTODAY&EDTE_TEXT=Upcoming+events
+6a83a7ea-7bbe-45dd-96aa-1cc38c851fc8,Storytime,needs_detail_review,missing_actionable_schedule,https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY=storytime&ENTRY_NAME=BS&ENTRY_TYPE=K&SORTS=ESD.SDTE%5DESD.STIM&GQ=storytime&ISGLB=0&NRECS=10&QRY=EVSEDTE%3A+%22%3E%3D+TODAY%22&QRYTEXT=Upcoming+events&_SPQ=2
+4dea634d-3819-4e9d-9fdd-50f17a5ca6da,Baby Rhyme Time,needs_detail_review,missing_actionable_schedule,https://www.hertfordshire.gov.uk/babyrhymetime
+58753b93-2bf0-41ac-8337-b148cd46b47e,Preschool Phonics with Robot Reg Knutsford,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+3da9ab79-b516-4984-8c8a-38ed23791da4,Mini Phonics with Robot Reg Knutsford,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+578e5d06-9079-4ef5-a0ba-d0a1d210ff0a,"Water Babies at Cedar Mount Academy, Gorton",structurally_actionable_pending_source_verification,,https://hoop.co.uk/water-babies-south-manchester/3wPrT1-water-babies-at-cedar-mount-academy-gorton/
+d980298d-b7c4-44af-bf0f-15747245b061,Little Kickers Football Classes,needs_detail_review,missing_location;missing_actionable_schedule,https://hoop.co.uk/little-kickers-south-manchester-trafford-and-stockport/vCkYNw-little-kickers-football-classes/
+c4dd6a0b-741b-4a58-9471-0bbd6a2f0f22,Tumble Tots in Hale Barns,structurally_actionable_pending_source_verification,,https://hoop.co.uk/Tumble-Tots-Trafford/7tGOFuH-tumble-tots-in-hale-barns/
+caee9a88-0f21-44bf-91b6-953ea404b075,Total Ballers 1-2-1 Sessions Football,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/total-ballers/9tlYrv-total-ballers-1-2-1-sessions/
+c1931a39-3701-46e5-863f-5ff2a4ce7110,Youth Academy,structurally_actionable_pending_source_verification,,https://hoop.co.uk/musical-mayhem-london/rlXsHY3-youth-academy/
+f3d447f6-fa61-47b4-9fb0-61b8a3e210fa,Little Kickers - Croydon Lloyd Park - 18months - 2.5 years (FREE TRIAL AVAILABLE),needs_detail_review,missing_specific_url,
+ef7cf67a-aca9-48f5-9713-30c14be43d0e,Little Kickers Football Classes- Harrow (Whitmore High),needs_detail_review,missing_specific_url,
+762c33c7-532d-4e2b-b38c-97cb634abe8f,SoccerDays Toddler Football Classes- Valentines High School,needs_detail_review,missing_specific_url,
+3857e79f-0a9d-465f-bace-b6dc0d47244e,SoccerDays Toddler Football Classes- Holy Family School,needs_detail_review,missing_specific_url,
+623edf65-38c6-4fb2-aae5-b7afca25abd3,Little Kickers - Riddlesdown School - 18months - 2.5 years (FREE TRIAL AVAILABLE),needs_detail_review,missing_specific_url,
+a93c082c-2e96-44e6-878b-64e79d970216,SoccerDays Toddler Football Classes- Roding Valley High School,needs_detail_review,missing_specific_url,
+06df52e9-9e21-4993-9114-63713e0ea2d6,SoccerDays Toddler Football Classes- Forest School,structurally_actionable_pending_source_verification,,https://hoop.co.uk/soccerdays-ltd/SZIBcV-socc
+134dcc3a-c141-4c5a-b55d-b4cf50b6f535,Footy4kidz,needs_detail_review,missing_actionable_schedule,https://footy4kidz.classforkids.io?venueName=Pendleton Sixth Form College
+d1926461-9d39-4398-8e3b-3e113c958867,Junior Sport Stars,needs_detail_review,missing_actionable_schedule,https://junior-sport-stars.classforkids.io?venueName=Chorlton CE Primary School
+22118d30-4e37-4e24-b6fc-c6131c6eaece,We Will Rock You Project,needs_detail_review,missing_actionable_schedule,https://we-will-rock-you-project.classforkids.io?venueName=The Edge Theatre & Arts Centre
+f71d4896-8f17-442b-ac21-081320c1fb69,Tactile Arts,needs_detail_review,missing_actionable_schedule,https://tactilearts.classforkids.io?venueName=West Didsbury CE Primary School
+278f08a9-4b55-40b7-9e8c-5503b07f3df4,Tactile Arts,needs_detail_review,missing_actionable_schedule,https://tactilearts.classforkids.io?venueName=Cavendish Community Primary School
+e365f223-56e0-45ff-b9a7-dedc372aa766,Footy4kidz,needs_detail_review,missing_actionable_schedule,https://footy4kidz.classforkids.io?venueName=Salford Sports Village
+e39bd73a-e563-46ff-8629-72f10aadbf94,Tumble Tots Bolton & Bury,needs_detail_review,missing_actionable_schedule,https://tumble-tots-bolton.classforkids.io?venueName=Manchester Maccabi Community and Sports Club (Prestwich)
+478c3306-9162-456c-955c-cdf816b1fea7,First Gymnastics South Manchester,needs_detail_review,missing_actionable_schedule,https://firstgymnastics-south-manchester.classforkids.io?venueName=CHS South
+835d7ffd-f6f4-4701-9345-c3a56223c12e,First Gymnastics South Manchester,needs_detail_review,missing_actionable_schedule,https://firstgymnastics-south-manchester.classforkids.io?venueName=CHS South (PS)
+809cf0f1-3466-4a03-b624-6c8425de6e1c,Development In Sport & PE,needs_detail_review,missing_actionable_schedule,https://development-in-sport-pe.classforkids.io?venueName=Seymour Park Primary School
+1203cf5a-64ea-4972-91bb-850b7d3c7e63,Tucum Capoeira Manchester,needs_detail_review,missing_actionable_schedule,https://capoeira-manchester.classforkids.io?venueName=St John's Centre
+8c2d31c1-8bad-479f-ad3f-a0c6255c61ad,Tucum Capoeira Manchester,needs_detail_review,missing_actionable_schedule,https://capoeira-manchester.classforkids.io?venueName=Ukrainian Cultural Centre
+1163abb5-d441-4d7c-bbdb-960c26644697,Junior Sport Stars,needs_detail_review,missing_actionable_schedule,https://junior-sport-stars.classforkids.io?venueName=Co-op Academy New Islington
+a20dbb98-14cc-4717-86ce-8b70454421ae,SSA Manchester Central Football,needs_detail_review,missing_actionable_schedule,https://soccer-star-academy-manchester-central.classforkids.io?venueName=Trinity Sports Centre
+fa62d34c-2362-48c1-b79f-e61512634b64,Tucum Capoeira Manchester,needs_detail_review,missing_actionable_schedule,https://capoeira-manchester.classforkids.io?venueName=Fighting Fit Manchester
+3dd7c3c4-2aba-4940-abe3-98133474b031,KNT Danceworks,needs_detail_review,missing_actionable_schedule,https://kntdanceworks.classforkids.io?venueName=MCR Dance Studios - Waltz Studio
+90811533-05a3-4ba5-b97f-ad7b428dac38,KNT Danceworks,needs_detail_review,missing_actionable_schedule,https://kntdanceworks.classforkids.io?venueName=MCR Dance Studios - Curve Studio
+6905beca-8591-4189-91d6-7e5e8a0ddeb0,KNT Danceworks,needs_detail_review,missing_actionable_schedule,https://kntdanceworks.classforkids.io?venueName=MCR Dance Studios - Stomp Studio
+73b4f656-41ac-4037-9030-6d79e94c5636,Saturdads at St John's Church Waterbeach,needs_detail_review,missing_actionable_schedule,https://haysouthcambs.co.uk/activities/saturdads-at-st-johns-church-waterbeach/
+e9a50c00-a8cd-4d1c-9bda-95fd77b66108,Art&Design Club Hotel Elephant,needs_detail_review,missing_actionable_schedule,https://www.southwark.gov.uk/southwark-presents/artdesign-club-hotel-elephant
+c72ed9c3-a8df-4f89-923a-644daf80ffb5,Kids Yoga in Peckham,needs_detail_review,missing_actionable_schedule,https://www.southwark.gov.uk/southwark-presents/kids-yoga-peckham
+fec8ea10-9434-43d0-86ad-b6198edf6e5d,Kids Wrestling Class,needs_detail_review,missing_actionable_schedule,https://www.southwark.gov.uk/southwark-presents/kids-wrestling-class
+32e751f4-4285-4f7e-9639-685560fbf368,Young Flyers Aerial Classes,needs_detail_review,missing_actionable_schedule,https://www.southwark.gov.uk/southwark-presents/young-flyers-aerial-classes-0
+c1f46b26-f2a9-47f4-bd55-4ca54b3e8eb1,Holyrood Family Adventure,needs_detail_review,missing_actionable_schedule,https://www.historicenvironment.scot/whats-on/all/overview/?eventId=f09d9743-70f1-4b49-ac18-ae6d00cbd008
+c8d4862b-8080-4dc7-a36a-def9888697e2,Sensory storytelling and play,needs_detail_review,missing_location;missing_actionable_schedule,https://www.southwark.gov.uk/southwark-presents/sensory-storytelling-and-play-0
+784d7eb2-c899-4816-b720-f8865dcaf635,"Water Babies at Waterside Hotel, Didsbury",needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/water-babies-south-manchester/P7hY63-water-babies-at-waterside-hotel-didsbury/
+e92741f3-27c8-4b1d-bd3d-9f4cf36d5b04,Novas teen martial arts classes,needs_detail_review,missing_location;missing_actionable_schedule,https://hoop.co.uk/novas-freestyle-martial-arts-academy/SxPCkW-novas-teen-martial-arts-classes/
+f0234669-7c09-471d-ab58-4069364378e7,"Water Babies at Delamere School, Flixton",needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/water-babies-south-manchester/ukd8lf-water-babies-at-delamere-school-flixton/
+f1d211b8-174a-4d03-a2a7-b37f4070fc8a,"Water Babies at Pictor Academy, Timperley",needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/water-babies-south-manchester/wA9xZ25-water-babies-at-pictor-academy-timperley/
+002565f1-4706-4634-8885-94b7b061a6a0,Baby Beeps - Union Church and Community Centre - Crouch End,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+15e63823-f200-48f6-815d-60cd14b89fa1,Bellingham Multi-sports,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+2923c319-14b1-411e-8abb-eada7ccf7e0d,Tiny Tunes Music & Dance Classes 3 mths - 5 yrs: Twickenham,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/tiny-tunes/93QDyB-tiny-tunes-music-dance-classes-3-mths-5-yrs-twickenham/
+3129940c-107e-40b9-ade8-d2b1d2e25427,Regal Ballet: Baby Ballet (18 months to 2½ years),needs_detail_review,missing_location;missing_specific_url;missing_actionable_schedule,
+3cf720cf-f761-4676-993b-75cc8a33fa03,Hartbeeps Happy House @ Stanley Arts,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/hartbeeps/bAgD0Dg-hartbeeps-happy-house-stanley-arts/
+5628cafa-30c1-4872-af91-6707ec3247f8,Baby Beeps - Hampstead Garden Suburb Free Church Hall,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+604d2d15-92b9-465c-94b2-8e6ddb855676,Karate & Self Defence for Kids 3+,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+67095db2-199a-44f5-a15e-e6e495b4ac76,Baby Bells - Hampstead Garden Suburb Free Church Hall,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+7bc1b368-052b-443b-b8c7-0e619dcf3fef,All day play!,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/ivystreetfamilycentre/ltCFVT-all-day-play/
+8e6faa61-cbf7-48ef-b053-a423b1cef810,Hartbeeps - Baby Bells @ STANLEY Arts,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+970c29f5-dff2-479b-94e1-5e8c21e78e1b,Jolly Jumpers Stay and Play,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/e/BVskDS/
+9e69ace4-69a2-4515-a1d7-15910a873430,Happy House - Hampstead Garden Suburb Free Church Hall,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/e/yyTClH9/
+a8c0a56d-d3fe-4a17-8fe5-8039cb70a7c7,Hartbeeps - Baby Beeps @STANLEY Arts,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+c41a0d33-2581-40b7-87ab-4534ed8f501a,Baby Bells - Union Church and Community Centre - Crouch End,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+e3c262ed-b7b2-4e6f-9d66-ce61e4902be4,Adapted Water Sports (for children with d...,needs_detail_review,missing_actionable_schedule,https://www.redbridge.gov.uk/discover/events/adapted-water-sports-for-children-with-disabilities/
+12a10d32-e5bf-402d-acc9-f7f9661ed19f,Henley: Storytime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/henley-storytime
+422043ac-9a8c-48e1-ace6-a6ee535d08b2,Wantage: GroW - Stay and Play,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/wantage-grow-stay-and-play
+47f6846b-6e71-42d3-8f60-81edd8af2c96,Woodstock: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries-oxfordshire-museum/woodstock-rhymetime
+603514c6-75ec-4637-9b7d-892e321bfc0c,Wallingford Library: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/wallingford-library-rhymetime
+6bac60a0-52e5-4663-a224-3bcbb837aa28,Carterton: Lego Club,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/carterton-lego-club
+7599537c-dc44-4c37-993f-deed4b4f4505,Wheatley Library: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/wheatley-library-rhymetime
+7cc6ecdd-7bc1-4d48-b3c7-4d99c5009557,Botley: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/botley-rhymetime-0
+92390fcd-6120-42d6-9a21-749b0cb78cce,Headington Library: Stay & Play,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/headington-library-stay-play
+eecaf46d-eed7-44ae-8f2d-e3134f1dd550,Thame Library: Storytime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/thame-library-storytime
+e7efe008-8370-44ff-aef4-6e0fc4dc8a12,Jaywick Martello Tower: We Are Music,needs_detail_review,missing_actionable_schedule,https://www.explore-essex.com/whats-on/jaywick-we-are-music
+99fca424-bef4-45b9-b63a-cb6ea9ad3f0e,Novas teen martial arts classes,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/novas-freestyle-martial-arts-academy/SxPCkW-novas-teen-martial-arts-classes/
+a46078fa-a6d5-48e5-8c76-42cfda7fecd4,Baby Bounce And Rhyme,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/e/r1Q6ihZ/
+be4bcfb9-3785-4305-85aa-a3ee4816a9e1,All Little Dancers,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/the-lesley-taylor-school-of-dance/ObVIae-all-little-dancers/
+ce4819cb-489a-4e14-95d2-69656282a226,KNT Dance School,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/e/lOZ8ka/
+d2f510d8-4c4c-4dca-a259-00e7a474cf76,Toddler Rhyme Time,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+1c636919-abb0-4a67-9e3a-65aa0e53f5d0,Hartbeeps - Baby Beeps @ Grove Church SYDENHAM,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+51c1ee8f-37f4-4b5b-aca7-54335b5a7119,Little Kickers - Wallington Roundshaw Park - 18months - 4 years,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/little-kickers-Brighton/2clPEW-little-kickers-wallington-roundshaw-park-18months-4-years-free-trial-available/
+53d5f122-efda-4dde-98c1-971b2ae98897,Marble Triceratops Skull public sculpture,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/e/G5vRyX/
+55198e9c-9294-420c-a56d-27be8acca6de,Regal Ballet: Pre-Primary Ballet (3½ to 5 years),needs_detail_review,missing_location;missing_specific_url;missing_actionable_schedule,
+5fa2b6fa-2665-4a05-92f3-b628c4c9b14d,Hartbeeps Happy House @ Grove Church SYDENHAM,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/hartbeeps/B6QTGLZ-hartbeeps-happy-house-grove-church-sydenham/
+69812663-bdab-4919-84f2-de134206df7c,Mum & Baby Pilates with Lottie,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+83bba1e7-17bc-47d0-ab23-e378243e512c,"Rhymetime Music Classes: The Orchard Tavern, Shepherds Bush",needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/rhymetime/Drct98-rhymetime-music-classes-the-orchard-tavern-shepherds-bush/
+cc4e76e3-b40d-4d2d-9553-8337825bf52a,Tiny Tunes Music & Dance Classes 3 mths - 5 yrs: Clapham,needs_detail_review,missing_actionable_schedule,https://hoop.co.uk/tiny-tunes/FmfmPa-tiny-tunes-music-dance-classes-3-mths-5-yrs-clapham/
+f14d2325-e54d-4ff6-a949-defb01bdbe0c,Hartbeeps - Baby Bells @ Grove Church SYDENHAM,needs_detail_review,missing_specific_url;missing_actionable_schedule,
+e28c22dc-f41d-4749-852c-58cb32327fd2,Music Classes for Under-Fives - Canada Water Library,needs_detail_review,missing_actionable_schedule,https://www.southwark.gov.uk/southwark-presents/music-classes-under-fives-canada-water-library
+bc4d1de4-183c-42ca-b4ad-f02104897a2c,Forest School: Make Walltown Home,needs_detail_review,missing_actionable_schedule,https://www.northumberlandnationalpark.org.uk/whats-on/forest-school-make-walltown-home-2-2-4/
+ea6cd546-e854-400b-86a3-ce91213d29ae,Pottery and Sculpture Workshop,needs_detail_review,missing_actionable_schedule,https://www.redbridge.gov.uk/discover/events/pottery-and-sculpture-workshop/
+006f1869-f8fa-4a92-ada1-06ac1b909010,Woodstock Library: Story Time,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries-oxfordshire-museum/woodstock-library-story-time
+189aa60b-71e8-40ac-ba10-e5b3a0672e96,Botley: Lego Club,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/botley-lego-club
+6f65708d-01bb-45f0-8e63-f434223e3f3c,Summertown: Code Club,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/summertown-code-club
+811fed40-04bf-41ba-9d62-056a929efcd2,Henley: Stay and Play,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/henley-stay-and-play-0
+883404be-88c7-40f9-83c6-5b30e6e24e44,Summertown: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/summertown-rhymetime
+99600616-6481-433a-9b6d-b580bc0624b2,Bicester Library: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/bicester-library-rhymetime-0
+a32684a9-99d4-4cc4-8d79-63ed3bf4717f,Bampton: Rhymetime - Poetry Special,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/bampton-rhymetime-poetry-special
+bef46b14-982f-486f-a840-02b57ee0e476,Abingdon: Tuesday Make and Play,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/abingdon-tuesday-make-and-play
+c2436630-613e-46d3-8d89-712a1ab386dd,Kidlington: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/kidlington-rhymetime
+dbb35e02-c654-4ad9-8385-9399be9de75a,Didcot: Lego Club,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/didcot-lego-club
+de25166a-8412-49d3-ac8c-96bec020a96f,Littlemore: Rhymetime,needs_detail_review,missing_actionable_schedule,https://www.oxfordshire.gov.uk/events/libraries/littlemore-rhymetime

@@ -24,6 +24,7 @@ import worker as base
 _ORIGINAL_BUILD_PROMPT = base.build_prompt
 _ORIGINAL_CLEAN_EVENTS = base.clean_events
 _ORIGINAL_PROCESS_SOURCE = base.process_source
+_ORIGINAL_FETCH_SOURCE_HTML = base.fetch_source_html
 
 SCHEDULE_SIGNAL = re.compile(
     r"\b(?:weekly|every\s+(?:mon|tue|wed|thu|fri|sat|sun)|mondays?|tuesdays?|wednesdays?|"
@@ -424,6 +425,20 @@ def _activity_row(item: dict, source: dict, page_url: str, method: str, stats: d
     location = base.clean_str(item.get("location"), 300) or venue_name
     schedule = base.clean_str(item.get("schedule_text"), 300) or base.clean_str(item.get("time_text"), 200)
     event_url = base.absolute_url(item.get("event_url"), page_url)
+    if not location:
+        stats["missing_activity_location"] = stats.get("missing_activity_location", 0) + 1
+        return None
+    if not event_url:
+        stats["missing_activity_url"] = stats.get("missing_activity_url", 0) + 1
+        return None
+    # A duration, bare clock time, or 'regular sessions' is not an actionable
+    # recurring schedule. Never invent a weekday from the source's location.
+    if not schedule or not re.search(
+        r"\b(?:mon(?:day)?s?|tue(?:sday)?s?|wed(?:nesday)?s?|thu(?:rsday)?s?|fri(?:day)?s?|sat(?:urday)?s?|sun(?:day)?s?|daily|weekly|monthly|every day|every week|every month)\b",
+        schedule, re.I,
+    ):
+        stats["missing_activity_schedule"] = stats.get("missing_activity_schedule", 0) + 1
+        return None
     venue_id = _resolve_venue(item, page_url)
     now_iso = dt.datetime.now(dt.timezone.utc).isoformat()
     key = _activity_dedupe_key(title, venue_name or location)
@@ -553,11 +568,22 @@ def process_source(source, extract, today):
     return _ORIGINAL_PROCESS_SOURCE(source, extract, today)
 
 
+def fetch_source_html(source):
+    if source.get("source_adapter") == "venue_listing_details":
+        from activity_source_discovery import fetch_listing_documents
+
+        # Reviewed static pages can use HTTP even in the browser worker.
+        fetch = base.fetch_html_requests if source.get("fetch_method") in {"html", "requests"} else base.fetch_html
+        return fetch_listing_documents(source, fetch, base.robots_allows, lambda: time.sleep(base.PAUSE_SECONDS))
+    return _ORIGINAL_FETCH_SOURCE_HTML(source)
+
+
 def install_quality_rules():
     base.build_prompt = build_prompt
     base.clean_events = clean_events
     base.make_gemini_caller = make_gemini_caller
     base.process_source = process_source
+    base.fetch_source_html = fetch_source_html
 
     # Preserve the old date detector but also let clearly scheduled activities
     # through the cheap pre-Gemini gate.
