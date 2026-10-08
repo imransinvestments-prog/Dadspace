@@ -24,9 +24,9 @@ export default async function VenuesPage({searchParams}: Props) {
   const db = getSupabase()
   const {data: categories} = db ? await db.rpc("venue_category_counts") : {data:null}
   return <>
-    <DiscoveryLinks/>
     <VenuesJsonLd venues={initial.venues} path={`/venues${page > 1 ? `?page=${page}` : ""}`}/>
     <VenuesDirectory venues={initial.venues} initialTotal={initial.total} initialHasMore={initial.hasMore} initialPage={page} allCategories={categories??[]}/>
+    <DiscoveryLinks/>
     <nav aria-label="Browse all UK venue pages" className="flex justify-between">{page > 1 && <Link href={page > 2 ? `/venues?page=${page-1}` : "/venues"}>← Previous UK page</Link>}{initial.hasMore && <Link href={`/venues?page=${page+1}`}>Next UK page →</Link>}</nav>
   </>
 }

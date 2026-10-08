@@ -126,12 +126,11 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
           Days out
         </p>
         <h1 className="max-w-3xl font-heading text-4xl leading-[1.05] font-extrabold text-balance md:text-6xl">
-          Where are we{" "}
+          UK venues for{" "}
           <span className="relative inline-block">
-            <span className="relative z-10">off to</span>
+            <span className="relative z-10">family days out</span>
             <span className="absolute inset-x-0 bottom-1 -z-0 h-3 -rotate-1 rounded-sm bg-primary/70 md:h-4" aria-hidden />
           </span>{" "}
-          today?
         </h1>
         <p className="max-w-xl leading-relaxed text-pretty text-muted-foreground">
           Playgrounds, museums, soft play, zoos and more. Pick a type, or let the dice decide and get out the door.
