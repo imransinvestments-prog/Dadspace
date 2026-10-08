@@ -28,6 +28,7 @@ export default async function AreaCategoryPage(props: Props) {
     <nav aria-label="Breadcrumb"><Link href="/">Home</Link> / <Link href="/venues">Venues</Link> / {area.name}</nav>
     <header><h1 className="font-heading text-4xl font-bold">{category.name} in {area.name}</h1><p className="mt-4 max-w-2xl text-muted-foreground">{area.intro}</p><p className="mt-2 text-sm">{result.total} published places · page {page}. Check suitability, prices and opening times with the venue before travelling.</p></header>
     <VenuesJsonLd venues={result.venues} path={path} title={`${category.name} in ${area.name}`} />
+    {result.venues.length > 0 && <h2 className="sr-only">Published venues</h2>}
     {result.venues.length ? <ul className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{result.venues.map(venue => <li key={venue.id}><VenueCard venue={venue} distance={null}/></li>)}</ul> : <p>No published places are available in this category yet.</p>}
     <nav aria-label="Listing pages" className="flex justify-between">{page > 1 && <Link href={`${path.split("?")[0]}${page > 2 ? `?page=${page - 1}` : ""}`}>← Previous page</Link>}{result.hasMore && <Link href={`${path.split("?")[0]}?page=${page + 1}`}>Next page →</Link>}</nav>
   </div>

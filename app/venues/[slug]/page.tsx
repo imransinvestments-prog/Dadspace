@@ -3,7 +3,7 @@ import Link from "next/link"
 import { notFound, permanentRedirect } from "next/navigation"
 import { publicVenueById } from "@/lib/venue-discovery"
 import { venueIdFromSlug, venueSlug } from "@/lib/venue-slug"
-import { categoryLabel, FACILITY_LABELS, venuePhotoUrl } from "@/lib/venue-meta"
+import { categoryImage, categoryLabel, FACILITY_LABELS, venuePhotoUrl } from "@/lib/venue-meta"
 import { pageMetadata, siteUrl } from "@/lib/seo"
 import { VenuePhoto } from "@/components/venues/venue-photo"
 import { venueSchema } from "@/components/venues/venues-json-ld"
@@ -21,7 +21,7 @@ async function venueFor(props: Props) {
 }
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const v = await venueFor(props)
-  return pageMetadata(`${v.name}${v.town ? ` in ${v.town}` : ""}`, `/venues/${venueSlug(v)}`, `${categoryLabel(v.category)}${v.town ? ` in ${v.town}` : ""}. Find the address and available visitor information for ${v.name}.`, {image: venuePhotoUrl(v) ?? "/images/venues/museum.png"})
+  return pageMetadata(`${v.name}${v.town ? ` in ${v.town}` : ""}`, `/venues/${venueSlug(v)}`, `${categoryLabel(v.category)}${v.town ? ` in ${v.town}` : ""}. Find the address and available visitor information for ${v.name}.`, {image: venuePhotoUrl(v) ?? categoryImage(v.category)})
 }
 export default async function VenueDetail(props: Props) {
   const v = await venueFor(props), url = `${siteUrl}/venues/${venueSlug(v)}`
