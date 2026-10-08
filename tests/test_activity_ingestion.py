@@ -1,4 +1,6 @@
 import datetime as dt
+import json
+from pathlib import Path
 import unittest
 from unittest.mock import patch
 
@@ -98,6 +100,35 @@ class ActivityIngestionTests(unittest.TestCase):
         self.assertEqual(self.clean(item)[1]['missing_activity_location'],1)
         item=self.activity(); item['event_url']=None
         self.assertEqual(self.clean(item)[1]['missing_activity_url'],1)
+
+    def test_activity_venue_suffix_drift_does_not_duplicate(self):
+        first=self.activity(); first['title']='Family LEGO club @ Central Library'
+        a=self.clean(first)[0][0]; b=self.clean(self.activity())[0][0]
+        self.assertEqual(a['dedupe_key'],b['dedupe_key'])
+        self.assertEqual(a['title'],'Family LEGO club')
+        self.assertEqual(quality._listing_title('LEGO at Home','Central Library'),'LEGO at Home')
+
+    def test_specific_event_url_survives_title_and_address_drift(self):
+        a=dict(title='Halloween Crafts @ Canton Library',start_date='2026-10-28',
+               venue_name='Canton Library',location='Canton Library, Library Street',
+               event_url='https://library.test/events/crafts',source_url='https://library.test/events')
+        b=dict(a,title='Halloween Crafts',location='Canton Library')
+        self.assertEqual(quality._event_dedupe_key(a),quality._event_dedupe_key(b))
+        self.assertNotEqual(quality._event_dedupe_key(a),quality._event_dedupe_key(dict(b,venue_name='Other Library')))
+        self.assertNotEqual(quality._event_dedupe_key(a),quality._event_dedupe_key(dict(b,start_date='2026-10-29')))
+
+    def test_recorded_cardiff_extraction_keeps_all_seven_identities(self):
+        runs=json.loads((Path(__file__).parent/'fixtures/activity-repeat-cardiff.json').read_text(encoding='utf-8'))
+        keys=[]
+        for rows in runs:
+            identities=set()
+            for row in rows:
+                row=dict(row,title=quality._listing_title(row['title'],row['venue_name']))
+                key=quality._activity_dedupe_key(row['title'],row['venue_name'] or row['location']) if row['listing_type']=='activity' else quality._event_dedupe_key(row)
+                identities.add(key)
+            keys.append(identities)
+        self.assertEqual(len(keys[0]),7)
+        self.assertEqual(keys[0],keys[1])
 
 
 if __name__=='__main__':

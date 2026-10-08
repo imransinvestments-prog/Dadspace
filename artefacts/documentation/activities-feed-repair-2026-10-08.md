@@ -26,9 +26,9 @@ The manifest adds 38 operator-level candidates across all four UK nations: 17 li
 
 ## Verification and operating steps
 
-Nine focused regressions and the existing worker self-test passed locally. Live transaction-only failure probe tested six Birmingham activities: zero were incorrectly refreshed; the transaction rolled back. Source access audit made zero AI calls and zero database writes. Candidate inserts and the freshness migration were verified separately.
+All 79 Python tests, including 12 focused ingestion regressions, and the existing worker self-test passed locally. Live transaction-only probes confirmed failed fetch 0/6 refreshed, changed page 0/8 refreshed, and successful unchanged check 8/8 refreshed; all transactions rolled back. Source access audit made zero AI calls and zero database writes. Candidate inserts and the freshness migration were verified separately.
 
-`activity-venue-source-review.yml` performs two real extraction passes through the normal quality worker for eight pilot sources, with all database and venue writes disabled. It records every accepted row, rejected counters, source failure, page hash and actual model/API/token usage. The existing browser baseline covers five current directory sources. Live extraction and CI outcomes must be attached here before activating new routes or accepting the ticket. Two forced extraction passes are extraction-repeat evidence; they are not live database repeat-ingestion evidence.
+`activity-venue-source-review.yml` performs two real extraction passes through the normal quality worker for eight pilot sources, with all database and venue writes disabled. It records every accepted row, rejected counters, source failure, page hash and actual model/API/token usage. The existing browser baseline covers five current directory sources. The real eight-source review completed successfully in run 37839982261, with zero database writes. Kent failed HTTP 403 twice and Libraries NI timed out twice on the runner. Six sources returned accepted rows, with 100 accepted rows across both passes and 48 distinct identities after replaying the repaired key logic. API usage was 12 attempts, 106,199 prompt tokens, 83,078 output tokens and 189,277 total tokens (thinking is a reported subset, not added again). Monetary cost depends on the account pricing; no charge estimate was invented. Two forced extraction passes are extraction-repeat evidence; they are not live database repeat-ingestion evidence.
 
 After reviewing extraction artifacts: repair unsupported sources; confirm canonical branch identities; deploy the worker; enable only individually approved routes; back up events; run a bounded live collector twice; verify stable IDs and no duplicate identity keys; review public results; and observe scheduled freshness/health. Source activation before worker rollout would use the old collector and is unsafe. Human 90%/100 quality review, pilot coverage and seven-day reliability are still open. Production site launch remains subject to the existing release gate.
 
@@ -43,3 +43,24 @@ After reviewing extraction artifacts: repair unsupported sources; confirm canoni
 `DRY_RUN=true python scripts/validate_venue_activity_sources.py` (requires existing Supabase/Gemini secrets; read-only)
 
 Canonical source metadata and access evidence: `artefacts/data/activities-source-candidates.json`, `activities-source-access-2026-10-08.json`, `activities-museum-domain-coverage.csv`, `activities-library-town-coverage.csv`. Reviewed source inserts: `activity-source-candidates.sql`. Replay schema via the recorded migration; do not re-run ad hoc edits.
+
+## Extraction review findings
+
+| Source | Pass 1 | Pass 2 | Matching identities |
+|---|---:|---:|---:|
+| Cardiff Libraries | 7 | 7 | 7 |
+| Museum Wales | 10 | 11 | 10 |
+| Royal Museums Greenwich | 11 | 11 | 11 |
+| Birmingham Museums | 8 | 8 | 8 |
+| Horniman Museum | 8 | 4 | 4 |
+| Amersham Museum | 2 | 3 | 2 |
+
+Cardiff originally changed every key when titles gained/lost a venue suffix and addresses changed wording. Titles now remove only an exact redundant venue suffix; dated listings use specific detail URL, date and venue for identity. Replay of the recorded seven-row fixture matches 7/7. The actual extraction report retains original rows for reproducibility. Counts above use the repaired identity logic and are not live database upsert results.
+
+Museum Wales inconsistently classified Play Sessions as a dateless activity (rejected for missing schedule) or a dated event; Horniman lost four rows between passes and includes exhibition start dates of today, which require detail-page date confirmation. Amersham added a lacemaking listing linked to the generic calendar in its second pass. These routes remain unapproved: neither a successful process nor accepted row count proves source accuracy. Birmingham's duplicate title variants collapse to eight rows, though the old kept counter says nine; the new key-level counter records merged duplicates correctly. Cardiff venues are absent from the current canonical library inventory and require explicit branch enrichment. Existing source links and automatically found venue names do not prove canonical linkage.
+
+The five-directory browser baseline produced 47 eligible rows; the five-source civic baseline produced one, with one 404. These baseline artifacts contain counters, not all accepted row content, so only the eight-source extraction artifact supports new-row detail review. Public discovery/SEO, deals-quality and civic checks passed on d05d8ce; final identity changes must pass the subsequent branch checks before merge.
+
+The bounded inventory discovery script starts from real inventoried museum homepages, respects robots, retains canonical IDs, and follows only actually linked pages. Its first 20 distinct domains found 21 candidate URLs on eight sites; eight had no suitable links and four failed. A cursor allows the full 1,710-domain backlog to be processed in reviewed batches without a broad automatic crawl, AI calls or activation. This is comprehensive inventory coverage with an explicit discovery backlog, not a claim that 38 seeds cover all venues.
+
+Evidence includes the full stored-row structural review, all accepted/rejected pilot rows and token counters, replay overlap, complete inventories, access failures and the first discovery batch. Historical incomplete records, source-specific extraction instability, inaccessible routes and live repeat ingestion remain outstanding delivery work under DS-10.

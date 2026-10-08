@@ -1,0 +1,98 @@
+[
+  {
+    "source": "Kent Libraries",
+    "statuses": [
+      "failed_403",
+      "failed_403"
+    ],
+    "first": 0,
+    "second": 0,
+    "overlap": 0,
+    "union": 0,
+    "review_required": true
+  },
+  {
+    "source": "Libraries NI",
+    "statuses": [
+      "failed_timeout",
+      "failed_timeout"
+    ],
+    "first": 0,
+    "second": 0,
+    "overlap": 0,
+    "union": 0,
+    "review_required": true
+  },
+  {
+    "source": "Cardiff Libraries",
+    "statuses": [
+      "ok",
+      "ok"
+    ],
+    "first": 7,
+    "second": 7,
+    "overlap": 7,
+    "union": 7,
+    "review_required": true
+  },
+  {
+    "source": "Museum Wales",
+    "statuses": [
+      "ok",
+      "ok"
+    ],
+    "first": 10,
+    "second": 11,
+    "overlap": 10,
+    "union": 11,
+    "review_required": true
+  },
+  {
+    "source": "Royal Museums Greenwich",
+    "statuses": [
+      "ok",
+      "ok"
+    ],
+    "first": 11,
+    "second": 11,
+    "overlap": 11,
+    "union": 11,
+    "review_required": true
+  },
+  {
+    "source": "Birmingham Museums",
+    "statuses": [
+      "ok",
+      "ok"
+    ],
+    "first": 8,
+    "second": 8,
+    "overlap": 8,
+    "union": 8,
+    "review_required": true
+  },
+  {
+    "source": "Horniman Museum",
+    "statuses": [
+      "ok",
+      "ok"
+    ],
+    "first": 8,
+    "second": 4,
+    "overlap": 4,
+    "union": 8,
+    "review_required": true
+  },
+  {
+    "source": "Amersham Museum",
+    "statuses": [
+      "ok",
+      "ok"
+    ],
+    "first": 2,
+    "second": 3,
+    "overlap": 2,
+    "union": 3,
+    "review_required": true
+  }
+]

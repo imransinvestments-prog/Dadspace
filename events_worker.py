@@ -76,13 +76,25 @@ def _activity_dedupe_key(title: str, venue: str | None) -> str:
     return hashlib.sha1(raw.encode("utf-8")).hexdigest()
 
 
+def _listing_title(title: str | None, venue: str | None) -> str | None:
+    """Remove only an exact, redundant venue suffix; retain distinct class names."""
+    if not title or not venue:
+        return title
+    parts = re.split(r"\s+(?:@|at)\s+", title, maxsplit=1, flags=re.I)
+    if len(parts) == 2 and _normalise_words(parts[1]) == _normalise_words(venue):
+        return parts[0].strip()
+    return title
+
+
 def _event_dedupe_key(row: dict) -> str:
+    url = (row.get("event_url") or "").strip().split("#", 1)[0].rstrip("/").lower()
+    source_url = (row.get("source_url") or "").strip().split("#", 1)[0].rstrip("/").lower()
     raw = "|".join(
         [
             "event",
-            _normalise_words(row.get("title")),
+            "url:" + url if url and url != source_url else _normalise_words(row.get("title")),
             str(row.get("start_date") or ""),
-            _normalise_words(row.get("location")),
+            _normalise_words(row.get("venue_name") or row.get("location")),
         ]
     )
     return hashlib.sha1(raw.encode("utf-8")).hexdigest()
@@ -482,6 +494,8 @@ def clean_events(raw_events, source, page_url, method, today, stats=None):
         if not isinstance(item, dict):
             event_raw.append(item)
             continue
+        item = dict(item)
+        item["title"] = _listing_title(item.get("title"), item.get("venue_name"))
         title_text = f"{item.get('title') or ''} {item.get('description') or ''}"
         holiday = bool(item.get("is_holiday_camp")) or bool(HOLIDAY_CAMP.search(title_text))
         listing_type = str(item.get("listing_type") or "event").strip().lower()
@@ -536,7 +550,11 @@ def clean_events(raw_events, source, page_url, method, today, stats=None):
             }
         )
         row["dedupe_key"] = _event_dedupe_key(row)
-        kept[row["dedupe_key"]] = row
+        if row["dedupe_key"] in kept:
+            stats["duplicates"] = stats.get("duplicates", 0) + 1
+            stats["kept"] = max(0, stats.get("kept", 0) - 1)
+        else:
+            kept[row["dedupe_key"]] = row
 
     for item in activities:
         stats["extracted"] = stats.get("extracted", 0) + 1
