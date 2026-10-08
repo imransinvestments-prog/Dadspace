@@ -18,6 +18,6 @@ export function NewsHeadlines({ articles }: { articles: HomeData["articles"] }) 
         <a className="mt-auto pt-2 text-sm font-semibold text-accent hover:underline" href={article.url || "/news"} target={article.url ? "_blank" : undefined} rel="noopener noreferrer">Read article<span className="sr-only">{article.url ? " (opens in a new tab)" : ""}</span> →</a>
       </article>)}
     </div>
-    {!articles.items.length && <p className="text-muted-foreground">News is temporarily unavailable.</p>}
+    {!articles.items.length && <p className="text-muted-foreground">{articles.loadFailed ? "News is temporarily unavailable." : "No family news meets our relevance checks right now. Check back soon."}</p>}
   </section>
 }

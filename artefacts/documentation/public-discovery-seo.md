@@ -70,3 +70,13 @@ Manual Hounslow lookup and nearby results succeeded in the browser. The public c
 One pre-compression preview homepage lab run: [PageSpeed report](https://pagespeed.web.dev/analysis/https-dadspace-git-codex-53-public-disc-1de796-imransinvestments-6859-vercel-app/wqz1uxdcfd?form_factor=mobile), captured 8 October 2026 13:52 BST, Lighthouse 13.5.0, initial-load Moto G Power/slow 4G. Mobile performance 92, FCP 0.9s, LCP 3.2s, TBT 0ms, CLS 0.001; desktop performance 98, FCP 0.2s, LCP 0.7s, TBT 10ms, CLS 0.024. No CrUX data. SEO 69 reflects deliberately blocked preview indexing. These are single-run preview diagnostics, not production before/after medians or a field pass.
 
 That run found 126KiB potential image savings and a 404 for the obsolete dwin2 script. Image quality 60 is explicitly allowed and used for the hero/category art; the broken script is removed. Venue attribution and affiliate offer disclosures remain. Repeat measurements on the final deployment; contrast and unused-JavaScript diagnostics remain visible follow-up work.
+
+## Final acceptance evidence
+
+PR #55 shipped the missing results H2 and category-matched detail share artwork. The final HTTP/sitemap verifier passed on a9ca6d7cfbb73fa428ad83622ee54edc022a9f8e. [The production PageSpeed report](pagespeed-production-2026-10-08.md) records all 24 device results across four representative routes, conditions, exact links and remaining diagnostics.
+
+Google Rich Results Test successfully crawled the Hounslow Library detail with three valid items (breadcrumbs, Library/local business, organisation). Optional telephone, priceRange and image warnings remain unknown rather than invented. This is sampled validation, not an audit of every existing event/activity page. Search Console access is unavailable in the current account; property-owner URL Inspection and sitemap evidence are required.
+
+Owner accepted monitoring budgets on 8 October: API p95 below 2.5 seconds; JSON below 100 KiB per 24 venue records. Single latency samples do not establish p95. The national deep-page EXPLAIN (offset 58,000, limit 24) took 549.6ms and scanned 58,500 public rows with an external merge sort (4,144KB disk). Retain first/deep/filter measurements before deciding index or paging changes.
+
+The follow-up feed contract marks missing configuration, returned query errors and thrown transport failures as loadFailed. Successful empty supply or relevance-filtered supply is a genuine empty state. Publisher source and URL remain attached to eligible articles. Regression coverage exercises all five outcomes without writing production data.

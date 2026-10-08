@@ -90,6 +90,6 @@ export type HomeData = {
   events: Sourced<DadEvent[]> & { isWeekend: boolean; nearby: NearbyScope | null; radiusMiles: number }
   threads: Sourced<ForumThread[]>
   /** `pool[i]` holds the newest articles for the category shown in card `i`, newest first. */
-  articles: Sourced<Article[]> & { pool?: Article[][] }
+  articles: Sourced<Article[]> & { pool?: Article[][]; loadFailed: boolean }
   deal: Sourced<LiveDeal | null> & { loadFailed: boolean }
 }

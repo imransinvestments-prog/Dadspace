@@ -40,3 +40,23 @@ test('news homepage prefers actionable relevance, never pads with weak stories',
   const rows=[{id:'weak',category:'money',relevance:3},{id:'strong',category:'parenting',relevance:5},{id:'safety',category:'safety',relevance:4}]
   assert.deepEqual(Array.from(m.selectNewsCards(rows),r=>r.id),['strong','safety'])
 })
+
+test('home feed separates empty and filtered supply from query and transport failures',async()=>{
+  let configured=true,mode='empty'
+  const article={id:1,title:'Recall for parents',url:'https://publisher.example/recall',source_name:'Publisher',category:'safety',relevance:5,published_at:'2026-10-08'}
+  const db={from:table=>{const q={};for(const method of ['select','gte','lte','order'])q[method]=()=>q
+    q.limit=async()=>{
+      if(table==='feed_items' && mode==='throw')throw new Error('network failure')
+      return {data:table==='feed_items' && ['strong','weak'].includes(mode)?[{...article,relevance:mode==='weak'?3:5}]:[],error:table==='feed_items' && mode==='error'?{message:'offline'}:null}
+    };return q}}
+  const selection=load('lib/home-selection.ts',{}).module
+  const {module:m}=load('lib/data.ts',{'server-only':{},'./home-selection':selection,'./deals':{getDeals:async()=>({items:[],loadFailed:false})},'./supabase':{getSupabase:()=>configured?db:null},'./dates':{londonHour:()=>12,londonToday:()=> '2026-10-08',upcomingWeekend:()=>({saturday:'2026-10-10',sunday:'2026-10-11',sleeps:2}),formatEventDate:()=> '10–11 October'},'./geo':{}})
+  for(const next of ['empty','weak','error','throw','strong']){
+    mode=next;const {articles}=await m.getHomeData()
+    assert.equal(articles.loadFailed,['error','throw'].includes(mode),next)
+    assert.equal(articles.items.length,mode==='strong'?1:0,next)
+    assert.equal(articles.isSample,false)
+    if(mode==='strong'){assert.equal(articles.items[0].source,'Publisher');assert.equal(articles.items[0].url,article.url)}
+  }
+  configured=false;assert.equal((await m.getHomeData()).articles.loadFailed,true)
+})
