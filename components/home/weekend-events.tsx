@@ -93,7 +93,7 @@ export function WeekendEvents(props: Props) {
           ))}
         </ul>
       ) : (
-        <EmptyState title="No events here yet." body="Even dads need a nap." />
+        <EmptyState title={events.loadFailed ? "Events are temporarily unavailable." : "No events here yet."} body={events.loadFailed ? "Please try again shortly." : "Even dads need a nap."} />
       )}
     </section>
   )

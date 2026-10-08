@@ -42,10 +42,15 @@ test('news homepage prefers actionable relevance, never pads with weak stories',
 })
 
 test('home feed separates empty and filtered supply from query and transport failures',async()=>{
-  let configured=true,mode='empty'
+  let configured=true,mode='empty',eventMode='empty',eventCalls=0
   const article={id:1,title:'Recall for parents',url:'https://publisher.example/recall',source_name:'Publisher',category:'safety',relevance:5,published_at:'2026-10-08'}
   const db={from:table=>{const q={};for(const method of ['select','gte','lte','order'])q[method]=()=>q
     q.limit=async()=>{
+      if(table==='upcoming_events'){
+        eventCalls++
+        if(eventMode==='throw')throw new Error('event transport failure')
+        if(eventMode==='error' || (eventMode==='upcoming-error' && eventCalls===2))return {data:null,error:{message:'events offline'}}
+      }
       if(table==='feed_items' && mode==='throw')throw new Error('network failure')
       return {data:table==='feed_items' && ['strong','weak'].includes(mode)?[{...article,relevance:mode==='weak'?3:5}]:[],error:table==='feed_items' && mode==='error'?{message:'offline'}:null}
     };return q}}
@@ -58,5 +63,12 @@ test('home feed separates empty and filtered supply from query and transport fai
     assert.equal(articles.isSample,false)
     if(mode==='strong'){assert.equal(articles.items[0].source,'Publisher');assert.equal(articles.items[0].url,article.url)}
   }
-  configured=false;assert.equal((await m.getHomeData()).articles.loadFailed,true)
+  mode='strong'
+  for(const next of ['empty','error','upcoming-error','throw']){
+    eventMode=next;eventCalls=0;const data=await m.getHomeData()
+    assert.equal(data.events.loadFailed,next!=='empty',next)
+    assert.equal(data.events.items.length,0)
+    assert.equal(data.articles.items.length,1,'events failure does not drop news')
+  }
+  configured=false;const missing=await m.getHomeData();assert.equal(missing.articles.loadFailed,true);assert.equal(missing.events.loadFailed,true)
 })
