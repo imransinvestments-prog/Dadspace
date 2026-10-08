@@ -1,5 +1,7 @@
 import type { Article } from "./types"
 export function selectNewsCards(rows: Article[], count = 8): Article[] {
+  // Homepage is a small curated surface: prefer strong family relevance over category quotas.
+  rows = rows.filter(row => (row.relevance ?? 0) >= 4).sort((a,b) => (b.relevance ?? 0) - (a.relevance ?? 0) || String(b.published_at ?? "").localeCompare(String(a.published_at ?? "")))
   const chosen: Article[] = [], categories = new Set<string>(), ids = new Set<string>()
   for (const row of rows) {
     if (ids.has(row.id) || categories.has(row.category ?? "other")) continue

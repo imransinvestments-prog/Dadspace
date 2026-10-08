@@ -67,6 +67,7 @@ export type Article = {
   source: string | null
   url?: string | null
   category?: string | null
+  relevance?: number | null
 }
 
 export type Deal = {
@@ -92,4 +93,3 @@ export type HomeData = {
   articles: Sourced<Article[]> & { pool?: Article[][] }
   deal: Sourced<LiveDeal | null> & { loadFailed: boolean }
 }
-

@@ -5,12 +5,12 @@ const canonicalSiteUrl = "https://www.dad-space.co.uk"
 // The public custom domain is the canonical SEO origin. NEXT_PUBLIC_SITE_URL
 // can still override it deliberately for another production deployment.
 export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || canonicalSiteUrl).replace(/\/$/, "")
-export const isProduction = process.env.VERCEL_ENV === "production" || process.env.NODE_ENV === "production"
+export const isProduction = process.env.VERCEL_ENV ? process.env.VERCEL_ENV === "production" : process.env.NODE_ENV === "production"
 
 export const siteName = "Dadspace"
-export const defaultTitle = "Dadspace – the hub for UK dads"
+export const defaultTitle = "Dadspace – family days out for UK dads"
 export const defaultDescription =
-  "Find family days out near you, chat with other dads, catch up on dad rights and parenting news, and grab deals on baby and kids' kit."
+  "Find UK family days out, local activities, parenting news and useful deals on baby and kids' kit."
 
 export function pageMetadata(
   title: string,
@@ -20,7 +20,7 @@ export function pageMetadata(
 ): Metadata {
   const canonical = new URL(path || "/", siteUrl).toString()
   const image = options?.image || "/images/hero-dad.png"
-  const noIndex = options?.noIndex ?? !isProduction
+  const noIndex = !isProduction || options?.noIndex === true
 
   return {
     title,

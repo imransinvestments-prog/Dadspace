@@ -8,8 +8,8 @@ const fetcher = async (url: string): Promise<LiveDeal[]> => {
   if (!response.ok) throw new Error("Unavailable")
   return response.json()
 }
-export function HomeDeals() {
-  const { data, error, isLoading } = useSWR("/api/home/deals", fetcher, { refreshInterval: 300000 })
+export function HomeDeals({initialDeals = []}: {initialDeals?: LiveDeal[]}) {
+  const { data, error, isLoading } = useSWR("/api/home/deals", fetcher, { fallbackData: initialDeals, refreshInterval: 300000 })
   return <section aria-labelledby="home-deals-title" className="flex flex-col gap-4">
     <SectionHeader id="home-deals-title" title="Deals for dads" href="/deals" linkLabel="All deals" />
     <div className="grid gap-4 md:grid-cols-3">{data?.map(deal => <DealCard key={deal.id} deal={deal} />)}</div>

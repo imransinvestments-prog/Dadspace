@@ -8,11 +8,11 @@ import { VenueCard } from "@/components/venues/venue-card"
 import { milesBetween, type Venue } from "@/lib/venue-meta"
 import { SectionHeader } from "./section-header"
 
-export function LocalPlaces() {
+export function LocalPlaces({publicPlaces = []}: {publicPlaces?: Venue[]}) {
   const { coords, label } = useLocation()
   const url = coords ? `/api/home/local-places?lat=${coords.lat}&lng=${coords.lng}` : "/api/home/local-places"
   const feed = useDirectoryPage<{ venues: Venue[] }>(url, !!coords)
-  const venues = feed.pages[0]?.venues ?? []
+  const venues = coords ? feed.pages[0]?.venues ?? [] : publicPlaces
   const rail = useRef<HTMLUListElement>(null)
   const [paused, setPaused] = useState(false)
   const [hovered, setHovered] = useState(false)
@@ -66,9 +66,9 @@ export function LocalPlaces() {
 
   return (
     <section aria-labelledby="local-places-title" className="flex min-w-0 flex-col gap-4">
-      <SectionHeader id="local-places-title" title="Local Places" href="/venues" linkLabel="View all places" />
+      <SectionHeader id="local-places-title" title={coords ? "Local Places" : "Explore UK places"} href="/venues" linkLabel="View all places" />
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="max-w-lg text-sm leading-relaxed text-muted-foreground">Closest places in each category, then the next closest{coords ? ` · near ${label}` : ""}.</p>
+        <p className="max-w-lg text-sm leading-relaxed text-muted-foreground">{coords ? `Closest places in each category, then the next closest · near ${label}.` : "Browse published UK places, or choose a location for nearby results."}</p>
         {venues.length > 0 && <div className="flex items-center gap-2">
           <button type="button" aria-label="Previous local places" onClick={() => move(-1)} className="flex size-10 items-center justify-center rounded-full border bg-card hover:bg-muted"><ChevronLeft className="size-4" aria-hidden /></button>
           {!reducedMotion && <button type="button" aria-label={paused ? "Play local places reel" : "Pause local places reel"} aria-pressed={paused} onClick={() => setPaused((value) => !value)} className="inline-flex min-h-10 items-center gap-2 rounded-full border bg-card px-3 text-sm font-semibold hover:bg-muted">
@@ -77,8 +77,7 @@ export function LocalPlaces() {
           <button type="button" aria-label="Next local places" onClick={() => move(1)} className="flex size-10 items-center justify-center rounded-full border bg-card hover:bg-muted"><ChevronRight className="size-4" aria-hidden /></button>
         </div>}
       </div>
-      {!coords ? <p role="status" className="text-sm text-muted-foreground">Choose a location to see places near you.</p>
-        : feed.loading ? <p role="status" className="rounded-xl border bg-card p-6 text-muted-foreground">Finding local places…</p>
+      {coords && feed.loading ? <p role="status" className="rounded-xl border bg-card p-6 text-muted-foreground">Finding local places…</p>
         : feed.error ? <p role="alert" className="rounded-xl border bg-card p-6">{feed.error} <button type="button" onClick={feed.retry} className="font-semibold underline">Retry</button></p>
         : !venues.length ? <p className="rounded-xl border border-dashed bg-card p-6 text-muted-foreground">No local places found yet. Try another location.</p>
         : <ul ref={rail} aria-label="Local places, nearest in each category first" tabIndex={0}

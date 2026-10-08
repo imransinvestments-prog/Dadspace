@@ -1,0 +1,26 @@
+name: Public discovery SEO checks
+on:
+  push:
+    branches: [codex/53-public-discovery-seo]
+  pull_request:
+    paths: ['app/**', 'components/**', 'hooks/**', 'lib/**', 'tests/**', '.github/workflows/public-discovery-checks.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: node --test tests/venue-seo.test.mjs tests/public-discovery.test.cjs tests/deals-selection.test.mjs
+      - run: pnpm exec tsc --noEmit
+      - run: pnpm build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'

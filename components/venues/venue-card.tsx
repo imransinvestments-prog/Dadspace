@@ -1,4 +1,6 @@
 import { VenuePhoto } from "@/components/venues/venue-photo"
+import Link from "next/link"
+import { venueSlug } from "@/lib/venue-slug"
 import { Accessibility, Baby, Clock, Coffee, Dog, Globe, MapPin, Navigation, Phone, SquareParking, type LucideIcon } from "lucide-react"
 import { directionsUrl, formatMiles } from "@/components/venues/venue-spotlight"
 import { FACILITY_LABELS, categoryLabel, type Venue } from "@/lib/venue-meta"
@@ -30,7 +32,7 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
       <div className="relative aspect-[16/10] overflow-hidden">
         <VenuePhoto
           venue={venue}
-          sizes="(min-width: 1280px) 30vw, (min-width: 640px) 50vw, 100vw"
+          sizes="(min-width: 1280px) 320px, (min-width: 640px) 40vw, 90vw"
           className="object-cover transition duration-500 group-hover:scale-105"
         />
         <span className="absolute top-3 left-3 -rotate-2 rounded-md bg-card px-2.5 py-1 text-xs font-extrabold text-card-foreground shadow-sm transition group-hover:rotate-0">
@@ -55,7 +57,7 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
 
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="flex flex-col gap-1">
-          <h3 className="font-heading text-lg leading-snug font-bold text-pretty">{venue.name}</h3>
+          <h3 className="font-heading text-lg leading-snug font-bold text-pretty"><Link href={`/venues/${venueSlug(venue)}`} className="hover:underline">{venue.name}</Link></h3>
           {venue.description && <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">{venue.description}</p>}
         </div>
 
