@@ -6,11 +6,11 @@ export type LocationStatus = "idle" | "locating" | "ready" | "denied" | "unavail
 type Value = { coords: Coords | null; status: LocationStatus; label: string; request: () => void; setLocation: (p: Coords, label?: string) => void; browseAll: boolean }
 const LocationContext=createContext<Value>({coords:null,status:"idle",label:"Current location",request:()=>{},setLocation:()=>{},browseAll:false})
 const KEY="dadspace-location-v2"
+export const DEFAULT_LOCATION: Coords = {lat:51.5074,lng:-0.1278}
 export function LocationProvider({children}:{children:React.ReactNode}) {
-  const [coords,setCoords]=useState<Coords|null>(null)
-  const [status,setStatus]=useState<LocationStatus>("idle")
-  const [label,setLabel]=useState("Current location")
-  const [authorized,setAuthorized]=useState(false)
+  const [coords,setCoords]=useState<Coords|null>(DEFAULT_LOCATION)
+  const [status,setStatus]=useState<LocationStatus>("ready")
+  const [label,setLabel]=useState("Central London")
   const [query,setQuery]=useState("")
   const [searching,setSearching]=useState(false)
   const [searchError,setSearchError]=useState("")
@@ -20,7 +20,6 @@ export function LocationProvider({children}:{children:React.ReactNode}) {
   const setLocation=useCallback((p:Coords,name="Selected destination")=>{
     const point=parsePoint(new URLSearchParams({lat:String(p.lat),lng:String(p.lng)}))
     if(!point)return
-    setAuthorized(true)
     generation.current++;setCoords(point);setStatus("ready");setLabel(name)
     try {sessionStorage.setItem(KEY,JSON.stringify({point,label:name,authorized:true}))} catch {}
   },[])
@@ -60,38 +59,29 @@ export function LocationProvider({children}:{children:React.ReactNode}) {
       const saved=JSON.parse(sessionStorage.getItem(KEY)||"null")
       if(saved?.authorized&&typeof saved.label==="string"){
         const point=parsePoint(new URLSearchParams({lat:String(saved.point?.lat),lng:String(saved.point?.lng)}))
-        if(point){setAuthorized(true);setCoords(point);setLabel(saved.label);setStatus("ready")}
+        if(point){setCoords(point);setLabel(saved.label);setStatus("ready")}
       }
     }catch{}
     return ()=>{generation.current++;searchGeneration.current++}
   },[request])
-  return <LocationContext.Provider value={{coords,status,label,request,setLocation,browseAll:!coords}}>
+  return <LocationContext.Provider value={{coords,status,label,request,setLocation,browseAll:false}}>
     <div className="mx-auto w-full max-w-6xl px-4 pt-4 lg:pl-72">
-      <details className="rounded-xl border bg-card p-4">
-        <summary className="cursor-pointer font-semibold">{authorized ? `Search near ${label} · change location` : "Choose a location for nearby results (optional)"}</summary>
-      <section aria-labelledby="location-title" className="w-full max-w-md rounded-2xl border bg-card p-6 shadow-sm">
-        <p className="mb-3 text-sm font-semibold text-primary">Dadspace</p>
-        <h2 id="location-title" className="text-2xl font-bold">Find your starting location</h2>
-        <p className="mt-3 text-muted-foreground">Browse UK places below, or use your device location or a town, city or UK postcode for nearby results.</p>
-        <p className="mt-3 text-sm text-muted-foreground">You can search manually without sharing your device location.</p>
-        <div aria-live="polite" className="mt-4 text-sm">
-          {status==="locating"&&<p>Finding your location…</p>}
-          {status==="denied"&&<p>Location access is blocked. Enter a town or postcode below to continue, or allow location in your browser’s site settings and try again.</p>}
-          {status==="unavailable"&&<p>Your device location is unavailable. Enter a town or postcode below to continue.</p>}
-        </div>
-        <button type="button" onClick={request} disabled={status==="locating"} className="mt-5 w-full rounded-full bg-primary px-4 py-3 font-semibold text-primary-foreground disabled:opacity-50">{status==="locating"?"Finding location…":status==="denied"||status==="unavailable"?"Try again":"Allow location and continue"}</button>
-        <div className="my-5 text-center text-sm text-muted-foreground">or enter a location manually</div>
+      <section aria-label="Search location" className="rounded-xl border bg-card p-4">
+        <p role="status" className="mb-3 text-sm text-muted-foreground">Showing nearby results for <strong className="text-foreground">{label}</strong>. Search a town or postcode to change area.</p>
         <form onSubmit={search} className="space-y-3">
-          <label htmlFor="starting-location" className="block text-sm font-semibold">Town, city or UK postcode</label>
-          <input id="starting-location" value={query} maxLength={100} onChange={event=>{searchGeneration.current++;setSearching(false);setQuery(event.target.value);setResults([]);setSearchError("")}} placeholder="e.g. Manchester or SW1A 1AA" autoComplete="postal-code" aria-describedby={searchError?"location-search-error":undefined} aria-invalid={!!searchError} className="w-full rounded-lg border bg-background px-3 py-3 text-base" />
-          <button type="submit" disabled={searching} className="w-full rounded-full border px-4 py-3 font-semibold disabled:opacity-50">{searching?"Searching…":"Find location and continue"}</button>
+          <label htmlFor="starting-location" className="sr-only">Town, city or UK postcode</label>
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <input id="starting-location" type="search" value={query} maxLength={100} onChange={event=>{searchGeneration.current++;setSearching(false);setQuery(event.target.value);setResults([]);setSearchError("")}} placeholder="Search a town, city or UK postcode" autoComplete="postal-code" aria-describedby={searchError?"location-search-error":undefined} aria-invalid={!!searchError} className="min-w-0 flex-1 rounded-lg border bg-background px-3 py-3 text-base" />
+            <button type="submit" disabled={searching} className="rounded-full bg-primary px-5 py-3 font-semibold text-primary-foreground disabled:opacity-50">{searching?"Searching…":"Search location"}</button>
+            <button type="button" onClick={()=>{searchGeneration.current++;setSearching(false);setResults([]);setSearchError("");request()}} disabled={status==="locating"} className="rounded-full border px-4 py-3 text-sm font-semibold disabled:opacity-50">{status==="locating"?"Finding location…":"Use my location"}</button>
+          </div>
           <div aria-live="polite">
             {searchError&&<p id="location-search-error" role="alert" className="text-sm text-destructive">{searchError}</p>}
-            {!!results.length&&<div className="space-y-2"><p className="text-sm">Choose your location:</p>{results.map((place,index)=><button key={`${place.lat}-${place.lng}-${index}`} type="button" onClick={()=>setLocation(place,place.label)} className="block w-full rounded-lg border p-3 text-left text-sm hover:bg-muted">{place.label}</button>)}</div>}
+            {!!results.length&&<div className="space-y-2"><p className="text-sm">Choose your location:</p>{results.map((place,index)=><button key={`${place.lat}-${place.lng}-${index}`} type="button" onClick={()=>{setLocation(place,place.label);setResults([])}} className="block w-full rounded-lg border p-3 text-left text-sm hover:bg-muted">{place.label}</button>)}</div>}
+            {(status==="denied"||status==="unavailable")&&<p className="text-sm text-muted-foreground">Could not use your device location. Still showing results for {label}; search a town or postcode to change area.</p>}
           </div>
         </form>
       </section>
-      </details>
     </div>
     {children}
   </LocationContext.Provider>
