@@ -12,17 +12,20 @@ import {
   REGIONS,
   fetchNews,
   isRegion,
+  parseNewsLocation,
   type CategoryFilter,
   type NewsItem,
+  type NewsLocation,
   type RegionFilter,
 } from "@/lib/news"
 import { NewsCard } from "./news-card"
 import { NewsSkeleton } from "./news-skeleton"
 
-/** Where the chosen region is remembered in the browser. */
+/** Where the chosen region/location is remembered in the browser. */
 const REGION_STORAGE_KEY = "dadspace:news-region"
+const LOCATION_STORAGE_KEY = "dadspace:news-location"
 
-type Key = readonly ["news", RegionFilter, CategoryFilter, number]
+type Key = readonly ["news", RegionFilter, CategoryFilter, string, number]
 
 /**
  * The interactive part of the News page: region dropdown, category chips,
@@ -34,32 +37,64 @@ type Key = readonly ["news", RegionFilter, CategoryFilter, number]
 export function NewsFeed({ initialItems }: { initialItems: NewsItem[] | null }) {
   const [region, setRegion] = useState<RegionFilter>("all")
   const [category, setCategory] = useState<CategoryFilter>("all")
+  const [location, setLocation] = useState<NewsLocation | null>(null)
 
-  // Restore the region the dad picked last time.
+  // Restore the region/location the dad picked last time.
   useEffect(() => {
-    const saved = window.localStorage.getItem(REGION_STORAGE_KEY)
-    if (isRegion(saved)) setRegion(saved)
+    try {
+      const saved = window.localStorage.getItem(REGION_STORAGE_KEY)
+      if (isRegion(saved)) setRegion(saved)
+      const rawLocation = window.localStorage.getItem(LOCATION_STORAGE_KEY)
+      if (!rawLocation) return
+      const parsed = parseNewsLocation(JSON.parse(rawLocation))
+      if (parsed && parsed.region === saved) setLocation(parsed)
+      else window.localStorage.removeItem(LOCATION_STORAGE_KEY)
+    } catch {
+      // Storage can be blocked; the feed still works for this session.
+      try { window.localStorage.removeItem(LOCATION_STORAGE_KEY) } catch { /* Storage is blocked. */ }
+    }
   }, [])
 
   const changeRegion = useCallback((value: string) => {
     if (!isRegion(value)) return
     setRegion(value)
-    window.localStorage.setItem(REGION_STORAGE_KEY, value)
+    setLocation(null)
+    try {
+      window.localStorage.setItem(REGION_STORAGE_KEY, value)
+      window.localStorage.removeItem(LOCATION_STORAGE_KEY)
+    } catch { /* Session-only selection when storage is blocked. */ }
   }, [])
 
-  const { locate, status: locationStatus, message: locationMessage } = useRegionFromLocation(changeRegion)
+  const applyLocation = useCallback((value: NewsLocation) => {
+    if (!isRegion(value.region) || value.region === "all") return
+    setRegion(value.region)
+    setLocation(value)
+    try {
+      window.localStorage.setItem(REGION_STORAGE_KEY, value.region)
+      window.localStorage.setItem(LOCATION_STORAGE_KEY, JSON.stringify(value))
+    } catch { /* Session-only selection when storage is blocked. */ }
+  }, [])
+
+  const { locate, status: locationStatus, message: locationMessage } = useRegionFromLocation(applyLocation)
+  const locationKey = location ? JSON.stringify(location) : "none"
 
   // Each "page" is 20 articles. Stop asking for more once a page comes back short.
   const getKey = (pageIndex: number, previousPage: NewsItem[] | null): Key | null => {
     if (previousPage && previousPage.length < PAGE_SIZE) return null
-    return ["news", region, category, pageIndex] as const
+    return ["news", region, category, locationKey, pageIndex] as const
   }
 
-  const isDefaultView = region === "all" && category === "all"
+  const isDefaultView = region === "all" && category === "all" && !location
 
   const { data, error, size, setSize, isLoading, isValidating, mutate } = useSWRInfinite(
     getKey,
-    ([, r, c, page]: Key) => fetchNews({ region: r, category: c, page }),
+    ([, r, c, locKey, page]: Key) =>
+      fetchNews({
+        region: r,
+        category: c,
+        page,
+        location: locKey === "none" ? null : parseNewsLocation(JSON.parse(locKey)),
+      }),
     {
       fallbackData: isDefaultView && initialItems ? [initialItems] : undefined,
       revalidateFirstPage: false,
@@ -114,7 +149,7 @@ export function NewsFeed({ initialItems }: { initialItems: NewsItem[] | null }) 
             type="button"
             onClick={locate}
             disabled={locationStatus === "locating"}
-            aria-label="Use my location to set the region"
+            aria-label="Use my location to personalise local news"
             title="Use my location"
             className="flex size-9 shrink-0 items-center justify-center rounded-full text-card-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60"
           >
@@ -152,7 +187,7 @@ export function NewsFeed({ initialItems }: { initialItems: NewsItem[] | null }) 
       </div>
 
       <p role="status" aria-live="polite" className={cn("-mt-3 text-sm leading-relaxed text-muted-foreground", !locationMessage && "sr-only")}>
-        {locationStatus === "locating" ? "Finding your region…" : locationMessage}
+        {locationStatus === "locating" ? "Finding your area…" : locationMessage}
       </p>
 
       <section aria-label="Articles" aria-busy={isLoading} className="flex flex-col gap-4">

@@ -1,7 +1,8 @@
 "use client"
 
 import { useCallback, useState } from "react"
-import { isRegion, type RegionFilter } from "@/lib/news"
+import { parseNewsLocation, type NewsLocation } from "@/lib/news"
+import { parsePoint } from "@/lib/distance"
 
 type Status = "idle" | "locating" | "error"
 
@@ -11,7 +12,7 @@ const MESSAGES = {
   denied: "Location is blocked for this site. Allow it in your browser settings, or pick a region.",
   unavailable: "We couldn't get a fix on your location. Try again, or pick a region.",
   outside: "Looks like you're outside the UK nations we cover, so we've kept All UK.",
-  failed: "We couldn't work out your region just now. Try again, or pick one.",
+  failed: "We couldn't work out your area just now. Try again, or pick a region.",
 } as const
 
 function getPosition(): Promise<GeolocationPosition> {
@@ -24,8 +25,8 @@ function getPosition(): Promise<GeolocationPosition> {
   )
 }
 
-/** Asks the browser for its location and maps it to a UK nation for the News filter. */
-export function useRegionFromLocation(onRegion: (region: RegionFilter) => void) {
+/** Asks the browser for its location and maps it to coarse UK news geography. */
+export function useRegionFromLocation(onLocation: (location: NewsLocation) => void) {
   const [status, setStatus] = useState<Status>("idle")
   const [message, setMessage] = useState<string | null>(null)
 
@@ -44,12 +45,13 @@ export function useRegionFromLocation(onRegion: (region: RegionFilter) => void) 
     }
 
     try {
-      const { latitude, longitude } = position.coords
-      const res = await fetch(`/api/region?lat=${latitude}&lng=${longitude}`)
+      const point = parsePoint(new URLSearchParams({ lat: String(position.coords.latitude), lng: String(position.coords.longitude) }))
+      if (!point) return fail(MESSAGES.unavailable)
+      const res = await fetch(`/api/region?lat=${point.lat}&lng=${point.lng}`)
       if (!res.ok) return fail(MESSAGES.failed)
-      const { region } = (await res.json()) as { region: string | null }
-      if (!isRegion(region) || region === "all") return fail(MESSAGES.outside)
-      onRegion(region)
+      const result = parseNewsLocation(await res.json())
+      if (!result) return fail(MESSAGES.outside)
+      onLocation(result)
       setStatus("idle")
     } catch {
       fail(MESSAGES.failed)
@@ -59,7 +61,7 @@ export function useRegionFromLocation(onRegion: (region: RegionFilter) => void) 
       setStatus("error")
       setMessage(text)
     }
-  }, [onRegion])
+  }, [onLocation])
 
   return { locate, status, message }
 }

@@ -98,10 +98,14 @@ def fetch_awin(source):
     publisher_id = os.getenv("AWIN_PUBLISHER_ID", "").strip()
     if not token or not publisher_id:
         return "configuration_missing", [], "AWIN_API_TOKEN or AWIN_PUBLISHER_ID not configured"
+    if not publisher_id.isascii() or not publisher_id.isdecimal() or int(publisher_id) <= 0:
+        return "configuration_invalid", [], "AWIN_PUBLISHER_ID must be a positive numeric ID"
     default_url = f"https://api.awin.com/publisher/{publisher_id}/promotions"
     url = (source.get("url") or default_url).strip()
     if url == "config://awin":
         url = default_url
+    if url != default_url:
+        return "configuration_invalid", [], "Awin source must use config://awin or the publisher's official promotions endpoint"
     headers = {
         "Authorization": f"Bearer {token}",
         "Accept": "application/json",
@@ -114,7 +118,7 @@ def fetch_awin(source):
     }
     status, offers, info = _pages(
         lambda page: requests.post(url, headers=headers,
-                                   json={**body, "pagination": {"page": page, "pageSize": 200}}, timeout=(10, 45)),
+                                   json={**body, "pagination": {"page": page, "pageSize": 200}}, timeout=(10, 45), allow_redirects=False),
         ("offers", "promotions", "data", "results"), 200, "Awin")
     if status != "ok":
         return status, [], info
@@ -257,6 +261,9 @@ def fetch_source(source, rss_fetcher):
     source_type = (source.get("source_type") or "rss").strip().lower()
     if source_type == "rss":
         return rss_fetcher(source)
+    if source_type == "direct":
+        from deals_direct_sources import fetch_direct
+        return fetch_direct(source)
     if source_type == "awin":
         return fetch_awin(source)
     if source_type == "fmtc":

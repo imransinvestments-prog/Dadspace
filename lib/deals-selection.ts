@@ -16,16 +16,26 @@ export type LiveDeal = {
   audience_evidence: string | null
   classified_by: string | null
   matched_item?: string | null
+  item_id?: number | null
+  equivalent_item_id?: number | null
+  deal_type?: string | null
+  source_id?: number | null
+  value_band?: string | null
   status: string
 }
 
 export function familyBenefit(text: string) {
   const benefit = text.match(/\b(?:kids?|children)\s+(?:eat|go)\s+free\b|\b2\s+for\s+1\s+(?:family\s+)?(?:tickets|admission)\b/i)
-  const terms = /\b(?:with (?:a |an )?(?:paying )?adult|per (?:paying )?adult|aged? \d|under \d|adult (?:meal|ticket|admission)|code\s+[a-z0-9]+)\b/i.test(text)
+  const terms = /\b(?:with (?:a |an )?(?:paying )?adult|per (?:paying )?adult|aged? \d+|under \d+|adult (?:meal|ticket|admission)|code\s+[a-z0-9]+)\b/i.test(text)
   return benefit && terms ? benefit[0] : null
 }
 
+export function merchantAdvertised(deal: LiveDeal) {
+  return /^quality-v1:source-page:merchant-advertised:/.test(deal.classified_by ?? "")
+}
+
 export function dealBenefit(deal: LiveDeal) {
+  if (merchantAdvertised(deal)) return null
   return familyBenefit(`${deal.title} ${deal.description ?? ""}`)
 }
 
@@ -53,6 +63,7 @@ function score(deal: LiveDeal, now: number) {
   const savings = Math.max(0, Number(deal.was_price) - Number(deal.price))
   const freshness = Math.max(0, 1 - (now - Date.parse(deal.last_seen!)) / (72 * 3600000))
   return Number(deal.relevance) * 10 + freshness * 10 +
+    (deal.value_band === "big" ? 5 : 0) +
     (dealBenefit(deal) ? 15 : Math.min(savings, 50) / 5 + Math.min(Number(deal.discount_pct), 50) / 5)
 }
 
@@ -81,6 +92,12 @@ export function dealItemKey(deal: LiveDeal) {
   // Different restaurants/attractions remain useful distinct family offers.
   const benefit = dealBenefit(deal)
   if (benefit) return `benefit:${benefit.toLowerCase()}:${(deal.retailer || deal.title).toLowerCase()}`
+  if (deal.item_id) {
+    const key = `taxonomy:${deal.equivalent_item_id || deal.item_id}`
+    // Distinct holiday destinations and service packages are useful choices.
+    if (deal.deal_type === "service" || /\b(?:holidays?|vacations?)\b/i.test(deal.matched_item ?? "")) return `${key}:${deal.link}`
+    return key
+  }
   // Title first: old keyword matches can label rash cream and nappy bins as diapers.
   for (const [key, pattern] of itemTypes) if (pattern.test(deal.title)) return `item:${key}`
   const matched = deal.matched_item?.trim()

@@ -1,3 +1,2 @@
-// Keep the public holding page live until the owner approves the MVP launch.
-// Change this in a reviewed release to expose the completed app.
-export const COMING_SOON = true
+// Public launch approved on 8 October 2026. Set true only for a deliberate maintenance hold.
+export const COMING_SOON = false

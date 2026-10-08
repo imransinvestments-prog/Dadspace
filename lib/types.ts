@@ -59,6 +59,9 @@ export type ForumThread = {
 }
 
 export type Article = {
+  summary?: string | null
+  why_it_matters?: string | null
+  published_at?: string | null
   id: string
   title: string
   source: string | null

@@ -23,7 +23,7 @@ def _truthy(value):
 
 
 def load_items_from_supabase():
-    rows = worker.sb("GET", ITEMS_TABLE, params={"select": "*", "order": "id"}) or []
+    rows = read_all(ITEMS_TABLE)
     for row in rows:
         row["active"] = "yes" if _truthy(row.get("active", True)) else "no"
         row["uk_terms"] = row.get("uk_terms") or ""
@@ -35,12 +35,23 @@ def load_items_from_supabase():
 
 
 def load_exclusions_from_supabase():
-    rows = worker.sb("GET", EXCLUSIONS_TABLE, params={"select": "*", "order": "id"}) or []
+    rows = read_all(EXCLUSIONS_TABLE)
     for row in rows:
         row["term"] = row.get("term") or ""
         row["reason"] = row.get("reason") or ""
-        row["mode"] = (row.get("mode") or "soft").strip().lower()
+        default_mode = "hard" if "pet product" in row["reason"] or "second-hand" in row["reason"] or "cleaning product" in row["reason"] else "soft"
+        row["mode"] = (row.get("mode") or default_mode).strip().lower()
     return rows
+
+
+def read_all(table):
+    rows = []
+    for offset in range(0, 10000, 500):
+        page = worker.sb("GET", table, params={"select": "*", "order": "id", "offset": offset, "limit": 500}) or []
+        rows.extend(page)
+        if len(page) < 500:
+            return rows
+    raise RuntimeError(f"{table} exceeds taxonomy safety limit; refusing partial classification")
 
 
 def load_database_list(path):
@@ -56,7 +67,7 @@ def gemini_classify_38(batch):
         "You classify UK shopping deals for Dadspace, an app for dads and parents of children aged 0 to 12.\n"
         "For each deal decide whether it is a genuinely useful product or family days-out offer for babies, children up to about 12, or their parents.\n"
         "Include family attraction tickets and kids-eat-free offers with explicit child eligibility. Use Days Out & Family Fun.\n"
-        "Reject: pet products, adult-only items, teen (13+) items, second-hand items, adult-only services, tuition, insurance, general groceries (baby food is fine), games consoles and video games, cleaning products.\n"
+        "Reject: pet products, adult-only items, teen (13+) items, second-hand items, adult-only services, insurance, general groceries (baby food is fine), games consoles and video games, cleaning products.\n"
         "Return ONLY a JSON array with one object per deal:\n"
         '{"id": <id>, "relevant": true or false, "group": one of '
         + json.dumps(worker.GROUPS)
@@ -134,6 +145,16 @@ def enhanced_details(all_deals, source_results, started, status="ok", error=None
     return details
 
 
+def source_counts(deals, source_id):
+    from collections import Counter
+    rows = [d for d in deals if d.get("source_id") == source_id]
+    return {
+        "fetched": len(rows),
+        "verified": sum(d.get("decision") == "kept" for d in rows),
+        "rejected": dict(Counter(d.get("reason") for d in rows if d.get("decision") == "rejected")),
+    }
+
+
 def self_test():
     ok = True
     if not (worker._SB_URL and worker._SB_KEY):
@@ -164,7 +185,7 @@ def self_test():
     except Exception as exc:
         worker.log(f"FAIL Supabase sources: {exc}")
         ok = False
-    worker.log(("OK  " if worker._GEMINI_KEY else "WARN ") + "Gemini key " + ("found" if worker._GEMINI_KEY else "missing (unclear items will be skipped)"))
+    worker.log("Rules-only collection: paid AI disabled" if not worker.ENABLE_PAID_AI else "Optional AI explicitly enabled")
     return ok
 
 
@@ -197,11 +218,6 @@ def run():
             "items": len(raw_items),
             "info": info,
         })
-        if not worker.DRY_RUN:
-            try:
-                worker.update_source_health(source, status)
-            except Exception as exc:
-                worker.log(f"  (source health not saved: {exc})")
 
         for raw in raw_items:
             deal = worker.normalise(raw)
@@ -217,8 +233,21 @@ def run():
         if source_type == "rss":
             time.sleep(1.5)
 
-    stats = worker.process_items(all_deals, entries, exclusions, gemini_classify_38 if worker._GEMINI_KEY else None)
-    worker.verify_kept(all_deals, worker.reject)
+    stats = worker.process_items(all_deals, entries, exclusions, gemini_classify_38 if worker.ENABLE_PAID_AI and worker._GEMINI_KEY else None)
+    for deal in all_deals:
+        if deal.get("decision") == "kept" and not deal.get("item_id"):
+            worker.reject(deal, "unmapped_item: no canonical taxonomy identity")
+    worker.verify_kept(all_deals, worker.reject, max_checks=worker._env_int("MAX_VERIFICATION_CHECKS", 120))
+    health_errors = []
+    for source, result in zip(sources, source_results):
+        counts = source_counts(all_deals, source["id"])
+        result.update(counts)
+        if not worker.DRY_RUN:
+            try:
+                worker.update_source_health(source, result["status"], counts)
+            except Exception:
+                health_errors.append(source["id"])
+                worker.log(f"Source health write failed: {source['id']}")
     kept = [d for d in all_deals if d.get("decision") == "kept"]
     skipped_prefilter = sum(1 for d in all_deals if d.get("decision") == "rejected" and worker.stage_of(d["reason"]) == "prefilter")
     worker.write_review(all_deals, source_results, stats, started)
@@ -229,8 +258,16 @@ def run():
         worker.save_live(kept, {}, all_deals)
         worker.log(f"\nLIVE: saved {len(kept)} deals and expired only offers with known expiry dates.")
 
-    worker.log_run(skipped_prefilter, enhanced_details(all_deals, source_results, started))
-    return 0
+    degraded = health_errors or not sources or any(s["status"] not in {"ok", "empty"} for s in source_results)
+    details = enhanced_details(all_deals, source_results, started, status="degraded" if degraded else "ok")
+    details["health_write_failures"] = health_errors
+    details["classification_mode"] = "optional-ai" if worker.ENABLE_PAID_AI else "rules-only"
+    details["dry_run"] = worker.DRY_RUN
+    with open(os.path.join(worker.REVIEW_DIR, "run-health.json"), "w", encoding="utf-8") as f:
+        json.dump(details, f, indent=2)
+    worker.log_run(skipped_prefilter, details)
+    # Preserve good offers from successful sources, but make outages visible to Actions.
+    return 1 if degraded else 0
 
 
 def configure_worker():

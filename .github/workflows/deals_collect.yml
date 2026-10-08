@@ -12,10 +12,18 @@ on:
       sample_size:
         description: "Number of deals in the review sample"
         default: "40"
+      checkout_ref:
+        description: "Optional explicit collector branch"
+        default: ""
 
 
   workflow_call:
     inputs:
+      checkout_ref:
+        description: "Optional collector branch for a reviewed scheduler"
+        required: false
+        type: string
+        default: ""
       dry_run:
         description: "true = only show results and review files, false = save to Supabase"
         required: false
@@ -38,14 +46,23 @@ permissions:
 
 jobs:
   collect:
+    concurrency:
+      group: dadspace-shared-deals-collection
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.checkout_ref || github.ref }}
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
 
       - name: Install
         run: pip install requests
@@ -62,9 +79,7 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          ENABLE_PAID_AI: "false"
           AWIN_API_TOKEN: ${{ secrets.AWIN_API_TOKEN }}
           AWIN_PUBLISHER_ID: ${{ secrets.AWIN_PUBLISHER_ID }}
           FMTC_API_TOKEN: ${{ secrets.FMTC_API_TOKEN }}
@@ -83,15 +98,25 @@ jobs:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
 
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          ENABLE_PAID_AI: "false"
+          MAX_GEMINI_ITEMS: "0"
+          MAX_VERIFICATION_CHECKS: "120"
 
           AWIN_API_TOKEN: ${{ secrets.AWIN_API_TOKEN }}
           AWIN_PUBLISHER_ID: ${{ secrets.AWIN_PUBLISHER_ID }}
           FMTC_API_TOKEN: ${{ secrets.FMTC_API_TOKEN }}
           PEPPER_API_KEY: ${{ secrets.PEPPER_API_KEY }}
         run: python deals_worker_db.py
+
+      - name: Feed health and coverage
+        if: always() && (inputs.self_test || 'false') != 'true'
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          ENABLE_PAID_AI: "false"
+        run: python scripts/deals-health.py
 
       - name: Upload review files
         if: always()

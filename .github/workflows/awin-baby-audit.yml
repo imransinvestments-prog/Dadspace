@@ -1,0 +1,28 @@
+name: AWIN baby feed API trial
+on:
+  push:
+    branches: [codex/awin-deals]
+    paths: [scripts/awin-baby-audit.py, .github/workflows/awin-baby-audit.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Read baby programmes and active UK offers
+        env:
+          AWIN_API_TOKEN: ${{ secrets.AWIN_API_TOKEN }}
+          AWIN_PUBLISHER_ID: ${{ secrets.AWIN_PUBLISHER_ID }}
+        run: python scripts/awin-baby-audit.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: awin-baby-audit
+          path: review/awin-baby-audit.json
+          retention-days: 14

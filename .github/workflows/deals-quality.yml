@@ -1,6 +1,17 @@
 name: Deals quality checks
 
 on:
+  push:
+    branches: ["codex/mvp-testing"]
+    paths:
+      - "deals_*.py"
+      - "lib/deals*"
+      - "app/deals/**"
+      - "components/deal-card.tsx"
+      - "components/home/home-deals.tsx"
+      - "scripts/deals*"
+      - "tests/**"
+      - ".github/workflows/deals*"
   pull_request:
     paths:
       - "deals_*.py"

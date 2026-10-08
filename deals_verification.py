@@ -5,7 +5,18 @@ from urllib.parse import urlsplit
 import requests
 
 
-def verify_offer(deal):
+def verify_offer(deal, shopify_pages=None):
+    if deal.get("shopify_variant_id"):
+        from deals_shopify import verify_shopify
+        return verify_shopify(deal, shopify_pages)
+    if deal.get("merchant_product_id"):
+        from deals_halfords import allowed, verify_halfords
+        if allowed(deal["link"]):
+            return verify_halfords(deal)
+    if deal.get("verified_source_page") == deal.get("link"):
+        from deals_direct_sources import RECIPES
+        if deal["link"] in RECIPES:
+            return None, "source-page"
     if deal.get("source_status") == "active":
         return None, "source-api"  # Explicit current provider status, not a merchant claim.
     url = urlsplit(deal["link"])
@@ -52,11 +63,33 @@ def verify_offer(deal):
     return None, "source-page"
 
 
-def verify_kept(deals, reject):
+def verify_kept(deals, reject, max_checks=120):
+    from collections import deque
+    # Round-robin sources and canonical items before spending the bounded budget.
+    # A clothing store's many size variants must not starve other categories.
+    sources = {}
     for deal in deals:
-        if deal.get("decision") != "kept":
+        if deal.get("decision") == "kept":
+            items = sources.setdefault(deal.get("source_id"), {})
+            items.setdefault(deal.get("item_id") or deal.get("matched_item") or deal.get("link"), deque()).append(deal)
+    sources = {source: deque(items.values()) for source, items in sources.items()}
+    ordered = []
+    while sources:
+        for source, items in list(sources.items()):
+            variants = items.popleft()
+            ordered.append(variants.popleft())
+            if variants:
+                items.append(variants)
+            if not items:
+                del sources[source]
+    checked = 0
+    shopify_pages = {}
+    for deal in ordered:
+        if checked >= max_checks:
+            reject(deal, "verification_budget: retry next run")
             continue
-        reason, method = verify_offer(deal)
+        checked += 1
+        reason, method = verify_offer(deal, shopify_pages)
         if reason:
             reject(deal, reason)
         else:
