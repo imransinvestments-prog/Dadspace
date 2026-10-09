@@ -40,7 +40,7 @@ export function HomeDashboard({ initial, publicPlaces = [], initialDeals = [], c
       </div>
       {children}
       <LocalPlaces publicPlaces={publicPlaces}/>
-      <div className="border-t pt-8"><NewsHeadlines articles={data.articles} /></div>
+      <div className="border-t pt-8"><NewsHeadlines monthlyNews={data.monthlyNews} /></div>
       <NearbyWeek />
       <HomeDeals initialDeals={initialDeals}/>
       {FORUM_ENABLED && <TrendingThreads threads={data.threads} />}

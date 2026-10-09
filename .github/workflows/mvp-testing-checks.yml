@@ -29,6 +29,7 @@ jobs:
           python -m unittest discover -s tests -v
           python scripts/test_news_locality.py
           node scripts/test-news-locality.mjs
+          node --test tests/news-newspaper.test.cjs
           node --test tests/deals-selection.test.mjs
       - name: Production build
         run: pnpm build

@@ -34,9 +34,9 @@ type Key = readonly ["news", RegionFilter, CategoryFilter, string, number]
  * `initialItems` is the first page for "All UK" + "All", fetched on the server so
  * the page appears instantly. Changing a filter fetches fresh results.
  */
-export function NewsFeed({ initialItems }: { initialItems: NewsItem[] | null }) {
+export function NewsFeed({ initialItems, initialCategory = "all" }: { initialItems: NewsItem[] | null; initialCategory?: CategoryFilter }) {
   const [region, setRegion] = useState<RegionFilter>("all")
-  const [category, setCategory] = useState<CategoryFilter>("all")
+  const [category, setCategory] = useState<CategoryFilter>(initialCategory)
   const [location, setLocation] = useState<NewsLocation | null>(null)
 
   // Restore the region/location the dad picked last time.
@@ -84,7 +84,7 @@ export function NewsFeed({ initialItems }: { initialItems: NewsItem[] | null }) 
     return ["news", region, category, locationKey, pageIndex] as const
   }
 
-  const isDefaultView = region === "all" && category === "all" && !location
+  const isDefaultView = region === "all" && category === initialCategory && !location
 
   const { data, error, size, setSize, isLoading, isValidating, mutate } = useSWRInfinite(
     getKey,

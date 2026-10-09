@@ -58,7 +58,7 @@ test('home feed separates empty and filtered supply from query and transport fai
       return {data:table==='feed_items' && ['strong','weak'].includes(mode)?[{...article,relevance:mode==='weak'?3:5}]:[],error:table==='feed_items' && mode==='error'?{message:'offline'}:null}
     };return q}}
   const selection=load('lib/home-selection.ts',{}).module
-  const {module:m}=load('lib/data.ts',{'server-only':{},'./home-selection':selection,'./deals':{getDeals:async()=>({items:[],loadFailed:false})},'./supabase':{getSupabase:()=>configured?db:null},'./dates':{londonHour:()=>12,londonToday:()=> '2026-10-08',upcomingWeekend:()=>({saturday:'2026-10-10',sunday:'2026-10-11',sleeps:2}),formatEventDate:()=> '10–11 October'},'./geo':{}})
+  const {module:m}=load('lib/data.ts',{'server-only':{},'./home-selection':selection,'./news-monthly':{getMonthlyNews:async()=>({month:'October 2026',counts:null})},'./deals':{getDeals:async()=>({items:[],loadFailed:false})},'./supabase':{getSupabase:()=>configured?db:null},'./dates':{londonHour:()=>12,londonToday:()=> '2026-10-08',upcomingWeekend:()=>({saturday:'2026-10-10',sunday:'2026-10-11',sleeps:2}),formatEventDate:()=> '10–11 October'},'./geo':{}})
   for(const next of ['empty','weak','error','throw','strong']){
     mode=next;const {articles}=await m.getHomeData()
     assert.equal(articles.loadFailed,['error','throw'].includes(mode),next)

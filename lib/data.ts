@@ -1,4 +1,5 @@
 import "server-only"
+import { getMonthlyNews } from "./news-monthly"
 import { selectNewsCards } from "./home-selection"
 import { getDeals } from "./deals"
 import { getSupabase } from "./supabase"
@@ -203,11 +204,12 @@ export async function getHomeData(user: Point | null = null): Promise<HomeData> 
   const today = londonToday()
   const { saturday, sunday, sleeps } = upcomingWeekend(today)
 
-  const [events, threads, articles, deals] = await Promise.all([
+  const [events, threads, articles, deals, monthlyNews] = await Promise.all([
     getEvents(user, saturday, sunday, today),
     getTrendingThreads(),
     getLatestArticles(),
     getDeals(),
+    getMonthlyNews(),
   ])
 
   return {
@@ -217,6 +219,7 @@ export async function getHomeData(user: Point | null = null): Promise<HomeData> 
     events,
     threads,
     articles,
+    monthlyNews,
     deal: { items: deals.items[0] ?? null, isSample: false, loadFailed: deals.loadFailed },
   }
 }
