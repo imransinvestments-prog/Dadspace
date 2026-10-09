@@ -1,6 +1,6 @@
 import { NewsFeed } from "@/components/news/news-feed"
 import { NewsJsonLd } from "@/components/news/news-json-ld"
-import { fetchNews, type NewsItem } from "@/lib/news"
+import { fetchNews, newsCategory, type NewsItem } from "@/lib/news"
 import { pageMetadata } from "@/lib/seo"
 
 export const metadata = pageMetadata(
@@ -12,12 +12,13 @@ export const metadata = pageMetadata(
 // Re-check the database for new articles at most every 10 minutes.
 export const revalidate = 600
 
-export default async function NewsPage() {
+export default async function NewsPage({ searchParams }: { searchParams: Promise<{ category?: string | string[] }> }) {
+  const category = newsCategory((await searchParams).category)
   // Fetch the first 20 articles on the server so the page shows up instantly.
   // If this fails, the browser will try again and show a retry button if needed.
   let initialItems: NewsItem[] | null = null
   try {
-    initialItems = await fetchNews({ region: "all", category: "all", page: 0 })
+    initialItems = await fetchNews({ region: "all", category, page: 0 })
   } catch {
     initialItems = null
   }
@@ -25,7 +26,7 @@ export default async function NewsPage() {
   return (
     <>
       {initialItems?.length ? <NewsJsonLd items={initialItems} /> : null}
-      <NewsFeed initialItems={initialItems} />
+      <NewsFeed key={category} initialItems={initialItems} initialCategory={category} />
     </>
   )
 }

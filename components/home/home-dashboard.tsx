@@ -36,7 +36,7 @@ export function HomeDashboard({ initial }: { initial: HomeData }) {
         <DadJoke />
       </div>
       <LocalPlaces />
-      <NewsHeadlines articles={data.articles} />
+      <NewsHeadlines monthlyNews={data.monthlyNews} />
       <NearbyWeek />
       <HomeDeals />
       <TrendingThreads threads={data.threads} />

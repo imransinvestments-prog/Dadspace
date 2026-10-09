@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+.dad-newspaper {
+  color: #252119;
+  background-color: #f6eedb;
+  background-image: radial-gradient(ellipse at 12% 8%, #c6a86c26, transparent 48%), radial-gradient(ellipse at 95% 90%, #b9955226, transparent 50%);
+  border: 1px solid #b8a580;
+  box-shadow: 0 3px 12px #25211912;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
