@@ -36,10 +36,15 @@ export const CATEGORIES = [
   { value: "wellbeing", label: "Wellbeing" },
   { value: "health", label: "Health" },
   { value: "education", label: "Education" },
+  { value: "other", label: "Other news" },
 ] as const
 
 export type RegionFilter = (typeof REGIONS)[number]["value"]
 export type CategoryFilter = (typeof CATEGORIES)[number]["value"]
+
+export function newsCategory(value: unknown): CategoryFilter {
+  return CATEGORIES.find(c => c.value === value)?.value ?? "all"
+}
 
 export type NewsLocation = {
   version: number

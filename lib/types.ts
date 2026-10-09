@@ -84,6 +84,7 @@ export type Deal = {
 export type Sourced<T> = { items: T; isSample: boolean }
 
 export type HomeData = {
+  monthlyNews: { month: string; counts: Record<string, number> | null }
   greeting: string
   sleepsToWeekend: number
   weekendLabel: string

@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+.dad-newspaper {
+  color: #252119;
+  background-color: #f6eedb;
+  background-image: radial-gradient(ellipse at 12% 8%, #c6a86c26, transparent 48%), radial-gradient(ellipse at 95% 90%, #b9955226, transparent 50%);
+  border: 1px solid #b8a580;
+  border-radius: 1.5rem;
+  box-shadow: 0 16px 36px -12px #25211933, 0 4px 10px #25211914;
+}
+
+.dad-newspaper-section {
+  border: 1px solid #25211940;
+  border-radius: 1rem;
+  background-color: #fffaf033;
+  box-shadow: 0 6px 14px -5px #25211926, inset 0 1px 0 #ffffff70;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
