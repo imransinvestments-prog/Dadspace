@@ -90,6 +90,7 @@ export type HomeData = {
   threads: Sourced<ForumThread[]>
   /** `pool[i]` holds the newest articles for the category shown in card `i`, newest first. */
   articles: Sourced<Article[]> & { pool?: Article[][] }
+  monthlyNews: { month: string; counts: Record<string, number> | null }
   deal: Sourced<LiveDeal | null> & { loadFailed: boolean }
 }
 
