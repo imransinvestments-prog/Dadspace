@@ -24,12 +24,12 @@ export function NewsHeadlines({ monthlyNews }: { monthlyNews: HomeData["monthlyN
       <h2 id="news-title" className="font-serif text-[clamp(2.1rem,6vw,5.5rem)] font-black uppercase leading-[0.95] tracking-tight">The Dad Space Times</h2>
       <p className="mt-3 text-sm sm:text-base">Your month in news. Pick a section. Find your next read.</p>
     </header>
-    <div className="my-3 bg-[#252119] px-3 py-2 text-center text-xs font-bold uppercase tracking-[0.15em] text-[#f6eedb]">The news desk · Articles collected this month</div>
+    <div className="my-3 rounded-lg bg-[#252119] px-3 py-2 text-center text-xs font-bold uppercase tracking-[0.15em] text-[#f6eedb] shadow-sm">The news desk · Articles collected this month</div>
     {!monthlyNews.counts && <p role="status" className="border-b border-current py-3 text-center text-sm">Monthly counts are temporarily unavailable. You can still browse every section.</p>}
-    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
       {sections.map(({ category, title, icon: Icon, note }, index) => {
         const count = monthlyNews.counts?.[category]
-        return <Link key={category} href={`/news?category=${category}`} className={`group flex min-w-0 flex-col border-b border-[#252119]/50 px-4 py-5 transition-colors hover:bg-[#252119]/[0.07] focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#252119] sm:odd:border-r xl:border-r ${index === 8 ? "sm:col-span-2 xl:col-span-4 xl:border-r-0" : ""}`}>
+        return <Link key={category} href={`/news?category=${category}`} className={`dad-newspaper-section group flex min-w-0 flex-col px-4 py-5 transition-colors hover:bg-[#252119]/[0.07] focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#252119] ${index === 8 ? "sm:col-span-2 xl:col-span-4" : ""}`}>
           <h3 className="font-serif text-xl font-black uppercase leading-tight sm:text-2xl">{title}</h3>
           <div className="my-4 flex items-center gap-4">
             <Icon className="size-12 shrink-0 stroke-[1.3]" aria-hidden="true" />
