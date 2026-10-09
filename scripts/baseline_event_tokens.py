@@ -33,6 +33,9 @@ def main():
     parser.add_argument("--source-ids", default="", help="Optional comma-separated IDs to rerun exactly")
     args = parser.parse_args()
 
+    # Venue resolution inside cleaning can insert candidates. The baseline is
+    # read-only even when its workflow omits the DRY_RUN environment variable.
+    base.DRY_RUN = True
     events_worker.install_quality_rules()
 
     url = os.environ["SUPABASE_URL"]

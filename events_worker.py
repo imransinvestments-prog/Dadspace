@@ -24,6 +24,7 @@ import worker as base
 _ORIGINAL_BUILD_PROMPT = base.build_prompt
 _ORIGINAL_CLEAN_EVENTS = base.clean_events
 _ORIGINAL_PROCESS_SOURCE = base.process_source
+_ORIGINAL_FETCH_SOURCE_HTML = base.fetch_source_html
 
 SCHEDULE_SIGNAL = re.compile(
     r"\b(?:weekly|every\s+(?:mon|tue|wed|thu|fri|sat|sun)|mondays?|tuesdays?|wednesdays?|"
@@ -75,13 +76,25 @@ def _activity_dedupe_key(title: str, venue: str | None) -> str:
     return hashlib.sha1(raw.encode("utf-8")).hexdigest()
 
 
+def _listing_title(title: str | None, venue: str | None) -> str | None:
+    """Remove only an exact, redundant venue suffix; retain distinct class names."""
+    if not title or not venue:
+        return title
+    parts = re.split(r"\s+(?:@|at)\s+", title, maxsplit=1, flags=re.I)
+    if len(parts) == 2 and _normalise_words(parts[1]) == _normalise_words(venue):
+        return parts[0].strip()
+    return title
+
+
 def _event_dedupe_key(row: dict) -> str:
+    url = (row.get("event_url") or "").strip().split("#", 1)[0].rstrip("/").lower()
+    source_url = (row.get("source_url") or "").strip().split("#", 1)[0].rstrip("/").lower()
     raw = "|".join(
         [
             "event",
-            _normalise_words(row.get("title")),
+            "url:" + url if url and url != source_url else _normalise_words(row.get("title")),
             str(row.get("start_date") or ""),
-            _normalise_words(row.get("location")),
+            _normalise_words(row.get("venue_name") or row.get("location")),
         ]
     )
     return hashlib.sha1(raw.encode("utf-8")).hexdigest()
@@ -424,6 +437,20 @@ def _activity_row(item: dict, source: dict, page_url: str, method: str, stats: d
     location = base.clean_str(item.get("location"), 300) or venue_name
     schedule = base.clean_str(item.get("schedule_text"), 300) or base.clean_str(item.get("time_text"), 200)
     event_url = base.absolute_url(item.get("event_url"), page_url)
+    if not location:
+        stats["missing_activity_location"] = stats.get("missing_activity_location", 0) + 1
+        return None
+    if not event_url:
+        stats["missing_activity_url"] = stats.get("missing_activity_url", 0) + 1
+        return None
+    # A duration, bare clock time, or 'regular sessions' is not an actionable
+    # recurring schedule. Never invent a weekday from the source's location.
+    if not schedule or not re.search(
+        r"\b(?:mon(?:day)?s?|tue(?:sday)?s?|wed(?:nesday)?s?|thu(?:rsday)?s?|fri(?:day)?s?|sat(?:urday)?s?|sun(?:day)?s?|daily|weekly|monthly|every day|every week|every month)\b",
+        schedule, re.I,
+    ):
+        stats["missing_activity_schedule"] = stats.get("missing_activity_schedule", 0) + 1
+        return None
     venue_id = _resolve_venue(item, page_url)
     now_iso = dt.datetime.now(dt.timezone.utc).isoformat()
     key = _activity_dedupe_key(title, venue_name or location)
@@ -467,6 +494,8 @@ def clean_events(raw_events, source, page_url, method, today, stats=None):
         if not isinstance(item, dict):
             event_raw.append(item)
             continue
+        item = dict(item)
+        item["title"] = _listing_title(item.get("title"), item.get("venue_name"))
         title_text = f"{item.get('title') or ''} {item.get('description') or ''}"
         holiday = bool(item.get("is_holiday_camp")) or bool(HOLIDAY_CAMP.search(title_text))
         listing_type = str(item.get("listing_type") or "event").strip().lower()
@@ -521,7 +550,11 @@ def clean_events(raw_events, source, page_url, method, today, stats=None):
             }
         )
         row["dedupe_key"] = _event_dedupe_key(row)
-        kept[row["dedupe_key"]] = row
+        if row["dedupe_key"] in kept:
+            stats["duplicates"] = stats.get("duplicates", 0) + 1
+            stats["kept"] = max(0, stats.get("kept", 0) - 1)
+        else:
+            kept[row["dedupe_key"]] = row
 
     for item in activities:
         stats["extracted"] = stats.get("extracted", 0) + 1
@@ -553,11 +586,22 @@ def process_source(source, extract, today):
     return _ORIGINAL_PROCESS_SOURCE(source, extract, today)
 
 
+def fetch_source_html(source):
+    if source.get("source_adapter") == "venue_listing_details":
+        from activity_source_discovery import fetch_listing_documents
+
+        # Reviewed static pages can use HTTP even in the browser worker.
+        fetch = base.fetch_html_requests if source.get("fetch_method") in {"html", "requests"} else base.fetch_html
+        return fetch_listing_documents(source, fetch, base.robots_allows, lambda: time.sleep(base.PAUSE_SECONDS))
+    return _ORIGINAL_FETCH_SOURCE_HTML(source)
+
+
 def install_quality_rules():
     base.build_prompt = build_prompt
     base.clean_events = clean_events
     base.make_gemini_caller = make_gemini_caller
     base.process_source = process_source
+    base.fetch_source_html = fetch_source_html
 
     # Preserve the old date detector but also let clearly scheduled activities
     # through the cheap pre-Gemini gate.

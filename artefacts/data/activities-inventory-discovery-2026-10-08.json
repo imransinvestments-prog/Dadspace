@@ -1,0 +1,428 @@
+{
+  "ai_calls": 0,
+  "database_writes": 0,
+  "offset": 0,
+  "next_offset": 20,
+  "total_domains": 1710,
+  "sources": [
+    {
+      "domain": "nationaltrust.org.uk",
+      "venue_ids": [
+        "0449fe07-95fc-4ca8-a2b5-b6cbb99da402",
+        "0f39dfd8-e93a-4a6e-8c65-fd55996641b4",
+        "175dc156-ee86-481c-8616-7fd64736a5eb",
+        "179f1ba2-748f-4865-a752-b7e665f912f8",
+        "1bd20b51-a954-41b4-9c3e-e1614a3a2c32",
+        "1fa6ae6d-bbf4-44c8-807b-e14b38c8c3dc",
+        "20d829a8-bc59-4e2e-adbf-ce121c279a88",
+        "28eb5c36-31f1-4303-b377-b1c719b12fa8",
+        "2b3191e6-72c9-42d0-9b70-6d544fa6c2bc",
+        "3706276c-d2fc-4606-a9e2-2731377e57a5",
+        "3de2916c-89b2-40e7-8254-41e081b865f6",
+        "4398a5d4-896d-4974-9f91-d58695feb54c",
+        "460b035b-3c75-4d93-8d3c-229c4440b4b9",
+        "49a0f878-fae5-4b41-b8ee-cf4587e61a17",
+        "50c79fd4-1a10-4de2-916a-9b98a22882de",
+        "52a981b9-8996-4e2c-b834-586d359c5ee0",
+        "55825c99-ab3f-47f2-894f-7321393ec940",
+        "5b9e1bdf-4284-4b85-99c5-f9d575b577ca",
+        "6032977d-b2ad-45b4-8409-b39f78c4b868",
+        "60f8d809-e4e1-4050-b3c5-741d499d6fa9",
+        "6c54b2d0-91cd-402c-b980-5e557e19dc56",
+        "6e519dff-c63c-4ad1-977c-127c43a252b2",
+        "76c5c04e-bf54-45a2-904f-b0a9646a6a8c",
+        "8198c0bf-9aa5-4cce-8b5f-e8097631f3ab",
+        "82b89a84-87d0-4d1f-a769-d72a181b13f7",
+        "82f21a57-63db-4fe5-8e98-6334070b68d9",
+        "85f10185-6148-424f-9ef3-77614f27285d",
+        "8de02cad-f1c9-465a-99fc-a4dba62aedf3",
+        "978a235f-e21d-4499-b193-d7db74710a2d",
+        "99d3f09d-7059-4109-9c0a-e47647f7297d",
+        "b688c53e-7f8b-453d-9c55-73dd9e946697",
+        "bc6303cd-51b7-4ddf-a3fd-d61d169b07f5",
+        "bca486f3-2c72-454c-ab62-a19e60139685",
+        "bde29794-f504-4796-8673-437387917dc3",
+        "c1d62716-d227-4afa-bb5c-75e635056ed3",
+        "c1ea784e-a7aa-4c58-881b-21762080535e",
+        "c290e199-b519-44d0-b98f-2d47ce650213",
+        "c5513b36-9412-47fb-a91d-c12b1fb153cd",
+        "ca6b0749-8cb0-4f0f-b277-6a707f910ca5",
+        "caf16a89-12d5-4e84-b194-d2673143144a",
+        "d6d40436-8d42-41f5-855e-69fdb81fdf17",
+        "dbbe504e-a2b4-4709-8aff-fab203b654a7",
+        "e40eda34-8b71-4a99-b080-d6c50eab4949"
+      ],
+      "venue_count": 43,
+      "status": "pending_extraction",
+      "inventory_url": "https://www.nationaltrust.org.uk/lacock-abbey-fox-talbot-museum-and-village",
+      "candidate_listing_urls": [
+        "https://www.nationaltrust.org.uk/visit/wiltshire/lacock/visiting-lacock-with-family",
+        "https://www.nationaltrust.org.uk/visit/wiltshire/lacock/events/950ac7b7-4c7f-466d-99a2-ca06a634dec3",
+        "https://www.nationaltrust.org.uk/visit/wiltshire/lacock/events/bcc316ea-76d6-4f18-bf4b-55f68261b31b",
+        "https://www.nationaltrust.org.uk/visit/wiltshire/lacock/events"
+      ]
+    },
+    {
+      "domain": "museum.wales",
+      "venue_ids": [
+        "0ed148c1-2b6b-4f50-bea8-5596163d2d55",
+        "11058b73-3c69-4195-aa22-0e8e541434dc",
+        "12f769e3-159a-448e-99d7-cf24863e623a",
+        "14f50fa4-42b6-4e5c-ba91-1ee18b5981e4",
+        "175f8cb1-2ba1-4eca-ab13-47f0045d373f",
+        "1bea2318-a517-438c-8175-b0323d347af2",
+        "26c21388-9358-43e8-9fc2-7fbf9a875f79",
+        "29edcb23-4882-49d0-854f-4caef6a6d073",
+        "2d354be6-4568-4c03-aa37-8f55cc152251",
+        "3de679dc-c5d1-4b66-923e-384eb6700dd1",
+        "580f2e2a-bff0-49b9-93c7-3e0a33d19f9b",
+        "5cf32d7a-dbcc-4e04-aac4-af5c8febca72",
+        "5eb83f9c-afe8-4047-812e-0c6d2bc1dce0",
+        "6fe758c7-ce74-4ba0-a7a3-d148ad451a41",
+        "768d7909-60a1-4df6-9ea6-69ff9ef43738",
+        "76a79166-2aa4-4a20-8ee1-3236cd1086ab",
+        "78b453a4-c7e5-4e15-840d-17b397955a56",
+        "81d8ecce-03c3-499e-9c27-da2b64f66e19",
+        "934f252f-51c0-455d-b9b8-17814c71a43c",
+        "96c6f915-4452-4edd-9e12-a740c6a2d736",
+        "a04d14b8-d299-40f3-9a96-933d54e24649",
+        "a5e969f8-abc2-4a00-a7fc-6c9ff531d33b",
+        "aa96df95-c475-435e-baae-37619dbdf0cc",
+        "c53cf455-e882-446a-9392-a44bf2e54baf",
+        "c7612fa4-8658-4ab8-be2b-d45c6ae52def",
+        "de717a75-eb66-445b-8723-ec12ed78cb23",
+        "ea53c529-e214-454a-836e-8c5cb30b268f",
+        "ecfa57ee-292d-4cd7-8c92-787ad95d8232",
+        "ed9ef77c-5c7c-41fb-bf04-1fc89a37c426",
+        "eda6ad8a-9924-4c55-be1d-4e16fadf900e",
+        "f0a83773-1516-48c8-ae14-598ae32b9628",
+        "f79cc8ad-aead-4f4a-9679-8f3076f523b6",
+        "f949859f-d990-4aa4-a0a6-e94830dea808"
+      ],
+      "venue_count": 33,
+      "status": "no_listing_links_found",
+      "inventory_url": "https://museum.wales/stfagans/buildings/gwalia/",
+      "candidate_listing_urls": []
+    },
+    {
+      "domain": "english-heritage.org.uk",
+      "venue_ids": [
+        "04e57ad0-bc19-4ac8-b4f9-b62cafc82a19",
+        "07427739-5bc4-46a7-a5d6-63e64e5cb977",
+        "091aa36a-3266-47e5-bcc4-8b8443534fab",
+        "0e68a6a7-d1ec-45aa-9bc3-0f3883aaa60c",
+        "1881fb74-8605-4a38-b613-1606d8acba6b",
+        "1ad267aa-897e-4d20-9cfa-cc638c2f0f52",
+        "1f802473-70fd-4b3a-bb7c-696fd14f71bd",
+        "2167b940-e216-4914-ba18-6a53feedb92d",
+        "318fcca7-0192-41f7-a929-1a5c9f6186a9",
+        "32c403c6-40e0-48ea-9578-2d895d788b4d",
+        "5bdbdf71-2d0e-42f3-b08d-bd2c2200a03b",
+        "5d9674ae-d889-4719-9ab5-abefaa159876",
+        "613cd967-059a-48bd-9ed7-5a600a609bc5",
+        "85e763d5-5042-4075-bd6e-f891287c3413",
+        "88767b32-5546-45a9-a2e5-446ea58b889b",
+        "9ca0e7a6-41fc-4a49-a171-c69da5aa75d6",
+        "b071391f-871f-4e7c-a0bd-fce9fe0bd729",
+        "b1ae5ad4-1a1e-4ee5-aab4-f143175d9b6f",
+        "d44869f6-72c4-4f3e-a78b-9a74f977b797",
+        "d9b02189-9440-41e8-824b-9d568f70ceb6",
+        "dc1c2bb5-a679-487c-b1a6-a67b3a996b1d",
+        "ebe6d32f-ad2c-46e6-b703-e43529d321eb",
+        "ef1cc09c-3dd6-4a78-b53d-49e591006ea7",
+        "f3fd931a-17e2-4ebf-9d84-6f0879353b30"
+      ],
+      "venue_count": 24,
+      "status": "pending_extraction",
+      "inventory_url": "https://www.english-heritage.org.uk/visit/places/housesteads-roman-fort-hadrians-wall/things-to-do/museum-and-roman-collection/",
+      "candidate_listing_urls": [
+        "https://www.english-heritage.org.uk/visit/whats-on"
+      ]
+    },
+    {
+      "domain": "nts.org.uk",
+      "venue_ids": [
+        "0d3e12e6-dace-4ad8-826e-ed2f7b3e7714",
+        "1115f27f-15bc-42ab-9d11-e0d969072414",
+        "254a897f-1032-4bba-9c15-450f35a83001",
+        "29f4c9f4-dc18-41ba-a22b-2c2aab70c209",
+        "2a3f1d19-f936-42c2-87cd-11570a8d63c7",
+        "2d962505-8475-4f90-b4e0-7b1c13aa4a42",
+        "37eec2e9-5e74-4b17-b970-c75c423b539a",
+        "470d093f-791a-4269-967a-b4d5c036dd94",
+        "4e2e0aee-a932-4b2e-8554-a92fedf5501c",
+        "78e02d74-4fec-4e20-947d-259731386e22",
+        "8885100a-99a2-4026-9678-451a8e52e7ee",
+        "893dc328-c886-44c4-bc99-79a798559738",
+        "9eda2417-03b8-4613-8c30-f50b06fbfc49",
+        "a29451ee-7b72-4ed3-8ebf-ca127dcdb662",
+        "a98485c6-3258-464e-a7d3-febe7228f4cf",
+        "b2f0bb79-9823-408e-a4ba-6af1a7ecbee5",
+        "ca230eb6-8820-4c3f-9b67-cc2dad6bbac8",
+        "d0ff6d04-768f-47e7-a9cd-93b04910a4b0",
+        "d60dfa06-d002-442a-866e-8c8c730a2dda",
+        "dfd2ef42-ef77-4714-b1e2-f13d0d0dbf23",
+        "ff449c2d-a77b-4cda-a859-38d789d64a25"
+      ],
+      "venue_count": 21,
+      "status": "no_listing_links_found",
+      "inventory_url": "https://www.nts.org.uk/visit/places/the-tenement-house",
+      "candidate_listing_urls": []
+    },
+    {
+      "domain": "historicenvironment.scot",
+      "venue_ids": [
+        "019f07e4-f379-4ce0-a056-c011bf8ecfc1",
+        "270c55f9-a813-433f-ac39-c937afdaee13",
+        "3ca12971-595d-40fc-9b53-cfb81faf2518",
+        "6fe1c93c-b6a6-417c-b992-adf9ae26742a",
+        "7b79fd30-c622-4340-9c20-5582222d8e56",
+        "8849cb27-2673-458d-a2c8-054614baeef7",
+        "8be1bbfb-cda1-4c3c-8899-91c208b492c6",
+        "a732399c-9c57-409d-86c8-dc0aa58ee829",
+        "a9b6a36c-ecea-480a-b6e5-a1aa4b84ff82",
+        "f6102a96-75cd-40b2-839e-720eabd0f4d8"
+      ],
+      "venue_count": 10,
+      "status": "no_listing_links_found",
+      "inventory_url": "https://www.historicenvironment.scot/visit-a-place/places/stanley-mills/",
+      "candidate_listing_urls": []
+    },
+    {
+      "domain": "ironbridge.org.uk",
+      "venue_ids": [
+        "1a1f5a03-135e-4277-8df0-b0c79584abb2",
+        "2cf95d36-3b1d-4118-b99a-b572f1f88ffd",
+        "30f98ec3-733e-421d-9b85-dcd6c8c1ff57",
+        "4ae0f638-63dc-4ad4-a641-e17354a098b1",
+        "52fb6d25-43aa-4348-96d4-fdb4730cbf13",
+        "7970c9bc-686f-491a-95db-55b51228e99f",
+        "7b763a9c-03e4-4f5a-b33d-ff794aa71ae4",
+        "9b4af88c-eb3d-43d4-ad61-588cf4dfe746",
+        "df79ce0d-2ef0-4483-acaa-dc1d2af25766",
+        "e3f82d2b-38ff-40bf-988e-e332cf3b6193"
+      ],
+      "venue_count": 10,
+      "status": "pending_extraction",
+      "inventory_url": "https://www.ironbridge.org.uk/visit/jackfield-tile-museum/",
+      "candidate_listing_urls": [
+        "https://www.ironbridge.org.uk/visit/shropshire-staffordshire/ironbridge-gorge/family-days-out-at-ironbridge-gorge",
+        "https://www.ironbridge.org.uk/visit/shropshire-staffordshire/ironbridge-gorge/events",
+        "https://www.ironbridge.org.uk/visit/shropshire-staffordshire/ironbridge-gorge/events/3e87f010-06dd-4228-80f7-8b622ff34850",
+        "https://www.ironbridge.org.uk/visit/shropshire-staffordshire/ironbridge-gorge/events/f4362047-ce97-4c00-8beb-18015e0fb77f"
+      ]
+    },
+    {
+      "domain": "glasgowlife.org.uk",
+      "venue_ids": [
+        "13cf962f-8857-45fb-9dd7-6501d5b846ad",
+        "23a39fd6-2862-4ddc-b06f-46902017646a",
+        "357632dc-ba70-435c-940d-73c27615bbf9",
+        "60e0444d-eb12-4c08-8301-44b984c3f452",
+        "8cd31143-5007-4a8f-85fb-18b5bd1cc8c8",
+        "c5b50ade-835a-4351-acfb-31164b9213b5",
+        "e63fefa5-54ba-42c2-8cdb-45ce50ab8b86"
+      ],
+      "venue_count": 7,
+      "status": "no_listing_links_found",
+      "inventory_url": "https://www.glasgowlife.org.uk/museums/venues/peoples-palace",
+      "candidate_listing_urls": []
+    },
+    {
+      "domain": "edinburghmuseums.org.uk",
+      "venue_ids": [
+        "017fabc4-81bd-4ecf-8f8a-0da37121f59a",
+        "0aee9afb-d3c8-42f9-844c-b0447b74213d",
+        "6848e50d-4012-483c-bfec-8bbe96dbe19b",
+        "7134deee-2975-41dd-968e-3d1e7eac97a3",
+        "cdaaee15-27fc-4b89-b562-799daa29a346",
+        "e6c1e4f1-dfd3-4003-b92f-307e2750011d"
+      ],
+      "venue_count": 6,
+      "status": "access_failed",
+      "inventory_url": "https://www.edinburghmuseums.org.uk/Venues/Museum-Collections-Centre",
+      "error": "http_404: https://www.edinburghmuseums.org.uk/Venues/Museum-Collections-Centre"
+    },
+    {
+      "domain": "vam.ac.uk",
+      "venue_ids": [
+        "452551d7-ec80-44a0-887e-8ae3e8c0ad9f",
+        "b5ed9ef8-7663-4c39-8efb-a051697f2cb2",
+        "d26157ec-a95e-4e87-9f8a-bf9e7d4fc174",
+        "d5b93c5f-1b53-4f33-8b0b-efc1223b62b7",
+        "f8136633-51b8-4a09-bc0d-9b7349ed79b3",
+        "fd8e91bc-7ca8-4e90-a905-ec3d47ee9dd0"
+      ],
+      "venue_count": 6,
+      "status": "pending_extraction",
+      "inventory_url": "https://www.vam.ac.uk/dundee",
+      "candidate_listing_urls": [
+        "https://www.vam.ac.uk/dundee/whatson/events/after-hours-we-can-be-heroes"
+      ]
+    },
+    {
+      "domain": "liveborders.org.uk",
+      "venue_ids": [
+        "5d781b73-6930-45ef-8ab6-18beea52d5ae",
+        "64342161-e2be-4b2d-a5fd-e2dd590a01c6",
+        "7dc80a4d-6a7b-4880-8995-768b63b371bf",
+        "a3462756-74c6-4eb3-b6d4-58538e3530f8",
+        "af18c1c1-9f89-42b1-b0b5-75b5f382dae3",
+        "bf608eab-da7d-4823-86e8-4ceaeb16ed21"
+      ],
+      "venue_count": 6,
+      "status": "pending_extraction",
+      "inventory_url": "https://www.liveborders.org.uk/culture/museums/our-museums/borders-textile-towerhouse/",
+      "candidate_listing_urls": [
+        "https://www.liveborders.org.uk/museum-exhibitions-events/",
+        "https://www.liveborders.org.uk/whats-on/"
+      ]
+    },
+    {
+      "domain": "liverpoolmuseums.org.uk",
+      "venue_ids": [
+        "12e2400b-6143-4f65-b3f0-fbdc59959576",
+        "1776b3a5-6a57-4c1a-bd8f-8c9151142fb8",
+        "44e01799-dda3-4d70-a0d2-0e65e664a183",
+        "8619b22b-6095-4796-af00-a9869720e347",
+        "de2776f4-7201-45c0-824e-53a698ab46ff"
+      ],
+      "venue_count": 5,
+      "status": "no_listing_links_found",
+      "inventory_url": "https://www.liverpoolmuseums.org.uk/wml/",
+      "candidate_listing_urls": []
+    },
+    {
+      "domain": "rmg.co.uk",
+      "venue_ids": [
+        "166ef036-b6cc-48dd-81d9-7ae18cce3744",
+        "66ecf217-5c66-483b-bf7e-0202970f33bb",
+        "8830d631-6293-4a49-a985-80184704ac8a",
+        "eaf5a41b-a74e-4dac-9484-e6939a6b25fc",
+        "fdbd1579-130a-4dee-a8c6-765c1a7ffe3d"
+      ],
+      "venue_count": 5,
+      "status": "pending_extraction",
+      "inventory_url": "https://www.rmg.co.uk/collections/prince-philip-maritime-collections-centre",
+      "candidate_listing_urls": [
+        "https://www.rmg.co.uk/whats-on?location=prince%2520philip%2520maritime%2520collections%2520centre",
+        "https://www.rmg.co.uk/whats-on?location=online",
+        "https://www.rmg.co.uk/whats-on?srch=&d_f=&d_t=&ev_type=All&loc=72849"
+      ]
+    },
+    {
+      "domain": "iwm.org.uk",
+      "venue_ids": [
+        "1902a1b9-fca4-4613-86de-4bbb44fb7eb0",
+        "664af67c-58e7-4b6d-ae62-c4926856b56d",
+        "f040bcdc-1f4a-4018-9e2f-0d8a72f34fef",
+        "f3458085-edfc-4a16-925c-5da451ad4f7f",
+        "f4af4a28-1fc5-43d5-889f-bfa004fda14e"
+      ],
+      "venue_count": 5,
+      "status": "pending_extraction",
+      "inventory_url": "https://www.iwm.org.uk/visits/iwm-north",
+      "candidate_listing_urls": [
+        "https://www.iwm.org.uk/events/poppies",
+        "https://www.iwm.org.uk/events/big-picture-show"
+      ]
+    },
+    {
+      "domain": "museums.norfolk.gov.uk",
+      "venue_ids": [
+        "6db2e809-9344-4e90-b0d4-7d9cdbf9b96a",
+        "a9f3c332-9932-417e-a78b-9ff1ae5fc8e1",
+        "b173b95c-f6ac-4483-9eac-4ecda0a70446",
+        "e57c82af-49e7-4c7c-ad47-63b1dab04ce5",
+        "f5d20c3d-e170-47d1-81d8-06df88386b60"
+      ],
+      "venue_count": 5,
+      "status": "access_failed",
+      "inventory_url": "https://www.museums.norfolk.gov.uk/lynn-museum",
+      "error": "http_403: https://www.lynnmuseum.norfolk.gov.uk"
+    },
+    {
+      "domain": "culturenl.co.uk",
+      "venue_ids": [
+        "024b2299-5a28-4e7a-9da9-55187df39dfd",
+        "6ab1ac28-c144-4860-a318-7060b871e12c",
+        "86634106-da37-47c5-af13-a87b958651e5",
+        "f504103b-3726-4ca8-907a-3dc27db64167"
+      ],
+      "venue_count": 4,
+      "status": "no_listing_links_found",
+      "inventory_url": "https://culturenl.co.uk/museums/visiting-us/summerlee/",
+      "candidate_listing_urls": []
+    },
+    {
+      "domain": "nms.ac.uk",
+      "venue_ids": [
+        "09efa602-45bb-4ac0-87ca-9b86d00e5a3c",
+        "390269d0-5f96-4b40-be67-54a202916ae9",
+        "a333116d-ba35-4a67-8b77-52aeb4100917",
+        "f1554356-0854-4182-b510-857a36caa06c"
+      ],
+      "venue_count": 4,
+      "status": "access_failed",
+      "inventory_url": "https://www.nms.ac.uk/our_museums/museum_of_flight.aspx",
+      "error": "http_403: https://www.nms.ac.uk/our_museums/museum_of_flight.aspx"
+    },
+    {
+      "domain": "historicengland.org.uk",
+      "venue_ids": [
+        "0ae0d4b3-3c81-4111-b08a-5b18b13ee590",
+        "2fb4ba2b-5606-4e71-ac65-b45e60342ec1",
+        "5787ac89-5218-4706-8406-cc92d1289bc3",
+        "ea4247ef-7bd8-40bc-b949-afc674003ec3"
+      ],
+      "venue_count": 4,
+      "status": "access_failed",
+      "inventory_url": "https://historicengland.org.uk/listing/the-list/list-entry/1205787",
+      "error": "http_403: https://historicengland.org.uk/listing/the-list/list-entry/1205787"
+    },
+    {
+      "domain": "bradfordmuseums.org",
+      "venue_ids": [
+        "0e76a6da-814a-4168-a736-630efdc757eb",
+        "437c7a05-9e05-4839-a550-f976a1fb77d7",
+        "7184900e-36b0-4e3f-9d11-0f348ac4450d",
+        "faaba786-87e5-48f2-bf2c-9bf3627ef986"
+      ],
+      "venue_count": 4,
+      "status": "no_listing_links_found",
+      "inventory_url": "https://www.bradfordmuseums.org/venues/industrialmuseum/index.php",
+      "candidate_listing_urls": []
+    },
+    {
+      "domain": "birminghammuseums.org.uk",
+      "venue_ids": [
+        "11351660-83ed-49a7-8a73-2bdbde9a467e",
+        "df8d9096-a989-4ff8-9e96-4ca4c4747db7",
+        "e8e29563-ddfc-487e-b116-c737d6b1c8fa",
+        "f0908e67-2b70-4ba1-bafc-a6a5b5993708"
+      ],
+      "venue_count": 4,
+      "status": "pending_extraction",
+      "inventory_url": "https://www.birminghammuseums.org.uk/blakesley-hall",
+      "candidate_listing_urls": [
+        "https://www.birminghammuseums.org.uk/events/discovery-tours-at-blakesley-hall",
+        "https://www.birminghammuseums.org.uk/events/zoo-lab-at-blakesley-hall-witchcraft-and-wizardry",
+        "https://www.birminghammuseums.org.uk/blakesley-hall/whats-on",
+        "https://www.birminghammuseums.org.uk/blakesley-hall/about"
+      ]
+    },
+    {
+      "domain": "eastayrshireleisure.com",
+      "venue_ids": [
+        "1dd0c30d-b133-4a5e-9e70-cfb293a5a141",
+        "59e0661d-8bb2-4fae-80c4-adb1af3e2a5e",
+        "8c50487e-6f26-432d-9de6-229516c72e7a",
+        "f9376290-a04f-40b1-9fff-703e7dd33b4e"
+      ],
+      "venue_count": 4,
+      "status": "no_listing_links_found",
+      "inventory_url": "https://eastayrshireleisure.com/venue/burns-house-museum/",
+      "candidate_listing_urls": []
+    }
+  ]
+}

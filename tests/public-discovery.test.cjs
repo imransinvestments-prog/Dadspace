@@ -29,7 +29,10 @@ test('location remains optional before selection and after denied geolocation',a
   Object.assign(sandbox,{window:{isSecureContext:true},navigator:{geolocation:{getCurrentPosition:(_s,e)=>{geoCalls++;geoError=e}}},sessionStorage:{setItem:()=>{}},fetch:async()=>({ok:true,json:async()=>({results:[{lat:51.47,lng:-.39,label:'Hounslow'}]})})})
   const render=()=>{i=j=0;return m.LocationProvider({children:'PUBLIC_CONTENT'})}
   const nodes=n=>!n||typeof n!=='object'?[]:[n,...[n.props?.children].flat(Infinity).flatMap(nodes)]
-  let tree=render();assert(tree.props.children.includes('PUBLIC_CONTENT'));assert.equal(geoCalls,0);assert.equal(tree.props.value.browseAll,true)
+  let tree=render();assert(tree.props.children.includes('PUBLIC_CONTENT'));assert.equal(geoCalls,0)
+  // Main now starts with the owner-approved London fallback (#58/#59).
+  assert.equal(tree.props.value.browseAll,false);assert.equal(tree.props.value.label,'Central London')
+  assert.equal(tree.props.value.coords.lat,51.5074);assert.equal(tree.props.value.coords.lng,-0.1278)
   tree.props.value.request();geoError({code:1});tree=render();assert(tree.props.children.includes('PUBLIC_CONTENT'));assert.equal(tree.props.value.status,'denied')
   nodes(tree).find(n=>n.type==='input').props.onChange({target:{value:'Hounslow'}})
   tree=render();await nodes(tree).find(n=>n.type==='form').props.onSubmit({preventDefault(){}})
