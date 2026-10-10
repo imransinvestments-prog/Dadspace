@@ -1,0 +1,287 @@
+{
+  "checked_on": "2026-10-10",
+  "scope": "32 London boroughs and City of London; family supply, with item-level 0-5 pilot suitability",
+  "production_enabled": false,
+  "reliability": "Research routes, not 33 operational feeds. HTML/calendar usefulness, automated access, publication permission and repeat ingestion are separate acceptance gates.",
+  "boroughs": [
+    {
+      "borough": "Barking and Dagenham",
+      "activities": "https://valencehousecollections.co.uk/events/",
+      "events": "https://valencehousecollections.co.uk/events/",
+      "supplement": "https://lbbd.events.mylibrary.digital/",
+      "adapter_family": "wordpress_calendar",
+      "evidence": "Valence House lists Museum Minis, 28 October 2026 11-12, under 5s, free drop-in; Whalebone Makers returns each school holiday, all ages. Library platform rendered but 0 upcoming events; cannot count it as supply.",
+      "gap": "Museum Minis regularity and library/family-hub schedule coverage need qualification."
+    },
+    {
+      "borough": "Barnet",
+      "activities": "https://www.barnet.gov.uk/underfiveslibraryevents",
+      "events": "https://www.barnet.gov.uk/libraries/library-events",
+      "supplement": "https://www.barnet.gov.uk/events/rhyme-time-colindale-library",
+      "adapter_family": "council_html",
+      "evidence": "Official under-fives programme and Colindale Thursday 10-10:30 term-time rhyme time. Index supports age, date and library filters.",
+      "gap": "Capture pagination, term dates and item detail."
+    },
+    {
+      "borough": "Bexley",
+      "activities": "https://arena.yourlondonlibrary.net/web/bexley/regular-events-for-children",
+      "events": "https://arena.yourlondonlibrary.net/web/bexley/whats-on",
+      "adapter_family": "arena_schedule",
+      "evidence": "Branch tables give recurring rhyme/stay-play times and age bands. Central Monday 10-10:30 rhyme time ages 0-3 term-time. Special-events section says Loading in basic HTML.",
+      "gap": "Render special events; review contradictory Sidcup end time (2:30am) rather than silently correcting it."
+    },
+    {
+      "borough": "Brent",
+      "activities": "https://www.brent.gov.uk/libraries-arts-and-heritage/libraries/library-events",
+      "events": "https://www.brent.gov.uk/libraries",
+      "adapter_family": "council_rendered_calendar",
+      "evidence": "Official library page has current October Book Trust sessions; calendar index requires rendering. Ealing Road Library is in Wembley, Brent, not Ealing borough.",
+      "gap": "Validate rendered pagination and individual current programme pages."
+    },
+    {
+      "borough": "Bromley",
+      "activities": "https://www.better.org.uk/library/london/bromley/events-and-activities/rhyme-time",
+      "events": "https://www.better.org.uk/library/london/bromley/events-and-activities",
+      "adapter_family": "better_embedded_timetable",
+      "evidence": "Operator describes baby rhyme ages a few months to 2, storytime under 5, with parent attendance and branch timetable.",
+      "gap": "Generic operator descriptions are insufficient: extract embedded branch timetable before accepting listings."
+    },
+    {
+      "borough": "Camden",
+      "activities": "https://www.camden.gov.uk/whats-on-this-month",
+      "events": "https://www.camden.gov.uk/whats-on-this-month",
+      "adapter_family": "council_schedule",
+      "evidence": "Existing zero-yield route contains branch-specific recurring under-five rhyme time and Duplo sessions. Camden Town Wednesday 11-11:30. Page also includes expired June material.",
+      "gap": "Repair schedule extraction; expire dated material separately from standing schedules. Conflicting older directory times need review."
+    },
+    {
+      "borough": "Croydon",
+      "activities": "https://libraries.croydon.gov.uk/events",
+      "events": "https://libraries.croydon.gov.uk/events/date/calendar",
+      "adapter_family": "library_calendar",
+      "evidence": "Official calendar includes Under 5s category, Central rhymetime and Selsdon storytime with detail navigation.",
+      "gap": "Validate current dates, detail ages, pagination and booking platform hand-off."
+    },
+    {
+      "borough": "Ealing",
+      "activities": "https://ealing.events.mylibrary.digital/",
+      "events": "https://ealing.events.mylibrary.digital/",
+      "supplement": "https://ealing.events.mylibrary.digital/event?id=319317",
+      "adapter_family": "mylibrary_rendered_ics",
+      "evidence": "Browser verified 112 upcoming listings (20 initially displayed). Southall Monday 12 October 10-11 free/no booking; explicit Every Monday, series 319285 and Add to Calendar /ics?id=319317. Series skips 26 October. Northolt related listing explicitly ages 0-5. HTTP robots request 403; browser loaded automatically without solving a challenge.",
+      "gap": "Confirm permitted automated route and runner access; extract all pages and item-level ages, do not assume Southall age from related Northolt item.",
+      "observed_calendar_export": "https://ealing.events.mylibrary.digital/ics?id=319317"
+    },
+    {
+      "borough": "Enfield",
+      "activities": "https://www.chickenshed.org.uk/",
+      "events": "https://www.chickenshed.org.uk/",
+      "supplement": "https://enfield.events.mylibrary.digital/",
+      "adapter_family": "operator_programme",
+      "evidence": "Chickenshed has current Planet Play Fridays ages 0-3, Tales from the Shed weekly Saturdays ages 0-6 and Halloween Tales 26-29 October. Enfield library calendar rendered but 0 upcoming events.",
+      "gap": "Qualify programme detail times and independent council/library source; calendar availability alone is not coverage."
+    },
+    {
+      "borough": "Greenwich",
+      "activities": "https://www.better.org.uk/library/london/greenwich/events-and-activities/rhyme-time",
+      "events": "https://www.better.org.uk/library/london/greenwich/events-and-activities",
+      "adapter_family": "better_embedded_timetable",
+      "evidence": "Official operator offers baby rhyme up to age 2 and storytime under 5. Calendar sits in embedded timetable.",
+      "gap": "Extract the actual branch/date timetable, not generic programme copy; supplement museum family programmes."
+    },
+    {
+      "borough": "Hackney",
+      "activities": "https://www.lovehackney.uk/whats-on",
+      "events": "https://www.lovehackney.uk/whats-on",
+      "supplement": "https://www.lovehackney.uk/whats-on/musical-storyland-4je3z",
+      "adapter_family": "squarespace_ics",
+      "evidence": "Council-linked culture calendar exposes Google Calendar/ICS and item dates, locations, age and cost. Musical Storyland 30 October ages 3-7/families; listed 10AM-11PM is a suspicious duration. Family film same day 2-3PM free. Weekly family dance programme also listed.",
+      "gap": "Read detail/category and verify age/regularity; quarantine suspicious end times rather than propagating them."
+    },
+    {
+      "borough": "Hammersmith and Fulham",
+      "activities": "https://www.lbhf.gov.uk/children-and-young-people/family-hub/find-family-hub-or-childrens-centre",
+      "events": "https://lyric.co.uk/whats-on/?event_genre=little-lyric",
+      "supplement": "https://www.lbhf.gov.uk/children-and-young-people/family-hub/find-family-hub-or-childrens-centre/family-hub-stephen-wiltshire-centre",
+      "adapter_family": "family_hub_schedule_and_operator",
+      "evidence": "Family-hub page lists regular Little Explorers ages 0-5; borough residency, registration and booking restrictions apply. Lyric lists current Saturday children's shows and festive season. Council library root returned bot-verification page.",
+      "gap": "Follow each hub's current timetable. General booking-required statement conflicts with drop-in wording and needs review. Resolve library route without challenge bypass."
+    },
+    {
+      "borough": "Haringey",
+      "activities": "https://haringey.gov.uk/whats-on",
+      "events": "https://haringey.gov.uk/whats-on",
+      "adapter_family": "existing",
+      "evidence": "Retain existing healthy source: positive latest worker yield, zero failure count and readable baseline. Not re-audited in this follow-up.",
+      "gap": "Existing source is retained; separate activity/event and under-five coverage still must be measured."
+    },
+    {
+      "borough": "Harrow",
+      "activities": "https://libraries.harrow.gov.uk/events/date",
+      "events": "https://harrow.events.mylibrary.digital/",
+      "supplement": "https://www.harrow.gov.uk/libraries/events-activities-harrow-libraries",
+      "adapter_family": "mylibrary_rendered_ics",
+      "evidence": "Council identifies free under-five rhyme time and links library events; calendar links to Harrow's booking platform.",
+      "gap": "Search-index examples are historical July dates; validate live future detail and pagination before accepting."
+    },
+    {
+      "borough": "Havering",
+      "activities": "https://havering.events.mylibrary.digital/event?id=276670",
+      "events": "https://libraries.havering.gov.uk/events/date",
+      "adapter_family": "mylibrary_rendered_ics",
+      "evidence": "Official Baby Bounce at Elm Park states every Wednesday during term time and no booking. Library calendar links booking platform.",
+      "gap": "Verify current occurrences and full branch schedule; search-index summer examples are expired."
+    },
+    {
+      "borough": "Hillingdon",
+      "activities": "https://pre.hillingdon.gov.uk/library-events-activities",
+      "events": "https://discover.hillingdon.gov.uk/library-events",
+      "supplement": "https://pre.hillingdon.gov.uk/events/event/55/tiny-tunes-at-ruislip-manor-library",
+      "adapter_family": "council_calendar",
+      "evidence": "Tiny Tunes at Ruislip Manor, 28 September-14 December 2026 weekly Monday 2:15-2:45, ages 0-18 months, free, advance booking; operator booking window 2 weeks. Some children's sessions temporarily unavailable.",
+      "gap": "The indexed host is pre.hillingdon.gov.uk: verify canonical public host and cancellations rather than treating a preproduction URL as stable."
+    },
+    {
+      "borough": "Hounslow",
+      "activities": "https://hounslowconnect.com/pages/local-libraries",
+      "events": "https://hounslowconnect.com/events",
+      "adapter_family": "ayup_connect_rendered",
+      "evidence": "Old council activities URL redirects to Hounslow Connect. Browser rendered current council-organised branch programmes and 15 pages; Family Games and colouring appeared on 10 October, with weekly wording for Chiswick. Static HTML only says Loading results. Old indexed under-five schedule cannot prove current times.",
+      "gap": "Render all pages and individual programmes, verify current rhyme/story times and item ages. Preserve weekly Activities even when the directory calls each occurrence an Event. Do not use council UAT host or old cached schedule as a production feed.",
+      "supplement": "https://hounslowconnect.com/categories/hounslow-library"
+    },
+    {
+      "borough": "Islington",
+      "activities": "https://www.islington.gov.uk/libraries-arts-and-heritage/libraries/library-services-for-families-children-and-young-people/baby-bounce-under-5s-toy-libraries",
+      "events": "https://islingtonlife.london/things-to-do/",
+      "supplement": "https://search3.openobjects.com/kb5/islington/directory/service.page?id=CMt0mIEPCow",
+      "adapter_family": "openobjects_schedule",
+      "evidence": "Council links Find Your Islington for schedules; baby bounce 0-18 months, under-fives 18-48 months. West Library directory supplies days/times, last updated July 2025.",
+      "gap": "Use linked live directory and refresh stale branch details; Islington Life dated event index needs current family detail validation."
+    },
+    {
+      "borough": "Kensington and Chelsea",
+      "activities": "https://www.rbkc.gov.uk/events?Audience=Children+and+young+people&page=0",
+      "events": "https://www.rbkc.gov.uk/events",
+      "adapter_family": "council_recurring_calendar",
+      "evidence": "Official event cards retain weekly days for baby rhyme, stay-play and crafts. Filter includes Children and young people/ Families.",
+      "gap": "Current detail occurrences, ages, booking rules and pagination; ignore stale PDFs with conflicting days."
+    },
+    {
+      "borough": "Kingston upon Thames",
+      "activities": "https://libraries.kingston.gov.uk/events/category/rhymetime",
+      "events": "https://kingston.events.mylibrary.digital/",
+      "adapter_family": "mylibrary_rendered_ics",
+      "evidence": "Official calendar has branch rhymetime, including term-time New Malden and Tolworth babies/toddlers, with detail/series links.",
+      "gap": "Search examples are September or earlier: verify current future occurrences, series and item-level age."
+    },
+    {
+      "borough": "Lambeth",
+      "activities": "https://www.lambeth.gov.uk/events/wriggle-rhyme-2",
+      "events": "https://libraries.lambeth.gov.uk/en_GB/events",
+      "adapter_family": "council_calendar",
+      "evidence": "Library operator redirects event discovery to council website and selected Eventbrite bookings. Carnegie Wriggle and Rhyme says Saturday mornings, play/stories/songs.",
+      "gap": "Follow current council event dates, retain recurrence and identify official organiser booking links."
+    },
+    {
+      "borough": "Lewisham",
+      "activities": "https://www.horniman.ac.uk/whats-on/",
+      "events": "https://lewisham.gov.uk/inmyarea/events",
+      "adapter_family": "operator_calendar",
+      "evidence": "Existing council source has accepted historical yield but baseline/live robots unavailable; Horniman is an inactive but readable museum source in existing review.",
+      "gap": "Resolve council access and qualify current Horniman family details. Do not replace a source solely because robots retrieval fails."
+    },
+    {
+      "borough": "Merton",
+      "activities": "https://merton.events.mylibrary.digital/",
+      "events": "https://merton.events.mylibrary.digital/",
+      "supplement": "https://merton.events.mylibrary.digital/event?id=378391",
+      "adapter_family": "mylibrary_rendered_ics",
+      "evidence": "Browser verified future Music Mayhem ages 0-5, Storytelling with Kiddirama 15 October ages 0-5 and Libraries Week specials. Location/category tables retain age and Full status.",
+      "gap": "Capture all pages and detail booking/price plus series evidence; Full is availability, not an age label."
+    },
+    {
+      "borough": "Newham",
+      "activities": "https://libraries.newham.gov.uk/digital-content/childrens/rhyme-times",
+      "events": "https://newham.events.mylibrary.digital/",
+      "adapter_family": "mylibrary_rendered_ics",
+      "evidence": "Official children's page describes free rhyme/story sessions; separate booking calendar has current dated listings, including adults.",
+      "gap": "Verify live family occurrences and branch times, exclude adult-only listings without discarding other-age family supply."
+    },
+    {
+      "borough": "Redbridge",
+      "activities": "https://www.redbridge.gov.uk/discover/whats-on",
+      "events": "https://www.redbridge.gov.uk/discover/whats-on",
+      "adapter_family": "existing",
+      "evidence": "Retain existing healthy source: positive latest worker yield, zero failure count and readable baseline. Not re-audited.",
+      "gap": "Measure recurring and rare family coverage separately; accepted records are not proof of exhaustive borough coverage."
+    },
+    {
+      "borough": "Richmond upon Thames",
+      "activities": "https://www.richmond.gov.uk/services/libraries/library_services_for_children_and_teens/library_events_for_children_and_teens/storytime",
+      "events": "https://www2.richmond.gov.uk/Richmondbookings/libraries.aspx",
+      "adapter_family": "council_schedule_and_boxoffice",
+      "evidence": "Storytime updated June 2026, under 6, weekly 4PM per branch, free/no booking. Box office contains future October events and Childrens/family filter.",
+      "gap": "Capture child/family detail rather than all adult talks; supplement Baby Rhyme programme."
+    },
+    {
+      "borough": "Southwark",
+      "activities": "https://www.southwark.gov.uk/culture-and-sport/libraries/library-activities-babies-and-toddlers",
+      "events": "https://www.southwark.gov.uk/southwark-presents",
+      "adapter_family": "council_schedule_and_calendar",
+      "evidence": "Council explicitly separates regular groups from specials. Bookstart 0-4 adults accompany, term-time, drop-in; separate linked schedule page and paginated Presents diary.",
+      "gap": "Follow schedule subpage, current event filters and all pages; cached May dates are not accepted future supply."
+    },
+    {
+      "borough": "Sutton",
+      "activities": "https://events.sutton.gov.uk/",
+      "events": "https://events.sutton.gov.uk/",
+      "supplement": "https://events.sutton.gov.uk/event?id=364833",
+      "adapter_family": "mylibrary_rendered_ics",
+      "evidence": "Sutton Central rhymetime 12 October 2026 11:15-12:15 ages 0-5, accompanied, each attendee ticket required. Family hub series has local residency restrictions and weather conditions.",
+      "gap": "Preserve library and hub eligibility separately; venue/date/booking alone do not decide activity/event classification."
+    },
+    {
+      "borough": "Tower Hamlets",
+      "activities": "https://ideastore.towerhamlets.gov.uk/events",
+      "events": "https://www.vam.ac.uk/whatson/programmes/family",
+      "supplement": "https://www.vam.ac.uk/event/N1YgO46xz5/yva-mini-play-for-babies-oct-2026",
+      "adapter_family": "library_calendar_and_museum_detail",
+      "evidence": "Rendered Idea Store All Events lists four branch Lego Clubs for 11 October 2026 12-13 and links to idea.events.mylibrary.digital; ages need detail review. Young V&A has current Mini Play under-1 sensory series, 12/16/19 October 11-12:30, GBP15, adult attendance and booking required. Recurring series is a Dadspace Activity despite source Special event label.",
+      "gap": "Use actual library event details rather than book-group category as family coverage. Filter V&A by venue: Young V&A E2 9PA is Tower Hamlets; South Kensington items are not. Validate library ages and all occurrence dates."
+    },
+    {
+      "borough": "Waltham Forest",
+      "activities": "https://www.walthamforest.gov.uk/events/stories-and-rhymes-higham-hill-library",
+      "events": "https://libraries.walthamforest.gov.uk/digital-content/events-activities",
+      "adapter_family": "council_schedule",
+      "evidence": "Council Higham Hill page has weekly Thursday 11-11:30 under-five rhyme, free, but displayed occurrence 13 August is past. Operator links individual libraries/Eventbrite; web-tool fetch returned 403, while bounded urllib access succeeded; access varies by client.",
+      "gap": "Verify current standing schedule and official organiser calendar; do not publish the past occurrence as upcoming."
+    },
+    {
+      "borough": "Wandsworth",
+      "activities": "https://fis.wandsworth.gov.uk/activities-and-things-to-do/SK-baby-rhyme-time-wandsworth-town-library/",
+      "events": "https://www.better.org.uk/library/london/wandsworth/events-and-activities/childrens-activities",
+      "adapter_family": "fis_schedule_and_better",
+      "evidence": "FIS supplies Wandsworth Town Tuesday 10-10:30 and 2:15-2:45, 0-2, free/drop-in, SW18 4QG. Broader directory age tag 2-5 conflicts with session description; prefer specific description.",
+      "gap": "Extract Better embedded timetable for specials and other branches; hold conflicting age evidence for review."
+    },
+    {
+      "borough": "Westminster",
+      "activities": "https://www.westminster.gov.uk/event",
+      "events": "https://www.westminster.gov.uk/event",
+      "supplement": "https://www.westminster.gov.uk/event/rhyme-time-victoria-library-thursday",
+      "adapter_family": "council_recurring_calendar",
+      "evidence": "Victoria Thursday rhyme-time detail has exact future starts/ends, weekly, under-five family scope, free/no booking. Calendar supports audience/date filters and pagination.",
+      "gap": "Extract every occurrence and current audience detail; retain regular Activity with dated occurrences."
+    },
+    {
+      "borough": "City of London",
+      "activities": "https://www.fis.cityoflondon.gov.uk/whats-on/rhyme-time-barbican",
+      "events": "https://www.cityoflondon.gov.uk/services/libraries/events-in-our-libraries",
+      "adapter_family": "fis_schedule_and_council_calendar",
+      "evidence": "Barbican FIS rhyme time Mon/Fri/Sat 10:45-11:15 ages 0-5 free/no booking, Silk Street EC2Y 8DS. Council library events has current October specials.",
+      "gap": "FIS contact heading says Artizan while address says Barbican: review venue conflict. Follow service changes/refurbishment notices and dated event detail."
+    }
+  ]
+}

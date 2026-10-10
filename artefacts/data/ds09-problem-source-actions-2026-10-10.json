@@ -1,0 +1,681 @@
+{
+  "checked_on": "2026-10-10",
+  "production_enabled": false,
+  "sources": [
+    {
+      "id": "430cabe7-cba4-414d-bdf3-80a12561c3f0",
+      "name": "Aberdeen Museums",
+      "next_action": "Correct operator host to https://sites.aberdeencity.gov.uk/AAGM/whats-aberdeen-art-galleries-and-museums. Prior detail review found Loose Parts Play ages 2–5 and Baby Boogie under-five dates. Consent/host access failure is not absence of programmes; retain outside London pilot."
+    },
+    {
+      "id": "1afbdcde-2543-43a5-9383-b63eddf6b172",
+      "name": "Aerospace Bristol",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "6260ff8c-9d98-487e-95a1-cf651b8f0356",
+      "name": "Amersham Museum",
+      "next_action": "Keep useful source and follow event detail/calendar export: https://amershammuseum.org/event/museum-makers-8/ gives 11 October 2026 ages 7–11. Exclude this item from 0–5 pilot, not from national supply. Review recurring programme classification."
+    },
+    {
+      "id": "28d53ce7-23b2-4ffa-9f81-3843017efaeb",
+      "name": "Birmingham Libraries",
+      "next_action": "Follow official branch children/family programme and booking links; extract standing rhyme/story schedules separately from dated calendar items. Root text alone is not supply. Validate term dates, ages, adult attendance and cancellations before enabling."
+    },
+    {
+      "id": "701989a8-c768-44a7-b912-e0df79aa2882",
+      "name": "Birmingham Museums",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "e24646d3-1673-4021-a972-dd6291cfdafb",
+      "name": "British Museum",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "ac98cf40-2874-43b1-9220-467c38e6399a",
+      "name": "Buckinghamshire Libraries",
+      "next_action": "Follow official branch children/family programme and booking links; extract standing rhyme/story schedules separately from dated calendar items. Root text alone is not supply. Validate term dates, ages, adult attendance and cancellations before enabling."
+    },
+    {
+      "id": "c87b10cd-d53d-4372-8b23-6fe20a94af07",
+      "name": "Cambridgeshire Libraries",
+      "next_action": "Follow official branch children/family programme and booking links; extract standing rhyme/story schedules separately from dated calendar items. Root text alone is not supply. Validate term dates, ages, adult attendance and cancellations before enabling."
+    },
+    {
+      "id": "f1ee8adf-d18e-40ee-8325-011aca00340f",
+      "name": "Camp Beaumont",
+      "next_action": "Follow local class/centre timetable and booking detail. Preserve minimum age, postcode, term dates, session price and trial-versus-course distinction. Generic brand copy cannot establish local activity supply; request permitted export where timetable access fails."
+    },
+    {
+      "id": "31abe4ad-ef47-437f-91e9-121dca1e2a3e",
+      "name": "Cardiff Libraries",
+      "next_action": "Follow official branch children/family programme and booking links; extract standing rhyme/story schedules separately from dated calendar items. Root text alone is not supply. Validate term dates, ages, adult attendance and cancellations before enabling."
+    },
+    {
+      "id": "580d81a4-9fb5-46a5-a490-fa80cb6ce844",
+      "name": "ClassForKids",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "4196176c-b668-42b6-91f7-24322f318941",
+      "name": "ClassForKids (Birmingham)",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "50950a1b-4160-4193-b11d-c6b33af64313",
+      "name": "ClassForKids (London)",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "254f1361-8385-4374-8a0f-d4fbef2415e5",
+      "name": "ClassForKids (Manchester)",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "b8b88ea4-c5fa-4bb5-9633-1700b1bec89c",
+      "name": "Club Hub UK",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "e36a0df4-0a2d-4131-a332-197e8b1c00c4",
+      "name": "Cornwall Council",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "b9fd2655-f634-4566-b25b-aaf8990d6e85",
+      "name": "Day Out With The Kids",
+      "next_action": "Use as venue/operator discovery only unless an actual family programme detail exists. Follow the individual operator calendar; do not turn places, product pages or association membership into Activities or Events."
+    },
+    {
+      "id": "53903398-ceb9-4ff0-b40d-9002882d9682",
+      "name": "Derbyshire County Council",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "5ebd8c71-f272-4b3e-8c5e-d41b445cecae",
+      "name": "Edinburgh Libraries",
+      "next_action": "Follow official branch children/family programme and booking links; extract standing rhyme/story schedules separately from dated calendar items. Root text alone is not supply. Validate term dates, ages, adult attendance and cancellations before enabling."
+    },
+    {
+      "id": "a63a36df-c95c-43d2-aefd-dc7ad791e216",
+      "name": "Essex Libraries",
+      "next_action": "Follow official branch children/family programme and booking links; extract standing rhyme/story schedules separately from dated calendar items. Root text alone is not supply. Validate term dates, ages, adult attendance and cancellations before enabling."
+    },
+    {
+      "id": "e33e6430-2a55-4b4e-a9fe-91a898a560e8",
+      "name": "Federation of City Farms and Community Gardens",
+      "next_action": "Use as venue/operator discovery only unless an actual family programme detail exists. Follow the individual operator calendar; do not turn places, product pages or association membership into Activities or Events."
+    },
+    {
+      "id": "56b95513-a98a-459d-985a-41ebf2eddd17",
+      "name": "Glasgow Libraries",
+      "next_action": "Follow official branch children/family programme and booking links; extract standing rhyme/story schedules separately from dated calendar items. Root text alone is not supply. Validate term dates, ages, adult attendance and cancellations before enabling."
+    },
+    {
+      "id": "d8b7f660-0c08-406a-8d1c-3ee34d229af4",
+      "name": "Gymboree Play & Music UK",
+      "next_action": "Follow local class/centre timetable and booking detail. Preserve minimum age, postcode, term dates, session price and trial-versus-course distinction. Generic brand copy cannot establish local activity supply; request permitted export where timetable access fails."
+    },
+    {
+      "id": "9f0c7d33-5d6e-4ea2-9839-ddb60a49fd32",
+      "name": "Hampshire Cultural Trust",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "8212c9ec-8171-4487-9e58-a126b777d972",
+      "name": "Happity",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "90f059d3-6f26-4ac6-ada5-e03b0a722664",
+      "name": "Heritage Railway Association",
+      "next_action": "Use as venue/operator discovery only unless an actual family programme detail exists. Follow the individual operator calendar; do not turn places, product pages or association membership into Activities or Events."
+    },
+    {
+      "id": "c5fc0b84-a9c7-4810-b8f6-6c4d1c852225",
+      "name": "Hertfordshire County Council",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "2045621c-1fc6-4ba9-9ef2-e7da22d541a7",
+      "name": "Hoop",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "fa3bd851-2d24-403f-8a5e-b8606ee031f1",
+      "name": "Horniman Museum",
+      "next_action": "Retain and repair audience filters, Load more and detail extraction. Official index shows future October family programmes. Exclude daily venue attractions by default, preserve sold-out status and decide Activity/Event from programme frequency."
+    },
+    {
+      "id": "b623a42b-1f78-4e0b-ad75-8999ad2ff209",
+      "name": "Hounslow Libraries",
+      "next_action": "Replace generic root extraction with rendered https://hounslowconnect.com/events and https://hounslowconnect.com/pages/local-libraries; council legacy schedule redirects there. Browser confirmed dated branch family programmes and 15-page pagination. Qualify under-five detail/standing schedules."
+    },
+    {
+      "id": "95352cf2-da07-4826-8d80-5473107a5ecb",
+      "name": "Imperial War Museums",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "b5ecb89c-6b41-49eb-b08d-821487f022ac",
+      "name": "Ironbridge Museums",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "ade4ee64-f3a3-46db-b5b6-0247e11bff2a",
+      "name": "Kent Libraries",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "a2ed8964-138b-4403-8730-6818cb0f7692",
+      "name": "Kiddle",
+      "next_action": "Use as venue/operator discovery only unless an actual family programme detail exists. Follow the individual operator calendar; do not turn places, product pages or association membership into Activities or Events."
+    },
+    {
+      "id": "c900a56e-4e96-4839-9ae9-66776291e4bd",
+      "name": "Leeds Libraries",
+      "next_action": "Follow official branch children/family programme and booking links; extract standing rhyme/story schedules separately from dated calendar items. Root text alone is not supply. Validate term dates, ages, adult attendance and cancellations before enabling."
+    },
+    {
+      "id": "6d03968d-02fc-4a6a-bc2d-6ff3bb978ce9",
+      "name": "Leeds Museums",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "1ab3bc50-5935-4cb2-91d2-263972d713ed",
+      "name": "Leicester Museums",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "e5575a28-3f2a-43d4-bc3d-afa3e6fbb630",
+      "name": "Libraries NI",
+      "next_action": "Follow official branch children/family programme and booking links; extract standing rhyme/story schedules separately from dated calendar items. Root text alone is not supply. Validate term dates, ages, adult attendance and cancellations before enabling."
+    },
+    {
+      "id": "7817655d-83ff-42e5-a9e0-d50074f4c8a4",
+      "name": "Little Kickers",
+      "next_action": "Follow local class/centre timetable and booking detail. Preserve minimum age, postcode, term dates, session price and trial-versus-course distinction. Generic brand copy cannot establish local activity supply; request permitted export where timetable access fails."
+    },
+    {
+      "id": "0a976955-7296-4604-a95e-6474d383e1e1",
+      "name": "Little Viking",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "3a661af7-92f3-4c7b-b7de-2dd805259fa2",
+      "name": "London Play",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "ed76e110-050f-4c82-a3c6-0174a94556ef",
+      "name": "Manchester Libraries",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "c9ca000a-0e7e-4476-a1a2-3dccdd045906",
+      "name": "Muddy Puddles (Forest School Finder)",
+      "next_action": "Use as venue/operator discovery only unless an actual family programme detail exists. Follow the individual operator calendar; do not turn places, product pages or association membership into Activities or Events."
+    },
+    {
+      "id": "ac34cf3a-4391-431f-a3f8-f8392509bfa6",
+      "name": "Museum Wales",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "f2508a09-6cbf-49b8-ae06-c89279986b52",
+      "name": "National Museums Liverpool",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "a8019bd8-f14e-416f-8098-e3fab2b93303",
+      "name": "National Museums NI",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "e3ed3d74-012b-4512-894f-2d1277b3cbcd",
+      "name": "National Museums Scotland",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "63d54732-afb7-4fc6-9648-02732f190db1",
+      "name": "National Trust NI",
+      "next_action": "Replace obsolete /visit/northern-ireland/events with property calendars, e.g. https://www.nationaltrust.org.uk/visit/northern-ireland/rowallane-garden/events. Official calendar has current October family/Halloween programmes. Preserve ages, child/adult cost and recurrence."
+    },
+    {
+      "id": "efa9c184-6f85-4e4d-9643-574a1b583600",
+      "name": "Natural History Museum",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "562f3099-3b66-4719-9782-57e818d15491",
+      "name": "NCT Local Activities & Meet-ups",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "7bb06684-8716-40bf-8de8-da0a31200de2",
+      "name": "Netmums Whats On",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "6d3ad4b5-0629-49ee-8f31-d9ec77655216",
+      "name": "Norfolk Libraries",
+      "next_action": "Follow official branch children/family programme and booking links; extract standing rhyme/story schedules separately from dated calendar items. Root text alone is not supply. Validate term dates, ages, adult attendance and cancellations before enabling."
+    },
+    {
+      "id": "135b31ec-ee76-4d86-a5e9-a6db9324c068",
+      "name": "Norfolk Museums",
+      "next_action": "Replace /whats-on with official home-linked https://www.museums.norfolk.gov.uk/events. Home confirms cross-museum date/type/audience search; events fetch timed out. Qualification remains open, not a no-activity decision."
+    },
+    {
+      "id": "40abe18f-1322-4ee4-ac73-099ea35eea26",
+      "name": "Our Kids Social",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "af8459c0-ddac-4be7-8a3e-ab6e28c05b54",
+      "name": "Oxfordshire Libraries",
+      "next_action": "Follow official branch children/family programme and booking links; extract standing rhyme/story schedules separately from dated calendar items. Root text alone is not supply. Validate term dates, ages, adult attendance and cancellations before enabling."
+    },
+    {
+      "id": "fa261ed7-25c3-4e76-a8df-f304df80b949",
+      "name": "Primary Times Wales",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "e6a8ff3a-ae38-4121-b297-d72d8ab43faf",
+      "name": "Royal Museums Greenwich",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "6a2e4138-6f8c-48d9-a716-d344c372aa34",
+      "name": "RSPB (Royal Society for the Protection of Birds)",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "67bfff4c-fff7-4bd5-b8c1-272561523c79",
+      "name": "Rugbytots",
+      "next_action": "Follow local class/centre timetable and booking detail. Preserve minimum age, postcode, term dates, session price and trial-versus-course distinction. Generic brand copy cannot establish local activity supply; request permitted export where timetable access fails."
+    },
+    {
+      "id": "db624f05-3c35-4cf6-9da3-d617710da2ed",
+      "name": "Science Museum",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "e5760e8c-da11-468f-960b-93fb07090e87",
+      "name": "Sheffield Museums",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "3ec54288-92e7-4435-9ae9-637575a1e019",
+      "name": "Stagecoach Performing Arts",
+      "next_action": "Follow local class/centre timetable and booking detail. Preserve minimum age, postcode, term dates, session price and trial-versus-course distinction. Generic brand copy cannot establish local activity supply; request permitted export where timetable access fails."
+    },
+    {
+      "id": "aa1bb33a-c792-464a-9988-51b852189d91",
+      "name": "Suffolk Libraries",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "39cff5fb-1167-4003-a0ae-dc12892f9117",
+      "name": "SuperCamps",
+      "next_action": "Follow local class/centre timetable and booking detail. Preserve minimum age, postcode, term dates, session price and trial-versus-course distinction. Generic brand copy cannot establish local activity supply; request permitted export where timetable access fails."
+    },
+    {
+      "id": "6a138e07-6ce4-432e-b883-e59d37bbf5c7",
+      "name": "Surrey Libraries",
+      "next_action": "Follow official branch children/family programme and booking links; extract standing rhyme/story schedules separately from dated calendar items. Root text alone is not supply. Validate term dates, ages, adult attendance and cancellations before enabling."
+    },
+    {
+      "id": "03ff409e-f05c-48e0-ab51-a8a15351ca65",
+      "name": "The Creation Station",
+      "next_action": "Follow local class/centre timetable and booking detail. Preserve minimum age, postcode, term dates, session price and trial-versus-course distinction. Generic brand copy cannot establish local activity supply; request permitted export where timetable access fails."
+    },
+    {
+      "id": "922bf42e-d977-41bf-ad84-a4c2b798036f",
+      "name": "The National Trust",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "59e48981-3c4e-4024-9ece-9580d27f9a9c",
+      "name": "The PGL Adventure",
+      "next_action": "Follow local class/centre timetable and booking detail. Preserve minimum age, postcode, term dates, session price and trial-versus-course distinction. Generic brand copy cannot establish local activity supply; request permitted export where timetable access fails."
+    },
+    {
+      "id": "4050964e-5fd7-4c69-bb78-c92042424b77",
+      "name": "V&A",
+      "next_action": "Use https://www.vam.ac.uk/whatson/programmes/family and item details. Verified current Young V&A under-one Mini Play series; venue postcode decides borough. Source Special event label does not override recurring Dadspace Activity meaning."
+    },
+    {
+      "id": "5aa80f81-1212-4c77-a288-6a2c8905dc21",
+      "name": "Visit South East England (family search)",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "20bb395e-cf49-406e-9198-225c82bccec1",
+      "name": "Water Babies",
+      "next_action": "Follow local class/centre timetable and booking detail. Preserve minimum age, postcode, term dates, session price and trial-versus-course distinction. Generic brand copy cannot establish local activity supply; request permitted export where timetable access fails."
+    },
+    {
+      "id": "851c176d-9b60-4457-a289-5644635788d0",
+      "name": "What's On Scotland Kids",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "66203cb6-05f2-40fd-b84e-3987392b6b23",
+      "name": "Aberdeenshire Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "95563151-64d9-4a5e-8e58-1cac78879182",
+      "name": "Belfast City Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "bd249dbb-b90f-4b94-b148-0f7ba33fadcd",
+      "name": "Birmingham City Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "8e57d114-04db-4752-8ccd-86a3ac032369",
+      "name": "Camden Council",
+      "next_action": "Repair branch schedule extraction on existing page: standing under-five rhyme/Duplo sessions coexist with expired June events. Do not pause merely because latest worker yield is zero. See London plan."
+    },
+    {
+      "id": "2878520b-7ed9-42d1-8981-7ec36e27ad13",
+      "name": "Cardiff Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "a69f83d3-1491-48eb-991a-04be1329be9f",
+      "name": "City of Edinburgh Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "27319bfc-1e56-4491-a4ae-f4ddc6583bab",
+      "name": "Derry City & Strabane District Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "1e869385-a0d2-4365-9926-4205337b3e1f",
+      "name": "Devon County Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "c7296d6d-b8c7-4bd9-9648-ca74e1278c81",
+      "name": "Ealing Council",
+      "next_action": "Use https://ealing.events.mylibrary.digital/ rather than council event-root extraction; browser confirmed current occurrence/series/detail and individual ICS export. HTTP robots check is unresolved; qualify permitted collection before enabling."
+    },
+    {
+      "id": "53b745b1-df89-4be0-8376-7df0c8a2d938",
+      "name": "East Sussex County Council",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "1a93c814-09ef-4411-8a76-1c537e11adf2",
+      "name": "Glasgow City Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "38caa7d5-392b-4f1a-a5e6-fff7d11a0caa",
+      "name": "Gloucestershire County Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "2191af9b-c2eb-43ca-a36e-f67379a56346",
+      "name": "Gwynedd Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "74662532-4d4a-48fb-bc2e-681efc888f22",
+      "name": "Hampshire County Council",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "a57c54de-1001-4b19-a588-4ddd6ef7dd8e",
+      "name": "Highland Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "cc492422-c4bd-4ad0-8b73-118111669f69",
+      "name": "How Are You East Cambs?",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "c194b023-cb7b-4048-bbbe-f5cfd32d981d",
+      "name": "How Are You Fenland?",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "e179e04b-24b3-4b2e-8c37-6f5ec6f8c312",
+      "name": "How Are You Hunts?",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "222b7510-e5e0-4d5a-9bed-ab4d03d86f2f",
+      "name": "Lancashire County Council",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "aee8d676-7096-43d4-9aa9-99690fb02425",
+      "name": "Leeds City Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "610da93f-2710-4a78-8491-09e3278e08f5",
+      "name": "Leicestershire County Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "6f0ab1d7-449c-41e9-809d-8a258c546ad6",
+      "name": "Lewisham Council",
+      "next_action": "Retain unresolved council access; supplement with Horniman https://www.horniman.ac.uk/whats-on/ current October family craft/story/festival dates. One museum is not complete borough coverage."
+    },
+    {
+      "id": "5627b08e-6aa9-4e3f-89f7-707d84c1584e",
+      "name": "Lincolnshire County Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "2df92fe3-c3a4-4b46-b594-ce311e36b207",
+      "name": "Liverpool City Council",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "9a6214b9-a620-4b5d-b8a4-c4969d1c1bed",
+      "name": "Manchester City Council",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "7cd2be4e-5a97-4f69-b2da-f50bf2cb9231",
+      "name": "Newcastle City Council",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "7343484a-ca0b-4959-8d7c-9a20364ea771",
+      "name": "Norfolk County Council",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "5c159b83-ced2-4237-825b-76268b4d1e53",
+      "name": "North Yorkshire Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "44cee79a-a431-4387-a1a6-20f0b973800f",
+      "name": "Nottinghamshire County Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "a672b406-7bc9-43eb-958e-3cd363f57051",
+      "name": "Salford City Council",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "b0ec6de8-9eee-437d-96ab-539dd1f32132",
+      "name": "Sheffield City Council",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "5a4ed8c4-3030-444a-8e3a-f9293b839eb5",
+      "name": "Somerset Council",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "7b9c4eee-a94b-4175-9323-9c353543275d",
+      "name": "Southwark Council",
+      "next_action": "Use official babies/toddlers standing-schedule chapters and Southwark Presents calendar, as linked in London plan. Follow branch details and discard expired dated cards."
+    },
+    {
+      "id": "48534230-12d8-49e9-b970-0d104bfac602",
+      "name": "Staffordshire County Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "f2cad4dc-554c-4cc0-9a09-6f03e3fdb3ec",
+      "name": "Suffolk County Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "d81c986a-582e-433f-8782-325d494aa770",
+      "name": "Surrey County Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "9298aae6-2c23-43f9-88e3-ab3c93289f88",
+      "name": "Swansea Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "1b2fd4c8-5e46-44f5-82c9-48ef3ac74490",
+      "name": "Tower Hamlets Council",
+      "next_action": "Follow https://ideastore.towerhamlets.gov.uk/events then its observed idea.events.mylibrary.digital detail links. Browser confirmed future Kids Lego Club cards. Add Young V&A family programme filtered to E2 9PA; detail confirms current under-one Mini Play series. Do not use book-groups category as family coverage."
+    },
+    {
+      "id": "ecb8c88e-827a-41be-ad9f-456a3696f46e",
+      "name": "Warwickshire County Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "e8e16e34-2b93-4b9c-a334-1198bd053628",
+      "name": "West Sussex County Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "eb7638a2-f7e8-4e67-96d7-74568105fbf5",
+      "name": "Worcestershire County Council",
+      "next_action": "Replace committee-calendar role with borough library/operator/family programme route; do not extract governance meetings."
+    },
+    {
+      "id": "faae66f0-968d-4e1c-afb5-ec487eb58d54",
+      "name": "Bannau Brycheiniog (Brecon Beacons)",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "338ab216-4643-4771-87fa-557ffd44616c",
+      "name": "Cadw",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "0f9f8b83-c3d6-4657-9a0c-f4ccd46b90bc",
+      "name": "Cairngorms National Park",
+      "next_action": "Replace broken discovery route with candidate official destination calendar https://www.visitcairngorms.com/whats-on/. Qualify operator provenance, family details, export/access and current dates before accepting supply."
+    },
+    {
+      "id": "d1c3b028-b6b6-4209-aa75-4979ea36860f",
+      "name": "Dartmoor National Park",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "b7830857-020e-42d9-9e24-dafa4c613c5a",
+      "name": "English Heritage",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "fb60637b-c6ec-4cff-88ba-67b981cb45c5",
+      "name": "Eryri (Snowdonia) National Park",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "27d785ea-ba23-4d77-bb10-936bdb800f59",
+      "name": "Exmoor National Park",
+      "next_action": "Correct 404 route to https://www.exmoor-nationalpark.gov.uk/exmoor-for-everyone/events. Official calendar has current October half-term crafts and family programmes; preserve full-booked status and review conflicting card dates against detail."
+    },
+    {
+      "id": "5365e423-a70b-4ca1-8d85-55fe02f2749c",
+      "name": "Lake District National Park",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "b09d52f8-c87e-4f99-8373-3772635146c8",
+      "name": "Loch Lomond & The Trossachs National Park",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "f8c9c47b-deb8-4867-a408-5d97ac6ca555",
+      "name": "National Trust for Scotland",
+      "next_action": "Root /whats-on is unresolved; use official property event calendars discovered via https://www.nts.org.uk/visit. Brodie Castle /visit/places/brodie-castle/events/p2 is indexed with Nature Nippers but live fetch timed out; current detail and access remain unqualified."
+    },
+    {
+      "id": "407b6455-487a-45d1-a036-72b72308dee0",
+      "name": "North York Moors National Park",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "777486eb-206c-4f92-850d-2f82f8a6566e",
+      "name": "Peak District National Park",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "16fa8449-3afa-4f4b-b3e6-17c989e9047a",
+      "name": "Pembrokeshire Coast National Park",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "538de208-207c-4520-959e-8dfead8fa6e7",
+      "name": "Sherwood Forest (RSPB)",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "8e369398-7819-4ed9-bc23-ef339f71bdf4",
+      "name": "South Downs National Park",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "366b2559-31d6-43f8-97ea-f2fbac9eb1c4",
+      "name": "The Wildlife Trusts",
+      "next_action": "Resolve operator/feed access or obtain organiser export. Retain as unresolved access, not evidence of no activities."
+    },
+    {
+      "id": "7cd08580-6082-4a61-9108-6363ef718e70",
+      "name": "Woodland Trust",
+      "next_action": "Correct 404 route to https://www.woodlandtrust.org.uk/visiting-woods/things-to-do/events/. Official page shows future October programmes including family crafts. Qualify item ages, geography and automation before reactivation."
+    },
+    {
+      "id": "264dfc8d-f1c5-45cc-9492-52d273b28b47",
+      "name": "Yorkshire Dales National Park",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "47aedc68-94fd-4cdd-abac-015f5d38ba2b",
+      "name": "BuckinghamshireLive - Family & Kids",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "eb284368-0fa8-47eb-a2ac-06914aaf5173",
+      "name": "French Brothers (Windsor steamboat)",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    },
+    {
+      "id": "81f0c800-d05b-4d32-bc5a-55124b825ca5",
+      "name": "London Transport Museum Depot (Acton)",
+      "next_action": "Use observed operator booking calendar https://bookings.ltmuseum.co.uk/; search indexes Depot Family Tours, live text fetch empty. Render detail and confirm actual dates/ages and Acton versus Covent Garden venue before accepting W3 supply."
+    },
+    {
+      "id": "ab7d7df1-b398-4ab1-b186-4df6d6a9b299",
+      "name": "The Bucks Guide - Events",
+      "next_action": "Qualify detail/series extraction, dated freshness and explicit regular schedules; readable pages are not accepted supply."
+    }
+  ]
+}

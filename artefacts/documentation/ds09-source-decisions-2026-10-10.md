@@ -1,5 +1,7 @@
 # DS-09 source decisions
 
+Latest follow-up: [problem-source recommendations](ds09-problem-source-review-2026-10-10.md) leave 20 healthy routes alone and review the other 135. The [London collection plan](ds09-london-collection-plan-2026-10-10.md) maps all 32 boroughs plus the City to operator routes, adapters and unresolved access/coverage work. These recommendations supersede blanket access-only pause interpretations below; they do not activate sources or establish reliable production feeds.
+
 Pilot: W3 9LN, ages 0–5 inclusive; include evidenced family activities. Radius remains provisional at 10 km. Inactive is an operational flag, not a judgment of usefulness.
 
 Generated from saved 10 October read-only evidence plus owner/official-page review. Aberdeen and Amersham detail evidence supersedes the earlier access-only interpretation. See [updated pilot and source review](ds09-w3-pilot-and-source-review-2026-10-10.md). Production active flags are unchanged.
