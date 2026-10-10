@@ -445,10 +445,11 @@ def _activity_row(item: dict, source: dict, page_url: str, method: str, stats: d
         return None
     # A duration, bare clock time, or 'regular sessions' is not an actionable
     # recurring schedule. Never invent a weekday from the source's location.
-    if not schedule or not re.search(
+    published_dates=item.get('occurrence_dates') if method=='mylibrary_calendar' else None
+    if not schedule or (not published_dates and not re.search(
         r"\b(?:mon(?:day)?s?|tue(?:sday)?s?|wed(?:nesday)?s?|thu(?:rsday)?s?|fri(?:day)?s?|sat(?:urday)?s?|sun(?:day)?s?|daily|weekly|monthly|every day|every week|every month)\b",
         schedule, re.I,
-    ):
+    )):
         stats["missing_activity_schedule"] = stats.get("missing_activity_schedule", 0) + 1
         return None
     venue_id = _resolve_venue(item, page_url)
@@ -462,8 +463,8 @@ def _activity_row(item: dict, source: dict, page_url: str, method: str, stats: d
         "listing_type": "activity",
         "is_holiday_camp": False,
         "category": base.clean_str(item.get("category"), 80),
-        "start_date": None,
-        "end_date": None,
+        "start_date": min(published_dates) if published_dates else None,
+        "end_date": max(published_dates) if published_dates else None,
         "schedule_text": schedule,
         "time_text": base.clean_str(item.get("time_text"), 200),
         "location": location,
@@ -577,6 +578,18 @@ def clean_events(raw_events, source, page_url, method, today, stats=None):
 
 
 def process_source(source, extract, today):
+    if source.get('source_adapter')=='mylibrary_calendar':
+        from mylibrary_calendar import collect, render_page
+        stats={}
+        try:
+            raw,new_hash,stats=collect(source,today,render_page,base.robots_allows,stats=stats)
+            rows=clean_events(raw,source,source['url'],'mylibrary_calendar',today,stats)
+            # Re-clean exact items every time at zero model cost. A source-level
+            # unchanged refresh would renew cancelled/disappeared programmes.
+            return ('ok' if rows else 'ok_zero',rows,new_hash,
+                    f'MyLibrary: {len(raw)} programme occurrences/groups, {len(rows)} kept; zero model calls',stats)
+        except Exception as exc:
+            return base.classify_fetch_error(str(exc)),[],None,str(exc),stats
     # Explicit manual escape hatch for a full re-read. It bypasses only the
     # in-memory hash comparison; DRY_RUN still prevents database writes.
     if os.environ.get("FORCE_REREAD", "false").strip().lower() == "true":

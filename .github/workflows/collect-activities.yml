@@ -50,6 +50,8 @@ jobs:
         run: python events_worker.py --self-test
       - name: Activity ingestion regressions
         run: python -m unittest discover -s tests -p test_activity_ingestion.py -v
+      - name: Library calendar regressions
+        run: python -m unittest discover -s tests -p test_mylibrary_calendar.py -v
       - name: Back up events before any live write
         if: ${{ (inputs.dry_run || 'true') == 'false' }}
         env:
