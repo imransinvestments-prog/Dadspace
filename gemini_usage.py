@@ -1,4 +1,4 @@
-"""Gemini extraction controls; provider selection belongs to issue #66."""
+"""Compatibility adapter for the existing Gemini SDK extraction behavior."""
 import json
 import os
 import time
@@ -13,7 +13,7 @@ def make_extractor(model, schema, timeout, fatal_error):
     from google.genai import types
 
     def integer(name, default=0):
-        value = int(os.environ.get(name) or default)
+        value = int(os.environ.get(name.replace('GEMINI_', 'LLM_', 1)) or os.environ.get(name) or default)
         if value < 0:
             raise ValueError(f"{name} must be non-negative")
         return value
@@ -25,6 +25,8 @@ def make_extractor(model, schema, timeout, fatal_error):
     attempt_budget = integer("GEMINI_RUN_MAX_ATTEMPTS")
     output_limit = integer("GEMINI_MAX_OUTPUT_TOKENS")
     retries = integer("GEMINI_MAX_RETRIES", 2)
+    if retries > 5:
+        raise ValueError("LLM_MAX_RETRIES must be at most 5")
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         raise fatal_error("GEMINI_API_KEY is missing")

@@ -337,7 +337,7 @@ def make_gemini_caller():
         audience: Optional[str] = None
         family_evidence: Optional[str] = None
 
-    from gemini_usage import make_extractor
+    from llm_provider import make_extractor
     return make_extractor(base.MODEL, list[ListingSchema], base.GEMINI_TIMEOUT_SECONDS, base.FatalError)
 
 

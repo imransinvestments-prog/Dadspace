@@ -36,7 +36,7 @@ This version just makes sure that report can no longer fail either.
 """
 
 import datetime as dt
-from gemini_usage import BudgetExhausted
+from llm_provider import BudgetExhausted, credential_name, selection
 
 import hashlib
 import json
@@ -58,7 +58,7 @@ from urllib3.util.retry import Retry
 # ----------------------------------------------------------------------------
 # Settings (all can be changed from GitHub without editing this file)
 # ----------------------------------------------------------------------------
-MODEL = os.environ.get("GEMINI_MODEL") or "gemini-3.6-flash"
+MODEL = selection("EXTRACTION", os.environ.get("GEMINI_MODEL") or "gemini-3.6-flash")[1]
 FETCH_ENGINE = (os.environ.get("FETCH_ENGINE", "requests") or "requests").strip().lower()
 CATEGORY_FILTER = [c.strip() for c in os.environ.get("CATEGORIES", "").split(",") if c.strip()]
 EVENTS_TABLE = os.environ.get("EVENTS_TABLE", "collected_events")
@@ -659,7 +659,7 @@ def make_gemini_caller():
         audience: Optional[str] = None
         family_evidence: Optional[str] = None
 
-    from gemini_usage import make_extractor
+    from llm_provider import make_extractor
     return make_extractor(MODEL, list[EventSchema], GEMINI_TIMEOUT_SECONDS, FatalError)
 
 
@@ -1107,7 +1107,7 @@ def self_test():
         timed_out = "timed out" in str(exc)
     check("call_with_timeout enforces its deadline", timed_out)
 
-    for name in ("SUPABASE_URL", "SUPABASE_KEY", "GEMINI_API_KEY"):
+    for name in ("SUPABASE_URL", "SUPABASE_KEY", credential_name()):
         present = bool(os.environ.get(name))
         print(f"  [{'ok' if present else 'warn'}] {name} secret is set" if present else f"  [warn] {name} secret is NOT set (fine for self-test, required for a real run)")
 
@@ -1161,7 +1161,7 @@ def main():
     if "--self-test" in sys.argv:
         sys.exit(0 if self_test() else 1)
 
-    missing = [n for n in ("SUPABASE_URL", "SUPABASE_KEY", "GEMINI_API_KEY") if not os.environ.get(n)]
+    missing = [n for n in ("SUPABASE_URL", "SUPABASE_KEY", credential_name()) if not os.environ.get(n)]
     if missing:
         print("Setup problem: these GitHub secrets are missing or empty: " + ", ".join(missing))
         sys.exit(1)
@@ -1188,7 +1188,7 @@ def main():
             sys.exit(1)
 
     extract = make_gemini_caller()
-    print("Gemini controls: " + json.dumps(getattr(extract, "settings", {}), sort_keys=True))
+    print("LLM controls: " + json.dumps(getattr(extract, "settings", {}), sort_keys=True))
     today = today_uk()
 
     query = db.table("sources").select("*").eq("active", True)
@@ -1203,7 +1203,7 @@ def main():
     which = ", ".join(CATEGORY_FILTER) if CATEGORY_FILTER else "all categories"
     print(f"Today (UK): {today}. Categories: {which}. Fetch engine: {FETCH_ENGINE}. "
           f"Sources to process: {len(sources)}. Dry run: {DRY_RUN}. Model: {MODEL}. "
-          f"Run budget: {MAX_RUN_MINUTES} min. Gemini timeout: {GEMINI_TIMEOUT_SECONDS}s.")
+          f"Run budget: {MAX_RUN_MINUTES} min. LLM timeout: {GEMINI_TIMEOUT_SECONDS}s.")
 
     # Everything the summary needs is created here, before the loop, so a
     # crash partway through the loop still leaves a valid report to print.
@@ -1317,7 +1317,7 @@ def main():
         # API attempts include retries/timeouts; input chars therefore reflect actual
         # request payloads sent rather than just successful logical source calls.
         print(
-            "Gemini usage: "
+            "LLM usage: "
             f"api_attempts={gemini_metrics.get('api_attempts', 0)}, "
             f"input_chars_sent={gemini_metrics.get('input_chars_sent', 0)}, "
             f"prompt_tokens={gemini_metrics.get('prompt_tokens', 0)}, "

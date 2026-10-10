@@ -1,8 +1,15 @@
-name: Gemini usage controls (offline)
+name: LLM provider and usage controls (offline)
 on:
   pull_request:
     paths:
       - 'gemini_usage.py'
+      - 'llm_provider.py'
+      - 'requirements-llm.txt'
+      - 'tests/test_llm_provider.py'
+      - 'news_worker*.py'
+      - 'original_content_worker.py'
+      - '.github/workflows/original-content.yml'
+      - '.github/workflows/llm-smoke.yml'
       - 'worker.py'
       - 'events_worker.py'
       - 'tests/test_gemini_usage.py'
@@ -26,4 +33,6 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s tests -p test_gemini_usage.py -v
       - run: python -m unittest discover -s tests -p test_activity_ingestion.py -v
+      - run: python -m unittest discover -s tests -p test_llm_provider.py -v
+      - run: python -m unittest discover -s tests -p test_original_content.py -v
       - run: python events_worker.py --self-test

@@ -49,9 +49,23 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - run: pip install -r requirements-llm.txt
       - name: Generate, review and publish due originals
         run: python original_content_worker.py ${{ inputs.dry_run == true && '--dry-run' || '' }}
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          LLM_PROVIDER: ${{ vars.LLM_PROVIDER }}
+          LLM_MODEL: ${{ vars.LLM_MODEL }}
+          LLM_RUN_MAX_ATTEMPTS: ${{ vars.LLM_RUN_MAX_ATTEMPTS }}
+          LLM_RUN_TOKEN_BUDGET: ${{ vars.LLM_RUN_TOKEN_BUDGET }}
+          LLM_MAX_OUTPUT_TOKENS: ${{ vars.LLM_MAX_OUTPUT_TOKENS }}
+          EXTRACTION_LLM_PROVIDER: ${{ vars.EXTRACTION_LLM_PROVIDER }}
+          EXTRACTION_LLM_MODEL: ${{ vars.EXTRACTION_LLM_MODEL }}
+          NEWS_LLM_PROVIDER: ${{ vars.NEWS_LLM_PROVIDER }}
+          NEWS_LLM_MODEL: ${{ vars.NEWS_LLM_MODEL }}
+          ORIGINAL_CONTENT_LLM_PROVIDER: ${{ vars.ORIGINAL_CONTENT_LLM_PROVIDER }}
+          ORIGINAL_CONTENT_LLM_MODEL: ${{ vars.ORIGINAL_CONTENT_LLM_MODEL }}

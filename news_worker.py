@@ -19,6 +19,7 @@ Usage:
   python news_worker.py                # normal run
 """
 
+from llm_provider import StructuredGenerator, credential_name, selection, FatalLLMError, BudgetExhausted
 import argparse
 import html
 import json
@@ -318,41 +319,28 @@ def fetch_feed(src):
 # ----------------------------------------------------------------------
 # GEMINI
 # ----------------------------------------------------------------------
-def gemini_json(prompt):
-    """Send a prompt to Gemini, count the tokens, and return the parsed JSON answer."""
-    body = {
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {
-            "temperature": 0.1,
-            "responseMimeType": "application/json",
-        },
-    }
-    if THINKING_LEVEL != "off":
-        body["generationConfig"]["thinkingConfig"] = {"thinkingLevel": THINKING_LEVEL.upper()}
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
-    last_error = None
-    for attempt in range(2):
-        try:
-            r = requests.post(url, headers={"x-goog-api-key": GEMINI_API_KEY},
-                              json=body, timeout=GEMINI_TIMEOUT)
-            r.raise_for_status()
-            reply = r.json()
-            usage = reply.get("usageMetadata", {})
-            TOKENS["in"] += usage.get("promptTokenCount", 0)
-            # "thinking" tokens are billed as output, so they are counted too
-            TOKENS["out"] += usage.get("candidatesTokenCount", 0) + usage.get("thoughtsTokenCount", 0)
-            TOKENS["think"] += usage.get("thoughtsTokenCount", 0)
-            TOKENS["calls"] += 1
-            text = reply["candidates"][0]["content"]["parts"][0]["text"]
-            data = json.loads(text)
-            if isinstance(data, dict):
-                data = data.get("articles") or data.get("results") or data.get("stories") or [data]
-            return data
-        except Exception as exc:
-            last_error = exc
-            time.sleep(3)
-    raise RuntimeError(f"Gemini failed: {last_error}")
+def object_array(properties):
+    return {"type": "array", "items": {"type": "object", "properties": properties,
+            "required": list(properties), "additionalProperties": False}}
 
+SCORE_SCHEMA = object_array({"i": {"type": "integer"}, "relevance": {"type": "integer"},
+    **{key: {"type": "string"} for key in ("category", "region", "summary", "why_it_matters")}})
+GROUP_SCHEMA = object_array({"id": {"type": "integer"}, "story": {"type": "string"}})
+_generator = None
+
+def gemini_json(prompt, schema=None):
+    """Compatibility entry point; all news calls share provider and run budget."""
+    global _generator
+    if _generator is None:
+        _generator = StructuredGenerator("NEWS", GEMINI_MODEL, GEMINI_TIMEOUT,
+            thinking_level="" if THINKING_LEVEL == "off" else THINKING_LEVEL.lower(), temperature=0.1)
+        print(f"LLM provider={_generator.provider} model={_generator.model}")
+    try:
+        return _generator.generate(prompt, schema or SCORE_SCHEMA)
+    finally:
+        metrics = _generator.metrics
+        TOKENS.update({"in": metrics["prompt_tokens"], "out": metrics["output_tokens"],
+                       "think": metrics["thinking_tokens"], "calls": metrics["api_attempts"]})
 
 def gemini_score(batch):
     """batch: list of {"i", "title", "source", "snippet"}. Returns list of dicts."""
@@ -399,7 +387,7 @@ def assign_stories(rows, existing):
         f"{n} | {r['title'][:110].replace('|', '/')} | {r['source_name']}"
         for n, r in enumerate(kept))
     answer = gemini_json(GROUP_PROMPT.replace("{existing}", existing_lines)
-                                     .replace("{new}", new_lines))
+                                     .replace("{new}", new_lines), GROUP_SCHEMA)
     keys = {}
     for item in answer:
         try:
@@ -434,7 +422,7 @@ def assign_stories(rows, existing):
 # ----------------------------------------------------------------------
 def self_test():
     problems = []
-    for name in ("SUPABASE_URL", "SUPABASE_SERVICE_KEY", "GEMINI_API_KEY"):
+    for name in ("SUPABASE_URL", "SUPABASE_SERVICE_KEY", credential_name("NEWS")):
         if not os.environ.get(name):
             problems.append(f"missing setting: {name}")
     if problems:
@@ -463,19 +451,9 @@ def self_test():
     try:
         result = gemini_score([{"i": 0, "title": "Changes to paternity leave rules announced",
                                 "source": "test", "snippet": ""}])
-        print(f"Gemini ({GEMINI_MODEL}): OK ({len(result)} result)")
+        print(f"LLM ({selection('NEWS', GEMINI_MODEL)}): OK ({len(result)} result)")
     except Exception as exc:
-        problems.append(f"Gemini: {exc}")
-        try:
-            r = requests.get("https://generativelanguage.googleapis.com/v1beta/models",
-                             headers={"x-goog-api-key": GEMINI_API_KEY},
-                             params={"pageSize": 100}, timeout=30)
-            names = [m["name"].replace("models/", "") for m in r.json().get("models", [])
-                     if "generateContent" in m.get("supportedGenerationMethods", [])
-                     and "flash" in m["name"]]
-            print("Flash models your key can use right now:\n  " + "\n  ".join(names))
-        except Exception as exc2:
-            print(f"(could not list models: {exc2})")
+        problems.append(f"LLM: {exc}")
     if TOKENS["calls"]:
         log_run({"scored": 0}, worker="news-selftest", dry_run=True)
     if problems:
@@ -524,7 +502,7 @@ def run():
     story_lines = []  # duplicate stories that were merged (shown in dry run)
     all_rows = []  # every scored article, saved together after grouping
 
-    print(f"Dadspace news worker | dry_run={DRY_RUN} | model={GEMINI_MODEL} | thinking={THINKING_LEVEL}")
+    print(f"Dadspace news worker | dry_run={DRY_RUN} | provider/model={selection('NEWS', GEMINI_MODEL)} | Gemini thinking={THINKING_LEVEL}")
 
     try:
         sources = load_sources()
@@ -607,6 +585,8 @@ def run():
                         "snippet": c["snippet"]} for n, c in enumerate(chunk)]
             try:
                 results = gemini_score(payload)
+            except (FatalLLMError, BudgetExhausted):
+                raise
             except Exception as exc:
                 stats["batches_failed"] += 1
                 print(f"  Batch failed (will retry next run): {exc}")
@@ -682,6 +662,9 @@ def run():
         if not DRY_RUN:
             delete_old()
 
+    except (FatalLLMError, BudgetExhausted) as exc:
+        print(f"LLM run stopped: {exc}")
+        raise
     except Exception:
         print("UNEXPECTED ERROR:")
         traceback.print_exc()
@@ -726,6 +709,9 @@ def run():
         print(f"  minutes: {(time.time() - START) / 60:.1f}")
         print("=" * 60)
         log_run(stats)
+        if _generator is not None:
+            print("LLM usage: " + json.dumps(_generator.metrics, sort_keys=True))
+            _generator.close()
 
 
 if __name__ == "__main__":
@@ -734,7 +720,7 @@ if __name__ == "__main__":
     args = ap.parse_args()
     if args.self_test:
         sys.exit(self_test())
-    if not (SUPABASE_URL and SUPABASE_SERVICE_KEY and GEMINI_API_KEY):
-        print("Missing SUPABASE_URL, SUPABASE_SERVICE_KEY or GEMINI_API_KEY")
+    if not (SUPABASE_URL and SUPABASE_SERVICE_KEY and os.getenv(credential_name("NEWS"))):
+        print("Missing Supabase credentials or selected LLM API key")
         sys.exit(1)
     run()
