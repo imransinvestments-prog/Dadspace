@@ -1,0 +1,29 @@
+name: Gemini usage controls (offline)
+on:
+  pull_request:
+    paths:
+      - 'gemini_usage.py'
+      - 'worker.py'
+      - 'events_worker.py'
+      - 'tests/test_gemini_usage.py'
+      - 'tests/test_activity_ingestion.py'
+      - '.github/workflows/gemini-usage-checks.yml'
+      - '.github/workflows/news.yml'
+      - '.github/workflows/collect-*.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -p test_gemini_usage.py -v
+      - run: python -m unittest discover -s tests -p test_activity_ingestion.py -v
+      - run: python events_worker.py --self-test

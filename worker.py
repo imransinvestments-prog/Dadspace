@@ -36,6 +36,8 @@ This version just makes sure that report can no longer fail either.
 """
 
 import datetime as dt
+from gemini_usage import BudgetExhausted
+
 import hashlib
 import json
 import os
@@ -638,8 +640,6 @@ CONTENT:
 def make_gemini_caller():
     """Set up the Gemini client. Imported here so the rest of the file can be
     tested (including --self-test) without these libraries being required."""
-    from google import genai
-    from google.genai import types
     from pydantic import BaseModel
     from typing import Optional
 
@@ -659,65 +659,8 @@ def make_gemini_caller():
         audience: Optional[str] = None
         family_evidence: Optional[str] = None
 
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        raise FatalError("GEMINI_API_KEY is missing")
-
-    client = genai.Client(api_key=api_key)
-    metrics = {
-        "api_attempts": 0,
-        "input_chars_sent": 0,
-        "prompt_tokens": 0,
-        "output_tokens": 0,
-        "thinking_tokens": 0,
-        "total_tokens": 0,
-    }
-
-    def call(prompt):
-        last_error = None
-        for attempt in range(3):
-            try:
-                def do_call():
-                    metrics["api_attempts"] += 1
-                    metrics["input_chars_sent"] += len(prompt)
-                    return client.models.generate_content(
-                        model=MODEL,
-                        contents=prompt,
-                        config=types.GenerateContentConfig(
-                            response_mime_type="application/json",
-                            response_schema=list[EventSchema],
-                            temperature=0,
-                            automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
-                        ),
-                    )
-
-                response = call_with_timeout(do_call, GEMINI_TIMEOUT_SECONDS)
-                usage = getattr(response, "usage_metadata", None)
-                if usage is not None:
-                    metrics["prompt_tokens"] += int(getattr(usage, "prompt_token_count", 0) or 0)
-                    # Thinking tokens are billed as output, so they count towards output_tokens.
-                    thinking = int(getattr(usage, "thoughts_token_count", 0) or 0)
-                    metrics["thinking_tokens"] += thinking
-                    metrics["output_tokens"] += int(getattr(usage, "candidates_token_count", 0) or 0) + thinking
-                    metrics["total_tokens"] += int(getattr(usage, "total_token_count", 0) or 0)
-                data = json.loads(response.text)
-                if not isinstance(data, list):
-                    raise ValueError("Gemini did not return a list")
-                return data
-            except Exception as exc:
-                text = str(exc)
-                if any(word in text for word in ("NOT_FOUND", "PERMISSION_DENIED", "UNAUTHENTICATED", "API key not valid")):
-                    raise FatalError(
-                        f"Gemini rejected the request ({text[:300]}). "
-                        "The model name may be retired (change the GEMINI_MODEL variable in GitHub) "
-                        "or the GEMINI_API_KEY secret may be wrong."
-                    ) from exc
-                last_error = exc
-                time.sleep(5 * (attempt + 1))
-        raise RuntimeError(f"Gemini failed after 3 tries: {last_error}")
-
-    call.metrics = metrics
-    return call
+    from gemini_usage import make_extractor
+    return make_extractor(MODEL, list[EventSchema], GEMINI_TIMEOUT_SECONDS, FatalError)
 
 
 # ----------------------------------------------------------------------------
@@ -931,7 +874,7 @@ def process_source(source, extract, today):
     # can show exactly which sources spend tokens. Retries are included.
     metrics = getattr(extract, "metrics", {})
     before = {k: int(metrics.get(k, 0) or 0) for k in (
-        "api_attempts", "input_chars_sent", "prompt_tokens", "output_tokens", "total_tokens"
+        "api_attempts", "input_chars_sent", "prompt_tokens", "output_tokens", "thinking_tokens", "total_tokens"
     )}
     raw = extract(prompt)
     after = {k: int(metrics.get(k, 0) or 0) for k in before}
@@ -1245,6 +1188,7 @@ def main():
             sys.exit(1)
 
     extract = make_gemini_caller()
+    print("Gemini controls: " + json.dumps(getattr(extract, "settings", {}), sort_keys=True))
     today = today_uk()
 
     query = db.table("sources").select("*").eq("active", True)
@@ -1295,6 +1239,10 @@ def main():
 
             try:
                 status, rows, new_hash, message, stats = process_source(source, extract, today)
+            except BudgetExhausted as exc:
+                print(f"Stopping before marking source complete: {exc}")
+                stopped_early = True
+                break
             except FatalError as exc:
                 fatal = exc
                 break
@@ -1361,7 +1309,7 @@ def main():
         total_minutes = (time.monotonic() - start_time) / 60
         print("\n=== Summary ===")
         print(f"Ran for {total_minutes:.1f} min. Sources processed: {processed}/{len(sources)}"
-              + (" (stopped early on the time budget)" if stopped_early else ""))
+              + (" (stopped early on a run budget)" if stopped_early else ""))
         print(f"Saved/updated events: {total_events}" + (" (dry run - nothing was saved)" if DRY_RUN else ""))
         print("Sources: " + ", ".join(f"{k}={v}" for k, v in sorted(totals.items())))
         print("Events: " + ", ".join(f"{k}={v}" for k, v in run_stats.items()))
@@ -1377,8 +1325,12 @@ def main():
             f"(of which thinking: {gemini_metrics.get('thinking_tokens', 0)}), "
             f"total_tokens={gemini_metrics.get('total_tokens', 0)}"
         )
+        print(f"Unknown-usage attempts: {gemini_metrics.get('unknown_usage_attempts', 0)}")
         print(f"Expired events: {expired_note}")
         log_run(db, gemini_metrics)
+        close = getattr(extract, "close", None)
+        if close:
+            close()
         if zero_event_sources:
             print("Worked but found 0 events (worth a look): " + "; ".join(zero_event_sources))
 
