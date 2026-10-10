@@ -1,12 +1,14 @@
 # DS-09 source decisions
 
-Generated from saved 10 October read-only evidence. Decisions are audit recommendations; production active flags are unchanged. See the DS-09 report for acceptance limits.
+Pilot: W3 9LN, ages 0–5 inclusive; include evidenced family activities. Radius remains provisional at 10 km. Inactive is an operational flag, not a judgment of usefulness.
 
-| Source | Registry | Active | Decision | Access | Stored activities/events | Owner |
+Generated from saved 10 October read-only evidence plus owner/official-page review. Aberdeen and Amersham detail evidence supersedes the earlier access-only interpretation. See [updated pilot and source review](ds09-w3-pilot-and-source-review-2026-10-10.md). Production active flags are unchanged.
+
+| Source | Registry | Active | Decision | Access evidence | Stored activities/events | Owner |
 |---|---|---|---|---|---|---|
-| [Aberdeen Museums](https://www.aberdeencity.gov.uk/AAGM/whats-aberdeen-art-galleries-and-museums) | activities | False | pause | insufficient_content | 0/0 | Imran Tajuddin |
+| [Aberdeen Museums](https://sites.aberdeencity.gov.uk/AAGM/whats-aberdeen-art-galleries-and-museums) | activities | False | improve | official detail pages verified; worker pending | 0/0 | Imran Tajuddin |
 | [Aerospace Bristol](https://aerospacebristol.org/whats-on) | activities | False | improve | readable_pending_validation | 0/0 | Imran Tajuddin |
-| [Amersham Museum](https://amershammuseum.org/events/) | activities | False | improve | readable_pending_validation | 0/0 | Imran Tajuddin |
+| [Amersham Museum](https://amershammuseum.org/events/) | activities | False | improve | official detail pages verified; worker pending | 0/0 | Imran Tajuddin |
 | [Birmingham Libraries](https://www.birmingham.gov.uk/libraries) | activities | False | improve | readable_pending_validation | 0/0 | Imran Tajuddin |
 | [Birmingham Museums](https://www.birminghammuseums.org.uk/whats-on) | activities | False | improve | readable_pending_validation | 0/0 | Imran Tajuddin |
 | [British Museum](https://www.britishmuseum.org/events) | activities | False | pause | http_failed | 0/0 | Imran Tajuddin |

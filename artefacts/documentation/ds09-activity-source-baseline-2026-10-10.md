@@ -1,5 +1,7 @@
 # DS-09: activity source matrix and TW4 6AY coverage baseline
 
+**Superseded pilot scope:** W3 9LN, ages 0–5 inclusive, now confirmed by the owner. See [updated pilot and consent/detail-page source review](ds09-w3-pilot-and-source-review-2026-10-10.md). The TW4 counts below remain historical evidence. Current recommendations are 89 improve, 43 pause, 23 replace; Aberdeen's newly verified official host/detail pages supersede its earlier access-only pause recommendation. Inactive does not mean unsuitable.
+
 Delivery ticket: [#38](https://github.com/imransinvestments-prog/Dadspace/issues/38). Audit date: 10 October 2026, Europe/London. Repository baseline: `8fcc8fc6269994d6c7e1f44b1ad66aa5d556676b`.
 
 ## Product model — owner clarification

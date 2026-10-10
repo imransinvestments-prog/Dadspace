@@ -14,6 +14,8 @@ def main():
     segments=load('ds09-segments-2026-10-10.json')
     prior={x['url']:x for x in load('activities-source-candidates.json')}
     extraction=load('activities-venue-extraction-2026-10-08.json')['results']
+    review=load('ds09-source-review-overrides-2026-10-10.json')
+    overrides={x['name']:x for x in review['sources']}
     matrix=[]
     for s in sources:
         a=access[s['id']]; notes=s.get('notes') or ''; focus=s.get('focus') or ''
@@ -40,15 +42,27 @@ def main():
         if s['name']=='NCT Local Activities & Meet-ups':lane='dedicated nct_html_adapter (manual/push workflow; inactive)'
         local=s['name'] in ('Hounslow Libraries','Kempton Steam Museum','NCT Local Activities & Meet-ups','Hoop (London)','ClassForKids (London)','London Transport Museum Depot (Acton)')
         row={'id':s['id'],'name':s['name'],'url':s['url'],'registry_category':s['category'],'role':s['source_role'],'active':s['active'],'decision':decision,'reason':reason,'content_review_owner':'Imran Tajuddin','adapter_owner':'Engineering (named maintainer not yet assigned)','geography':{'nation':s['nation'],'region':s['region'],'pilot_relevance':'local route to validate' if local else 'not demonstrated for TW4 6AY'},'age_scope':'Not accepted; retain item-level age evidence without inferring from source','focus':focus or 'library/museum family scope; detail evidence required','observed_categories':sorted(set(x['category'] or 'unknown' for x in seg)),'observed_age_labels':sorted(set(x['age_range'] or 'unknown' for x in seg)),'configured_fetch_method':s['fetch_method'],'effective_workflow_lane':lane,'adapter':s['source_adapter'],'cadence':'Every second London calendar day at 07:00; no per-source cadence enforcement' if s['active'] else 'Inactive; proposed 2 days after individual approval','access_status':a['status'],'robots_status':a.get('robots_status'),'robots_allowed':a.get('robots_allowed'),'access_checked_at':a['checked_at'],'republishing_route':'Unconfirmed: Imran to review terms/licensed API or factual listing/link policy; robots is not permission','detail_completeness':'Not accepted; stored nonblank fields are structural counts only','stored_by_type':ys,'last_worker_yield':s['last_event_count'],'last_success_at':s['last_success_at'],'fail_count':s['fail_count'],'last_error':s['last_error'],'duplicate_review':'No duplicate dedupe/identity keys globally; semantic and cross-source duplicates unreviewed','operator_group':urlparse(s['url']).hostname.removeprefix('www.'),'maintenance_cost':'Unmeasured per source; inspect aggregate pipeline tokens and bounded access elapsed seconds','access_elapsed_seconds':a['elapsed_seconds'],'prior_extraction_passes':[{'attempt':x['attempt'],'status':x['status'],'accepted_row_count':len(x.get('rows',[]))} for x in extraction if x.get('url')==s['url']],'evidence':['ds09-access-2026-10-10.json','ds09-yield-2026-10-10.json','ds09-segments-2026-10-10.json','ds09-sources-2026-10-10.json']}
+        row['pilot_scope']=review['pilot']
+        row['age_scope']='Pilot 0–5 years inclusive, including evidenced family activities; preserve wider-age supply separately'
+        row['geography']['pilot_relevance']=row['geography']['pilot_relevance'].replace('TW4 6AY','W3 9LN')
+        row['access_policy']=review['access_policy']
+        if s['name'] in overrides:
+            override=overrides[s['name']]
+            row['decision']=override['decision']
+            row['reason']=override['reason']
+            row['source_review']=override
+            row['evidence'].append('ds09-source-review-overrides-2026-10-10.json')
         matrix.append(row)
     assert len(matrix)==155 and len({x['id'] for x in matrix})==155
     assert set(access)=={x['id'] for x in matrix}
     assert sum(x['stored_count'] for x in yields)==679
     (DATA/'ds09-source-matrix-2026-10-10.json').write_text(json.dumps(matrix,indent=2,ensure_ascii=False),encoding='utf-8')
-    lines=['# DS-09 source decisions','', 'Generated from saved 10 October read-only evidence. Decisions are audit recommendations; production active flags are unchanged. See the DS-09 report for acceptance limits.','', '| Source | Registry | Active | Decision | Access | Stored activities/events | Owner |','|---|---|---|---|---|---|---|']
+    lines=['# DS-09 source decisions','', 'Pilot: W3 9LN, ages 0–5 inclusive; include evidenced family activities. Radius remains provisional at 10 km. Inactive is an operational flag, not a judgment of usefulness.','', 'Generated from saved 10 October read-only evidence plus owner/official-page review. Aberdeen and Amersham detail evidence supersedes the earlier access-only interpretation. See [updated pilot and source review](ds09-w3-pilot-and-source-review-2026-10-10.md). Production active flags are unchanged.','', '| Source | Registry | Active | Decision | Access evidence | Stored activities/events | Owner |','|---|---|---|---|---|---|---|']
     for x in matrix:
         counts={y['listing_type']:y['stored_count'] for y in x['stored_by_type']}
-        lines.append(f"| [{x['name']}]({x['url']}) | {x['registry_category']} | {x['active']} | {x['decision']} | {x['access_status']} | {counts.get('activity',0)}/{counts.get('event',0)} | Imran Tajuddin |")
+        url=x.get('source_review',{}).get('candidate_url',x['url'])
+        status='official detail pages verified; worker pending' if x.get('source_review') else x['access_status']
+        lines.append(f"| [{x['name']}]({url}) | {x['registry_category']} | {x['active']} | {x['decision']} | {status} | {counts.get('activity',0)}/{counts.get('event',0)} | Imran Tajuddin |")
     (ROOT/'artefacts/documentation/ds09-source-decisions-2026-10-10.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
     print('Sources',len(matrix),'decisions',dict(collections.Counter(x['decision'] for x in matrix)))
     print('Access',dict(collections.Counter(x['access_status'] for x in matrix)))
