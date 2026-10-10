@@ -1,5 +1,7 @@
 # DS-09 updated pilot and source review
 
+**11 October reconciliation:** Current decisions are 20 keep, 101 improve, 27 replace and 7 pause. Imran Tajuddin confirmed the 10 km radius and is the named content/technical owner. [Reconciliation summary](ds09-matrix-reconciliation-2026-10-11.md) supersedes the previous decision totals and provisional ownership/radius statements below. Earlier counts and checks remain historical evidence.
+
 Owner update, 10 October 2026. This supersedes the earlier TW4 6AY pilot and unconfirmed age scope in the baseline report. Current centre: **W3 9LN**, Ealing; age scope: **0–5 inclusive**, including family programmes with evidence they suit children in that range. Postcodes.io coordinates: 51.508924, -0.275866. Radius remains the proposed 10 km straight-line working radius, not an agreed travel promise.
 
 ## Corrected interpretation of inactive sources

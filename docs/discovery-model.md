@@ -8,7 +8,7 @@ Owner clarification: Imran Tajuddin, 10 October 2026. Apply this model to future
 
 ## Development implications
 
-Current pilot: **W3 9LN, children aged 0–5 inclusive**, including family activities evidenced as suitable for children in that range. This supersedes the earlier TW4 6AY pilot centre. The 10 km working radius remains provisional. Preserve useful wider-age and national supply outside the pilot; a 7–11 programme is not pilot coverage, but its source can still be useful.
+Current pilot: **W3 9LN, children aged 0–5 inclusive**, including family activities evidenced as suitable for children in that range. This supersedes the earlier TW4 6AY pilot centre. The 10 km radius was confirmed by Imran Tajuddin on 11 October 2026. Imran Tajuddin is the named accountable owner for content review and technical upkeep; Engineering implements adapters. Preserve useful wider-age and national supply outside the pilot; a 7–11 programme is not pilot coverage, but its source can still be useful.
 
 An inactive source is not an unsuitable source. Cookie consent, JavaScript, redirects and detail-page navigation may hide valid programmes from basic HTTP extraction. Before proposing pause/replace for missing content, check the actual operator host, family/detail pages and a supported rendered route. Keep access/republication checks separate from usefulness; record consent-related limitations explicitly.
 

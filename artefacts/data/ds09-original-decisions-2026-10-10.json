@@ -1,0 +1,932 @@
+[
+  {
+    "id": "430cabe7-cba4-414d-bdf3-80a12561c3f0",
+    "name": "Aberdeen Museums",
+    "decision": "improve",
+    "reason": "Owner found useful content behind consent; official alternate host and detail pages verified. Loose parts play ages 2–5, listed Wednesdays 10:30–12:30, free drop-in. Baby Boogie listing says under 5s and adults; detail has specific future sessions and paid booking. Preserve exact schedules and assess programme regularity rather than page Event label. Outside W3 geography but valuable national source."
+  },
+  {
+    "id": "1afbdcde-2543-43a5-9383-b63eddf6b172",
+    "name": "Aerospace Bristol",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "6260ff8c-9d98-487e-95a1-cf651b8f0356",
+    "name": "Amersham Museum",
+    "decision": "improve",
+    "reason": "Museum Makers is a useful family arts programme with ages 7–11, 11 October 2026 10:00–11:30, tickets £12 first child/£8 second child. Repeat-session offer supports programme regularity but exact future recurrence must be verified. Outside 0–5 pilot age range; retain as wider coverage rather than reject source."
+  },
+  {
+    "id": "28d53ce7-23b2-4ffa-9f81-3843017efaeb",
+    "name": "Birmingham Libraries",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "701989a8-c768-44a7-b912-e0df79aa2882",
+    "name": "Birmingham Museums",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "e24646d3-1673-4021-a972-dd6291cfdafb",
+    "name": "British Museum",
+    "decision": "pause",
+    "reason": "Live access check: http_failed; HTTP Error 403: Forbidden"
+  },
+  {
+    "id": "ac98cf40-2874-43b1-9220-467c38e6399a",
+    "name": "Buckinghamshire Libraries",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "c87b10cd-d53d-4372-8b23-6fe20a94af07",
+    "name": "Cambridgeshire Libraries",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "f1ee8adf-d18e-40ee-8325-011aca00340f",
+    "name": "Camp Beaumont",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Operator/camp site; not a primary events feed"
+  },
+  {
+    "id": "31abe4ad-ef47-437f-91e9-121dca1e2a3e",
+    "name": "Cardiff Libraries",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "580d81a4-9fb5-46a5-a490-fa80cb6ce844",
+    "name": "ClassForKids",
+    "decision": "pause",
+    "reason": "Aggregator: check ToS/robots.txt; best used for discovering venues | Deactivated: replaced by per-city rows above."
+  },
+  {
+    "id": "4196176c-b668-42b6-91f7-24322f318941",
+    "name": "ClassForKids (Birmingham)",
+    "decision": "improve",
+    "reason": "Live access check: access_failed; The read operation timed out"
+  },
+  {
+    "id": "50950a1b-4160-4193-b11d-c6b33af64313",
+    "name": "ClassForKids (London)",
+    "decision": "improve",
+    "reason": "Live access check: access_failed; The read operation timed out"
+  },
+  {
+    "id": "254f1361-8385-4374-8a0f-d4fbef2415e5",
+    "name": "ClassForKids (Manchester)",
+    "decision": "improve",
+    "reason": "Live access check: access_failed; The read operation timed out"
+  },
+  {
+    "id": "b8b88ea4-c5fa-4bb5-9633-1700b1bec89c",
+    "name": "Club Hub UK",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Aggregator: check ToS/robots.txt; best used for discovering venues"
+  },
+  {
+    "id": "e36a0df4-0a2d-4131-a332-197e8b1c00c4",
+    "name": "Cornwall Council",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Moved from its original category so the browser-based run (collect-activities.yml) can load it - a plain download found almost no text."
+  },
+  {
+    "id": "b9fd2655-f634-4566-b25b-aaf8990d6e85",
+    "name": "Day Out With The Kids",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Aggregator: check ToS/robots.txt; best used for discovering venues | Homepage is an attraction/location search portal, not a dated event listing."
+  },
+  {
+    "id": "53903398-ceb9-4ff0-b40d-9002882d9682",
+    "name": "Derbyshire County Council",
+    "decision": "pause",
+    "reason": "Live access check: robots_unavailable; <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
+  },
+  {
+    "id": "5ebd8c71-f272-4b3e-8c5e-d41b445cecae",
+    "name": "Edinburgh Libraries",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "a63a36df-c95c-43d2-aefd-dc7ad791e216",
+    "name": "Essex Libraries",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "e33e6430-2a55-4b4e-a9fe-91a898a560e8",
+    "name": "Federation of City Farms and Community Gardens",
+    "decision": "pause",
+    "reason": "Aggregator: check ToS/robots.txt; best used for discovering venues | Deactivated: its public events feed is sector training/networking for the childcare sector, not a family activities feed."
+  },
+  {
+    "id": "56b95513-a98a-459d-985a-41ebf2eddd17",
+    "name": "Glasgow Libraries",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "d8b7f660-0c08-406a-8d1c-3ee34d229af4",
+    "name": "Gymboree Play & Music UK",
+    "decision": "pause",
+    "reason": "Live access check: robots_unavailable; <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'gymboreeclasses.co.uk'. (_ssl.c:1010)>"
+  },
+  {
+    "id": "9f0c7d33-5d6e-4ea2-9839-ddb60a49fd32",
+    "name": "Hampshire Cultural Trust",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: insufficient_content; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "8212c9ec-8171-4487-9e58-a126b777d972",
+    "name": "Happity",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Aggregator: check ToS/robots.txt; best used for discovering venues"
+  },
+  {
+    "id": "90f059d3-6f26-4ac6-ada5-e03b0a722664",
+    "name": "Heritage Railway Association",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Aggregator: check ToS/robots.txt; best used for discovering venues"
+  },
+  {
+    "id": "c5fc0b84-a9c7-4810-b8f6-6c4d1c852225",
+    "name": "Hertfordshire County Council",
+    "decision": "improve",
+    "reason": "Live access check: robots_unavailable; inspect recorded evidence"
+  },
+  {
+    "id": "2045621c-1fc6-4ba9-9ef2-e7da22d541a7",
+    "name": "Hoop",
+    "decision": "pause",
+    "reason": "Aggregator: check ToS/robots.txt; best used for discovering venues | Deactivated: replaced by per-city rows above."
+  },
+  {
+    "id": "8b8b950e-11d9-4b92-a83c-f9284a8fa732",
+    "name": "Hoop (Greater Manchester)",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "2df575ca-a90a-4386-903f-ae0a1c43135e",
+    "name": "Hoop (London)",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "fa3bd851-2d24-403f-8a5e-b8606ee031f1",
+    "name": "Horniman Museum",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "b623a42b-1f78-4e0b-ad75-8999ad2ff209",
+    "name": "Hounslow Libraries",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "95352cf2-da07-4826-8d80-5473107a5ecb",
+    "name": "Imperial War Museums",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: insufficient_content; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "b5ecb89c-6b41-49eb-b08d-821487f022ac",
+    "name": "Ironbridge Museums",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "ade4ee64-f3a3-46db-b5b6-0247e11bff2a",
+    "name": "Kent Libraries",
+    "decision": "pause",
+    "reason": "Live access check: http_failed; HTTP Error 403: Forbidden"
+  },
+  {
+    "id": "a2ed8964-138b-4403-8730-6818cb0f7692",
+    "name": "Kiddle",
+    "decision": "pause",
+    "reason": "Live access check: robots_unavailable; <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.kiddle.co.uk'. (_ssl.c:1010)>"
+  },
+  {
+    "id": "c900a56e-4e96-4839-9ae9-66776291e4bd",
+    "name": "Leeds Libraries",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "6d03968d-02fc-4a6a-bc2d-6ff3bb978ce9",
+    "name": "Leeds Museums",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "1ab3bc50-5935-4cb2-91d2-263972d713ed",
+    "name": "Leicester Museums",
+    "decision": "pause",
+    "reason": "Live access check: robots_unavailable; inspect recorded evidence"
+  },
+  {
+    "id": "e5575a28-3f2a-43d4-bc3d-afa3e6fbb630",
+    "name": "Libraries NI",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "7817655d-83ff-42e5-a9e0-d50074f4c8a4",
+    "name": "Little Kickers",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Recurring classes, not one-off events; needs separate handling"
+  },
+  {
+    "id": "0a976955-7296-4604-a95e-6474d383e1e1",
+    "name": "Little Viking",
+    "decision": "pause",
+    "reason": "Live access check: robots_unavailable; <urlopen error [Errno 11001] getaddrinfo failed>"
+  },
+  {
+    "id": "3a661af7-92f3-4c7b-b7de-2dd805259fa2",
+    "name": "London Play",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Aggregator: check ToS/robots.txt; best used for discovering venues"
+  },
+  {
+    "id": "ed76e110-050f-4c82-a3c6-0174a94556ef",
+    "name": "Manchester Libraries",
+    "decision": "pause",
+    "reason": "Live access check: robots_unavailable; inspect recorded evidence"
+  },
+  {
+    "id": "c9ca000a-0e7e-4476-a1a2-3dccdd045906",
+    "name": "Muddy Puddles (Forest School Finder)",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Aggregator: check ToS/robots.txt; best used for discovering venues"
+  },
+  {
+    "id": "ac34cf3a-4391-431f-a3f8-f8392509bfa6",
+    "name": "Museum Wales",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "f2508a09-6cbf-49b8-ae06-c89279986b52",
+    "name": "National Museums Liverpool",
+    "decision": "pause",
+    "reason": "Live access check: http_failed; HTTP Error 502: Bad Gateway"
+  },
+  {
+    "id": "a8019bd8-f14e-416f-8098-e3fab2b93303",
+    "name": "National Museums NI",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "e3ed3d74-012b-4512-894f-2d1277b3cbcd",
+    "name": "National Museums Scotland",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: insufficient_content; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "63d54732-afb7-4fc6-9648-02732f190db1",
+    "name": "National Trust NI",
+    "decision": "pause",
+    "reason": "Live access check: http_failed; HTTP Error 404: Not Found"
+  },
+  {
+    "id": "efa9c184-6f85-4e4d-9643-574a1b583600",
+    "name": "Natural History Museum",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "562f3099-3b66-4719-9782-57e818d15491",
+    "name": "NCT Local Activities & Meet-ups",
+    "decision": "pause",
+    "reason": "Strong Dadspace activity fit. Kept inactive until approved data-access/republishing route is confirmed; adapter should use NCT branch/group discovery rather than treating the postcode landing page as a single generic page."
+  },
+  {
+    "id": "7bb06684-8716-40bf-8de8-da0a31200de2",
+    "name": "Netmums Whats On",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Aggregator: check ToS/robots.txt; best used for discovering venues"
+  },
+  {
+    "id": "cef3de43-3328-4087-84a8-49cf6e2dd169",
+    "name": "Ni 4 Kids",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "6d3ad4b5-0629-49ee-8f31-d9ec77655216",
+    "name": "Norfolk Libraries",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: access_failed; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "135b31ec-ee76-4d86-a5e9-a6db9324c068",
+    "name": "Norfolk Museums",
+    "decision": "pause",
+    "reason": "Live access check: http_failed; HTTP Error 404: Not Found"
+  },
+  {
+    "id": "40abe18f-1322-4ee4-ac73-099ea35eea26",
+    "name": "Our Kids Social",
+    "decision": "pause",
+    "reason": "Live access check: robots_unavailable; <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'ourkidssocial.co.uk'. (_ssl.c:1010)>"
+  },
+  {
+    "id": "af8459c0-ddac-4be7-8a3e-ab6e28c05b54",
+    "name": "Oxfordshire Libraries",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "fa261ed7-25c3-4e76-a8df-f304df80b949",
+    "name": "Primary Times Wales",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Aggregator: check ToS/robots.txt; best used for discovering venues"
+  },
+  {
+    "id": "e6a8ff3a-ae38-4121-b297-d72d8ab43faf",
+    "name": "Royal Museums Greenwich",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "6a2e4138-6f8c-48d9-a716-d344c372aa34",
+    "name": "RSPB (Royal Society for the Protection of Birds)",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Moved from its original category so the browser-based run (collect-activities.yml) can load it - a plain download found almost no text."
+  },
+  {
+    "id": "67bfff4c-fff7-4bd5-b8c1-272561523c79",
+    "name": "Rugbytots",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Recurring classes, not one-off events; needs separate handling"
+  },
+  {
+    "id": "db624f05-3c35-4cf6-9da3-d617710da2ed",
+    "name": "Science Museum",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "e5760e8c-da11-468f-960b-93fb07090e87",
+    "name": "Sheffield Museums",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "3ec54288-92e7-4435-9ae9-637575a1e019",
+    "name": "Stagecoach Performing Arts",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Recurring classes, not one-off events; needs separate handling"
+  },
+  {
+    "id": "aa1bb33a-c792-464a-9988-51b852189d91",
+    "name": "Suffolk Libraries",
+    "decision": "pause",
+    "reason": "Live access check: robots_unavailable; inspect recorded evidence"
+  },
+  {
+    "id": "39cff5fb-1167-4003-a0ae-dc12892f9117",
+    "name": "SuperCamps",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Operator/camp site; not a primary events feed"
+  },
+  {
+    "id": "6a138e07-6ce4-432e-b883-e59d37bbf5c7",
+    "name": "Surrey Libraries",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "03ff409e-f05c-48e0-ab51-a8a15351ca65",
+    "name": "The Creation Station",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Recurring classes, not one-off events; needs separate handling"
+  },
+  {
+    "id": "922bf42e-d977-41bf-ad84-a4c2b798036f",
+    "name": "The National Trust",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Moved from its original category so the browser-based run (collect-activities.yml) can load it - a plain download found almost no text."
+  },
+  {
+    "id": "59e48981-3c4e-4024-9ece-9580d27f9a9c",
+    "name": "The PGL Adventure",
+    "decision": "pause",
+    "reason": "Live access check: robots_unavailable; <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1010)>"
+  },
+  {
+    "id": "4050964e-5fd7-4c69-bb78-c92042424b77",
+    "name": "V&A",
+    "decision": "improve",
+    "reason": "Inactive candidate; readable HTML alone is not an event feed. DS-10 #39; access review 2026-10-08: accessible_pending_extraction; pending real extraction/repeat and canonical branch matching; adapter requires activities-library-museum worker rollout"
+  },
+  {
+    "id": "5aa80f81-1212-4c77-a288-6a2c8905dc21",
+    "name": "Visit South East England (family search)",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Regional aggregator, not tied to one council. Check terms/robots.txt before relying on it long-term. Filtered search page - may need the browser fetch method if the plain download finds nothing."
+  },
+  {
+    "id": "20bb395e-cf49-406e-9198-225c82bccec1",
+    "name": "Water Babies",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Recurring classes, not one-off events; needs separate handling"
+  },
+  {
+    "id": "851c176d-9b60-4457-a289-5644635788d0",
+    "name": "What's On Scotland Kids",
+    "decision": "pause",
+    "reason": "Live access check: robots_unavailable; <urlopen error [Errno 11001] getaddrinfo failed>"
+  },
+  {
+    "id": "66203cb6-05f2-40fd-b84e-3987392b6b23",
+    "name": "Aberdeenshire Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "95563151-64d9-4a5e-8e58-1cac78879182",
+    "name": "Belfast City Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "bd249dbb-b90f-4b94-b148-0f7ba33fadcd",
+    "name": "Birmingham City Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "0b2bc50c-3684-4a83-8078-3d7aacf9dcd1",
+    "name": "Buckinghamshire Council",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "d9a7f253-1b3b-424f-b874-e48d7d0a2e2d",
+    "name": "Cambridgeshire County Council",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "8e57d114-04db-4752-8ccd-86a3ac032369",
+    "name": "Camden Council",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "2878520b-7ed9-42d1-8981-7ec36e27ad13",
+    "name": "Cardiff Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "a69f83d3-1491-48eb-991a-04be1329be9f",
+    "name": "City of Edinburgh Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "0f773e80-abe5-437d-9359-08ce37a1c947",
+    "name": "Coventry City Council",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "27319bfc-1e56-4491-a4ae-f4ddc6583bab",
+    "name": "Derry City & Strabane District Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "1e869385-a0d2-4365-9926-4205337b3e1f",
+    "name": "Devon County Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "c7296d6d-b8c7-4bd9-9648-ca74e1278c81",
+    "name": "Ealing Council",
+    "decision": "improve",
+    "reason": "Live access check: robots_unavailable; inspect recorded evidence"
+  },
+  {
+    "id": "53b745b1-df89-4be0-8376-7df0c8a2d938",
+    "name": "East Sussex County Council",
+    "decision": "improve",
+    "reason": "Active route has recorded failures; validate worker lane and runner access before trusting stored yield."
+  },
+  {
+    "id": "2209646a-b6ac-4aca-aaaf-197e5ded53ae",
+    "name": "Essex County Council",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "1a93c814-09ef-4411-8a76-1c537e11adf2",
+    "name": "Glasgow City Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "38caa7d5-392b-4f1a-a5e6-fff7d11a0caa",
+    "name": "Gloucestershire County Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "2191af9b-c2eb-43ca-a36e-f67379a56346",
+    "name": "Gwynedd Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "74662532-4d4a-48fb-bc2e-681efc888f22",
+    "name": "Hampshire County Council",
+    "decision": "improve",
+    "reason": "Live access check: robots_unavailable; inspect recorded evidence"
+  },
+  {
+    "id": "a90d3e97-b6ee-456d-a377-3d4694c3d504",
+    "name": "Haringey Council",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "a57c54de-1001-4b19-a588-4ddd6ef7dd8e",
+    "name": "Highland Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "c2177d85-2620-42fe-821d-121d6d46e1b5",
+    "name": "How Are You Cambridge?",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "cc492422-c4bd-4ad0-8b73-118111669f69",
+    "name": "How Are You East Cambs?",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "c194b023-cb7b-4048-bbbe-f5cfd32d981d",
+    "name": "How Are You Fenland?",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "e179e04b-24b3-4b2e-8c37-6f5ec6f8c312",
+    "name": "How Are You Hunts?",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "d1c1caf6-4c3e-40f8-8234-10b51b6be5da",
+    "name": "How Are You Peterborough?",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "ece2b347-a42a-4020-8344-a7d48b1b47be",
+    "name": "How Are You South Cambs?",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "ed06de23-da3d-4e24-8c6c-6e74b617f117",
+    "name": "Kent County Council",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "222b7510-e5e0-4d5a-9bed-ab4d03d86f2f",
+    "name": "Lancashire County Council",
+    "decision": "pause",
+    "reason": "Live robots check disallows route; seek permitted API/feed or alternative source. No bypass."
+  },
+  {
+    "id": "aee8d676-7096-43d4-9aa9-99690fb02425",
+    "name": "Leeds City Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "610da93f-2710-4a78-8491-09e3278e08f5",
+    "name": "Leicestershire County Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "6f0ab1d7-449c-41e9-809d-8a258c546ad6",
+    "name": "Lewisham Council",
+    "decision": "improve",
+    "reason": "Live access check: robots_unavailable; inspect recorded evidence"
+  },
+  {
+    "id": "5627b08e-6aa9-4e3f-89f7-707d84c1584e",
+    "name": "Lincolnshire County Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "2df92fe3-c3a4-4b46-b594-ce311e36b207",
+    "name": "Liverpool City Council",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "9a6214b9-a620-4b5d-b8a4-c4969d1c1bed",
+    "name": "Manchester City Council",
+    "decision": "pause",
+    "reason": "Live robots check disallows route; seek permitted API/feed or alternative source. No bypass."
+  },
+  {
+    "id": "7cd2be4e-5a97-4f69-b2da-f50bf2cb9231",
+    "name": "Newcastle City Council",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "7343484a-ca0b-4959-8d7c-9a20364ea771",
+    "name": "Norfolk County Council",
+    "decision": "improve",
+    "reason": "Active route has recorded failures; validate worker lane and runner access before trusting stored yield."
+  },
+  {
+    "id": "5c159b83-ced2-4237-825b-76268b4d1e53",
+    "name": "North Yorkshire Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "44cee79a-a431-4387-a1a6-20f0b973800f",
+    "name": "Nottinghamshire County Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "43a48e50-eac3-435a-bd3c-5caad5d5a2da",
+    "name": "Oxfordshire County Council",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "6cf3f084-ccca-4799-8563-ed9f6f955c95",
+    "name": "Redbridge Council",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "a672b406-7bc9-43eb-958e-3cd363f57051",
+    "name": "Salford City Council",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "b0ec6de8-9eee-437d-96ab-539dd1f32132",
+    "name": "Sheffield City Council",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "5a4ed8c4-3030-444a-8e3a-f9293b839eb5",
+    "name": "Somerset Council",
+    "decision": "pause",
+    "reason": "Inactive discovery/operator lead with no stored-yield or extraction evidence; qualify a branch/detail route first. Homepage only; find the actual events/what's-on URL before activating"
+  },
+  {
+    "id": "7b9c4eee-a94b-4175-9323-9c353543275d",
+    "name": "Southwark Council",
+    "decision": "improve",
+    "reason": "Active route has recorded failures; validate worker lane and runner access before trusting stored yield."
+  },
+  {
+    "id": "48534230-12d8-49e9-b970-0d104bfac602",
+    "name": "Staffordshire County Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "f2cad4dc-554c-4cc0-9a09-6f03e3fdb3ec",
+    "name": "Suffolk County Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "d81c986a-582e-433f-8782-325d494aa770",
+    "name": "Surrey County Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "9298aae6-2c23-43f9-88e3-ab3c93289f88",
+    "name": "Swansea Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "1b2fd4c8-5e46-44f5-82c9-48ef3ac74490",
+    "name": "Tower Hamlets Council",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "ecb8c88e-827a-41be-ad9f-456a3696f46e",
+    "name": "Warwickshire County Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "e8e16e34-2b93-4b9c-a334-1198bd053628",
+    "name": "West Sussex County Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "eb7638a2-f7e8-4e67-96d7-74568105fbf5",
+    "name": "Worcestershire County Council",
+    "decision": "replace",
+    "reason": "Registry identifies a committee calendar, outside family activity scope; locate an evidenced library/family listing."
+  },
+  {
+    "id": "faae66f0-968d-4e1c-afb5-ec487eb58d54",
+    "name": "Bannau Brycheiniog (Brecon Beacons)",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "338ab216-4643-4771-87fa-557ffd44616c",
+    "name": "Cadw",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "0f9f8b83-c3d6-4657-9a0c-f4ccd46b90bc",
+    "name": "Cairngorms National Park",
+    "decision": "improve",
+    "reason": "Live access check: http_failed; HTTP Error 404: Not Found"
+  },
+  {
+    "id": "d1c3b028-b6b6-4209-aa75-4979ea36860f",
+    "name": "Dartmoor National Park",
+    "decision": "improve",
+    "reason": "Live access check: robots_unavailable; inspect recorded evidence"
+  },
+  {
+    "id": "c3142b62-c572-4ecc-9aea-32ce1efd84ac",
+    "name": "Discover Northern Ireland",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "b7830857-020e-42d9-9e24-dafa4c613c5a",
+    "name": "English Heritage",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "fb60637b-c6ec-4cff-88ba-67b981cb45c5",
+    "name": "Eryri (Snowdonia) National Park",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "27d785ea-ba23-4d77-bb10-936bdb800f59",
+    "name": "Exmoor National Park",
+    "decision": "improve",
+    "reason": "Live access check: robots_unavailable; inspect recorded evidence"
+  },
+  {
+    "id": "29c87314-fc12-41bf-b9d5-da8dfa319cfb",
+    "name": "Historic Environment Scotland",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "5365e423-a70b-4ca1-8d85-55fe02f2749c",
+    "name": "Lake District National Park",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "b09d52f8-c87e-4f99-8373-3772635146c8",
+    "name": "Loch Lomond & The Trossachs National Park",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "f8c9c47b-deb8-4867-a408-5d97ac6ca555",
+    "name": "National Trust for Scotland",
+    "decision": "pause",
+    "reason": "Live access check: http_failed; HTTP Error 404: Not Found"
+  },
+  {
+    "id": "407b6455-487a-45d1-a036-72b72308dee0",
+    "name": "North York Moors National Park",
+    "decision": "improve",
+    "reason": "Live access check: robots_unavailable; inspect recorded evidence"
+  },
+  {
+    "id": "29a5ae90-d7fb-4df6-beca-d86ae03d7859",
+    "name": "Northumberland National Park",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "777486eb-206c-4f92-850d-2f82f8a6566e",
+    "name": "Peak District National Park",
+    "decision": "improve",
+    "reason": "Live access check: robots_unavailable; inspect recorded evidence"
+  },
+  {
+    "id": "16fa8449-3afa-4f4b-b3e6-17c989e9047a",
+    "name": "Pembrokeshire Coast National Park",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "538de208-207c-4520-959e-8dfead8fa6e7",
+    "name": "Sherwood Forest (RSPB)",
+    "decision": "improve",
+    "reason": "Active route has recorded failures; validate worker lane and runner access before trusting stored yield."
+  },
+  {
+    "id": "8e369398-7819-4ed9-bc23-ef339f71bdf4",
+    "name": "South Downs National Park",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "39361d71-4480-4706-903d-bdda3702c5f6",
+    "name": "The Broads Authority",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "366b2559-31d6-43f8-97ea-f2fbac9eb1c4",
+    "name": "The Wildlife Trusts",
+    "decision": "pause",
+    "reason": "Live robots check disallows route; seek permitted API/feed or alternative source. No bypass."
+  },
+  {
+    "id": "7cd08580-6082-4a61-9108-6363ef718e70",
+    "name": "Woodland Trust",
+    "decision": "improve",
+    "reason": "Live access check: http_failed; HTTP Error 404: Not Found"
+  },
+  {
+    "id": "264dfc8d-f1c5-45cc-9492-52d273b28b47",
+    "name": "Yorkshire Dales National Park",
+    "decision": "improve",
+    "reason": "Active route has recorded failures; validate worker lane and runner access before trusting stored yield."
+  },
+  {
+    "id": "47aedc68-94fd-4cdd-abac-015f5d38ba2b",
+    "name": "BuckinghamshireLive - Family & Kids",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "eb284368-0fa8-47eb-a2ac-06914aaf5173",
+    "name": "French Brothers (Windsor steamboat)",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  },
+  {
+    "id": "b771bba1-9fdd-4604-9725-8b3f5764616a",
+    "name": "Kempton Steam Museum",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "4cef66e5-90a6-429b-9e33-77850667551e",
+    "name": "Kids Days Out - Buckinghamshire",
+    "decision": "improve",
+    "reason": "Validate source-specific detail, quality, repeat yield and access/republishing route before acceptance."
+  },
+  {
+    "id": "81f0c800-d05b-4d32-bc5a-55124b825ca5",
+    "name": "London Transport Museum Depot (Acton)",
+    "decision": "improve",
+    "reason": "Live access check: http_failed; HTTP Error 403: Forbidden"
+  },
+  {
+    "id": "ab7d7df1-b398-4ab1-b186-4df6d6a9b299",
+    "name": "The Bucks Guide - Events",
+    "decision": "improve",
+    "reason": "Active route has latest recorded zero yield; separate empty supply from parser/relevance failure and inspect detail pages."
+  }
+]

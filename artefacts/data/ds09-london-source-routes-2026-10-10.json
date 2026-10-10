@@ -283,5 +283,12 @@
       "evidence": "Barbican FIS rhyme time Mon/Fri/Sat 10:45-11:15 ages 0-5 free/no booking, Silk Street EC2Y 8DS. Council library events has current October specials.",
       "gap": "FIS contact heading says Artizan while address says Barbican: review venue conflict. Follow service changes/refurbishment notices and dated event detail."
     }
-  ]
+  ],
+  "accountable_owner": "Imran Tajuddin",
+  "pilot": {
+    "postcode": "W3 9LN",
+    "ages": "0–5 inclusive",
+    "radius_km": 10,
+    "confirmed_on": "2026-10-11"
+  }
 }

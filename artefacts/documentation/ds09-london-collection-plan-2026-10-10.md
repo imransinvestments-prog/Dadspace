@@ -63,7 +63,7 @@ The pilot remains W3 9LN, ages 0–5 inclusive. London-wide and older-child supp
 
 Implement Ealing/MyLibrary series and individual ICS support first for the W3 pilot, then Camden/Bexley/Barnet standing-schedule extraction and Hounslow Connect rendered pagination. Reuse the MyLibrary adapter for Merton, Sutton and Idea Store where access is qualified. Add the Better embedded-timetable adapter for Bromley, Greenwich and Wandsworth. Complete the other council/library adapters and independent operator fallbacks against the borough table.
 
-Engineering owns adapters; Imran Tajuddin owns content/data review. The named engineering assignee remains to be assigned. #39 should deliver adapters and staged reliability checks, #40 identity/venue matching, #32 scheduling and #70 the operational review UI. #38 stays open until the outstanding audit decisions and ownership are accepted.
+Imran Tajuddin confirmed the 10 km pilot radius and is the named accountable content and technical owner on 11 October 2026. Engineering implements adapters. #39 delivers adapters and staged reliability checks, #40 identity/venue matching, #32 scheduling and #70 the operational review UI. The [reconciled matrix](ds09-source-decisions-2026-10-10.md) incorporates these recommendations; audit acceptance and PR merge remain separate from operational feed qualification.
 
 ## Evidence files and limitations
 

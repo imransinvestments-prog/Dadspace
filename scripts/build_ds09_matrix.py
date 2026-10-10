@@ -3,6 +3,7 @@ import collections
 import json
 from pathlib import Path
 from urllib.parse import urlparse
+from reconcile_ds09_matrix import reconcile
 
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/'artefacts/data'
@@ -56,13 +57,18 @@ def main():
     assert len(matrix)==155 and len({x['id'] for x in matrix})==155
     assert set(access)=={x['id'] for x in matrix}
     assert sum(x['stored_count'] for x in yields)==679
+    matrix=reconcile(matrix,DATA)
     (DATA/'ds09-source-matrix-2026-10-10.json').write_text(json.dumps(matrix,indent=2,ensure_ascii=False),encoding='utf-8')
-    lines=['# DS-09 source decisions','', 'Pilot: W3 9LN, ages 0–5 inclusive; include evidenced family activities. Radius remains provisional at 10 km. Inactive is an operational flag, not a judgment of usefulness.','', 'Generated from saved 10 October read-only evidence plus owner/official-page review. Aberdeen and Amersham detail evidence supersedes the earlier access-only interpretation. See [updated pilot and source review](ds09-w3-pilot-and-source-review-2026-10-10.md). Production active flags are unchanged.','', '| Source | Registry | Active | Decision | Access evidence | Stored activities/events | Owner |','|---|---|---|---|---|---|---|']
+    lines=['# DS-09 reconciled source decisions','',
+        'Reconciled 11 October 2026 against the saved original decisions and newer problem-source recommendations. Pilot: W3 9LN, ages 0–5 inclusive, confirmed 10 km radius. Imran Tajuddin is the named content and technical owner; Engineering implements adapters. Production flags and registry URLs are unchanged.','',
+        'Keep retains the 20 healthy routes. Improve means investigate or repair before acceptance; it does not enable an inactive source. Replace changes an unsuitable programme-feed role while retaining useful venue discovery. Pause remains for explicit robots, access-policy, redundant-route or non-family-programme blockers. HTTP failure alone no longer causes pause. Access/republication approval remains separate from these recommendations.','',
+        '[Reconciliation summary](ds09-matrix-reconciliation-2026-10-11.md) · [London collection plan](ds09-london-collection-plan-2026-10-10.md) · [Problem-source evidence](ds09-problem-source-review-2026-10-10.md)','',
+        '| Source | Active | Original → reconciled | Latest follow-up access | Reason / next action | Owner |',
+        '| --- | --- | --- | --- | --- | --- |']
     for x in matrix:
-        counts={y['listing_type']:y['stored_count'] for y in x['stored_by_type']}
         url=x.get('source_review',{}).get('candidate_url',x['url'])
-        status='official detail pages verified; worker pending' if x.get('source_review') else x['access_status']
-        lines.append(f"| [{x['name']}]({url}) | {x['registry_category']} | {x['active']} | {x['decision']} | {status} | {counts.get('activity',0)}/{counts.get('event',0)} | Imran Tajuddin |")
+        reason=(x['reason']+' Next: '+x['next_action']).replace('|','\\|').replace('\n',' ')
+        lines.append(f"| [{x['name']}]({url}) | {x['active']} | {x['original_decision']} → **{x['decision']}** | {x['follow_up_access_status']} | {reason} | Imran Tajuddin |")
     (ROOT/'artefacts/documentation/ds09-source-decisions-2026-10-10.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
     print('Sources',len(matrix),'decisions',dict(collections.Counter(x['decision'] for x in matrix)))
     print('Access',dict(collections.Counter(x['access_status'] for x in matrix)))

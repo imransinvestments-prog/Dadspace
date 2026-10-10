@@ -1,8 +1,37 @@
 {
-  "pilot": {"postcode": "W3 9LN", "ages": "0–5 years inclusive", "family_scope": "Include family activities with evidence of suitability for children in this range", "radius_km": 10, "radius_status": "provisional"},
+  "pilot": {
+    "postcode": "W3 9LN",
+    "ages": "0–5 years inclusive",
+    "family_scope": "Include family activities with evidence of suitability for children in this range",
+    "radius_km": 10,
+    "radius_status": "owner-confirmed 2026-10-11"
+  },
   "access_policy": "Inactive is an operational flag, not a usefulness verdict. Incomplete HTTP content, cookie consent and JavaScript require alternate URL/detail/browser review before a usefulness decision. Robots/republication decisions remain separate.",
   "sources": [
-    {"name": "Aberdeen Museums", "decision": "improve", "candidate_url": "https://sites.aberdeencity.gov.uk/AAGM/whats-aberdeen-art-galleries-and-museums", "evidence_urls": ["https://sites.aberdeencity.gov.uk/AAGM/whats-aberdeen-art-galleries-and-museums/family-fun-loose-parts-play", "https://sites.aberdeencity.gov.uk/AAGM/whats-aberdeen-art-galleries-and-museums/baby-boogie-8"], "reason": "Owner found useful content behind consent; official alternate host and detail pages verified. Loose parts play ages 2–5, listed Wednesdays 10:30–12:30, free drop-in. Baby Boogie listing says under 5s and adults; detail has specific future sessions and paid booking. Preserve exact schedules and assess programme regularity rather than page Event label. Outside W3 geography but valuable national source.", "consent_evidence": "Owner-reported; browser consent flow not yet independently replayed", "activation": "unchanged inactive; worker route and repeat extraction still require validation"},
-    {"name": "Amersham Museum", "decision": "improve", "candidate_url": "https://amershammuseum.org/events/", "evidence_urls": ["https://amershammuseum.org/event/museum-makers-8/"], "reason": "Museum Makers is a useful family arts programme with ages 7–11, 11 October 2026 10:00–11:30, tickets £12 first child/£8 second child. Repeat-session offer supports programme regularity but exact future recurrence must be verified. Outside 0–5 pilot age range; retain as wider coverage rather than reject source.", "consent_evidence": "Owner-reported; browser consent flow not yet independently replayed", "activation": "unchanged inactive; existing detail/repeat reliability gaps remain"}
-  ]
+    {
+      "name": "Aberdeen Museums",
+      "decision": "improve",
+      "candidate_url": "https://sites.aberdeencity.gov.uk/AAGM/whats-aberdeen-art-galleries-and-museums",
+      "evidence_urls": [
+        "https://sites.aberdeencity.gov.uk/AAGM/whats-aberdeen-art-galleries-and-museums/family-fun-loose-parts-play",
+        "https://sites.aberdeencity.gov.uk/AAGM/whats-aberdeen-art-galleries-and-museums/baby-boogie-8"
+      ],
+      "reason": "Owner found useful content behind consent; official alternate host and detail pages verified. Loose parts play ages 2–5, listed Wednesdays 10:30–12:30, free drop-in. Baby Boogie listing says under 5s and adults; detail has specific future sessions and paid booking. Preserve exact schedules and assess programme regularity rather than page Event label. Outside W3 geography but valuable national source.",
+      "consent_evidence": "Owner-reported; browser consent flow not yet independently replayed",
+      "activation": "unchanged inactive; worker route and repeat extraction still require validation"
+    },
+    {
+      "name": "Amersham Museum",
+      "decision": "improve",
+      "candidate_url": "https://amershammuseum.org/events/",
+      "evidence_urls": [
+        "https://amershammuseum.org/event/museum-makers-8/"
+      ],
+      "reason": "Museum Makers is a useful family arts programme with ages 7–11, 11 October 2026 10:00–11:30, tickets £12 first child/£8 second child. Repeat-session offer supports programme regularity but exact future recurrence must be verified. Outside 0–5 pilot age range; retain as wider coverage rather than reject source.",
+      "consent_evidence": "Owner-reported; browser consent flow not yet independently replayed",
+      "activation": "unchanged inactive; existing detail/repeat reliability gaps remain"
+    }
+  ],
+  "accountable_owner": "Imran Tajuddin",
+  "technical_owner": "Imran Tajuddin"
 }
