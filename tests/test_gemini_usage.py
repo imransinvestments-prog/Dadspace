@@ -5,6 +5,11 @@ from unittest.mock import Mock, patch
 
 from gemini_usage import BudgetExhausted, make_extractor
 
+try:
+    from google import genai
+except ImportError:
+    genai = None
+
 
 def response(text='[]', finish='STOP', total=15, usage=True):
     return SimpleNamespace(text=text, candidates=[SimpleNamespace(finish_reason=finish)],
@@ -13,6 +18,9 @@ def response(text='[]', finish='STOP', total=15, usage=True):
                                total_token_count=total) if usage else None)
 
 
+# General deals suites intentionally install only their lightweight dependencies.
+# The dedicated Gemini CI job installs requirements.txt and runs every test here.
+@unittest.skipIf(genai is None, 'Gemini SDK required; covered by dedicated usage CI')
 class UsageTests(unittest.TestCase):
     def setUp(self):
         self.env = patch.dict(os.environ, {'GEMINI_API_KEY': 'fake'}, clear=True)
