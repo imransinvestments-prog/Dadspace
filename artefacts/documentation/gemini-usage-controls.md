@@ -1,6 +1,6 @@
 # Gemini usage reduction (#65), first implementation
 
-This change removes recurring paid news connectivity tests and automatic PR news collection, and gives event/activity extraction configurable usage controls. It does not close #65: content reduction, granular cache work and comparative live quality evaluation remain outstanding. Provider switching is tracked separately in #66.
+This change removes recurring paid news connectivity tests and automatic PR AI reviews, and gives event/activity extraction configurable usage controls. It does not close #65: content reduction, granular cache work and comparative live quality evaluation remain outstanding. Provider switching is tracked separately in #66.
 
 ## Existing measured baseline
 
@@ -29,6 +29,10 @@ Budget exhaustion leaves the current source unmarked so the next run can retry i
 ## Tests and live checks
 
 `gemini-usage-checks.yml` runs mocked controls and existing activity regressions without secrets. News PR checks keep the existing mocked locality regressions and build. Scheduled/manual news collection makes no extra connectivity request. A manual news dispatch can explicitly enable `live_smoke_test`; both that test and a manual AI dry run are paid calls.
+
+The split-baseline workflow keeps its read-only backup/preview automatic, but its two forced Gemini baseline jobs run only on manual dispatch. Venue-source review keeps offline regressions automatic and gates its real two-pass extraction and artifact upload to manual dispatch. The initial PR exposed the split-baseline automatic run; the follow-up gating commit cancelled that superseded run. These paid reviews should be run deliberately for quality evaluation rather than on routine code changes.
+
+The initial civic baseline failed with Gemini HTTP 402: prepayment credits depleted (run 38079392838, 10 October 2026). Live comparative evaluation is blocked until billing is resolved. The caller now treats this as fatal without retries or continuing through more sources. No production writes were made by the read-only baseline. Do not interpret the failed run as quality or savings evidence.
 
 Run:
 

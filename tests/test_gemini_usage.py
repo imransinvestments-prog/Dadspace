@@ -88,6 +88,15 @@ class UsageTests(unittest.TestCase):
         self.assertEqual(call.metrics['api_attempts'], 2)
         self.assertEqual(call.metrics['total_tokens'], 30)
 
+    def test_depleted_billing_stops_without_retries(self):
+        error = RuntimeError('prepayment credits depleted')
+        error.code = 402
+        self.generate.side_effect = error
+        with self.assertRaisesRegex(RuntimeError, 'billing credits'):
+            self.caller()('hello')
+        self.assertEqual(self.generate.call_count, 1)
+        self.sleep.assert_not_called()
+
     def test_invalid_settings_fail_before_request(self):
         for name, value in [('GEMINI_THINKING_LEVEL', 'off'), ('GEMINI_RUN_TOKEN_BUDGET', '-1')]:
             with patch.dict(os.environ, {name: value}):

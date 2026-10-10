@@ -78,6 +78,8 @@ def make_extractor(model, schema, timeout, fatal_error):
             except Exception as exc:
                 if response is None:
                     metrics["unknown_usage_attempts"] += 1
+                if getattr(exc, "code", None) == 402:
+                    raise fatal_error("Gemini billing credits are depleted; resolve billing before another live run") from exc
                 text = str(exc)
                 if any(word in text for word in ("NOT_FOUND", "PERMISSION_DENIED", "UNAUTHENTICATED", "INVALID_ARGUMENT", "API key not valid")):
                     raise fatal_error("Gemini rejected the request; check model and credentials") from exc
