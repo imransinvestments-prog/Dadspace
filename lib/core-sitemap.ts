@@ -4,6 +4,7 @@ import { eventSlug } from "@/lib/event-slug"
 import { getSupabase } from "@/lib/supabase"
 import { siteUrl } from "@/lib/seo"
 import { COMING_SOON } from "@/lib/launch"
+import { getOriginals } from "@/lib/originals"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (COMING_SOON) return [{ url: siteUrl, changeFrequency: "weekly", priority: 1 }]
@@ -14,6 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }> = [
     { path: "", changeFrequency: "daily", priority: 1 },
     { path: "/news", changeFrequency: "daily", priority: 0.9 },
+    { path: "/originals", changeFrequency: "daily", priority: 0.9 },
     { path: "/events", changeFrequency: "daily", priority: 0.9 },
     { path: "/activities", changeFrequency: "daily", priority: 0.9 },
     { path: "/deals", changeFrequency: "daily", priority: 0.9 },
@@ -61,5 +63,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
       }))
 
-  return [...staticPages, ...eventPages, ...activityPages]
+  const originals = await getOriginals().catch(() => [])
+  return [...staticPages, ...eventPages, ...activityPages, ...originals.map(post => ({
+    url: `${siteUrl}/originals/${post.slug}`, lastModified: new Date(post.published_at),
+    changeFrequency: "weekly" as const, priority: 0.7,
+  }))]
 }

@@ -1,0 +1,57 @@
+name: Dadspace original content
+on:
+  schedule:
+    - cron: '17 7,9 * * *'
+      timezone: Europe/London
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Validate content without publishing
+        type: boolean
+        default: true
+  push:
+    branches: [main]
+    paths: ['original_content_worker.py', '.github/workflows/original-content.yml']
+  pull_request:
+    paths: ['app/originals/**', 'lib/originals.ts', 'original_content_worker.py', 'tests/test_original_content.py', '.github/workflows/original-content.yml']
+permissions:
+  contents: read
+concurrency:
+  group: original-content
+  cancel-in-progress: false
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests -p test_original_content.py -v
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec tsc --noEmit
+      - run: pnpm build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+  publish:
+    needs: checks
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate, review and publish due originals
+        run: python original_content_worker.py ${{ inputs.dry_run == true && '--dry-run' || '' }}
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
