@@ -1,0 +1,47 @@
+[
+  {
+    "id": "a793340c-6833-4eb3-9e0b-3b8ed18c2877",
+    "source_id": "562f3099-3b66-4719-9782-57e818d15491",
+    "title": "NCT Alf King Baby Café",
+    "listing_type": "activity",
+    "category": "parent_baby_group",
+    "age_range": "Pregnant parents, babies and young children",
+    "schedule_text": "10:00am - 11:30am",
+    "location": "Alf King Family Hub West, Feltham, TW13 5AF",
+    "event_url": "https://www.nct.org.uk/events/twickenham-hounslow-and-district/nct-alf-king-baby-cafe-17",
+    "venue_id": null,
+    "start_date": "2026-12-21",
+    "end_date": "2026-12-21",
+    "last_seen_at": "2026-10-04 00:19:19.117664+00"
+  },
+  {
+    "id": "f741c231-f580-4e3d-9335-828b8d37469c",
+    "source_id": "562f3099-3b66-4719-9782-57e818d15491",
+    "title": "NCT Lampton Baby Café",
+    "listing_type": "activity",
+    "category": "parent_baby_group",
+    "age_range": "Pregnant parents, babies and young children",
+    "schedule_text": "10:00am - 12:00pm",
+    "location": "Lampton Family Hub Central, Hounslow, TW3 4JG",
+    "event_url": "https://www.nct.org.uk/events/twickenham-hounslow-and-district/nct-lampton-baby-cafe-18",
+    "venue_id": null,
+    "start_date": "2026-12-23",
+    "end_date": "2026-12-23",
+    "last_seen_at": "2026-10-04 00:19:19.748459+00"
+  },
+  {
+    "id": "ec251ee1-732a-4a66-b201-a4fd86b395a6",
+    "source_id": "562f3099-3b66-4719-9782-57e818d15491",
+    "title": "NCT Lampton Park Walk & Talk",
+    "listing_type": "activity",
+    "category": "walks_outdoors",
+    "age_range": "Pregnant parents, babies and young children",
+    "schedule_text": "10:00am - 11:30am",
+    "location": "Lampton Park, Hounslow, TW3 4LD",
+    "event_url": "https://www.nct.org.uk/events/twickenham-hounslow-and-district/nct-lampton-park-walk-talk-16",
+    "venue_id": null,
+    "start_date": "2026-12-10",
+    "end_date": "2026-12-10",
+    "last_seen_at": "2026-10-04 00:19:18.500736+00"
+  }
+]

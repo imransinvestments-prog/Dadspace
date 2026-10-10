@@ -1,0 +1,10 @@
+{
+  "run_id": 37925215149,
+  "url": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/37925215149",
+  "head_sha": "d71a037ad790878e1c5e08ded202a8b4781d513d",
+  "status": "completed",
+  "conclusion": "cancelled",
+  "checked_date_london": "2026-10-10",
+  "evidence_route": "GitHub Actions REST connector",
+  "acceptance": "Does not prove successful collection or live repeat ingestion"
+}
