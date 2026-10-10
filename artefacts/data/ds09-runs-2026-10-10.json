@@ -1,0 +1,92 @@
+[
+  {
+    "worker": "events-activities",
+    "ran_at": "2026-10-09 06:22:28.996384+00",
+    "dry_run": false,
+    "input_tokens": 28341,
+    "output_tokens": 29339,
+    "gemini_calls": 4,
+    "details": null
+  },
+  {
+    "worker": "events-civic",
+    "ran_at": "2026-10-09 06:17:31.810811+00",
+    "dry_run": false,
+    "input_tokens": 154303,
+    "output_tokens": 93182,
+    "gemini_calls": 19,
+    "details": null
+  },
+  {
+    "worker": "events-activities",
+    "ran_at": "2026-10-07 06:22:29.418813+00",
+    "dry_run": false,
+    "input_tokens": 49752,
+    "output_tokens": 78572,
+    "gemini_calls": 7,
+    "details": null
+  },
+  {
+    "worker": "events-civic",
+    "ran_at": "2026-10-07 06:14:32.705503+00",
+    "dry_run": false,
+    "input_tokens": 138668,
+    "output_tokens": 91226,
+    "gemini_calls": 18,
+    "details": null
+  },
+  {
+    "worker": "events-activities",
+    "ran_at": "2026-10-05 06:23:30.987154+00",
+    "dry_run": false,
+    "input_tokens": 42679,
+    "output_tokens": 60363,
+    "gemini_calls": 6,
+    "details": null
+  },
+  {
+    "worker": "events-civic",
+    "ran_at": "2026-10-05 06:16:56.157879+00",
+    "dry_run": false,
+    "input_tokens": 101226,
+    "output_tokens": 77727,
+    "gemini_calls": 14,
+    "details": null
+  },
+  {
+    "worker": "events-activities",
+    "ran_at": "2026-10-03 06:25:27.400991+00",
+    "dry_run": false,
+    "input_tokens": 42900,
+    "output_tokens": 67632,
+    "gemini_calls": 6,
+    "details": null
+  },
+  {
+    "worker": "events-civic",
+    "ran_at": "2026-10-03 06:18:24.699239+00",
+    "dry_run": false,
+    "input_tokens": 121692,
+    "output_tokens": 77177,
+    "gemini_calls": 15,
+    "details": null
+  },
+  {
+    "worker": "events-civic",
+    "ran_at": "2026-10-01 06:13:41.711025+00",
+    "dry_run": false,
+    "input_tokens": 100974,
+    "output_tokens": 67105,
+    "gemini_calls": 16,
+    "details": null
+  },
+  {
+    "worker": "events-activities",
+    "ran_at": "2026-10-01 06:10:58.328557+00",
+    "dry_run": false,
+    "input_tokens": 39836,
+    "output_tokens": 47043,
+    "gemini_calls": 6,
+    "details": null
+  }
+]
