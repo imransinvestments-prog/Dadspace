@@ -1,0 +1,51 @@
+[
+  {
+    "category": "Amusement arcade",
+    "venues": 5,
+    "visible_venues": 5,
+    "stored_listings": 0,
+    "stored_activities": 0
+  },
+  {
+    "category": "Children’s playground",
+    "venues": 489,
+    "visible_venues": 489,
+    "stored_listings": 0,
+    "stored_activities": 0
+  },
+  {
+    "category": "Indoor / soft play centre",
+    "venues": 8,
+    "visible_venues": 8,
+    "stored_listings": 0,
+    "stored_activities": 0
+  },
+  {
+    "category": "library",
+    "venues": 61,
+    "visible_venues": 59,
+    "stored_listings": 0,
+    "stored_activities": 0
+  },
+  {
+    "category": "Museum",
+    "venues": 35,
+    "visible_venues": 35,
+    "stored_listings": 0,
+    "stored_activities": 0
+  },
+  {
+    "category": "Trampoline venue",
+    "venues": 3,
+    "visible_venues": 3,
+    "stored_listings": 0,
+    "stored_activities": 0
+  },
+  {
+    "category": "Zoo / animal park",
+    "venues": 1,
+    "visible_venues": 1,
+    "stored_listings": 0,
+    "stored_activities": 0
+  }
+]
