@@ -12,6 +12,19 @@ on:
       - ".github/workflows/collect-civic.yml"
   workflow_dispatch:
     inputs:
+      llm_smoke_only:
+        description: "One synthetic LLM check only; no source collection or database access"
+        type: boolean
+        default: false
+      smoke_provider:
+        description: "Provider for smoke check only"
+        type: choice
+        options: [openai, gemini, deepseek]
+        default: openai
+      smoke_model:
+        description: "API model for smoke check only"
+        type: string
+        default: gpt-4.1-mini
       limit:
         description: "How many websites to process (0 = all)"
         default: "5"
@@ -74,7 +87,7 @@ jobs:
           if-no-files-found: error
 
   collect:
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && !inputs.llm_smoke_only
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -137,3 +150,31 @@ jobs:
           LIMIT: ${{ inputs.limit || '0' }}
           DRY_RUN: ${{ inputs.dry_run || 'true' }}
           FORCE_REREAD: ${{ inputs.force_reread || 'false' }}
+
+  provider-smoke:
+    if: github.event_name == 'workflow_dispatch' && inputs.llm_smoke_only
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements-llm.txt
+      - name: Fixed fixture, no database access
+        run: python scripts/llm_smoke.py
+        env:
+          LLM_PROVIDER: ${{ inputs.smoke_provider }}
+          LLM_MODEL: ${{ inputs.smoke_model }}
+          LLM_RUN_MAX_ATTEMPTS: '1'
+          LLM_MAX_RETRIES: '0'
+          LLM_MAX_OUTPUT_TOKENS: '1000'
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: llm-smoke
+          path: llm-smoke.json
+          if-no-files-found: ignore

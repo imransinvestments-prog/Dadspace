@@ -6,6 +6,11 @@ from unittest.mock import patch
 
 import llm_provider as llm
 
+try:
+    import jsonschema
+except ImportError:
+    jsonschema = None
+
 SCHEMA = {'type': 'array', 'items': {'type': 'object', 'properties': {
     'title': {'type': 'string'}, 'evidence': {'anyOf': [{'type': 'string'}, {'type': 'null'}], 'default': None}},
     'required': ['title']}}
@@ -26,6 +31,9 @@ def response(provider='openai', data=DATA):
                               'thoughtsTokenCount': 3, 'totalTokenCount': 15}}
 
 
+# Lightweight deals CI deliberately omits LLM dependencies. The dedicated
+# provider CI installs them and executes every adapter regression.
+@unittest.skipIf(jsonschema is None, 'LLM dependencies required; covered by provider CI')
 class ProviderTests(unittest.TestCase):
     def setUp(self):
         self.env = patch.dict(os.environ, {'LLM_PROVIDER': 'openai', 'LLM_MODEL': 'test-model',

@@ -9,7 +9,9 @@ server-side environment variables and GitHub Actions secrets.
 1. Add a funded OpenAI API key as the repository Actions secret `OPENAI_API_KEY`.
 2. Run **LLM provider smoke (manual, one request)** using `openai` and
    `gpt-4.1-mini`. It checks a fixed synthetic source and writes only an artifact.
-   It does not access Supabase. The model supports Responses and Structured
+   It does not access Supabase. Before merge, the existing **Collect events
+   (councils, heritage & niche venues)** workflow also exposes `llm_smoke_only`
+   on this feature branch; that mode skips collection and database access. The model supports Responses and Structured
    Outputs: [official model documentation](https://developers.openai.com/api/docs/models/gpt-4.1-mini).
 3. Set repository Actions variables `LLM_PROVIDER=openai` and
    `LLM_MODEL=gpt-4.1-mini`. To migrate only collectors first, set
