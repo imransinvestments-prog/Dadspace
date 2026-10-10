@@ -1,4 +1,5 @@
 import json
+from io import BytesIO
 import os
 import unittest
 from urllib.error import HTTPError, URLError
@@ -188,6 +189,16 @@ class ProviderTests(unittest.TestCase):
             gen.generate('source', SCHEMA)
         self.assertEqual(gen.metrics['unknown_usage_attempts'], 1)
         self.assertEqual(self.post.call_count, 1)
+
+    def test_quota_429_stops_without_retries_or_private_error_text(self):
+        for category in llm.BILLING_ERRORS:
+            self.post.reset_mock()
+            payload = {'error': {'code': category, 'message': 'private credentials and project'}}
+            self.post.side_effect = HTTPError('private-url', 429, 'private reason', {}, BytesIO(json.dumps(payload).encode()))
+            with self.assertRaisesRegex(llm.FatalLLMError, category) as caught:
+                self.generator().generate('source', SCHEMA)
+            self.assertNotIn('private', str(caught.exception))
+            self.assertEqual(self.post.call_count, 1)
 
 
 if __name__ == '__main__':

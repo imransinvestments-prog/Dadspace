@@ -15,6 +15,24 @@ class FatalLLMError(RuntimeError):
 
 
 KEYS = {'gemini': 'GEMINI_API_KEY', 'openai': 'OPENAI_API_KEY', 'deepseek': 'DEEPSEEK_API_KEY'}
+BILLING_ERRORS = {'insufficient_quota', 'credit_balance_exhausted',
+                  'organization_spend_limit_exceeded', 'project_spend_limit_exceeded',
+                  'organization_usage_limit_exceeded', 'billing_hard_limit_reached',
+                  'usage_limit_exceeded'}
+
+
+def http_category(exc):
+    """Only expose known error codes, never remote messages/bodies/URLs."""
+    try:
+        error = json.loads(exc.read(65536)).get('error', {})
+        allowed = BILLING_ERRORS | {'rate_limit_exceeded', 'slow_down', 'server_is_overloaded'}
+        for field in ('code', 'type'):
+            value = error.get(field)
+            if isinstance(value, str) and value in allowed:
+                return value
+    except (AttributeError, ValueError, OSError):
+        pass
+    return None
 
 
 def selection(scope='EXTRACTION', legacy_model='gemini-3.6-flash'):
@@ -150,12 +168,16 @@ class StructuredGenerator:
             except (HTTPError, URLError, TimeoutError) as exc:
                 self.metrics['unknown_usage_attempts'] += 1
                 code = getattr(exc, 'code', None)
+                category = http_category(exc) if isinstance(exc, HTTPError) else None
+                if category in BILLING_ERRORS:
+                    raise FatalLLMError(f'{self.provider} HTTP {code}: {category}; resolve API billing/limits before another run') from None
                 if code in {400, 401, 402, 403, 404, 422}:
                     raise FatalLLMError(f'{self.provider} rejected request (HTTP {code}); check billing, model and credentials') from None
                 if code is not None and code != 429 and not 500 <= code <= 599:
                     raise RuntimeError(f'{self.provider} HTTP {code}') from None
                 if attempt == self.retries:
-                    raise RuntimeError(self.provider + ' transport failed after bounded retries') from None
+                    reason = f'HTTP {code}' if code is not None else type(exc).__name__
+                    raise RuntimeError(f'{self.provider} transport failed after bounded retries ({reason}, {category or "unclassified"})') from None
                 time.sleep(min(2 ** attempt, 8))
                 continue
             self._usage(reply)
