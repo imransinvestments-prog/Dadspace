@@ -128,6 +128,7 @@ jobs:
           LLM_MODEL: ${{ vars.LLM_MODEL }}
           LLM_RUN_MAX_ATTEMPTS: ${{ vars.LLM_RUN_MAX_ATTEMPTS }}
           LLM_RUN_TOKEN_BUDGET: ${{ vars.LLM_RUN_TOKEN_BUDGET }}
+          LLM_MAX_RETRIES: ${{ vars.LLM_MAX_RETRIES }}
           LLM_MAX_OUTPUT_TOKENS: ${{ vars.LLM_MAX_OUTPUT_TOKENS }}
           EXTRACTION_LLM_PROVIDER: ${{ vars.EXTRACTION_LLM_PROVIDER }}
           EXTRACTION_LLM_MODEL: ${{ vars.EXTRACTION_LLM_MODEL }}
