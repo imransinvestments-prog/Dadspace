@@ -311,8 +311,6 @@ QUALITY:
 
 def make_gemini_caller():
     """Same Gemini call/metrics as worker.py, with the expanded one-pass schema."""
-    from google import genai
-    from google.genai import types
     from pydantic import BaseModel
     from typing import Optional
 
@@ -339,60 +337,8 @@ def make_gemini_caller():
         audience: Optional[str] = None
         family_evidence: Optional[str] = None
 
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        raise base.FatalError("GEMINI_API_KEY is missing")
-
-    client = genai.Client(api_key=api_key)
-    metrics = {
-        "api_attempts": 0,
-        "input_chars_sent": 0,
-        "prompt_tokens": 0,
-        "output_tokens": 0,
-        "thinking_tokens": 0,
-        "total_tokens": 0,
-    }
-
-    def call(prompt):
-        last_error = None
-        for attempt in range(3):
-            try:
-                def do_call():
-                    metrics["api_attempts"] += 1
-                    metrics["input_chars_sent"] += len(prompt)
-                    return client.models.generate_content(
-                        model=base.MODEL,
-                        contents=prompt,
-                        config=types.GenerateContentConfig(
-                            response_mime_type="application/json",
-                            response_schema=list[ListingSchema],
-                            temperature=0,
-                            automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
-                        ),
-                    )
-
-                response = base.call_with_timeout(do_call, base.GEMINI_TIMEOUT_SECONDS)
-                usage = getattr(response, "usage_metadata", None)
-                if usage is not None:
-                    metrics["prompt_tokens"] += int(getattr(usage, "prompt_token_count", 0) or 0)
-                    thinking = int(getattr(usage, "thoughts_token_count", 0) or 0)
-                    metrics["thinking_tokens"] += thinking
-                    metrics["output_tokens"] += int(getattr(usage, "candidates_token_count", 0) or 0) + thinking
-                    metrics["total_tokens"] += int(getattr(usage, "total_token_count", 0) or 0)
-                data = json.loads(response.text)
-                if not isinstance(data, list):
-                    raise ValueError("Gemini did not return a list")
-                return data
-            except Exception as exc:
-                text = str(exc)
-                if any(word in text for word in ("NOT_FOUND", "PERMISSION_DENIED", "UNAUTHENTICATED", "API key not valid")):
-                    raise base.FatalError(f"Gemini rejected the request ({text[:300]})") from exc
-                last_error = exc
-                time.sleep(5 * (attempt + 1))
-        raise RuntimeError(f"Gemini failed after 3 tries: {last_error}")
-
-    call.metrics = metrics
-    return call
+    from gemini_usage import make_extractor
+    return make_extractor(base.MODEL, list[ListingSchema], base.GEMINI_TIMEOUT_SECONDS, base.FatalError)
 
 
 def _activity_row(item: dict, source: dict, page_url: str, method: str, stats: dict) -> dict | None:

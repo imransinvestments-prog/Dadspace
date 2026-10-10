@@ -25,6 +25,7 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s tests -p test_activity_ingestion.py -v
       - run: python scripts/validate_venue_activity_sources.py
+        if: github.event_name == 'workflow_dispatch'
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
@@ -38,7 +39,7 @@ jobs:
           GEMINI_TIMEOUT_SECONDS: '60'
           MAX_CHARS: '24000'
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && github.event_name == 'workflow_dispatch'
         with:
           name: activity-venue-source-review-${{ github.run_id }}
           path: venue-source-review/

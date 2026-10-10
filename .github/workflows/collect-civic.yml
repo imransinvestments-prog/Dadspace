@@ -85,6 +85,8 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Validate Python (syntax check)
         run: python -m py_compile worker.py events_worker.py scripts/export_events_backup.py scripts/audit_and_merge_event_duplicates.py
+      - name: Gemini usage control regressions (no network)
+        run: python -m unittest discover -s tests -p test_gemini_usage.py -v
       - name: Self-test (no network/Gemini/Supabase calls)
         run: python events_worker.py --self-test
       - name: Back up events before any live write
@@ -108,6 +110,11 @@ jobs:
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          # Blank preserves model defaults until quality evaluation approves a setting.
+          GEMINI_THINKING_LEVEL: ${{ vars.GEMINI_EXTRACTION_THINKING_LEVEL }}
+          GEMINI_RUN_TOKEN_BUDGET: ${{ vars.GEMINI_EXTRACTION_TOKEN_BUDGET }}
+          GEMINI_RUN_MAX_ATTEMPTS: ${{ vars.GEMINI_EXTRACTION_MAX_ATTEMPTS }}
+          GEMINI_MAX_OUTPUT_TOKENS: ${{ vars.GEMINI_EXTRACTION_MAX_OUTPUT_TOKENS }}
           WORKER_NAME: "events-civic"
           CATEGORIES: "councils,heritage_parks,niche_venues"
           FETCH_ENGINE: "requests"
