@@ -20,6 +20,10 @@ on:
       dry_run:
         description: "Dry run? true = only show results, false = save to database"
         default: "true"
+      live_smoke_test:
+        description: "Run an additional paid Gemini connectivity check"
+        type: boolean
+        default: false
 
   workflow_call:
     inputs:
@@ -60,11 +64,8 @@ jobs:
 
   news:
     needs: checks
-    # Keep scheduled/manual behaviour, and run a dry review on same-repo PRs.
-    # Never expose worker secrets to forked pull requests.
-    if: >-
-      !cancelled() && (github.event_name != 'pull_request' ||
-      (needs.checks.result == 'success' && github.event.pull_request.head.repo.full_name == github.repository))
+    # PR checks use mocks; collection and paid reviews are manual/scheduled only.
+    if: ${{ !cancelled() && github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -77,7 +78,8 @@ jobs:
       - name: Install
         run: pip install requests feedparser googlenewsdecoder==0.2.1 selectolax==0.4.12
 
-      - name: Self-test
+      - name: Explicit paid smoke test
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.live_smoke_test }}
         run: python news_worker_locality.py --self-test
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
@@ -91,7 +93,7 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          DRY_RUN: ${{ github.event_name == 'pull_request' && 'true' || inputs.dry_run || 'false' }}
+          DRY_RUN: ${{ inputs.dry_run || 'false' }}
           MAX_NEW_PER_RUN: ${{ github.event_name == 'pull_request' && '40' || '300' }}
           MAX_RUN_MINUTES: ${{ github.event_name == 'pull_request' && '8' || '20' }}
           NEWS_LOCALITY_REPORT_PATH: news-locality-review.jsonl
