@@ -18,7 +18,10 @@ SERIES_HTML='''<div id="main"><table id="resultsTable"><tbody>
 
 
 class MyLibraryTests(unittest.TestCase):
-    def fetch(self,url): return {URL:HTML,SERIES:SERIES_HTML}[url]
+    def fetch(self,url):
+        return {URL:HTML,SERIES:SERIES_HTML,
+                'https://ealing.events.mylibrary.digital/event?id=319318':HTML.replace('12 October 2026','19 October 2026'),
+                'https://ealing.events.mylibrary.digital/event?id=319319':HTML.replace('12 October 2026','2 November 2026')}[url]
     def collect(self,**kwargs): return collect({'url':URL},TODAY,self.fetch,lambda _: (True,''),**kwargs)
 
     def test_detail_keeps_programme_type_cost_location_and_missing_age(self):
@@ -79,7 +82,7 @@ class MyLibraryTests(unittest.TestCase):
 
     def test_cancelled_and_conflicting_series_rows(self):
         def fetch(url):
-            return self.fetch(url).replace('19 October 2026 at 10:00 AM','Cancelled 19 October 2026 at 10:00 AM') if url==SERIES else HTML
+            return self.fetch(url).replace('19 October 2026 at 10:00 AM','Cancelled 19 October 2026 at 10:00 AM') if url==SERIES else self.fetch(url)
         rows,_,_=collect({'url':URL},TODAY,fetch,lambda _:(True,''))
         self.assertNotIn('2026-10-19',rows[0]['occurrence_dates'])
         for before,after in [('Southall Library','Other Library'),('10:00 AM','12:00 PM')]:
@@ -122,5 +125,52 @@ class MyLibraryTests(unittest.TestCase):
         results[-1]['status']='ok'
         results[-1]['rows']=[dict(dedupe_key='changed')]
         self.assertTrue(acceptance_errors(results))
+
+    def test_named_rhymetime_series_uses_regular_programme_evidence(self):
+        url='https://events.sutton.gov.uk/event?id=364833'
+        html=(Path(__file__).parent/'fixtures/mylibrary-sutton.html').read_text(encoding='utf-8')
+        item=parse_detail(html,url)
+        self.assertEqual(item['listing_type'],'unknown')
+        self.assertIn('each child and adult',item['booking_text'])
+        series='<main><table><tbody>'+''.join(
+            '<tr><td><a href="/event?id='+str(i)+'">Rhymetime in Sutton Central Library</a></td>'
+            '<td>'+date+' at 11:15 AM</td><td>Sutton Central Library</td><td>Ages 0-5</td></tr>'
+            for i,date in [(364834,'19 October 2026'),(364835,'26 October 2026'),(364838,'16 November 2026')])+'</tbody></table></main>'
+        def fetch(u):
+            if '/series?' in u: return series
+            if u.endswith('364834'): return html.replace('12 October 2026','19 October 2026')
+            if u.endswith('364835'): return html.replace('12 October 2026','26 October 2026')
+            return html
+        rows,_,stats=collect({'url':url},TODAY,fetch,lambda _:(True,''))
+        self.assertEqual(rows[0]['listing_type'],'activity')
+        self.assertEqual(rows[0]['occurrence_dates'],['2026-10-12','2026-10-19','2026-10-26'])
+        self.assertEqual(stats['collection_window_days'],30)
+        festival=html.replace('Rhymetime in Sutton Central Library','Annual Rhymetime festival in Sutton Central Library')
+        self.assertEqual(parse_detail(festival,url)['listing_type'],'event')
+
+    def test_cancelled_detail_and_description_regularity(self):
+        # Use the actual description section rather than unrelated paragraphs.
+        from bs4 import BeautifulSoup
+        soup=BeautifulSoup(HTML.replace('Every Monday',''),'html.parser')
+        description=next(h for h in soup.select('h2') if h.get_text(strip=True)=='Event Description').find_next_sibling()
+        description.string='This session is cancelled. Weekly storytime for families.'
+        item=parse_detail(str(soup),URL)
+        self.assertTrue(item['cancelled'])
+        self.assertEqual(item['listing_type'],'activity')
+
+    def test_historical_series_conflicts_do_not_block_current_window(self):
+        item=parse_detail(HTML,URL)
+        from mylibrary_calendar import series_dates
+        historical='<main><table><tr><td><a href="/event?id=111">Old programme</a></td><td>1 January 2023 at 1:00 PM</td><td>Old venue</td></tr></table></main>'
+        self.assertEqual(series_dates(historical,SERIES,item,first_date=TODAY.isoformat()),[])
+
+    def test_occurrence_end_time_changes_and_cancelled_details(self):
+        future='https://ealing.events.mylibrary.digital/event?id=319318'
+        def changed(u): return self.fetch(u).replace('11:00 AM','11:30 AM') if u==future else self.fetch(u)
+        with self.assertRaisesRegex(CalendarError,'time_text conflict'):
+            collect({'url':URL},TODAY,changed,lambda _:(True,''))
+        def cancelled(u): return self.fetch(u).replace('Bounce and Rhyme and Storytime','Cancelled Bounce and Rhyme and Storytime') if u==future else self.fetch(u)
+        rows,_,_=collect({'url':URL},TODAY,cancelled,lambda _:(True,''))
+        self.assertNotIn('2026-10-19',rows[0]['occurrence_dates'])
 
 if __name__=='__main__': unittest.main()

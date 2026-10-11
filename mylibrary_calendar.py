@@ -21,6 +21,7 @@ HOSTS = {'ealing.events.mylibrary.digital', 'merton.events.mylibrary.digital',
 FAMILY = re.compile(r'\b(?:babies|baby|toddlers?|children|kids|families|family|nursery rhymes|all ages)\b', re.I)
 REGULAR = re.compile(r'\b(?:every (?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|week|month)|weekly|monthly|term[- ]time)\b', re.I)
 RARE = re.compile(r'\b(?:festival|annual|one[- ]off|special occasion|celebration)\b',re.I)
+REGULAR_PROGRAMME = re.compile(r'\b(?:rhymetimes?|rhyme time|storytimes?|story time|stay\s*(?:and|&)\s*play)\b',re.I)
 DATE = re.compile(r'\b(\d{1,2} (?:January|February|March|April|May|June|July|August|September|October|November|December) \d{4})\b', re.I)
 TIME = re.compile(r'\b\d{1,2}:\d{2}\s*[AP]M\b', re.I)
 POSTCODE = re.compile(r'\b[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}\b', re.I)
@@ -100,9 +101,12 @@ def parse_detail(html, url):
             label=values[-1].get_text(' ',strip=True).lower()
             if label=='ages': age=values[0].get_text(' ',strip=True)
             if label=='cost': cost=values[0].get_text(' ',strip=True)
+    text=description.get_text(' ',strip=True) if description else ''
     recurring=next((p.get_text(' ',strip=True) for p in header.select('p.category')
                     if REGULAR.search(p.get_text(' ',strip=True))),None)
-    text=description.get_text(' ',strip=True) if description else ''
+    if not recurring:
+        match=REGULAR.search(text)
+        if match: recurring=match.group(0)
     title=header.h1.get_text(' ',strip=True)
     family=FAMILY.search(title+' '+text)
     # Related events' ages and categories must never leak into this item.
@@ -118,8 +122,10 @@ def parse_detail(html, url):
     ics=when.select_one('a[href*="/ics?"]')
     booking=main.select_one('.button-container')
     booking_text=booking.get_text(' ',strip=True) if booking else None
+    notes=section(main,'Notes & Requirements'); bookings=section(main,'Bookings')
+    booking_text=' '.join(v.get_text(' ',strip=True) for v in (notes,bookings) if v) or booking_text
     pc=POSTCODE.search(address)
-    kind='activity' if recurring else 'event' if RARE.search(title+' '+text) else 'unknown'
+    kind='event' if RARE.search(title+' '+text) else 'activity' if recurring else 'unknown'
     return dict(title=title,description=text,listing_type=kind,
         audience='families' if family_evidence else 'unknown',family_evidence=family_evidence,
         family_relevance=5 if family_evidence else 0,confidence=.99,
@@ -129,10 +135,11 @@ def parse_detail(html, url):
         recurrence=recurring,event_url=url,category='story_rhyme' if re.search('rhyme|story',title,re.I) else None,
         booking_text=booking_text,series_url=public_url(series['href'],url) if series else None,
         ics_url=public_url(ics['href'],url) if ics else None,
-        occurrence_dates=[date],cancelled=bool(re.search(r'\bcancelled\b',header.get_text(' ',strip=True),re.I)))
+        occurrence_dates=[date],unavailable=bool(re.search(r'\b(?:fully booked|sold out)\b',booking_text or '',re.I)),cancelled=bool(re.search(r'\bcancelled\b',header.get_text(' ',strip=True),re.I)
+            or re.search(r'\b(?:this (?:event|session|activity) (?:has been|is)|event status:) cancelled\b',text,re.I)))
 
 
-def series_dates(html, origin, item):
+def series_dates(html, origin, item, *, first_date=None, last_date=None, fetch_detail=None):
     _,main=soup_for(html)
     table=main.select_one('table[aria-labelledby="seriesEventsHeading"]')
     # The full-series page uses the same public event table but may omit the ID.
@@ -147,11 +154,16 @@ def series_dates(html, origin, item):
         cells=row.find_all('td')
         if not cells: continue
         if len(cells)<3 or not event_links(row,origin): raise CalendarError('Malformed series occurrence')
+        text=cells[1].get_text(' ',strip=True)
+        date=item['start_date'] if not DATE.search(text) and item['event_url'] in event_links(row,origin) else html_date(text)
+        if first_date and date<first_date or last_date and date>last_date: continue
         if cells[2].get_text(' ',strip=True).casefold()!=item['venue_name'].casefold():
             raise CalendarError('Series venue conflict')
-        if cells[0].get_text(' ',strip=True).casefold()!=item['title'].casefold():
+        title_link=cells[0].find('a')
+        if title_link.get_text(' ',strip=True).casefold()!=item['title'].casefold():
             raise CalendarError('Series programme conflict')
         if re.search(r'\bcancelled\b',row.get_text(' ',strip=True),re.I): continue
+        if len(cells)>4 and re.search(r'\b(?:full|sold out)\b',cells[4].get_text(' ',strip=True),re.I): continue
         clocks=TIME.findall(cells[1].get_text(' ',strip=True))
         expected=TIME.findall(item['time_text'])[0]
         if clocks and dt.datetime.strptime(clocks[0].upper(),'%I:%M %p')!=dt.datetime.strptime(expected.upper(),'%I:%M %p'):
@@ -160,11 +172,14 @@ def series_dates(html, origin, item):
             restriction=cells[3].get_text(' ',strip=True).removeprefix('Ages ').strip()
             if restriction and restriction!=item['age_range']:
                 raise CalendarError('Series age restriction conflict')
-        text=cells[1].get_text(' ',strip=True)
-        if not DATE.search(text) and item['event_url'] in event_links(row,origin):
-            dates.append(item['start_date'])  # Today/Tomorrow for this exact known occurrence.
-        else:
-            dates.append(html_date(text))
+        if fetch_detail:
+            detail_url=event_links(row,origin)[0]
+            occurrence=parse_detail(fetch_detail(detail_url).html,detail_url)
+            if occurrence['cancelled'] or occurrence['unavailable']: continue
+            if occurrence['start_date']!=date: raise CalendarError('Series/detail date conflict')
+            for key in ('title','venue_name','time_text','age_range','cost_text'):
+                if occurrence[key]!=item[key]: raise CalendarError('Series/detail '+key+' conflict')
+        dates.append(date)
     return dates
 
 
@@ -229,22 +244,37 @@ def collect(source, today, fetch, robots, *, max_requests=80, max_seconds=300, f
         links=event_links(index,origin)
         if not links: raise CalendarError('No current calendar supply; retain as unresolved empty source')
     items=[]
+    window_days=int(source.get('collection_days',30))
+    if not 1<=window_days<=90: raise CalendarError('Collection window must be 1–90 days')
+    cutoff=(today+dt.timedelta(days=window_days)).isoformat()
+    stats['collection_window_days']=window_days
     for url in links:
         item=parse_detail(get(url).html,url)
+        series_checked=False
         if not item['family_evidence']:
             stats['missing_family_evidence']=stats.get('missing_family_evidence',0)+1; continue
+        if (item['listing_type']=='unknown' and item['series_url']
+                and REGULAR_PROGRAMME.search(item['title'])
+                and REGULAR_PROGRAMME.search(item['description'])):
+            published=series_dates(get(item['series_url']).html,item['series_url'],item,first_date=today.isoformat(),last_date=cutoff,fetch_detail=get)
+            if set(published)-set(item['occurrence_dates']):
+                item['listing_type']='activity'
+                item['recurrence']='Named regular programme with published series occurrences'
+                item['occurrence_dates']+=published
+                series_checked=True
         if item['listing_type']=='unknown':
             stats['classification_unresolved']=stats.get('classification_unresolved',0)+1; continue
-        if item['cancelled']:
-            stats['cancelled']=stats.get('cancelled',0)+1; continue
+        if item['cancelled'] or item['unavailable']:
+            reason='cancelled' if item['cancelled'] else 'unavailable'
+            stats[reason]=stats.get(reason,0)+1; continue
         if fetch_ics and item['ics_url']:
             occurrence=parse_ics(get(item['ics_url'],True).html)
             if occurrence['cancelled']: continue
             if occurrence['date']!=item['start_date'] or occurrence['time_text']!=item['time_text']:
                 raise CalendarError('HTML/ICS occurrence conflict')
-        if item['listing_type']=='activity' and item['series_url']:
-            item['occurrence_dates']+=series_dates(get(item['series_url']).html,item['series_url'],item)
-        item['occurrence_dates']=sorted({d for d in item['occurrence_dates'] if d>=today.isoformat()})
+        if item['listing_type']=='activity' and item['series_url'] and not series_checked:
+            item['occurrence_dates']+=series_dates(get(item['series_url']).html,item['series_url'],item,first_date=today.isoformat(),last_date=cutoff,fetch_detail=get)
+        item['occurrence_dates']=sorted({d for d in item['occurrence_dates'] if today.isoformat()<=d<=cutoff})
         if not item['occurrence_dates']: continue
         item['description']+=' '+(item['booking_text'] or '')
         if item['listing_type']=='activity':
