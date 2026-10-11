@@ -112,4 +112,15 @@ class MyLibraryTests(unittest.TestCase):
         festival=HTML.replace('Every Monday','').replace('Bounce and Rhyme and Storytime','Annual family festival')
         self.assertEqual(parse_detail(festival,URL)['listing_type'],'event')
 
+    def test_live_validation_cannot_hide_failed_sources_or_unstable_keys(self):
+        from scripts.validate_mylibrary_sources import SOURCES, acceptance_errors
+        results=[dict(name=name,status='ok',rows=[dict(dedupe_key=name)],
+                      stats=dict(gemini_logical_calls=0)) for name,_ in SOURCES for _ in (1,2)]
+        self.assertEqual(acceptance_errors(results),[])
+        results[-1]['status']='failed_403'
+        self.assertTrue(acceptance_errors(results))
+        results[-1]['status']='ok'
+        results[-1]['rows']=[dict(dedupe_key='changed')]
+        self.assertTrue(acceptance_errors(results))
+
 if __name__=='__main__': unittest.main()
