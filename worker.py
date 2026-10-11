@@ -39,6 +39,7 @@ import datetime as dt
 from gemini_usage import BudgetExhausted
 
 import hashlib
+import inspect
 import json
 import os
 import re
@@ -70,6 +71,8 @@ MIN_CONFIDENCE = float(os.environ.get("MIN_CONFIDENCE", "0.0"))
 
 MAX_CHARS = int(os.environ.get("MAX_CHARS", "40000"))
 MAX_JSONLD_CHARS = int(os.environ.get("MAX_JSONLD_CHARS", "12000"))
+EXTRACTION_CACHE_VERSION = os.environ.get("EXTRACTION_CACHE_VERSION", "2")
+EXTRACTION_REFRESH_DAYS = max(0, int(os.environ.get("EXTRACTION_REFRESH_DAYS", "7")))
 OXFORDSHIRE_MAX_PAGES = int(os.environ.get("OXFORDSHIRE_MAX_PAGES", "3"))
 
 PAUSE_SECONDS = float(os.environ.get("PAUSE_SECONDS", "2"))
@@ -404,7 +407,7 @@ DATE_HINT_PATTERN = re.compile(
 )
 
 
-def extract_eventish_html(soup, base_url):
+def extract_eventish_html(soup, base_url, *, remove_captured=False):
     """Preserve event-like table/list rows in a compact, highly visible block.
 
     Some council pages are perfectly server-rendered but their event listings
@@ -412,6 +415,7 @@ def extract_eventish_html(soup, base_url):
     rows/cards makes those pages much more reliable without requiring a browser.
     """
     rows = []
+    captured = []
 
     # Tables are especially common on council event pages.
     for tr in soup.find_all("tr"):
@@ -429,6 +433,7 @@ def extract_eventish_html(soup, base_url):
             if links:
                 line += " | LINKS: " + " ; ".join(dict.fromkeys(links))
             rows.append(line)
+            captured.append(tr)
 
     # If there is no useful table, preserve common event-card/list containers -
     # but only ones that plausibly reference a date or link to their own page.
@@ -461,11 +466,18 @@ def extract_eventish_html(soup, base_url):
                 if line not in seen:
                     seen.add(line)
                     rows.append(line)
+                    captured.append(node)
                 if len(rows) >= 150:
                     break
             if rows:
                 break
 
+    if remove_captured:
+        # Only remove nodes actually represented within the bounded compact block.
+        # Uncaptured text remains available, including surrounding audience rules.
+        for node in captured[:150]:
+            if node.name is not None:
+                node.decompose()
     return "\n".join(rows[:150])
 
 
@@ -552,7 +564,11 @@ def prepare_content(html, url):
         soup = BeautifulSoup(page_html, "html.parser")
         jsonld_all.extend(extract_jsonld_events(soup))
 
-        compact = extract_eventish_html(soup, page_url)
+        # Navigation/filter tables are not listings and must not pollute the hash.
+        for tag in soup(["nav", "footer", "form", "script", "style", "noscript", "svg", "iframe"]):
+            tag.decompose()
+
+        compact = extract_eventish_html(soup, page_url, remove_captured=True)
         if compact:
             event_blocks.append(f"PAGE: {page_url}\n{compact}")
 
@@ -564,6 +580,8 @@ def prepare_content(html, url):
     if event_blocks:
         parts.append("COMPACT EVENT LISTINGS FROM HTML:\n" + "\n\n".join(event_blocks))
     if jsonld_all:
+        jsonld_all = list({json.dumps(item, sort_keys=True, ensure_ascii=False): item
+                           for item in jsonld_all}.values())
         jsonld_text = json.dumps(jsonld_all, ensure_ascii=False)
         parts.append("STRUCTURED EVENT DATA (schema.org JSON-LD):\n" + jsonld_text[:MAX_JSONLD_CHARS])
     if visible_blocks:
@@ -589,6 +607,41 @@ def prepare_content(html, url):
     else:
         method = "llm"
     return content, method
+
+
+def extraction_cache_hash(content, source, today):
+    """Version normalized evidence and output-affecting extraction settings.
+
+    Hash the whole evidence, not only its listing titles: changes to audience,
+    prices and surrounding restrictions must invalidate a successful extraction.
+    The successful timestamp bounds freshness without adding database columns.
+    """
+    prompt_rules = build_prompt(source, source["url"], "", dt.date(2000, 1, 1))
+    settings = {"version": EXTRACTION_CACHE_VERSION,
+                "method": FETCH_ENGINE, "model": MODEL,
+                "relevance": MIN_RELEVANCE, "confidence": MIN_CONFIDENCE,
+                "min_days": MIN_EVENT_DAYS_FROM_TODAY,
+                "max_days": MAX_EVENT_DAYS_FROM_TODAY,
+                "ongoing": ALLOW_ONGOING_EVENTS,
+                "thinking": os.environ.get("GEMINI_THINKING_LEVEL", ""),
+                "extractor": inspect.getsource(make_gemini_caller),
+                "validator": inspect.getsource(clean_events),
+                "provider_settings": {key: os.environ.get(key, "") for key in (
+                    "LLM_PROVIDER", "LLM_MODEL", "EXTRACTION_LLM_PROVIDER", "EXTRACTION_LLM_MODEL")},
+                "rules": prompt_rules}
+    evidence = re.sub(r"\s+", " ", content).strip()
+    return hashlib.sha256((json.dumps(settings, sort_keys=True) + "\n" + evidence).encode("utf-8")).hexdigest()
+
+
+def extraction_cache_fresh(source, today):
+    if EXTRACTION_REFRESH_DAYS == 0:
+        return False
+    try:
+        checked = dt.datetime.fromisoformat(source["last_success_at"].replace("Z", "+00:00"))
+        age = (today - checked.date()).days
+        return 0 <= age < EXTRACTION_REFRESH_DAYS
+    except (KeyError, TypeError, ValueError):
+        return False
 
 
 # ----------------------------------------------------------------------------
@@ -854,7 +907,7 @@ def process_source(source, extract, today):
     # date hint is enough to let Gemini interpret the rendered listing.
     date_hints = len(DATE_HINT_PATTERN.findall(content))
     if FETCH_ENGINE == "browser" and date_hints < MIN_DATE_HINTS_FOR_LLM:
-        new_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()
+        new_hash = extraction_cache_hash(content, source, today)
         return (
             "ok_zero", [], new_hash,
             f"0 extracted, 0 kept; skipped Gemini: only {date_hints} date-like signal(s); "
@@ -862,8 +915,10 @@ def process_source(source, extract, today):
             stats,
         )
 
-    new_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()
-    if new_hash == source.get("last_hash") and source.get("last_success_at"):
+    new_hash = extraction_cache_hash(content, source, today)
+    if (new_hash == source.get("last_hash") and extraction_cache_fresh(source, today)
+            and os.environ.get("FORCE_REREAD", "false").strip().lower() != "true"):
+        stats["cache_hits"] = 1
         return "unchanged", [], new_hash, "Page unchanged since last run", stats
 
     prompt = build_prompt(source, url, content, today)
@@ -1211,6 +1266,7 @@ def main():
     total_events = 0
     zero_event_sources = []
     run_stats = {
+        "cache_hits": 0,
         "extracted": 0, "kept": 0, "invalid": 0, "no_date": 0, "event_finished": 0,
         "event_too_far_in_future": 0, "low_relevance": 0, "not_parent_activity": 0,
         "missing_family_evidence": 0, "low_confidence": 0, "duplicates": 0,

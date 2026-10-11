@@ -55,3 +55,53 @@ python scripts/test_news_locality.py
 Rollback: clear the extraction repository variables to restore default thinking and remove the optional limits. Revert this PR to restore the previous request/retry implementation and news workflow behavior. Do not close #65 until the remaining quality/savings acceptance criteria are met.
 
 References: [Google thinking](https://ai.google.dev/gemini-api/docs/thinking), [SDK](https://googleapis.github.io/python-genai/), [Batch API](https://ai.google.dev/gemini-api/docs/batch-api).
+# Follow-up input and cache controls (#65)
+
+Compact HTML listing nodes are removed from the visible-text fallback only after
+their text and links have been captured. Surrounding audience restrictions remain.
+Navigation, forms and footers are excluded before listing selection; duplicate
+JSON-LD objects are collapsed. JSON-LD and visible evidence remain separate where
+they may contain different fields. No complete event is inferred deterministically
+from incomplete metadata.
+
+The existing `sources.last_hash` stores a versioned digest of normalized evidence,
+prompt rules, extractor/schema factory, validation function, model/provider
+configuration and output-affecting date/relevance settings. This intentionally
+hashes surrounding evidence too: ignoring it could miss changed age restrictions.
+`EXTRACTION_CACHE_VERSION` defaults to `2`; bump it when changing helper/schema
+behavior that is not captured by the factory/validator fingerprint.
+`EXTRACTION_REFRESH_DAYS` defaults to `7`; `0` disables cache skips. Invalid, future
+or expired success timestamps trigger processing. `FORCE_REREAD=true` bypasses the
+cache in both collector entry points. Successful state is still advanced only by
+the existing post-persistence path; dry runs do not change it. `cache_hits` is
+included in the run summary. Existing hashes invalidate once on rollout, so the
+first run may cost more; use existing attempt/token budgets to spread that work.
+Rollback by reverting this change; that likewise causes one cache invalidation.
+
+Offline saved-page comparison on 11 October 2026 against main `772a075`:
+
+| Saved source page | Before chars | After chars | Removed |
+| --- | ---: | ---: | ---: |
+| Cardiff Hubs events | 13,837 | 9,114 | 4,723 |
+| Museum Wales what's on | 33,817 | 32,255 | 1,562 |
+
+These are prepared-character counts from two listing pages (no detail expansion),
+not billed tokens, production savings or quality equivalence. Repeat with
+`python scripts/measure_extraction_input.py SNAPSHOT_DIR --baseline REF`; JSON
+snapshots contain `url` and `documents` (URL/HTML pairs). The tool uses saved input
+and makes no network, model or database calls. Include browser pages, detail pages,
+news and Originals before claiming representative savings.
+
+Google's [Batch API](https://ai.google.dev/gemini-api/docs/batch-api) offers 50% of
+interactive pricing with a target turnaround of up to 24 hours. This reduces cost,
+not tokens. Do not enable it for scheduled slot-specific Originals or fresh news
+without a durable job/result queue, retry/idempotency handling and freshness checks
+at result application. Keep synchronous extraction for now; evaluate Batch on a
+bounded historical/backfill job once billing and quality baselines are available.
+
+Still outstanding: durable per-detail/result caching (requires storage lifecycle
+and reconciliation), complete deterministic structured-listing extraction,
+truncation/coverage evaluation, grounded family-evidence fixes from #69, and a
+representative live before/after comparison. The Gemini credit blocker prevents
+that comparison today. #66 selects providers per worker; neither issue currently
+implements dynamic cost/quality-based allocation or automatic fallback.
