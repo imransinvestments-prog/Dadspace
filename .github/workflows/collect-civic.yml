@@ -12,6 +12,10 @@ on:
       - ".github/workflows/collect-civic.yml"
   workflow_dispatch:
     inputs:
+      llm_source_review_only:
+        description: "Three real-source LLM extractions only; no database access"
+        type: boolean
+        default: false
       llm_smoke_only:
         description: "One synthetic LLM check only; no source collection or database access"
         type: boolean
@@ -87,7 +91,7 @@ jobs:
           if-no-files-found: error
 
   collect:
-    if: github.event_name != 'pull_request' && !inputs.llm_smoke_only
+    if: github.event_name != 'pull_request' && !inputs.llm_smoke_only && !inputs.llm_source_review_only
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -179,3 +183,40 @@ jobs:
           name: llm-smoke
           path: llm-smoke.json
           if-no-files-found: ignore
+
+  provider-source-review:
+    if: github.event_name == 'workflow_dispatch' && inputs.llm_source_review_only && !inputs.llm_smoke_only
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Three real sources, no database access
+        run: python scripts/review_llm_sources.py
+        env:
+          LLM_PROVIDER: ${{ inputs.smoke_provider }}
+          LLM_MODEL: ${{ inputs.smoke_model }}
+          LLM_RUN_MAX_ATTEMPTS: '3'
+          LLM_RUN_TOKEN_BUDGET: '30000'
+          LLM_MAX_RETRIES: '0'
+          LLM_MAX_OUTPUT_TOKENS: '3000'
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          FETCH_ENGINE: requests
+          DRY_RUN: 'true'
+          REQUEST_TIMEOUT: '15'
+          MAX_RETRIES: '0'
+          ACTIVITY_DETAIL_PAGES: '2'
+          MAX_CHARS: '18000'
+          PAUSE_SECONDS: '1'
+          GEMINI_TIMEOUT_SECONDS: '60'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: llm-source-review
+          path: llm-source-review/
+          if-no-files-found: error
