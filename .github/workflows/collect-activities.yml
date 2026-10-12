@@ -66,6 +66,13 @@ jobs:
           path: event-backup/
           retention-days: 30
           if-no-files-found: error
+      - name: Restore reviewed extraction results
+        if: vars.EXTRACTION_PER_PAGE == 'true'
+        uses: actions/cache/restore@v5
+        with:
+          path: .extraction-cache/
+          key: extraction-activities-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: extraction-activities-v1-
       - name: Run collector
         run: python events_worker.py
         env:
@@ -78,6 +85,8 @@ jobs:
           GEMINI_RUN_TOKEN_BUDGET: ${{ vars.GEMINI_EXTRACTION_TOKEN_BUDGET }}
           GEMINI_RUN_MAX_ATTEMPTS: ${{ vars.GEMINI_EXTRACTION_MAX_ATTEMPTS }}
           GEMINI_MAX_OUTPUT_TOKENS: ${{ vars.GEMINI_EXTRACTION_MAX_OUTPUT_TOKENS }}
+          EXTRACTION_PER_PAGE: ${{ vars.EXTRACTION_PER_PAGE || 'false' }}
+          EXTRACTION_CACHE_DIR: .extraction-cache
           WORKER_NAME: "events-activities"
           CATEGORIES: "activities"
           FETCH_ENGINE: "browser"
@@ -92,3 +101,9 @@ jobs:
           LIMIT: ${{ inputs.limit || '0' }}
           DRY_RUN: ${{ inputs.dry_run || 'true' }}
           FORCE_REREAD: ${{ inputs.force_reread || 'false' }}
+      - name: Save committed extraction results
+        if: ${{ success() && vars.EXTRACTION_PER_PAGE == 'true' && (inputs.dry_run || 'true') == 'false' }}
+        uses: actions/cache/save@v5
+        with:
+          path: .extraction-cache/
+          key: extraction-activities-v1-${{ github.run_id }}-${{ github.run_attempt }}

@@ -99,9 +99,49 @@ without a durable job/result queue, retry/idempotency handling and freshness che
 at result application. Keep synchronous extraction for now; evaluate Batch on a
 bounded historical/backfill job once billing and quality baselines are available.
 
-Still outstanding: durable per-detail/result caching (requires storage lifecycle
-and reconciliation), complete deterministic structured-listing extraction,
-truncation/coverage evaluation, grounded family-evidence fixes from #69, and a
-representative live before/after comparison. The Gemini credit blocker prevents
-that comparison today. #66 selects providers per worker; neither issue currently
-implements dynamic cost/quality-based allocation or automatic fallback.
+## Per-page results and complete structured sources
+
+The optional per-page path processes every fetched document independently and
+merges results through the existing cleaner. `EXTRACTION_PER_PAGE=true` enables
+it for a bounded evaluation; alternatively a reviewed source may supply
+`extraction_mode=per_page`. Neither is activated by this PR. The first extraction
+may make more calls than the whole-source path; compare warm-cache savings against
+that cold-run cost before enabling it. Existing shared attempt/token budgets apply.
+
+Set `EXTRACTION_CACHE_DIR` to a disposable persistent directory. Civic/activity
+workflows restore and save `.extraction-cache` using GitHub Actions cache only when
+the per-page variable is true. Live runs save committed entries; dry runs never
+write entries or save the Actions cache. Entries contain public extracted fields,
+not credentials or source HTML. Eviction/corruption is an ordinary cache miss.
+Unchanged documents reuse raw results, which pass current validation again. A
+changed document calls AI once; all fetched documents are included in the source
+digest even beyond the combined input limit. Hits retain their original extraction
+date. Expired historical URL entries are pruned on successful cache commit.
+
+New entries stay in memory until both listing persistence and a source-status
+update returning that source ID succeed. Budget/fatal failures, malformed page
+results, cleaner exceptions, failed/empty status updates, row save failures and
+dry runs discard them. Relative-date evidence includes today's date in its digest,
+so a cached interpretation of "tomorrow" cannot carry into another day. A page
+reaching the input limit fails before its AI request; partial sources do not commit.
+
+`structured_events_complete=true` opts a reviewed source into strict JSON-LD
+parsing. Every record must have a visible title/description and family signal,
+timezone-aware start/end, venue/address/postcode, GBP price and a linked event URL.
+Recurring schedules, incomplete/ambiguous records and ungrounded descriptions
+fall back as a whole. Existing date/family/venue validation still applies. No
+source is opted in by this change; review metadata coverage first. This flag is
+an in-memory/source-configuration capability, not a new database column/migration.
+
+`scripts/review_usage.py` and civic `usage_review_only` provide a four-request
+OpenAI before/after comparison on the same saved Cardiff/Museum Wales HTML. The
+job pins #69's provider module and uses a 40,000-token run budget with no retries;
+production collection is skipped and no database credentials are supplied. It
+saves raw/accepted output, token usage, missing/added listings and changed fields.
+This validates input preparation with OpenAI; it does not establish Gemini parity
+or representative savings across news, Originals and browser/detail sources.
+
+Still outstanding: production representative measurement, full listing coverage
+and grounded family-evidence validation (#69), Gemini-specific comparison while
+billing is blocked, and source-by-source activation review. #66 selects providers
+per worker; neither issue implements dynamic allocation or automatic fallback.

@@ -48,6 +48,13 @@ class ExtractionCacheTests(unittest.TestCase):
         with patch.object(worker, 'EXTRACTION_REFRESH_DAYS', 0):
             self.assertFalse(worker.extraction_cache_fresh(self.source, self.today))
 
+    def test_relative_date_results_do_not_carry_into_another_day(self):
+        next_day = self.today + dt.timedelta(days=1)
+        self.assertNotEqual(worker.extraction_cache_hash('Family event tomorrow', self.source, self.today),
+                            worker.extraction_cache_hash('Family event tomorrow', self.source, next_day))
+        self.assertEqual(worker.extraction_cache_hash('Family event October 15 2026', self.source, self.today),
+                         worker.extraction_cache_hash('Family event October 15 2026', self.source, next_day))
+
     def test_cache_hit_avoids_call_and_force_reread_calls(self):
         html = self.html + '<p>' + 'Extra evidence. ' * 30 + '</p>'
         content, _ = worker.prepare_content(html, self.source['url'])

@@ -616,6 +616,7 @@ def extraction_cache_hash(content, source, today):
     prices and surrounding restrictions must invalidate a successful extraction.
     The successful timestamp bounds freshness without adding database columns.
     """
+    from structured_events import complete_events
     prompt_rules = build_prompt(source, source["url"], "", dt.date(2000, 1, 1))
     settings = {"version": EXTRACTION_CACHE_VERSION,
                 "method": FETCH_ENGINE, "model": MODEL,
@@ -626,6 +627,13 @@ def extraction_cache_hash(content, source, today):
                 "thinking": os.environ.get("GEMINI_THINKING_LEVEL", ""),
                 "extractor": inspect.getsource(make_gemini_caller),
                 "validator": inspect.getsource(clean_events),
+                "page_extraction": inspect.getsource(extract_documents),
+                "structured_parser": inspect.getsource(complete_events),
+                "source_mode": {key: source.get(key) for key in (
+                    "source_adapter", "structured_events_complete", "extraction_mode")},
+                "relative_date_anchor": today.isoformat() if re.search(
+                    r'\b(?:today|tomorrow|yesterday|(?:this|next|last)\s+(?:week|month|year|monday|tuesday|wednesday|thursday|friday|saturday|sunday))\b',
+                    content, re.I) else None,
                 "provider_settings": {key: os.environ.get(key, "") for key in (
                     "LLM_PROVIDER", "LLM_MODEL", "EXTRACTION_LLM_PROVIDER", "EXTRACTION_LLM_MODEL")},
                 "rules": prompt_rules}
@@ -642,6 +650,69 @@ def extraction_cache_fresh(source, today):
         return 0 <= age < EXTRACTION_REFRESH_DAYS
     except (KeyError, TypeError, ValueError):
         return False
+
+
+def extract_documents(documents, source, extract, today, stats):
+    """Optional reviewed per-page extraction; cache entries remain staged."""
+    from structured_events import complete_events
+    from extraction_cache import ResultCache
+
+    docs = documents if isinstance(documents, list) else [(source['url'], documents)]
+    if source.get('structured_events_complete') is True:
+        structured = complete_events(docs, extract_jsonld_events)
+        if structured is not None:
+            stats['structured_events'] = len(structured)
+            return structured
+    if not (source.get('extraction_mode') == 'per_page'
+            or os.environ.get('EXTRACTION_PER_PAGE', 'false').lower() == 'true'):
+        content, _ = prepare_content(docs, source['url'])
+        prompt = build_prompt(source, source['url'], content, today)
+        stats['gemini_logical_calls'] = 1
+        stats['gemini_prompt_chars'] = len(prompt)
+        return extract(prompt)
+
+    directory = os.environ.get('EXTRACTION_CACHE_DIR', '')
+    cache = getattr(extract, 'result_cache', None)
+    if directory and cache is None:
+        cache = ResultCache(directory, EXTRACTION_REFRESH_DAYS)
+        extract.result_cache = cache
+    raw = []
+    force = os.environ.get('FORCE_REREAD', 'false').lower() == 'true'
+    for page_url, html in docs:
+        content, _ = prepare_content(html, page_url)
+        # A truncated page is not a complete extraction unit. No partial success.
+        if len(content) >= MAX_CHARS:
+            raise ValueError('Prepared page reaches input limit; review coverage before per-page extraction')
+        if len(content.strip()) < 200:
+            raise ValueError('Detail/listing page has insufficient readable evidence')
+        page_source = dict(source, url=page_url)
+        digest = extraction_cache_hash(content, page_source, today)
+        cached = cache.get(source['id'], page_url, digest, today) if cache and not force else None
+        if cached is not None:
+            stats['detail_cache_hits'] = stats.get('detail_cache_hits', 0) + 1
+            raw.extend(cached)
+            continue
+        prompt = build_prompt(source, page_url, content, today)
+        stats['gemini_logical_calls'] = stats.get('gemini_logical_calls', 0) + 1
+        stats['gemini_prompt_chars'] = stats.get('gemini_prompt_chars', 0) + len(prompt)
+        page_raw = extract(prompt)
+        if not isinstance(page_raw, list) or not all(isinstance(x, dict) for x in page_raw):
+            raise ValueError('Incomplete or invalid page extraction')
+        # All cached raw results pass the current cleaner again, including date,
+        # relevance and venue validation. Newly staged results commit after writes.
+        raw.extend(page_raw)
+        if cache:
+            cache.stage(source['id'], page_url, digest, today, page_raw)
+    return raw
+
+
+def finish_result_cache(extract, source_id, persisted):
+    cache = getattr(extract, 'result_cache', None)
+    if cache is not None:
+        if persisted:
+            cache.commit(source_id)
+        else:
+            cache.discard(source_id)
 
 
 # ----------------------------------------------------------------------------
@@ -915,15 +986,18 @@ def process_source(source, extract, today):
             stats,
         )
 
-    new_hash = extraction_cache_hash(content, source, today)
+    per_page = (source.get('extraction_mode') == 'per_page'
+                or os.environ.get('EXTRACTION_PER_PAGE', 'false').lower() == 'true')
+    hash_content = content
+    if per_page:
+        hash_content = '\n'.join(extraction_cache_hash(prepare_content(html, page_url)[0],
+            dict(source, url=page_url), today) for page_url, html in documents)
+    new_hash = extraction_cache_hash(hash_content, source, today)
     if (new_hash == source.get("last_hash") and extraction_cache_fresh(source, today)
+            and not per_page
             and os.environ.get("FORCE_REREAD", "false").strip().lower() != "true"):
         stats["cache_hits"] = 1
         return "unchanged", [], new_hash, "Page unchanged since last run", stats
-
-    prompt = build_prompt(source, url, content, today)
-    stats["gemini_logical_calls"] = stats.get("gemini_logical_calls", 0) + 1
-    stats["gemini_prompt_chars"] = stats.get("gemini_prompt_chars", 0) + len(prompt)
 
     # Capture cumulative Gemini counters before/after this source so the run log
     # can show exactly which sources spend tokens. Retries are included.
@@ -931,12 +1005,20 @@ def process_source(source, extract, today):
     before = {k: int(metrics.get(k, 0) or 0) for k in (
         "api_attempts", "input_chars_sent", "prompt_tokens", "output_tokens", "thinking_tokens", "total_tokens"
     )}
-    raw = extract(prompt)
+    try:
+        raw = extract_documents(documents, source, extract, today, stats)
+    except Exception:
+        finish_result_cache(extract, source['id'], False)
+        raise
     after = {k: int(metrics.get(k, 0) or 0) for k in before}
     for key in before:
         stats[f"gemini_{key}"] = max(0, after[key] - before[key])
 
-    rows = clean_events(raw, source, url, method, today, stats)
+    try:
+        rows = clean_events(raw, source, url, method, today, stats)
+    except Exception:
+        finish_result_cache(extract, source['id'], False)
+        raise
     status = "ok" if rows else "ok_zero"
     message = f"{stats.get('extracted', 0)} extracted, {len(rows)} kept"
     if status == "ok_zero":
@@ -1266,6 +1348,7 @@ def main():
     total_events = 0
     zero_event_sources = []
     run_stats = {
+        "detail_cache_hits": 0, "structured_events": 0,
         "cache_hits": 0,
         "extracted": 0, "kept": 0, "invalid": 0, "no_date": 0, "event_finished": 0,
         "event_too_far_in_future": 0, "low_relevance": 0, "not_parent_activity": 0,
@@ -1345,9 +1428,17 @@ def main():
 
             if not DRY_RUN:
                 try:
-                    db.table("sources").update(update).eq("id", source["id"]).execute()
+                    response = db.table("sources").update(update).eq("id", source["id"]).execute()
+                    # Confirm the update actually affected this source before
+                    # admitting results to the reusable cache (RLS can return []).
+                    persisted = (status in ('ok', 'ok_zero') and isinstance(response.data, list)
+                                 and any(row.get('id') == source['id'] for row in response.data))
+                    finish_result_cache(extract, source['id'], persisted)
                 except Exception as exc:
+                    finish_result_cache(extract, source['id'], False)
                     print(f"      warning: could not update this source's status ({type(exc).__name__}: {exc})")
+            else:
+                finish_result_cache(extract, source['id'], False)
 
             time.sleep(PAUSE_SECONDS)
 
