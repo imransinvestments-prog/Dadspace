@@ -1,0 +1,1633 @@
+{
+  "checked_at": "2026-10-12T11:21:28.627937+00:00",
+  "database_writes": 0,
+  "gemini_calls": 0,
+  "note": "Evidence signals require programme association/currentness review; readable alone is not qualified supply.",
+  "pages": [
+    {
+      "url": "https://bilinguasing-birmingham-south.classforkids.io",
+      "checked_at": "2026-10-12T11:21:09.976923+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://city-of-birmingham-rockets-basketball-club.classforkids.io",
+      "checked_at": "2026-10-12T11:21:09.976923+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://creative-arts-kids.classforkids.io",
+      "checked_at": "2026-10-12T11:21:09.977921+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://drama-tots-birmingham-south.classforkids.io",
+      "checked_at": "2026-10-12T11:21:09.977921+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://edgeahead.classforkids.io",
+      "checked_at": "2026-10-12T11:21:09.977921+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://firstgymnastics-south-manchester.classforkids.io?venueName=CHS South (PS)",
+      "checked_at": "2026-10-12T11:21:09.977921+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://footy4kidz.classforkids.io?venueName=Pendleton Sixth Form College",
+      "checked_at": "2026-10-12T11:21:10.307547+00:00",
+      "http_status": 200,
+      "page_title": "Footy4kidz",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://footy4kidz.classforkids.io?venueName=Salford Sports Village",
+      "checked_at": "2026-10-12T11:21:10.363438+00:00",
+      "http_status": 200,
+      "page_title": "Footy4kidz",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://gymlab-hackney.classforkids.io",
+      "checked_at": "2026-10-12T11:21:10.368836+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://haycambridge.co.uk/activities/child-family-centres-stay-and-play/",
+      "checked_at": "2026-10-12T11:21:10.431428+00:00",
+      "http_status": 200,
+      "page_title": "Child & Family Centres - Stay and Play",
+      "status": "readable",
+      "schedule_evidence": [
+        "Weekly Stay and Play sessions for children under the age of 5 and their carers/parents, held in Child & Family Centres across Cambridge.",
+        "Tuesday: 10 - 11.30am, Fawcett Child and Family Zone Wednesday: 1.30 - 3pm Chesterton Child and Family Centre Thursday: 10am - 12noon Berwick Bridge Child and Family Zone (Term time only) Thursday: 1.30pm - 3pm North Cambridge Child and Fam"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://haycambridge.co.uk/activities/hands-on-the-circle-honc-stay-and-play-groups/",
+      "checked_at": "2026-10-12T11:21:10.431428+00:00",
+      "http_status": 200,
+      "page_title": "Hands on the Circle (HonC!) Stay and Play Groups",
+      "status": "readable",
+      "schedule_evidence": [
+        "These weekly stay and play sessions in Trumpington are for babies and pre-school children and their parents/carers. They are run by Connected Lives, a charity that supports healthy connections through building resilience and attachment.",
+        "The sessions run on Wednesday mornings at Clay Farm Community Centre. For full details and timings visit the Connected Lives website.",
+        "There is a small weekly charge to attend the Stay and Play sessions. Full details on the Connected Lives website ."
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://haycambridge.co.uk/activities/merry-go-round-toy-library/",
+      "checked_at": "2026-10-12T11:21:10.527427+00:00",
+      "http_status": 200,
+      "page_title": "Merry-Go-Round Toy Library",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://haycambridge.co.uk/activities/mini-athletics/",
+      "checked_at": "2026-10-12T11:21:10.634598+00:00",
+      "http_status": 200,
+      "page_title": "Mini Athletics",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://haycambridge.co.uk/activities/sports-coaching-sessions-for-children-gk-fit/",
+      "checked_at": "2026-10-12T11:21:10.667294+00:00",
+      "http_status": 200,
+      "page_title": "Sports Coaching Sessions for Children - GK Fit",
+      "status": "readable",
+      "schedule_evidence": [
+        "Daytime sessions are held on week days during term time in Central Cambridge, Orchard Park and Trumpington. There are 30 minute multi-skills sessions for children aged between 3 and 6 years. There are also 60 minute sports sessions for chil",
+        "There are also after school netball coaching sessions suitable for all children (girls and boys) aged between 7 and 13 years. These are held weekly in term time at Girton Rec and Netherhall School."
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://haycambridge.co.uk/activities/wildlings-at-milton-country-park/",
+      "checked_at": "2026-10-12T11:21:10.705303+00:00",
+      "http_status": 200,
+      "page_title": "Wildlings at Milton Country Park",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://haysouthcambs.co.uk/activities/junior-parkrun/",
+      "checked_at": "2026-10-12T11:21:10.764538+00:00",
+      "http_status": 200,
+      "page_title": "junior parkrun",
+      "status": "readable",
+      "schedule_evidence": [
+        "junior parkrun is a free, fun and friendly weekly 2k community event for 4-14 year olds. Walk, jog, run or spectate \u2013 it's up to you! It is not a race; there is no time limit and no-one finishes last. If you are an adult & you'd like to hel",
+        "Every Sunday at 9am children and young people pull on their trainers and walk, run or spectate at parkruns. These friendly, volunteer-run events are free to take part in but pre-registration via the parkrun website is essential before your "
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://haysouthcambs.co.uk/activities/minime-mindfulness-cambridge/",
+      "checked_at": "2026-10-12T11:21:11.699286+00:00",
+      "http_status": 200,
+      "page_title": "MiniMe Mindfulness Cambridge",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://haysouthcambs.co.uk/activities/saturdads-at-st-johns-church-waterbeach/",
+      "checked_at": "2026-10-12T11:21:11.797960+00:00",
+      "http_status": 200,
+      "page_title": "Saturdads at St John's Church Waterbeach",
+      "status": "readable",
+      "schedule_evidence": [
+        "Held in the Church Room at St John's Church in Waterbeach every month, Saturdads is a chance for dads, grandads and male carers to get together with their babies, toddlers and children for playing, chatting and sausage butties. For people o",
+        "it's a good way to get out of the house and have something to do on a Saturday morning;",
+        "Held on the first Saturday of each month between 9.30am - 11.30am (not including December - to check when it is on, visit the Church Facebook page ). No need to book, just drop-in and stay for as long as you want."
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://haysouthcambs.co.uk/activities/scouts-in-south-cambridgeshire/",
+      "checked_at": "2026-10-12T11:21:12.182075+00:00",
+      "http_status": 200,
+      "page_title": "Beavers, Cubs & Scouts in South Cambridgeshire",
+      "status": "readable",
+      "schedule_evidence": [
+        "For 4-25 year olds, Beavers, Cubs & Scouts is where youngsters make friends, learn skills & share life-changing experiences. Weekly meetings are run throughout South Cambridgeshire; if you are an adult & still want to join the fun, why not "
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://haysouthcambs.co.uk/activities/shake-rattle-and-roll/",
+      "checked_at": "2026-10-12T11:21:12.480461+00:00",
+      "http_status": 200,
+      "page_title": "Shake, Rattle and Roll",
+      "status": "readable",
+      "schedule_evidence": [
+        "Inclusive and interactive live weekly music sessions in Histon for parents and young children (age 0 to 5). After singing, dancing and interacting together by the end of each session you'll both be feeling great!",
+        "Aimed at 0 to 5 year olds and their grown-ups, Shake, Rattle and Roll\u2019s musicians will take you and your child(ren) through a selection of songs, encouraging everyone to play along with shakers and drums, or dance with pom-poms, scarves, pa",
+        "Find out more and book the weekly session you\u2019d like to attend on the website."
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://haysouthcambs.co.uk/activities/sing-and-sign/",
+      "checked_at": "2026-10-12T11:21:12.663948+00:00",
+      "http_status": 200,
+      "page_title": "Sing and Sign",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY=storytime&ENTRY_NAME=BS&ENTRY_TYPE=K&SORTS=ESD.SDTE%5DESD.STIM&GQ=storytime&ISGLB=0&NRECS=10&QRY=EVSEDTE%3A+%22%3E%3D+TODAY%22&QRYTEXT=Upcoming+events&_SPQ=2",
+      "checked_at": "2026-10-12T11:21:12.700750+00:00",
+      "http_status": 200,
+      "page_title": "Anywhere: storytime (Keywords) and Upcoming events",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY_NAME=BS&ENTRY=lego&ENTRY_TYPE=K&NRECS=10&SORTS=ESD.SDTE%5DESD.STIM&SEARCH_FORM=%2Fcgi-bin%2Fspydus.exe%2FMSGTRN%2FOPAC%2FBSEARCH_EVSES&_SPQ=1&FORM_DESC=Events+-+Quick+search&ISGLB=0&GQ=lego&EDTE=%3E%3DTODAY&EDTE_TEXT=Upcoming+events",
+      "checked_at": "2026-10-12T11:21:13.638260+00:00",
+      "http_status": 200,
+      "page_title": "Anywhere: lego (Keywords) and Upcoming events",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://hoop.co.uk/Tumble-Tots-Trafford/CdmES8g-tumble-tots-at-altrincham-fc/",
+      "checked_at": "2026-10-12T11:21:13.667073+00:00",
+      "http_status": 200,
+      "page_title": "Tumble Tots at Altrincham FC",
+      "status": "readable",
+      "schedule_evidence": [
+        "08:30 \u2013 11:10",
+        "Repeats weekly",
+        "Walking-2yrs 2-3 & 3-4yrs Thursdays timetable: 9.30am-10.15am    Walking - 2 Years 10.30am-11.15am   2 - 3 Years 11.25am-12.10pm   3 Yrs - School Age Our progressive play programme is designed to develop your child\u2019s physical skills. Using "
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://hoop.co.uk/e/CdAXHY/",
+      "checked_at": "2026-10-12T11:21:14.230259+00:00",
+      "http_status": 200,
+      "page_title": "Little Forts Playgroup",
+      "status": "readable",
+      "schedule_evidence": [
+        "08:45 \u2013 10:15",
+        "Repeats weekly",
+        "Little Forts Playgroup is a fun and engaging stay-and-play group for babies and toddlers, offering two weekly sessions at Roe Green Church Hall. Our sessions include a variety of toys, games, and activities designed to stimulate learning th"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://hoop.co.uk/eos-dance/273iNl-big-small/",
+      "checked_at": "2026-10-12T11:21:14.279366+00:00",
+      "http_status": 200,
+      "page_title": "Big & Small",
+      "status": "readable",
+      "schedule_evidence": [
+        "08:30 \u2013 09:00",
+        "Repeats weekly"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://hoop.co.uk/ivystreetfamilycentre/MZL6ih-stay-and-play-with-messy-play/",
+      "checked_at": "2026-10-12T11:21:14.365277+00:00",
+      "http_status": 200,
+      "page_title": "Stay and Play with Messy Play",
+      "status": "readable",
+      "schedule_evidence": [
+        "08:30 \u2013 10:30",
+        "Repeats weekly"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://hoop.co.uk/ivystreetfamilycentre/ltCFVT-all-day-play/",
+      "checked_at": "2026-10-12T11:21:14.500546+00:00",
+      "http_status": 200,
+      "page_title": "All day play!",
+      "status": "readable",
+      "schedule_evidence": [
+        "08:00 \u2013 14:00",
+        "Repeats weekly",
+        "Bring your lunch and spend the day in Ivy Street! Drop in any time between 9.30am and 3pm for play and fun. Meet other parents and carers and have lunch together as part of our Ivy Street Family."
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://hoop.co.uk/little-kickers-Brighton/2clPEW-little-kickers-wallington-roundshaw-park-18months-4-years-free-trial-available/",
+      "checked_at": "2026-10-12T11:21:14.597824+00:00",
+      "http_status": 200,
+      "page_title": "Little Kickers - Wallington Roundshaw Park - 18months - 4 years (FREE TRIAL AVAILABLE)",
+      "status": "readable",
+      "schedule_evidence": [
+        "08:30 \u2013 09:10",
+        "Repeats weekly",
+        "I took my son Toby and my nephew Jamie yesterday and they absolutely loved it! There was some really fun games that all of the children seemed to love. Richard was very good with the children and very patient with my little boy who can be a"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://hoop.co.uk/novas-freestyle-martial-arts-academy/NXRbZw-mini-novas-martial-arts-classes/",
+      "checked_at": "2026-10-12T11:21:14.780339+00:00",
+      "http_status": 200,
+      "page_title": "Mini novas martial arts classes",
+      "status": "readable",
+      "schedule_evidence": [
+        "16:00 \u2013 16:45",
+        "Martial arts for children age 3 to 6 years teaching    martial arts skills and drills whilst improving discipline, confidence, motor skills, coordination and so much more. Mondays, Tuesdays and Thursdays at 5pm. Saturdays at 1pm"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://hoop.co.uk/phonics-with-robot-reg-warrington-and-knutsford/zIVcihD-preschool-phonics-with-robot-reg-knutsford/",
+      "checked_at": "2026-10-12T11:21:14.799584+00:00",
+      "http_status": 200,
+      "page_title": "Preschool Phonics with Robot Reg Knutsford",
+      "status": "readable",
+      "schedule_evidence": [
+        "09:45 \u2013 10:30",
+        "Repeats weekly"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://hoop.co.uk/tiny-tunes/FmfmPa-tiny-tunes-music-dance-classes-3-mths-5-yrs-clapham/",
+      "checked_at": "2026-10-12T11:21:14.883965+00:00",
+      "http_status": 200,
+      "page_title": "Tiny Tunes Music & Dance Classes 3 mths - 5 yrs: Clapham",
+      "status": "readable",
+      "schedule_evidence": [
+        "09:15 \u2013 09:55",
+        "Repeats weekly"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://hoop.co.uk/water-babies-south-manchester/P7hY63-water-babies-at-waterside-hotel-didsbury/",
+      "checked_at": "2026-10-12T11:21:14.897832+00:00",
+      "http_status": 200,
+      "page_title": "Water Babies at Waterside Hotel, Didsbury",
+      "status": "readable",
+      "schedule_evidence": [
+        "10:45 \u2013 13:15",
+        "Repeats weekly",
+        "We\u2019ll teach you to teach your baby to swim. From lesson one, we\u2019ll get your little one used to the sensation of the water, developing their natural instincts and transforming these into core aquatic skills. By the end of our programme, your"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://hoop.co.uk/water-babies-south-manchester/ukd8lf-water-babies-at-delamere-school-flixton/",
+      "checked_at": "2026-10-12T11:21:15.087334+00:00",
+      "http_status": 200,
+      "page_title": "Water Babies at Delamere School, Flixton",
+      "status": "readable",
+      "schedule_evidence": [
+        "11:15 \u2013 16:45",
+        "Repeats weekly",
+        "We\u2019ll teach you to teach your baby to swim. From lesson one, we\u2019ll get your little one used to the sensation of the water, developing their natural instincts and transforming these into core aquatic skills. By the end of our programme, your"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://junior-sport-stars.classforkids.io?venueName=Chorlton CE Primary School",
+      "checked_at": "2026-10-12T11:21:15.325727+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://lambeth-tigers-football-club.classforkids.io",
+      "checked_at": "2026-10-12T11:21:15.375677+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://little-movers-gym.classforkids.io",
+      "checked_at": "2026-10-12T11:21:15.445860+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://ni4kids.com/whatson/family-lego-club/2027-05-01/",
+      "checked_at": "2026-10-12T11:21:15.461792+00:00",
+      "http_status": 200,
+      "page_title": "Family Lego Club",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://proelite-southlondon.classforkids.io",
+      "checked_at": "2026-10-12T11:21:15.474778+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://salfordcommunityleisure.co.uk/event/afterschool-lego-club-5/",
+      "checked_at": "2026-10-12T11:21:15.523557+00:00",
+      "http_status": 404,
+      "status": "failed_fetch",
+      "reason": "404 Client Error: Not Found for url: https://salfordcommunityleisure.co.uk/event/afterschool-lego-club-5/"
+    },
+    {
+      "url": "https://salfordcommunityleisure.co.uk/event/baby-gym-53/",
+      "checked_at": "2026-10-12T11:21:15.711294+00:00",
+      "http_status": 404,
+      "status": "failed_fetch",
+      "reason": "404 Client Error: Not Found for url: https://salfordcommunityleisure.co.uk/event/baby-gym-53/"
+    },
+    {
+      "url": "https://salfordcommunityleisure.co.uk/event/bayse-multi-sports-4/",
+      "checked_at": "2026-10-12T11:21:15.751087+00:00",
+      "http_status": 404,
+      "status": "failed_fetch",
+      "reason": "404 Client Error: Not Found for url: https://salfordcommunityleisure.co.uk/event/bayse-multi-sports-4/"
+    },
+    {
+      "url": "https://tumble-tots-bolton.classforkids.io?venueName=Manchester Maccabi Community and Sports Club (Prestwich)",
+      "checked_at": "2026-10-12T11:21:15.846506+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://unity-fc.classforkids.io",
+      "checked_at": "2026-10-12T11:21:15.855287+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://vibedance.classforkids.io",
+      "checked_at": "2026-10-12T11:21:15.868547+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://we-will-rock-you-project.classforkids.io?venueName=The Edge Theatre & Arts Centre",
+      "checked_at": "2026-10-12T11:21:16.258214+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://wolfpack-dance-collective.classforkids.io",
+      "checked_at": "2026-10-12T11:21:16.273791+00:00",
+      "http_status": 200,
+      "page_title": "Classes",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://www.coventry.gov.uk/events/event/8828/tots-time",
+      "checked_at": "2026-10-12T11:21:16.287947+00:00",
+      "http_status": 200,
+      "page_title": "Tots Time",
+      "status": "readable",
+      "schedule_evidence": [
+        "Tots Time at St Andrew's Church | Baby and Toddler Groups in Coventry Timetable: Thursdays (fortnightly)",
+        "Pop along to this small friendly group who meet together to chat, play and sing. They meet fortnightly on a Thursday during term time.",
+        "Date: 9th July 2026 - 8th January 2027 Recurs every other week on Thursday.",
+        "Time: 10:00 - 11:15"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.explore-essex.com/whats-on/family-forest-school-at-danbury-country-park",
+      "checked_at": "2026-10-12T11:21:16.446788+00:00",
+      "http_status": 200,
+      "page_title": "Family Forest School: Danbury Country Park",
+      "status": "readable",
+      "schedule_evidence": [
+        "These sessions run one Saturday each month and are suitable for toddlers through to grandparents. Join our experienced L3 Forest School leader for some unique family time.",
+        "11:00am\u00a0-\u00a02:00pm",
+        "Times: 10:00am\u00a0-\u00a012:00pm",
+        "Times: 12:30pm\u00a0-\u00a02:30pm",
+        "Times: 10:00am\u00a0-\u00a04:00pm"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.explore-essex.com/whats-on/great-notley-junior-parkrun",
+      "checked_at": "2026-10-12T11:21:16.490321+00:00",
+      "http_status": 200,
+      "page_title": "Parkrun Junior: Great Notley Country Park",
+      "status": "readable",
+      "schedule_evidence": [
+        "Join this free, weekly 2k run aimed specifically at juniors aged 4 to 14 years-old.",
+        "Parkrun organise free, weekly, 2km timed runs around the world for children. They are open to everyone and take place at Great Notley Country Park every Sunday morning at 9am.",
+        "9:00am\u00a0-\u00a06:00pm",
+        "Times: 10:00am\u00a0-\u00a04:00pm",
+        "Free, weekly 5km timed runs.",
+        "Times: 9:00am\u00a0-\u00a010:00am",
+        "Times: 11:00am\u00a0-\u00a02:30pm"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.explore-essex.com/whats-on/home-education-sessions",
+      "checked_at": "2026-10-12T11:21:16.583994+00:00",
+      "http_status": 200,
+      "page_title": "Forest School sessions for Home Ed: Danbury Country Park",
+      "status": "readable",
+      "schedule_evidence": [
+        "Monday 14 September to 19 October (\u00a354.00 block)",
+        "Monday 2 November to 7 December (\u00a354.00 block)",
+        "12:30pm\u00a0-\u00a02:30pm",
+        "Times: 10:00am\u00a0-\u00a012:00pm",
+        "Times: 10:00am\u00a0-\u00a04:00pm",
+        "Times: 11:00am\u00a0-\u00a02:00pm"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.explore-essex.com/whats-on/jaywick-we-are-music",
+      "checked_at": "2026-10-12T11:21:16.590908+00:00",
+      "http_status": 404,
+      "status": "failed_fetch",
+      "reason": "404 Client Error: Not Found for url: https://www.explore-essex.com/whats-on/jaywick-we-are-music"
+    },
+    {
+      "url": "https://www.explore-essex.com/whats-on/north-essex-astronomical-society-at-great-notley",
+      "checked_at": "2026-10-12T11:21:16.647418+00:00",
+      "http_status": 200,
+      "page_title": "North Essex Astronomical Society at Great Notley",
+      "status": "readable",
+      "schedule_evidence": [
+        "7:00pm\u00a0-\u00a09:30pm",
+        "Times: 10:00am\u00a0-\u00a04:00pm",
+        "Free, weekly 5km timed runs.",
+        "Times: 9:00am\u00a0-\u00a010:00am",
+        "Times: 11:00am\u00a0-\u00a02:30pm"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.explore-essex.com/whats-on/sky-ropes-and-sky-ropes-junior-at-great-notley",
+      "checked_at": "2026-10-12T11:21:16.700504+00:00",
+      "http_status": 200,
+      "page_title": "Sky Ropes and Sky Ropes Junior at Great Notley",
+      "status": "readable",
+      "schedule_evidence": [
+        "Adventure sessions take place from 10.00am - 11.15am, 11.30am - 12.45pm, 1.30pm - 2.45pm, and 3.00pm - 4.15pm.",
+        "Junior sessions take place from 10.30am - 11.00am, 12.00pm - 12.30pm, 2.00pm - 2.30pm and 3.30pm - 4.00pm.",
+        "11:00am\u00a0-\u00a02:30pm",
+        "Times: 10:00am\u00a0-\u00a04:00pm",
+        "Free, weekly 5km timed runs.",
+        "Times: 9:00am\u00a0-\u00a010:00am",
+        "Join this free, weekly 2k run aimed specifically at juniors aged 4 to 14 years-old.",
+        "Times: 9:00am\u00a0-\u00a06:00pm"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.explore-essex.com/whats-on/woodland-play-at-danbury-country-park",
+      "checked_at": "2026-10-12T11:21:17.024886+00:00",
+      "http_status": 200,
+      "page_title": "Woodland Play under five's Forest School: Danbury Country Park",
+      "status": "readable",
+      "schedule_evidence": [
+        "Aimed at the under-fives, this series of term time woodland play sessions at Danbury Country Park includes nature activities, forest crafts, imagination, physical play and building things.",
+        "Monday 14 September to 19 October (\u00a354.00 block)",
+        "Monday 2 November to 7 December (\u00a354.00 block)",
+        "10:00am\u00a0-\u00a012:00pm",
+        "Times: 12:30pm\u00a0-\u00a02:30pm",
+        "Times: 10:00am\u00a0-\u00a04:00pm",
+        "Times: 11:00am\u00a0-\u00a02:00pm"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.hertfordshire.gov.uk/babyrhymetime",
+      "checked_at": "2026-10-12T11:21:17.133170+00:00",
+      "http_status": 200,
+      "status": "redirect_requires_review",
+      "target": "https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY=baby+rhyme+time&ENTRY_NAME=BS&ENTRY_TYPE=K&SORTS=ESD.SDTE%5DESD.STIM&GQ=baby+rhyme+time&ISGLB=0&NRECS=10&QRY=EVSEDTE%3A+%22%3E%3D+TODAY%22&QRYTEXT=Upcoming+events&_SPQ=2"
+    },
+    {
+      "url": "https://www.historicenvironment.scot/whats-on/all/overview/?eventId=f09d9743-70f1-4b49-ac18-ae6d00cbd008",
+      "checked_at": "2026-10-12T11:21:17.326846+00:00",
+      "http_status": 200,
+      "page_title": "Holyrood Family Adventure",
+      "status": "readable",
+      "schedule_evidence": [
+        "Selected dates from Thursday 15 October 2026 to Wednesday 17 February 2027",
+        "1pm to 3pm",
+        "Parking: Broad Pavement Car Park (off Queen's Drive, next to Holyrood Palace). Parking charges apply, Mon-Fri, 8.30am to 5.30pm. Free for blue badge holders",
+        "Road closures: Holyrood Park roads are closed every Saturday and Sunday. Local roads and car parks may be subject to closures."
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.kidsdaysout.co.uk/kids-days-out-england/buckinghamshire/item/hillingdon-theatre-dance-centre.html",
+      "checked_at": "2026-10-12T11:21:17.465570+00:00",
+      "http_status": 200,
+      "page_title": "Hillingdon Theatre Dance Centre",
+      "status": "readable",
+      "schedule_evidence": [
+        "Monday, 12 October 2026"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.library.live/our-answers-blog/storytimes-HXEoS",
+      "checked_at": "2026-10-12T11:21:17.597901+00:00",
+      "http_status": 200,
+      "page_title": "Storytimes for Under 5s",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://www.library.live/our-answers-blog/zd5f1gmmgrq47os18452njc80yev2o-A4pDD",
+      "checked_at": "2026-10-12T11:21:17.625262+00:00",
+      "http_status": 200,
+      "page_title": "Rhymetimes for Babies and Toddlers",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://www.nct.org.uk/events/beckenham-and-borders/nct-beckenham-borders-baby-cafe-58",
+      "checked_at": "2026-10-12T11:21:17.700549+00:00",
+      "http_status": 200,
+      "page_title": "NCT Beckenham & Borders Baby Cafe",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://www.nct.org.uk/events/chorley-and-leyland/nct-breastfeeding-and-infant-feeding-support-group-32",
+      "checked_at": "2026-10-12T11:21:17.803713+00:00",
+      "http_status": 200,
+      "page_title": "NCT Breastfeeding and Infant Feeding Support Group",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://www.nct.org.uk/events/east-lancashire/nct-breastfeeding-and-infant-feeding-support-group-168",
+      "checked_at": "2026-10-12T11:21:17.894001+00:00",
+      "http_status": 200,
+      "page_title": "NCT Breastfeeding and Infant Feeding Support Group",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://www.nct.org.uk/events/medway/nct-medway-walk-talk-11",
+      "checked_at": "2026-10-12T11:21:18.200160+00:00",
+      "http_status": 200,
+      "page_title": "NCT Medway Walk & Talk",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://www.nct.org.uk/events/plymouth-and-west-devon/nct-plymouth-and-west-devon-walk-and-talk-19",
+      "checked_at": "2026-10-12T11:21:18.280019+00:00",
+      "http_status": 200,
+      "page_title": "NCT Plymouth and West Devon Walk and Talk",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://www.nct.org.uk/events/staines-ashford-egham-surrounding-areas/nct-staines-ashford-and-egham-nearly-new-sale-1",
+      "checked_at": "2026-10-12T11:21:18.346204+00:00",
+      "http_status": 200,
+      "page_title": "NCT Staines, Ashford and Egham Nearly New Sale",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://www.nct.org.uk/events/sutton-coldfield/nct-sutton-coldfield-baby-child-first-aid-course-23",
+      "checked_at": "2026-10-12T11:21:18.368762+00:00",
+      "http_status": 200,
+      "page_title": "NCT Sutton Coldfield Baby & Child First Aid Course",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://www.nct.org.uk/events/watford/nct-watford-baby-child-first-aid-9",
+      "checked_at": "2026-10-12T11:21:18.395018+00:00",
+      "http_status": 403,
+      "status": "failed_fetch",
+      "reason": "403 Client Error: Forbidden for url: https://www.nct.org.uk/events/watford/nct-watford-baby-child-first-aid-9"
+    },
+    {
+      "url": "https://www.northumberlandnationalpark.org.uk/whats-on/forest-school-make-walltown-home-2-2-4/",
+      "checked_at": "2026-10-12T11:21:18.535225+00:00",
+      "http_status": 200,
+      "page_title": "Forest School: Make Walltown Home",
+      "status": "readable",
+      "schedule_evidence": [
+        "Dates Fridays: 4th, 11th, 18th, 25th (September)",
+        "Friday 2nd, 9th (October)",
+        "10:00am to 12:00pm"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.oxfordshire.gov.uk/events/family-activities/thursday-board-games",
+      "checked_at": "2026-10-12T11:21:18.607296+00:00",
+      "http_status": 200,
+      "page_title": "Thursday board games",
+      "status": "readable",
+      "schedule_evidence": [
+        "We've got Chess, Scrabble, Junior Scrabble and Boggle available to play in the library. \u00a0Pop by Thursday mornings 10am-12noon and/or Thursday afternoons 2pm-4.30pm - bring your friends or see who's already here and join in. \u00a0All welcome to ",
+        "Thursday 15 Oct 2026, 10am-4.30pm",
+        "Thursday 22 Oct 2026, 10am-4.30pm",
+        "Thursday 29 Oct 2026, 10am-4.30pm",
+        "Thursday 5 Nov 2026, 10am-4.30pm",
+        "Thursday 12 Nov 2026, 10am-4.30pm"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.oxfordshire.gov.uk/events/libraries-oxfordshire-museum/woodstock-rhymetime",
+      "checked_at": "2026-10-12T11:21:18.761330+00:00",
+      "http_status": 200,
+      "page_title": "Woodstock: Rhymetime",
+      "status": "readable",
+      "schedule_evidence": [
+        "Friday 16 Oct 2026, 10.30am-11am",
+        "Friday 23 Oct 2026, 10.30am-11am",
+        "Friday 30 Oct 2026, 10.30am-11am",
+        "Friday 6 Nov 2026, 10.30am-11am",
+        "Friday 13 Nov 2026, 10.30am-11am"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.oxfordshire.gov.uk/events/libraries/bicester-stay-and-play",
+      "checked_at": "2026-10-12T11:21:18.799198+00:00",
+      "http_status": 200,
+      "page_title": "Bicester: Stay and Play",
+      "status": "readable",
+      "schedule_evidence": [
+        "Monday 19 Oct 2026, 9.30am-11.30am",
+        "Monday 26 Oct 2026, 9.30am-11.30am",
+        "Monday 2 Nov 2026, 9.30am-11.30am",
+        "Monday 9 Nov 2026, 9.30am-11.30am",
+        "Monday 16 Nov 2026, 9.30am-11.30am"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.oxfordshire.gov.uk/events/libraries/botley-rhymetime-0",
+      "checked_at": "2026-10-12T11:21:18.834005+00:00",
+      "http_status": 200,
+      "page_title": "Botley: Rhymetime",
+      "status": "readable",
+      "schedule_evidence": [
+        "Friday 16 Oct 2026, 10am-10.30am",
+        "Friday 23 Oct 2026, 10am-10.30am",
+        "Friday 30 Oct 2026, 10am-10.30am",
+        "Friday 6 Nov 2026, 10am-10.30am",
+        "Friday 13 Nov 2026, 10am-10.30am"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.oxfordshire.gov.uk/events/libraries/didcot-stay-and-play",
+      "checked_at": "2026-10-12T11:21:18.931198+00:00",
+      "http_status": 200,
+      "page_title": "Didcot: Stay and Play",
+      "status": "readable",
+      "schedule_evidence": [
+        "Thursday 15 Oct 2026, 9.30am-11am",
+        "Thursday 22 Oct 2026, 9.30am-11am",
+        "Thursday 29 Oct 2026, 9.30am-11am",
+        "Thursday 5 Nov 2026, 9.30am-11am",
+        "Thursday 12 Nov 2026, 9.30am-11am"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.oxfordshire.gov.uk/events/libraries/summertown-rhymetime",
+      "checked_at": "2026-10-12T11:21:18.974313+00:00",
+      "http_status": 200,
+      "page_title": "Summertown: Rhymetime",
+      "status": "readable",
+      "schedule_evidence": [
+        "Weekly drop-in, simply turn up on the day and join in!",
+        "Tuesday 13 Oct 2026, 11.30am-12pm",
+        "Tuesday 20 Oct 2026, 11.30am-12pm",
+        "Tuesday 27 Oct 2026, 11.30am-12pm",
+        "Tuesday 3 Nov 2026, 11.30am-12pm",
+        "Tuesday 10 Nov 2026, 11.30am-12pm"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.oxfordshire.gov.uk/events/libraries/wallingford-library-rhymetime",
+      "checked_at": "2026-10-12T11:21:19.140947+00:00",
+      "http_status": 200,
+      "page_title": "Wallingford Library: Rhymetime",
+      "status": "readable",
+      "schedule_evidence": [
+        "Friday 16 Oct 2026, 10am-10.30am",
+        "Friday 23 Oct 2026, 10am-10.30am",
+        "Friday 30 Oct 2026, 10am-10.30am",
+        "Friday 6 Nov 2026, 10am-10.30am",
+        "Friday 13 Nov 2026, 10am-10.30am"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.oxfordshire.gov.uk/events/libraries/wantage-grow-stay-and-play",
+      "checked_at": "2026-10-12T11:21:19.213456+00:00",
+      "http_status": 200,
+      "page_title": "Wantage: GroW - Stay and Play",
+      "status": "readable",
+      "schedule_evidence": [
+        "These sessions only run during term time.",
+        "Friday 16 Oct 2026, 10am-11.30am",
+        "Friday 23 Oct 2026, 10am-11.30am",
+        "Friday 30 Oct 2026, 10am-11.30am",
+        "Friday 6 Nov 2026, 10am-11.30am",
+        "Friday 13 Nov 2026, 10am-11.30am"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.redbridge.gov.uk/discover/events/adapted-water-sports-for-children-with-disabilities/",
+      "checked_at": "2026-10-12T11:21:19.267069+00:00",
+      "http_status": 200,
+      "page_title": "Adapted Water Sports (for children with disabilities)",
+      "status": "readable",
+      "schedule_evidence": [
+        "16:30 to 18:00"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.redbridge.gov.uk/discover/events/fab-club/",
+      "checked_at": "2026-10-12T11:21:19.300589+00:00",
+      "http_status": 200,
+      "page_title": "FAB Club",
+      "status": "readable",
+      "schedule_evidence": [
+        "Tuesday 20 October 2026",
+        "16:30 to 17:30"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.redbridge.gov.uk/discover/events/homework-help-club/",
+      "checked_at": "2026-10-12T11:21:19.383672+00:00",
+      "http_status": 200,
+      "page_title": "Homework Help Club",
+      "status": "readable",
+      "schedule_evidence": [
+        "12:00 to 13:00"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.redbridge.gov.uk/discover/events/pottery-and-sculpture-workshop/",
+      "checked_at": "2026-10-12T11:21:19.494753+00:00",
+      "http_status": 200,
+      "page_title": "Pottery and Sculpture Workshop",
+      "status": "readable",
+      "schedule_evidence": [],
+      "has_schedule_evidence": false
+    },
+    {
+      "url": "https://www.southwark.gov.uk/southwark-presents/kids-non-contact-boxing-classes",
+      "checked_at": "2026-10-12T11:21:19.530041+00:00",
+      "http_status": 200,
+      "page_title": "Kids' non-contact boxing classes",
+      "status": "readable",
+      "schedule_evidence": [
+        "Wednesday, 21 May 2025",
+        "Monday, 12 October 2026",
+        "Date: Mon 12 October 2026 Time: 3:17pm",
+        "3:17pm",
+        "Date: Tue 13 October 2026 Time: 3:17pm",
+        "Date: Wed 14 October 2026 Time: 3:17pm",
+        "Date: Thu 15 October 2026 Time: 3:17pm",
+        "Date: Fri 16 October 2026 Time: 3:17pm"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.southwark.gov.uk/southwark-presents/kids-yoga-peckham",
+      "checked_at": "2026-10-12T11:21:19.650580+00:00",
+      "http_status": 200,
+      "page_title": "Kids Yoga in Peckham",
+      "status": "readable",
+      "schedule_evidence": [
+        "Saturday, 22 March 2025",
+        "Saturday, 17 October 2026",
+        "Date: Sat 17 October 2026 Time: 10:00am - 11:00am",
+        "10:00am",
+        "11:00am",
+        "Date: Sat 24 October 2026 Time: 10:00am - 11:00am",
+        "Date: Sat 31 October 2026 Time: 10:00am - 11:00am",
+        "Date: Sat 07 November 2026 Time: 10:00am - 11:00am"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.southwark.gov.uk/southwark-presents/music-classes-under-fives-canada-water-library",
+      "checked_at": "2026-10-12T11:21:19.736584+00:00",
+      "http_status": 200,
+      "page_title": "Music Classes for Under-Fives - Canada Water Library",
+      "status": "readable",
+      "schedule_evidence": [
+        "Join us and enjoy, singing, musical instruments, playing, movement and lots of props that babies and toddlers enjoy.  Booking is essential. Please note: These sessions run term-time only.",
+        "Wednesday, 10 September 2025",
+        "Wednesday, 14 October 2026",
+        "Date: Wed 14 October 2026 Time: 10:30am - 11:30am",
+        "10:30am",
+        "11:30am",
+        "Date: Wed 21 October 2026 Time: 10:30am - 11:30am",
+        "Date: Wed 28 October 2026 Time: 10:30am - 11:30am"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.southwark.gov.uk/southwark-presents/sensory-storytelling-and-play-0",
+      "checked_at": "2026-10-12T11:21:19.772086+00:00",
+      "http_status": 200,
+      "page_title": "Sensory storytelling and play",
+      "status": "readable",
+      "schedule_evidence": [
+        "Thursday, 7 November 2024",
+        "Thursday, 5 November 2026",
+        "Date: Thu 05 November 2026 Time: 10:00am - 11:00am",
+        "10:00am",
+        "11:00am",
+        "Date: Thu 03 December 2026 Time: 10:00am - 11:00am",
+        "Date: Thu 07 January 2027 Time: 10:00am - 11:00am",
+        "Date: Thu 04 February 2027 Time: 10:00am - 11:00am"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.southwark.gov.uk/southwark-presents/storymakers-under-5s-free-class",
+      "checked_at": "2026-10-12T11:21:19.833780+00:00",
+      "http_status": 200,
+      "page_title": "StoryMakers - Under 5's free class",
+      "status": "readable",
+      "schedule_evidence": [
+        "An interactive storytelling, drama and music class for under 5's every Wednesday.",
+        "Wednesday, 18 June 2025",
+        "Wednesday, 14 October 2026",
+        "Date: Wed 14 October 2026 Time: 10:00am - 10:45am",
+        "10:00am",
+        "10:45am",
+        "Date: Wed 21 October 2026 Time: 10:00am - 10:45am",
+        "Date: Wed 28 October 2026 Time: 10:00am - 10:45am"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.southwark.gov.uk/southwark-presents/young-flyers-aerial-classes",
+      "checked_at": "2026-10-12T11:21:19.937375+00:00",
+      "http_status": 200,
+      "page_title": "Young Flyers Aerial Classes",
+      "status": "readable",
+      "schedule_evidence": [
+        "Aerial classes for ages 7-16yrs in hoop, slings, silks, trapeze and more! Mondays 4:15pm & 5:40pm Saturdays 9:15am & 10:45am",
+        "Monday, 1 September 2025",
+        "Saturday, 17 October 2026",
+        "Date: Sat 17 October 2026 Time: 9:15am - 11:50am",
+        "9:15am",
+        "11:50am",
+        "Date: Mon 19 October 2026 Time: 9:15am - 11:50am",
+        "Date: Sat 24 October 2026 Time: 9:15am - 11:50am"
+      ],
+      "has_schedule_evidence": true
+    },
+    {
+      "url": "https://www.southwark.gov.uk/southwark-presents/young-flyers-aerial-classes-0",
+      "checked_at": "2026-10-12T11:21:20.465847+00:00",
+      "http_status": 200,
+      "page_title": "Young Flyers Aerial Classes",
+      "status": "readable",
+      "schedule_evidence": [
+        "Aerial classes for children ages 7-16yrs Thursday 4:15pm Saturday 9:15am & 10:45am",
+        "Monday, 1 September 2025",
+        "Thursday, 15 October 2026",
+        "Date: Thu 15 October 2026 Time: 9:15am - 11:50am",
+        "9:15am",
+        "11:50am",
+        "Date: Sat 17 October 2026 Time: 9:15am - 11:50am",
+        "Date: Thu 22 October 2026 Time: 9:15am - 11:50am"
+      ],
+      "has_schedule_evidence": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "7cc6ecdd-7bc1-4d48-b3c7-4d99c5009557",
+      "title": "Botley: Rhymetime",
+      "url": "https://www.oxfordshire.gov.uk/events/libraries/botley-rhymetime-0",
+      "status": "readable"
+    },
+    {
+      "id": "2ed53532-f8af-48b7-ae0a-d561faf2a94a",
+      "title": "Footy4kidz - Pendleton Sixth Form College",
+      "url": "https://footy4kidz.classforkids.io?venueName=Pendleton Sixth Form College",
+      "status": "readable"
+    },
+    {
+      "id": "f3d447f6-fa61-47b4-9fb0-61b8a3e210fa",
+      "title": "Little Kickers - Croydon Lloyd Park - 18months - 2.5 years (FREE TRIAL AVAILABLE)",
+      "url": null,
+      "status": "missing_detail_link"
+    },
+    {
+      "id": "0a3ecc35-bbed-4381-8f04-9d32e7ac053e",
+      "title": "NCT Breastfeeding and Infant Feeding Support Group",
+      "url": "https://www.nct.org.uk/events/east-lancashire/nct-breastfeeding-and-infant-feeding-support-group-168",
+      "status": "readable"
+    },
+    {
+      "id": "6f6b01bd-526c-4ad5-902a-ac54ad9df182",
+      "title": "Kids' non-contact boxing classes",
+      "url": "https://www.southwark.gov.uk/southwark-presents/kids-non-contact-boxing-classes",
+      "status": "readable"
+    },
+    {
+      "id": "73b4f656-41ac-4037-9030-6d79e94c5636",
+      "title": "Saturdads at St John's Church Waterbeach",
+      "url": "https://haysouthcambs.co.uk/activities/saturdads-at-st-johns-church-waterbeach/",
+      "status": "readable"
+    },
+    {
+      "id": "4d892006-5304-42a1-b1e6-97f88dfb4cc6",
+      "title": "Water Babies at Delamere School, Flixton",
+      "url": "https://hoop.co.uk/water-babies-south-manchester/ukd8lf-water-babies-at-delamere-school-flixton/",
+      "status": "readable"
+    },
+    {
+      "id": "4c64d56e-b1f2-493d-bc72-157c3c657993",
+      "title": "Little Movers Gym",
+      "url": "https://little-movers-gym.classforkids.io",
+      "status": "readable"
+    },
+    {
+      "id": "4dea634d-3819-4e9d-9fdd-50f17a5ca6da",
+      "title": "Baby Rhyme Time",
+      "url": "https://www.hertfordshire.gov.uk/babyrhymetime",
+      "status": "redirect_requires_review"
+    },
+    {
+      "id": "3c057f8e-877f-4389-ac59-3c9d0512e190",
+      "title": "Edgeahead",
+      "url": "https://edgeahead.classforkids.io",
+      "status": "readable"
+    },
+    {
+      "id": "162848db-2615-4063-b761-589b2bc6b15c",
+      "title": "Tots Time",
+      "url": "https://www.coventry.gov.uk/events/event/8828/tots-time",
+      "status": "readable"
+    },
+    {
+      "id": "d439f22f-6a3a-4bb2-ac1e-1bb941d1cbef",
+      "title": "Sports Coaching Sessions for Children - GK Fit",
+      "url": "https://haycambridge.co.uk/activities/sports-coaching-sessions-for-children-gk-fit/",
+      "status": "readable"
+    },
+    {
+      "id": "bc4d1de4-183c-42ca-b4ad-f02104897a2c",
+      "title": "Forest School: Make Walltown Home",
+      "url": "https://www.northumberlandnationalpark.org.uk/whats-on/forest-school-make-walltown-home-2-2-4/",
+      "status": "readable"
+    },
+    {
+      "id": "e7efe008-8370-44ff-aef4-6e0fc4dc8a12",
+      "title": "Jaywick Martello Tower: We Are Music",
+      "url": "https://www.explore-essex.com/whats-on/jaywick-we-are-music",
+      "status": "failed_fetch"
+    },
+    {
+      "id": "ea6cd546-e854-400b-86a3-ce91213d29ae",
+      "title": "Pottery and Sculpture Workshop",
+      "url": "https://www.redbridge.gov.uk/discover/events/pottery-and-sculpture-workshop/",
+      "status": "readable"
+    },
+    {
+      "id": "0d54658f-16ee-48e5-b917-acd4ba9b7992",
+      "title": "Family Lego Club",
+      "url": "https://ni4kids.com/whatson/family-lego-club/2027-05-01/",
+      "status": "readable"
+    },
+    {
+      "id": "43a2aa58-9a3e-4f9b-817e-9a34630943dc",
+      "title": "Hillingdon Theatre Dance Centre",
+      "url": "https://www.kidsdaysout.co.uk/kids-days-out-england/buckinghamshire/item/hillingdon-theatre-dance-centre.html",
+      "status": "readable"
+    },
+    {
+      "id": "92bb3f62-1bd8-4db8-bd80-9072a4a03389",
+      "title": "Afterschool Lego Club",
+      "url": "https://salfordcommunityleisure.co.uk/event/afterschool-lego-club-5/",
+      "status": "failed_fetch"
+    },
+    {
+      "id": "bbc6d669-367b-4eb4-9cde-18372c8afe77",
+      "title": "Storytimes for Under 5s",
+      "url": "https://www.library.live/our-answers-blog/storytimes-HXEoS",
+      "status": "readable"
+    },
+    {
+      "id": "c1f46b26-f2a9-47f4-bd55-4ca54b3e8eb1",
+      "title": "Holyrood Family Adventure",
+      "url": "https://www.historicenvironment.scot/whats-on/all/overview/?eventId=f09d9743-70f1-4b49-ac18-ae6d00cbd008",
+      "status": "readable"
+    },
+    {
+      "id": "5628cafa-30c1-4872-af91-6707ec3247f8",
+      "title": "Baby Beeps - Hampstead Garden Suburb Free Church Hall",
+      "url": null,
+      "status": "missing_detail_link"
+    },
+    {
+      "id": "61bc9e23-3a43-440e-9a7f-d7220a8e71a3",
+      "title": "NCT Watford Baby & Child First Aid",
+      "url": "https://www.nct.org.uk/events/watford/nct-watford-baby-child-first-aid-9",
+      "status": "failed_fetch"
+    },
+    {
+      "id": "603514c6-75ec-4637-9b7d-892e321bfc0c",
+      "title": "Wallingford Library: Rhymetime",
+      "url": "https://www.oxfordshire.gov.uk/events/libraries/wallingford-library-rhymetime",
+      "status": "readable"
+    },
+    {
+      "id": "c3313707-4b2e-4e27-88d6-0b2e93c5c161",
+      "title": "Tumble Tots Bolton & Bury - Prestwich",
+      "url": "https://tumble-tots-bolton.classforkids.io?venueName=Manchester Maccabi Community and Sports Club (Prestwich)",
+      "status": "readable"
+    },
+    {
+      "id": "d618c764-5e0a-4702-b163-6da327f0b2cd",
+      "title": "Preschool Phonics with Robot Reg Knutsford",
+      "url": "https://hoop.co.uk/phonics-with-robot-reg-warrington-and-knutsford/zIVcihD-preschool-phonics-with-robot-reg-knutsford/",
+      "status": "readable"
+    },
+    {
+      "id": "096a997e-7eed-4929-b68a-0e295e022efe",
+      "title": "Unity FC",
+      "url": "https://unity-fc.classforkids.io",
+      "status": "readable"
+    },
+    {
+      "id": "4b5aaed1-3557-4050-bfc3-4840febdc43f",
+      "title": "Saturdads at St John's Church Waterbeach",
+      "url": "https://haysouthcambs.co.uk/activities/saturdads-at-st-johns-church-waterbeach/",
+      "status": "readable"
+    },
+    {
+      "id": "b65cacab-cdae-4af7-8848-e132f52f5c5e",
+      "title": "LEGO workshops",
+      "url": "https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY_NAME=BS&ENTRY=lego&ENTRY_TYPE=K&NRECS=10&SORTS=ESD.SDTE%5DESD.STIM&SEARCH_FORM=%2Fcgi-bin%2Fspydus.exe%2FMSGTRN%2FOPAC%2FBSEARCH_EVSES&_SPQ=1&FORM_DESC=Events+-+Quick+search&ISGLB=0&GQ=lego&EDTE=%3E%3DTODAY&EDTE_TEXT=Upcoming+events",
+      "status": "readable"
+    },
+    {
+      "id": "32e751f4-4285-4f7e-9639-685560fbf368",
+      "title": "Young Flyers Aerial Classes",
+      "url": "https://www.southwark.gov.uk/southwark-presents/young-flyers-aerial-classes-0",
+      "status": "readable"
+    },
+    {
+      "id": "292a7c1d-09da-4f6c-9c2c-f61d80198fbb",
+      "title": "CITY OF BIRMINGHAM ROCKETS BASKETBALL CLUB",
+      "url": "https://city-of-birmingham-rockets-basketball-club.classforkids.io",
+      "status": "readable"
+    },
+    {
+      "id": "f8b143e1-141f-4a0f-9a38-b11d69720659",
+      "title": "FAB Club",
+      "url": "https://www.redbridge.gov.uk/discover/events/fab-club/",
+      "status": "readable"
+    },
+    {
+      "id": "ccb2fe58-1e9a-42db-bc79-6cd5870f3e61",
+      "title": "Merry-Go-Round Toy Library",
+      "url": "https://haycambridge.co.uk/activities/merry-go-round-toy-library/",
+      "status": "readable"
+    },
+    {
+      "id": "29d05865-6ef3-41ed-94d4-5804eed4907a",
+      "title": "Woodland Play under five's Forest School: Danbury Country Park",
+      "url": "https://www.explore-essex.com/whats-on/woodland-play-at-danbury-country-park",
+      "status": "readable"
+    },
+    {
+      "id": "07f3ec2b-87cf-4ee0-95a1-5fd36d769afc",
+      "title": "Baby Gym",
+      "url": "https://salfordcommunityleisure.co.uk/event/baby-gym-53/",
+      "status": "failed_fetch"
+    },
+    {
+      "id": "368a7430-a54b-4c02-9af7-0d4702d740dc",
+      "title": "Rhymetimes for Babies and Toddlers",
+      "url": "https://www.library.live/our-answers-blog/zd5f1gmmgrq47os18452njc80yev2o-A4pDD",
+      "status": "readable"
+    },
+    {
+      "id": "d2c5c8d8-8323-4588-a617-9f1a932ff337",
+      "title": "Big & Small",
+      "url": "https://hoop.co.uk/eos-dance/273iNl-big-small/",
+      "status": "readable"
+    },
+    {
+      "id": "15d86134-ec49-4780-bd29-60e14793580f",
+      "title": "NCT Plymouth and West Devon Walk and Talk",
+      "url": "https://www.nct.org.uk/events/plymouth-and-west-devon/nct-plymouth-and-west-devon-walk-and-talk-19",
+      "status": "readable"
+    },
+    {
+      "id": "759c4833-d4fc-4957-aada-5ec60e4ed02d",
+      "title": "Footy4kidz - Salford Sports Village",
+      "url": "https://footy4kidz.classforkids.io?venueName=Salford Sports Village",
+      "status": "readable"
+    },
+    {
+      "id": "71873f7b-acfc-459d-8c08-3dace49d841a",
+      "title": "Didcot: Stay and Play",
+      "url": "https://www.oxfordshire.gov.uk/events/libraries/didcot-stay-and-play",
+      "status": "readable"
+    },
+    {
+      "id": "235ca29c-c686-498a-a6e2-26b80d77c9ea",
+      "title": "Gymlab",
+      "url": "https://gymlab-hackney.classforkids.io",
+      "status": "readable"
+    },
+    {
+      "id": "43ee5fe4-dd13-4aee-a7d1-fc2736c43d17",
+      "title": "Tumble Tots at Altrincham FC (Thursday)",
+      "url": "https://hoop.co.uk/Tumble-Tots-Trafford/CdmES8g-tumble-tots-at-altrincham-fc/",
+      "status": "readable"
+    },
+    {
+      "id": "2673c9e1-8d65-4b0f-80bc-1994031fab9d",
+      "title": "Music Classes for Under-Fives - Canada Water Library",
+      "url": "https://www.southwark.gov.uk/southwark-presents/music-classes-under-fives-canada-water-library",
+      "status": "readable"
+    },
+    {
+      "id": "ea4db9a9-6232-452a-b4d4-52293624d528",
+      "title": "Shake, Rattle and Roll",
+      "url": "https://haysouthcambs.co.uk/activities/shake-rattle-and-roll/",
+      "status": "readable"
+    },
+    {
+      "id": "6603ecef-4146-4efc-99e0-1164811feed5",
+      "title": "Page One Creative Workshops",
+      "url": null,
+      "status": "missing_detail_link"
+    },
+    {
+      "id": "1acad649-49e7-4edf-964d-fe9a20d2730a",
+      "title": "Adapted Water Sports (for children with disabilities)",
+      "url": "https://www.redbridge.gov.uk/discover/events/adapted-water-sports-for-children-with-disabilities/",
+      "status": "readable"
+    },
+    {
+      "id": "e33f67e2-c93d-4211-9f9f-bd5221a44f55",
+      "title": "Mini Athletics",
+      "url": "https://haycambridge.co.uk/activities/mini-athletics/",
+      "status": "readable"
+    },
+    {
+      "id": "af84a3a8-e805-4f7f-b2fc-0125acad07b3",
+      "title": "VIBEDANCE",
+      "url": "https://vibedance.classforkids.io",
+      "status": "readable"
+    },
+    {
+      "id": "229f7e5d-60dd-4346-b425-2ed1016dd944",
+      "title": "Sky Ropes and Sky Ropes Junior at Great Notley",
+      "url": "https://www.explore-essex.com/whats-on/sky-ropes-and-sky-ropes-junior-at-great-notley",
+      "status": "readable"
+    },
+    {
+      "id": "301ae80d-df77-41b6-954a-3be6d12ee300",
+      "title": "BAYSE Multi-Sports",
+      "url": "https://salfordcommunityleisure.co.uk/event/bayse-multi-sports-4/",
+      "status": "failed_fetch"
+    },
+    {
+      "id": "55198e9c-9294-420c-a56d-27be8acca6de",
+      "title": "Regal Ballet: Pre-Primary Ballet (3\u00bd to 5 years)",
+      "url": null,
+      "status": "missing_detail_link"
+    },
+    {
+      "id": "0b8e69fa-dac4-4b15-9649-08c6b9d85778",
+      "title": "We Will Rock You Project - The Edge Theatre & Arts Centre",
+      "url": "https://we-will-rock-you-project.classforkids.io?venueName=The Edge Theatre & Arts Centre",
+      "status": "readable"
+    },
+    {
+      "id": "ec2bb948-908f-4b67-9956-f01b79c76a92",
+      "title": "NCT Sutton Coldfield Baby & Child First Aid Course",
+      "url": "https://www.nct.org.uk/events/sutton-coldfield/nct-sutton-coldfield-baby-child-first-aid-course-23",
+      "status": "readable"
+    },
+    {
+      "id": "883404be-88c7-40f9-83c6-5b30e6e24e44",
+      "title": "Summertown: Rhymetime",
+      "url": "https://www.oxfordshire.gov.uk/events/libraries/summertown-rhymetime",
+      "status": "readable"
+    },
+    {
+      "id": "784d7eb2-c899-4816-b720-f8865dcaf635",
+      "title": "Water Babies at Waterside Hotel, Didsbury",
+      "url": "https://hoop.co.uk/water-babies-south-manchester/P7hY63-water-babies-at-waterside-hotel-didsbury/",
+      "status": "readable"
+    },
+    {
+      "id": "b4877b7a-1a12-4e93-a990-9915ae188dbc",
+      "title": "Lambeth Tigers Football Club",
+      "url": "https://lambeth-tigers-football-club.classforkids.io",
+      "status": "readable"
+    },
+    {
+      "id": "2c3c79bf-ebac-4afa-ab89-4cec834810fc",
+      "title": "MiniMe Mindfulness Cambridge",
+      "url": "https://haysouthcambs.co.uk/activities/minime-mindfulness-cambridge/",
+      "status": "readable"
+    },
+    {
+      "id": "2001286e-3787-4b95-9f30-7bdf661f017b",
+      "title": "LEGO Workshops",
+      "url": "https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY_NAME=BS&ENTRY=lego&ENTRY_TYPE=K&NRECS=10&SORTS=ESD.SDTE%5DESD.STIM&SEARCH_FORM=%2Fcgi-bin%2Fspydus.exe%2FMSGTRN%2FOPAC%2FBSEARCH_EVSES&_SPQ=1&FORM_DESC=Events+-+Quick+search&ISGLB=0&GQ=lego&EDTE=%3E%3DTODAY&EDTE_TEXT=Upcoming+events",
+      "status": "readable"
+    },
+    {
+      "id": "c8d4862b-8080-4dc7-a36a-def9888697e2",
+      "title": "Sensory storytelling and play",
+      "url": "https://www.southwark.gov.uk/southwark-presents/sensory-storytelling-and-play-0",
+      "status": "readable"
+    },
+    {
+      "id": "82046bfd-9588-467f-b628-f6917a8ba7e7",
+      "title": "Drama Tots Birmingham South",
+      "url": "https://drama-tots-birmingham-south.classforkids.io",
+      "status": "readable"
+    },
+    {
+      "id": "5b2dc682-a962-43e4-8e3f-f4d5ab9af126",
+      "title": "Child & Family Centres - Stay and Play",
+      "url": "https://haycambridge.co.uk/activities/child-family-centres-stay-and-play/",
+      "status": "readable"
+    },
+    {
+      "id": "6973c527-f576-42fe-955b-df4a142b0bc7",
+      "title": "Parkrun Junior: Great Notley Country Park",
+      "url": "https://www.explore-essex.com/whats-on/great-notley-junior-parkrun",
+      "status": "readable"
+    },
+    {
+      "id": "e3c262ed-b7b2-4e6f-9d66-ce61e4902be4",
+      "title": "Adapted Water Sports (for children with d...",
+      "url": "https://www.redbridge.gov.uk/discover/events/adapted-water-sports-for-children-with-disabilities/",
+      "status": "readable"
+    },
+    {
+      "id": "7bc1b368-052b-443b-b8c7-0e619dcf3fef",
+      "title": "All day play!",
+      "url": "https://hoop.co.uk/ivystreetfamilycentre/ltCFVT-all-day-play/",
+      "status": "readable"
+    },
+    {
+      "id": "5a874299-d504-436c-bd8f-8948283f5ad5",
+      "title": "NCT Medway Walk & Talk",
+      "url": "https://www.nct.org.uk/events/medway/nct-medway-walk-talk-11",
+      "status": "readable"
+    },
+    {
+      "id": "2b714fb6-5218-4077-99d7-b6802251ff3a",
+      "title": "Thursday board games",
+      "url": "https://www.oxfordshire.gov.uk/events/family-activities/thursday-board-games",
+      "status": "readable"
+    },
+    {
+      "id": "e39bd73a-e563-46ff-8629-72f10aadbf94",
+      "title": "Tumble Tots Bolton & Bury",
+      "url": "https://tumble-tots-bolton.classforkids.io?venueName=Manchester Maccabi Community and Sports Club (Prestwich)",
+      "status": "readable"
+    },
+    {
+      "id": "cbb7c805-0230-46a1-8ebc-d3cfcdca492b",
+      "title": "Mini novas martial arts classes",
+      "url": "https://hoop.co.uk/novas-freestyle-martial-arts-academy/NXRbZw-mini-novas-martial-arts-classes/",
+      "status": "readable"
+    },
+    {
+      "id": "4905ae57-f240-48b7-a38e-eefddd95188d",
+      "title": "Wolfpack Dance Collective",
+      "url": "https://wolfpack-dance-collective.classforkids.io",
+      "status": "readable"
+    },
+    {
+      "id": "dd4e8663-1d52-49ba-a7c1-edd1f1d93c65",
+      "title": "Beavers, Cubs & Scouts in South Cambridgeshire",
+      "url": "https://haysouthcambs.co.uk/activities/scouts-in-south-cambridgeshire/",
+      "status": "readable"
+    },
+    {
+      "id": "e4348942-60a7-4a33-a576-dc6c81f86f23",
+      "title": "Baby Rhyme Time",
+      "url": "https://www.hertfordshire.gov.uk/babyrhymetime",
+      "status": "redirect_requires_review"
+    },
+    {
+      "id": "c72ed9c3-a8df-4f89-923a-644daf80ffb5",
+      "title": "Kids Yoga in Peckham",
+      "url": "https://www.southwark.gov.uk/southwark-presents/kids-yoga-peckham",
+      "status": "readable"
+    },
+    {
+      "id": "669b75e6-335c-4b67-84c6-44f9e63946a2",
+      "title": "BilinguaSing Birmingham South",
+      "url": "https://bilinguasing-birmingham-south.classforkids.io",
+      "status": "readable"
+    },
+    {
+      "id": "f4b39ed5-9dcb-4b32-9d65-11cd42b54122",
+      "title": "Hands on the Circle (HonC!) Stay and Play Groups",
+      "url": "https://haycambridge.co.uk/activities/hands-on-the-circle-honc-stay-and-play-groups/",
+      "status": "readable"
+    },
+    {
+      "id": "6ec0ad69-3fdf-404b-aca9-dfa71e6a5d3e",
+      "title": "North Essex Astronomical Society at Great Notley",
+      "url": "https://www.explore-essex.com/whats-on/north-essex-astronomical-society-at-great-notley",
+      "status": "readable"
+    },
+    {
+      "id": "9ee3175d-6482-452c-8f17-171283cb0e42",
+      "title": "Homework Help Club",
+      "url": "https://www.redbridge.gov.uk/discover/events/homework-help-club/",
+      "status": "readable"
+    },
+    {
+      "id": "a95c7cce-23a5-4294-84c9-12e4885d7dda",
+      "title": "NCT Staines, Ashford and Egham Nearly New Sale",
+      "url": "https://www.nct.org.uk/events/staines-ashford-egham-surrounding-areas/nct-staines-ashford-and-egham-nearly-new-sale-1",
+      "status": "readable"
+    },
+    {
+      "id": "835d7ffd-f6f4-4701-9345-c3a56223c12e",
+      "title": "First Gymnastics South Manchester",
+      "url": "https://firstgymnastics-south-manchester.classforkids.io?venueName=CHS South (PS)",
+      "status": "readable"
+    },
+    {
+      "id": "cc4e76e3-b40d-4d2d-9553-8337825bf52a",
+      "title": "Tiny Tunes Music & Dance Classes 3 mths - 5 yrs: Clapham",
+      "url": "https://hoop.co.uk/tiny-tunes/FmfmPa-tiny-tunes-music-dance-classes-3-mths-5-yrs-clapham/",
+      "status": "readable"
+    },
+    {
+      "id": "084db16d-03b4-445a-a799-b5693e90d2f5",
+      "title": "Bicester: Stay and Play",
+      "url": "https://www.oxfordshire.gov.uk/events/libraries/bicester-stay-and-play",
+      "status": "readable"
+    },
+    {
+      "id": "1d6c99bd-8e7f-4a07-8d46-5e0ffb9b6482",
+      "title": "Little Forts Playgroup",
+      "url": "https://hoop.co.uk/e/CdAXHY/",
+      "status": "readable"
+    },
+    {
+      "id": "0bb71fef-b2aa-4ca4-85c4-076d00a05a20",
+      "title": "CREATIVE ARTS KIDS",
+      "url": "https://creative-arts-kids.classforkids.io",
+      "status": "readable"
+    },
+    {
+      "id": "e61ceeb7-baeb-4f12-b8c1-73736bc9202f",
+      "title": "Sing and Sign",
+      "url": "https://haysouthcambs.co.uk/activities/sing-and-sign/",
+      "status": "readable"
+    },
+    {
+      "id": "979ed418-c648-4f43-b978-d7d26b8d874c",
+      "title": "StoryMakers - Under 5's free class",
+      "url": "https://www.southwark.gov.uk/southwark-presents/storymakers-under-5s-free-class",
+      "status": "readable"
+    },
+    {
+      "id": "fc732505-6c76-40c8-b071-7817f900e537",
+      "title": "Page One: Creative Workshops",
+      "url": null,
+      "status": "missing_detail_link"
+    },
+    {
+      "id": "dae9e6b2-f143-4f8e-b419-118b7d528cda",
+      "title": "Drama Tots Birmingham South",
+      "url": "https://drama-tots-birmingham-south.classforkids.io",
+      "status": "readable"
+    },
+    {
+      "id": "f5b34fb4-83d1-4202-b628-f84b08f8c06a",
+      "title": "Wildlings at Milton Country Park",
+      "url": "https://haycambridge.co.uk/activities/wildlings-at-milton-country-park/",
+      "status": "readable"
+    },
+    {
+      "id": "0ef0331d-ce78-44c3-88a6-d37a558cb6ec",
+      "title": "Family Forest School: Danbury Country Park",
+      "url": "https://www.explore-essex.com/whats-on/family-forest-school-at-danbury-country-park",
+      "status": "readable"
+    },
+    {
+      "id": "c5e0067b-e81f-483f-b744-f395aebf6d96",
+      "title": "NCT Beckenham & Borders Baby Cafe",
+      "url": "https://www.nct.org.uk/events/beckenham-and-borders/nct-beckenham-borders-baby-cafe-58",
+      "status": "readable"
+    },
+    {
+      "id": "d1926461-9d39-4398-8e3b-3e113c958867",
+      "title": "Junior Sport Stars",
+      "url": "https://junior-sport-stars.classforkids.io?venueName=Chorlton CE Primary School",
+      "status": "readable"
+    },
+    {
+      "id": "422043ac-9a8c-48e1-ace6-a6ee535d08b2",
+      "title": "Wantage: GroW - Stay and Play",
+      "url": "https://www.oxfordshire.gov.uk/events/libraries/wantage-grow-stay-and-play",
+      "status": "readable"
+    },
+    {
+      "id": "a44ab8f8-7edc-49ba-8b1b-faac1f41d7c3",
+      "title": "Stay and Play with Messy Play",
+      "url": "https://hoop.co.uk/ivystreetfamilycentre/MZL6ih-stay-and-play-with-messy-play/",
+      "status": "readable"
+    },
+    {
+      "id": "1f7bbd66-4182-4d89-afc1-670b10037a09",
+      "title": "Mini novas martial arts classes",
+      "url": "https://hoop.co.uk/novas-freestyle-martial-arts-academy/NXRbZw-mini-novas-martial-arts-classes/",
+      "status": "readable"
+    },
+    {
+      "id": "d032c15c-2d92-4ada-9bba-d95829de5fe8",
+      "title": "Pro Elite South London",
+      "url": "https://proelite-southlondon.classforkids.io",
+      "status": "readable"
+    },
+    {
+      "id": "eef13c90-de1b-4f73-aeb1-5e0e59a99eba",
+      "title": "junior parkrun",
+      "url": "https://haysouthcambs.co.uk/activities/junior-parkrun/",
+      "status": "readable"
+    },
+    {
+      "id": "c12434d5-36fc-4d26-b055-9ae4cab1c9cd",
+      "title": "Young Flyers Aerial Classes",
+      "url": "https://www.southwark.gov.uk/southwark-presents/young-flyers-aerial-classes",
+      "status": "readable"
+    },
+    {
+      "id": "6a83a7ea-7bbe-45dd-96aa-1cc38c851fc8",
+      "title": "Storytime",
+      "url": "https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY=storytime&ENTRY_NAME=BS&ENTRY_TYPE=K&SORTS=ESD.SDTE%5DESD.STIM&GQ=storytime&ISGLB=0&NRECS=10&QRY=EVSEDTE%3A+%22%3E%3D+TODAY%22&QRYTEXT=Upcoming+events&_SPQ=2",
+      "status": "readable"
+    },
+    {
+      "id": "589cfd21-dfd2-49ac-9453-c37e189c5acc",
+      "title": "Forest School sessions for Home Ed: Danbury Country Park",
+      "url": "https://www.explore-essex.com/whats-on/home-education-sessions",
+      "status": "readable"
+    },
+    {
+      "id": "d124805c-d02a-4755-8358-4b000362decc",
+      "title": "NCT Breastfeeding and Infant Feeding Support Group",
+      "url": "https://www.nct.org.uk/events/chorley-and-leyland/nct-breastfeeding-and-infant-feeding-support-group-32",
+      "status": "readable"
+    },
+    {
+      "id": "47f6846b-6e71-42d3-8f60-81edd8af2c96",
+      "title": "Woodstock: Rhymetime",
+      "url": "https://www.oxfordshire.gov.uk/events/libraries-oxfordshire-museum/woodstock-rhymetime",
+      "status": "readable"
+    },
+    {
+      "id": "51c1ee8f-37f4-4b5b-aca7-54335b5a7119",
+      "title": "Little Kickers - Wallington Roundshaw Park - 18months - 4 years",
+      "url": "https://hoop.co.uk/little-kickers-Brighton/2clPEW-little-kickers-wallington-roundshaw-park-18months-4-years-free-trial-available/",
+      "status": "readable"
+    }
+  ]
+}

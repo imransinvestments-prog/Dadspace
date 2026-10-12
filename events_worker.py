@@ -605,6 +605,15 @@ def clean_events(raw_events, source, page_url, method, today, stats=None):
 
 
 def process_source(source, extract, today):
+    if source.get('source_adapter')=='classforkids_calendar':
+        from classforkids_calendar import collect
+        stats={}
+        try:
+            raw,new_hash=collect(source,today,base.fetch_html,base.robots_allows,stats)
+            rows=clean_events(raw,source,source['url'],'classforkids_calendar',today,stats)
+            return ('ok' if rows else 'ok_zero'),rows,new_hash,f'ClassForKids: {len(rows)} classes; zero model calls',stats
+        except Exception as exc:
+            return base.classify_fetch_error(str(exc)),[],None,str(exc),stats
     if source.get('source_adapter')=='library_portal':
         from library_portal import collect_portal, fetch_portal
         stats={}

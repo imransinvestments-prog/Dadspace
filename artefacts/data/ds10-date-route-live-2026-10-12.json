@@ -1,0 +1,139 @@
+{
+  "gemini_calls": 0,
+  "database_writes": 0,
+  "note": "Date/detail parser route checks, not full source discovery or activation. Two passes are not seven-day scheduling evidence.",
+  "results": [
+    {
+      "name": "Saturdads",
+      "url": "https://haysouthcambs.co.uk/activities/saturdads-at-st-johns-church-waterbeach/",
+      "pass_number": 1,
+      "checked_at": "2026-10-12T11:35:12.214853+00:00",
+      "status": "ok",
+      "fields": {
+        "start_date": null,
+        "end_date": null,
+        "occurrence_dates": [],
+        "schedule_text": "Held on the first Saturday of each month between 9.30am - 11.30am (not including December - to check when it is on, visit the Church Facebook page ). No need to book, just drop-in and stay for as long as you want."
+      }
+    },
+    {
+      "name": "Saturdads",
+      "url": "https://haysouthcambs.co.uk/activities/saturdads-at-st-johns-church-waterbeach/",
+      "pass_number": 2,
+      "checked_at": "2026-10-12T11:35:12.435736+00:00",
+      "status": "ok",
+      "fields": {
+        "start_date": null,
+        "end_date": null,
+        "occurrence_dates": [],
+        "schedule_text": "Held on the first Saturday of each month between 9.30am - 11.30am (not including December - to check when it is on, visit the Church Facebook page ). No need to book, just drop-in and stay for as long as you want."
+      }
+    },
+    {
+      "name": "Hoop Little Forts",
+      "url": "https://hoop.co.uk/e/CdAXHY/",
+      "pass_number": 1,
+      "checked_at": "2026-10-12T11:35:12.563975+00:00",
+      "status": "ok",
+      "fields": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-10-14",
+        "occurrence_dates": [
+          "2026-10-14"
+        ],
+        "schedule_text": "Published session: 2026-10-14; 08:45 \u2013 10:15; repeats weekly",
+        "time_text": "08:45 \u2013 10:15"
+      }
+    },
+    {
+      "name": "Hoop Little Forts",
+      "url": "https://hoop.co.uk/e/CdAXHY/",
+      "pass_number": 2,
+      "checked_at": "2026-10-12T11:35:13.115271+00:00",
+      "status": "ok",
+      "fields": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-10-14",
+        "occurrence_dates": [
+          "2026-10-14"
+        ],
+        "schedule_text": "Published session: 2026-10-14; 08:45 \u2013 10:15; repeats weekly",
+        "time_text": "08:45 \u2013 10:15"
+      }
+    },
+    {
+      "name": "ClassForKids Mini Movers",
+      "url": "https://little-movers-gym.classforkids.io/info/123",
+      "pass_number": 1,
+      "checked_at": "2026-10-12T11:35:13.588587+00:00",
+      "status": "ok",
+      "fields": {
+        "title": "Mini Movers Gymnastics",
+        "listing_type": "activity",
+        "family_relevance": 5,
+        "family_evidence": "Published class age range",
+        "audience": "families",
+        "confidence": 0.99,
+        "age_range": "18mth - 3yrs",
+        "venue_name": "Grace Point",
+        "location": "Grace Point",
+        "postcode": "N1 2SN",
+        "event_url": "https://little-movers-gym.classforkids.io/info/123",
+        "start_date": "2026-10-14",
+        "end_date": "2026-12-16",
+        "occurrence_dates": [
+          "2026-10-14",
+          "2026-10-21",
+          "2026-10-28",
+          "2026-11-04",
+          "2026-11-11",
+          "2026-11-18",
+          "2026-11-25",
+          "2026-12-02",
+          "2026-12-09",
+          "2026-12-16"
+        ],
+        "schedule_text": "Published dates: 2026-10-14, 2026-10-21, 2026-10-28, 2026-11-04, 2026-11-11, 2026-11-18, 2026-11-25, 2026-12-02, 2026-12-09, 2026-12-16; Wednesday 10:30am - 11:15am",
+        "cost_text": "\u00a3150.00 for remaining published sessions",
+        "description": "Regular class with published remaining sessions; check booking page for attendance requirements."
+      }
+    },
+    {
+      "name": "ClassForKids Mini Movers",
+      "url": "https://little-movers-gym.classforkids.io/info/123",
+      "pass_number": 2,
+      "checked_at": "2026-10-12T11:35:13.919732+00:00",
+      "status": "ok",
+      "fields": {
+        "title": "Mini Movers Gymnastics",
+        "listing_type": "activity",
+        "family_relevance": 5,
+        "family_evidence": "Published class age range",
+        "audience": "families",
+        "confidence": 0.99,
+        "age_range": "18mth - 3yrs",
+        "venue_name": "Grace Point",
+        "location": "Grace Point",
+        "postcode": "N1 2SN",
+        "event_url": "https://little-movers-gym.classforkids.io/info/123",
+        "start_date": "2026-10-14",
+        "end_date": "2026-12-16",
+        "occurrence_dates": [
+          "2026-10-14",
+          "2026-10-21",
+          "2026-10-28",
+          "2026-11-04",
+          "2026-11-11",
+          "2026-11-18",
+          "2026-11-25",
+          "2026-12-02",
+          "2026-12-09",
+          "2026-12-16"
+        ],
+        "schedule_text": "Published dates: 2026-10-14, 2026-10-21, 2026-10-28, 2026-11-04, 2026-11-11, 2026-11-18, 2026-11-25, 2026-12-02, 2026-12-09, 2026-12-16; Wednesday 10:30am - 11:15am",
+        "cost_text": "\u00a3150.00 for remaining published sessions",
+        "description": "Regular class with published remaining sessions; check booking page for attendance requirements."
+      }
+    }
+  ]
+}

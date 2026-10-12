@@ -2,6 +2,23 @@ import unittest
 from activity_dates import published_date_fields, enrich_dates
 
 class PublishedActivityDateTests(unittest.TestCase):
+    def test_hay_monthly_exception_is_preserved_without_invented_dates(self):
+        html='<h1>Saturdads</h1><div class="prose"><p>First Saturday of each month 9.30am - 11.30am, excluding December.</p></div>'
+        fields=published_date_fields(html,'https://haysouthcambs.co.uk/activities/saturdads/','Saturdads')
+        self.assertIsNone(fields['start_date'])
+        self.assertEqual(fields['occurrence_dates'],[])
+        self.assertIn('excluding December',fields['schedule_text'])
+
+    def test_hoop_copies_published_session_not_generated_repeats(self):
+        import json
+        url='https://hoop.co.uk/e/example/'
+        event=dict(name='Little Forts',url=url,startDate='2026-10-14T08:45:00Z',endDate='2026-10-14T10:15:00Z')
+        event['@type']='Event'
+        html='<h1>Little Forts</h1><li>08:45 - 10:15</li><p>Repeats weekly</p><script type="application/ld+json">'+json.dumps(event)+'</script>'
+        fields=published_date_fields(html,url,'Little Forts')
+        self.assertEqual(fields['occurrence_dates'],['2026-10-14'])
+        with self.assertRaisesRegex(ValueError,'clocks disagree'):
+            published_date_fields(html.replace('<li>08:45','<li>09:45'),url,'Little Forts')
     def test_oxfordshire_dates_exclude_related_listing_and_preserve_gap(self):
         html='<h1>Botley: Rhymetime</h1><div><h2>Dates</h2><p>Friday 16 Oct 2026, 10am-10.30am</p><p>Friday 30 Oct 2026, 10am-10.30am</p></div><h2>Related</h2><p>1 Nov 2026</p>'
         fields=published_date_fields(html,'https://www.oxfordshire.gov.uk/events/libraries/botley-rhymetime-0','Botley: Rhymetime')
