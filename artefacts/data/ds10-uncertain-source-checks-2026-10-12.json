@@ -1,0 +1,527 @@
+[
+  {
+    "url": "https://haycambridge.co.uk/activities/child-family-centres-stay-and-play/",
+    "checked_at": "2026-10-12T13:47:54.832890+00:00",
+    "status": 200,
+    "final_url": "https://haycambridge.co.uk/activities/child-family-centres-stay-and-play/",
+    "sha256": "3451828652791430709c37a6af54b75c7cddb3500d2d2f5883f5a33e6791e7f0"
+  },
+  {
+    "url": "https://haycambridge.co.uk/activities/hands-on-the-circle-honc-stay-and-play-groups/",
+    "checked_at": "2026-10-12T13:47:54.832890+00:00",
+    "status": 200,
+    "final_url": "https://haycambridge.co.uk/activities/hands-on-the-circle-honc-stay-and-play-groups/",
+    "sha256": "09102cf63488d256b2ab157879c8b4419efbd2ea8379815b5de58dcc76d81d59"
+  },
+  {
+    "url": "https://haycambridge.co.uk/activities/merry-go-round-toy-library/",
+    "checked_at": "2026-10-12T13:47:54.832890+00:00",
+    "status": 200,
+    "final_url": "https://haycambridge.co.uk/activities/merry-go-round-toy-library/",
+    "sha256": "367b257f6b68ac57512abdbdfcb893f36977ba6becc0527a0b4e4959e4a8adcd"
+  },
+  {
+    "url": "https://haycambridge.co.uk/activities/mini-athletics/",
+    "checked_at": "2026-10-12T13:47:54.832890+00:00",
+    "status": 200,
+    "final_url": "https://haycambridge.co.uk/activities/mini-athletics/",
+    "sha256": "efea02d83d451b631490f2e94287cac23e50a2d0ceab9b7029685782542767ae"
+  },
+  {
+    "url": "https://haycambridge.co.uk/activities/sports-coaching-sessions-for-children-gk-fit/",
+    "checked_at": "2026-10-12T13:47:58.455814+00:00",
+    "status": 200,
+    "final_url": "https://haycambridge.co.uk/activities/sports-coaching-sessions-for-children-gk-fit/",
+    "sha256": "02386ae2c129d17853a78e6f061ad76356e6d58280f84cc6c399497ec2a27365"
+  },
+  {
+    "url": "https://haycambridge.co.uk/activities/wildlings-at-milton-country-park/",
+    "checked_at": "2026-10-12T13:48:03.841826+00:00",
+    "status": 200,
+    "final_url": "https://haycambridge.co.uk/activities/wildlings-at-milton-country-park/",
+    "sha256": "c7c2c79b7d0d1c9f7ac3919200ace91d4ffd79bbc4a0edd0a500402f76b8f2e9"
+  },
+  {
+    "url": "https://haysouthcambs.co.uk/activities/minime-mindfulness-cambridge/",
+    "checked_at": "2026-10-12T13:48:04.739182+00:00",
+    "status": 200,
+    "final_url": "https://haysouthcambs.co.uk/activities/minime-mindfulness-cambridge/",
+    "sha256": "8bf05b0ba244476a674806b38fcc71a7a8fcf865018a9623eea4eac72268ca5b"
+  },
+  {
+    "url": "https://haysouthcambs.co.uk/activities/scouts-in-south-cambridgeshire/",
+    "checked_at": "2026-10-12T13:48:05.577854+00:00",
+    "status": 200,
+    "final_url": "https://haysouthcambs.co.uk/activities/scouts-in-south-cambridgeshire/",
+    "sha256": "7c5b786c0e71286e37844ffc361d026331539c65ddbd9ec25d920a651c4eee38"
+  },
+  {
+    "url": "https://haysouthcambs.co.uk/activities/shake-rattle-and-roll/",
+    "checked_at": "2026-10-12T13:48:05.843359+00:00",
+    "status": 200,
+    "final_url": "https://haysouthcambs.co.uk/activities/shake-rattle-and-roll/",
+    "sha256": "9dc67c26f0cace63a67e20fc79dcf4556b60b2ac11400c2c2e3230aa5be40476"
+  },
+  {
+    "url": "https://haysouthcambs.co.uk/activities/shredder-skate-school/",
+    "checked_at": "2026-10-12T13:48:07.940461+00:00",
+    "status": 200,
+    "final_url": "https://haysouthcambs.co.uk/activities/shredder-skate-school/",
+    "sha256": "f55f04dcdf9be15d7e44e86884b2859d0fdb3279ed49474f9bd57e05eec2d5ca"
+  },
+  {
+    "url": "https://haysouthcambs.co.uk/activities/sing-and-sign/",
+    "checked_at": "2026-10-12T13:48:08.239161+00:00",
+    "status": 200,
+    "final_url": "https://haysouthcambs.co.uk/activities/sing-and-sign/",
+    "sha256": "9ee1fe503655232fab312f2234a12b87195083c5d1395e8730221969f50098f1"
+  },
+  {
+    "url": "https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY=storytime&ENTRY_NAME=BS&ENTRY_TYPE=K&SORTS=ESD.SDTE%5DESD.STIM&GQ=storytime&ISGLB=0&NRECS=10&QRY=EVSEDTE%3A+%22%3E%3D+TODAY%22&QRYTEXT=Upcoming+events&_SPQ=2",
+    "checked_at": "2026-10-12T13:48:08.343794+00:00",
+    "status": 200,
+    "final_url": "https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY=storytime&ENTRY_NAME=BS&ENTRY_TYPE=K&SORTS=ESD.SDTE%5DESD.STIM&GQ=storytime&ISGLB=0&NRECS=10&QRY=EVSEDTE%3A+%22%3E%3D+TODAY%22&QRYTEXT=Upcoming+events&_SPQ=2",
+    "sha256": "116c2cbf79cdf9530f92f794b00a89bf9bf61c7183f140d2b801692daf3b5a1b"
+  },
+  {
+    "url": "https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY_NAME=BS&ENTRY=lego&ENTRY_TYPE=K&NRECS=10&SORTS=ESD.SDTE%5DESD.STIM&SEARCH_FORM=%2Fcgi-bin%2Fspydus.exe%2FMSGTRN%2FOPAC%2FBSEARCH_EVSES&_SPQ=1&FORM_DESC=Events+-+Quick+search&ISGLB=0&GQ=lego&EDTE=%3E%3DTODAY&EDTE_TEXT=Upcoming+events",
+    "checked_at": "2026-10-12T13:48:09.336295+00:00",
+    "status": 200,
+    "final_url": "https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY_NAME=BS&ENTRY=lego&ENTRY_TYPE=K&NRECS=10&SORTS=ESD.SDTE%5DESD.STIM&SEARCH_FORM=%2Fcgi-bin%2Fspydus.exe%2FMSGTRN%2FOPAC%2FBSEARCH_EVSES&_SPQ=1&FORM_DESC=Events+-+Quick+search&ISGLB=0&GQ=lego&EDTE=%3E%3DTODAY&EDTE_TEXT=Upcoming+events",
+    "sha256": "1920a71453cfc014f078ca216cf812f07086654ad5f1f6a91dd2d737966d8632"
+  },
+  {
+    "url": "https://hoop.co.uk/Tumble-Tots-Trafford/7tGOFuH-tumble-tots-in-hale-barns/",
+    "checked_at": "2026-10-12T13:48:13.659009+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/Tumble-Tots-Trafford/7tGOFuH-tumble-tots-in-hale-barns/",
+    "sha256": "6a3b447c42ff1354f21c57ee51cab3b10f4b2970690ed069d1b338558beef55c"
+  },
+  {
+    "url": "https://hoop.co.uk/Tumble-Tots-Trafford/CdmES8g-tumble-tots-at-altrincham-fc/",
+    "checked_at": "2026-10-12T13:48:14.082560+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/Tumble-Tots-Trafford/CdmES8g-tumble-tots-at-altrincham-fc/",
+    "sha256": "e7bdd615ac03c28222a8aa32a3fd7567434931bc3c00745d16dd2dfb228fab89"
+  },
+  {
+    "url": "https://hoop.co.uk/Tumble-Tots-Trafford/iuFqgjS-tumble-tots-at-altrincham-fc/",
+    "checked_at": "2026-10-12T13:48:14.442532+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/Tumble-Tots-Trafford/iuFqgjS-tumble-tots-at-altrincham-fc/",
+    "sha256": "9fd241106e56f73c59b825929500f6c48f6b50fb79b6103f883f8182e960287c"
+  },
+  {
+    "url": "https://hoop.co.uk/e/1El7g0h/",
+    "checked_at": "2026-10-12T13:48:14.636042+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/e/1El7g0h/",
+    "sha256": "162309c251951720fe299328d6c0ce9ab7a550ed3b6cb97852453e2246102adc"
+  },
+  {
+    "url": "https://hoop.co.uk/e/BVskDS/",
+    "checked_at": "2026-10-12T13:48:14.840633+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/e/BVskDS/",
+    "sha256": "7e96ef61d1b3ba5e5a0fd6a43b9c0ea0772f6960026e80bec606e5bfa47dce50"
+  },
+  {
+    "url": "https://hoop.co.uk/e/EneZmzg/",
+    "checked_at": "2026-10-12T13:48:15.018622+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/e/EneZmzg/",
+    "sha256": "07b9360c5c642aa532b9d7a4dca5435cacac0b28bd0b3f969c202322d244235d"
+  },
+  {
+    "url": "https://hoop.co.uk/e/G5vRyX/",
+    "checked_at": "2026-10-12T13:48:15.393093+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/e/G5vRyX/",
+    "sha256": "9115259da1f6ecfcfc01e8d060ae635a70197c76f6a62691f76950a31d9c7b1c"
+  },
+  {
+    "url": "https://hoop.co.uk/e/K07VKv/",
+    "checked_at": "2026-10-12T13:48:15.455274+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/e/K07VKv/",
+    "sha256": "6dc2e528ee0f21df787ef66bdb1f835d14f993840f92fc28ac569c91588bbfe0"
+  },
+  {
+    "url": "https://hoop.co.uk/e/RBe3FD/",
+    "checked_at": "2026-10-12T13:48:15.711090+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/e/RBe3FD/",
+    "sha256": "ef9ef943b019ea7bd9d51ab6b2873a04b3dacfb166fe9216cbe4cb319def5f3c"
+  },
+  {
+    "url": "https://hoop.co.uk/e/h38o4V/",
+    "checked_at": "2026-10-12T13:48:15.770438+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/e/h38o4V/",
+    "sha256": "5cb20611e415e919d6ae894e06ac9bb9dc6cb3683024f83802ea15042d6e58f5"
+  },
+  {
+    "url": "https://hoop.co.uk/e/kEcjKt/",
+    "checked_at": "2026-10-12T13:48:16.107042+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/e/kEcjKt/",
+    "sha256": "443ccb1a70fd8877d23e9c98ad49f19beb9e448585eebcb3bf26a4db2aa17c7f"
+  },
+  {
+    "url": "https://hoop.co.uk/e/lOZ8ka/",
+    "checked_at": "2026-10-12T13:48:16.122389+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/e/lOZ8ka/",
+    "sha256": "8e29cc9d9ab992453c7203daa54f37d8a5142770f780bc78a77ba5bb47024934"
+  },
+  {
+    "url": "https://hoop.co.uk/e/r1Q6ihZ/",
+    "checked_at": "2026-10-12T13:48:16.515977+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/e/r1Q6ihZ/",
+    "sha256": "58622d3f90fad9508160be7f7a37c9906b64217f3d5876bf638779e4f2d887e1"
+  },
+  {
+    "url": "https://hoop.co.uk/e/ueYYlsr/",
+    "checked_at": "2026-10-12T13:48:16.515977+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/e/ueYYlsr/",
+    "sha256": "2950d65c9d8b6ad328638bebce5caed8716fe6ecccd716e60cedbdab0ebb5b53"
+  },
+  {
+    "url": "https://hoop.co.uk/ivystreetfamilycentre/ltCFVT-all-day-play/",
+    "checked_at": "2026-10-12T13:48:16.808123+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/ivystreetfamilycentre/ltCFVT-all-day-play/",
+    "sha256": "5c3890e1a165bb2e05ab8a30d9ac7823a4b427708d17df06bad845a10c8a506e"
+  },
+  {
+    "url": "https://hoop.co.uk/little-kickers-Brighton/2clPEW-little-kickers-wallington-roundshaw-park-18months-4-years-free-trial-available/",
+    "checked_at": "2026-10-12T13:48:16.830928+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/little-kickers-Brighton/2clPEW-little-kickers-wallington-roundshaw-park-18months-4-years-free-trial-available/",
+    "sha256": "1ddab8bc70079823d34761a510a1b253c21e9ebedfddd9c666b86f28cbef0a2b"
+  },
+  {
+    "url": "https://hoop.co.uk/little-kickers-south-manchester-trafford-and-stockport/vCkYNw-little-kickers-football-classes/",
+    "checked_at": "2026-10-12T13:48:17.101446+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/little-kickers-south-manchester-trafford-and-stockport/vCkYNw-little-kickers-football-classes/",
+    "sha256": "1ee1d4bd0959b4a14297a953c4d3fa6898a54abdd91b826c20bf64a47f839832"
+  },
+  {
+    "url": "https://hoop.co.uk/little-kickers-watford-harrow-pinner/i2MTUh-little-kickers-football-classes-st-johns-wood-church-of-our-lady/",
+    "checked_at": "2026-10-12T13:48:17.242305+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/little-kickers-watford-harrow-pinner/i2MTUh-little-kickers-football-classes-st-johns-wood-church-of-our-lady/",
+    "sha256": "9b24a0987f2dcce6fdec3e396ca7ab6a460365547d7f20766f8e905e3265ae82"
+  },
+  {
+    "url": "https://hoop.co.uk/musical-mayhem-london/rlXsHY3-youth-academy/",
+    "checked_at": "2026-10-12T13:48:17.449868+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/musical-mayhem-london/rlXsHY3-youth-academy/",
+    "sha256": "39553d4487ebf56deb89dca2bf0253393b7c79bac11a370c52cdb6061fa7ae57"
+  },
+  {
+    "url": "https://hoop.co.uk/novas-freestyle-martial-arts-academy/Ap6OFu-junior-novas-martial-arts-classes/",
+    "checked_at": "2026-10-12T13:48:17.545209+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/novas-freestyle-martial-arts-academy/Ap6OFu-junior-novas-martial-arts-classes/",
+    "sha256": "79eda3b0d8acd8f1c819ba26aa8109ef11851fe10d99421a3f1db3e5c2299077"
+  },
+  {
+    "url": "https://hoop.co.uk/novas-freestyle-martial-arts-academy/NXRbZw-mini-novas-martial-arts-classes/",
+    "checked_at": "2026-10-12T13:48:17.760167+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/novas-freestyle-martial-arts-academy/NXRbZw-mini-novas-martial-arts-classes/",
+    "sha256": "ac336eb781fd24928d2bce9f1da003737a41897e533f23db41a092fccce2bafe"
+  },
+  {
+    "url": "https://hoop.co.uk/novas-freestyle-martial-arts-academy/SxPCkW-novas-teen-martial-arts-classes/",
+    "checked_at": "2026-10-12T13:48:18.169021+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/novas-freestyle-martial-arts-academy/SxPCkW-novas-teen-martial-arts-classes/",
+    "sha256": "54361338efb74e8857fabbca717dc1de5c51d46622111a77d69c6de2927c42af"
+  },
+  {
+    "url": "https://hoop.co.uk/oasis-childrens-nature-garden/lackK7-friday-fun-for-under-5s/",
+    "checked_at": "2026-10-12T13:48:18.201726+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/oasis-childrens-nature-garden/lackK7-friday-fun-for-under-5s/",
+    "sha256": "094acef485d74f0e9535c88085e64350b13b97c1a3275ef63ef34eaaad37f1b9"
+  },
+  {
+    "url": "https://hoop.co.uk/rugbytots-se-cheshire-and-staffordshire-moorlands/c97vIvj-poynton-rugbytots-friday/",
+    "checked_at": "2026-10-12T13:48:18.565756+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/rugbytots-se-cheshire-and-staffordshire-moorlands/c97vIvj-poynton-rugbytots-friday/",
+    "sha256": "ea2e7a8ef0d9e3539cd6021ea6687a29ab725d5365640715de2ea22f8184612f"
+  },
+  {
+    "url": "https://hoop.co.uk/soccerdays-ltd/SZIBcV-socc",
+    "checked_at": "2026-10-12T13:48:18.877935+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/soccerdays-ltd/SZIBcV-socc/",
+    "sha256": "03476c474d864d1594431b05fac7588440e0df53a38b36d89fce462cc67df17c"
+  },
+  {
+    "url": "https://hoop.co.uk/soccerdays-ltd/Z1mIyI-soccerdays-toddler-football-classes-woodford-memorial-hall/",
+    "checked_at": "2026-10-12T13:48:18.912597+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/soccerdays-ltd/Z1mIyI-soccerdays-toddler-football-classes-woodford-memorial-hall/",
+    "sha256": "60ca196c7026f084e3146249649bb80cefac23f7adb28084dd0f53f023900f33"
+  },
+  {
+    "url": "https://hoop.co.uk/total-ballers/9tlYrv-total-ballers-1-2-1-sessions/",
+    "checked_at": "2026-10-12T13:48:19.240244+00:00",
+    "status": 200,
+    "final_url": "https://hoop.co.uk/total-ballers/9tlYrv-total-ballers-1-2-1-sessions/",
+    "sha256": "771e509f96f989d05cedf59ade64d5fbfecc0324ce8be4cd5ca70d4b772c76bc"
+  },
+  {
+    "url": "https://salfordcommunityleisure.co.uk/event/baby-gym-53/",
+    "checked_at": "2026-10-12T13:48:19.309112+00:00",
+    "status": 404,
+    "final_url": "https://salfordcommunityleisure.co.uk/event/baby-gym-53/",
+    "sha256": "cb91afa9a952bb2bcefe3a95ca8f2f35030d5dcc3bba4ab3dd76cf7a3d382282"
+  },
+  {
+    "url": "https://salfordcommunityleisure.co.uk/event/bayse-multi-sports-4/",
+    "checked_at": "2026-10-12T13:48:19.599095+00:00",
+    "status": 404,
+    "final_url": "https://salfordcommunityleisure.co.uk/event/bayse-multi-sports-4/",
+    "sha256": "3e64fb183a3644324578c49dae742e7de33e5cbce92805c5b4ca5f0e64901cc8"
+  },
+  {
+    "url": "https://www.hertfordshire.gov.uk/babyrhymetime",
+    "checked_at": "2026-10-12T13:48:20.309157+00:00",
+    "status": 200,
+    "final_url": "https://herts.spydus.co.uk/cgi-bin/spydus.exe/ENQ/OPAC/EVSESENQ?ENTRY=baby+rhyme+time&ENTRY_NAME=BS&ENTRY_TYPE=K&SORTS=ESD.SDTE%5DESD.STIM&GQ=baby+rhyme+time&ISGLB=0&NRECS=10&QRY=EVSEDTE%3A+%22%3E%3D+TODAY%22&QRYTEXT=Upcoming+events&_SPQ=2",
+    "sha256": "33bcfbcbadc2c027f32b31f0b0e856d7133af1177efe1092371eb9b9062c37cb"
+  },
+  {
+    "url": "https://www.historicenvironment.scot/whats-on/all/overview/?eventId=f09d9743-70f1-4b49-ac18-ae6d00cbd008",
+    "checked_at": "2026-10-12T13:48:20.552133+00:00",
+    "status": 200,
+    "final_url": "https://www.historicenvironment.scot/whats-on/all/overview/?eventId=f09d9743-70f1-4b49-ac18-ae6d00cbd008",
+    "sha256": "a24e33c6b6863542801e8011560fb78d60184c3bee83422f50269e4132a7c052"
+  },
+  {
+    "url": "https://www.kidsdaysout.co.uk/kids-days-out-england/buckinghamshire/item/hillingdon-theatre-dance-centre.html",
+    "checked_at": "2026-10-12T13:48:20.715219+00:00",
+    "status": 200,
+    "final_url": "https://www.kidsdaysout.co.uk/kids-days-out-england/buckinghamshire/item/hillingdon-theatre-dance-centre.html",
+    "sha256": "c8745243f85a81a04e1c4d90cf5ad50650f95ea249bf8db0a0f3cad783f826ef"
+  },
+  {
+    "url": "https://www.library.live/our-answers-blog/storytimes-HXEoS",
+    "checked_at": "2026-10-12T13:48:20.872206+00:00",
+    "status": 200,
+    "final_url": "https://www.library.live/our-answers-blog/storytimes-HXEoS",
+    "sha256": "52fc6a985eea81ca458f5ae4d048ef87c3eed9d9ba280b67e716960349cbd730"
+  },
+  {
+    "url": "https://www.library.live/our-answers-blog/zd5f1gmmgrq47os18452njc80yev2o-A4pDD",
+    "checked_at": "2026-10-12T13:48:21.141711+00:00",
+    "status": 200,
+    "final_url": "https://www.library.live/our-answers-blog/zd5f1gmmgrq47os18452njc80yev2o-A4pDD",
+    "sha256": "57f00049794f6e1211f1f3bc55d028a3019543654375cb6beb68ba9b8674f953"
+  },
+  {
+    "url": "https://www.nct.org.uk/events/bassetlaw/nct-bassetlaw-nearly-new-sale-1",
+    "checked_at": "2026-10-12T13:48:21.350248+00:00",
+    "status": 403,
+    "final_url": "https://www.nct.org.uk/events/bassetlaw/nct-bassetlaw-nearly-new-sale-1",
+    "sha256": "8f45f7121028e13de2b96e38be6f06a85316ebf8101a60165614796b5dcd1b8c"
+  },
+  {
+    "url": "https://www.nct.org.uk/events/brentwood/nct-brentwood-nearly-new-sale-1",
+    "checked_at": "2026-10-12T13:48:21.438104+00:00",
+    "status": 403,
+    "final_url": "https://www.nct.org.uk/events/brentwood/nct-brentwood-nearly-new-sale-1",
+    "sha256": "0ee3bf5491daf2e0ec6f125436c3881bd06c732515b1db563bf6f36607b16f07"
+  },
+  {
+    "url": "https://www.nct.org.uk/events/tring-and-district/nct-tring-nearly-new-sale-1",
+    "checked_at": "2026-10-12T13:48:21.445961+00:00",
+    "status": 403,
+    "final_url": "https://www.nct.org.uk/events/tring-and-district/nct-tring-nearly-new-sale-1",
+    "sha256": "8b1c0665121a35aa5fbfd92d190eec586e50161bf340f44d7785f3948650f2f2"
+  },
+  {
+    "url": "https://www.nct.org.uk/events/winchester-district/nct-winchester-and-district-nearly-new-sale-0",
+    "checked_at": "2026-10-12T13:48:21.610256+00:00",
+    "status": 403,
+    "final_url": "https://www.nct.org.uk/events/winchester-district/nct-winchester-and-district-nearly-new-sale-0",
+    "sha256": "7c6c2fb737cdacb6e29b1c61b4135ece2fa0c919cad060ea0797847e5471e23d"
+  },
+  {
+    "url": "https://www.northumberlandnationalpark.org.uk/whats-on/forest-school-make-walltown-home-2-2-4/",
+    "checked_at": "2026-10-12T13:48:21.634083+00:00",
+    "status": 200,
+    "final_url": "https://www.northumberlandnationalpark.org.uk/whats-on/forest-school-make-walltown-home-2-2-4/",
+    "sha256": "54da7967c0795f6155615499083cdada14461cd7d10383e69d2dc92e6a0cfd3f"
+  },
+  {
+    "url": "https://www.oxfordshire.gov.uk/events/exhibitions-oxfordshire-museum/curiosity-club",
+    "checked_at": "2026-10-12T13:48:21.657924+00:00",
+    "status": 404,
+    "final_url": "https://www.oxfordshire.gov.uk/events/exhibitions-oxfordshire-museum/curiosity-club",
+    "sha256": "59361662b03872a79fbd553bb9f74fc34f6c5bd220873d6dc9ad436ecbc9d780"
+  },
+  {
+    "url": "https://www.oxfordshire.gov.uk/events/libraries/bampton-rhymetime-poetry-special",
+    "checked_at": "2026-10-12T13:48:21.775883+00:00",
+    "status": 404,
+    "final_url": "https://www.oxfordshire.gov.uk/events/libraries/bampton-rhymetime-poetry-special",
+    "sha256": "f80e745502a2019c270ae60db905f6aa619c2969b8518dab5e618aad851745ff"
+  },
+  {
+    "url": "https://www.oxfordshire.gov.uk/events/libraries/didcot-rhymetime",
+    "checked_at": "2026-10-12T13:48:21.819260+00:00",
+    "status": 404,
+    "final_url": "https://www.oxfordshire.gov.uk/events/libraries/didcot-rhymetime",
+    "sha256": "eafca6476c963361d66cc5b88c0b2afb4508287b7867bab95ecf23400be15de6"
+  },
+  {
+    "url": "https://www.redbridge.gov.uk/discover/events/adapted-water-sports-for-children-with-disabilities/",
+    "checked_at": "2026-10-12T13:48:21.982217+00:00",
+    "status": 200,
+    "final_url": "https://www.redbridge.gov.uk/discover/events/adapted-water-sports-for-children-with-disabilities/",
+    "sha256": "da8112ec8d40bb35581eaef386e5248ff7ef393829d097a90b724f6a9dbfaf62"
+  },
+  {
+    "url": "https://www.redbridge.gov.uk/discover/events/homework-help-club/",
+    "checked_at": "2026-10-12T13:48:22.103523+00:00",
+    "status": 200,
+    "final_url": "https://www.redbridge.gov.uk/discover/events/homework-help-club/",
+    "sha256": "ce1f61cf4ad1f78023329900a7797c630c098edc6ad9c09b0329566c251df423"
+  },
+  {
+    "url": "https://www.redbridge.gov.uk/discover/events/pottery-and-sculpture-workshop/",
+    "checked_at": "2026-10-12T13:48:22.106984+00:00",
+    "status": 200,
+    "final_url": "https://www.redbridge.gov.uk/discover/events/pottery-and-sculpture-workshop/",
+    "sha256": "e2a809d61f09368b99aca0d1aafab23bb9baaa08084322db17391afa6a9851d7"
+  },
+  {
+    "url": "https://www.southwark.gov.uk/southwark-presents/sensory-storytelling-and-play-0",
+    "checked_at": "2026-10-12T13:48:22.122286+00:00",
+    "status": 200,
+    "final_url": "https://www.southwark.gov.uk/southwark-presents/sensory-storytelling-and-play-0",
+    "sha256": "c09093ce0659f7b17188f9ab6124a3646d7cb328bee52c1cabefb8cb2b77bf00"
+  },
+  {
+    "url": "https://cambridge.minimemindfulness.co.uk/",
+    "checked_at": "2026-10-12T13:56:19.371416+00:00",
+    "status": 200,
+    "final_url": "https://cambridge.minimemindfulness.co.uk/",
+    "sha256": "50f709b6f5f489c82cb0ba32f03aa0620e96ee9dc242607407d6084cebdf4605"
+  },
+  {
+    "url": "https://capoeira-manchester.classforkids.io/info/258",
+    "checked_at": "2026-10-12T13:56:19.371416+00:00",
+    "status": 200,
+    "final_url": "https://capoeira-manchester.classforkids.io/info/258",
+    "sha256": "a483e2851245eeb7d9e9cd4f307ad84a1c6cb4ce10f1606c606f7f50f134327c"
+  },
+  {
+    "url": "https://footy4kidz.classforkids.io/info/32",
+    "checked_at": "2026-10-12T13:56:19.372415+00:00",
+    "status": 200,
+    "final_url": "https://footy4kidz.classforkids.io/info/32",
+    "sha256": "1076ee115d329902f5e20e2baefbbdec9e47cf488df3f842154825e35bcd81fd"
+  },
+  {
+    "url": "https://footy4kidz.classforkids.io/info/33",
+    "checked_at": "2026-10-12T13:56:19.372415+00:00",
+    "status": 200,
+    "final_url": "https://footy4kidz.classforkids.io/info/33",
+    "sha256": "a1171a2bfedeb2bfd35f7eaea091856711480523896c6d5ffc91d61d531a87df"
+  },
+  {
+    "url": "https://footytotzsalford.classforkids.io/info/109",
+    "checked_at": "2026-10-12T13:56:19.735040+00:00",
+    "status": 200,
+    "final_url": "https://footytotzsalford.classforkids.io/info/109",
+    "sha256": "e3d7e13943ba91f9938024e8454001a23da76a0153dc393d3265446c01935221"
+  },
+  {
+    "url": "https://junior-sport-stars.classforkids.io/info/2044",
+    "checked_at": "2026-10-12T13:56:19.741846+00:00",
+    "status": 200,
+    "final_url": "https://junior-sport-stars.classforkids.io/info/2044",
+    "sha256": "a5f4fe1d5ddcf109ea1a71dc67be6e6f633165ea3f93bc6098b604d111c74df8"
+  },
+  {
+    "url": "https://www.cambridgeshire.gov.uk/directory?collection=ccc-web&f.Age%20%2F%20Audience%7CserviceAge=Babies%20and%20Toddlers&f.Classification%7Cclassification=Whats%20On&form=html&origin=&postcode=&profile=_default&profile=_default&profile=_default&profile=_default&query=storytime&start_rank=1",
+    "checked_at": "2026-10-12T13:56:19.752597+00:00",
+    "status": 200,
+    "final_url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/community.page?camcommunitychannel=0",
+    "sha256": "fe8303c36228ec5330b9f49e3daa38309f16400d9654caa6e8a1c5663cf56ea7"
+  },
+  {
+    "url": "https://www.cambridgeshire.gov.uk/directory?collection=ccc-web&f.Age%20%2F%20Audience%7CserviceAge=Babies%20and%20Toddlers&f.Classification%7Cclassification=Whats%20On&form=html&origin=&postcode=&profile=_default&profile=_default&query=rhymetime&start_rank=1",
+    "checked_at": "2026-10-12T13:56:19.759185+00:00",
+    "status": 200,
+    "final_url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/community.page?camcommunitychannel=0",
+    "sha256": "dccd4a3598e15d00eb60a379e6746c96d3a2c5872de425bdee5bf165cb290326"
+  },
+  {
+    "url": "https://www.cambstoylibrary.org.uk/",
+    "checked_at": "2026-10-12T13:56:20.106848+00:00",
+    "status": 200,
+    "final_url": "https://www.cambstoylibrary.org.uk/",
+    "sha256": "430319d118540013bb3b796d15a88ed5cf99f9d1ce237651b08cfa12923b631e"
+  },
+  {
+    "url": "https://www.connectedlives.org.uk/honc",
+    "checked_at": "2026-10-12T13:56:20.140335+00:00",
+    "status": 200,
+    "final_url": "https://www.connectedlives.org.uk/honc",
+    "sha256": "f9eb2ddc859000776d0d36f0616c508b8e0b55623818da24ba171bd3a0a875b9"
+  },
+  {
+    "url": "https://www.gkfit.co.uk/",
+    "checked_at": "2026-10-12T13:56:20.508732+00:00",
+    "status": 200,
+    "final_url": "https://www.gkfit.co.uk/",
+    "sha256": "6cef24927c59bf953757fc40d1e9f9e19183b4503341e5b0b16d3dfbb3216250"
+  },
+  {
+    "url": "https://www.miltoncountrypark.org/wildplaceactivities",
+    "checked_at": "2026-10-12T13:56:20.783827+00:00",
+    "status": 404,
+    "final_url": "https://www.miltoncountrypark.org/wildplaceactivities",
+    "sha256": "9093695bed6ad4bf5be10d4eccdb5999a5997fbc3ac01a29cab4c3e25f6d7f7b"
+  },
+  {
+    "url": "https://www.miniathletics.com/mini-athletics-cambridge-and-saffron-walden-summary/",
+    "checked_at": "2026-10-12T13:56:20.853827+00:00",
+    "status": 200,
+    "final_url": "https://www.miniathletics.com/mini-athletics-cambridge-and-saffron-walden-summary/",
+    "sha256": "badc928ee0d01fb10b3246f29965c9dc02be5e9745f030bd1e18b5bda0de7af9"
+  },
+  {
+    "url": "https://www.shake-rattle-roll.org/",
+    "checked_at": "2026-10-12T13:56:20.957702+00:00",
+    "status": 200,
+    "final_url": "https://www.shake-rattle-roll.org/",
+    "sha256": "0402ef2ad0b6fb8cf5ae6869e50f9db97cb08e04575819fe0ede33e54f80eea7"
+  },
+  {
+    "url": "https://www.shredderskateschool.co.uk/",
+    "checked_at": "2026-10-12T13:56:21.013562+00:00",
+    "status": 200,
+    "final_url": "https://www.shredderskateschool.co.uk/",
+    "sha256": "7b392bf6dc7bb29c8cc21d5835581a396336f71febd96b3f3ebc4704e67a3116"
+  },
+  {
+    "url": "https://www.singandsign.co.uk/classes/classes-near-you/cambridge",
+    "checked_at": "2026-10-12T13:56:21.029439+00:00",
+    "status": 200,
+    "final_url": "https://singandsign.co.uk/classes/classes-near-you/cambridge",
+    "sha256": "1d329c9709be76a3b98a40815bc722339366fbb38ace51416eebdd44120659a0"
+  }
+]

@@ -2,6 +2,16 @@ import unittest
 from activity_dates import published_date_fields, enrich_dates
 
 class PublishedActivityDateTests(unittest.TestCase):
+    def test_redbridge_accordion_keeps_session_gaps_and_rejects_mixed_venues(self):
+        def occurrence(date,venue='Library',time='12:00 to 13:00'):
+            return '<div class="govuk-accordion__section"><h2 class="govuk-accordion__section-heading">'+date+'</h2><div class="location-details-aside"><p>'+venue+'</p><p>'+time+'</p></div></div>'
+        url='https://www.redbridge.gov.uk/discover/events/club/'
+        html='<h1>Club</h1>'+occurrence('17 October 2026')+occurrence('7 November 2026')
+        fields=published_date_fields(html,url,'Club')
+        self.assertEqual(fields['occurrence_dates'],['2026-10-17','2026-11-07'])
+        self.assertNotIn('2026-10-24',fields['schedule_text'])
+        for extra in [occurrence('14 November 2026','Other Library'),occurrence('14 November 2026',time='14:00 to 15:00'),occurrence('No date')]:
+            with self.assertRaises(ValueError):published_date_fields(html+extra,url,'Club')
     def test_hay_monthly_exception_is_preserved_without_invented_dates(self):
         html='<h1>Saturdads</h1><div class="prose"><p>First Saturday of each month 9.30am - 11.30am, excluding December.</p></div>'
         fields=published_date_fields(html,'https://haysouthcambs.co.uk/activities/saturdads/','Saturdads')

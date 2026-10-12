@@ -34,6 +34,28 @@ def published_date_fields(html,url,title):
         return dict(start_date=None,end_date=None,occurrence_dates=[],schedule_text=schedule)
     if host=='www.redbridge.gov.uk':
         section=soup.select_one('.location-details-aside-container')
+        if section is None:
+            # The current site puts each published occurrence in its own
+            # accordion. Keep gaps and reject mixed venues or session times.
+            dates=[];places=[];times=[]
+            for block in soup.select('.govuk-accordion__section'):
+                heading=block.select_one('.govuk-accordion__section-heading')
+                found=date_values(heading.get_text(' ',strip=True)) if heading else []
+                detail=block.select_one('.location-details-aside')
+                paragraphs=detail.find_all('p') if detail else []
+                if len(found)!=1 or len(paragraphs)!=2:
+                    raise ValueError('Incomplete Redbridge occurrence')
+                place,clock=(p.get_text(' ',strip=True) for p in paragraphs)
+                if len(CLOCK.findall(clock))!=2:
+                    raise ValueError('Missing Redbridge occurrence time')
+                dates.extend(found);places.append(place);times.append(clock)
+            if not dates: raise ValueError('Missing Redbridge programme date')
+            if len(set(places))!=1 or len(set(times))!=1:
+                raise ValueError('Multiple Redbridge venues/session times require review')
+            dates=sorted(set(dates))
+            schedule='Published dates: '+', '.join(dates)+'; '+times[0]
+            if len(schedule)>300: raise ValueError('Redbridge schedule exceeds storage limit')
+            return dict(start_date=dates[0],end_date=dates[-1],occurrence_dates=dates,schedule_text=schedule,time_text=times[0])
         date=section.select_one('.single-date') if section else None
         if date is None: raise ValueError('Missing Redbridge programme date')
         dates=date_values(date.get_text(' ',strip=True))

@@ -1,0 +1,499 @@
+[
+  {
+    "url": "https://active-youth-sports-club.classforkids.io",
+    "class_rows": 2,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://active-youth-sports-club.classforkids.io/info/14",
+      "https://active-youth-sports-club.classforkids.io/info/16"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://bilinguasing-birmingham-south.classforkids.io",
+    "class_rows": 6,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://bilinguasing-birmingham-south.classforkids.io/info/387",
+      "https://bilinguasing-birmingham-south.classforkids.io/info/386"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://capoeira-manchester.classforkids.io?venueName=Fighting Fit Manchester",
+    "class_rows": 1,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://capoeira-manchester.classforkids.io/info/258"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://capoeira-manchester.classforkids.io?venueName=St John's Centre",
+    "class_rows": 2,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://capoeira-manchester.classforkids.io/info/254",
+      "https://capoeira-manchester.classforkids.io/info/255"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://capoeira-manchester.classforkids.io?venueName=Ukrainian Cultural Centre",
+    "class_rows": 0,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed",
+    "note": "No timetable rows; venue absent from current venue dropdown. Other provider venues remain active. Historical venue continuity unconfirmed."
+  },
+  {
+    "url": "https://city-of-birmingham-rockets-basketball-club.classforkids.io",
+    "class_rows": 77,
+    "nonstandard_rows": 5,
+    "sample_booking_urls": [
+      "https://city-of-birmingham-rockets-basketball-club.classforkids.io/info/356",
+      "https://city-of-birmingham-rockets-basketball-club.classforkids.io/info/360"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://creative-arts-kids.classforkids.io",
+    "class_rows": 12,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://creative-arts-kids.classforkids.io/info/341",
+      "https://creative-arts-kids.classforkids.io/info/344"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://creative-writing-club.classforkids.io",
+    "class_rows": 3,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://creative-writing-club.classforkids.io/info/20",
+      "https://creative-writing-club.classforkids.io/info/21"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://development-in-sport-pe.classforkids.io?venueName=Seymour Park Primary School",
+    "class_rows": 8,
+    "nonstandard_rows": 1,
+    "sample_booking_urls": [
+      "https://development-in-sport-pe.classforkids.io/info/138",
+      "https://development-in-sport-pe.classforkids.io/info/139"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://drama-tots-birmingham-south.classforkids.io",
+    "class_rows": 2,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://drama-tots-birmingham-south.classforkids.io/info/3",
+      "https://drama-tots-birmingham-south.classforkids.io/info/17"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://edgeahead.classforkids.io",
+    "class_rows": 15,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://edgeahead.classforkids.io/info/644",
+      "https://edgeahead.classforkids.io/info/649"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://el-recreo-spanish-eltham.classforkids.io",
+    "class_rows": 27,
+    "nonstandard_rows": 1,
+    "sample_booking_urls": [
+      "https://el-recreo-spanish-eltham.classforkids.io/info/170",
+      "https://el-recreo-spanish-eltham.classforkids.io/info/172"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://El-Recreo-Spanish-Online-for-Kids.classforkids.io",
+    "class_rows": 14,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://El-Recreo-Spanish-Online-for-Kids.classforkids.io/info/147",
+      "https://El-Recreo-Spanish-Online-for-Kids.classforkids.io/info/134"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://firstgymnastics-south-manchester.classforkids.io?venueName=CHS South",
+    "class_rows": 6,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://firstgymnastics-south-manchester.classforkids.io/info/69",
+      "https://firstgymnastics-south-manchester.classforkids.io/info/71"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://firstgymnastics-south-manchester.classforkids.io?venueName=CHS South (PS)",
+    "class_rows": 0,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed",
+    "note": "Venue remains in dropdown but no timetable rows under this filter; main CHS South has six. Do not silently merge pre-school and school-age programmes."
+  },
+  {
+    "url": "https://footy4kidz.classforkids.io?venueName=Pendleton Sixth Form College",
+    "class_rows": 1,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://footy4kidz.classforkids.io/info/32"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://footy4kidz.classforkids.io?venueName=Salford Sports Village",
+    "class_rows": 1,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://footy4kidz.classforkids.io/info/33"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://footytotzsalford.classforkids.io?venueName=Emmanuel Church Salford",
+    "class_rows": 1,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://footytotzsalford.classforkids.io/info/109"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://grace-poise-academy.classforkids.io",
+    "class_rows": 64,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://grace-poise-academy.classforkids.io/info/1818",
+      "https://grace-poise-academy.classforkids.io/info/1836"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://gymlab-hackney.classforkids.io",
+    "class_rows": 2,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://gymlab-hackney.classforkids.io/info/39",
+      "https://gymlab-hackney.classforkids.io/info/40"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://j-ace-rotherhithe-gymnastics.classforkids.io",
+    "class_rows": 15,
+    "nonstandard_rows": 1,
+    "sample_booking_urls": [
+      "https://j-ace-rotherhithe-gymnastics.classforkids.io/info/141",
+      "https://j-ace-rotherhithe-gymnastics.classforkids.io/info/131"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://junior-sport-stars.classforkids.io?venueName=Chorlton CE Primary School",
+    "class_rows": 1,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://junior-sport-stars.classforkids.io/info/2044"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://junior-sport-stars.classforkids.io?venueName=Co-op Academy New Islington",
+    "class_rows": 3,
+    "nonstandard_rows": 1,
+    "sample_booking_urls": [
+      "https://junior-sport-stars.classforkids.io/info/2031",
+      "https://junior-sport-stars.classforkids.io/info/2038"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://kittywatsonacting.classforkids.io?venueName=Christ Church West Didsbury",
+    "class_rows": 5,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://kittywatsonacting.classforkids.io/info/1176",
+      "https://kittywatsonacting.classforkids.io/info/1177"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://kntdanceworks.classforkids.io?venueName=MCR Dance Studios - Curve Studio",
+    "class_rows": 7,
+    "nonstandard_rows": 2,
+    "sample_booking_urls": [
+      "https://kntdanceworks.classforkids.io/info/561",
+      "https://kntdanceworks.classforkids.io/info/551"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://kntdanceworks.classforkids.io?venueName=MCR Dance Studios - Stomp Studio",
+    "class_rows": 5,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://kntdanceworks.classforkids.io/info/552",
+      "https://kntdanceworks.classforkids.io/info/560"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://kntdanceworks.classforkids.io?venueName=MCR Dance Studios - Waltz Studio",
+    "class_rows": 2,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://kntdanceworks.classforkids.io/info/562",
+      "https://kntdanceworks.classforkids.io/info/558"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://lambeth-tigers-football-club.classforkids.io",
+    "class_rows": 18,
+    "nonstandard_rows": 1,
+    "sample_booking_urls": [
+      "https://lambeth-tigers-football-club.classforkids.io/info/981",
+      "https://lambeth-tigers-football-club.classforkids.io/info/980"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://let-s-get-active.classforkids.io",
+    "class_rows": 13,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://let-s-get-active.classforkids.io/info/38",
+      "https://let-s-get-active.classforkids.io/info/44"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://little-movers-gym.classforkids.io",
+    "class_rows": 5,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://little-movers-gym.classforkids.io/info/121",
+      "https://little-movers-gym.classforkids.io/info/122"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://moo-music-rochdale.classforkids.io?venueName=BLACKLEY - Higher Blackley Community Centre",
+    "class_rows": 2,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://moo-music-rochdale.classforkids.io/info/607",
+      "https://moo-music-rochdale.classforkids.io/info/614"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://nextsteps-football-fc-chorlton-boys.classforkids.io?venueName=Houghend Astroturf Pitches",
+    "class_rows": 2,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://nextsteps-football-fc-chorlton-boys.classforkids.io/info/4",
+      "https://nextsteps-football-fc-chorlton-boys.classforkids.io/info/5"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://penguins-palace.classforkids.io",
+    "class_rows": 75,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://penguins-palace.classforkids.io/info/1217",
+      "https://penguins-palace.classforkids.io/info/1218"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://proelite-southlondon.classforkids.io",
+    "class_rows": 20,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://proelite-southlondon.classforkids.io/info/195",
+      "https://proelite-southlondon.classforkids.io/info/196"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://soccer-star-academy-manchester-central.classforkids.io?venueName=Trinity Sports Centre",
+    "class_rows": 5,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://soccer-star-academy-manchester-central.classforkids.io/info/125",
+      "https://soccer-star-academy-manchester-central.classforkids.io/info/127"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://tactilearts.classforkids.io?venueName=Cavendish Community Primary School",
+    "class_rows": 5,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://tactilearts.classforkids.io/info/1772",
+      "https://tactilearts.classforkids.io/info/1771"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://tactilearts.classforkids.io?venueName=West Didsbury CE Primary School",
+    "class_rows": 2,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://tactilearts.classforkids.io/info/1787",
+      "https://tactilearts.classforkids.io/info/1786"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://teachmajor.classforkids.io",
+    "class_rows": 50,
+    "nonstandard_rows": 1,
+    "sample_booking_urls": [
+      "https://teachmajor.classforkids.io/info/614",
+      "https://teachmajor.classforkids.io/info/615"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://tennis-time.classforkids.io",
+    "class_rows": 11,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://tennis-time.classforkids.io/info/243",
+      "https://tennis-time.classforkids.io/info/248"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://theatre-peckham.classforkids.io",
+    "class_rows": 0,
+    "nonstandard_rows": 2,
+    "sample_booking_urls": [],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed",
+    "note": "Two nonstandard camp/exam summary rows, not recurring class rows. Historical regular programme needs a direct class route."
+  },
+  {
+    "url": "https://tumble-tots-bolton.classforkids.io?venueName=Manchester Maccabi Community and Sports Club (Prestwich)",
+    "class_rows": 6,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://tumble-tots-bolton.classforkids.io/info/1326",
+      "https://tumble-tots-bolton.classforkids.io/info/1319"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://unity-fc.classforkids.io",
+    "class_rows": 2,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://unity-fc.classforkids.io/info/120",
+      "https://unity-fc.classforkids.io/info/123"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://vibedance.classforkids.io",
+    "class_rows": 5,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://vibedance.classforkids.io/info/10",
+      "https://vibedance.classforkids.io/info/14"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://we-will-rock-you-project.classforkids.io?venueName=Kingdom Life Youth Centre",
+    "class_rows": 5,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://we-will-rock-you-project.classforkids.io/info/89",
+      "https://we-will-rock-you-project.classforkids.io/info/87"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  },
+  {
+    "url": "https://we-will-rock-you-project.classforkids.io?venueName=The Edge Theatre & Arts Centre",
+    "class_rows": 3,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://we-will-rock-you-project.classforkids.io/info/85",
+      "https://we-will-rock-you-project.classforkids.io/info/84"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed",
+    "corrected_url": "https://we-will-rock-you-project.classforkids.io/?venueName=The%20Edge%20Theatre%20%26%20Arts%20Centre&%20Arts%20Centre",
+    "note": "Original unescaped ampersand breaks venueName. Selecting the actual venue shows three classes, all Join Waiting List. Do not imply booking availability."
+  },
+  {
+    "url": "https://wolfpack-dance-collective.classforkids.io",
+    "class_rows": 10,
+    "nonstandard_rows": 0,
+    "sample_booking_urls": [
+      "https://wolfpack-dance-collective.classforkids.io/info/100",
+      "https://wolfpack-dance-collective.classforkids.io/info/101"
+    ],
+    "checked_on": "2026-10-12",
+    "method": "Rendered public timetable, CUA; sample links only; detail availability/eligibility not assumed"
+  }
+]

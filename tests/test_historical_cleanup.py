@@ -17,3 +17,8 @@ class HistoricalCleanupTests(unittest.TestCase):
         plan=self.plan(schedule_text='Weekly')
         plan['changes']*=2
         with self.assertRaises(ValueError):build_sql(plan)
+    def test_recovered_links_must_be_public_https_and_cannot_change_venue_identity(self):
+        for url in ['javascript:alert(1)','https://user:password@example.com/','http://example.com/','https://example.com:444/']:
+            with self.assertRaises(ValueError):build_sql(self.plan(event_url=url))
+        with self.assertRaises(ValueError):build_sql(self.plan(venue_id='73b4f656-41ac-4037-9030-6d79e94c5636'))
+        self.assertIn('Protected provenance changed',build_sql(self.plan(event_url='https://example.com/class',location='Published address')))

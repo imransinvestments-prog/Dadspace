@@ -2,8 +2,9 @@
 import json
 import re
 import uuid
+from urllib.parse import urlsplit
 
-ALLOWED={'start_date','end_date','schedule_text','time_text','listing_type','recurrence','withdrawn_at','withdrawal_reason','superseded_by','date_backfill_reviewed_at','date_backfill_review_note'}
+ALLOWED={'start_date','end_date','schedule_text','time_text','listing_type','recurrence','withdrawn_at','withdrawal_reason','superseded_by','date_backfill_reviewed_at','date_backfill_review_note','event_url','location','postcode','venue_name','age_range'}
 
 def validate_plan(plan):
     seen=set()
@@ -14,6 +15,10 @@ def validate_plan(plan):
         if not re.fullmatch('[0-9a-f]{32}',item['expected_fingerprint']):raise ValueError('Missing row fingerprint')
         patch=item['patch']
         if not patch or set(patch)-ALLOWED:raise ValueError('Unsupported cleanup field')
+        if patch.get('event_url'):
+            url=urlsplit(patch['event_url'])
+            if url.scheme!='https' or not url.hostname or url.username or url.password or url.port not in (None,443):
+                raise ValueError('Invalid reviewed public URL')
         if patch.get('superseded_by'):
             uuid.UUID(patch['superseded_by'])
             if patch['superseded_by']==item['id']:raise ValueError('Cannot supersede itself')
