@@ -6,6 +6,8 @@ on:
       - 'scripts/validate_sutton_sources.py'
       - 'tests/test_sutton_source_review.py'
       - '.github/workflows/sutton-source-review.yml'
+      - 'lib/activity-copy.ts'
+      - 'scripts/test-activity-attendance.mjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -21,6 +23,10 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s tests -p test_sutton_source_review.py -v
       - run: python -m unittest discover -s tests -p test_mylibrary_calendar.py -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --experimental-strip-types scripts/test-activity-attendance.mjs
   live-read-only:
     needs: regressions
     runs-on: ubuntu-latest
