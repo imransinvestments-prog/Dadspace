@@ -82,6 +82,23 @@ class ActivityIngestionTests(unittest.TestCase):
             rows=quality.clean_events([item], {'id':'test'}, 'https://library.test/', 'test', dt.date(2026,10,8), stats)
         return rows, stats
 
+    def test_general_activity_preserves_published_bounds_without_generating_sessions(self):
+        rows,_=self.clean(self.activity(start_date='2026-07-09',end_date='2027-01-08'))
+        self.assertEqual((rows[0]['start_date'],rows[0]['end_date']),('2026-07-09','2027-01-08'))
+        self.assertEqual(rows[0]['schedule_text'],'Every Saturday at 10am')
+
+    def test_general_activity_keeps_explicit_session_gaps(self):
+        item=self.activity(occurrence_dates=['2026-10-12','2026-11-02'])
+        item['schedule_text']='10am - 10.30am'
+        rows,_=self.clean(item)
+        self.assertIn('2026-10-12, 2026-11-02',rows[0]['schedule_text'])
+        self.assertEqual(rows[0]['end_date'],'2026-11-02')
+        self.assertNotIn('2026-10-19',rows[0]['schedule_text'])
+
+    def test_activity_rejects_invalid_and_contradictory_date_evidence(self):
+        for dates in [dict(start_date='2026-02-30'),dict(start_date='2026-10-12',end_date='2026-10-01'),dict(start_date='2026-10-12',occurrence_dates=['2026-10-01'])]:
+            self.assertEqual(self.clean(self.activity(**dates))[1]['invalid_activity_dates'],1)
+
     def test_actionable_recurring_activity_kept(self):
         rows, _=self.clean(self.activity())
         self.assertEqual(len(rows), 1)

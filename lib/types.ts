@@ -26,6 +26,8 @@ export type DadEvent = {
 }
 
 export type DadActivity = {
+  start_date?: string | null
+  end_date?: string | null
   distance_miles?: number | null
   id: string
   title: string

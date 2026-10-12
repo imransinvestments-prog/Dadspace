@@ -1,0 +1,104 @@
+{
+  "checked_at": "2026-10-12T09:59:48.431740+00:00",
+  "method": "fresh public requests HTML + deterministic provider parser + normal quality cleaner; frozen reviewer row supplies other fields, not a new model extraction",
+  "gemini_calls": 0,
+  "database_writes": 0,
+  "results": [
+    {
+      "title": "Botley: Rhymetime",
+      "url": "https://www.oxfordshire.gov.uk/events/libraries/botley-rhymetime-0",
+      "status": 200,
+      "published_fields": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-13",
+        "occurrence_dates": [
+          "2026-10-16",
+          "2026-10-23",
+          "2026-10-30",
+          "2026-11-06",
+          "2026-11-13"
+        ],
+        "schedule_text": "Friday 16 Oct 2026, 10am-10.30am; Friday 23 Oct 2026, 10am-10.30am; Friday 30 Oct 2026, 10am-10.30am; Friday 6 Nov 2026, 10am-10.30am; Friday 13 Nov 2026, 10am-10.30am"
+      },
+      "accepted": [
+        {
+          "source_id": "43a48e50-eac3-435a-bd3c-5caad5d5a2da",
+          "title": "Botley: Rhymetime",
+          "description": null,
+          "listing_type": "activity",
+          "is_holiday_camp": false,
+          "category": "baby_toddler",
+          "start_date": "2026-10-16",
+          "end_date": "2026-11-13",
+          "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-10-30, 2026-11-06, 2026-11-13; Friday 16 Oct 2026, 10am-10.30am; Friday 23 Oct 2026, 10am-10.30am; Friday 30 Oct 2026, 10am-10.30am; Friday 6 Nov 2026, 10am-10.30am; Friday 13 Nov 2026, 10am-10.30am",
+          "time_text": "10.00am - 10.30am",
+          "location": "Botley Library",
+          "venue_name": "Botley Library",
+          "venue_address": null,
+          "postcode": null,
+          "venue_id": null,
+          "event_url": "https://www.oxfordshire.gov.uk/events/libraries/botley-rhymetime-0",
+          "cost_text": null,
+          "age_range": null,
+          "recurrence": "recurring",
+          "family_relevance": 5,
+          "confidence": 0.99,
+          "source_url": "https://www.oxfordshire.gov.uk/events/libraries/botley-rhymetime-0",
+          "extraction_method": "published-date-review",
+          "dedupe_key": "2cffd92ee843605f2bef64526e99aab6cc9440e3",
+          "last_verified_at": "2026-10-12T09:59:48.196778+00:00",
+          "last_seen_at": "2026-10-12T09:59:48.196778+00:00"
+        }
+      ],
+      "stats": {
+        "kept": 1,
+        "extracted": 1
+      }
+    },
+    {
+      "title": "Tots Time",
+      "url": "https://www.coventry.gov.uk/events/event/8828/tots-time",
+      "status": 200,
+      "published_fields": {
+        "start_date": "2026-07-09",
+        "end_date": "2027-01-08",
+        "occurrence_dates": [],
+        "schedule_text": "9th July 2026 - 8th January 2027 Recurs every other week on Thursday.; Time: 10:00 - 11:15; term time only"
+      },
+      "accepted": [
+        {
+          "source_id": "0f773e80-abe5-437d-9359-08ce37a1c947",
+          "title": "Tots Time",
+          "description": "Tots Time is a free group for babies, toddlers and their carers at St Andrew's Church in Eastern Green.",
+          "listing_type": "activity",
+          "is_holiday_camp": false,
+          "category": "baby_toddler",
+          "start_date": "2026-07-09",
+          "end_date": "2027-01-08",
+          "schedule_text": "9th July 2026 - 8th January 2027 Recurs every other week on Thursday.; Time: 10:00 - 11:15; term time only",
+          "time_text": null,
+          "location": "St Andrew's Church in Eastern Green",
+          "venue_name": "St Andrew's Church",
+          "venue_address": null,
+          "postcode": null,
+          "venue_id": null,
+          "event_url": "https://www.coventry.gov.uk/events/event/8828/tots-time",
+          "cost_text": "free",
+          "age_range": "babies, toddlers",
+          "recurrence": "recurring",
+          "family_relevance": 5,
+          "confidence": 0.99,
+          "source_url": "https://www.coventry.gov.uk/events/event/8828/tots-time",
+          "extraction_method": "published-date-review",
+          "dedupe_key": "fba762b64ddd804de5d0136229c7fac2d577a54c",
+          "last_verified_at": "2026-10-12T09:59:48.431740+00:00",
+          "last_seen_at": "2026-10-12T09:59:48.431740+00:00"
+        }
+      ],
+      "stats": {
+        "kept": 1,
+        "extracted": 1
+      }
+    }
+  ]
+}

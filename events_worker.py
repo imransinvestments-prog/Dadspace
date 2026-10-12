@@ -291,7 +291,8 @@ EVENTS VS ACTIVITIES (classify EACH ITEM, never classify from the source categor
 - activity = a regular weekly, repeating or term-time class/session/group/club. It may have no start_date.
 - event = a one-off, seasonal or special event. SCHOOL-HOLIDAY CAMPS ARE EVENTS even when they run for several days or repeat during a holiday.
 - is_holiday_camp = true only for a genuine school-holiday camp; otherwise false.
-- For an activity, put the human schedule copied from the page in schedule_text (for example "Tuesdays 10am, term time"). Do not invent a schedule. start_date/end_date may be null.
+- For an activity, copy the full published schedule into schedule_text, including weekday, clock times, term-time limits and exceptions. Preserve explicit start_date/end_date as ISO dates when the page supplies them; null only when absent. Date bounds are not proof of daily sessions.
+- Put individually published activity session dates in occurrence_dates as ISO dates; never generate dates from a recurrence or infer a missing year. Preserve gaps, cancellations and varying session times in schedule_text. Do not use footer dates, related listings or a calendar range that contradicts the programme description. Conflicting dates must be left unresolved rather than guessed.
 - For an event, start_date is mandatory and schedule_text should normally be null.
 - category must classify the ITEM itself, not the website/source. Use one concise category from: holiday_camps, sports, swimming, outdoors_nature, film_theatre, arts_crafts, museums_heritage, farms_animals, libraries, baby_toddler, family_days_out, other.
 
@@ -325,6 +326,7 @@ def make_gemini_caller():
         start_date: Optional[str]
         end_date: Optional[str]
         schedule_text: Optional[str] = None
+        occurrence_dates: Optional[list[str]] = None
         time_text: Optional[str]
         location: Optional[str]
         venue_name: Optional[str] = None
@@ -445,8 +447,33 @@ def _activity_row(item: dict, source: dict, page_url: str, method: str, stats: d
         return None
     # A duration, bare clock time, or 'regular sessions' is not an actionable
     # recurring schedule. Never invent a weekday from the source's location.
-    published_dates=item.get('occurrence_dates') if method in ('mylibrary_calendar','library_portal') else None
-    if not schedule or (not published_dates and not re.search(
+    published_dates = item.get('occurrence_dates') or []
+    start = base.parse_date(item.get('start_date'))
+    end = base.parse_date(item.get('end_date'))
+    if not isinstance(published_dates, list) or any(not base.parse_date(value) for value in published_dates):
+        stats['invalid_activity_dates'] = stats.get('invalid_activity_dates', 0) + 1
+        return None
+    published_dates = sorted({base.parse_date(value).isoformat() for value in published_dates})
+    if published_dates and method in ('mylibrary_calendar', 'library_portal'):
+        # These adapters' start/end describe the root session, not the series.
+        start = base.parse_date(published_dates[0])
+        end = base.parse_date(published_dates[-1])
+    if ((item.get('start_date') and not start) or (item.get('end_date') and not end)
+            or (start and end and end < start)
+            or (published_dates and ((start and published_dates[0] < start.isoformat())
+                                     or (end and published_dates[-1] > end.isoformat())))):
+        stats['invalid_activity_dates'] = stats.get('invalid_activity_dates', 0) + 1
+        return None
+    if published_dates:
+        # Keep exact sessions in the existing schedule column. Never silently
+        # truncate a date list into an apparently complete schedule.
+        dates_text = 'Published dates: ' + ', '.join(published_dates)
+        if not all(date in (schedule or '') for date in published_dates):
+            schedule = dates_text + ('; ' + schedule if schedule else '')
+        if len(schedule) > 300:
+            stats['activity_schedule_requires_review'] = stats.get('activity_schedule_requires_review', 0) + 1
+            return None
+    if not schedule or (not published_dates and not start and not re.search(
         r"\b(?:mon(?:day)?s?|tue(?:sday)?s?|wed(?:nesday)?s?|thu(?:rsday)?s?|fri(?:day)?s?|sat(?:urday)?s?|sun(?:day)?s?|daily|weekly|monthly|every day|every week|every month)\b",
         schedule, re.I,
     )):
@@ -463,8 +490,8 @@ def _activity_row(item: dict, source: dict, page_url: str, method: str, stats: d
         "listing_type": "activity",
         "is_holiday_camp": False,
         "category": base.clean_str(item.get("category"), 80),
-        "start_date": min(published_dates) if published_dates else None,
-        "end_date": max(published_dates) if published_dates else None,
+        "start_date": start.isoformat() if start else min(published_dates) if published_dates else None,
+        "end_date": end.isoformat() if end else max(published_dates) if published_dates else None,
         "schedule_text": schedule,
         "time_text": base.clean_str(item.get("time_text"), 200),
         "location": location,
@@ -606,7 +633,30 @@ def process_source(source, extract, today):
         source = dict(source)
         source["last_hash"] = None
         source["last_success_at"] = None
-    return _ORIGINAL_PROCESS_SOURCE(source, extract, today)
+    from activity_dates import enrich_dates
+    from urllib.parse import urlparse
+    from activity_dates import HOSTS as DATE_DETAIL_HOSTS
+    date_details = source.get('source_adapter') == 'published_activity_dates'
+    if date_details and urlparse(source['url']).hostname not in DATE_DETAIL_HOSTS:
+        return 'failed_fetch', [], None, 'Unreviewed activity date detail host', {}
+    if date_details:
+        # An unchanged directory does not prove its session detail dates are
+        # unchanged. Do not refresh verification from the root hash alone.
+        source = dict(source, last_hash=None, last_success_at=None)
+    date_stats = {}
+    def extract_with_dates(prompt):
+        date_stats['gemini_logical_calls'] = 1
+        raw = extract(prompt)
+        return enrich_dates(raw, source, base.fetch_html, base.robots_allows, date_stats) if date_details else raw
+    extract_with_dates.metrics = getattr(extract, 'metrics', {})
+    try:
+        result = _ORIGINAL_PROCESS_SOURCE(source, extract_with_dates, today)
+    except base.FatalError:
+        raise
+    except Exception as exc:
+        return base.classify_fetch_error(str(exc)), [], None, str(exc), date_stats
+    result[-1].update(date_stats)
+    return result
 
 
 def fetch_source_html(source):
