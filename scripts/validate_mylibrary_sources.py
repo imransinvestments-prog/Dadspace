@@ -12,9 +12,8 @@ import events_worker
 import worker
 
 SOURCES=[
-    ('Ealing Southall','https://ealing.events.mylibrary.digital/event?id=319317'),
-    ('Ealing Northolt','https://ealing.events.mylibrary.digital/event?id=264081'),
-    ('Merton storytelling','https://merton.events.mylibrary.digital/event?id=378391'),
+    ('Ealing libraries','https://libraries.ealing.gov.uk/events'),
+    ('Merton libraries','https://libraries.merton.gov.uk/events'),
     ('Sutton library','https://events.sutton.gov.uk/event?id=364833'),
 ]
 
@@ -38,7 +37,9 @@ def main():
     path=ROOT/'mylibrary-source-review/results.json'
     path.parent.mkdir(exist_ok=True)
     for name,url in SOURCES:
-        source=dict(id='preview-'+name,name=name,url=url,source_adapter='mylibrary_calendar')
+        source=dict(id='preview-'+name,name=name,url=url,
+                    source_adapter='library_portal' if 'libraries.' in url else 'mylibrary_calendar',
+                    collection_days=7 if name=='Merton libraries' else 30)
         for attempt in (1,2):
             status,rows,digest,message,stats=events_worker.process_source(source,None,worker.today_uk())
             results.append(dict(name=name,url=url,attempt=attempt,status=status,rows=rows,

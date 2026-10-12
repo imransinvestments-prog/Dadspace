@@ -47,3 +47,15 @@ Confirm permitted unattended collection/republishing for each operator. Validate
 Cancellation is excluded from the new accepted snapshot; existing stale rows expire through current freshness policy. Immediate per-item withdrawal/review is not implemented here. A future source review must address this before claiming complete cancellation handling. The public Activities mapper currently displays schedule text, not the date bounds; those bounds remain stored for provenance and future occurrence views.
 
 Camden/Bexley/Barnet standing schedules, Hounslow rendered pagination, Better embedded timetables, wider operator discovery, canonical matching (#40), 10 activities across three categories/two providers, human quality acceptance, reviewed source activation and live repeat ingestion remain outstanding. #39 stays open. No deployment or production source activation is included in this delivery.
+
+## Public portal qualification (12 October, latest)
+
+This supersedes the Ealing/Merton access gap above. Their official public library portals publish structured event records in the returned React server-component document. The new opt-in `library_portal` adapter reads those published records without executing scripts or using private endpoints. Text-frame references are resolved with UTF-8 byte lengths. Calendar booking URLs remain provenance links; blocked calendar hosts are not bypassed.
+
+The index must extend beyond the declared window and remain chronological. Ealing qualifies a 30-day window; Merton currently qualifies seven days. Private, unpublished, cancelled, full, virtual, ambiguous and conflicting-condition records are excluded with rejection counters. Exact dates and varying session times are retained. Missing ages and addresses are not fabricated. Venue matching and pilot eligibility still require separate evidence.
+
+[Read-only two-pass evidence](../data/ds10-public-portal-live-2026-10-12.json) records Ealing six accepted programmes, Merton fourteen and Sutton one on each normal-worker pass, with stable identities and zero model calls/database writes. Sutton used public requests HTML locally; the CI browser route requires its own new run. These programme counts do not certify pilot coverage.
+
+Sutton's published Today/Tomorrow labels now resolve against the fresh UK collection date; relative labels without an anchor fail. All 110 Python tests pass. Previous evidence and counts remain historical snapshots.
+
+The owner worksheet remains unanswered. Closure still requires the 100-item human review at 90% quality, verified pilot breadth, scheduled collection evidence across seven days, remaining operator routes and historical withdrawal handling. Sources remain inactive; this change does not deploy or activate production collection.

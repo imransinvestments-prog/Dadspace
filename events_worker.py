@@ -445,7 +445,7 @@ def _activity_row(item: dict, source: dict, page_url: str, method: str, stats: d
         return None
     # A duration, bare clock time, or 'regular sessions' is not an actionable
     # recurring schedule. Never invent a weekday from the source's location.
-    published_dates=item.get('occurrence_dates') if method=='mylibrary_calendar' else None
+    published_dates=item.get('occurrence_dates') if method in ('mylibrary_calendar','library_portal') else None
     if not schedule or (not published_dates and not re.search(
         r"\b(?:mon(?:day)?s?|tue(?:sday)?s?|wed(?:nesday)?s?|thu(?:rsday)?s?|fri(?:day)?s?|sat(?:urday)?s?|sun(?:day)?s?|daily|weekly|monthly|every day|every week|every month)\b",
         schedule, re.I,
@@ -578,6 +578,16 @@ def clean_events(raw_events, source, page_url, method, today, stats=None):
 
 
 def process_source(source, extract, today):
+    if source.get('source_adapter')=='library_portal':
+        from library_portal import collect_portal, fetch_portal
+        stats={}
+        try:
+            raw,new_hash,stats=collect_portal(source,today,fetch_portal,base.robots_allows,stats)
+            rows=clean_events(raw,source,source['url'],'library_portal',today,stats)
+            stats['extracted']=len(raw)
+            return ('ok' if rows else 'ok_zero'),rows,new_hash,f'Public library portal: {len(rows)} kept; zero model calls',stats
+        except Exception as exc:
+            return base.classify_fetch_error(str(exc)),[],None,str(exc),stats
     if source.get('source_adapter')=='mylibrary_calendar':
         from mylibrary_calendar import collect, render_page
         stats={}

@@ -173,4 +173,12 @@ class MyLibraryTests(unittest.TestCase):
         rows,_,_=collect({'url':URL},TODAY,cancelled,lambda _:(True,''))
         self.assertNotIn('2026-10-19',rows[0]['occurrence_dates'])
 
+    def test_relative_dates_require_fresh_collection_anchor(self):
+        from mylibrary_calendar import html_date
+        anchor=dt.date(2026,10,12)
+        self.assertEqual(html_date('Today at 11:15 AM',anchor),'2026-10-12')
+        self.assertEqual(html_date('Tomorrow at 11:15 AM',dt.date(2026,12,31)),'2027-01-01')
+        with self.assertRaises(CalendarError):
+            html_date('Today at 11:15 AM')
+
 if __name__=='__main__': unittest.main()
