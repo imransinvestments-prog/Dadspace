@@ -1,0 +1,135 @@
+{
+  "checked_on": "2026-10-12",
+  "address_evidence_url": "https://haysouthcambs.co.uk/activities/scouts-in-south-cambridgeshire/",
+  "address_capture": "previously reviewed public HTML snapshot",
+  "standard_age_bands": {
+    "Beavers": "6–8 years",
+    "Cubs": "8–10½ years",
+    "Scouts": "10½–14 years"
+  },
+  "groups": [
+    {
+      "title": "32nd Cambridge Scout Group (Waterbeach)",
+      "location": "32nd Cambridge Scout Group (Waterbeach)  High Street Waterbeach Cambridge CB25 9JU",
+      "reason": "Only historical 2021 meeting times found; contemporary primary timetable needed"
+    },
+    {
+      "title": "50th Cambridge Scout Group (Milton & Landbeach)",
+      "location": "50th Cambridge Scout Group (Milton & Landbeach)  Coles Road Milton Cambridge CB24 6BL UK",
+      "url": "https://www.50thcambridgescouts.org/",
+      "adapter": "milton"
+    },
+    {
+      "title": "1st Cambridge Orchard Park Scout Group",
+      "location": "1st Cambridge Orchard Park Scout Group The Orchard Community Centre Central Avenue Cambridge CB4 2EZ UK",
+      "url": "https://www.cambridgescouts.org.uk/groups/1stcambridge/",
+      "adapter": "orchard",
+      "age_evidence_url": "https://www.cambridgeshirescouts.org.uk/"
+    },
+    {
+      "title": "Shelfords and Stapleford Scout Group",
+      "location": "Shelfords and Stapleford Scout Group  Woollards Lane Great Shelford Cambridge CB22 5LZ UK",
+      "url": "https://www.shelfordsandstaplefordscouts.org.uk/join/",
+      "adapter": "waiting-list"
+    },
+    {
+      "title": "1st Sawston Scout Group",
+      "location": "1st Sawston Scout Group  High Street Sawston Cambridge CB22 3HJ UK",
+      "reason": "Older operator page publishes a different meeting venue (St Mary’s Community Hall, Church Lane). Confirm current section timetable and venue before application."
+    },
+    {
+      "title": "1st Whittlesford & Duxford Scout Group",
+      "location": "1st Whittlesford & Duxford Scout Group  Moorfield Road Duxford Cambridge CB22 4PS UK",
+      "url": "https://wanddscouts.org.uk/",
+      "adapter": "duxford"
+    },
+    {
+      "title": "57th Cambridge Scout Group (Fulbourn)",
+      "location": "57th Cambridge Scout Group (Fulbourn)  Home End Fulbourn Cambridge CB21 5BS UK",
+      "url": "https://www.57thfulbournscouts.org.uk/beavers.html",
+      "adapter": "fulbourn"
+    },
+    {
+      "title": "1st Over Scout Group",
+      "location": "1st Over Scout Group Church End Over Cambridge CB24 5NH UK",
+      "url": "https://craftshillscouts.org.uk/1st-over-st-marys-scout-group/",
+      "adapter": "crafts-hill"
+    },
+    {
+      "title": "1st Willingham Scout Group",
+      "location": "1st Willingham Scout Group  Jeeps Close Willingham Cambridge CB24 5AD UK",
+      "url": "https://craftshillscouts.org.uk/1st-willingham/",
+      "adapter": "crafts-hill"
+    },
+    {
+      "title": "1st Swavesey Scout Group",
+      "location": "1st Swavesey Scout Group  Swavesey Cambridge CB24 4RS UK",
+      "url": "https://craftshillscouts.org.uk/1st-swavesey/",
+      "adapter": "crafts-hill"
+    },
+    {
+      "title": "1st Northstowe Scout Group",
+      "location": "1st Northstowe Scout Group  The Community Wing Pathfinder Way Northstowe CB24 1AA",
+      "url": "https://craftshillscouts.org.uk/1st-northstowe/",
+      "adapter": "crafts-hill"
+    },
+    {
+      "title": "2nd Cottenham Scout Group",
+      "location": "2nd Cottenham Scout Group  Corbett Street Cottenham Cambridge CB24 8QX UK",
+      "url": "https://craftshillscouts.org.uk/2nd-cottenham/",
+      "adapter": "crafts-hill"
+    },
+    {
+      "title": "1st Oakington Scout Group",
+      "location": "1st Oakington Scout Group  Queens Way Oakington Cambridge CB24 3AW UK",
+      "url": "https://craftshillscouts.org.uk/1st-oakington/",
+      "adapter": "crafts-hill"
+    },
+    {
+      "title": "1st Bar Hill Scout Group",
+      "location": "1st Bar Hill Scout Group  The Spinney Bar Hill Cambridge CB23 8SU UK",
+      "url": "https://craftshillscouts.org.uk/1st-bar-hill/",
+      "adapter": "crafts-hill"
+    },
+    {
+      "title": "1st Hardwick & Highfields Scout Group",
+      "location": "1st Hardwick & Highfields Scout Group  Pippin Walk Hardwick Cambridge CB23 7QD UK",
+      "url": "https://craftshillscouts.org.uk/1st-hardwick-highfields/",
+      "adapter": "crafts-hill"
+    },
+    {
+      "title": "1st Caldecote Scout Group",
+      "location": "1st Caldecote Scout Group  Furlong Way Highfields Caldecote Cambridge CB23 7ZH UK",
+      "reason": "Current primary section timetable not yet qualified; no dates or section sessions inferred"
+    },
+    {
+      "title": "1st Cambourne Scout Group",
+      "location": "1st Cambourne Scout Group  Jeavons Lane Cambourne Cambridge CB23 6AF UK",
+      "url": "https://craftshillscouts.org.uk/1st-cambourne/",
+      "adapter": "crafts-hill"
+    },
+    {
+      "title": "1st Bourn Scout Group",
+      "location": "1st Bourn Scout Group  Park Lane Longstowe Cambridge CB23 2UJ UK",
+      "url": "https://craftshillscouts.org.uk/1st-bourn-scout-group/",
+      "adapter": "crafts-hill"
+    },
+    {
+      "title": "1st Comberton Scout Group",
+      "location": "1st Comberton Scout Group Comberton Cambridge CB23 7DU UK",
+      "url": "https://craftshillscouts.org.uk/1st-comberton/",
+      "adapter": "crafts-hill"
+    },
+    {
+      "title": "7/16 Cambridge Scout Group",
+      "location": "7/16 Cambridge Scout Group  School Lane Barton Cambridge CB23 7BD UK",
+      "reason": "HAY identifies 7/16 Cambridge; district lists 6/17 Cambridge in Barton. Group identity must be reconciled before attaching its timetable."
+    },
+    {
+      "title": "2nd Cambourne Scout Group",
+      "location": "2nd Cambourne Scout Group  Back Lane Cambourne Cambridge CB23 6FY UK",
+      "url": "https://craftshillscouts.org.uk/2nd-cambourne/",
+      "adapter": "crafts-hill"
+    }
+  ]
+}

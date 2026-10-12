@@ -1,0 +1,821 @@
+{
+  "checked_on": "2026-10-12",
+  "parent_record_id": "dd4e8663-1d52-49ba-a7c1-edd1f1d93c65",
+  "database_writes": 0,
+  "groups": [
+    {
+      "title": "32nd Cambridge Scout Group (Waterbeach)",
+      "status": "needs review",
+      "reason": "Only historical 2021 meeting times found; contemporary primary timetable needed"
+    },
+    {
+      "title": "50th Cambridge Scout Group (Milton & Landbeach)",
+      "proposals": 4,
+      "status": "extracted",
+      "issues": [
+        "Squirrels: no published meeting time"
+      ]
+    },
+    {
+      "title": "1st Cambridge Orchard Park Scout Group",
+      "proposals": 3,
+      "status": "extracted",
+      "issues": []
+    },
+    {
+      "title": "Shelfords and Stapleford Scout Group",
+      "proposals": 0,
+      "status": "needs review",
+      "issues": [
+        "All sections full; membership waiting list only"
+      ]
+    },
+    {
+      "title": "1st Sawston Scout Group",
+      "status": "needs review",
+      "reason": "Older operator page publishes a different meeting venue (St Mary’s Community Hall, Church Lane). Confirm current section timetable and venue before application."
+    },
+    {
+      "title": "1st Whittlesford & Duxford Scout Group",
+      "proposals": 2,
+      "status": "extracted",
+      "issues": [
+        "Cubs: waiting list only",
+        "Scouts: waiting list only",
+        "Explorers: waiting list only"
+      ]
+    },
+    {
+      "title": "57th Cambridge Scout Group (Fulbourn)",
+      "proposals": 4,
+      "status": "extracted",
+      "issues": [
+        "Beavers: conflicting published age ranges"
+      ]
+    },
+    {
+      "title": "1st Over Scout Group",
+      "proposals": 2,
+      "status": "extracted",
+      "issues": [
+        "Beavers: explicitly unavailable"
+      ]
+    },
+    {
+      "title": "1st Willingham Scout Group",
+      "proposals": 4,
+      "status": "extracted",
+      "issues": []
+    },
+    {
+      "title": "1st Swavesey Scout Group",
+      "proposals": 3,
+      "status": "extracted",
+      "issues": []
+    },
+    {
+      "title": "1st Northstowe Scout Group",
+      "proposals": 3,
+      "status": "extracted",
+      "issues": []
+    },
+    {
+      "title": "2nd Cottenham Scout Group",
+      "proposals": 4,
+      "status": "extracted",
+      "issues": []
+    },
+    {
+      "title": "1st Oakington Scout Group",
+      "proposals": 3,
+      "status": "extracted",
+      "issues": []
+    },
+    {
+      "title": "1st Bar Hill Scout Group",
+      "proposals": 4,
+      "status": "extracted",
+      "issues": []
+    },
+    {
+      "title": "1st Hardwick & Highfields Scout Group",
+      "proposals": 3,
+      "status": "extracted",
+      "issues": []
+    },
+    {
+      "title": "1st Caldecote Scout Group",
+      "status": "needs review",
+      "reason": "Current primary section timetable not yet qualified; no dates or section sessions inferred"
+    },
+    {
+      "title": "1st Cambourne Scout Group",
+      "proposals": 3,
+      "status": "extracted",
+      "issues": []
+    },
+    {
+      "title": "1st Bourn Scout Group",
+      "proposals": 3,
+      "status": "extracted",
+      "issues": []
+    },
+    {
+      "title": "1st Comberton Scout Group",
+      "proposals": 3,
+      "status": "extracted",
+      "issues": []
+    },
+    {
+      "title": "7/16 Cambridge Scout Group",
+      "status": "needs review",
+      "reason": "HAY identifies 7/16 Cambridge; district lists 6/17 Cambridge in Barton. Group identity must be reconciled before attaching its timetable."
+    },
+    {
+      "title": "2nd Cambourne Scout Group",
+      "proposals": 3,
+      "status": "extracted",
+      "issues": []
+    }
+  ],
+  "sessions": [
+    {
+      "name": "50th Cambridge Scout Group (Milton & Landbeach) — Beavers",
+      "venue": "50th Cambridge Scout Group (Milton & Landbeach)",
+      "location": "50th Cambridge Scout Group (Milton & Landbeach)  Coles Road Milton Cambridge CB24 6BL UK",
+      "postcode": "CB24 6BL",
+      "ages": "six and eight",
+      "schedule": "Fridays 6:30 - 7.30pm during term time",
+      "evidence_url": "https://www.50thcambridgescouts.org/index.php/beavers",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "39206fd880fabc833bb450ec5089810c29367e1b2aa57182cd486a998cd57d7d"
+    },
+    {
+      "name": "50th Cambridge Scout Group (Milton & Landbeach) — Cubs",
+      "venue": "50th Cambridge Scout Group (Milton & Landbeach)",
+      "location": "50th Cambridge Scout Group (Milton & Landbeach)  Coles Road Milton Cambridge CB24 6BL UK",
+      "postcode": "CB24 6BL",
+      "ages": "eight and a half to ten",
+      "schedule": "Fridays 6.15 - 7.40pm during term time. We may finish later if we are going out.",
+      "evidence_url": "https://www.50thcambridgescouts.org/index.php/cubs",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "f4cefea446e8127aa13577ef5049ae642d5d1e24192e63bb4a94939d5cb7cfbe"
+    },
+    {
+      "name": "50th Cambridge Scout Group (Milton & Landbeach) — Scouts",
+      "venue": "50th Cambridge Scout Group (Milton & Landbeach)",
+      "location": "50th Cambridge Scout Group (Milton & Landbeach)  Coles Road Milton Cambridge CB24 6BL UK",
+      "postcode": "CB24 6BL",
+      "ages": "10½ and 14",
+      "schedule": "Fridays 7:45-9:15pm during term time",
+      "evidence_url": "https://www.50thcambridgescouts.org/index.php/scouts",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "e850a4c45ac09ee0c2c08328fcc4e4f63c93d193b5c4c680d1a18c3c3a544856"
+    },
+    {
+      "name": "50th Cambridge Scout Group (Milton & Landbeach) — Explorers",
+      "venue": "50th Cambridge Scout Group (Milton & Landbeach)",
+      "location": "50th Cambridge Scout Group (Milton & Landbeach)  Coles Road Milton Cambridge CB24 6BL UK",
+      "postcode": "CB24 6BL",
+      "ages": "14 and 18",
+      "schedule": "Fridays 7:45-9:15pm during term time",
+      "evidence_url": "https://www.50thcambridgescouts.org/index.php/explorers",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "26196870981b084a8a1cf5867712911e0fd77a092c89a70f7e6a3426a48e6d7e"
+    },
+    {
+      "name": "1st Cambridge Orchard Park Scout Group — Beavers",
+      "venue": "1st Cambridge Orchard Park Scout Group",
+      "location": "1st Cambridge Orchard Park Scout Group The Orchard Community Centre Central Avenue Cambridge CB4 2EZ UK",
+      "postcode": "CB4 2EZ",
+      "ages": "6–8 years",
+      "schedule": "Fridays 5.30pm – 6.45pm",
+      "evidence_url": "https://www.cambridgescouts.org.uk/groups/1stcambridge/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application; Age band from county section reference: https://www.cambridgeshirescouts.org.uk/",
+      "proposal_key": "1f80b40def92249eaa62320b815caec79c894e01231520b099e91e245abb9658"
+    },
+    {
+      "name": "1st Cambridge Orchard Park Scout Group — Cubs",
+      "venue": "1st Cambridge Orchard Park Scout Group",
+      "location": "1st Cambridge Orchard Park Scout Group The Orchard Community Centre Central Avenue Cambridge CB4 2EZ UK",
+      "postcode": "CB4 2EZ",
+      "ages": "8–10½ years",
+      "schedule": "Fridays 6.45pm – 8pm",
+      "evidence_url": "https://www.cambridgescouts.org.uk/groups/1stcambridge/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application; Age band from county section reference: https://www.cambridgeshirescouts.org.uk/",
+      "proposal_key": "70fc51f86d03abdb99965ddfb133efb281f55b57b419d56cdc2938e13e0e5f12"
+    },
+    {
+      "name": "1st Cambridge Orchard Park Scout Group — Scouts",
+      "venue": "1st Cambridge Orchard Park Scout Group",
+      "location": "1st Cambridge Orchard Park Scout Group The Orchard Community Centre Central Avenue Cambridge CB4 2EZ UK",
+      "postcode": "CB4 2EZ",
+      "ages": "10½–14 years",
+      "schedule": "Fridays 8pm – 9.30pm",
+      "evidence_url": "https://www.cambridgescouts.org.uk/groups/1stcambridge/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application; Age band from county section reference: https://www.cambridgeshirescouts.org.uk/",
+      "proposal_key": "c157aee136e7882ee7576d28cc84ad0eb132cb47eb05fccdc9e3b56c328ed2c0"
+    },
+    {
+      "name": "1st Whittlesford & Duxford Scout Group — Wildwood Beavers",
+      "venue": "1st Whittlesford & Duxford Scout Group",
+      "location": "1st Whittlesford & Duxford Scout Group  Moorfield Road Duxford Cambridge CB22 4PS UK",
+      "postcode": "CB22 4PS",
+      "ages": "6–8",
+      "schedule": "Wed 18:30-19:30",
+      "evidence_url": "https://wanddscouts.org.uk/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "e41e7fffb95d4616992843eb7e05afce7d4df835c91a19fd97a089523efe12cb"
+    },
+    {
+      "name": "1st Whittlesford & Duxford Scout Group — Forest Beavers",
+      "venue": "1st Whittlesford & Duxford Scout Group",
+      "location": "1st Whittlesford & Duxford Scout Group  Moorfield Road Duxford Cambridge CB22 4PS UK",
+      "postcode": "CB22 4PS",
+      "ages": "6–8",
+      "schedule": "Fri 18:15-19:15",
+      "evidence_url": "https://wanddscouts.org.uk/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "de83a312ae55e0dec3c817d9aed2791a83112ff8cfde484576020ec6b94cbfd6"
+    },
+    {
+      "name": "57th Cambridge Scout Group (Fulbourn) — Scouts",
+      "venue": "57th Cambridge Scout Group (Fulbourn)",
+      "location": "57th Cambridge Scout Group (Fulbourn)  Home End Fulbourn Cambridge CB21 5BS UK",
+      "postcode": "CB21 5BS",
+      "ages": "10½ to 14 years",
+      "schedule": "Wednesday's 7:30pm - 9pm",
+      "evidence_url": "https://www.57thfulbournscouts.org.uk/scouts.html",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "73dcd69199f3aeab4bdf5f44cb8301e86a5108e9c6c49c7e65e7cc7f73a8c1b9"
+    },
+    {
+      "name": "57th Cambridge Scout Group (Fulbourn) — Cubs",
+      "venue": "57th Cambridge Scout Group (Fulbourn)",
+      "location": "57th Cambridge Scout Group (Fulbourn)  Home End Fulbourn Cambridge CB21 5BS UK",
+      "postcode": "CB21 5BS",
+      "ages": "8 to 10½",
+      "schedule": "Thursday's 6pm - 7:30pm",
+      "evidence_url": "https://www.57thfulbournscouts.org.uk/cubs.html",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "129de16b23bdad2c812003315fd9e83626d0cc775f31e68593643813a83ee9d2"
+    },
+    {
+      "name": "57th Cambridge Scout Group (Fulbourn) — Beavers",
+      "venue": "57th Cambridge Scout Group (Fulbourn)",
+      "location": "57th Cambridge Scout Group (Fulbourn)  Home End Fulbourn Cambridge CB21 5BS UK",
+      "postcode": "CB21 5BS",
+      "ages": "7½ to 8½",
+      "schedule": "Tuesday's 6:30pm - 7:30pm",
+      "evidence_url": "https://www.57thfulbournscouts.org.uk/beavers.html",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application; Age heading says 7½ to 8½ but body says 6–8; resolve eligibility before application",
+      "proposal_key": "f066b43998958a6ddc9c4ad0b5e9bd195635dcc64d76e965a19846958d8bf294"
+    },
+    {
+      "name": "57th Cambridge Scout Group (Fulbourn) — Squirrels",
+      "venue": "57th Cambridge Scout Group (Fulbourn)",
+      "location": "57th Cambridge Scout Group (Fulbourn)  Home End Fulbourn Cambridge CB21 5BS UK",
+      "postcode": "CB21 5BS",
+      "ages": "4 to 6",
+      "schedule": "Tuesday's 4:10pm - 5:10pm",
+      "evidence_url": "https://www.57thfulbournscouts.org.uk/squirrels.html",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "89ba8a49231e9ca7572a7f840a1ce165376d4ebf601d2fbf01ef8a73f692a5f2"
+    },
+    {
+      "name": "1st Over Scout Group — Cubs",
+      "venue": "1st Over Scout Group",
+      "location": "1st Over Scout Group Church End Over Cambridge CB24 5NH UK",
+      "postcode": "CB24 5NH",
+      "ages": "8 to 10½",
+      "schedule": "Mondays 18:00-19:15 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-over-st-marys-scout-group/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "553b014e0cb65d4d44e106a25a51a5c90a8bf060bcd66ca1e95a88375728f976"
+    },
+    {
+      "name": "1st Over Scout Group — Scouts",
+      "venue": "1st Over Scout Group",
+      "location": "1st Over Scout Group Church End Over Cambridge CB24 5NH UK",
+      "postcode": "CB24 5NH",
+      "ages": "10½ – 14 years",
+      "schedule": "Mondays 19:30-21:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-over-st-marys-scout-group/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "9242ddcc535cde8ffd6a2e79c50b1fefe06facdf43cf5576a660a8506a21585a"
+    },
+    {
+      "name": "1st Willingham Scout Group — Beavers",
+      "venue": "1st Willingham Scout Group",
+      "location": "1st Willingham Scout Group  Jeeps Close Willingham Cambridge CB24 5AD UK",
+      "postcode": "CB24 5AD",
+      "ages": "6 to 8 years",
+      "schedule": "Mondays 18:00-19:30 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-willingham/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "fb0fa2b54634e51124a9fb0360c9d9b925c92ad62064fb5a09f295b9b9e1c7bf"
+    },
+    {
+      "name": "1st Willingham Scout Group — Cubs",
+      "venue": "1st Willingham Scout Group",
+      "location": "1st Willingham Scout Group  Jeeps Close Willingham Cambridge CB24 5AD UK",
+      "postcode": "CB24 5AD",
+      "ages": "8 to 10½",
+      "schedule": "Wednesday 18:00-19:30 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-willingham/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "73862e1ab6260db9619b08dc1536f3cdd3a762317e55089c55711abf65db26b1"
+    },
+    {
+      "name": "1st Willingham Scout Group — Scouts",
+      "venue": "1st Willingham Scout Group",
+      "location": "1st Willingham Scout Group  Jeeps Close Willingham Cambridge CB24 5AD UK",
+      "postcode": "CB24 5AD",
+      "ages": "10½ – 14 years",
+      "schedule": "Wednesday 19:30-21:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-willingham/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "8a6f75a94b8f1917ac99f6154af37d7b456a48438ae9e77143ab390f81665a56"
+    },
+    {
+      "name": "1st Willingham Scout Group — Scouts",
+      "venue": "1st Willingham Scout Group",
+      "location": "1st Willingham Scout Group  Jeeps Close Willingham Cambridge CB24 5AD UK",
+      "postcode": "CB24 5AD",
+      "ages": "10½ – 14 years",
+      "schedule": "Thursday 19:00-21:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-willingham/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "6a40ecd29b8572cc0ea513b19e748ff0d05976c3d83502e8c4633fec557ffe70"
+    },
+    {
+      "name": "1st Swavesey Scout Group — Beavers",
+      "venue": "1st Swavesey Scout Group",
+      "location": "1st Swavesey Scout Group  Swavesey Cambridge CB24 4RS UK",
+      "postcode": "CB24 4RS",
+      "ages": "6 to 8 years",
+      "schedule": "Thursdays 18:00-19:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-swavesey/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "1e6024202e7258f77067504b81f485d7e6b09c3d27896e185a9cffc446f30df6"
+    },
+    {
+      "name": "1st Swavesey Scout Group — Cubs",
+      "venue": "1st Swavesey Scout Group",
+      "location": "1st Swavesey Scout Group  Swavesey Cambridge CB24 4RS UK",
+      "postcode": "CB24 4RS",
+      "ages": "8 to 10½",
+      "schedule": "Tuesdays 18:00-19:15 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-swavesey/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "2fec4559c8558b85ab5bf3443889c8efeaee9707a888c3ddff502ff0f8656ad5"
+    },
+    {
+      "name": "1st Swavesey Scout Group — Scouts",
+      "venue": "1st Swavesey Scout Group",
+      "location": "1st Swavesey Scout Group  Swavesey Cambridge CB24 4RS UK",
+      "postcode": "CB24 4RS",
+      "ages": "10½ – 14 years",
+      "schedule": "Mondays 19:00-20:30 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-swavesey/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "ce386a5e63eed75d59c17a6089760627e435b3260c3543be052e85c7a2aa2fd2"
+    },
+    {
+      "name": "1st Northstowe Scout Group — Beavers",
+      "venue": "1st Northstowe Scout Group",
+      "location": "1st Northstowe Scout Group  The Community Wing Pathfinder Way Northstowe CB24 1AA",
+      "postcode": "CB24 1AA",
+      "ages": "6 to 8 years",
+      "schedule": "Mondays 17:45-18:45 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-northstowe/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "58e60288a4419c9bcee1e412007bf9dfee479cdf86c7be7cd9436a891611ac41"
+    },
+    {
+      "name": "1st Northstowe Scout Group — Cubs",
+      "venue": "1st Northstowe Scout Group",
+      "location": "1st Northstowe Scout Group  The Community Wing Pathfinder Way Northstowe CB24 1AA",
+      "postcode": "CB24 1AA",
+      "ages": "8 to 10½",
+      "schedule": "Mondays 19:00-20:15 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-northstowe/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "66e90a8d67af25be7bb8bded1005d8f929154bd3c04227ed14f9bbd244a331f8"
+    },
+    {
+      "name": "1st Northstowe Scout Group — Scouts",
+      "venue": "1st Northstowe Scout Group",
+      "location": "1st Northstowe Scout Group  The Community Wing Pathfinder Way Northstowe CB24 1AA",
+      "postcode": "CB24 1AA",
+      "ages": "10½ – 14 years",
+      "schedule": "Thursdays 19:15-20:30 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-northstowe/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "657e7c385513afcc6fcc620e01981ac552c6656b7d7c54fefb646b2fb42f0e71"
+    },
+    {
+      "name": "2nd Cottenham Scout Group — Squirrels",
+      "venue": "2nd Cottenham Scout Group",
+      "location": "2nd Cottenham Scout Group  Corbett Street Cottenham Cambridge CB24 8QX UK",
+      "postcode": "CB24 8QX",
+      "ages": "4 to 6",
+      "schedule": "Wednesdays 17.30-18.15 ",
+      "evidence_url": "https://craftshillscouts.org.uk/2nd-cottenham/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "bd9dbe1a307855656703746beeecd59beb2300ba890aece74412828129ba6fd8"
+    },
+    {
+      "name": "2nd Cottenham Scout Group — Beavers",
+      "venue": "2nd Cottenham Scout Group",
+      "location": "2nd Cottenham Scout Group  Corbett Street Cottenham Cambridge CB24 8QX UK",
+      "postcode": "CB24 8QX",
+      "ages": "6 to 8 years",
+      "schedule": "Tuesdays 18:00-19:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/2nd-cottenham/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "9989f10f1a433bc811629463be06f0101386bf5797d97dd63641516e69a6ec7b"
+    },
+    {
+      "name": "2nd Cottenham Scout Group — Cubs",
+      "venue": "2nd Cottenham Scout Group",
+      "location": "2nd Cottenham Scout Group  Corbett Street Cottenham Cambridge CB24 8QX UK",
+      "postcode": "CB24 8QX",
+      "ages": "8 to 10½",
+      "schedule": "Wednesdays 18:30-19:30 ",
+      "evidence_url": "https://craftshillscouts.org.uk/2nd-cottenham/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "7313aa952e90773d48e42a755d9db39f9e6f888907bf222297595aad9d871ae5"
+    },
+    {
+      "name": "2nd Cottenham Scout Group — Scouts",
+      "venue": "2nd Cottenham Scout Group",
+      "location": "2nd Cottenham Scout Group  Corbett Street Cottenham Cambridge CB24 8QX UK",
+      "postcode": "CB24 8QX",
+      "ages": "10½ – 14 years",
+      "schedule": "Mondays 18:30-20:30 ",
+      "evidence_url": "https://craftshillscouts.org.uk/2nd-cottenham/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "e314fa9ca6b92399ec5282a4720903f6daeee062c2b73f50e76aea512b95ff63"
+    },
+    {
+      "name": "1st Oakington Scout Group — Beavers",
+      "venue": "1st Oakington Scout Group",
+      "location": "1st Oakington Scout Group  Queens Way Oakington Cambridge CB24 3AW UK",
+      "postcode": "CB24 3AW",
+      "ages": "6 to 8 years",
+      "schedule": "Mondays 18:00-19:15 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-oakington/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "1ba3dd70f82abbd24d2af737036deb22ab45b2ac83f75d9163132fe844e0060d"
+    },
+    {
+      "name": "1st Oakington Scout Group — Cubs",
+      "venue": "1st Oakington Scout Group",
+      "location": "1st Oakington Scout Group  Queens Way Oakington Cambridge CB24 3AW UK",
+      "postcode": "CB24 3AW",
+      "ages": "8 to 10½",
+      "schedule": "Tuesdays 18:00-19:15 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-oakington/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "87571542d5b9c5bcc7348331ebf057cdc2da5a5839fda523948e7a955f8d34a6"
+    },
+    {
+      "name": "1st Oakington Scout Group — Scouts",
+      "venue": "1st Oakington Scout Group",
+      "location": "1st Oakington Scout Group  Queens Way Oakington Cambridge CB24 3AW UK",
+      "postcode": "CB24 3AW",
+      "ages": "10½ – 14 years",
+      "schedule": "Fridays 18:00-19:15 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-oakington/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "91a497c4f999d0f967b7d99c9b01cd4a29f4a762776962e50b4b022440bb3fec"
+    },
+    {
+      "name": "1st Bar Hill Scout Group — Squirrels",
+      "venue": "1st Bar Hill Scout Group",
+      "location": "1st Bar Hill Scout Group  The Spinney Bar Hill Cambridge CB23 8SU UK",
+      "postcode": "CB23 8SU",
+      "ages": "4 to 6",
+      "schedule": "Mondays 17:00 – 18:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-bar-hill/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "65d0d64423e4543cf6ce0eb03d426a7dbad9ac3363706859dcc746942cb006d8"
+    },
+    {
+      "name": "1st Bar Hill Scout Group — Beavers",
+      "venue": "1st Bar Hill Scout Group",
+      "location": "1st Bar Hill Scout Group  The Spinney Bar Hill Cambridge CB23 8SU UK",
+      "postcode": "CB23 8SU",
+      "ages": "6 to 8 years",
+      "schedule": "Wednesdays 18:00-19:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-bar-hill/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "4d2fbd7753e8483dd91c6ac9b21f357e7ceefe3e6cf242ef071a3f4c9d1fcf69"
+    },
+    {
+      "name": "1st Bar Hill Scout Group — Cubs",
+      "venue": "1st Bar Hill Scout Group",
+      "location": "1st Bar Hill Scout Group  The Spinney Bar Hill Cambridge CB23 8SU UK",
+      "postcode": "CB23 8SU",
+      "ages": "8 to 10½",
+      "schedule": "Mondays 18:30-20:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-bar-hill/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "02d0b8ef98904a6f8fc860a966217b0690be1f1716da2d3c984ab997d4292824"
+    },
+    {
+      "name": "1st Bar Hill Scout Group — Scouts",
+      "venue": "1st Bar Hill Scout Group",
+      "location": "1st Bar Hill Scout Group  The Spinney Bar Hill Cambridge CB23 8SU UK",
+      "postcode": "CB23 8SU",
+      "ages": "10½ – 14 years",
+      "schedule": "Fridays 19:30-21:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-bar-hill/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "4cff7c1e0e9901e8520fbacba0e0bd33bea89c7252179473a02ed1f7a706eee4"
+    },
+    {
+      "name": "1st Hardwick & Highfields Scout Group — Beavers",
+      "venue": "1st Hardwick & Highfields Scout Group",
+      "location": "1st Hardwick & Highfields Scout Group  Pippin Walk Hardwick Cambridge CB23 7QD UK",
+      "postcode": "CB23 7QD",
+      "ages": "6 to 8 years",
+      "schedule": "Fridays 17:00-18:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-hardwick-highfields/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "d374e0a647c5c38a6141c8330fed6e06b8607995277a7325cfa78f96dc1d4e34"
+    },
+    {
+      "name": "1st Hardwick & Highfields Scout Group — Cubs",
+      "venue": "1st Hardwick & Highfields Scout Group",
+      "location": "1st Hardwick & Highfields Scout Group  Pippin Walk Hardwick Cambridge CB23 7QD UK",
+      "postcode": "CB23 7QD",
+      "ages": "8 to 10½",
+      "schedule": "Thursdays 18:15-19:45 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-hardwick-highfields/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "d8e49ce083abc0aa5f1e13ab21899d21165bf0f84efb79f0adaad13cc0a5603d"
+    },
+    {
+      "name": "1st Hardwick & Highfields Scout Group — Scouts",
+      "venue": "1st Hardwick & Highfields Scout Group",
+      "location": "1st Hardwick & Highfields Scout Group  Pippin Walk Hardwick Cambridge CB23 7QD UK",
+      "postcode": "CB23 7QD",
+      "ages": "10½ – 14 years",
+      "schedule": "Mondays 19:00-21:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-hardwick-highfields/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "ae613fa36a76026088e06e88b7b94564c5714d6cb7d69b1c16a352fd54fe3661"
+    },
+    {
+      "name": "1st Cambourne Scout Group — Beavers",
+      "venue": "1st Cambourne Scout Group",
+      "location": "1st Cambourne Scout Group  Jeavons Lane Cambourne Cambridge CB23 6AF UK",
+      "postcode": "CB23 6AF",
+      "ages": "6 to 8 years",
+      "schedule": "Thursdays 18:00-19:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-cambourne/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "d5ce8630fedf6ae40b6ee00af06a009e30704d2d48c7a3d3d6bd30d773db190d"
+    },
+    {
+      "name": "1st Cambourne Scout Group — Cubs",
+      "venue": "1st Cambourne Scout Group",
+      "location": "1st Cambourne Scout Group  Jeavons Lane Cambourne Cambridge CB23 6AF UK",
+      "postcode": "CB23 6AF",
+      "ages": "8 to 10½",
+      "schedule": "Fridays 18:30-20:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-cambourne/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "17efa8bc7db111f7d96aaeac669264f2e0e5d6e8587c54e0a012ec78c17bf059"
+    },
+    {
+      "name": "1st Cambourne Scout Group — Scouts",
+      "venue": "1st Cambourne Scout Group",
+      "location": "1st Cambourne Scout Group  Jeavons Lane Cambourne Cambridge CB23 6AF UK",
+      "postcode": "CB23 6AF",
+      "ages": "10½ – 14 years",
+      "schedule": "Thursdays 18:15-20:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-cambourne/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "a62781d6c44571ad8233e43bf800827d663f808e931254ee14f3e755cba71313"
+    },
+    {
+      "name": "1st Bourn Scout Group — Beavers",
+      "venue": "1st Bourn Scout Group",
+      "location": "1st Bourn Scout Group  Park Lane Longstowe Cambridge CB23 2UJ UK",
+      "postcode": "CB23 2UJ",
+      "ages": "6 to 8 years",
+      "schedule": "Tuesdays 17:30-18:30 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-bourn-scout-group/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "406c9eb5d1c8e6ca3a7b725aaf19d4da18eedc6f6a69afe6726711fa147b5a63"
+    },
+    {
+      "name": "1st Bourn Scout Group — Cubs",
+      "venue": "1st Bourn Scout Group",
+      "location": "1st Bourn Scout Group  Park Lane Longstowe Cambridge CB23 2UJ UK",
+      "postcode": "CB23 2UJ",
+      "ages": "8 to 10½",
+      "schedule": "Mondays 18:30-20:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-bourn-scout-group/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "a1f01c044dc52bcdc5693154b0d08f66d0a1ac4fce852c3c7668894dd74b639f"
+    },
+    {
+      "name": "1st Bourn Scout Group — Scouts",
+      "venue": "1st Bourn Scout Group",
+      "location": "1st Bourn Scout Group  Park Lane Longstowe Cambridge CB23 2UJ UK",
+      "postcode": "CB23 2UJ",
+      "ages": "10½ – 14 years",
+      "schedule": "Tuesdays 19:00-20:30 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-bourn-scout-group/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "7122fef82963bd042db6e4b059f53da9085e46d528f2e97b07e2ab7906ee283d"
+    },
+    {
+      "name": "1st Comberton Scout Group — Beavers",
+      "venue": "1st Comberton Scout Group",
+      "location": "1st Comberton Scout Group Comberton Cambridge CB23 7DU UK",
+      "postcode": "CB23 7DU",
+      "ages": "6 to 8 years",
+      "schedule": "Thursdays 17:30-18:30 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-comberton/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "64bd4ff3377ec7ebcb4b407f27ca39a031849ce216f5d5921a61b96c7033a985"
+    },
+    {
+      "name": "1st Comberton Scout Group — Cubs",
+      "venue": "1st Comberton Scout Group",
+      "location": "1st Comberton Scout Group Comberton Cambridge CB23 7DU UK",
+      "postcode": "CB23 7DU",
+      "ages": "8 to 10½",
+      "schedule": "Fridays 18:00-19:10 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-comberton/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "a9410660335504f33b0d8eccf8fdbfb8828c7d7f0001c23f72dc7043f9c462c3"
+    },
+    {
+      "name": "1st Comberton Scout Group — Scouts",
+      "venue": "1st Comberton Scout Group",
+      "location": "1st Comberton Scout Group Comberton Cambridge CB23 7DU UK",
+      "postcode": "CB23 7DU",
+      "ages": "10½ – 14 years",
+      "schedule": "Fridays 19:30-21:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/1st-comberton/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "07d977ca86a8fb0db16b1b9452ea24004178122618c1246afabd9a5d6662085b"
+    },
+    {
+      "name": "2nd Cambourne Scout Group — Beavers",
+      "venue": "2nd Cambourne Scout Group",
+      "location": "2nd Cambourne Scout Group  Back Lane Cambourne Cambridge CB23 6FY UK",
+      "postcode": "CB23 6FY",
+      "ages": "6 to 8 years",
+      "schedule": "Tuesdays 18:00-19:00 ",
+      "evidence_url": "https://craftshillscouts.org.uk/2nd-cambourne/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "2c2629946ba090312b27c5eef86c97ea65748f67b9e2c6a82499239f952c6029"
+    },
+    {
+      "name": "2nd Cambourne Scout Group — Cubs",
+      "venue": "2nd Cambourne Scout Group",
+      "location": "2nd Cambourne Scout Group  Back Lane Cambourne Cambridge CB23 6FY UK",
+      "postcode": "CB23 6FY",
+      "ages": "8 to 10½",
+      "schedule": "Mondays 18:30 to 19:30 ",
+      "evidence_url": "https://craftshillscouts.org.uk/2nd-cambourne/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "75aca61ba699277e88670f455179b46c8dc3cf6b55a7c7b8cc911319396aa334"
+    },
+    {
+      "name": "2nd Cambourne Scout Group — Scouts",
+      "venue": "2nd Cambourne Scout Group",
+      "location": "2nd Cambourne Scout Group  Back Lane Cambourne Cambridge CB23 6FY UK",
+      "postcode": "CB23 6FY",
+      "ages": "10½ – 14 years",
+      "schedule": "Fridays 19:00-20:30 ",
+      "evidence_url": "https://craftshillscouts.org.uk/2nd-cambourne/",
+      "booking_url": "",
+      "dates": "",
+      "notes": "Recurring Activity; no individual dates generated; Membership enquiry required; remaining places unconfirmed; Venue/address from reviewed HAY directory; confirm section meeting place before application",
+      "proposal_key": "92d549aca90ab83226bb111b2cb92a5b262ea04c7c3c9de815e8fb1b620e0d83"
+    }
+  ],
+  "issues": [
+    "HAY address inventory is a reviewed snapshot; current HTTP route returned 403. Locations require confirmation.",
+    "32nd Cambridge Scout Group (Waterbeach): Only historical 2021 meeting times found; contemporary primary timetable needed",
+    "50th Cambridge Scout Group (Milton & Landbeach): Squirrels: no published meeting time",
+    "Shelfords and Stapleford Scout Group: All sections full; membership waiting list only",
+    "1st Sawston Scout Group: Older operator page publishes a different meeting venue (St Mary’s Community Hall, Church Lane). Confirm current section timetable and venue before application.",
+    "1st Whittlesford & Duxford Scout Group: Cubs: waiting list only",
+    "1st Whittlesford & Duxford Scout Group: Scouts: waiting list only",
+    "1st Whittlesford & Duxford Scout Group: Explorers: waiting list only",
+    "57th Cambridge Scout Group (Fulbourn): Beavers: conflicting published age ranges",
+    "1st Over Scout Group: Beavers: explicitly unavailable",
+    "1st Caldecote Scout Group: Current primary section timetable not yet qualified; no dates or section sessions inferred",
+    "7/16 Cambridge Scout Group: HAY identifies 7/16 Cambridge; district lists 6/17 Cambridge in Barton. Group identity must be reconciled before attaching its timetable."
+  ],
+  "coverage_complete": false
+}

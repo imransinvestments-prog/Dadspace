@@ -1,0 +1,159 @@
+{
+  "records": [
+    {
+      "record_id": "25f7b7c1-f324-4a2b-8cd7-ca9589291f05",
+      "title": "Curiosity Club",
+      "checked_on": "2026-10-12",
+      "status": "exclude from family supply",
+      "recommendation": "Current Curiosity Club is for adults 50+/55+, not evidenced child/family supply. Old route returns 404.",
+      "remaining": [
+        "Owner review before withdrawal from family activities; retain adult-programme evidence separately."
+      ],
+      "links": [
+        {
+          "label": "Current adult programme",
+          "url": "https://www.oxfordshire.gov.uk/events/workshops-oxfordshire-museum/curiosity-club-3"
+        }
+      ],
+      "owner": "Imran Tajuddin",
+      "approved": false
+    },
+    {
+      "record_id": "f5b34fb4-83d1-4202-b628-f84b08f8c06a",
+      "title": "Wildlings at Milton Country Park",
+      "checked_on": "2026-10-12",
+      "status": "route recovered; currentness unresolved",
+      "recommendation": "Primary forest-activities route and Wildlings booking route recovered. Programme page gives Fridays 12:00–13:30 for non-walking babies, but its listed next dates are May 2026.",
+      "remaining": [
+        "Confirm current dated availability before restoring verification; do not substitute fully booked Wild Beginnings or unrelated Wildlings operators."
+      ],
+      "links": [
+        {
+          "label": "Current forest activities",
+          "url": "https://www.miltoncountrypark.org/wild-place"
+        },
+        {
+          "label": "Wildlings booking calendar",
+          "url": "https://www.miltoncountrypark.org/booking-calendar/wildlings"
+        }
+      ],
+      "owner": "Imran Tajuddin",
+      "approved": false
+    },
+    {
+      "record_id": "301ae80d-df77-41b6-954a-3be6d12ee300",
+      "title": "BAYSE Multi-Sports",
+      "checked_on": "2026-10-12",
+      "status": "current timetable unresolved",
+      "recommendation": "Original route now returns 404. Cached October 6 occurrence describes weekly Tuesday 18:00–19:30 at Brookhouse, excluding bank holidays/festive period.",
+      "remaining": [
+        "Find current provider timetable; cached past date does not qualify current supply or prove closure."
+      ],
+      "links": [
+        {
+          "label": "Provider",
+          "url": "https://salfordcommunityleisure.co.uk/"
+        }
+      ],
+      "owner": "Imran Tajuddin",
+      "approved": false
+    },
+    {
+      "record_id": "07f3ec2b-87cf-4ee0-95a1-5fd36d769afc",
+      "title": "Baby Gym",
+      "checked_on": "2026-10-12",
+      "status": "recovered; split into sessions",
+      "recommendation": "Current operator table yields seven weekly Baby Gym sessions for ages 9 months+. Select the split action to review the generated rows.",
+      "remaining": [
+        "Match actual venue addresses before application; resolve £4.50 primary-page versus £4.10 old-product pricing."
+      ],
+      "links": [
+        {
+          "label": "Current Baby Gym timetable",
+          "url": "https://salfordcommunityleisure.co.uk/active-communities/active-gymnastics/"
+        }
+      ],
+      "owner": "Imran Tajuddin",
+      "approved": false
+    },
+    {
+      "record_id": "a32684a9-99d4-4cc4-8d79-63ed3bf4717f",
+      "title": "Bampton: Rhymetime - Poetry Special",
+      "checked_on": "2026-10-12",
+      "status": "expired occasion; withdrawal proposed",
+      "recommendation": "Published occasion was 30 September 2026, 10:30–11:00; original page now returns 404. This was a Poetry Special, not evidence of a weekly recurring programme.",
+      "remaining": [
+        "Owner review of expiry before withdrawal; keep branch directory as discovery evidence rather than substituting another activity."
+      ],
+      "links": [
+        {
+          "label": "Current Bampton Library",
+          "url": "https://www.oxfordshire.gov.uk/oxfordshire-libraries/find-library/bampton-library"
+        }
+      ],
+      "owner": "Imran Tajuddin",
+      "approved": false
+    },
+    {
+      "record_id": "53d5f122-efda-4dde-98c1-971b2ae98897",
+      "title": "Marble Triceratops Skull public sculpture",
+      "checked_on": "2026-10-12",
+      "status": "place conversion proposed",
+      "recommendation": "Primary gallery evidence locates the public sculpture in Berkeley Square, Mayfair. Hoop daily occurrence and 23:00–22:59 range are not an actionable activity timetable.",
+      "remaining": [
+        "Match/create an appropriate venue candidate before withdrawing the activity alias; preserve independent place value."
+      ],
+      "links": [
+        {
+          "label": "Primary sculpture evidence",
+          "url": "https://www.davidaaron.com/event-details/50334"
+        }
+      ],
+      "owner": "Imran Tajuddin",
+      "approved": false
+    },
+    {
+      "record_id": "b50cf863-8a26-42b3-8435-0f1ae3338ed5",
+      "title": "Didcot: Rhymetime",
+      "checked_on": "2026-10-12",
+      "status": "expired old route; current branch discovered",
+      "recommendation": "Old occurrence was 17 July 2026 and now returns 404. Current branch page lists Cantonese Rhymetime and other programmes.",
+      "remaining": [
+        "Do not overwrite English Rhymetime with another language/programme; collect newly evidenced future occurrences separately."
+      ],
+      "links": [
+        {
+          "label": "Current Didcot Library",
+          "url": "https://www.oxfordshire.gov.uk/oxfordshire-libraries/find-library/didcot-library"
+        }
+      ],
+      "owner": "Imran Tajuddin",
+      "approved": false
+    },
+    {
+      "record_id": "caee9a88-0f21-44bf-91b6-953ea404b075",
+      "title": "Total Ballers 1-2-1 Sessions Football",
+      "checked_on": "2026-10-12",
+      "status": "mobile service; appointment required",
+      "recommendation": "Provider site and booking hub recovered. Mobile coaching is arranged with the family; Hoop daily 17:00 slot and SW11 map pin do not establish a fixed venue or daily availability.",
+      "remaining": [
+        "Confirm service area, session age eligibility and appointment through actual booking; £35/hour primary versus £40/monthly-paid aggregator pricing needs review."
+      ],
+      "links": [
+        {
+          "label": "Primary operator",
+          "url": "https://www.totalballers.co.uk/"
+        },
+        {
+          "label": "Provider booking hub",
+          "url": "https://linktr.ee/totalballers"
+        }
+      ],
+      "owner": "Imran Tajuddin",
+      "approved": false
+    }
+  ],
+  "database_writes": 0,
+  "source_activations": 0,
+  "notes": "Read-only evidence; provider pages and cached historical dates are distinguished. Recommendations are not applied decisions."
+}
