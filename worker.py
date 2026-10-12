@@ -1325,7 +1325,8 @@ def main():
             print("Stopping before any website is read, so nothing is marked as done without being saved.")
             sys.exit(1)
 
-    extract = make_gemini_caller()
+    from shadow_capture import capture_calls
+    extract = capture_calls(make_gemini_caller())
     print("Gemini controls: " + json.dumps(getattr(extract, "settings", {}), sort_keys=True))
     today = today_uk()
 
