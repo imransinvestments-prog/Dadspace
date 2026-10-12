@@ -55,3 +55,101 @@ python scripts/test_news_locality.py
 Rollback: clear the extraction repository variables to restore default thinking and remove the optional limits. Revert this PR to restore the previous request/retry implementation and news workflow behavior. Do not close #65 until the remaining quality/savings acceptance criteria are met.
 
 References: [Google thinking](https://ai.google.dev/gemini-api/docs/thinking), [SDK](https://googleapis.github.io/python-genai/), [Batch API](https://ai.google.dev/gemini-api/docs/batch-api).
+# Follow-up input and cache controls (#65)
+
+Compact HTML listing nodes are removed from the visible-text fallback only after
+their text and links have been captured. Surrounding audience restrictions remain.
+Navigation, forms and footers are excluded before listing selection; duplicate
+JSON-LD objects are collapsed. JSON-LD and visible evidence remain separate where
+they may contain different fields. No complete event is inferred deterministically
+from incomplete metadata.
+
+The existing `sources.last_hash` stores a versioned digest of normalized evidence,
+prompt rules, extractor/schema factory, validation function, model/provider
+configuration and output-affecting date/relevance settings. This intentionally
+hashes surrounding evidence too: ignoring it could miss changed age restrictions.
+`EXTRACTION_CACHE_VERSION` defaults to `2`; bump it when changing helper/schema
+behavior that is not captured by the factory/validator fingerprint.
+`EXTRACTION_REFRESH_DAYS` defaults to `7`; `0` disables cache skips. Invalid, future
+or expired success timestamps trigger processing. `FORCE_REREAD=true` bypasses the
+cache in both collector entry points. Successful state is still advanced only by
+the existing post-persistence path; dry runs do not change it. `cache_hits` is
+included in the run summary. Existing hashes invalidate once on rollout, so the
+first run may cost more; use existing attempt/token budgets to spread that work.
+Rollback by reverting this change; that likewise causes one cache invalidation.
+
+Offline saved-page comparison on 11 October 2026 against main `772a075`:
+
+| Saved source page | Before chars | After chars | Removed |
+| --- | ---: | ---: | ---: |
+| Cardiff Hubs events | 13,837 | 9,114 | 4,723 |
+| Museum Wales what's on | 33,817 | 32,255 | 1,562 |
+
+These are prepared-character counts from two listing pages (no detail expansion),
+not billed tokens, production savings or quality equivalence. Repeat with
+`python scripts/measure_extraction_input.py SNAPSHOT_DIR --baseline REF`; JSON
+snapshots contain `url` and `documents` (URL/HTML pairs). The tool uses saved input
+and makes no network, model or database calls. Include browser pages, detail pages,
+news and Originals before claiming representative savings.
+
+Google's [Batch API](https://ai.google.dev/gemini-api/docs/batch-api) offers 50% of
+interactive pricing with a target turnaround of up to 24 hours. This reduces cost,
+not tokens. Do not enable it for scheduled slot-specific Originals or fresh news
+without a durable job/result queue, retry/idempotency handling and freshness checks
+at result application. Keep synchronous extraction for now; evaluate Batch on a
+bounded historical/backfill job once billing and quality baselines are available.
+
+## Per-page results and complete structured sources
+
+The optional per-page path processes every fetched document independently and
+merges results through the existing cleaner. `EXTRACTION_PER_PAGE=true` enables
+it for a bounded evaluation; alternatively a reviewed source may supply
+`extraction_mode=per_page`. Neither is activated by this PR. The first extraction
+may make more calls than the whole-source path; compare warm-cache savings against
+that cold-run cost before enabling it. Existing shared attempt/token budgets apply.
+
+Set `EXTRACTION_CACHE_DIR` to a disposable persistent directory. Civic/activity
+workflows restore and save `.extraction-cache` using GitHub Actions cache only when
+the per-page variable is true. Live runs save committed entries; dry runs never
+write entries or save the Actions cache. Entries contain public extracted fields,
+not credentials or source HTML. Eviction/corruption is an ordinary cache miss.
+Unchanged documents reuse raw results, which pass current validation again. A
+changed document calls AI once; all fetched documents are included in the source
+digest even beyond the combined input limit. Hits retain their original extraction
+date. Expired historical URL entries are pruned on successful cache commit.
+
+New entries stay in memory until both listing persistence and a source-status
+update returning that source ID succeed. Budget/fatal failures, malformed page
+results, cleaner exceptions, failed/empty status updates, row save failures and
+dry runs discard them. Relative-date evidence includes today's date in its digest,
+so a cached interpretation of "tomorrow" cannot carry into another day. A page
+reaching the input limit fails before its AI request; partial sources do not commit.
+
+`structured_events_complete=true` opts a reviewed source into strict JSON-LD
+parsing. Every record must have a visible title/description and family signal,
+timezone-aware start/end, venue/address/postcode, GBP price and a linked event URL.
+Recurring schedules, incomplete/ambiguous records and ungrounded descriptions
+fall back as a whole. Existing date/family/venue validation still applies. No
+source is opted in by this change; review metadata coverage first. This flag is
+an in-memory/source-configuration capability, not a new database column/migration.
+
+`scripts/review_usage.py` and civic `usage_review_only` provide a four-request
+OpenAI before/after comparison on the same saved Cardiff/Museum Wales HTML. The
+job pins #69's provider module and uses a 40,000-token run budget with no retries;
+production collection is skipped and no database credentials are supplied. It
+saves raw/accepted output, token usage, missing/added listings and changed fields.
+This validates input preparation with OpenAI; it does not establish Gemini parity
+or representative savings across news, Originals and browser/detail sources.
+
+Collector workflows upload a `usage-report.json` artifact per run. It records
+per-source paid attempts/tokens (including failures), accepted rows, validation,
+cache hits and structured bypass counts, plus cumulative usage and run settings.
+Budget/fatal stops retain the current source's spend in the report. The report
+contains no credentials, prompts or source HTML. Use these artifacts to gather a
+production baseline after merge; news and Originals retain their existing separate
+logs and must be included in the wider acceptance review.
+
+Still outstanding: production representative measurement, full listing coverage
+and grounded family-evidence validation (#69), Gemini-specific comparison while
+billing is blocked, and source-by-source activation review. #66 selects providers
+per worker; neither issue implements dynamic allocation or automatic fallback.

@@ -7,3 +7,5 @@ next-env.d.ts
 __pycache__/
 supabase/.temp/
 review/
+.extraction-cache/
+usage-report.json

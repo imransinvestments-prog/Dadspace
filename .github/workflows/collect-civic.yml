@@ -12,6 +12,10 @@ on:
       - ".github/workflows/collect-civic.yml"
   workflow_dispatch:
     inputs:
+      usage_review_only:
+        description: "Four paired OpenAI extraction calls only; no database access"
+        type: boolean
+        default: false
       limit:
         description: "How many websites to process (0 = all)"
         default: "5"
@@ -74,7 +78,7 @@ jobs:
           if-no-files-found: error
 
   collect:
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && !inputs.usage_review_only
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -103,6 +107,13 @@ jobs:
           path: event-backup/
           retention-days: 30
           if-no-files-found: error
+      - name: Restore reviewed extraction results
+        if: vars.EXTRACTION_PER_PAGE == 'true'
+        uses: actions/cache/restore@v5
+        with:
+          path: .extraction-cache/
+          key: extraction-civic-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: extraction-civic-v1-
       - name: Run collector
         run: python events_worker.py
         env:
@@ -115,7 +126,10 @@ jobs:
           GEMINI_RUN_TOKEN_BUDGET: ${{ vars.GEMINI_EXTRACTION_TOKEN_BUDGET }}
           GEMINI_RUN_MAX_ATTEMPTS: ${{ vars.GEMINI_EXTRACTION_MAX_ATTEMPTS }}
           GEMINI_MAX_OUTPUT_TOKENS: ${{ vars.GEMINI_EXTRACTION_MAX_OUTPUT_TOKENS }}
+          EXTRACTION_PER_PAGE: ${{ vars.EXTRACTION_PER_PAGE || 'false' }}
+          EXTRACTION_CACHE_DIR: .extraction-cache
           WORKER_NAME: "events-civic"
+          USAGE_REPORT_PATH: usage-report.json
           CATEGORIES: "councils,heritage_parks,niche_venues"
           FETCH_ENGINE: "requests"
           MAX_RUN_MINUTES: "45"
@@ -124,3 +138,53 @@ jobs:
           LIMIT: ${{ inputs.limit || '0' }}
           DRY_RUN: ${{ inputs.dry_run || 'true' }}
           FORCE_REREAD: ${{ inputs.force_reread || 'false' }}
+      - name: Upload extraction usage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: civic-usage-${{ github.run_id }}-${{ github.run_attempt }}
+          path: usage-report.json
+          if-no-files-found: warn
+      - name: Save committed extraction results
+        if: ${{ success() && vars.EXTRACTION_PER_PAGE == 'true' && (inputs.dry_run || 'true') == 'false' }}
+        uses: actions/cache/save@v5
+        with:
+          path: .extraction-cache/
+          key: extraction-civic-v1-${{ github.run_id }}-${{ github.run_attempt }}
+  usage-review:
+    if: github.event_name == 'workflow_dispatch' && inputs.usage_review_only
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          ref: bf663f940e3e3311deb20d1447740496ebb6bad5
+          path: provider-code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python scripts/review_usage.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          EXTRACTION_LLM_PROVIDER: openai
+          EXTRACTION_LLM_MODEL: gpt-4.1-mini
+          LLM_RUN_MAX_ATTEMPTS: '4'
+          LLM_RUN_TOKEN_BUDGET: '40000'
+          LLM_MAX_RETRIES: '0'
+          LLM_MAX_OUTPUT_TOKENS: '5000'
+          DRY_RUN: 'true'
+          FETCH_ENGINE: requests
+          MAX_CHARS: '40000'
+          MAX_RETRIES: '0'
+          REQUEST_TIMEOUT: '15'
+          GEMINI_TIMEOUT_SECONDS: '90'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: usage-review
+          path: usage-review/
+          if-no-files-found: error
