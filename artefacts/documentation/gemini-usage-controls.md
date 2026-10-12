@@ -141,6 +141,14 @@ saves raw/accepted output, token usage, missing/added listings and changed field
 This validates input preparation with OpenAI; it does not establish Gemini parity
 or representative savings across news, Originals and browser/detail sources.
 
+Collector workflows upload a `usage-report.json` artifact per run. It records
+per-source paid attempts/tokens (including failures), accepted rows, validation,
+cache hits and structured bypass counts, plus cumulative usage and run settings.
+Budget/fatal stops retain the current source's spend in the report. The report
+contains no credentials, prompts or source HTML. Use these artifacts to gather a
+production baseline after merge; news and Originals retain their existing separate
+logs and must be included in the wider acceptance review.
+
 Still outstanding: production representative measurement, full listing coverage
 and grounded family-evidence validation (#69), Gemini-specific comparison while
 billing is blocked, and source-by-source activation review. #66 selects providers

@@ -2,6 +2,7 @@
 import datetime as dt
 import re
 from urllib.parse import urljoin, urlparse
+from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
 
@@ -43,6 +44,8 @@ def complete_events(documents, extract_jsonld):
                 # Preserve actual local advertised times; do not guess the zone.
                 if start.utcoffset() != end.utcoffset():
                     return None
+                start = start.astimezone(ZoneInfo('Europe/London'))
+                end = end.astimezone(ZoneInfo('Europe/London'))
                 location = event['location']
                 address = location['address']
                 venue = location['name']

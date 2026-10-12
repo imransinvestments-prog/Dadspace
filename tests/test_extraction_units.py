@@ -110,8 +110,10 @@ class ExtractionUnitsTests(unittest.TestCase):
                 extract.metrics, extract.settings, extract.close = {}, {}, Mock()
                 extract.result_cache = Mock()
                 row = {'start_date': '2026-10-15', 'title': 'Family day', 'location': 'Museum'}
+                report_path = Path(__file__).parent / 'usage-test.json'
+                self.addCleanup(report_path.unlink, missing_ok=True)
                 with patch.dict('sys.modules', {'supabase': SimpleNamespace(create_client=lambda *_: db)}), \
-                     patch.dict(os.environ, {'SUPABASE_URL': 'https://example.supabase.co', 'SUPABASE_KEY': 'test', 'GEMINI_API_KEY': 'test'}), \
+                     patch.dict(os.environ, {'SUPABASE_URL': 'https://example.supabase.co', 'SUPABASE_KEY': 'test', 'GEMINI_API_KEY': 'test', 'USAGE_REPORT_PATH': str(report_path)}), \
                      patch.object(worker, 'make_gemini_caller', return_value=extract), \
                      patch.object(worker, 'check_events_table', return_value=None), \
                      patch.object(worker, 'process_source', return_value=('ok', [row], 'digest', '', {})), \
@@ -120,11 +122,21 @@ class ExtractionUnitsTests(unittest.TestCase):
                      patch.object(worker, 'log_run'), patch.object(worker, 'CATEGORY_FILTER', []), \
                      patch.object(worker, 'PAUSE_SECONDS', 0), patch.object(worker, 'DRY_RUN', dry_run):
                     worker.main()
+                report = json.loads(report_path.read_text(encoding='utf-8'))
+                self.assertEqual(report['dry_run'], dry_run)
+                self.assertEqual(report['sources'][0]['accepted'], 0 if save_error else 1)
+                self.assertNotIn('SUPABASE', report_path.read_text(encoding='utf-8'))
                 if expected:
                     extract.result_cache.commit.assert_called_once_with('a')
                 else:
                     extract.result_cache.commit.assert_not_called()
                     extract.result_cache.discard.assert_called_once_with('a')
+
+    def test_structured_times_resolve_to_uk_date(self):
+        rows = complete_events(self.structured(startDate='2026-10-15T23:30:00Z',
+                                              endDate='2026-10-16T00:30:00Z'), worker.extract_jsonld_events)
+        self.assertEqual(rows[0]['start_date'], '2026-10-16')
+        self.assertEqual(rows[0]['time_text'], '00:30 - 01:30')
 
     def structured(self, **changes):
         event = {'@type': 'Event', 'name': 'Family pottery', 'description': 'Children create pottery.',

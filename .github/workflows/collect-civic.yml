@@ -129,6 +129,7 @@ jobs:
           EXTRACTION_PER_PAGE: ${{ vars.EXTRACTION_PER_PAGE || 'false' }}
           EXTRACTION_CACHE_DIR: .extraction-cache
           WORKER_NAME: "events-civic"
+          USAGE_REPORT_PATH: usage-report.json
           CATEGORIES: "councils,heritage_parks,niche_venues"
           FETCH_ENGINE: "requests"
           MAX_RUN_MINUTES: "45"
@@ -137,6 +138,13 @@ jobs:
           LIMIT: ${{ inputs.limit || '0' }}
           DRY_RUN: ${{ inputs.dry_run || 'true' }}
           FORCE_REREAD: ${{ inputs.force_reread || 'false' }}
+      - name: Upload extraction usage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: civic-usage-${{ github.run_id }}-${{ github.run_attempt }}
+          path: usage-report.json
+          if-no-files-found: warn
       - name: Save committed extraction results
         if: ${{ success() && vars.EXTRACTION_PER_PAGE == 'true' && (inputs.dry_run || 'true') == 'false' }}
         uses: actions/cache/save@v5

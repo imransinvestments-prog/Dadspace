@@ -8,3 +8,4 @@ __pycache__/
 supabase/.temp/
 review/
 .extraction-cache/
+usage-report.json
