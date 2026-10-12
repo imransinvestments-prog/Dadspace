@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'gemini_usage.py'
+      - 'shadow_capture.py'
+      - 'tests/test_shadow_review.py'
       - 'worker.py'
       - 'events_worker.py'
       - 'tests/test_gemini_usage.py'

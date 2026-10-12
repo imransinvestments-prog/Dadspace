@@ -130,6 +130,7 @@ jobs:
           EXTRACTION_CACHE_DIR: .extraction-cache
           WORKER_NAME: "events-civic"
           USAGE_REPORT_PATH: usage-report.json
+          SHADOW_CAPTURE_DIR: ${{ (inputs.dry_run || 'true') == 'false' && 'shadow-input' || '' }}
           CATEGORIES: "councils,heritage_parks,niche_venues"
           FETCH_ENGINE: "requests"
           MAX_RUN_MINUTES: "45"
@@ -138,6 +139,15 @@ jobs:
           LIMIT: ${{ inputs.limit || '0' }}
           DRY_RUN: ${{ inputs.dry_run || 'true' }}
           FORCE_REREAD: ${{ inputs.force_reread || 'false' }}
+      - name: Upload bounded Gemini shadow inputs
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: gemini-shadow-input-civic-${{ github.run_id }}-${{ github.run_attempt }}
+          path: shadow-input/
+          retention-days: 7
+          if-no-files-found: ignore
       - name: Upload extraction usage report
         if: always()
         uses: actions/upload-artifact@v4

@@ -9,3 +9,5 @@ supabase/.temp/
 review/
 .extraction-cache/
 usage-report.json
+shadow-input/
+shadow-results/

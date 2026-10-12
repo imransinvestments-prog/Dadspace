@@ -89,6 +89,12 @@ def make_extractor(model, schema, timeout, fatal_error):
         raise RuntimeError(f"Gemini failed after {retries + 1} attempts: {last_error}")
 
     call.metrics = metrics
+    if os.environ.get('SHADOW_CAPTURE_DIR'):
+        try:
+            from pydantic import TypeAdapter
+            call.json_schema = TypeAdapter(schema).json_schema()
+        except Exception:
+            call.json_schema = None
     call.close = client.close
     call.settings = dict(model=model, thinking_level=level or "model-default",
                          token_budget=token_budget, attempt_budget=attempt_budget,
