@@ -26,6 +26,20 @@ jobs:
   compare:
     if: github.event_name == 'workflow_run' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == github.repository
     needs: checks
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - variant: openai-non-reasoning
+            provider: openai
+            model: gpt-4.1-mini
+            input_rate: SHADOW_OPENAI_INPUT_USD_PER_MILLION
+            output_rate: SHADOW_OPENAI_OUTPUT_USD_PER_MILLION
+          - variant: gemini-minimum-thinking
+            provider: gemini
+            model: gemini-3.6-flash
+            input_rate: SHADOW_GEMINI_INPUT_USD_PER_MILLION
+            output_rate: SHADOW_GEMINI_OUTPUT_USD_PER_MILLION
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -44,9 +58,11 @@ jobs:
       - name: Replay captured prompts only
         run: python scripts/replay_shadow.py
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          EXTRACTION_LLM_PROVIDER: openai
-          EXTRACTION_LLM_MODEL: gpt-4.1-mini
+          OPENAI_API_KEY: ${{ matrix.provider == 'openai' && secrets.OPENAI_API_KEY || '' }}
+          GEMINI_API_KEY: ${{ matrix.provider == 'gemini' && secrets.GEMINI_API_KEY || '' }}
+          EXTRACTION_LLM_PROVIDER: ${{ matrix.provider }}
+          EXTRACTION_LLM_MODEL: ${{ matrix.model }}
+          SHADOW_VARIANT: ${{ matrix.variant }}
           LLM_RUN_MAX_ATTEMPTS: '4'
           LLM_RUN_TOKEN_BUDGET: '60000'
           LLM_MAX_OUTPUT_TOKENS: '3000'
@@ -54,12 +70,12 @@ jobs:
           UPSTREAM_RUN_ID: ${{ github.event.workflow_run.id }}
           BASELINE_INPUT_USD_PER_MILLION: ${{ vars.SHADOW_GEMINI_INPUT_USD_PER_MILLION }}
           BASELINE_OUTPUT_USD_PER_MILLION: ${{ vars.SHADOW_GEMINI_OUTPUT_USD_PER_MILLION }}
-          SHADOW_INPUT_USD_PER_MILLION: ${{ vars.SHADOW_OPENAI_INPUT_USD_PER_MILLION }}
-          SHADOW_OUTPUT_USD_PER_MILLION: ${{ vars.SHADOW_OPENAI_OUTPUT_USD_PER_MILLION }}
+          SHADOW_INPUT_USD_PER_MILLION: ${{ vars[matrix.input_rate] }}
+          SHADOW_OUTPUT_USD_PER_MILLION: ${{ vars[matrix.output_rate] }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: shadow-comparison-${{ github.event.workflow_run.id }}
+          name: shadow-comparison-${{ matrix.variant }}-${{ github.event.workflow_run.id }}
           path: shadow-results/
           retention-days: 14
           if-no-files-found: warn

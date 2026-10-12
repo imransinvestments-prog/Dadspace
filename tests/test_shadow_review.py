@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import Mock, patch
 
 from shadow_capture import capture_calls
-from scripts.replay_shadow import replay, estimate
+from scripts.replay_shadow import replay, estimate, configure_minimum
 
 
 class ShadowReviewTests(unittest.TestCase):
@@ -89,6 +89,26 @@ class ShadowReviewTests(unittest.TestCase):
         with patch.dict(os.environ, {'BASELINE_INPUT_USD_PER_MILLION': '1', 'BASELINE_OUTPUT_USD_PER_MILLION': '2'}):
             self.assertAlmostEqual(estimate(usage, 'BASELINE'), 0.0002)
             self.assertIsNone(estimate(dict(usage, unknown_usage_attempts=1), 'BASELINE'))
+
+    def test_minimum_preserves_captured_model_and_records_real_setting(self):
+        generator = Mock(provider='gemini', settings={})
+        self.assertTrue(configure_minimum({'settings': {'model': 'gemini-3.6-flash'}}, generator))
+        self.assertEqual(generator.model, 'gemini-3.6-flash')
+        self.assertEqual(generator.thinking_level, 'minimal')
+        self.assertEqual(generator.settings['thinking_level'], 'minimal')
+        self.assertEqual(generator.temperature, 0)
+        self.assertTrue(configure_minimum({'settings': {'model': 'gemini-3.8-flash'}}, generator))
+        self.assertEqual(generator.thinking_level, 'low')
+
+    def test_unknown_gemini_model_is_not_replayed_or_substituted(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory:
+            root = Path(directory)
+            (root / 'sample-1.json').write_text(json.dumps({'prompt': 'prompt', 'schema': {},
+                'raw': [], 'worker': 'events', 'settings': {'model': 'future-model'}, 'usage': {}}))
+            generator = Mock(provider='gemini', settings={}, metrics={})
+            report = replay(root, root / 'output', generator, configure_minimum)
+            generator.generate.assert_not_called()
+            self.assertEqual(report['samples'][0]['status'], 'unsupported-model; no paid request')
 
 
 if __name__ == '__main__':

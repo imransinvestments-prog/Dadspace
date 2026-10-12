@@ -15,6 +15,27 @@ FIELDS = ('title', 'start_date', 'end_date', 'time_text', 'schedule_text', 'loca
           'venue_name', 'venue_address', 'postcode', 'event_url', 'cost_text', 'age_range',
           'recurrence', 'listing_type', 'family_relevance', 'audience', 'family_evidence')
 
+# Explicit documented model IDs only; unknown IDs are reported without a request.
+LOWEST_THINKING = {
+    'gemini-3.6-flash': 'minimal', 'gemini-3.5-flash': 'minimal',
+    'gemini-3-flash': 'minimal', 'gemini-3.5-flash-lite': 'minimal',
+    'gemini-3.1-flash-lite': 'minimal', 'gemini-3.8-flash': 'low',
+    'gemini-3.1-pro': 'low',
+}
+
+
+def configure_minimum(snapshot, generator):
+    if generator.provider != 'gemini':
+        raise ValueError('Minimum-thinking replay requires Gemini')
+    model = snapshot['settings'].get('model')
+    level = LOWEST_THINKING.get(model)
+    if level is None:
+        return False
+    generator.model, generator.thinking_level, generator.temperature = model, level, 0
+    generator.preserve_gemini_schema = True
+    generator.settings.update(model=model, thinking_level=level, temperature=0)
+    return True
+
 
 def estimate(usage, prefix):
     rates = [os.environ.get(prefix + '_' + x + '_USD_PER_MILLION', '') for x in ('INPUT', 'OUTPUT')]
@@ -39,10 +60,11 @@ def compare(before, after):
                         if any(left[k].get(f) != right[k].get(f) for f in FIELDS)]}
 
 
-def replay(directory, output, generator):
+def replay(directory, output, generator, configure=None):
     report = {'database_access': False, 'publishing': False, 'samples': [],
               'cost_basis': 'Configured standard rates; uncached-input estimate, not a billing receipt',
-              'upstream_run_id': os.environ.get('UPSTREAM_RUN_ID'), 'settings': generator.settings}
+              'upstream_run_id': os.environ.get('UPSTREAM_RUN_ID'), 'settings': generator.settings,
+              'variant': os.environ.get('SHADOW_VARIANT', 'openai-non-reasoning')}
     output.mkdir(parents=True, exist_ok=True)
     try:
         for prefix in ('BASELINE', 'SHADOW'):
@@ -56,12 +78,17 @@ def replay(directory, output, generator):
                 raise ValueError('Captured prompt outside bounded review size')
             if not isinstance(snapshot['raw'], list) or not all(isinstance(x, dict) for x in snapshot['raw']):
                 raise ValueError('Invalid baseline result')
+            if configure is not None and not configure(snapshot, generator):
+                report['samples'].append({'worker': snapshot['worker'],
+                    'baseline_settings': snapshot['settings'], 'status': 'unsupported-model; no paid request'})
+                continue
             before = dict(generator.metrics)
             raw = generator.generate(prompt, snapshot['schema'])
             usage = {k: v - before.get(k, 0) for k, v in generator.metrics.items()}
             report['samples'].append({'worker': snapshot['worker'],
                 'prompt_sha256': hashlib.sha256(prompt.encode()).hexdigest(),
                 'baseline_settings': snapshot['settings'], 'baseline_usage': snapshot['usage'],
+                'shadow_settings': dict(generator.settings),
                 'shadow_usage': usage, 'baseline_estimated_usd': estimate(snapshot['usage'], 'BASELINE'),
                 'shadow_estimated_usd': estimate(usage, 'SHADOW'),
                 'comparison': compare(snapshot['raw'], raw), 'baseline_raw': snapshot['raw'], 'shadow_raw': raw})
@@ -82,6 +109,7 @@ if __name__ == '__main__':
     else:
         generator = StructuredGenerator('EXTRACTION', 'gemini-3.6-flash', 90)
         try:
-            replay(Path('shadow-input'), Path('shadow-results'), generator)
+            configure = configure_minimum if os.environ.get('SHADOW_VARIANT') == 'gemini-minimum-thinking' else None
+            replay(Path('shadow-input'), Path('shadow-results'), generator, configure)
         finally:
             generator.close()
