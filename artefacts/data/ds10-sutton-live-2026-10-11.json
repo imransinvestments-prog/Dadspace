@@ -1,0 +1,93 @@
+{
+  "database_writes": 0,
+  "model_calls": 0,
+  "fetch_engine": "requests public HTML; every in-window occurrence detail checked",
+  "results": [
+    {
+      "status": "ok",
+      "rows": [
+        {
+          "source_id": "preview-Sutton",
+          "title": "Rhymetime in Sutton Central Library",
+          "description": "Our ever popular Rhymetimes are here for children aged 0-5 to enjoy singing and stories with Sutton Council's Cultural Services, the people behind your local libraries and heritage houses. Please book a ticket for each child and adult wanting to attend. Children must be accompanied by a responsible adult throughout. This event may be photographed and/or recorded for marketing and evaluation purposes. If you do not wish to be a part of future promotional material, please make it known at the time of the event. Please log in with your library credentials to reserve your place at this event.",
+          "listing_type": "activity",
+          "is_holiday_camp": false,
+          "category": "story_rhyme",
+          "start_date": "2026-10-12",
+          "end_date": "2026-11-10",
+          "schedule_text": "Published dates: 2026-10-12, 2026-10-13, 2026-10-16, 2026-10-19, 2026-10-20, 2026-10-23, 2026-10-26, 2026-10-27, 2026-10-30, 2026-11-02, 2026-11-03, 2026-11-06, 2026-11-09, 2026-11-10; 11:15 AM - 12:15 PM",
+          "time_text": "11:15 AM - 12:15 PM",
+          "location": "Children's Library, Ground Floor, Sutton Central Library, St Nicholas Way, Sutton SM1 1EA, UK",
+          "venue_name": "Sutton Central Library",
+          "venue_address": "Children's Library, Ground Floor, Sutton Central Library, St Nicholas Way, Sutton SM1 1EA, UK",
+          "postcode": "SM1 1EA",
+          "venue_id": null,
+          "event_url": "https://events.sutton.gov.uk/event?id=364833",
+          "cost_text": "FREE",
+          "age_range": "0-5",
+          "recurrence": "recurring",
+          "family_relevance": 5,
+          "confidence": 0.99,
+          "source_url": "https://events.sutton.gov.uk/event?id=364833",
+          "extraction_method": "mylibrary_calendar",
+          "dedupe_key": "8bc6d342072a2ecbf94f35816ad6013e74561000",
+          "last_verified_at": "2026-10-11T12:51:40.620751+00:00",
+          "last_seen_at": "2026-10-11T12:51:40.620751+00:00"
+        }
+      ],
+      "hash": "ebad4e8183a36ef0348fc5bcf14fc9b66da3f1247148efbbd2612c00b32ee2be",
+      "message": "MyLibrary: 1 programme occurrences/groups, 1 kept; zero model calls",
+      "stats": {
+        "calendar_requests": 15,
+        "gemini_logical_calls": 0,
+        "collection_window_days": 30,
+        "calendar_documents": 15,
+        "kept": 1,
+        "extracted": 1
+      }
+    },
+    {
+      "status": "ok",
+      "rows": [
+        {
+          "source_id": "preview-Sutton",
+          "title": "Rhymetime in Sutton Central Library",
+          "description": "Our ever popular Rhymetimes are here for children aged 0-5 to enjoy singing and stories with Sutton Council's Cultural Services, the people behind your local libraries and heritage houses. Please book a ticket for each child and adult wanting to attend. Children must be accompanied by a responsible adult throughout. This event may be photographed and/or recorded for marketing and evaluation purposes. If you do not wish to be a part of future promotional material, please make it known at the time of the event. Please log in with your library credentials to reserve your place at this event.",
+          "listing_type": "activity",
+          "is_holiday_camp": false,
+          "category": "story_rhyme",
+          "start_date": "2026-10-12",
+          "end_date": "2026-11-10",
+          "schedule_text": "Published dates: 2026-10-12, 2026-10-13, 2026-10-16, 2026-10-19, 2026-10-20, 2026-10-23, 2026-10-26, 2026-10-27, 2026-10-30, 2026-11-02, 2026-11-03, 2026-11-06, 2026-11-09, 2026-11-10; 11:15 AM - 12:15 PM",
+          "time_text": "11:15 AM - 12:15 PM",
+          "location": "Children's Library, Ground Floor, Sutton Central Library, St Nicholas Way, Sutton SM1 1EA, UK",
+          "venue_name": "Sutton Central Library",
+          "venue_address": "Children's Library, Ground Floor, Sutton Central Library, St Nicholas Way, Sutton SM1 1EA, UK",
+          "postcode": "SM1 1EA",
+          "venue_id": null,
+          "event_url": "https://events.sutton.gov.uk/event?id=364833",
+          "cost_text": "FREE",
+          "age_range": "0-5",
+          "recurrence": "recurring",
+          "family_relevance": 5,
+          "confidence": 0.99,
+          "source_url": "https://events.sutton.gov.uk/event?id=364833",
+          "extraction_method": "mylibrary_calendar",
+          "dedupe_key": "8bc6d342072a2ecbf94f35816ad6013e74561000",
+          "last_verified_at": "2026-10-11T12:51:45.788855+00:00",
+          "last_seen_at": "2026-10-11T12:51:45.788855+00:00"
+        }
+      ],
+      "hash": "ebad4e8183a36ef0348fc5bcf14fc9b66da3f1247148efbbd2612c00b32ee2be",
+      "message": "MyLibrary: 1 programme occurrences/groups, 1 kept; zero model calls",
+      "stats": {
+        "calendar_requests": 15,
+        "gemini_logical_calls": 0,
+        "collection_window_days": 30,
+        "calendar_documents": 15,
+        "kept": 1,
+        "extracted": 1
+      }
+    }
+  ]
+}

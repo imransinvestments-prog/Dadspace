@@ -1,0 +1,329 @@
+{
+  "programme": "storytime",
+  "capture_method": "public-browser-review",
+  "checked_on": "2026-10-12",
+  "index_url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/results.page?qt=storytime&term=&camcommunitychannel=6-4&sorttype=relevance",
+  "index_pages_reviewed": 2,
+  "index_capture_complete": true,
+  "observed_detail_urls": [
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=viBJIIRkrYg&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=ARDeAFTyRxc&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=thFHFA_sbrE&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=ENmGwUVtYzQ&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=c5pKbxS6MWI&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=BDbIsyloDaM&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=sYeyt5peVQk&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=yDrSWGCcyKw&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=gwZeNrxE_1A&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=dWerJguLVJI&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=QK2H0xPmbhg&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=1YzyAJR4kGU&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=3NW1KkTYDS0&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=L0-EFfqXKMM&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=CJK0H4uiffE&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=PMY2GzVdqU0&camcommunitychannel=6-4"
+  ],
+  "robots_allows_unattended_collection": false,
+  "records": [
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=viBJIIRkrYg&camcommunitychannel=6-4",
+      "title": "Storytime at Ramsey Library",
+      "fields": {
+        "Name": "Ramsey Library",
+        "Address": "Ramsey Library, 25, Great Whyte, Ramsey, Huntingdon, Cambridgeshire",
+        "Postcode": "PE26 1HG",
+        "Time/date notes": "Thursday 10.30 - 11.15 am (Term-time only)",
+        "Age Ranges": "Suitable for 0-4 years",
+        "Details": "Free but donations welcome"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "drop-in",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=ARDeAFTyRxc&camcommunitychannel=6-4",
+      "title": "Storytime at Huntingdon Library",
+      "fields": {
+        "Time/date notes": "Every week on Wednesday, until further notice",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "0 - 5 years",
+        "Details": "Free (donations welcome)"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=thFHFA_sbrE&camcommunitychannel=6-4",
+      "title": "Storytime - Fulbourn Village Library",
+      "fields": {
+        "Name": "Fulbourn Village Library",
+        "Address": "The Swifts, Haggis Gap, Fulbourn",
+        "Postcode": "CB21 5HD",
+        "Time/date notes": "Every month on the 3rd Saturday of the month, until further notice",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "0 - 6 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=ENmGwUVtYzQ&camcommunitychannel=6-4",
+      "title": "Bar Hill Library Storytime",
+      "fields": {
+        "Name": "Bar Hill Library",
+        "Address": "Gladeside, Bar Hill, Cambridge, Cambridgeshire",
+        "Postcode": "CB23 8DY",
+        "Time/date notes": "3.15 to 3.45pm, 3rd Wednesday of the month",
+        "Age Ranges": "4+",
+        "Details": "Free, donations welcome"
+      },
+      "relocation": false,
+      "restrictions": [
+        "Key stage one children"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=c5pKbxS6MWI&camcommunitychannel=6-4",
+      "title": "Storytime on Saturdays at Cherry Hinton Library",
+      "fields": {
+        "Name": "Cherry Hinton Hub",
+        "Address": "High Street, Cherry Hinton, Cambridge",
+        "Postcode": "CB1 9HZ",
+        "Time/date notes": "Every other Saturday. Check our Eventbrite webpage for upcoming dates.",
+        "Opening Hours": "10:30 - 11:30",
+        "Age Ranges": "18 months - 5 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in",
+        "adult attendance"
+      ],
+      "description": "",
+      "booking_url": "https://www.eventbrite.co.uk/o/cambridgeshire-libraries-33302830317",
+      "review_flags": [
+        "Fortnightly dates need verification against the linked organiser listings; no dated occurrences generated."
+      ]
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=BDbIsyloDaM&camcommunitychannel=6-4",
+      "title": "Storytime & Rhymetime on Thursdays at Arbury Court Library",
+      "fields": {
+        "Name": "Arbury Court Library",
+        "Address": "Arbury Court, Cambridge, Cambridgeshire",
+        "Postcode": "CB4 2JQ",
+        "Time/date notes": "Every week on Thursday, until further notice",
+        "Opening Hours": "10:30 - 11:15",
+        "Age Ranges": "0 months - 5 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=sYeyt5peVQk&camcommunitychannel=6-4",
+      "title": "Storytime",
+      "fields": {
+        "Name": "Ely Library",
+        "Address": "Ely Library, 6, The Cloisters, Ely, Cambridgeshire",
+        "Postcode": "CB7 4ZH",
+        "Time/date notes": "Every two weeks on a Monday 10:00 - 10:30 Please enquire at the library.",
+        "Opening Hours": "10:00 - 10:30",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [],
+      "description": "",
+      "review_flags": [
+        "Fortnightly dates need confirmation at the library; no dated occurrences generated."
+      ]
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=yDrSWGCcyKw&camcommunitychannel=6-4",
+      "title": "Storytime on Thursdays at Milton Road Library",
+      "fields": {
+        "Name": "Milton Road Library",
+        "Address": "Ascham Road, Cambridge",
+        "Postcode": "CB4 2BD",
+        "Time/date notes": "Every week on Thursday, until further notice.",
+        "Opening Hours": "15:30 - 16:30",
+        "Age Ranges": "18 months - 5 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=gwZeNrxE_1A&camcommunitychannel=6-4",
+      "title": "Rhymetime, Storytime and Duplo at Cambourne Library",
+      "fields": {
+        "Name": "Cambourne Library",
+        "Address": "Sackville House, Sackville Way, Great Cambourne, Cambridge",
+        "Postcode": "CB23 6HL",
+        "Time/date notes": "Weekly on Fridays, during term time.",
+        "Opening Hours": "9:30 - 10:30",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "drop-in",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=dWerJguLVJI&camcommunitychannel=6-4",
+      "title": "Saturday Storytime at St Neots Library",
+      "fields": {
+        "Name": "St Neots Library",
+        "Address": "Priory Lane, St. Neots, Cambridgeshire",
+        "Postcode": "PE19 2BH",
+        "Time/date notes": "Every week on Saturday, until further notice",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "Children of all ages",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=QK2H0xPmbhg&camcommunitychannel=6-4",
+      "title": "Histon Library Storytime",
+      "fields": {
+        "Name": "Histon Library",
+        "Address": "School Hill, Histon",
+        "Postcode": "CB24 9JE",
+        "Time/date notes": "2.30pm to 3pm, 1st Tuesday of the month, term time only",
+        "Age Ranges": "0-4",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "adult attendance",
+        "donations welcome"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=1YzyAJR4kGU&camcommunitychannel=6-4",
+      "title": "Storytime at St Ives Library",
+      "fields": {
+        "Name": "St Ives Library",
+        "Address": "4, Library Row, Station Road, St Ives",
+        "Postcode": "PE27 5BW",
+        "Time/date notes": "Every week on Tuesday (term time only) until further notice",
+        "Opening Hours": "10:00 - 11:00",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free but donations welcome"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=3NW1KkTYDS0&camcommunitychannel=6-4",
+      "title": "Storytime on Mondays at Cambridge Central Library",
+      "fields": {
+        "Name": "Cambridge Central Library",
+        "Address": "Lion Yard, Cambridge, Cambridgeshire",
+        "Postcode": "CB2 3QD",
+        "Time/date notes": "Every week on Monday, until further notice",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "1 - 5 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in",
+        "adult attendance"
+      ],
+      "description": "",
+      "review_flags": [
+        "Age field says 1 - 5 years; published description says 18 months to 5 years. Resolve before application."
+      ]
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=L0-EFfqXKMM&camcommunitychannel=6-4",
+      "title": "Storytime on Sundays at Cambridge Central Library",
+      "fields": {
+        "Name": "Cambridge Central Library",
+        "Address": "Lion Yard, Cambridge, Cambridgeshire",
+        "Postcode": "CB2 3QD",
+        "Time/date notes": "Every week on Sunday, until further notice",
+        "Opening Hours": "15:00 - 15:30",
+        "Age Ranges": "0 - 5 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in",
+        "adult attendance"
+      ],
+      "description": "",
+      "review_flags": [
+        "Age field says 0 - 5 years; published description says 18 months to 5 years. Resolve before application."
+      ]
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=CJK0H4uiffE&camcommunitychannel=6-4",
+      "title": "Stories, Songs and Fun at Littleport Library",
+      "fields": {
+        "Name": "Littleport Library",
+        "Address": "Victoria Street, Littleport",
+        "Postcode": "CB6 1LU",
+        "Time/date notes": "Every week on Thursday",
+        "Opening Hours": "15:00 - 15:30",
+        "Age Ranges": "0 - 11 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "Booking at library desk",
+        "places extremely limited"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=PMY2GzVdqU0&camcommunitychannel=6-4",
+      "title": "Rhythm and Rhyme at Linton Library",
+      "fields": {
+        "Name": "Linton Library",
+        "Address": "The Cathodeon Centre, Horseheath Road, Linton, Cambridge",
+        "Postcode": "CB21 4LU",
+        "Time/date notes": "Every Tuesday during term time 10:30am-11:00am"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "caregiver attendance"
+      ],
+      "description": "For 0-4 year olds and their caregivers. Runs during term time. Free."
+    }
+  ]
+}

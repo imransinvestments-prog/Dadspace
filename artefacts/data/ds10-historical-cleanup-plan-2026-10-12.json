@@ -1,0 +1,2740 @@
+{
+  "prepared_at": "2026-10-12T12:21:05.325086+00:00",
+  "reviewed_rows": 679,
+  "changes": [
+    {
+      "id": "92390fcd-6120-42d6-9a21-749b0cb78cce",
+      "expected_fingerprint": "290bebb803046a84c423a458d8200d90",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-20",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-11-06, 2026-11-13, 2026-11-20; Friday 16 Oct 2026, 10am-11.30am; Friday 23 Oct 2026, 10am-11.30am; Friday 6 Nov 2026, 10am-11.30am; Friday 13 Nov 2026, 10am-11.30am; Friday 20 Nov 2026, 10am-11.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/headington-library-stay-play"
+    },
+    {
+      "id": "1a7e8d0c-8e91-4dc8-97a6-ebbc0572fe69",
+      "expected_fingerprint": "23a3d884fdf5bf8d29268f1da9a69464",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-10-17",
+        "end_date": "2026-10-17",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/solihull-and-south-birmingham/nct-solihull-nearly-new-sale-17th-october-2026"
+    },
+    {
+      "id": "3fca438f-d323-413a-8599-f1c88100b26d",
+      "expected_fingerprint": "d1dea308a32acf06740ea7c7f20e8a37",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-10-16",
+        "schedule_text": "Published session: 2026-10-16; 08:30 \u2013 10:30; repeats weekly",
+        "time_text": "08:30 \u2013 10:30"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/ivystreetfamilycentre/s3kZhMC-soft-play-stay-and-play/"
+    },
+    {
+      "id": "63a77550-4819-4dea-b11a-c0987611c7bf",
+      "expected_fingerprint": "27f49685c70d6973cde379552aa237cf",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-10-16",
+        "schedule_text": "Published session: 2026-10-16; 08:30 \u2013 10:00; repeats weekly",
+        "time_text": "08:30 \u2013 10:00"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/stagecoach-chiswick/Y9yrupg-early-stages-class-saturday-930-11am/"
+    },
+    {
+      "id": "669bfff9-1bec-4b68-855e-ef8cce57dcba",
+      "expected_fingerprint": "0d2d59514819a3f2b3d80f29ec33a15e",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-10-16",
+        "schedule_text": "Published session: 2026-10-16; 08:30 \u2013 09:00; repeats weekly",
+        "time_text": "08:30 \u2013 09:00"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/eos-dance/uJ58cA-big-small/"
+    },
+    {
+      "id": "226b56b4-15cc-4f64-89df-6258190d4b01",
+      "expected_fingerprint": "763459b1765d3d38000b72a79e2c2f77",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-10-19",
+        "schedule_text": "Published session: 2026-10-19; 09:00 \u2013 09:30; repeats weekly",
+        "time_text": "09:00 \u2013 09:30"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/eos-dance/cZEciJ-tiny-dancers/"
+    },
+    {
+      "id": "fb4d38aa-27ff-4b8b-9bf5-ebe3768a8eea",
+      "expected_fingerprint": "ecfc04ea2806181d1eef9363aed712d0",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-11-01",
+        "end_date": "2026-11-01",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/southam-and-villages/nct-southam-and-villages-nearly-new-sale-0"
+    },
+    {
+      "id": "ae6be7eb-c9e2-4dcc-be3f-1f8cd2c0eaa5",
+      "expected_fingerprint": "b2ef58bb412180743a9107785c1c0f4d",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-10-16",
+        "schedule_text": "Published session: 2026-10-16; 08:30 \u2013 09:10; repeats weekly",
+        "time_text": "08:30 \u2013 09:10"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/tiny-tunes/Hxy4sU-tiny-tunes-music-dance-classes-3-mths-5-yrs-esher/"
+    },
+    {
+      "id": "4c8d8c81-0428-4a55-b7f3-aafd60a95b49",
+      "expected_fingerprint": "608729879448405abca0dbc2df519fad",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-11-14",
+        "end_date": "2026-11-14",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/alton-and-bordon/nct-alton-and-bordon-nearly-new-sale-0"
+    },
+    {
+      "id": "099a1428-806f-419e-9cfb-b04b40973e75",
+      "expected_fingerprint": "ee891578fecc4fccc9af80fc396506e6",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-11-28",
+        "end_date": "2026-11-28",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/aylesbury-risborough-thame-and-district/nct-aylesbury-district-nearly-new-sale-1"
+    },
+    {
+      "id": "40a1f61f-1d9a-4ace-b9a4-0538091315c7",
+      "expected_fingerprint": "dfc36578268d2a65c900db94db344c58",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-10-16",
+        "schedule_text": "Published session: 2026-10-16; 08:30 \u2013 12:00; repeats weekly",
+        "time_text": "08:30 \u2013 12:00"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/e/1WGBEi/"
+    },
+    {
+      "id": "7eb92f63-fc0e-4a26-8dc5-88b5aa9924b5",
+      "expected_fingerprint": "00c99d05074e494a7879bcd2e4f6f9ac",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-10-16",
+        "schedule_text": "Published session: 2026-10-16; 09:00 \u2013 09:30; repeats weekly",
+        "time_text": "09:00 \u2013 09:30"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/eos-dance/jM05EA-tiny-dancers/"
+    },
+    {
+      "id": "6627eb6e-a21d-46d0-894d-63d31cc7d082",
+      "expected_fingerprint": "2ae0ac4de535f807395d302f3682e790",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-11-14",
+        "end_date": "2026-11-14",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/leighton-buzzard/nct-leighton-buzzard-nearly-new-sale-1"
+    },
+    {
+      "id": "83225b8e-aa57-4864-a933-f0340cafdeb6",
+      "expected_fingerprint": "59647b574f8dd9b02d9bc278550aa6fb",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-10-16",
+        "schedule_text": "Published session: 2026-10-16; 09:00 \u2013 09:40; repeats weekly",
+        "time_text": "09:00 \u2013 09:40"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/tiny-tunes/xmY5U9-tiny-tunes-music-dance-classes-3-mths-5-yrs-epsom/"
+    },
+    {
+      "id": "12a10d32-e5bf-402d-acc9-f7f9661ed19f",
+      "expected_fingerprint": "ed2462a13f9c941aee5a0a53713ef236",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-13",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-10-30, 2026-11-06, 2026-11-13; Friday 16 Oct 2026, 10am-10.30am; Friday 23 Oct 2026, 10am-10.30am; Friday 30 Oct 2026, 10am-10.30am; Friday 6 Nov 2026, 10am-10.30am; Friday 13 Nov 2026, 10am-10.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/henley-storytime"
+    },
+    {
+      "id": "3e43fbba-3d45-483b-8b75-1ee1b8b0da5f",
+      "expected_fingerprint": "985a239f309fb7154fa63494896aaa7b",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-10-16",
+        "schedule_text": "Published session: 2026-10-16; 09:00 \u2013 09:45; repeats weekly",
+        "time_text": "09:00 \u2013 09:45"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/hartbeeps/oXWWhw1-hartbeeps-happy-house-christ-church-gipsy-hill/"
+    },
+    {
+      "id": "a282df52-3ca1-4baa-b541-80d1bbe96654",
+      "expected_fingerprint": "2b6bb1a7a8a30b912ff21973d204017a",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-11-12",
+        "schedule_text": "Published dates: 2026-10-15, 2026-10-22, 2026-10-29, 2026-11-05, 2026-11-12; Thursday 15 Oct 2026, 9.30am-11am; Thursday 22 Oct 2026, 9.30am-11am; Thursday 29 Oct 2026, 9.30am-11am; Thursday 5 Nov 2026, 9.30am-11am; Thursday 12 Nov 2026, 9.30am-11am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/oxford-westgate-stay-play-learn-1"
+    },
+    {
+      "id": "8baa0d81-55c5-467a-8b86-a820133e68c6",
+      "expected_fingerprint": "a40ded07db37b9d687b6c35f417db5b7",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:03.833225+00:00",
+        "withdrawal_reason": "Published dated occurrence ended 2026-10-07; ongoing programme is not declared discontinued."
+      },
+      "reason": "Expired dated occurrence",
+      "evidence_url": "https://www.nct.org.uk/events/aberdeen-city-and-shire/walk-and-talk-seaton-park-2"
+    },
+    {
+      "id": "0a2981c9-4da9-43e7-b437-b8788484c960",
+      "expected_fingerprint": "63e33eb6c7c405ace9147c204dc92c90",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-10-16",
+        "schedule_text": "Published session: 2026-10-16; 10:45 \u2013 13:15; repeats weekly",
+        "time_text": "10:45 \u2013 13:15"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/water-babies-south-manchester/P7hY63-water-babies-at-waterside-hotel-didsbury/"
+    },
+    {
+      "id": "71873f7b-acfc-459d-8c08-3dace49d841a",
+      "expected_fingerprint": "30434c2082c05b15ed312744fc312893",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-11-12",
+        "schedule_text": "Published dates: 2026-10-15, 2026-10-22, 2026-10-29, 2026-11-05, 2026-11-12; Thursday 15 Oct 2026, 9.30am-11am; Thursday 22 Oct 2026, 9.30am-11am; Thursday 29 Oct 2026, 9.30am-11am; Thursday 5 Nov 2026, 9.30am-11am; Thursday 12 Nov 2026, 9.30am-11am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/didcot-stay-and-play"
+    },
+    {
+      "id": "2e78948f-f8f2-474d-b216-d8f2865f8da0",
+      "expected_fingerprint": "8221da48d07342fe75342d6aeb7b576e",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:03.866285+00:00",
+        "withdrawal_reason": "Published dated occurrence ended 2026-10-07; ongoing programme is not declared discontinued."
+      },
+      "reason": "Expired dated occurrence",
+      "evidence_url": "https://www.nct.org.uk/events/aberdeen-city-and-shire/dani-rose-photo-session"
+    },
+    {
+      "id": "603514c6-75ec-4637-9b7d-892e321bfc0c",
+      "expected_fingerprint": "e1645003a1e2201b73c355199b9dd272",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-13",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-10-30, 2026-11-06, 2026-11-13; Friday 16 Oct 2026, 10am-10.30am; Friday 23 Oct 2026, 10am-10.30am; Friday 30 Oct 2026, 10am-10.30am; Friday 6 Nov 2026, 10am-10.30am; Friday 13 Nov 2026, 10am-10.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/wallingford-library-rhymetime"
+    },
+    {
+      "id": "73b4f656-41ac-4037-9030-6d79e94c5636",
+      "expected_fingerprint": "7553652f46c376ffd8f2fdac7901423f",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:05.323436+00:00",
+        "withdrawal_reason": "Duplicate of verified same named programme at https://haysouthcambs.co.uk/activities/saturdads-at-st-johns-church-waterbeach/",
+        "superseded_by": "4b5aaed1-3557-4050-bfc3-4840febdc43f"
+      },
+      "reason": "Duplicate programme record; preserve original evidence",
+      "evidence_url": "https://haysouthcambs.co.uk/activities/saturdads-at-st-johns-church-waterbeach/"
+    },
+    {
+      "id": "1d6c99bd-8e7f-4a07-8d46-5e0ffb9b6482",
+      "expected_fingerprint": "f54e82190c92055f939234d12ae0ba62",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-10-14",
+        "schedule_text": "Published session: 2026-10-14; 08:45 \u2013 10:15; repeats weekly",
+        "time_text": "08:45 \u2013 10:15"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/e/CdAXHY/"
+    },
+    {
+      "id": "7edccfd1-4f1c-4d60-bc10-36f914dfee6f",
+      "expected_fingerprint": "ba9470aaa1ba2dbf91ddc434238e8dd1",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-10-14",
+        "schedule_text": "Published session: 2026-10-14; 08:45 \u2013 09:30; repeats weekly",
+        "time_text": "08:45 \u2013 09:30"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/phonics-with-robot-reg-warrington-and-knutsford/173JPTG-minis-phonics-with-robot-reg-lymm/"
+    },
+    {
+      "id": "c4407f9d-fb17-4c92-a14f-433536ba3917",
+      "expected_fingerprint": "bbdf951dcd8e6a5ace360e57c0809514",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:03.923244+00:00",
+        "withdrawal_reason": "Published dated occurrence ended 2026-10-10; ongoing programme is not declared discontinued."
+      },
+      "reason": "Expired dated occurrence",
+      "evidence_url": "https://www.nct.org.uk/events/bassetlaw/nct-bassetlaw-nearly-new-sale-1"
+    },
+    {
+      "id": "2cc76f94-8c28-41f5-9634-0af665de6657",
+      "expected_fingerprint": "15854cd06ad5af4b36b46857113bda7b",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-11-11",
+        "schedule_text": "Published dates: 2026-10-14, 2026-10-21, 2026-10-28, 2026-11-04, 2026-11-11; Wednesday 14 Oct 2026, 9.30am-10am; Wednesday 21 Oct 2026, 9.30am-10am; Wednesday 28 Oct 2026, 9.30am-10am; Wednesday 4 Nov 2026, 9.30am-10am; Wednesday 11 Nov 2026, 9.30am-10am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/abingdon-rhymetime-1"
+    },
+    {
+      "id": "a95c7cce-23a5-4294-84c9-12e4885d7dda",
+      "expected_fingerprint": "2be3cc6c5fe2790a3056b5ebb57005e0",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-11-15",
+        "end_date": "2026-11-15",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/staines-ashford-egham-surrounding-areas/nct-staines-ashford-and-egham-nearly-new-sale-1"
+    },
+    {
+      "id": "4d892006-5304-42a1-b1e6-97f88dfb4cc6",
+      "expected_fingerprint": "556eb63d17fe48a5c1c7b3dce4f82e44",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-10-15",
+        "schedule_text": "Published session: 2026-10-15; 11:15 \u2013 16:45; repeats weekly",
+        "time_text": "11:15 \u2013 16:45"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/water-babies-south-manchester/ukd8lf-water-babies-at-delamere-school-flixton/"
+    },
+    {
+      "id": "40410879-0255-4cc6-918e-91ff2f6d0889",
+      "expected_fingerprint": "c81878df61d309bf2074ea90397fdab3",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:03.970420+00:00",
+        "withdrawal_reason": "Published dated occurrence ended 2026-10-10; ongoing programme is not declared discontinued."
+      },
+      "reason": "Expired dated occurrence",
+      "evidence_url": "https://www.nct.org.uk/events/tring-and-district/nct-tring-nearly-new-sale-1"
+    },
+    {
+      "id": "d2a8030b-4507-4bd1-aebc-c4808b668408",
+      "expected_fingerprint": "a3255ace1b33242d4e5b0ee54f6d98ba",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-10-16",
+        "schedule_text": "Published session: 2026-10-16; 08:45 \u2013 09:30; repeats weekly",
+        "time_text": "08:45 \u2013 09:30"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/phonics-with-robot-reg-warrington-and-knutsford/GAeC9Tf-minis-phonics-with-robot-reg-birchwood/"
+    },
+    {
+      "id": "b57e4f55-e603-4345-b1c6-3364048dced7",
+      "expected_fingerprint": "b797dfbde1b9303a7e66047e688963a6",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-10-16",
+        "schedule_text": "Published session: 2026-10-16; 08:50 \u2013 09:20; repeats weekly",
+        "time_text": "08:50 \u2013 09:20"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/the-lesley-taylor-school-of-dance/ObVIae-all-little-dancers/"
+    },
+    {
+      "id": "c5b2da90-9e5f-4873-95dc-28150b82424d",
+      "expected_fingerprint": "33b7d8a84bf78e3c87917656fefdc242",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-11-07",
+        "end_date": "2026-11-07",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/biggleswade-sandy-and-district/nct-biggleswade-and-sandy-nearly-new-sale-autumn-2026"
+    },
+    {
+      "id": "920b3f39-a584-429c-ae51-5f3f0b83f76d",
+      "expected_fingerprint": "e1c18bb32580e33f34b1dac87382fb77",
+      "patch": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-11-14",
+        "schedule_text": "Published dates: 2026-10-17, 2026-10-24, 2026-10-31, 2026-11-07, 2026-11-14; Saturday 17 Oct 2026, 10am-12pm; Saturday 24 Oct 2026, 10am-12pm; Saturday 31 Oct 2026, 10am-12pm; Saturday 7 Nov 2026, 10am-12pm; Saturday 14 Nov 2026, 10am-12pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/blackbird-leys-lego-club"
+    },
+    {
+      "id": "89c21b94-efee-4541-b01f-0533eb5493be",
+      "expected_fingerprint": "5fea99c93a41ce92526bab324e249a07",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-11-18",
+        "schedule_text": "Published dates: 2026-10-14, 2026-10-21, 2026-11-04, 2026-11-11, 2026-11-18; Wednesday 14 Oct 2026, 4pm-5pm; Wednesday 21 Oct 2026, 4pm-5pm; Wednesday 4 Nov 2026, 4pm-5pm; Wednesday 11 Nov 2026, 4pm-5pm; Wednesday 18 Nov 2026, 4pm-5pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/banbury-lego-club"
+    },
+    {
+      "id": "8e69de64-f507-4c1f-a221-855ba5f34b82",
+      "expected_fingerprint": "529753bfd5ffa8cb722b4abbb6cfc133",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:04.032347+00:00",
+        "withdrawal_reason": "Published dated occurrence ended 2026-10-09; ongoing programme is not declared discontinued."
+      },
+      "reason": "Expired dated occurrence",
+      "evidence_url": "https://www.nct.org.uk/events/doncaster/nct-doncaster-baby-cafe-140"
+    },
+    {
+      "id": "f8b143e1-141f-4a0f-9a38-b11d69720659",
+      "expected_fingerprint": "a36313e39827e7a993bcad1ce5b83a96",
+      "patch": {
+        "start_date": "2026-10-20",
+        "end_date": "2026-10-20",
+        "schedule_text": "Published dates: 2026-10-20; Every other Tuesday from 16:30 \u2013 17:30, Fullwell Cross Library.",
+        "time_text": "16:30 to 17:30"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.redbridge.gov.uk/discover/events/fab-club/"
+    },
+    {
+      "id": "f64c2642-ddf3-4b19-b980-73da2855fda8",
+      "expected_fingerprint": "3d3e9b8e3595acdef24443721662bda3",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-11-11",
+        "schedule_text": "Published dates: 2026-10-14, 2026-10-21, 2026-10-28, 2026-11-04, 2026-11-11; Wednesday 14 Oct 2026, 9.30am-10am; Wednesday 21 Oct 2026, 9.30am-10am; Wednesday 28 Oct 2026, 9.30am-10am; Wednesday 4 Nov 2026, 9.30am-10am; Wednesday 11 Nov 2026, 9.30am-10am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/wantage-rhymetime"
+    },
+    {
+      "id": "b95c4d87-254f-4889-b027-948bfc0afff9",
+      "expected_fingerprint": "1f3455bb484acd0fd5d8d4aa2961f686",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-10-16",
+        "schedule_text": "Published session: 2026-10-16; 09:00 \u2013 16:30; repeats weekly",
+        "time_text": "09:00 \u2013 16:30"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/water-babies-south-manchester/wA9xZ25-water-babies-at-pictor-academy-timperley/"
+    },
+    {
+      "id": "1a77fde5-98f1-413f-83c0-05ab17690393",
+      "expected_fingerprint": "8d51d538d7f3b284d4dd0010911191cb",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-10-16",
+        "schedule_text": "Published session: 2026-10-16; 09:45 \u2013 10:30; repeats weekly",
+        "time_text": "09:45 \u2013 10:30"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/phonics-with-robot-reg-warrington-and-knutsford/1k8Cas7-preschool-phonics-with-robot-reg-birchwood/"
+    },
+    {
+      "id": "2b714fb6-5218-4077-99d7-b6802251ff3a",
+      "expected_fingerprint": "16049e257559bf2842fd14567afd4201",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-11-12",
+        "schedule_text": "Published dates: 2026-10-15, 2026-10-22, 2026-10-29, 2026-11-05, 2026-11-12; Thursday 15 Oct 2026, 10am-4.30pm; Thursday 22 Oct 2026, 10am-4.30pm; Thursday 29 Oct 2026, 10am-4.30pm; Thursday 5 Nov 2026, 10am-4.30pm; Thursday 12 Nov 2026, 10am-4.30pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/family-activities/thursday-board-games"
+    },
+    {
+      "id": "270793e6-0009-4a4d-9ba9-a0c73ac90b44",
+      "expected_fingerprint": "37293685891b44a170822b29ab15cea5",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-11-19",
+        "schedule_text": "Published dates: 2026-10-15, 2026-10-22, 2026-11-05, 2026-11-12, 2026-11-19; Thursday 15 Oct 2026, 10am-11am; Thursday 22 Oct 2026, 10am-11am; Thursday 5 Nov 2026, 10am-11am; Thursday 12 Nov 2026, 10am-11am; Thursday 19 Nov 2026, 10am-11am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/adderbury-rhymetime"
+    },
+    {
+      "id": "9e74517f-2696-466b-952b-0ffa988f6fc8",
+      "expected_fingerprint": "afa64b8814d6c54347cd5429b6fef220",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:04.102755+00:00",
+        "withdrawal_reason": "Published dated occurrence ended 2026-10-11; ongoing programme is not declared discontinued."
+      },
+      "reason": "Expired dated occurrence",
+      "evidence_url": "https://www.nct.org.uk/events/brentwood/nct-brentwood-nearly-new-sale-1"
+    },
+    {
+      "id": "be4bcfb9-3785-4305-85aa-a3ee4816a9e1",
+      "expected_fingerprint": "cecea29ff7685f87c0694462af529fcb",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:05.323436+00:00",
+        "withdrawal_reason": "Duplicate of verified same named programme at https://hoop.co.uk/the-lesley-taylor-school-of-dance/ObVIae-all-little-dancers/",
+        "superseded_by": "b57e4f55-e603-4345-b1c6-3364048dced7"
+      },
+      "reason": "Duplicate programme record; preserve original evidence",
+      "evidence_url": "https://hoop.co.uk/the-lesley-taylor-school-of-dance/ObVIae-all-little-dancers/"
+    },
+    {
+      "id": "0b36020f-9bb2-4a12-b21e-61c64269efbf",
+      "expected_fingerprint": "89c3b2478539f9d4343a396a027282ec",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-10-22",
+        "schedule_text": "Published dates: 2026-10-15, 2026-10-22; Thursday 15 Oct 2026, 10am-12pm; Thursday 22 Oct 2026, 10am-12pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/witney-stay-and-play"
+    },
+    {
+      "id": "80c278fb-d8b0-49d4-9a78-7a29666771f7",
+      "expected_fingerprint": "3c732808ea62c7a0a2f4ccc1d754dcd3",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-11-07",
+        "end_date": "2026-11-07",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/malvern-hills/nct-malvern-hills-nearly-new-sale-0"
+    },
+    {
+      "id": "5b435b1c-6708-4de5-b1af-9c21bd067feb",
+      "expected_fingerprint": "cc6f311b42e1fab22d9fc79881655851",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:04.148931+00:00",
+        "withdrawal_reason": "Published dated occurrence ended 2026-10-08; ongoing programme is not declared discontinued."
+      },
+      "reason": "Expired dated occurrence",
+      "evidence_url": "https://www.nct.org.uk/events/herts-north/nct-herts-north-walk-talk-letchworth-norton-common-14"
+    },
+    {
+      "id": "7af9235c-6c3e-4f43-ad8e-b94d07fc9438",
+      "expected_fingerprint": "df635fe127034eefb206be2d40ea6f22",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-10-17",
+        "end_date": "2026-10-17",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/herts-north/nct-herts-north-nearly-new-sale-1"
+    },
+    {
+      "id": "443c1efc-e10e-433b-85a4-8cd95df4f9be",
+      "expected_fingerprint": "558f57d2bff0fa97e0dda23c4aed476b",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:04.164921+00:00",
+        "withdrawal_reason": "Published dated occurrence ended 2026-10-08; ongoing programme is not declared discontinued."
+      },
+      "reason": "Expired dated occurrence",
+      "evidence_url": "https://www.nct.org.uk/events/twickenham-hounslow-and-district/nct-boston-manor-park-walk-talk-8"
+    },
+    {
+      "id": "14068de2-95e3-455f-af83-dd9fcf5debb3",
+      "expected_fingerprint": "38be0182b7a1db772ec1d5d780b81a50",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-11-18",
+        "schedule_text": "Published dates: 2026-10-14, 2026-10-21, 2026-11-04, 2026-11-11, 2026-11-18; Wednesday 14 Oct 2026, 10am-10.40am; Wednesday 21 Oct 2026, 10am-10.40am; Wednesday 4 Nov 2026, 10am-10.40am; Wednesday 11 Nov 2026, 10am-10.40am; Wednesday 18 Nov 2026, 10am-10.40am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/henley-sing-sing"
+    },
+    {
+      "id": "162848db-2615-4063-b761-589b2bc6b15c",
+      "expected_fingerprint": "bd3b0a918bad166d2b79ec8f82878a19",
+      "patch": {
+        "start_date": "2026-07-09",
+        "end_date": "2027-01-08",
+        "schedule_text": "9th July 2026 - 8th January 2027 Recurs every other week on Thursday.; Time: 10:00 - 11:15; term time only"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.coventry.gov.uk/events/event/8828/tots-time"
+    },
+    {
+      "id": "006f1869-f8fa-4a92-ada1-06ac1b909010",
+      "expected_fingerprint": "50736f98d7d7e1524f1040ed3f51dde8",
+      "patch": {
+        "start_date": "2026-10-13",
+        "end_date": "2026-11-10",
+        "schedule_text": "Published dates: 2026-10-13, 2026-10-20, 2026-10-27, 2026-11-03, 2026-11-10; Tuesday 13 Oct 2026, 4pm-4.30pm; Tuesday 20 Oct 2026, 4pm-4.30pm; Tuesday 27 Oct 2026, 4pm-4.30pm; Tuesday 3 Nov 2026, 4pm-4.30pm; Tuesday 10 Nov 2026, 4pm-4.30pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries-oxfordshire-museum/woodstock-library-story-time"
+    },
+    {
+      "id": "8174a638-18f1-47db-a25a-9015f3fff915",
+      "expected_fingerprint": "18159a7d50c3b53f5e7361fb69f45070",
+      "patch": {
+        "start_date": "2026-05-06",
+        "end_date": "2026-06-10",
+        "schedule_text": "Published dates: 2026-05-06, 2026-05-13, 2026-05-20, 2026-06-03, 2026-06-10; Wednesday 6 May 2026, 10.30am-11am; Wednesday 13 May 2026, 10.30am-11am; Wednesday 20 May 2026, 10.30am-11am; Wednesday 3 Jun 2026, 10.30am-11am; Wednesday 10 Jun 2026, 10.30am-11am",
+        "withdrawn_at": "2026-10-12T12:25:31.995019+00:00",
+        "withdrawal_reason": "Only published dated occurrence ended 2026-06-10; ongoing recurrence requires re-verification."
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/berinsfield-rhymetime"
+    },
+    {
+      "id": "5c0fc03e-2747-4db0-9927-9f2a16c54602",
+      "expected_fingerprint": "32df819adab14902843ba599e6836b02",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-11-11",
+        "schedule_text": "Published dates: 2026-10-14, 2026-10-21, 2026-10-28, 2026-11-04, 2026-11-11; Wednesday 14 Oct 2026, 3.30pm-4.30pm; Wednesday 21 Oct 2026, 3.30pm-4.30pm; Wednesday 28 Oct 2026, 3.30pm-4.30pm; Wednesday 4 Nov 2026, 3.30pm-4.30pm; Wednesday 11 Nov 2026, 3.30pm-4.30pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/witney-lego-club"
+    },
+    {
+      "id": "f2c15da9-b731-4ddc-acad-85969d3eabf8",
+      "expected_fingerprint": "3470a488f8abb712fd79ac248e77303b",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-11-12",
+        "schedule_text": "Published dates: 2026-10-19, 2026-11-02, 2026-11-05, 2026-11-09, 2026-11-12; Monday 19 Oct 2026, 10am-10.30am; Monday 2 Nov 2026, 10am-10.30am; Thursday 5 Nov 2026, 10am-10.30am; Monday 9 Nov 2026, 10am-10.30am; Thursday 12 Nov 2026, 10am-10.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/witney-rhymetime"
+    },
+    {
+      "id": "d2dbde70-ae71-4250-92ba-9b33c7c9e45a",
+      "expected_fingerprint": "a91abfcbd3b70f38ec3a3d0bc720447c",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-11-23",
+        "schedule_text": "Published dates: 2026-10-19, 2026-11-02, 2026-11-09, 2026-11-16, 2026-11-23; Monday 19 Oct 2026, 10am-11am; Monday 2 Nov 2026, 10am-11am; Monday 9 Nov 2026, 10am-11am; Monday 16 Nov 2026, 10am-11am; Monday 23 Nov 2026, 10am-11am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/banbury-stay-play"
+    },
+    {
+      "id": "eecaf46d-eed7-44ae-8f2d-e3134f1dd550",
+      "expected_fingerprint": "9139564134f6df8f5b7cea925809e2f7",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-11-12",
+        "schedule_text": "Published dates: 2026-10-15, 2026-10-22, 2026-10-29, 2026-11-05, 2026-11-12; Thursday 15 Oct 2026, 3.30pm-4pm; Thursday 22 Oct 2026, 3.30pm-4pm; Thursday 29 Oct 2026, 3.30pm-4pm; Thursday 5 Nov 2026, 3.30pm-4pm; Thursday 12 Nov 2026, 3.30pm-4pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/thame-library-storytime"
+    },
+    {
+      "id": "6bac60a0-52e5-4663-a224-3bcbb837aa28",
+      "expected_fingerprint": "7f1dbf09525e7c15e4d1b686ea7b10d2",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-11-19",
+        "schedule_text": "Published dates: 2026-10-15, 2026-10-22, 2026-11-05, 2026-11-12, 2026-11-19; Thursday 15 Oct 2026, 3.30pm-4.30pm; Thursday 22 Oct 2026, 3.30pm-4.30pm; Thursday 5 Nov 2026, 3.30pm-4.30pm; Thursday 12 Nov 2026, 3.30pm-4.30pm; Thursday 19 Nov 2026, 3.30pm-4.30pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/carterton-lego-club"
+    },
+    {
+      "id": "bef46b14-982f-486f-a840-02b57ee0e476",
+      "expected_fingerprint": "5091f11e156dfe9b222e5aee0cdd9287",
+      "patch": {
+        "start_date": "2026-10-13",
+        "end_date": "2026-11-10",
+        "schedule_text": "Published dates: 2026-10-13, 2026-10-20, 2026-10-27, 2026-11-03, 2026-11-10; Tuesday 13 Oct 2026, 2pm-5pm; Tuesday 20 Oct 2026, 2pm-5pm; Tuesday 27 Oct 2026, 2pm-5pm; Tuesday 3 Nov 2026, 2pm-5pm; Tuesday 10 Nov 2026, 2pm-5pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/abingdon-tuesday-make-and-play"
+    },
+    {
+      "id": "6f65708d-01bb-45f0-8e63-f434223e3f3c",
+      "expected_fingerprint": "42aa52b5e7a084545fc1e638856292f3",
+      "patch": {
+        "start_date": "2026-10-13",
+        "end_date": "2026-11-10",
+        "schedule_text": "Published dates: 2026-10-13, 2026-10-20, 2026-10-27, 2026-11-03, 2026-11-10; Tuesday 13 Oct 2026, 4pm-5pm; Tuesday 20 Oct 2026, 4pm-5pm; Tuesday 27 Oct 2026, 4pm-5pm; Tuesday 3 Nov 2026, 4pm-5pm; Tuesday 10 Nov 2026, 4pm-5pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/summertown-code-club"
+    },
+    {
+      "id": "c2436630-613e-46d3-8d89-712a1ab386dd",
+      "expected_fingerprint": "be8c1bf9ad3e639dcbf41d09ea6497eb",
+      "patch": {
+        "start_date": "2026-10-13",
+        "end_date": "2026-11-10",
+        "schedule_text": "Published dates: 2026-10-13, 2026-10-20, 2026-10-27, 2026-11-03, 2026-11-10; Tuesday 13 Oct 2026, 2.15pm-2.45pm; Tuesday 20 Oct 2026, 2.15pm-2.45pm; Tuesday 27 Oct 2026, 2.15pm-2.45pm; Tuesday 3 Nov 2026, 2.15pm-2.45pm; Tuesday 10 Nov 2026, 2.15pm-2.45pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/kidlington-rhymetime"
+    },
+    {
+      "id": "189aa60b-71e8-40ac-ba10-e5b3a0672e96",
+      "expected_fingerprint": "4fca8e93ae1215d615b22fbc0c4ae2a9",
+      "patch": {
+        "start_date": "2026-10-13",
+        "end_date": "2026-11-10",
+        "schedule_text": "Published dates: 2026-10-13, 2026-10-20, 2026-10-27, 2026-11-03, 2026-11-10; Tuesday 13 Oct 2026, 3.30pm-5pm; Tuesday 20 Oct 2026, 3.30pm-5pm; Tuesday 27 Oct 2026, 3.30pm-5pm; Tuesday 3 Nov 2026, 3.30pm-5pm; Tuesday 10 Nov 2026, 3.30pm-5pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/botley-lego-club"
+    },
+    {
+      "id": "dbb35e02-c654-4ad9-8385-9399be9de75a",
+      "expected_fingerprint": "2e3fbcabdc3dc716e44b255aeeaa9554",
+      "patch": {
+        "start_date": "2026-10-13",
+        "end_date": "2026-11-10",
+        "schedule_text": "Published dates: 2026-10-13, 2026-10-20, 2026-10-27, 2026-11-03, 2026-11-10; Tuesday 13 Oct 2026, 3.30pm-5pm; Tuesday 20 Oct 2026, 3.30pm-5pm; Tuesday 27 Oct 2026, 3.30pm-5pm; Tuesday 3 Nov 2026, 3.30pm-5pm; Tuesday 10 Nov 2026, 3.30pm-5pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/didcot-lego-club"
+    },
+    {
+      "id": "f77cf9d7-c692-4d39-91ec-6c3b7b310ea2",
+      "expected_fingerprint": "7b1fbf0df06de58b71a260cdfef11ac9",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-11-16",
+        "schedule_text": "Published dates: 2026-10-19, 2026-10-26, 2026-11-02, 2026-11-09, 2026-11-16; Monday 19 Oct 2026, 9.30am-10am; Monday 26 Oct 2026, 9.30am-10am; Monday 2 Nov 2026, 9.30am-10am; Monday 9 Nov 2026, 9.30am-10am; Monday 16 Nov 2026, 9.30am-10am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/henley-rhymetime"
+    },
+    {
+      "id": "084db16d-03b4-445a-a799-b5693e90d2f5",
+      "expected_fingerprint": "d8e88f2b17604d8d86e878dde98fc248",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-11-16",
+        "schedule_text": "Published dates: 2026-10-19, 2026-10-26, 2026-11-02, 2026-11-09, 2026-11-16; Monday 19 Oct 2026, 9.30am-11.30am; Monday 26 Oct 2026, 9.30am-11.30am; Monday 2 Nov 2026, 9.30am-11.30am; Monday 9 Nov 2026, 9.30am-11.30am; Monday 16 Nov 2026, 9.30am-11.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/bicester-stay-and-play"
+    },
+    {
+      "id": "ea51b4b1-62a1-43a3-bcba-4699ee96fffe",
+      "expected_fingerprint": "b389c3f8f8ac3345a2ba64a478cb544d",
+      "patch": {
+        "start_date": "2026-10-12",
+        "end_date": "2026-11-09",
+        "schedule_text": "Published dates: 2026-10-12, 2026-10-19, 2026-10-26, 2026-11-02, 2026-11-09; Monday 12 Oct 2026, 3.30pm-4.30pm; Monday 19 Oct 2026, 3.30pm-4.30pm; Monday 26 Oct 2026, 3.30pm-4.30pm; Monday 2 Nov 2026, 3.30pm-4.30pm; Monday 9 Nov 2026, 3.30pm-4.30pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/deddington-lego-club"
+    },
+    {
+      "id": "0236de13-df5c-42ed-aeb9-9ef552babd51",
+      "expected_fingerprint": "aded064e4ed32f11983453117a2d7663",
+      "patch": {
+        "start_date": "2026-10-12",
+        "end_date": "2026-11-09",
+        "schedule_text": "Published dates: 2026-10-12, 2026-10-19, 2026-10-26, 2026-11-02, 2026-11-09; Monday 12 Oct 2026, 3.45pm-5pm; Monday 19 Oct 2026, 3.45pm-5pm; Monday 26 Oct 2026, 3.45pm-5pm; Monday 2 Nov 2026, 3.45pm-5pm; Monday 9 Nov 2026, 3.45pm-5pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/abingdon-lego-club"
+    },
+    {
+      "id": "8d710e1d-7e64-476f-9b7a-e6edf9e5dcec",
+      "expected_fingerprint": "c5d45b84adfded9a3213c64cb8d9cedd",
+      "patch": {
+        "start_date": "2026-10-12",
+        "end_date": "2026-10-19",
+        "schedule_text": "Published dates: 2026-10-12, 2026-10-19; Monday 12 Oct 2026, 5pm-6.30pm; Monday 19 Oct 2026, 5pm-6.30pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/bampton-childrens-art-club"
+    },
+    {
+      "id": "705564eb-09c2-4fdb-b97d-1bb343cf131b",
+      "expected_fingerprint": "cecaa2b892b97d0f817bebb369bb6d5a",
+      "patch": {
+        "start_date": "2026-10-13",
+        "end_date": "2026-11-10",
+        "schedule_text": "Published dates: 2026-10-13, 2026-10-20, 2026-10-27, 2026-11-03, 2026-11-10; Tuesday 13 Oct 2026, 10am-10.30am; Tuesday 20 Oct 2026, 10am-10.30am; Tuesday 27 Oct 2026, 10am-10.30am; Tuesday 3 Nov 2026, 10am-10.30am; Tuesday 10 Nov 2026, 10am-10.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/banbury-rhymetime"
+    },
+    {
+      "id": "31cec798-a604-4b4e-9524-8ef2fe062c11",
+      "expected_fingerprint": "306aad71e100141be1bb6401b96071ea",
+      "patch": {
+        "start_date": "2026-10-13",
+        "end_date": "2026-11-17",
+        "schedule_text": "Published dates: 2026-10-13, 2026-10-20, 2026-11-03, 2026-11-10, 2026-11-17; Tuesday 13 Oct 2026, 10.30am-11am; Tuesday 20 Oct 2026, 10.30am-11am; Tuesday 3 Nov 2026, 10.30am-11am; Tuesday 10 Nov 2026, 10.30am-11am; Tuesday 17 Nov 2026, 10.30am-11am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/carterton-rhyme-time"
+    },
+    {
+      "id": "2ef3eac1-c392-4f9c-9b00-89cebcf5f136",
+      "expected_fingerprint": "64abb158d0a6cad29fb341eebff93229",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-10-14",
+        "schedule_text": "Published session: 2026-10-14; 09:45 \u2013 10:30; repeats weekly",
+        "time_text": "09:45 \u2013 10:30"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/phonics-with-robot-reg-warrington-and-knutsford/ckUPNbS-preschool-phonics-with-robot-reg-lymm/"
+    },
+    {
+      "id": "c4644505-4316-4243-8704-36d55608f4c5",
+      "expected_fingerprint": "f9ef671ec5c8df373cdfa580f799d3b5",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-13",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-10-30, 2026-11-06, 2026-11-13; Friday 16 Oct 2026, 11am-11.30am; Friday 23 Oct 2026, 11am-11.30am; Friday 30 Oct 2026, 11am-11.30am; Friday 6 Nov 2026, 11am-11.30am; Friday 13 Nov 2026, 11am-11.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/thame-library-rhymetime-0"
+    },
+    {
+      "id": "cd38956c-9be1-4348-a0e3-90c55b474802",
+      "expected_fingerprint": "ad2a48cc07a4317f3a41a2d0c6eee0d1",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-10-19",
+        "schedule_text": "Published session: 2026-10-19; 08:45 \u2013 09:30; repeats weekly",
+        "time_text": "08:45 \u2013 09:30"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/phonics-with-robot-reg-warrington-and-knutsford/JEIfPZ4-mini-phonics-with-robot-reg-knutsford/"
+    },
+    {
+      "id": "d618c764-5e0a-4702-b163-6da327f0b2cd",
+      "expected_fingerprint": "ae3f3e72a5cd462f1093b26f50d247df",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-10-19",
+        "schedule_text": "Published session: 2026-10-19; 09:45 \u2013 10:30; repeats weekly",
+        "time_text": "09:45 \u2013 10:30"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/phonics-with-robot-reg-warrington-and-knutsford/zIVcihD-preschool-phonics-with-robot-reg-knutsford/"
+    },
+    {
+      "id": "62af8533-424c-45bb-9da5-4ebfcad54fd6",
+      "expected_fingerprint": "782e5e8769d33ba40e22cc89b5af26ab",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-11-15",
+        "end_date": "2026-11-15",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/haslemere-and-midhurst/nct-haslemere-and-midhurst-nearly-new-sale-1"
+    },
+    {
+      "id": "cc154cd9-4792-414b-a7d2-1b28aa984f4a",
+      "expected_fingerprint": "76975c1e3e59fa2edd917f524a10c8f6",
+      "patch": {
+        "start_date": "2026-10-12",
+        "end_date": "2026-10-12",
+        "schedule_text": "Published session: 2026-10-12; 12:15 \u2013 13:45; repeats weekly",
+        "time_text": "12:15 \u2013 13:45"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/e/Ui9kO6/"
+    },
+    {
+      "id": "4b5aaed1-3557-4050-bfc3-4840febdc43f",
+      "expected_fingerprint": "c6f4b3891ab3b679448d18264e90f6e7",
+      "patch": {
+        "start_date": null,
+        "end_date": null,
+        "schedule_text": "Held on the first Saturday of each month between 9.30am - 11.30am (not including December - to check when it is on, visit the Church Facebook page ). No need to book, just drop-in and stay for as long as you want."
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://haysouthcambs.co.uk/activities/saturdads-at-st-johns-church-waterbeach/"
+    },
+    {
+      "id": "de25166a-8412-49d3-ac8c-96bec020a96f",
+      "expected_fingerprint": "ae216410de83abeda103490aa1c613fc",
+      "patch": {
+        "start_date": "2026-12-29",
+        "end_date": "2027-11-30",
+        "schedule_text": "Published dates: 2026-12-29, 2027-03-30, 2027-06-29, 2027-08-31, 2027-11-30; Tuesday 29 Dec 2026, 2.15pm-2.45pm; Tuesday 30 Mar 2027, 2.15pm-2.45pm; Tuesday 29 Jun 2027, 2.15pm-2.45pm; Tuesday 31 Aug 2027, 2.15pm-2.45pm; Tuesday 30 Nov 2027, 2.15pm-2.45pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/littlemore-rhymetime"
+    },
+    {
+      "id": "d01d33c2-96e9-47de-b8ca-96e88222a85a",
+      "expected_fingerprint": "4e29cdc7027437907e9d7cb0913c0ee5",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:04.498291+00:00",
+        "withdrawal_reason": "Published dated occurrence ended 2026-10-06; ongoing programme is not declared discontinued."
+      },
+      "reason": "Expired dated occurrence",
+      "evidence_url": "https://www.nct.org.uk/events/north-liverpool/jakes-sensory-sessions-nac-3"
+    },
+    {
+      "id": "99600616-6481-433a-9b6d-b580bc0624b2",
+      "expected_fingerprint": "168e51e5140b1db863aade21e590a664",
+      "patch": {
+        "start_date": "2026-10-13",
+        "end_date": "2026-11-17",
+        "schedule_text": "Published dates: 2026-10-13, 2026-10-20, 2026-11-03, 2026-11-10, 2026-11-17; Tuesday 13 Oct 2026, 11am-11.30am; Tuesday 20 Oct 2026, 11am-11.30am; Tuesday 3 Nov 2026, 11am-11.30am; Tuesday 10 Nov 2026, 11am-11.30am; Tuesday 17 Nov 2026, 11am-11.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/bicester-library-rhymetime-0"
+    },
+    {
+      "id": "883404be-88c7-40f9-83c6-5b30e6e24e44",
+      "expected_fingerprint": "80c7ca038feb6839f9ae118bf01637c5",
+      "patch": {
+        "start_date": "2026-10-13",
+        "end_date": "2026-11-10",
+        "schedule_text": "Published dates: 2026-10-13, 2026-10-20, 2026-10-27, 2026-11-03, 2026-11-10; Tuesday 13 Oct 2026, 11.30am-12pm; Tuesday 20 Oct 2026, 11.30am-12pm; Tuesday 27 Oct 2026, 11.30am-12pm; Tuesday 3 Nov 2026, 11.30am-12pm; Tuesday 10 Nov 2026, 11.30am-12pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/summertown-rhymetime"
+    },
+    {
+      "id": "091e988a-b721-4ec1-b5f0-9be294cb74e3",
+      "expected_fingerprint": "2f4490daded9ff0bc779d9dfe53308f2",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:04.528546+00:00",
+        "withdrawal_reason": "Published dated occurrence ended 2026-10-10; ongoing programme is not declared discontinued.",
+        "listing_type": "event",
+        "start_date": "2026-10-10",
+        "end_date": "2026-10-10",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Expired dated occurrence",
+      "evidence_url": "https://www.nct.org.uk/events/north-bedfordshire/nct-north-beds-nearly-new-sale-0"
+    },
+    {
+      "id": "9b847637-d9c0-417b-9c16-bc469897bf7f",
+      "expected_fingerprint": "30b6b84a5dda7961ec9fb4b9ea4ad7b1",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-11-14",
+        "end_date": "2026-11-14",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/vale-evesham/nct-vale-evesham-nearly-new-sale-0"
+    },
+    {
+      "id": "01360a13-c15e-4094-8107-501c07ac3eef",
+      "expected_fingerprint": "94e3e3690cc9b1190c8ce60de3cbcee9",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:04.568858+00:00",
+        "withdrawal_reason": "Published dated occurrence ended 2026-10-05; ongoing programme is not declared discontinued."
+      },
+      "reason": "Expired dated occurrence",
+      "evidence_url": "https://www.nct.org.uk/events/royston-and-villages/royston-fundraising-event-halloween-pottery"
+    },
+    {
+      "id": "33e68b63-2777-49b9-8e9f-1137d89146b9",
+      "expected_fingerprint": "5bb348b648811c566e58bb00c25a6af1",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-11-15",
+        "end_date": "2026-11-15",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/sevenoaks-and-tonbridge/nct-sevenoaks-and-tonbridge-nearly-new-sale-0"
+    },
+    {
+      "id": "b7c87295-f5d8-49c9-aa00-b7c6f4a64038",
+      "expected_fingerprint": "65a3f9b4f88edb9218f2c59151403c3c",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-11-12",
+        "end_date": "2026-11-12",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/watford/nct-watford-bumps-and-babies-group-christmas-photoshoot-2"
+    },
+    {
+      "id": "a40f8bb7-a6d8-42ab-ad34-cd10801a7222",
+      "expected_fingerprint": "da90fb1809f4f7ba5aac32134956c44c",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-11-14",
+        "end_date": "2026-11-14",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/royston-and-villages/nct-royston-nearly-new-sale"
+    },
+    {
+      "id": "61bc9e23-3a43-440e-9a7f-d7220a8e71a3",
+      "expected_fingerprint": "b6e54d55e99f2dc9d18ffcc5cc91cdfe",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:04.632684+00:00",
+        "withdrawal_reason": "Published dated occurrence ended 2026-10-11; ongoing programme is not declared discontinued."
+      },
+      "reason": "Expired dated occurrence",
+      "evidence_url": "https://www.nct.org.uk/events/watford/nct-watford-baby-child-first-aid-9"
+    },
+    {
+      "id": "9927c25f-4db7-4bca-b562-99d902c6d321",
+      "expected_fingerprint": "4f17086882a5c47623770cb7631b96ff",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-11-12",
+        "schedule_text": "Published dates: 2026-10-15, 2026-10-22, 2026-10-29, 2026-11-05, 2026-11-12; Thursday 15 Oct 2026, 9.30am-11am; Thursday 22 Oct 2026, 9.30am-11am; Thursday 29 Oct 2026, 9.30am-11am; Thursday 5 Nov 2026, 9.30am-11am; Thursday 12 Nov 2026, 9.30am-11am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/abingdon-stay-and-play"
+    },
+    {
+      "id": "cc4e76e3-b40d-4d2d-9553-8337825bf52a",
+      "expected_fingerprint": "b62ebd088f3dc57a617d8b57a07b6705",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-10-14",
+        "schedule_text": "Published session: 2026-10-14; 09:15 \u2013 09:55; repeats weekly",
+        "time_text": "09:15 \u2013 09:55"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/tiny-tunes/FmfmPa-tiny-tunes-music-dance-classes-3-mths-5-yrs-clapham/"
+    },
+    {
+      "id": "9dab09c7-706b-4b60-b679-cac95a96a104",
+      "expected_fingerprint": "412aa42ccae3725ac84f65f2d05da6da",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-11-12",
+        "schedule_text": "Published dates: 2026-10-15, 2026-10-22, 2026-10-29, 2026-11-05, 2026-11-12; Thursday 15 Oct 2026, 10.15am-10.45am; Thursday 22 Oct 2026, 10.15am-10.45am; Thursday 29 Oct 2026, 10.15am-10.45am; Thursday 5 Nov 2026, 10.15am-10.45am; Thursday 12 Nov 2026, 10.15am-10.45am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/woodcote-library-rhymetime"
+    },
+    {
+      "id": "a47e9304-8319-475e-b76f-69be98f06ce8",
+      "expected_fingerprint": "1f226abd51cf6cb2362c7b4537a55751",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-11-12",
+        "schedule_text": "Published dates: 2026-10-15, 2026-10-22, 2026-10-29, 2026-11-05, 2026-11-12; Thursday 15 Oct 2026, 10.30am-11.30am; Thursday 22 Oct 2026, 10.30am-11.30am; Thursday 29 Oct 2026, 10.30am-11.30am; Thursday 5 Nov 2026, 10.30am-11.30am; Thursday 12 Nov 2026, 10.30am-11.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/blackbird-leys-rhymetime-and-stay-and-play"
+    },
+    {
+      "id": "06bf0b4d-eec2-43fe-8fb7-b33276df6834",
+      "expected_fingerprint": "8cb1c7b32cdeb988b31e3f938c5e050f",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-11-19",
+        "schedule_text": "Published dates: 2026-10-15, 2026-10-22, 2026-11-05, 2026-11-12, 2026-11-19; Thursday 15 Oct 2026, 11am-11.30am; Thursday 22 Oct 2026, 11am-11.30am; Thursday 5 Nov 2026, 11am-11.30am; Thursday 12 Nov 2026, 11am-11.30am; Thursday 19 Nov 2026, 11am-11.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/headington-library-rhymetime"
+    },
+    {
+      "id": "f782d46f-cebd-4c0a-8d53-cad729cce5ed",
+      "expected_fingerprint": "c9ee04206fef99b47d937f214e8f627b",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-11-16",
+        "schedule_text": "Published dates: 2026-10-19, 2026-10-26, 2026-11-02, 2026-11-09, 2026-11-16; Monday 19 Oct 2026, 11am-11.45am; Monday 26 Oct 2026, 11am-11.45am; Monday 2 Nov 2026, 11am-11.45am; Monday 9 Nov 2026, 11am-11.45am; Monday 16 Nov 2026, 11am-11.45am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/cowley-baby-club-26"
+    },
+    {
+      "id": "980fa4a8-60c8-4d00-b7db-92d9e53ced6a",
+      "expected_fingerprint": "ce5aaaf5f3b20bc78286803526b7cc33",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:04.734419+00:00",
+        "withdrawal_reason": "Published dated occurrence ended 2026-10-11; ongoing programme is not declared discontinued."
+      },
+      "reason": "Expired dated occurrence",
+      "evidence_url": "https://www.nct.org.uk/events/winchester-district/nct-winchester-and-district-nearly-new-sale-0"
+    },
+    {
+      "id": "811fed40-04bf-41ba-9d62-056a929efcd2",
+      "expected_fingerprint": "b29d4e9ff3e4a1e5328d77cd6b3f0e4b",
+      "patch": {
+        "start_date": "2026-10-13",
+        "end_date": "2026-11-10",
+        "schedule_text": "Published dates: 2026-10-13, 2026-10-20, 2026-10-27, 2026-11-03, 2026-11-10; Tuesday 13 Oct 2026, 2pm-3pm; Tuesday 20 Oct 2026, 2pm-3pm; Tuesday 27 Oct 2026, 2pm-3pm; Tuesday 3 Nov 2026, 2pm-3pm; Tuesday 10 Nov 2026, 2pm-3pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/henley-stay-and-play-0"
+    },
+    {
+      "id": "fd85c723-3722-4eb2-9e31-417fc4d47fce",
+      "expected_fingerprint": "5b8780264b1cb85d3c0066b0582864b0",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-11-11",
+        "schedule_text": "Published dates: 2026-10-14, 2026-10-21, 2026-10-28, 2026-11-04, 2026-11-11; Wednesday 14 Oct 2026, 10.30am-11am; Wednesday 21 Oct 2026, 10.30am-11am; Wednesday 28 Oct 2026, 10.30am-11am; Wednesday 4 Nov 2026, 10.30am-11am; Wednesday 11 Nov 2026, 10.30am-11am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/chipping-norton-rhymetime-0"
+    },
+    {
+      "id": "242bdd05-69b1-44ba-a50f-ac1d8667a5cc",
+      "expected_fingerprint": "2f3703f92fd7d7c30386144aa413cd08",
+      "patch": {
+        "listing_type": "event",
+        "start_date": "2026-11-29",
+        "end_date": "2026-11-29",
+        "schedule_text": null,
+        "recurrence": null
+      },
+      "reason": "Named infrequent sale/special photoshoot with dated ticketed occasion",
+      "evidence_url": "https://www.nct.org.uk/events/woking/nct-woking-nearly-new-sale-1"
+    },
+    {
+      "id": "142442ed-4ad7-4c6f-a9ab-490491f05b32",
+      "expected_fingerprint": "a71c9d1b7778cb6fc0a7ca25f40f08c4",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-11-11",
+        "schedule_text": "Published dates: 2026-10-14, 2026-10-21, 2026-10-28, 2026-11-04, 2026-11-11; Wednesday 14 Oct 2026, 11am-11.30am; Wednesday 21 Oct 2026, 11am-11.30am; Wednesday 28 Oct 2026, 11am-11.30am; Wednesday 4 Nov 2026, 11am-11.30am; Wednesday 11 Nov 2026, 11am-11.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/oxford-westgate-library-rhymetime"
+    },
+    {
+      "id": "1e2ce923-05e1-42ca-b479-d7864f19dbf8",
+      "expected_fingerprint": "261fa58a2a3cd2d219a9f4b32c29afcc",
+      "patch": {
+        "start_date": "2026-10-12",
+        "end_date": "2026-11-09",
+        "schedule_text": "Published dates: 2026-10-12, 2026-10-19, 2026-10-26, 2026-11-02, 2026-11-09; Monday 12 Oct 2026, 3.30pm-5pm; Monday 19 Oct 2026, 3.30pm-5pm; Monday 26 Oct 2026, 3.30pm-5pm; Monday 2 Nov 2026, 3.30pm-5pm; Monday 9 Nov 2026, 3.30pm-5pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/chipping-norton-lego-club"
+    },
+    {
+      "id": "eef13c90-de1b-4f73-aeb1-5e0e59a99eba",
+      "expected_fingerprint": "a7224d15089865595fe0d902e7e9a0a0",
+      "patch": {
+        "start_date": null,
+        "end_date": null,
+        "schedule_text": "Every Sunday at 9am children and young people pull on their trainers and walk, run or spectate at parkruns. These friendly, volunteer-run events are free to take part in but pre-registration via the parkrun website is essential before your first event."
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://haysouthcambs.co.uk/activities/junior-parkrun/"
+    },
+    {
+      "id": "6a7bcd76-62cf-4780-8b29-895d093e77f8",
+      "expected_fingerprint": "9bc9586fde95c05add1a7d6692c895c5",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:05.323436+00:00",
+        "withdrawal_reason": "Duplicate of verified same named programme at https://haysouthcambs.co.uk/activities/saturdads-at-st-johns-church-waterbeach/",
+        "superseded_by": "4b5aaed1-3557-4050-bfc3-4840febdc43f"
+      },
+      "reason": "Duplicate programme record; preserve original evidence",
+      "evidence_url": "https://haysouthcambs.co.uk/activities/saturdads-at-st-johns-church-waterbeach/"
+    },
+    {
+      "id": "c9da1e50-3558-46bb-a02c-85915392c9aa",
+      "expected_fingerprint": "8751c059f5a5722e0d5e21957892f3ea",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-10-19",
+        "schedule_text": "Published session: 2026-10-19; 08:30 \u2013 09:15; repeats weekly",
+        "time_text": "08:30 \u2013 09:15"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/little-kickers-blackheath-greenwich-hither-green-lewisham-and-lee/ux86Tx-little-kicks-toddler-football/"
+    },
+    {
+      "id": "e6290b7e-0ecf-4cb9-886b-456b29e11b02",
+      "expected_fingerprint": "354a30c2116b88771e947fef4c698f7d",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-10-30",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-17, 2026-10-23, 2026-10-24, 2026-10-30; Friday 16 Oct 2026, 9.30am-12.30pm; Saturday 17 Oct 2026, 9.30am-12.30pm; Friday 23 Oct 2026, 9.30am-12.30pm; Saturday 24 Oct 2026, 9.30am-12.30pm; Friday 30 Oct 2026, 9.30am-12.30pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/littlemore-lego-play-1"
+    },
+    {
+      "id": "422043ac-9a8c-48e1-ace6-a6ee535d08b2",
+      "expected_fingerprint": "92edde26832fd58abe0e2de433110e89",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-13",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-10-30, 2026-11-06, 2026-11-13; Friday 16 Oct 2026, 10am-11.30am; Friday 23 Oct 2026, 10am-11.30am; Friday 30 Oct 2026, 10am-11.30am; Friday 6 Nov 2026, 10am-11.30am; Friday 13 Nov 2026, 10am-11.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/wantage-grow-stay-and-play"
+    },
+    {
+      "id": "7cc6ecdd-7bc1-4d48-b3c7-4d99c5009557",
+      "expected_fingerprint": "01e5f8453e2bd1e6aa2e692113cc1414",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-13",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-10-30, 2026-11-06, 2026-11-13; Friday 16 Oct 2026, 10am-10.30am; Friday 23 Oct 2026, 10am-10.30am; Friday 30 Oct 2026, 10am-10.30am; Friday 6 Nov 2026, 10am-10.30am; Friday 13 Nov 2026, 10am-10.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/botley-rhymetime-0"
+    },
+    {
+      "id": "7599537c-dc44-4c37-993f-deed4b4f4505",
+      "expected_fingerprint": "dbb52ac71423c99f96b1026c0a4dd428",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-13",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-10-30, 2026-11-06, 2026-11-13; Friday 16 Oct 2026, 10.30am-11am; Friday 23 Oct 2026, 10.30am-11am; Friday 30 Oct 2026, 10.30am-11am; Friday 6 Nov 2026, 10.30am-11am; Friday 13 Nov 2026, 10.30am-11am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/wheatley-library-rhymetime"
+    },
+    {
+      "id": "47f6846b-6e71-42d3-8f60-81edd8af2c96",
+      "expected_fingerprint": "6a71bdccbac7e1f189c003557f0d4c3d",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-13",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-10-30, 2026-11-06, 2026-11-13; Friday 16 Oct 2026, 10.30am-11am; Friday 23 Oct 2026, 10.30am-11am; Friday 30 Oct 2026, 10.30am-11am; Friday 6 Nov 2026, 10.30am-11am; Friday 13 Nov 2026, 10.30am-11am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries-oxfordshire-museum/woodstock-rhymetime"
+    },
+    {
+      "id": "4c0b1668-7ca4-40db-adfd-634fd1b7d6a4",
+      "expected_fingerprint": "16116882c2222a65d08fcbd7e01b32c4",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-13",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-10-30, 2026-11-06, 2026-11-13; Friday 16 Oct 2026, 11am-11.30am; Friday 23 Oct 2026, 11am-11.30am; Friday 30 Oct 2026, 11am-11.30am; Friday 6 Nov 2026, 11am-11.30am; Friday 13 Nov 2026, 11am-11.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/cowley-rhymetime-0"
+    },
+    {
+      "id": "2b958ef7-c257-420e-bd13-91b3456731ae",
+      "expected_fingerprint": "69e7a9759e86fdb1c20aed77a97f0f4f",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-13",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-10-30, 2026-11-06, 2026-11-13; Friday 16 Oct 2026, 11am-11.30am; Friday 23 Oct 2026, 11am-11.30am; Friday 30 Oct 2026, 11am-11.30am; Friday 6 Nov 2026, 11am-11.30am; Friday 13 Nov 2026, 11am-11.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/oxford-westgate-rhymetime"
+    },
+    {
+      "id": "83f445bb-37a5-4e0a-b256-2fafccb7d3dc",
+      "expected_fingerprint": "6b64d4574e6a5a8960aa8b4358efcf9f",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-20",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-11-06, 2026-11-13, 2026-11-20; Friday 16 Oct 2026, 12pm-1pm; Friday 23 Oct 2026, 12pm-1pm; Friday 6 Nov 2026, 12pm-1pm; Friday 13 Nov 2026, 12pm-1pm; Friday 20 Nov 2026, 12pm-1pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/abingdon-sensory-playtime-babies"
+    },
+    {
+      "id": "d4efa4c3-25d1-454e-b0e8-1d5d7b34d6e2",
+      "expected_fingerprint": "fd23f058f7818bebfe90e4c60bc1c8e9",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-13",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-10-30, 2026-11-06, 2026-11-13; Friday 16 Oct 2026, 3pm-4.30pm; Friday 23 Oct 2026, 3pm-4.30pm; Friday 30 Oct 2026, 3pm-4.30pm; Friday 6 Nov 2026, 3pm-4.30pm; Friday 13 Nov 2026, 3pm-4.30pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/thame-library-lego-club"
+    },
+    {
+      "id": "f8319455-7119-458a-8870-a33c11532548",
+      "expected_fingerprint": "960ca3b5dab6d068dbba9511541961c0",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-13",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-10-30, 2026-11-06, 2026-11-13; Friday 16 Oct 2026, 3.30pm-4.30pm; Friday 23 Oct 2026, 3.30pm-4.30pm; Friday 30 Oct 2026, 3.30pm-4.30pm; Friday 6 Nov 2026, 3.30pm-4.30pm; Friday 13 Nov 2026, 3.30pm-4.30pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/bicester-lego-club"
+    },
+    {
+      "id": "9e69ace4-69a2-4515-a1d7-15910a873430",
+      "expected_fingerprint": "424524edd133b1616375070353980d79",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-10-15",
+        "schedule_text": "Published session: 2026-10-15; 08:30 \u2013 09:10; repeats weekly",
+        "time_text": "08:30 \u2013 09:10"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/e/yyTClH9/"
+    },
+    {
+      "id": "3cf720cf-f761-4676-993b-75cc8a33fa03",
+      "expected_fingerprint": "7b3837e252f6bcd2208167e50a5dabe2",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-10-15",
+        "schedule_text": "Published session: 2026-10-15; 09:00 \u2013 09:45; repeats weekly",
+        "time_text": "09:00 \u2013 09:45"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/hartbeeps/bAgD0Dg-hartbeeps-happy-house-stanley-arts/"
+    },
+    {
+      "id": "2923c319-14b1-411e-8abb-eada7ccf7e0d",
+      "expected_fingerprint": "bfa6562f8627bb3d7dcfbe5253b6b92f",
+      "patch": {
+        "start_date": "2026-10-15",
+        "end_date": "2026-10-15",
+        "schedule_text": "Published session: 2026-10-15; 09:00 \u2013 09:40; repeats weekly",
+        "time_text": "09:00 \u2013 09:40"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/tiny-tunes/93QDyB-tiny-tunes-music-dance-classes-3-mths-5-yrs-twickenham/"
+    },
+    {
+      "id": "b62b2eea-d3bb-45f3-86d5-8946d6e686b3",
+      "expected_fingerprint": "e71c054cb67361d89e7e78e0d657ed10",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-13",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-10-30, 2026-11-06, 2026-11-13; Friday 16 Oct 2026, 3.45pm-5.30pm; Friday 23 Oct 2026, 3.45pm-5.30pm; Friday 30 Oct 2026, 3.45pm-5.30pm; Friday 6 Nov 2026, 3.45pm-5.30pm; Friday 13 Nov 2026, 3.45pm-5.30pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/kidlington-childrens-chess-club"
+    },
+    {
+      "id": "b7c09ded-7342-427c-a2b6-1d60151d8cdb",
+      "expected_fingerprint": "206c730eea128f455c79bbe2b1cd900f",
+      "patch": {
+        "start_date": "2026-10-16",
+        "end_date": "2026-11-13",
+        "schedule_text": "Published dates: 2026-10-16, 2026-10-23, 2026-10-30, 2026-11-06, 2026-11-13; Friday 16 Oct 2026, 5pm-6.30pm; Friday 23 Oct 2026, 5pm-6.30pm; Friday 30 Oct 2026, 5pm-6.30pm; Friday 6 Nov 2026, 5pm-6.30pm; Friday 13 Nov 2026, 5pm-6.30pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/abingdon-chess-club-0"
+    },
+    {
+      "id": "36cdf423-32e0-469d-88a9-9fbcf6fc3a30",
+      "expected_fingerprint": "9823b9ce5260017e4e8e2c37530af45d",
+      "patch": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-11-14",
+        "schedule_text": "Published dates: 2026-10-17, 2026-10-24, 2026-10-31, 2026-11-07, 2026-11-14; Saturday 17 Oct 2026, 9.30am-10.30am; Saturday 24 Oct 2026, 9.30am-10.30am; Saturday 31 Oct 2026, 9.30am-10.30am; Saturday 7 Nov 2026, 9.30am-10.30am; Saturday 14 Nov 2026, 9.30am-10.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/cowley-early-bird-stay-and-play"
+    },
+    {
+      "id": "2d25e22e-91bb-40b7-adec-5c0f518d6c6a",
+      "expected_fingerprint": "41ee53d31c4417736e3b18b00f93df83",
+      "patch": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-11-14",
+        "schedule_text": "Published dates: 2026-10-17, 2026-10-24, 2026-10-31, 2026-11-07, 2026-11-14; Saturday 17 Oct 2026, 9.30am-10.30am; Saturday 24 Oct 2026, 9.30am-10.30am; Saturday 31 Oct 2026, 9.30am-10.30am; Saturday 7 Nov 2026, 9.30am-10.30am; Saturday 14 Nov 2026, 9.30am-10.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/oxford-westgate-code-club"
+    },
+    {
+      "id": "ad1ff9d0-9b7a-4c34-b236-b715ae0085b7",
+      "expected_fingerprint": "73ccc8c1cb999badf7eaa7e478d440c6",
+      "patch": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-11-14",
+        "schedule_text": "Published dates: 2026-10-17, 2026-10-24, 2026-10-31, 2026-11-07, 2026-11-14; Saturday 17 Oct 2026, 9.30am-12pm; Saturday 24 Oct 2026, 9.30am-12pm; Saturday 31 Oct 2026, 9.30am-12pm; Saturday 7 Nov 2026, 9.30am-12pm; Saturday 14 Nov 2026, 9.30am-12pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/littlemore-saturday-craft"
+    },
+    {
+      "id": "b46ba9df-e16a-409b-9832-2d9332129ea8",
+      "expected_fingerprint": "7b3c472b66b723c88fe4c281257dc83e",
+      "patch": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-11-21",
+        "schedule_text": "Published dates: 2026-10-17, 2026-10-31, 2026-11-07, 2026-11-14, 2026-11-21; Saturday 17 Oct 2026, 9.30am-10.30am; Saturday 31 Oct 2026, 9.30am-10.30am; Saturday 7 Nov 2026, 9.30am-10.30am; Saturday 14 Nov 2026, 9.30am-10.30am; Saturday 21 Nov 2026, 9.30am-10.30am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/headington-library-code-club"
+    },
+    {
+      "id": "63eec6cd-bdde-4a77-ac21-e35ece99508c",
+      "expected_fingerprint": "f0ba2534d99dc822d8da2ab2dbda987f",
+      "patch": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-11-14",
+        "schedule_text": "Published dates: 2026-10-17, 2026-10-24, 2026-10-31, 2026-11-07, 2026-11-14; Saturday 17 Oct 2026, 10am-11am; Saturday 24 Oct 2026, 10am-11am; Saturday 31 Oct 2026, 10am-11am; Saturday 7 Nov 2026, 10am-11am; Saturday 14 Nov 2026, 10am-11am"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/abingdon-code-club"
+    },
+    {
+      "id": "2d7b870b-03ec-482f-a0ed-48bde8a58619",
+      "expected_fingerprint": "3b48f99fc6de7858312cd48d2beb3dd6",
+      "patch": {
+        "start_date": "2026-11-14",
+        "end_date": "2027-03-13",
+        "schedule_text": "Published dates: 2026-11-14, 2026-12-12, 2027-01-09, 2027-02-13, 2027-03-13; Saturday 14 Nov 2026, 10am-12pm; Saturday 12 Dec 2026, 10am-12pm; Saturday 9 Jan 2027, 10am-12pm; Saturday 13 Feb 2027, 10am-12pm; Saturday 13 Mar 2027, 10am-12pm"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://www.oxfordshire.gov.uk/events/libraries/grove-family-lego-sessions"
+    },
+    {
+      "id": "f1d211b8-174a-4d03-a2a7-b37f4070fc8a",
+      "expected_fingerprint": "9ec2b0791c10e2f93b35fab4f40b43df",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:05.323436+00:00",
+        "withdrawal_reason": "Duplicate of verified same named programme at https://hoop.co.uk/water-babies-south-manchester/wA9xZ25-water-babies-at-pictor-academy-timperley/",
+        "superseded_by": "b95c4d87-254f-4889-b027-948bfc0afff9"
+      },
+      "reason": "Duplicate programme record; preserve original evidence",
+      "evidence_url": "https://hoop.co.uk/water-babies-south-manchester/wA9xZ25-water-babies-at-pictor-academy-timperley/"
+    },
+    {
+      "id": "f0234669-7c09-471d-ab58-4069364378e7",
+      "expected_fingerprint": "7123b92442e895e39b870bd6fed4b4e7",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:05.323436+00:00",
+        "withdrawal_reason": "Duplicate of verified same named programme at https://hoop.co.uk/water-babies-south-manchester/ukd8lf-water-babies-at-delamere-school-flixton/",
+        "superseded_by": "4d892006-5304-42a1-b1e6-97f88dfb4cc6"
+      },
+      "reason": "Duplicate programme record; preserve original evidence",
+      "evidence_url": "https://hoop.co.uk/water-babies-south-manchester/ukd8lf-water-babies-at-delamere-school-flixton/"
+    },
+    {
+      "id": "784d7eb2-c899-4816-b720-f8865dcaf635",
+      "expected_fingerprint": "31b875ad34c93e94164e9f72a1409dd2",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:05.323436+00:00",
+        "withdrawal_reason": "Duplicate of verified same named programme at https://hoop.co.uk/water-babies-south-manchester/P7hY63-water-babies-at-waterside-hotel-didsbury/",
+        "superseded_by": "0a2981c9-4da9-43e7-b437-b8788484c960"
+      },
+      "reason": "Duplicate programme record; preserve original evidence",
+      "evidence_url": "https://hoop.co.uk/water-babies-south-manchester/P7hY63-water-babies-at-waterside-hotel-didsbury/"
+    },
+    {
+      "id": "578e5d06-9079-4ef5-a0ba-d0a1d210ff0a",
+      "expected_fingerprint": "774b27924df52dca3bb3058ff537fdc9",
+      "patch": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-10-17",
+        "schedule_text": "Published session: 2026-10-17; 08:30 \u2013 11:30; repeats weekly",
+        "time_text": "08:30 \u2013 11:30"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/water-babies-south-manchester/3wPrT1-water-babies-at-cedar-mount-academy-gorton/"
+    },
+    {
+      "id": "06114cbf-99f3-4fa4-b469-0f1f4b7965ab",
+      "expected_fingerprint": "5d5e54556d4c24553749ee81a9e57f8d",
+      "patch": {
+        "start_date": "2026-10-13",
+        "end_date": "2026-10-13",
+        "schedule_text": "Published session: 2026-10-13; 08:30 \u2013 09:15; repeats weekly",
+        "time_text": "08:30 \u2013 09:15"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/e/Lofiio/"
+    },
+    {
+      "id": "0c6178f3-7119-4955-90b5-ea1ec950dce2",
+      "expected_fingerprint": "b2a7de24c1f065e1ff52aa7974bf0801",
+      "patch": {
+        "start_date": "2026-10-13",
+        "end_date": "2026-10-13",
+        "schedule_text": "Published session: 2026-10-13; 10:30 \u2013 11:15; repeats weekly",
+        "time_text": "10:30 \u2013 11:15"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/e/luXJaZ/"
+    },
+    {
+      "id": "a44ab8f8-7edc-49ba-8b1b-faac1f41d7c3",
+      "expected_fingerprint": "bd7b099420ded8c997356af8d1757b88",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-10-14",
+        "schedule_text": "Published session: 2026-10-14; 08:30 \u2013 10:30; repeats weekly",
+        "time_text": "08:30 \u2013 10:30"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/ivystreetfamilycentre/MZL6ih-stay-and-play-with-messy-play/"
+    },
+    {
+      "id": "43d852ca-c1f4-4f64-b0ee-ff334e3f73cc",
+      "expected_fingerprint": "cac3f3d035efe197a63ce2f866f2e588",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-10-14",
+        "schedule_text": "Published session: 2026-10-14; 08:30 \u2013 09:15; repeats weekly",
+        "time_text": "08:30 \u2013 09:15"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/rhymetime/Drct98-rhymetime-music-classes-the-orchard-tavern-shepherds-bush/"
+    },
+    {
+      "id": "38dc7aca-19d0-4261-a4c5-af0514ced5e2",
+      "expected_fingerprint": "a7fdb6a6a3363fa56bcbba00ac03ad47",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-10-14",
+        "schedule_text": "Published session: 2026-10-14; 09:00 \u2013 09:40; repeats weekly",
+        "time_text": "09:00 \u2013 09:40"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/tiny-tunes/mq0as5-tiny-tunes-music-dance-classes-3-mths-5-yrs-teddington/"
+    },
+    {
+      "id": "9c3a77e2-2041-4269-afb4-2b6cd440310b",
+      "expected_fingerprint": "95459c3a20bde09e69dad59b38242580",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-10-19",
+        "schedule_text": "Published session: 2026-10-19; 09:00 \u2013 09:40; repeats weekly",
+        "time_text": "09:00 \u2013 09:40"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/tiny-tunes/8kjuNP-tiny-tunes-music-dance-classes-3-mths-5-yrs-ashtead/"
+    },
+    {
+      "id": "b820a21e-6a66-4d3b-9995-4440d64be172",
+      "expected_fingerprint": "ecc09b3f92d487fda721a620e2f00060",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-10-19",
+        "schedule_text": "Published session: 2026-10-19; 09:00 \u2013 09:45; repeats weekly",
+        "time_text": "09:00 \u2013 09:45"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/musical-mayhem-london/3z888iS-munchkins-class/"
+    },
+    {
+      "id": "e810eac7-38b6-4cef-9a9b-3f8daa891bc7",
+      "expected_fingerprint": "3bdd838aefe6815b4e7828e090161f8c",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-10-19",
+        "schedule_text": "Published session: 2026-10-19; 09:00 \u2013 09:45; repeats weekly",
+        "time_text": "09:00 \u2013 09:45"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/hartbeeps/U9C3ouR-hartbeeps-happy-house-christ-church-east-dulwich/"
+    },
+    {
+      "id": "83bba1e7-17bc-47d0-ab23-e378243e512c",
+      "expected_fingerprint": "d300067b5902a6c57efbc8fae8a66402",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:05.324435+00:00",
+        "withdrawal_reason": "Duplicate of verified same named programme at https://hoop.co.uk/rhymetime/Drct98-rhymetime-music-classes-the-orchard-tavern-shepherds-bush/",
+        "superseded_by": "43d852ca-c1f4-4f64-b0ee-ff334e3f73cc"
+      },
+      "reason": "Duplicate programme record; preserve original evidence",
+      "evidence_url": "https://hoop.co.uk/rhymetime/Drct98-rhymetime-music-classes-the-orchard-tavern-shepherds-bush/"
+    },
+    {
+      "id": "5fa2b6fa-2665-4a05-92f3-b628c4c9b14d",
+      "expected_fingerprint": "0e60f67a6023cfcdac8f86a21d09b34c",
+      "patch": {
+        "withdrawn_at": "2026-10-12T12:21:05.324435+00:00",
+        "withdrawal_reason": "Duplicate of verified same named programme at https://hoop.co.uk/hartbeeps/B6QTGLZ-hartbeeps-happy-house-grove-church-sydenham/",
+        "superseded_by": "8f1be09a-d10c-4574-aab3-661f55c51576"
+      },
+      "reason": "Duplicate programme record; preserve original evidence",
+      "evidence_url": "https://hoop.co.uk/hartbeeps/B6QTGLZ-hartbeeps-happy-house-grove-church-sydenham/"
+    },
+    {
+      "id": "2e02eaab-3a6c-4eba-97b8-82a9f2e50d0e",
+      "expected_fingerprint": "e102b8561438f7f70e6ce8bb5a2dee67",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-10-19",
+        "schedule_text": "Published session: 2026-10-19; 08:30 \u2013 09:10; repeats weekly",
+        "time_text": "08:30 \u2013 09:10"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/e/lvmDuEX/"
+    },
+    {
+      "id": "b676d499-13c9-4dd2-9534-abc4274fdc1d",
+      "expected_fingerprint": "780b319ce1d2ef09f1e2ae164b88ef60",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-10-19",
+        "schedule_text": "Published session: 2026-10-19; 08:30 \u2013 10:30; repeats weekly",
+        "time_text": "08:30 \u2013 10:30"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/bonnydowns-community-association/TN7e90-toddler-groups-in-east-ham/"
+    },
+    {
+      "id": "21559a24-9f0f-4ceb-a02a-e99c4fe5be98",
+      "expected_fingerprint": "167d9adfc4568e71963a8508562dfd14",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-10-19",
+        "schedule_text": "Published session: 2026-10-19; 08:30 \u2013 09:10; repeats weekly",
+        "time_text": "08:30 \u2013 09:10"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/tiny-tunes/Cgyhoo-tiny-tunes-music-dance-classes-3mths-5yrs-surbiton/"
+    },
+    {
+      "id": "b4422394-ebf1-44f0-8e6b-254b0f3aaf17",
+      "expected_fingerprint": "f6192c7052d26265a70d67f7204f68cf",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-10-19",
+        "schedule_text": "Published session: 2026-10-19; 08:30 \u2013 09:15; repeats weekly",
+        "time_text": "08:30 \u2013 09:15"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/rhymetime/qHVhoc-rhymetime-music-classes-chiswick-methodist-church/"
+    },
+    {
+      "id": "06c4068d-e465-429f-a539-bffec0bf291d",
+      "expected_fingerprint": "39f17772e126553ce1bae368aa8e862a",
+      "patch": {
+        "start_date": "2026-10-12",
+        "end_date": "2026-10-12",
+        "schedule_text": "Published session: 2026-10-12; 08:30 \u2013 10:45; repeats weekly",
+        "time_text": "08:30 \u2013 10:45"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/e/2Ij50F/"
+    },
+    {
+      "id": "d2c5c8d8-8323-4588-a617-9f1a932ff337",
+      "expected_fingerprint": "9ece12992ddf6411df93897e83cc5157",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-10-19",
+        "schedule_text": "Published session: 2026-10-19; 08:30 \u2013 09:00; repeats weekly",
+        "time_text": "08:30 \u2013 09:00"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/eos-dance/273iNl-big-small/"
+    },
+    {
+      "id": "79c8d226-6016-41fe-98a0-683fb6e5504c",
+      "expected_fingerprint": "ece9d5122867d0216631ba656510bec2",
+      "patch": {
+        "start_date": "2026-10-19",
+        "end_date": "2026-10-19",
+        "schedule_text": "Published session: 2026-10-19; 09:05 \u2013 09:45; repeats weekly",
+        "time_text": "09:05 \u2013 09:45"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/beas-baby-music-school/LGkRXWn-beas-babymusic-school/"
+    },
+    {
+      "id": "8f1be09a-d10c-4574-aab3-661f55c51576",
+      "expected_fingerprint": "3683fbb01079c67187becc173fc0680b",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-10-14",
+        "schedule_text": "Published session: 2026-10-14; 09:00 \u2013 09:45; repeats weekly",
+        "time_text": "09:00 \u2013 09:45"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/hartbeeps/B6QTGLZ-hartbeeps-happy-house-grove-church-sydenham/"
+    },
+    {
+      "id": "e3df841a-0907-41e8-a2a1-b81e159504e8",
+      "expected_fingerprint": "050580f736ee06f9adca75df489f0fd0",
+      "patch": {
+        "start_date": "2026-10-14",
+        "end_date": "2026-10-14",
+        "schedule_text": "Published session: 2026-10-14; 09:00 \u2013 09:40; repeats weekly",
+        "time_text": "09:00 \u2013 09:40"
+      },
+      "reason": "Fresh named provider detail date/schedule evidence",
+      "evidence_url": "https://hoop.co.uk/tiny-tunes/I8FcIg-tiny-tunes-music-dance-classes-3-mths-5-yrs-claygate/"
+    }
+  ],
+  "requires_review": [
+    {
+      "id": "3b5ff6b2-cee5-4354-87a2-c505763a2fd1",
+      "title": "Little Kickers Football Classes- St Johns Wood (Church of our Lady)",
+      "reason": "Hoop description includes additional clock times; session association requires review"
+    },
+    {
+      "id": "1acad649-49e7-4edf-964d-fe9a20d2730a",
+      "title": "Adapted Water Sports (for children with disabilities)",
+      "reason": "Missing Redbridge programme date"
+    },
+    {
+      "id": "8a213314-1331-49c6-9a50-0f638ee4dee5",
+      "title": "SoccerDays Toddler Football Classes- Woodford Memorial Hall",
+      "reason": "Hoop description includes additional clock times; session association requires review"
+    },
+    {
+      "id": "873d0d04-2cb1-449b-8916-a7457ed4d925",
+      "title": "Friday Fun for Under 5s",
+      "reason": "Hoop description includes additional clock times; session association requires review"
+    },
+    {
+      "id": "9ee3175d-6482-452c-8f17-171283cb0e42",
+      "title": "Homework Help Club",
+      "reason": "Missing Redbridge programme date"
+    },
+    {
+      "id": "1f7bbd66-4182-4d89-afc1-670b10037a09",
+      "title": "Mini novas martial arts classes",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "7dfaccb1-a986-4688-a6a0-62d116cd6c16",
+      "title": "Junior Novas martial arts classes",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "c4dd6a0b-741b-4a58-9471-0bbd6a2f0f22",
+      "title": "Tumble Tots in Hale Barns",
+      "reason": "Hoop description includes additional clock times; session association requires review"
+    },
+    {
+      "id": "970c29f5-dff2-479b-94e1-5e8c21e78e1b",
+      "title": "Jolly Jumpers Stay and Play",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "d439f22f-6a3a-4bb2-ac1e-1bb941d1cbef",
+      "title": "Sports Coaching Sessions for Children - GK Fit",
+      "reason": "HAY schedule missing or multiple venue/session schedules require review"
+    },
+    {
+      "id": "5e600ff8-b668-453d-811f-242a13480b0a",
+      "title": "Baby Bounce And Rhyme",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "c4407f9d-fb17-4c92-a14f-433536ba3917",
+      "title": "NCT Bassetlaw Nearly New Sale",
+      "reason": "Classification review: [Errno 2] No such file or directory: 'historical-source-review\\\\f7e2a877c6ec2266e23e530de906873007ea5e7322c1f5282d0631e12f5fea05.html'"
+    },
+    {
+      "id": "43ee5fe4-dd13-4aee-a7d1-fc2736c43d17",
+      "title": "Tumble Tots at Altrincham FC (Thursday)",
+      "reason": "Detail title does not match activity"
+    },
+    {
+      "id": "a46078fa-a6d5-48e5-8c76-42cfda7fecd4",
+      "title": "Baby Bounce And Rhyme",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "30d588c3-cd05-4e99-9010-ec1b641ec2f7",
+      "title": "Poynton Rugbytots (Friday)",
+      "reason": "Hoop description includes additional clock times; session association requires review"
+    },
+    {
+      "id": "7aaaad57-1b38-447d-a75b-b294a34b3844",
+      "title": "Tumble Tots at Altrincham FC (Friday)",
+      "reason": "Detail title does not match activity"
+    },
+    {
+      "id": "40410879-0255-4cc6-918e-91ff2f6d0889",
+      "title": "NCT Tring Nearly New Sale",
+      "reason": "Classification review: [Errno 2] No such file or directory: 'historical-source-review\\\\ac4cccc47fbc8a281abd62b43ceaf137efc0d91a7feb6028b850f940aa727e9c.html'"
+    },
+    {
+      "id": "0196a4a2-bb76-422d-ac8b-56f686861362",
+      "title": "Toddler Rhyme Time",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "9e74517f-2696-466b-952b-0ffa988f6fc8",
+      "title": "NCT BRENTWOOD NEARLY NEW SALE",
+      "reason": "Classification review: [Errno 2] No such file or directory: 'historical-source-review\\\\fbc2803263b59c5ad465819ffd9ab7427cad94b80bc7000172a9bf17e0b79dd9.html'"
+    },
+    {
+      "id": "2f0f90af-acc0-44f9-8f5e-dbb7f882adc2",
+      "title": "Tumble Tots at Altrincham FC",
+      "reason": "Hoop description includes additional clock times; session association requires review"
+    },
+    {
+      "id": "25f7b7c1-f324-4a2b-8cd7-ca9589291f05",
+      "title": "Curiosity Club",
+      "reason": "[Errno 2] No such file or directory: 'historical-source-review\\\\7aebe9fbdd6df3a14262b7bc21560f33fa1ae2f35f75e0b656a4853eeadfbedc.html'"
+    },
+    {
+      "id": "41e132a1-8afa-4e1d-9d79-26b32eb711cc",
+      "title": "Junior Novas martial arts classes",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "ce4819cb-489a-4e14-95d2-69656282a226",
+      "title": "KNT Dance School",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "99fca424-bef4-45b9-b63a-cb6ea9ad3f0e",
+      "title": "Novas teen martial arts classes",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "e3c262ed-b7b2-4e6f-9d66-ce61e4902be4",
+      "title": "Adapted Water Sports (for children with d...",
+      "reason": "Detail title does not match activity"
+    },
+    {
+      "id": "ea6cd546-e854-400b-86a3-ce91213d29ae",
+      "title": "Pottery and Sculpture Workshop",
+      "reason": "Missing Redbridge programme date"
+    },
+    {
+      "id": "cbb7c805-0230-46a1-8ebc-d3cfcdca492b",
+      "title": "Mini novas martial arts classes",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "dd4e8663-1d52-49ba-a7c1-edd1f1d93c65",
+      "title": "Beavers, Cubs & Scouts in South Cambridgeshire",
+      "reason": "HAY schedule missing or multiple venue/session schedules require review"
+    },
+    {
+      "id": "f4b39ed5-9dcb-4b32-9d65-11cd42b54122",
+      "title": "Hands on the Circle (HonC!) Stay and Play Groups",
+      "reason": "HAY schedule missing or multiple venue/session schedules require review"
+    },
+    {
+      "id": "e33f67e2-c93d-4211-9f9f-bd5221a44f55",
+      "title": "Mini Athletics",
+      "reason": "HAY schedule missing or multiple venue/session schedules require review"
+    },
+    {
+      "id": "f5b34fb4-83d1-4202-b628-f84b08f8c06a",
+      "title": "Wildlings at Milton Country Park",
+      "reason": "HAY schedule missing or multiple venue/session schedules require review"
+    },
+    {
+      "id": "5b2dc682-a962-43e4-8e3f-f4d5ab9af126",
+      "title": "Child & Family Centres - Stay and Play",
+      "reason": "HAY schedule exceeds storage limit"
+    },
+    {
+      "id": "ea4db9a9-6232-452a-b4d4-52293624d528",
+      "title": "Shake, Rattle and Roll",
+      "reason": "HAY schedule missing or multiple venue/session schedules require review"
+    },
+    {
+      "id": "3b117b91-e261-4581-b39d-2db2ed9ecc48",
+      "title": "Mini tennis Red",
+      "reason": "Detail title does not match activity"
+    },
+    {
+      "id": "ccb2fe58-1e9a-42db-bc79-6cd5870f3e61",
+      "title": "Merry-Go-Round Toy Library",
+      "reason": "HAY schedule missing or multiple venue/session schedules require review"
+    },
+    {
+      "id": "980fa4a8-60c8-4d00-b7db-92d9e53ced6a",
+      "title": "NCT Winchester and District Nearly New Sale",
+      "reason": "Classification review: [Errno 2] No such file or directory: 'historical-source-review\\\\f2b57d0e08e96c72d4741afc7b9038e25e5763aa1766a52cf26f20a4f085da03.html'"
+    },
+    {
+      "id": "a32684a9-99d4-4cc4-8d79-63ed3bf4717f",
+      "title": "Bampton: Rhymetime - Poetry Special",
+      "reason": "[Errno 2] No such file or directory: 'historical-source-review\\\\1d15c3d36946c236bcab850be922599b6ef4fd125815ef68ea3e583f8828ba42.html'"
+    },
+    {
+      "id": "f9709eb7-1cf4-491e-85a8-8861f797f523",
+      "title": "KNT Dance School",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "2c3c79bf-ebac-4afa-ab89-4cec834810fc",
+      "title": "MiniMe Mindfulness Cambridge",
+      "reason": "HAY schedule missing or multiple venue/session schedules require review"
+    },
+    {
+      "id": "e61ceeb7-baeb-4f12-b8c1-73736bc9202f",
+      "title": "Sing and Sign",
+      "reason": "HAY schedule missing or multiple venue/session schedules require review"
+    },
+    {
+      "id": "194fa725-deae-4074-bc85-0c62923cf618",
+      "title": "Shredder Skate School",
+      "reason": "HAY schedule missing or multiple venue/session schedules require review"
+    },
+    {
+      "id": "53d5f122-efda-4dde-98c1-971b2ae98897",
+      "title": "Marble Triceratops Skull public sculpture",
+      "reason": "Hoop overnight/invalid session requires review"
+    },
+    {
+      "id": "51c1ee8f-37f4-4b5b-aca7-54335b5a7119",
+      "title": "Little Kickers - Wallington Roundshaw Park - 18months - 4 years",
+      "reason": "Detail title does not match activity"
+    },
+    {
+      "id": "b50cf863-8a26-42b3-8435-0f1ae3338ed5",
+      "title": "Didcot: Rhymetime",
+      "reason": "[Errno 2] No such file or directory: 'historical-source-review\\\\a73758d6344bade42edfa0ab66e144abb658c19fba1fdbed502397d646f1b5c4.html'"
+    },
+    {
+      "id": "d980298d-b7c4-44af-bf0f-15747245b061",
+      "title": "Little Kickers Football Classes",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "e92741f3-27c8-4b1d-bd3d-9f4cf36d5b04",
+      "title": "Novas teen martial arts classes",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "ce9574e0-5b32-4170-9707-a12561ae39a4",
+      "title": "Story Time",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "725e184a-9e55-4a0e-b04b-d9cabd6ae7f9",
+      "title": "Little Kickers - Wallington Roundshaw Park",
+      "reason": "Detail title does not match activity"
+    },
+    {
+      "id": "06df52e9-9e21-4993-9114-63713e0ea2d6",
+      "title": "SoccerDays Toddler Football Classes- Forest School",
+      "reason": "Missing unique matching Hoop event data"
+    },
+    {
+      "id": "c1931a39-3701-46e5-863f-5ff2a4ce7110",
+      "title": "Youth Academy",
+      "reason": "Hoop description includes additional clock times; session association requires review"
+    },
+    {
+      "id": "caee9a88-0f21-44bf-91b6-953ea404b075",
+      "title": "Total Ballers 1-2-1 Sessions Football",
+      "reason": "Detail title does not match activity"
+    },
+    {
+      "id": "7bc1b368-052b-443b-b8c7-0e619dcf3fef",
+      "title": "All day play!",
+      "reason": "Hoop description includes additional clock times; session association requires review"
+    },
+    {
+      "id": "0df38c71-5337-4c81-9a63-b119a8a5f4d7",
+      "title": "Watch Me Play",
+      "reason": "Detail title does not match activity"
+    },
+    {
+      "id": "13551c02-ad29-4f32-a4ac-b09637bc981d",
+      "title": "I can do",
+      "reason": "Detail title does not match activity"
+    },
+    {
+      "id": "b0f2042e-a2ff-4474-9f70-6f16958e1b1e",
+      "title": "Mini tennis Orange",
+      "reason": "Detail title does not match activity"
+    },
+    {
+      "id": "5b0dbd0f-d8a7-4827-8665-a1313ee64266",
+      "title": "Jolly Jumpers Stay and Play",
+      "reason": "Hoop regularity needs review"
+    },
+    {
+      "id": "bc4d1de4-183c-42ca-b4ad-f02104897a2c",
+      "title": "Forest School: Make Walltown Home",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "7999906b-b19d-4cdd-9e45-726c485171f1",
+      "title": "Penguins Palace",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "1c636919-abb0-4a67-9e3a-65aa0e53f5d0",
+      "title": "Hartbeeps - Baby Beeps @ Grove Church SYDENHAM",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "e7af3902-2f4a-4497-b278-2eebacb0ddcc",
+      "title": "Baby Bells - Hargrave Hall Community Centre",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "4dea634d-3819-4e9d-9fdd-50f17a5ca6da",
+      "title": "Baby Rhyme Time",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "4c64d56e-b1f2-493d-bc72-157c3c657993",
+      "title": "Little Movers Gym",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "368a7430-a54b-4c02-9af7-0d4702d740dc",
+      "title": "Rhymetimes for Babies and Toddlers",
+      "reason": "Historical structural review: missing location, schedule_text"
+    },
+    {
+      "id": "d1926461-9d39-4398-8e3b-3e113c958867",
+      "title": "Junior Sport Stars",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "c1f46b26-f2a9-47f4-bd55-4ca54b3e8eb1",
+      "title": "Holyrood Family Adventure",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "23d7fac7-0fc4-4a4e-b4ef-a0733634dbf6",
+      "title": "Rhymetime Music Classes: Barnes Methodist Church",
+      "reason": "Historical structural review: missing event_url, schedule_text"
+    },
+    {
+      "id": "f8d7507d-55cc-45b5-9459-a018bc9eb2c1",
+      "title": "Lego Club",
+      "reason": "Historical structural review: missing event_url, location"
+    },
+    {
+      "id": "b4877b7a-1a12-4e93-a990-9915ae188dbc",
+      "title": "Lambeth Tigers Football Club",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "c0267b2c-341f-45d7-8378-8320a5cf7a23",
+      "title": "Jolly Jumpers Stay and Play",
+      "reason": "Historical structural review: missing event_url, location"
+    },
+    {
+      "id": "345ae50b-ff58-4061-a1b6-9c4d15618c0c",
+      "title": "Tiny Tunes Music & Dance Classes 3 mths - 5 yrs: Southfields",
+      "reason": "Historical structural review: missing event_url, schedule_text"
+    },
+    {
+      "id": "68ca249e-0c88-4088-ae4f-071a008ef156",
+      "title": "Early Stages PLUS class Saturday 10.15am-12.15pm",
+      "reason": "Historical structural review: missing event_url, location"
+    },
+    {
+      "id": "c7973b68-84e6-4494-9878-f24806932793",
+      "title": "Ballet Classe for Ages 2+ to 18years old",
+      "reason": "Historical structural review: missing event_url, schedule_text"
+    },
+    {
+      "id": "06f0353a-f066-48c0-b51f-a9e13fba55f1",
+      "title": "Creative Writing Club",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "1f7bbd66-4182-4d89-afc1-670b10037a09",
+      "title": "Mini novas martial arts classes",
+      "reason": "Historical structural review: missing location"
+    },
+    {
+      "id": "7dfaccb1-a986-4688-a6a0-62d116cd6c16",
+      "title": "Junior Novas martial arts classes",
+      "reason": "Historical structural review: missing location"
+    },
+    {
+      "id": "4905ae57-f240-48b7-a38e-eefddd95188d",
+      "title": "Wolfpack Dance Collective",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "21da9862-53e7-4f7d-8964-551ef3f61b82",
+      "title": "TeachMajor",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "d439f22f-6a3a-4bb2-ac1e-1bb941d1cbef",
+      "title": "Sports Coaching Sessions for Children - GK Fit",
+      "reason": "Historical structural review: missing location, schedule_text"
+    },
+    {
+      "id": "cc642aff-00ee-4490-935e-1ee79f95ccc0",
+      "title": "KittyWatsonAcademy - Christ Church West Didsbury",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "71925e15-1936-4655-bd45-7c735f692bf2",
+      "title": "Moo Music - Higher Blackley Community Centre",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "5e600ff8-b668-453d-811f-242a13480b0a",
+      "title": "Baby Bounce And Rhyme",
+      "reason": "Historical structural review: missing location"
+    },
+    {
+      "id": "d7b3859d-ad99-4943-af81-ddfcd1443f78",
+      "title": "Pro Elite South London",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "d8cca276-45bc-46a4-a76b-ce75f98935fb",
+      "title": "SSA Manchester Central - Trinity Sports Centre",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "8d737b0d-ddb5-49c4-b0fb-d110edeac665",
+      "title": "We Will Rock You Project - Kingdom Life Youth Centre",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "fde13f1a-a650-400a-8597-547cccf8a457",
+      "title": "Karate for children in North London and herts",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "235ca29c-c686-498a-a6e2-26b80d77c9ea",
+      "title": "Gymlab",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "c123c4e8-106d-4a14-afe6-822ad3ce2e3d",
+      "title": "Tennis Time",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "d3cdf8c8-cf5b-4b63-a4c8-935f5f3aa67f",
+      "title": "Development In Sport & PE - Seymour Park Primary School",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "61046b4a-ef13-4c42-9c4a-c571f2b3f5e2",
+      "title": "General Stay and Play",
+      "reason": "Historical structural review: missing event_url, location"
+    },
+    {
+      "id": "ffdeff4a-40fb-4419-9bf9-722e78e89bcc",
+      "title": "Let\u2019s Get Active (LGA)",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "0196a4a2-bb76-422d-ac8b-56f686861362",
+      "title": "Toddler Rhyme Time",
+      "reason": "Historical structural review: missing location"
+    },
+    {
+      "id": "8ed06705-7d27-46dd-b087-f04e88df1c86",
+      "title": "Grace & Poise Academy CIC",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "c8d4862b-8080-4dc7-a36a-def9888697e2",
+      "title": "Sensory storytelling and play",
+      "reason": "Historical structural review: missing location"
+    },
+    {
+      "id": "d2f510d8-4c4c-4dca-a259-00e7a474cf76",
+      "title": "Toddler Rhyme Time",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "b5c28104-804a-488e-9b5c-ef54b2e8eae4",
+      "title": "Storytime",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "0bb71fef-b2aa-4ca4-85c4-076d00a05a20",
+      "title": "CREATIVE ARTS KIDS",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "fc732505-6c76-40c8-b071-7817f900e537",
+      "title": "Page One: Creative Workshops",
+      "reason": "Historical structural review: missing event_url, schedule_text"
+    },
+    {
+      "id": "dd4e8663-1d52-49ba-a7c1-edd1f1d93c65",
+      "title": "Beavers, Cubs & Scouts in South Cambridgeshire",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "f4b39ed5-9dcb-4b32-9d65-11cd42b54122",
+      "title": "Hands on the Circle (HonC!) Stay and Play Groups",
+      "reason": "Historical structural review: missing location, schedule_text"
+    },
+    {
+      "id": "e33f67e2-c93d-4211-9f9f-bd5221a44f55",
+      "title": "Mini Athletics",
+      "reason": "Historical structural review: missing location, schedule_text"
+    },
+    {
+      "id": "f5b34fb4-83d1-4202-b628-f84b08f8c06a",
+      "title": "Wildlings at Milton Country Park",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "91902926-8ac7-4a3e-9143-96cc5cf6435b",
+      "title": "KNT Danceworks - MCR Dance Studios - Curve Studio",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "301ae80d-df77-41b6-954a-3be6d12ee300",
+      "title": "BAYSE Multi-Sports",
+      "reason": "Historical structural review: missing location, schedule_text"
+    },
+    {
+      "id": "07f3ec2b-87cf-4ee0-95a1-5fd36d769afc",
+      "title": "Baby Gym",
+      "reason": "Historical structural review: missing location, schedule_text"
+    },
+    {
+      "id": "5b2dc682-a962-43e4-8e3f-f4d5ab9af126",
+      "title": "Child & Family Centres - Stay and Play",
+      "reason": "Historical structural review: missing location, schedule_text"
+    },
+    {
+      "id": "7d5db570-d36f-4086-b0bb-e72148fb7131",
+      "title": "Tactile Arts - Cavendish Community Primary School",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "d38fc520-2ca6-42e2-99f9-d0010d52fda5",
+      "title": "Hartbeeps - Baby Bells @ Grove Church SYDENHAM",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "cf81b8f9-7509-48e9-ba3c-889f54e6c41f",
+      "title": "Junior Sport Stars - Chorlton CE Primary School",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "bf703867-bdec-4123-a6cd-be77e24e9e2c",
+      "title": "KNT Danceworks - MCR Dance Studios - Stomp Studio",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "9542a777-3f73-46a1-9424-ac3c58902f5e",
+      "title": "Tucum Capoeira Manchester - Fighting Fit Manchester",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "cab793c0-6534-44f6-9f91-06b4fe7927a4",
+      "title": "First Gymnastics South Manchester - CHS South",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "6603ecef-4146-4efc-99e0-1164811feed5",
+      "title": "Page One Creative Workshops",
+      "reason": "Historical structural review: missing event_url, schedule_text"
+    },
+    {
+      "id": "134dcc3a-c141-4c5a-b55d-b4cf50b6f535",
+      "title": "Footy4kidz",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "0a11bb89-d55e-4611-8287-3510032641f8",
+      "title": "Nextsteps Football FC - Houghend Astroturf Pitches",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "ea4db9a9-6232-452a-b4d4-52293624d528",
+      "title": "Shake, Rattle and Roll",
+      "reason": "Historical structural review: missing location, schedule_text"
+    },
+    {
+      "id": "0bc4358b-5dfb-4493-a42d-fcec3ec0a982",
+      "title": "Tumble Tots - Manchester Maccabi Community and Sports Club",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "b65cacab-cdae-4af7-8848-e132f52f5c5e",
+      "title": "LEGO workshops",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "69812663-bdab-4919-84f2-de134206df7c",
+      "title": "Mum & Baby Pilates with Lottie",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "6a83a7ea-7bbe-45dd-96aa-1cc38c851fc8",
+      "title": "Storytime",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "aaf73209-de15-41dc-95c9-392f8cf1c775",
+      "title": "Page One Creative Workshops",
+      "reason": "Historical structural review: missing event_url, schedule_text"
+    },
+    {
+      "id": "ccb2fe58-1e9a-42db-bc79-6cd5870f3e61",
+      "title": "Merry-Go-Round Toy Library",
+      "reason": "Historical structural review: missing location, schedule_text"
+    },
+    {
+      "id": "3b44dd44-4bd4-4f24-891d-227a446d6d92",
+      "title": "KNT Danceworks - Street Dance & Multi Dance",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "a20dbb98-14cc-4717-86ce-8b70454421ae",
+      "title": "SSA Manchester Central Football",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "11f358b4-3d02-4edb-9869-74b220417dfc",
+      "title": "El Recreo Spanish Eltham",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "cbd29ec6-4ff5-4db2-b81a-fc80dcf3a5df",
+      "title": "Pro Elite South London",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "5628cafa-30c1-4872-af91-6707ec3247f8",
+      "title": "Baby Beeps - Hampstead Garden Suburb Free Church Hall",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "dae21fb9-4163-4645-a65b-3524cbc1880b",
+      "title": "KNT Danceworks - Ballet, Street Dance & Multi Dance",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "f9709eb7-1cf4-491e-85a8-8861f797f523",
+      "title": "KNT Dance School",
+      "reason": "Historical structural review: missing location"
+    },
+    {
+      "id": "2c3c79bf-ebac-4afa-ab89-4cec834810fc",
+      "title": "MiniMe Mindfulness Cambridge",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "2763dead-462b-45de-ae37-b382e59865d5",
+      "title": "First Gymnastics South Manchester (Pre-School)",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "e61ceeb7-baeb-4f12-b8c1-73736bc9202f",
+      "title": "Sing and Sign",
+      "reason": "Historical structural review: missing location, schedule_text"
+    },
+    {
+      "id": "43a2aa58-9a3e-4f9b-817e-9a34630943dc",
+      "title": "Hillingdon Theatre Dance Centre",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "194fa725-deae-4074-bc85-0c62923cf618",
+      "title": "Shredder Skate School",
+      "reason": "Historical structural review: missing location, schedule_text"
+    },
+    {
+      "id": "0b8e69fa-dac4-4b15-9649-08c6b9d85778",
+      "title": "We Will Rock You Project - The Edge Theatre & Arts Centre",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "faed4a96-d994-4c8d-a91a-a8372dcf8f0e",
+      "title": "Active Youth Sports Club",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "096a997e-7eed-4929-b68a-0e295e022efe",
+      "title": "Unity FC",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "d032c15c-2d92-4ada-9bba-d95829de5fe8",
+      "title": "Pro Elite South London",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "31ab081b-15e6-4443-af6b-0ef837a18ead",
+      "title": "Active Youth Sports Club",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "a14ebae3-032a-4446-a86c-d195d010d61d",
+      "title": "Penguins Palace",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "f299e57f-aee8-4c60-b61f-be064b16b5ee",
+      "title": "El Recreo Spanish Online for Kids",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "dae9e6b2-f143-4f8e-b419-118b7d528cda",
+      "title": "Drama Tots Birmingham South",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "1163abb5-d441-4d7c-bbdb-960c26644697",
+      "title": "Junior Sport Stars",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "bbc6d669-367b-4eb4-9cde-18372c8afe77",
+      "title": "Storytimes for Under 5s",
+      "reason": "Historical structural review: missing location, schedule_text"
+    },
+    {
+      "id": "82046bfd-9588-467f-b628-f6917a8ba7e7",
+      "title": "Drama Tots Birmingham South",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "292a7c1d-09da-4f6c-9c2c-f61d80198fbb",
+      "title": "CITY OF BIRMINGHAM ROCKETS BASKETBALL CLUB",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "3c057f8e-877f-4389-ac59-3c9d0512e190",
+      "title": "Edgeahead",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "669b75e6-335c-4b67-84c6-44f9e63946a2",
+      "title": "BilinguaSing Birmingham South",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "67095db2-199a-44f5-a15e-e6e495b4ac76",
+      "title": "Baby Bells - Hampstead Garden Suburb Free Church Hall",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "f0fb9987-239a-4315-9835-99bd9f8ec2ca",
+      "title": "J'ace Rotherhithe Gymnastics",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "951c7554-2098-45f9-bfc1-ab7fc48aa5c2",
+      "title": "Pro Elite South London",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "ed992693-fcc4-49d3-b3d7-2a3c9e9670a1",
+      "title": "Theatre Peckham",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "f14d2325-e54d-4ff6-a949-defb01bdbe0c",
+      "title": "Hartbeeps - Baby Bells @ Grove Church SYDENHAM",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "a5e6ddb5-83c3-483d-8917-2c55f991ffb2",
+      "title": "KNT Danceworks - MCR Dance Studios - Waltz Studio",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "de826ad8-8d28-431c-8767-9df8a70a210b",
+      "title": "Junior Sport Stars - Co-op Academy New Islington",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "759c4833-d4fc-4957-aada-5ec60e4ed02d",
+      "title": "Footy4kidz - Salford Sports Village",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "a75c093e-637a-46da-addd-4d9f34f682ae",
+      "title": "Moo Music Rochdale, Heywood & Middleton",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "2ed53532-f8af-48b7-ae0a-d561faf2a94a",
+      "title": "Footy4kidz - Pendleton Sixth Form College",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "988cbbdb-e4ca-4956-b9fc-f625b8d4d28a",
+      "title": "First Gymnastics South Manchester - CHS South (PS)",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "464df992-e640-4d8c-8e82-acecf6d6ae29",
+      "title": "FootytotzSalford - Emmanuel Church Salford",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "e9f3d75c-62bb-47fa-b921-5cc4d6b6e267",
+      "title": "KNT Danceworks - Ballet & Other Dance",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "809cf0f1-3466-4a03-b624-6c8425de6e1c",
+      "title": "Development In Sport & PE",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "835d7ffd-f6f4-4701-9345-c3a56223c12e",
+      "title": "First Gymnastics South Manchester",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "21a8c14c-9239-4b5a-a00f-6dd441aa4057",
+      "title": "SSA Manchester Central Football Class",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "a098b5c4-325a-4382-98b9-2ee8964cf246",
+      "title": "Junior Sport Stars - Football & Multi Sport",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "b896053b-2010-40a6-95e4-bc01f1bb6bc5",
+      "title": "Tucum Capoeira Manchester - Ukrainian Cultural Centre",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "762c33c7-532d-4e2b-b38c-97cb634abe8f",
+      "title": "SoccerDays Toddler Football Classes- Valentines High School",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "ef7cf67a-aca9-48f5-9713-30c14be43d0e",
+      "title": "Little Kickers Football Classes- Harrow (Whitmore High)",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "5c1270aa-6ebb-460c-bbf9-87eaa6f908e6",
+      "title": "Tucum Capoeira Manchester - St John's Centre",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "02778e05-c373-4dba-8c14-049f6a2cae7a",
+      "title": "Development In Sport & PE Sports Class",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "2136eef5-f34e-44af-bc81-70b0e56242e4",
+      "title": "First Gymnastics South Manchester (Ages 4-12)",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "c3313707-4b2e-4e27-88d6-0b2e93c5c161",
+      "title": "Tumble Tots Bolton & Bury - Prestwich",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "a80c0e71-d83a-468e-9987-6ec97dde6ea5",
+      "title": "Tactile Arts - West Didsbury CE Primary School",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "1467d566-08d1-4874-b36f-205eb86aa0b9",
+      "title": "Kitty Watson Academy of Performing Arts",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "6905beca-8591-4189-91d6-7e5e8a0ddeb0",
+      "title": "KNT Danceworks",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "90811533-05a3-4ba5-b97f-ad7b428dac38",
+      "title": "KNT Danceworks",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "3dd7c3c4-2aba-4940-abe3-98133474b031",
+      "title": "KNT Danceworks",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "e8618e35-26fd-4a49-aebf-3ef0f5e2e8ea",
+      "title": "Lego Club",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "fa62d34c-2362-48c1-b79f-e61512634b64",
+      "title": "Tucum Capoeira Manchester",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "8c2d31c1-8bad-479f-ad3f-a0c6255c61ad",
+      "title": "Tucum Capoeira Manchester",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "1203cf5a-64ea-4972-91bb-850b7d3c7e63",
+      "title": "Tucum Capoeira Manchester",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "2d35401f-f55b-4083-9bd1-46e4e419d591",
+      "title": "We Will Rock You Project",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "478c3306-9162-456c-955c-cdf816b1fea7",
+      "title": "First Gymnastics South Manchester",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "d980298d-b7c4-44af-bf0f-15747245b061",
+      "title": "Little Kickers Football Classes",
+      "reason": "Historical structural review: missing location"
+    },
+    {
+      "id": "e92741f3-27c8-4b1d-bd3d-9f4cf36d5b04",
+      "title": "Novas teen martial arts classes",
+      "reason": "Historical structural review: missing location"
+    },
+    {
+      "id": "3da9ab79-b516-4984-8c8a-38ed23791da4",
+      "title": "Mini Phonics with Robot Reg Knutsford",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "58753b93-2bf0-41ac-8337-b148cd46b47e",
+      "title": "Preschool Phonics with Robot Reg Knutsford",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "af84a3a8-e805-4f7f-b2fc-0125acad07b3",
+      "title": "VIBEDANCE",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "10c86ad4-fbdf-41a9-b5a2-28e0e59066e8",
+      "title": "Nextsteps Football FC (Chorlton Boys)",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "50fb734a-6dd4-4569-86af-afff43694cb3",
+      "title": "Footytotz Salford",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "3129940c-107e-40b9-ade8-d2b1d2e25427",
+      "title": "Regal Ballet: Baby Ballet (18 months to 2\u00bd years)",
+      "reason": "Historical structural review: missing event_url, location"
+    },
+    {
+      "id": "15e63823-f200-48f6-815d-60cd14b89fa1",
+      "title": "Bellingham Multi-sports",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "604d2d15-92b9-465c-94b2-8e6ddb855676",
+      "title": "Karate & Self Defence for Kids 3+",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "002565f1-4706-4634-8885-94b7b061a6a0",
+      "title": "Baby Beeps - Union Church and Community Centre - Crouch End",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "a8c0a56d-d3fe-4a17-8fe5-8039cb70a7c7",
+      "title": "Hartbeeps - Baby Beeps @STANLEY Arts",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "8e6faa61-cbf7-48ef-b053-a423b1cef810",
+      "title": "Hartbeeps - Baby Bells @ STANLEY Arts",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "a93c082c-2e96-44e6-878b-64e79d970216",
+      "title": "SoccerDays Toddler Football Classes- Roding Valley High School",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "623edf65-38c6-4fb2-aae5-b7afca25abd3",
+      "title": "Little Kickers - Riddlesdown School - 18months - 2.5 years (FREE TRIAL AVAILABLE)",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "3857e79f-0a9d-465f-bace-b6dc0d47244e",
+      "title": "SoccerDays Toddler Football Classes- Holy Family School",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "c41a0d33-2581-40b7-87ab-4534ed8f501a",
+      "title": "Baby Bells - Union Church and Community Centre - Crouch End",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "f3d447f6-fa61-47b4-9fb0-61b8a3e210fa",
+      "title": "Little Kickers - Croydon Lloyd Park - 18months - 2.5 years (FREE TRIAL AVAILABLE)",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "55198e9c-9294-420c-a56d-27be8acca6de",
+      "title": "Regal Ballet: Pre-Primary Ballet (3\u00bd to 5 years)",
+      "reason": "Historical structural review: missing event_url, location"
+    },
+    {
+      "id": "76292fb9-51b5-4fc8-aff5-9ce277daccd9",
+      "title": "Mum & Baby Pilates with Lottie",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "4efac06f-642f-4fda-8f1b-fc49cea3a464",
+      "title": "Baby Beeps - Hargrave Hall Community Centre",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "1814d869-a305-4082-a2e7-52d0546e9d11",
+      "title": "Hartbeeps - Baby Beeps @ Grove Church SYDENHAM",
+      "reason": "Historical structural review: missing event_url"
+    },
+    {
+      "id": "e39bd73a-e563-46ff-8629-72f10aadbf94",
+      "title": "Tumble Tots Bolton & Bury",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "e365f223-56e0-45ff-b9a7-dedc372aa766",
+      "title": "Footy4kidz",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "278f08a9-4b55-40b7-9e8c-5503b07f3df4",
+      "title": "Tactile Arts",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "f71d4896-8f17-442b-ac21-081320c1fb69",
+      "title": "Tactile Arts",
+      "reason": "Historical structural review: missing schedule_text"
+    },
+    {
+      "id": "22118d30-4e37-4e24-b6fc-c6131c6eaece",
+      "title": "We Will Rock You Project",
+      "reason": "Historical structural review: missing schedule_text"
+    }
+  ],
+  "database_writes": 0
+}
