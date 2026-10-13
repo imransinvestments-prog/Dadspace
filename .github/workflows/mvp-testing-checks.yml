@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pnpm install --frozen-lockfile
-      - run: pip install requests feedparser googlenewsdecoder==0.2.1 selectolax==0.4.12
+      - run: pip install -r requirements.txt feedparser googlenewsdecoder==0.2.1 selectolax==0.4.12
       - name: Offline regression checks
         run: |
           python -m unittest discover -s tests -v
@@ -31,7 +31,9 @@ jobs:
           node scripts/test-news-locality.mjs
           node --test tests/news-newspaper.test.cjs
           node --test tests/deals-selection.test.mjs
+          node tests/test_ds10_action_console.cjs
       - name: Production build
         run: pnpm build
         env:
           NEXT_TELEMETRY_DISABLED: '1'
+

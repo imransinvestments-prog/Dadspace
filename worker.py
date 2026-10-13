@@ -39,6 +39,7 @@ import datetime as dt
 from llm_provider import BudgetExhausted, credential_name, selection
 
 import hashlib
+import inspect
 import json
 import os
 import re
@@ -70,6 +71,8 @@ MIN_CONFIDENCE = float(os.environ.get("MIN_CONFIDENCE", "0.0"))
 
 MAX_CHARS = int(os.environ.get("MAX_CHARS", "40000"))
 MAX_JSONLD_CHARS = int(os.environ.get("MAX_JSONLD_CHARS", "12000"))
+EXTRACTION_CACHE_VERSION = os.environ.get("EXTRACTION_CACHE_VERSION", "2")
+EXTRACTION_REFRESH_DAYS = max(0, int(os.environ.get("EXTRACTION_REFRESH_DAYS", "7")))
 OXFORDSHIRE_MAX_PAGES = int(os.environ.get("OXFORDSHIRE_MAX_PAGES", "3"))
 
 PAUSE_SECONDS = float(os.environ.get("PAUSE_SECONDS", "2"))
@@ -404,7 +407,7 @@ DATE_HINT_PATTERN = re.compile(
 )
 
 
-def extract_eventish_html(soup, base_url):
+def extract_eventish_html(soup, base_url, *, remove_captured=False):
     """Preserve event-like table/list rows in a compact, highly visible block.
 
     Some council pages are perfectly server-rendered but their event listings
@@ -412,6 +415,7 @@ def extract_eventish_html(soup, base_url):
     rows/cards makes those pages much more reliable without requiring a browser.
     """
     rows = []
+    captured = []
 
     # Tables are especially common on council event pages.
     for tr in soup.find_all("tr"):
@@ -429,6 +433,7 @@ def extract_eventish_html(soup, base_url):
             if links:
                 line += " | LINKS: " + " ; ".join(dict.fromkeys(links))
             rows.append(line)
+            captured.append(tr)
 
     # If there is no useful table, preserve common event-card/list containers -
     # but only ones that plausibly reference a date or link to their own page.
@@ -461,11 +466,18 @@ def extract_eventish_html(soup, base_url):
                 if line not in seen:
                     seen.add(line)
                     rows.append(line)
+                    captured.append(node)
                 if len(rows) >= 150:
                     break
             if rows:
                 break
 
+    if remove_captured:
+        # Only remove nodes actually represented within the bounded compact block.
+        # Uncaptured text remains available, including surrounding audience rules.
+        for node in captured[:150]:
+            if node.name is not None:
+                node.decompose()
     return "\n".join(rows[:150])
 
 
@@ -552,7 +564,11 @@ def prepare_content(html, url):
         soup = BeautifulSoup(page_html, "html.parser")
         jsonld_all.extend(extract_jsonld_events(soup))
 
-        compact = extract_eventish_html(soup, page_url)
+        # Navigation/filter tables are not listings and must not pollute the hash.
+        for tag in soup(["nav", "footer", "form", "script", "style", "noscript", "svg", "iframe"]):
+            tag.decompose()
+
+        compact = extract_eventish_html(soup, page_url, remove_captured=True)
         if compact:
             event_blocks.append(f"PAGE: {page_url}\n{compact}")
 
@@ -564,6 +580,8 @@ def prepare_content(html, url):
     if event_blocks:
         parts.append("COMPACT EVENT LISTINGS FROM HTML:\n" + "\n\n".join(event_blocks))
     if jsonld_all:
+        jsonld_all = list({json.dumps(item, sort_keys=True, ensure_ascii=False): item
+                           for item in jsonld_all}.values())
         jsonld_text = json.dumps(jsonld_all, ensure_ascii=False)
         parts.append("STRUCTURED EVENT DATA (schema.org JSON-LD):\n" + jsonld_text[:MAX_JSONLD_CHARS])
     if visible_blocks:
@@ -589,6 +607,112 @@ def prepare_content(html, url):
     else:
         method = "llm"
     return content, method
+
+
+def extraction_cache_hash(content, source, today):
+    """Version normalized evidence and output-affecting extraction settings.
+
+    Hash the whole evidence, not only its listing titles: changes to audience,
+    prices and surrounding restrictions must invalidate a successful extraction.
+    The successful timestamp bounds freshness without adding database columns.
+    """
+    from structured_events import complete_events
+    prompt_rules = build_prompt(source, source["url"], "", dt.date(2000, 1, 1))
+    settings = {"version": EXTRACTION_CACHE_VERSION,
+                "method": FETCH_ENGINE, "model": MODEL,
+                "relevance": MIN_RELEVANCE, "confidence": MIN_CONFIDENCE,
+                "min_days": MIN_EVENT_DAYS_FROM_TODAY,
+                "max_days": MAX_EVENT_DAYS_FROM_TODAY,
+                "ongoing": ALLOW_ONGOING_EVENTS,
+                "thinking": os.environ.get("GEMINI_THINKING_LEVEL", ""),
+                "extractor": inspect.getsource(make_gemini_caller),
+                "validator": inspect.getsource(clean_events),
+                "page_extraction": inspect.getsource(extract_documents),
+                "structured_parser": inspect.getsource(complete_events),
+                "source_mode": {key: source.get(key) for key in (
+                    "source_adapter", "structured_events_complete", "extraction_mode")},
+                "relative_date_anchor": today.isoformat() if re.search(
+                    r'\b(?:today|tomorrow|yesterday|(?:this|next|last)\s+(?:week|month|year|monday|tuesday|wednesday|thursday|friday|saturday|sunday))\b',
+                    content, re.I) else None,
+                "provider_settings": {key: os.environ.get(key, "") for key in (
+                    "LLM_PROVIDER", "LLM_MODEL", "EXTRACTION_LLM_PROVIDER", "EXTRACTION_LLM_MODEL")},
+                "rules": prompt_rules}
+    evidence = re.sub(r"\s+", " ", content).strip()
+    return hashlib.sha256((json.dumps(settings, sort_keys=True) + "\n" + evidence).encode("utf-8")).hexdigest()
+
+
+def extraction_cache_fresh(source, today):
+    if EXTRACTION_REFRESH_DAYS == 0:
+        return False
+    try:
+        checked = dt.datetime.fromisoformat(source["last_success_at"].replace("Z", "+00:00"))
+        age = (today - checked.date()).days
+        return 0 <= age < EXTRACTION_REFRESH_DAYS
+    except (KeyError, TypeError, ValueError):
+        return False
+
+
+def extract_documents(documents, source, extract, today, stats):
+    """Optional reviewed per-page extraction; cache entries remain staged."""
+    from structured_events import complete_events
+    from extraction_cache import ResultCache
+
+    docs = documents if isinstance(documents, list) else [(source['url'], documents)]
+    if source.get('structured_events_complete') is True:
+        structured = complete_events(docs, extract_jsonld_events)
+        if structured is not None:
+            stats['structured_events'] = len(structured)
+            return structured
+    if not (source.get('extraction_mode') == 'per_page'
+            or os.environ.get('EXTRACTION_PER_PAGE', 'false').lower() == 'true'):
+        content, _ = prepare_content(docs, source['url'])
+        prompt = build_prompt(source, source['url'], content, today)
+        stats['gemini_logical_calls'] = 1
+        stats['gemini_prompt_chars'] = len(prompt)
+        return extract(prompt)
+
+    directory = os.environ.get('EXTRACTION_CACHE_DIR', '')
+    cache = getattr(extract, 'result_cache', None)
+    if directory and cache is None:
+        cache = ResultCache(directory, EXTRACTION_REFRESH_DAYS)
+        extract.result_cache = cache
+    raw = []
+    force = os.environ.get('FORCE_REREAD', 'false').lower() == 'true'
+    for page_url, html in docs:
+        content, _ = prepare_content(html, page_url)
+        # A truncated page is not a complete extraction unit. No partial success.
+        if len(content) >= MAX_CHARS:
+            raise ValueError('Prepared page reaches input limit; review coverage before per-page extraction')
+        if len(content.strip()) < 200:
+            raise ValueError('Detail/listing page has insufficient readable evidence')
+        page_source = dict(source, url=page_url)
+        digest = extraction_cache_hash(content, page_source, today)
+        cached = cache.get(source['id'], page_url, digest, today) if cache and not force else None
+        if cached is not None:
+            stats['detail_cache_hits'] = stats.get('detail_cache_hits', 0) + 1
+            raw.extend(cached)
+            continue
+        prompt = build_prompt(source, page_url, content, today)
+        stats['gemini_logical_calls'] = stats.get('gemini_logical_calls', 0) + 1
+        stats['gemini_prompt_chars'] = stats.get('gemini_prompt_chars', 0) + len(prompt)
+        page_raw = extract(prompt)
+        if not isinstance(page_raw, list) or not all(isinstance(x, dict) for x in page_raw):
+            raise ValueError('Incomplete or invalid page extraction')
+        # All cached raw results pass the current cleaner again, including date,
+        # relevance and venue validation. Newly staged results commit after writes.
+        raw.extend(page_raw)
+        if cache:
+            cache.stage(source['id'], page_url, digest, today, page_raw)
+    return raw
+
+
+def finish_result_cache(extract, source_id, persisted):
+    cache = getattr(extract, 'result_cache', None)
+    if cache is not None:
+        if persisted:
+            cache.commit(source_id)
+        else:
+            cache.discard(source_id)
 
 
 # ----------------------------------------------------------------------------
@@ -854,7 +978,7 @@ def process_source(source, extract, today):
     # date hint is enough to let Gemini interpret the rendered listing.
     date_hints = len(DATE_HINT_PATTERN.findall(content))
     if FETCH_ENGINE == "browser" and date_hints < MIN_DATE_HINTS_FOR_LLM:
-        new_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()
+        new_hash = extraction_cache_hash(content, source, today)
         return (
             "ok_zero", [], new_hash,
             f"0 extracted, 0 kept; skipped Gemini: only {date_hints} date-like signal(s); "
@@ -862,13 +986,18 @@ def process_source(source, extract, today):
             stats,
         )
 
-    new_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()
-    if new_hash == source.get("last_hash") and source.get("last_success_at"):
+    per_page = (source.get('extraction_mode') == 'per_page'
+                or os.environ.get('EXTRACTION_PER_PAGE', 'false').lower() == 'true')
+    hash_content = content
+    if per_page:
+        hash_content = '\n'.join(extraction_cache_hash(prepare_content(html, page_url)[0],
+            dict(source, url=page_url), today) for page_url, html in documents)
+    new_hash = extraction_cache_hash(hash_content, source, today)
+    if (new_hash == source.get("last_hash") and extraction_cache_fresh(source, today)
+            and not per_page
+            and os.environ.get("FORCE_REREAD", "false").strip().lower() != "true"):
+        stats["cache_hits"] = 1
         return "unchanged", [], new_hash, "Page unchanged since last run", stats
-
-    prompt = build_prompt(source, url, content, today)
-    stats["gemini_logical_calls"] = stats.get("gemini_logical_calls", 0) + 1
-    stats["gemini_prompt_chars"] = stats.get("gemini_prompt_chars", 0) + len(prompt)
 
     # Capture cumulative Gemini counters before/after this source so the run log
     # can show exactly which sources spend tokens. Retries are included.
@@ -876,19 +1005,28 @@ def process_source(source, extract, today):
     before = {k: int(metrics.get(k, 0) or 0) for k in (
         "api_attempts", "input_chars_sent", "prompt_tokens", "output_tokens", "thinking_tokens", "total_tokens"
     )}
-    raw = extract(prompt)
+    try:
+        raw = extract_documents(documents, source, extract, today, stats)
+    except Exception:
+        finish_result_cache(extract, source['id'], False)
+        raise
     after = {k: int(metrics.get(k, 0) or 0) for k in before}
     for key in before:
         stats[f"gemini_{key}"] = max(0, after[key] - before[key])
 
-    rows = clean_events(raw, source, url, method, today, stats)
+    try:
+        rows = clean_events(raw, source, url, method, today, stats)
+    except Exception:
+        finish_result_cache(extract, source['id'], False)
+        raise
     status = "ok" if rows else "ok_zero"
     message = f"{stats.get('extracted', 0)} extracted, {len(rows)} kept"
     if status == "ok_zero":
         message += "; diagnostics: " + content_diagnostics(documents, content)
     rejected = {
         k: v for k, v in stats.items()
-        if k not in ("extracted", "kept", "duplicates", "gemini_logical_calls", "gemini_prompt_chars")
+        if k not in ("extracted", "kept", "duplicates", "gemini_logical_calls", "gemini_prompt_chars",
+                     "cache_hits", "detail_cache_hits", "structured_events")
         and not k.startswith("gemini_") and not k.startswith("gate_") and v
     }
     if rejected:
@@ -1187,7 +1325,8 @@ def main():
             print("Stopping before any website is read, so nothing is marked as done without being saved.")
             sys.exit(1)
 
-    extract = make_gemini_caller()
+    from shadow_capture import capture_calls
+    extract = capture_calls(make_gemini_caller())
     print("LLM controls: " + json.dumps(getattr(extract, "settings", {}), sort_keys=True))
     today = today_uk()
 
@@ -1210,7 +1349,10 @@ def main():
     totals = {}
     total_events = 0
     zero_event_sources = []
+    source_usage = []
     run_stats = {
+        "detail_cache_hits": 0, "structured_events": 0,
+        "cache_hits": 0,
         "extracted": 0, "kept": 0, "invalid": 0, "no_date": 0, "event_finished": 0,
         "event_too_far_in_future": 0, "low_relevance": 0, "not_parent_activity": 0,
         "missing_family_evidence": 0, "low_confidence": 0, "duplicates": 0,
@@ -1236,14 +1378,21 @@ def main():
             now_iso = dt.datetime.now(dt.timezone.utc).isoformat()
             update = {"last_checked_at": now_iso}
             t0 = time.perf_counter()
+            usage_before = dict(getattr(extract, 'metrics', {}))
 
             try:
                 status, rows, new_hash, message, stats = process_source(source, extract, today)
             except BudgetExhausted as exc:
+                source_usage.append({'source_id': source['id'], 'source': source['name'],
+                    'status': 'deferred_budget', 'accepted': 0, 'usage': {k: v - usage_before.get(k, 0)
+                        for k, v in getattr(extract, 'metrics', {}).items()}})
                 print(f"Stopping before marking source complete: {exc}")
                 stopped_early = True
                 break
             except FatalError as exc:
+                source_usage.append({'source_id': source['id'], 'source': source['name'],
+                    'status': 'fatal', 'accepted': 0, 'usage': {k: v - usage_before.get(k, 0)
+                        for k, v in getattr(extract, 'metrics', {}).items()}})
                 fatal = exc
                 break
             except Exception as exc:
@@ -1259,6 +1408,10 @@ def main():
                     rows = []
 
             elapsed = time.perf_counter() - t0
+            source_usage.append({'source_id': source['id'], 'source': source['name'],
+                'status': status, 'accepted': len(rows), 'seconds': round(elapsed, 3),
+                'validation': stats, 'usage': {k: v - usage_before.get(k, 0)
+                    for k, v in getattr(extract, 'metrics', {}).items()}})
             processed += 1
             totals[status] = totals.get(status, 0) + 1
             for key in run_stats:
@@ -1289,9 +1442,17 @@ def main():
 
             if not DRY_RUN:
                 try:
-                    db.table("sources").update(update).eq("id", source["id"]).execute()
+                    response = db.table("sources").update(update).eq("id", source["id"]).execute()
+                    # Confirm the update actually affected this source before
+                    # admitting results to the reusable cache (RLS can return []).
+                    persisted = (status in ('ok', 'ok_zero') and isinstance(response.data, list)
+                                 and any(row.get('id') == source['id'] for row in response.data))
+                    finish_result_cache(extract, source['id'], persisted)
                 except Exception as exc:
+                    finish_result_cache(extract, source['id'], False)
                     print(f"      warning: could not update this source's status ({type(exc).__name__}: {exc})")
+            else:
+                finish_result_cache(extract, source['id'], False)
 
             time.sleep(PAUSE_SECONDS)
 
@@ -1307,6 +1468,18 @@ def main():
                 expired_note = f"clean-up failed ({type(exc).__name__}: {exc})"
     finally:
         total_minutes = (time.monotonic() - start_time) / 60
+        report_path = os.environ.get('USAGE_REPORT_PATH')
+        if report_path:
+            from pathlib import Path
+            report = {'checked_at': dt.datetime.now(dt.timezone.utc).isoformat(),
+                'worker': os.environ.get('WORKER_NAME', 'events'), 'dry_run': DRY_RUN,
+                'settings': getattr(extract, 'settings', {}), 'sources': source_usage,
+                'metrics': dict(getattr(extract, 'metrics', {})), 'validation': run_stats,
+                'stopped_early': stopped_early, 'fatal': fatal is not None}
+            try:
+                Path(report_path).write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
+            except OSError as exc:
+                print(f'Could not write usage report: {type(exc).__name__}')
         print("\n=== Summary ===")
         print(f"Ran for {total_minutes:.1f} min. Sources processed: {processed}/{len(sources)}"
               + (" (stopped early on a run budget)" if stopped_early else ""))

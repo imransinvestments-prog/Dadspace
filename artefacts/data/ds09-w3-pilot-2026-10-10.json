@@ -1,0 +1,67 @@
+{
+  "postcode": "W3 9LN",
+  "latitude": 51.508924,
+  "longitude": -0.275866,
+  "ages": "0–5 years inclusive; family activities with evidenced suitability",
+  "radius_km": 10,
+  "radius_status": "provisional",
+  "query": "with nearby as (select id,category,public_visible,6371*2*asin(sqrt(power(sin(radians(latitude-51.508924)/2),2)+cos(radians(51.508924))*cos(radians(latitude))*power(sin(radians(longitude+0.275866)/2),2))) as km from venues where latitude between 51.40 and 51.61 and longitude between -0.44 and -0.11) select n.category,count(distinct n.id) as venues,count(distinct n.id) filter(where n.public_visible) as visible_venues,count(e.id) as stored_listings,count(e.id) filter(where e.listing_type='activity') as stored_activities from nearby n left join collected_events e on e.venue_id=n.id where n.km<=10 group by n.category order by n.category",
+  "results": [
+    {
+      "category": "Amusement arcade",
+      "venues": 9,
+      "visible_venues": 9,
+      "stored_listings": 0,
+      "stored_activities": 0
+    },
+    {
+      "category": "Children’s playground",
+      "venues": 868,
+      "visible_venues": 868,
+      "stored_listings": 0,
+      "stored_activities": 0
+    },
+    {
+      "category": "Indoor / soft play centre",
+      "venues": 11,
+      "visible_venues": 11,
+      "stored_listings": 0,
+      "stored_activities": 0
+    },
+    {
+      "category": "library",
+      "venues": 105,
+      "visible_venues": 103,
+      "stored_listings": 0,
+      "stored_activities": 0
+    },
+    {
+      "category": "Museum",
+      "venues": 115,
+      "visible_venues": 115,
+      "stored_listings": 0,
+      "stored_activities": 0
+    },
+    {
+      "category": "Trampoline venue",
+      "venues": 2,
+      "visible_venues": 2,
+      "stored_listings": 0,
+      "stored_activities": 0
+    },
+    {
+      "category": "Zoo / animal park",
+      "venues": 5,
+      "visible_venues": 5,
+      "stored_listings": 0,
+      "stored_activities": 0
+    },
+    {
+      "category": null,
+      "venues": 2,
+      "visible_venues": 0,
+      "stored_listings": 2,
+      "stored_activities": 2
+    }
+  ]
+}

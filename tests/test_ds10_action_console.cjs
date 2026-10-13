@@ -1,0 +1,32 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const data=JSON.parse(fs.readFileSync('artefacts/data/ds10-action-console-19-2026-10-12.json','utf8'));
+const context={URL,Date,module:{exports:{}}};vm.createContext(context);vm.runInContext(fs.readFileSync('scripts/ds10_action_console.js','utf8'),context);const api=context.module.exports;
+assert.equal(data.records.length,19);
+const groups=Object.fromEntries(['split','routes','venue','mobile'].map(g=>[g,data.records.filter(r=>r.group===g).length]));assert.deepEqual(groups,{split:11,routes:6,venue:1,mobile:1});
+const record=data.records.find(r=>r.title==='Child & Family Centres - Stay and Play'),split={record_id:record.id,expected_fingerprint:record.fingerprint,status:'ready',action:'split',reviewer:'Imran Tajuddin',reviewed:true,evidence_url:record.current.event_url,notes:'Checked published centre schedule',sessions:structuredClone(record.seed_sessions)};
+assert.equal(api.validate(record,split).length,0);
+const file={version:data.version,cohort:data.cohort,decisions:[split]};
+const restored=api.importDecisions(file,data);assert.equal(restored[record.id].sessions.length,5);assert.ok(restored[record.id].sessions[2].schedule.includes('Thursday')&&restored[record.id].sessions[2].schedule.includes('term time only'));
+assert.throws(()=>api.importDecisions({...file,decisions:[split,split]},data),/duplicate/);
+assert.throws(()=>api.importDecisions({...file,decisions:[{...split,record_id:'unknown'}]},data),/Unknown/);
+assert.throws(()=>api.importDecisions({...file,decisions:[{...split,expected_fingerprint:'changed'}]},data),/snapshot/);
+assert.throws(()=>api.importDecisions({...file,cohort:'other'},data),/different/);
+assert.throws(()=>api.importDecisions({...file,decisions:[{...split,reviewed:false}]},data),/invalid fields/);
+assert.throws(()=>api.importDecisions({...file,decisions:[{...split,status:'draft',sessions:{}}]},data),/session form/);
+const invalid=structuredClone(split);invalid.sessions[0].dates='2026-02-30';assert.ok(api.validate(record,invalid).some(e=>e.includes('actual published dates')));
+invalid.sessions[0].dates='';invalid.sessions[0].booking_url='javascript:alert(1)';assert.ok(api.validate(record,invalid).some(e=>e.includes('HTTPS')));
+for(const group of ['routes','venue','mobile']){
+ const r=data.records.find(r=>r.group===group),d={action:{routes:'repair',venue:'venue',mobile:'mobile'}[group],reviewer:'Imran',reviewed:true,evidence_url:r.current.event_url,sessions:[]};
+ assert.ok(api.validate(r,d).length>0);
+ const defer={...d,action:'defer',notes:'Need a current provider timetable; follow up via observed source index.'};assert.equal(api.validate(r,defer).length,0);
+}
+const page=fs.readFileSync('artefacts/documentation/ds10-action-console-2026-10-12.html','utf8');
+let compiled=0;for(const match of page.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)){if(match[1].includes('application/json'))continue;new vm.Script(match[2]);compiled++;}assert.equal(compiled,2);
+assert.ok(!page.includes('__DATA__')&&!page.includes('__LOGIC__'));
+console.log('19-record cohort, five seeded sessions, evidence/date/URL validation, guarded import round-trip and both inline scripts: PASS');
+const baby=data.records.find(r=>r.title==='Baby Gym');
+assert.equal(baby.seed_sessions.length,7);
+assert.equal(api.validate(baby,{action:'split',reviewer:'Imran Tajuddin',reviewed:true,evidence_url:baby.seed_sessions[0].evidence_url,sessions:baby.seed_sessions}).length,0);
+const shred=data.records.find(r=>r.title==='Shredder Skate School');
+assert.equal(shred.seed_sessions.length,11);
+assert.ok(api.validate(shred,{action:'split',reviewer:'Imran Tajuddin',reviewed:true,evidence_url:shred.seed_sessions[0].evidence_url,sessions:shred.seed_sessions}).some(e=>e.includes('unknown-time placeholder')));

@@ -95,6 +95,10 @@ export default async function ActivityDetailPage({ params }: PageProps) {
           </div>
 
           <dl className="grid gap-4 sm:grid-cols-2">
+            {activity.start_date && <div className="flex gap-3 rounded-xl bg-muted/60 p-4">
+              <CalendarClock className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
+              <div><dt className="text-xs font-bold uppercase text-muted-foreground">Programme dates</dt><dd className="mt-1 font-semibold">{activity.start_date}{activity.end_date && activity.end_date !== activity.start_date ? ` to ${activity.end_date}` : ""}</dd><dd className="mt-1 text-sm text-muted-foreground">See the session schedule for individual dates and exceptions.</dd></div>
+            </div>}
             <div className="flex gap-3 rounded-xl bg-muted/60 p-4">
               <CalendarClock className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
               <div><dt className="text-xs font-bold uppercase text-muted-foreground">Schedule</dt><dd className="mt-1 font-semibold">{activity.schedule_text || activity.time_text || "Check schedule on site"}</dd></div>

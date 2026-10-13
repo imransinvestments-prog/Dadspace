@@ -1,0 +1,659 @@
+{
+  "programme": "rhymetime",
+  "capture_method": "public-browser-review",
+  "checked_on": "2026-10-12",
+  "index_url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/results.page?qt=rhymetime&term=&camcommunitychannel=6-4&sorttype=relevance",
+  "index_pages_reviewed": 4,
+  "index_capture_complete": true,
+  "observed_detail_urls": [
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=QKtYjnLvHIU&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=PDle7_c16-8&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=bFMwn7BJ-Fs&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=mCSZkhy89bU&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=TAEZLHJ5b2c&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=QKunVz1z9Hc&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=YVTolktK3qs&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=8TR-Gs5rbpQ&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=tsd_6xP5s08&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=3TPemxk5tdU&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=BDbIsyloDaM&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=6AkaZDO01Go&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=FP9v_3mtvHQ&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=KXY-3aeWZZk&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=NsuOx5GOkRE&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=Hia-Sy21jo4&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=gwZeNrxE_1A&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=HNDFljkwuxs&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=ABDHS838kRs&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=wcgh-5gVNYQ&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=h_V7gOIUWoQ&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=_ZByKwGXtb0&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=WIkuhoT_IAI&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=koC8swe1tXE&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=oumCC-miY1c&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=qfJVepAshYs&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=6Irz8t_8HHI&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=qmPX-HCxZB8&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=Vt7Z8whfL1Y&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=xe7xOOdRA0w&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=JiyviD5lWGI&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=0kfQWLA2HXI&camcommunitychannel=6-4",
+    "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=a19Gz2YlQP4&camcommunitychannel=6-4"
+  ],
+  "robots_allows_unattended_collection": false,
+  "records": [
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=QKtYjnLvHIU&camcommunitychannel=6-4",
+      "title": "Rhymetime on Wednesdays at Ely Library",
+      "fields": {
+        "Name": "Ely Library",
+        "Address": "6, The Cloisters, Ely, Cambridgeshire",
+        "Postcode": "CB7 4ZH",
+        "Time/date notes": "Every week on Wednesday",
+        "Opening Hours": "14:00 - 14:20",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=PDle7_c16-8&camcommunitychannel=6-4",
+      "title": "Baby Rhymetime at Huntingdon Library",
+      "fields": {
+        "Name": "",
+        "Address": "",
+        "Postcode": "",
+        "Time/date notes": "Every week on Friday (term time only), 10am to 10.30am",
+        "Opening Hours": "10:00 - 10:30",
+        "Age Ranges": "0 - 12 months",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "drop-in",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=bFMwn7BJ-Fs&camcommunitychannel=6-4",
+      "title": "Toddler Rhymetime at Huntingdon Library",
+      "fields": {
+        "Name": "",
+        "Address": "",
+        "Postcode": "",
+        "Time/date notes": "Every week on Friday, until further notice",
+        "Opening Hours": "11:00 - 11:30",
+        "Age Ranges": "1 - 4 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "drop-in",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=mCSZkhy89bU&camcommunitychannel=6-4",
+      "title": "Rhymetime on Fridays at Ely Library",
+      "fields": {
+        "Name": "Ely Library",
+        "Address": "6, The Cloisters, Ely, Cambridgeshire",
+        "Postcode": "CB7 4ZH",
+        "Time/date notes": "Every week on Friday",
+        "Opening Hours": "10:30 - 10:50",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=TAEZLHJ5b2c&camcommunitychannel=6-4",
+      "title": "Rhymetime at Buckden Library",
+      "fields": {
+        "Name": "Buckden Library",
+        "Address": "Community Hall and Sports Cente, Burberry Road, Buckden, St. Neots, Cambridgeshire",
+        "Postcode": "PE19 5UY",
+        "Time/date notes": "Every week on Tuesday (term time only) until further notice",
+        "Opening Hours": "14:15 - 14:45",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free, donations welcome"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=QKunVz1z9Hc&camcommunitychannel=6-4",
+      "title": "Rhymetime at Burwell Library",
+      "fields": {
+        "Name": "Burwell Library",
+        "Address": "Village College, The Causeway, Burwell",
+        "Postcode": "CB25 0DU",
+        "Time/date notes": "Every week on Tuesday (school term time only)",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "drop-in"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=YVTolktK3qs&camcommunitychannel=6-4",
+      "title": "Cottenham Library Rhymetime",
+      "fields": {
+        "Name": "Cottenham Library",
+        "Address": "Margett Street, Cottenham",
+        "Postcode": "CB24 8QY",
+        "Time/date notes": "10.30am to 11am, every 2 weeks on Tuesday, starting 8th September 2026, term time only",
+        "Opening Hours": "",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free, donations welcome"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=8TR-Gs5rbpQ&camcommunitychannel=6-4",
+      "title": "Rhymetime",
+      "fields": {
+        "Name": "Littleport Library",
+        "Address": "Littleport Library, Victoria Street, Littleport, Ely, Cambridgeshire",
+        "Postcode": "CB6 1LU",
+        "Time/date notes": "Every Monday 10:30 - 11:00",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "0-4",
+        "Details": "Free event"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=tsd_6xP5s08&camcommunitychannel=6-4",
+      "title": "Rhymetime at Sawtry Library",
+      "fields": {
+        "Name": "Sawtry Library",
+        "Address": "Sawtry Community Centre, Green End Road, Sawtry",
+        "Postcode": "PE28 5UX",
+        "Time/date notes": "Every week on Wednesday (term time only) until further notice",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "drop-in",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=3TPemxk5tdU&camcommunitychannel=6-4",
+      "title": "Rhymetime at Yaxley Library",
+      "fields": {
+        "Name": "Yaxley Library",
+        "Address": "Landsdowne Road, Yaxley",
+        "Postcode": "PE7 3JL",
+        "Time/date notes": "Every week on Tuesday",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "0 - 5 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=BDbIsyloDaM&camcommunitychannel=6-4",
+      "title": "Storytime & Rhymetime on Thursdays at Arbury Court Library",
+      "fields": {
+        "Name": "Arbury Court Library",
+        "Address": "Arbury Court, Cambridge, Cambridgeshire",
+        "Postcode": "CB4 2JQ",
+        "Time/date notes": "Every week on Thursday, until further notice",
+        "Opening Hours": "10:30 - 11:15",
+        "Age Ranges": "0 months - 5 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=6AkaZDO01Go&camcommunitychannel=6-4",
+      "title": "Rhymetime on Wednesdays at Cherry Hinton Library",
+      "fields": {
+        "Name": "Cherry Hinton Hub",
+        "Address": "High Street, Cherry Hinton, Cambridge",
+        "Postcode": "CB1 9HZ",
+        "Time/date notes": "Every week on Wednesday, until further notice",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "0 - 18 months",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=FP9v_3mtvHQ&camcommunitychannel=6-4",
+      "title": "Papworth Library Rhymetime",
+      "fields": {
+        "Name": "Papworth Library",
+        "Address": "Lower Pendrill Court, Ermine Street North, Papworth Everard",
+        "Postcode": "CB23 3UY",
+        "Time/date notes": "10am to 10.30am, every Wednesday, term time only",
+        "Opening Hours": "",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free - donations are of course welcome"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=KXY-3aeWZZk&camcommunitychannel=6-4",
+      "title": "Rhymetime at Chatteris Library (term time only)",
+      "fields": {
+        "Name": "Chatteris Library",
+        "Address": "2, Furrowfields Road, Chatteris",
+        "Postcode": "PE16 6DY",
+        "Time/date notes": "Every week on Friday, term time only",
+        "Opening Hours": "14:00 - 14:45",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=NsuOx5GOkRE&camcommunitychannel=6-4",
+      "title": "Rhymetime at Ramsey Library",
+      "fields": {
+        "Name": "Ramsey Library",
+        "Address": "25, Great Whyte, Ramsey",
+        "Postcode": "PE26 1HG",
+        "Time/date notes": "Every week on Friday (term time only) until further notice",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=Hia-Sy21jo4&camcommunitychannel=6-4",
+      "title": "Toddler Rhymetime at Ramsey Library",
+      "fields": {
+        "Name": "Ramsey Library",
+        "Address": "25, Great Whyte, Ramsey",
+        "Postcode": "PE26 1HG",
+        "Time/date notes": "Every week on Friday, until further notice",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "2 - 4 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=gwZeNrxE_1A&camcommunitychannel=6-4",
+      "title": "Rhymetime, Storytime and Duplo at Cambourne Library",
+      "fields": {
+        "Name": "Cambourne Library",
+        "Address": "Sackville House, Sackville Way, Great Cambourne, Cambridge",
+        "Postcode": "CB23 6HL",
+        "Time/date notes": "Weekly on Fridays, during term time.",
+        "Opening Hours": "9:30 - 10:30",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "drop-in",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=HNDFljkwuxs&camcommunitychannel=6-4",
+      "title": "Histon Library Rhymetime",
+      "fields": {
+        "Name": "Histon Library",
+        "Address": "School Hill, Histon",
+        "Postcode": "CB24 9JE",
+        "Time/date notes": "10.30am to 11am, 1st and 3rd Thursday of the month, term time only",
+        "Opening Hours": "",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free, donations welcome"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=ABDHS838kRs&camcommunitychannel=6-4",
+      "title": "Rhymetime (Term time)",
+      "fields": {
+        "Name": "Soham Library",
+        "Address": "Soham Library, Clay Street, Soham, Ely, Cambridgeshire",
+        "Postcode": "CB7 5HJ",
+        "Time/date notes": "Every Tuesday 10:30 - 11:00",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "",
+        "Details": "Free event"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "drop-in"
+      ],
+      "description": "Rhymetime for children aged birth to 4 years at Soham Library."
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=wcgh-5gVNYQ&camcommunitychannel=6-4",
+      "title": "Rhymetime at St Ives Library (1st session)",
+      "fields": {
+        "Name": "St Ives Library",
+        "Address": "4, Library Row, Station Road, St Ives",
+        "Postcode": "PE27 5BW",
+        "Time/date notes": "Every week on Wednesday (term time only) until further notice",
+        "Opening Hours": "10:00 - 10:30",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free - donations welcome"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=h_V7gOIUWoQ&camcommunitychannel=6-4",
+      "title": "Rhymetime at March Library (term time only )",
+      "fields": {
+        "Name": "March Library",
+        "Address": "City Road, March",
+        "Postcode": "PE15 9LT",
+        "Time/date notes": "Every week on Monday (term time only) 10 - 10.45am",
+        "Opening Hours": "10:00 - 10:45",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "drop-in",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=_ZByKwGXtb0&camcommunitychannel=6-4",
+      "title": "Rhymetime at March Library",
+      "fields": {
+        "Name": "March Library",
+        "Address": "City Road, March",
+        "Postcode": "PE15 9LT",
+        "Time/date notes": "Every week on Thursday, 10.00 - 10.45am",
+        "Opening Hours": "10:00 - 10:45",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=WIkuhoT_IAI&camcommunitychannel=6-4",
+      "title": "Baby Rhymetime at St Neots Library",
+      "fields": {
+        "Name": "St Neots Library",
+        "Address": "Priory Lane, St. Neots, Cambridgeshire",
+        "Postcode": "PE19 2BH",
+        "Time/date notes": "Every week on Friday (term time only), 10.30am to 11.00am",
+        "Opening Hours": "10:30 - 11.00",
+        "Age Ranges": "0 - 18 months",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=koC8swe1tXE&camcommunitychannel=6-4",
+      "title": "Toddler Rhymetime at St Neots Library",
+      "fields": {
+        "Name": "St Neots Library",
+        "Address": "Priory Lane, St. Neots, Cambridgeshire",
+        "Postcode": "PE19 2BH",
+        "Time/date notes": "Every week on Monday, until further notice",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "1 - 4 years",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=oumCC-miY1c&camcommunitychannel=6-4",
+      "title": "Rhymetime at St Ives Library (2nd session)",
+      "fields": {
+        "Name": "St Ives Library",
+        "Address": "4, Library Row, Station Road, St Ives",
+        "Postcode": "PE27 5BW",
+        "Time/date notes": "Every week on Wednesday (term time only) until further notice",
+        "Opening Hours": "11:00 - 11:30",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free - donations welcome"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=qfJVepAshYs&camcommunitychannel=6-4",
+      "title": "Rhymetime on Fridays at Cambridge Central Library",
+      "fields": {
+        "Name": "Cambridge Central Library",
+        "Address": "Lion Yard, Cambridge, Cambridgeshire",
+        "Postcode": "CB2 3QD",
+        "Time/date notes": "Every week on Friday, until further notice",
+        "Opening Hours": "14:30 - 15:00",
+        "Age Ranges": "0 - 18 months",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=6Irz8t_8HHI&camcommunitychannel=6-4",
+      "title": "Rhymetime on Saturdays at Cambridge Central Library",
+      "fields": {
+        "Name": "Cambridge Central Library",
+        "Address": "Lion Yard, Cambridge, Cambridgeshire",
+        "Postcode": "CB2 3QD",
+        "Time/date notes": "Every week on Saturday, until further notice",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "0 - 18 months",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=qmPX-HCxZB8&camcommunitychannel=6-4",
+      "title": "Rhymetime on Tuesdays at Cambridge Central Library",
+      "fields": {
+        "Name": "Cambridge Central Library",
+        "Address": "Lion Yard, Cambridge, Cambridgeshire",
+        "Postcode": "CB2 3QD",
+        "Time/date notes": "Every week on Tuesday, until further notice",
+        "Opening Hours": "14:30 - 15:00",
+        "Age Ranges": "0 - 18 months",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=Vt7Z8whfL1Y&camcommunitychannel=6-4",
+      "title": "Rhymetime on Thursdays at Cambridge Central Library",
+      "fields": {
+        "Name": "Cambridge Central Library",
+        "Address": "Lion Yard, Cambridge, Cambridgeshire",
+        "Postcode": "CB2 3QD",
+        "Time/date notes": "Every week on Thursday, until further notice",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "0 - 18 months",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=xe7xOOdRA0w&camcommunitychannel=6-4",
+      "title": "Rhymetime on Thursdays at Cambridge Central Library",
+      "fields": {
+        "Name": "Cambridge Central Library",
+        "Address": "Lion Yard, Cambridge, Cambridgeshire",
+        "Postcode": "CB2 3QD",
+        "Time/date notes": "Every week on Thursday, until further notice",
+        "Opening Hours": "11:15 - 11:45",
+        "Age Ranges": "0 - 18 months",
+        "Details": "Free"
+      },
+      "relocation": false,
+      "restrictions": [
+        "drop-in"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=JiyviD5lWGI&camcommunitychannel=6-4",
+      "title": "Rhymetime at Wisbech Library",
+      "fields": {
+        "Name": "Wisbech Library",
+        "Address": "Ely Place, Wisbech, Cambridgeshire",
+        "Postcode": "PE13 1EU",
+        "Time/date notes": "Every week on Friday, until further notice",
+        "Opening Hours": "10:30 - 11:15",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free, donations always welcomed"
+      },
+      "relocation": true,
+      "restrictions": [],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=0kfQWLA2HXI&camcommunitychannel=6-4",
+      "title": "Bar Hill Rhyme-time",
+      "fields": {
+        "Name": "Bar Hill Library",
+        "Address": "Gladeside, Bar Hill, Cambridge, Cambridgeshire",
+        "Postcode": "CB23 8DY",
+        "Time/date notes": "14.30 to 15.30, every Tuesday, term time only",
+        "Opening Hours": "",
+        "Age Ranges": "0 - 5 years",
+        "Details": "Free, donations welcome"
+      },
+      "relocation": false,
+      "restrictions": [
+        "term-time",
+        "adult attendance"
+      ],
+      "description": ""
+    },
+    {
+      "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=a19Gz2YlQP4&camcommunitychannel=6-4",
+      "title": "Wiggle and Giggle",
+      "fields": {
+        "Name": "Whittlesey Library",
+        "Address": "Market Street, Whittlesey, Peterborough, Cambridgeshire",
+        "Postcode": "PE7 1BA",
+        "Time/date notes": "During temporary library closure we have moved to Peel House PE7 1AY Tuesday 12:15 12:45pm",
+        "Opening Hours": "10:30 - 11:00",
+        "Age Ranges": "0 - 4 years",
+        "Details": "Free"
+      },
+      "relocation": true,
+      "restrictions": [
+        "term-time"
+      ],
+      "description": ""
+    }
+  ]
+}

@@ -10,10 +10,16 @@ on:
       - 'original_content_worker.py'
       - '.github/workflows/original-content.yml'
       - '.github/workflows/llm-smoke.yml'
+      - 'shadow_capture.py'
+      - 'tests/test_shadow_review.py'
       - 'worker.py'
       - 'events_worker.py'
       - 'tests/test_gemini_usage.py'
       - 'tests/test_activity_ingestion.py'
+      - 'tests/test_extraction_cache.py'
+      - 'tests/test_extraction_units.py'
+      - 'extraction_cache.py'
+      - 'structured_events.py'
       - '.github/workflows/gemini-usage-checks.yml'
       - '.github/workflows/news.yml'
       - '.github/workflows/collect-*.yml'
@@ -35,4 +41,6 @@ jobs:
       - run: python -m unittest discover -s tests -p test_activity_ingestion.py -v
       - run: python -m unittest discover -s tests -p test_llm_provider.py -v
       - run: python -m unittest discover -s tests -p test_original_content.py -v
+      - run: python -m unittest discover -s tests -p test_extraction_cache.py -v
+      - run: python -m unittest discover -s tests -p test_extraction_units.py -v
       - run: python events_worker.py --self-test

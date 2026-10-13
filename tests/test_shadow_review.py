@@ -1,0 +1,115 @@
+import json
+import os
+from pathlib import Path
+import tempfile
+import unittest
+from unittest.mock import Mock, patch
+
+from shadow_capture import capture_calls
+from scripts.replay_shadow import replay, estimate, configure_minimum
+
+
+class ShadowReviewTests(unittest.TestCase):
+    def caller(self):
+        def call(prompt):
+            call.metrics['api_attempts'] += 1
+            return [{'title': 'Family workshop', 'event_url': 'https://example.org/event'}]
+        call.metrics = {'api_attempts': 0}
+        call.settings = {'model': 'gemini'}
+        call.json_schema = {'type': 'array', 'items': {'type': 'object'}}
+        call.close = Mock()
+        return call
+
+    def test_capture_preserves_return_and_caps_sample_without_extra_calls(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory, \
+             patch.dict(os.environ, {'SHADOW_CAPTURE_DIR': directory}):
+            original = self.caller()
+            call = capture_calls(original)
+            for _ in range(3):
+                self.assertEqual(call('same prompt')[0]['title'], 'Family workshop')
+            paths = list(Path(directory).glob('*.json'))
+            self.assertEqual(len(paths), 2)
+            self.assertEqual(original.metrics['api_attempts'], 3)
+            sample = json.loads(paths[0].read_text())
+            self.assertEqual(sample['prompt'], 'same prompt')
+            self.assertEqual(sample['usage']['api_attempts'], 1)
+
+    def test_capture_io_failure_cannot_fail_production(self):
+        with patch.dict(os.environ, {'SHADOW_CAPTURE_DIR': 'unused'}), \
+             patch('shadow_capture.Path.mkdir', side_effect=OSError('disk error')):
+            call = capture_calls(self.caller())
+            self.assertEqual(call('prompt')[0]['title'], 'Family workshop')
+
+    def test_disabled_capture_and_production_error_behavior(self):
+        with patch.dict(os.environ, {'SHADOW_CAPTURE_DIR': ''}):
+            original = self.caller()
+            self.assertIs(capture_calls(original), original)
+        original = self.caller()
+        original = Mock(side_effect=RuntimeError('original error'), metrics={}, settings={}, close=Mock())
+        with patch.dict(os.environ, {'SHADOW_CAPTURE_DIR': 'unused'}):
+            with self.assertRaisesRegex(RuntimeError, 'original error'):
+                capture_calls(original)('prompt')
+
+    def test_replay_exact_prompts_and_four_request_cap(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory:
+            root = Path(directory)
+            inputs = root / 'inputs'
+            inputs.mkdir()
+            for i in range(6):
+                (inputs / f'sample-{i}.json').write_text(json.dumps({'prompt': 'saved prompt ' + str(i),
+                    'schema': {'type': 'array'}, 'raw': [], 'worker': 'events', 'settings': {}, 'usage': {}}))
+            generator = Mock(settings={}, metrics={'api_attempts': 0})
+            prompts = []
+            def generate(prompt, schema):
+                prompts.append(prompt)
+                generator.metrics['api_attempts'] += 1
+                return []
+            generator.generate.side_effect = generate
+            report = replay(inputs, root / 'output', generator)
+            self.assertEqual(prompts, ['saved prompt ' + str(i) for i in range(4)])
+            self.assertEqual(len(report['samples']), 4)
+            self.assertFalse(report['database_access'])
+            self.assertFalse(report['publishing'])
+
+    def test_failure_keeps_partial_report_without_retry(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory:
+            root = Path(directory)
+            (root / 'sample-1.json').write_text(json.dumps({'prompt': 'prompt', 'schema': {},
+                'raw': [], 'worker': 'events', 'settings': {}, 'usage': {}}))
+            generator = Mock(settings={}, metrics={}, generate=Mock(side_effect=RuntimeError('failure')))
+            with self.assertRaises(RuntimeError):
+                replay(root, root / 'output', generator)
+            generator.generate.assert_called_once()
+            self.assertTrue((root / 'output/results.json').exists())
+
+    def test_cost_unknown_without_rates_and_thinking_is_not_double_counted(self):
+        usage = {'prompt_tokens': 100, 'output_tokens': 50, 'thinking_tokens': 20}
+        with patch.dict(os.environ, {}, clear=True):
+            self.assertIsNone(estimate(usage, 'BASELINE'))
+        with patch.dict(os.environ, {'BASELINE_INPUT_USD_PER_MILLION': '1', 'BASELINE_OUTPUT_USD_PER_MILLION': '2'}):
+            self.assertAlmostEqual(estimate(usage, 'BASELINE'), 0.0002)
+            self.assertIsNone(estimate(dict(usage, unknown_usage_attempts=1), 'BASELINE'))
+
+    def test_minimum_preserves_captured_model_and_records_real_setting(self):
+        generator = Mock(provider='gemini', settings={})
+        self.assertTrue(configure_minimum({'settings': {'model': 'gemini-3.6-flash'}}, generator))
+        self.assertEqual(generator.model, 'gemini-3.6-flash')
+        self.assertEqual(generator.thinking_level, 'minimal')
+        self.assertEqual(generator.settings['thinking_level'], 'minimal')
+        self.assertEqual(generator.temperature, 0)
+        self.assertTrue(configure_minimum({'settings': {'model': 'gemini-3.8-flash'}}, generator))
+        self.assertEqual(generator.thinking_level, 'low')
+
+    def test_unknown_gemini_model_is_not_replayed_or_substituted(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory:
+            root = Path(directory)
+            (root / 'sample-1.json').write_text(json.dumps({'prompt': 'prompt', 'schema': {},
+                'raw': [], 'worker': 'events', 'settings': {'model': 'future-model'}, 'usage': {}}))
+            generator = Mock(provider='gemini', settings={}, metrics={})
+            report = replay(root, root / 'output', generator, configure_minimum)
+            generator.generate.assert_not_called()
+            self.assertEqual(report['samples'][0]['status'], 'unsupported-model; no paid request')
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -17,6 +17,8 @@ function toActivity(row: Record<string, unknown>): DadActivity {
     title: String(row.title ?? "Family activity"),
     description: text(row.description),
     schedule_text: text(row.schedule_text),
+    start_date: text(row.start_date),
+    end_date: text(row.end_date),
     time_text: text(row.time_text),
     location: text(row.location),
     event_url: text(row.event_url),

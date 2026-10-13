@@ -1,7 +1,7 @@
 name: Dadspace original content
 on:
   schedule:
-    - cron: '17 7,9 * * *'
+    - cron: '17 7,19 * * *'
       timezone: Europe/London
   workflow_dispatch:
     inputs:

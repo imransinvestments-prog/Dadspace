@@ -1,0 +1,52 @@
+name: Sutton prepublication qualification
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/validate_sutton_sources.py'
+      - 'tests/test_sutton_source_review.py'
+      - '.github/workflows/sutton-source-review.yml'
+      - 'lib/activity-copy.ts'
+      - 'scripts/test-activity-attendance.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -p test_sutton_source_review.py -v
+      - run: python -m unittest discover -s tests -p test_mylibrary_calendar.py -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --experimental-strip-types scripts/test-activity-attendance.mjs
+  live-read-only:
+    needs: regressions
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements-browser.txt
+      - run: playwright install --with-deps chromium
+      - run: python scripts/validate_sutton_sources.py
+        env:
+          DRY_RUN: 'true'
+          ALLOW_VENUE_WRITES: 'false'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sutton-source-review-${{ github.run_id }}
+          path: sutton-source-review/
+          if-no-files-found: error
+          retention-days: 30
+

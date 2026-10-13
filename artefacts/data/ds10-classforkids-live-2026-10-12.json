@@ -1,0 +1,91 @@
+{
+  "checked_at": "2026-10-12T11:32:13.286275+00:00",
+  "database_writes": 0,
+  "results": [
+    {
+      "pass_number": 1,
+      "status": "ok",
+      "rows": [
+        {
+          "source_id": "readonly-cfk-review",
+          "title": "Mini Movers Gymnastics",
+          "description": "Regular class with published remaining sessions; check booking page for attendance requirements.",
+          "listing_type": "activity",
+          "is_holiday_camp": false,
+          "category": null,
+          "start_date": "2026-10-14",
+          "end_date": "2026-12-16",
+          "schedule_text": "Published dates: 2026-10-14, 2026-10-21, 2026-10-28, 2026-11-04, 2026-11-11, 2026-11-18, 2026-11-25, 2026-12-02, 2026-12-09, 2026-12-16; Wednesday 10:30am - 11:15am",
+          "time_text": null,
+          "location": "Grace Point",
+          "venue_name": "Grace Point",
+          "venue_address": null,
+          "postcode": "N1 2SN",
+          "venue_id": null,
+          "event_url": "https://little-movers-gym.classforkids.io/info/123",
+          "cost_text": "\u00a3150.00 for remaining published sessions",
+          "age_range": "18mth - 3yrs",
+          "recurrence": "recurring",
+          "family_relevance": 5,
+          "confidence": 0.99,
+          "source_url": "https://little-movers-gym.classforkids.io/info/123",
+          "extraction_method": "classforkids_calendar",
+          "dedupe_key": "65bfa6a802fecfb46566298e1e08b2078b103237",
+          "last_verified_at": "2026-10-12T11:32:13.015533+00:00",
+          "last_seen_at": "2026-10-12T11:32:13.015533+00:00"
+        }
+      ],
+      "hash": "d8b8dbd77b2bc47caee7ab3ff57e02985a884f0f9f28383ba7989b3f92b24799",
+      "message": "ClassForKids: 1 classes; zero model calls",
+      "stats": {
+        "requests": 1,
+        "gemini_logical_calls": 0,
+        "extracted": 2,
+        "kept": 1
+      }
+    },
+    {
+      "pass_number": 2,
+      "status": "ok",
+      "rows": [
+        {
+          "source_id": "readonly-cfk-review",
+          "title": "Mini Movers Gymnastics",
+          "description": "Regular class with published remaining sessions; check booking page for attendance requirements.",
+          "listing_type": "activity",
+          "is_holiday_camp": false,
+          "category": null,
+          "start_date": "2026-10-14",
+          "end_date": "2026-12-16",
+          "schedule_text": "Published dates: 2026-10-14, 2026-10-21, 2026-10-28, 2026-11-04, 2026-11-11, 2026-11-18, 2026-11-25, 2026-12-02, 2026-12-09, 2026-12-16; Wednesday 10:30am - 11:15am",
+          "time_text": null,
+          "location": "Grace Point",
+          "venue_name": "Grace Point",
+          "venue_address": null,
+          "postcode": "N1 2SN",
+          "venue_id": null,
+          "event_url": "https://little-movers-gym.classforkids.io/info/123",
+          "cost_text": "\u00a3150.00 for remaining published sessions",
+          "age_range": "18mth - 3yrs",
+          "recurrence": "recurring",
+          "family_relevance": 5,
+          "confidence": 0.99,
+          "source_url": "https://little-movers-gym.classforkids.io/info/123",
+          "extraction_method": "classforkids_calendar",
+          "dedupe_key": "65bfa6a802fecfb46566298e1e08b2078b103237",
+          "last_verified_at": "2026-10-12T11:32:13.286275+00:00",
+          "last_seen_at": "2026-10-12T11:32:13.286275+00:00"
+        }
+      ],
+      "hash": "d8b8dbd77b2bc47caee7ab3ff57e02985a884f0f9f28383ba7989b3f92b24799",
+      "message": "ClassForKids: 1 classes; zero model calls",
+      "stats": {
+        "requests": 1,
+        "gemini_logical_calls": 0,
+        "extracted": 2,
+        "kept": 1
+      }
+    }
+  ],
+  "note": "Two normal-worker public detail passes with actual robots checks, venue resolution disabled. No root timetable completeness claim; only this observed detail URL is qualified."
+}

@@ -114,7 +114,9 @@ class StructuredGenerator:
                             output_tokens=0, thinking_tokens=0, total_tokens=0,
                             unknown_usage_attempts=0, unknown_thinking_attempts=0)
         self.settings = dict(provider=self.provider, model=self.model,
-                             thinking_level='provider-default', token_budget=self.token_budget,
+                             thinking_level=(self.thinking_level or 'provider-default') if self.provider == 'gemini'
+                                 else ('not-applicable (non-reasoning model)' if self.model == 'gpt-4.1-mini' else 'provider-default'),
+                             token_budget=self.token_budget,
                              attempt_budget=self.attempt_budget, max_output_tokens=self.output_limit,
                              max_retries=self.retries)
 
@@ -124,6 +126,8 @@ class StructuredGenerator:
     def generate(self, prompt, schema):
         from jsonschema import Draft202012Validator
         normalized, wrapped = strict_schema(schema)
+        if self.provider == 'gemini' and getattr(self, 'preserve_gemini_schema', False):
+            normalized, wrapped = copy.deepcopy(schema), False
         Draft202012Validator.check_schema(normalized)
         sent_prompt = prompt
         if self.provider == 'openai':

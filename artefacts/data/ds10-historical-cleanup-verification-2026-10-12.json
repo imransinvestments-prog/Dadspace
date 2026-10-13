@@ -1,0 +1,39 @@
+{
+  "counts": {
+    "stored_rows": 679,
+    "changed_rows": 147,
+    "untouched_rows": 532,
+    "date_schedule_backfills": 111,
+    "classifications_corrected": 16,
+    "withdrawn": 22,
+    "duplicates_superseded": 8
+  },
+  "deleted_rows": 0,
+  "source_registry_changes": 0,
+  "collection_timestamps_changed": 0,
+  "forward_transaction_rolled_back_before_commit": true,
+  "undo_transaction_verified_and_rolled_back": true,
+  "requires_review_records": 191,
+  "backups": [
+    {
+      "path": "event-backup\\historical-post-schema.json",
+      "sha256": "62f16f4fada10f0e3d7540fe18d3c738102d73a1425506515a7e48fca7d42b63"
+    },
+    {
+      "path": "event-backup\\historical-final.json",
+      "sha256": "a528b67ab9d10f694ea06d671e917b555bf664fadc2a04043ab2e371f3fe8df5"
+    },
+    {
+      "path": "event-backup\\historical-rollback-plan-v2.json",
+      "sha256": "d8c1fe71e7cab0406fbe356383003df8381426c13c9409a33f688e0154eb46e0"
+    }
+  ],
+  "guarded_dated_rows": 109,
+  "date_loss_probe_passed_and_rolled_back": true,
+  "explicit_date_change_probe_passed_and_rolled_back": true,
+  "source_level_refresh_probe_passed_and_rolled_back": true,
+  "final_guard_aware_undo_probe_passed_and_rolled_back": true,
+  "current_activities": 416,
+  "upcoming_events": 163,
+  "withdrawn_records_visible": 0
+}
