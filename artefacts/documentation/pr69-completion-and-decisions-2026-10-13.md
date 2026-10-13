@@ -2,6 +2,8 @@
 
 PR: https://github.com/imransinvestments-prog/Dadspace/pull/69
 
+Independent sampling repair released in [PR #77](https://github.com/imransinvestments-prog/Dadspace/pull/77), main commit `bfd3b3c61a066dccd1ee2b8a3cebb7d1b068a3c7`. Four PR workflows, main integration checks and Vercel production deployment passed. Scheduled shadow review will now receive nonempty samples where available, with the existing sample/call budgets. The broader #69 provider/validation release remains pending.
+
 Engineering improvements and a bounded live comparison are complete. The branch
 targets current main and remains a draft pending the release/quality decisions
 below. No source, provider configuration or production data was changed.
@@ -92,7 +94,7 @@ quotes versus neighbouring/global text, child versus senior age bands, observed
 pagination/access/budget failures, pre-request truncation rejection, resume without
 repeated paid calls and nonempty shadow sampling.
 
-Linux provider/usage, shadow, deals/full regressions, news, Originals, SEO, civic safety, venue-review and baseline workflows passed on engineering head `c8a4468`. [Provider checks](https://github.com/imransinvestments-prog/Dadspace/actions/runs/38425366390), [shadow checks](https://github.com/imransinvestments-prog/Dadspace/actions/runs/38425366433), [full regressions](https://github.com/imransinvestments-prog/Dadspace/actions/runs/38425366431). MyLibrary's separately
+Linux provider/usage, shadow, deals/full regressions, news, Originals, SEO, civic safety, venue-review and baseline workflows passed on final code head `9d2e8a4`. [Provider checks](https://github.com/imransinvestments-prog/Dadspace/actions/runs/38426546245), [shadow checks](https://github.com/imransinvestments-prog/Dadspace/actions/runs/38426546131), [full regressions](https://github.com/imransinvestments-prog/Dadspace/actions/runs/38426546188). MyLibrary's separately
 documented Ealing/Merton runner HTTP 403 remains a source-qualification failure,
 not a reason to waive regressions or enable those sources.
 
