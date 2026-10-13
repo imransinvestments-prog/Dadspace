@@ -79,6 +79,25 @@ class ProviderTests(unittest.TestCase):
                     self.assertIn('JSON', body['messages'][0]['content'])
                     self.assertEqual(gen.metrics['unknown_thinking_attempts'], 1)
 
+    def test_minimum_thinking_wire_setting_and_openai_not_applicable(self):
+        from scripts.replay_shadow import configure_minimum
+        os.environ.update(LLM_PROVIDER='gemini', LLM_MODEL='gemini-3.6-flash')
+        self.post.return_value = response('gemini', data=DATA['items'])
+        gen = self.generator()
+        configure_minimum({'settings': {'model': 'gemini-3.6-flash'}}, gen)
+        gen.generate('exact saved prompt', SCHEMA)
+        body = self.post.call_args.args[2]
+        self.assertEqual(body['generationConfig']['thinkingConfig'], {'thinkingLevel': 'MINIMAL'})
+        self.assertEqual(body['generationConfig']['temperature'], 0)
+        self.assertEqual(body['generationConfig']['responseJsonSchema'], SCHEMA)
+        self.assertEqual(gen.settings['thinking_level'], 'minimal')
+        os.environ.update(LLM_PROVIDER='openai', LLM_MODEL='gpt-4.1-mini')
+        self.post.return_value = response()
+        gen = self.generator()
+        gen.generate('exact saved prompt', SCHEMA)
+        self.assertNotIn('reasoning', self.post.call_args.args[2])
+        self.assertEqual(gen.settings['thinking_level'], 'not-applicable (non-reasoning model)')
+
     def test_no_retry_or_fallback_on_schema_failure(self):
         self.post.return_value = response(data={'items': [{'title': 123}]})
         with self.assertRaises(ValueError):

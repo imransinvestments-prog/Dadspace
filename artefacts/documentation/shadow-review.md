@@ -1,5 +1,31 @@
 # Extraction shadow comparison (#65)
 
+## Minimum-thinking comparison
+
+Shadow jobs now run independently for OpenAI and Gemini minimum thinking on the
+same captured prompts. Production Gemini settings stay unchanged. GPT-4.1-mini
+has no reasoning step or configurable thinking effort, so its existing replay is
+already the non-reasoning comparison; do not send an unsupported reasoning setting
+or duplicate an identical OpenAI call. See the [OpenAI model documentation](https://developers.openai.com/api/docs/models/gpt-4.1-mini).
+
+The Gemini replay preserves the captured model and uses a documented lowest level:
+`minimal` for the current Gemini 3.6 Flash, `low` for 3.8 Flash/3.1 Pro; other
+explicitly mapped supported models are listed in `LOWEST_THINKING`. Unknown IDs
+are marked unsupported and skipped without a request or model substitution.
+`minimal` does not guarantee zero thinking. See [Google's settings table](https://ai.google.dev/gemini-api/docs/generate-content/thinking).
+Gemini replay uses REST with temperature 0 and the original captured JSON Schema,
+including its array root, rather than the OpenAI object-root wrapper. This is not
+an exact SDK/transport reproduction of production; evaluate that limitation and
+the bounded output cap in comparisons.
+
+Each provider has its own four-attempt/60,000-token budget and no retries. Total
+additional shadow work is now at most eight attempts per upstream run, rather than
+four. Matrix fail-fast is disabled, so a Gemini billing/response failure cannot
+cancel the OpenAI comparison. Neither can affect production. Artifacts include
+variant labels and per-sample actual model/thinking settings, with separate pricing
+rates selected for each provider. The captured production response remains the
+baseline for both, enabling default-versus-minimum Gemini and cross-provider review.
+
 Production event/activity workers still call Gemini and remain the sole database
 writers. Their live runs best-effort capture at most two successful Gemini calls
 each: exact prompt, response JSON Schema, raw response, model settings and token
@@ -11,15 +37,15 @@ publication or listing correctness.
 The separate `Extraction shadow comparison` workflow triggers after the twice-
 daily orchestration or a manual civic/activity workflow finishes on trusted main.
 It downloads only `gemini-shadow-input-*` artifacts from that upstream run and
-replays at most four exact prompts with OpenAI `gpt-4.1-mini`. No page refetching,
+runs each comparison variant on at most four exact prompts. No page refetching,
 Supabase credentials, venue creation, database imports or publishing code is used.
 Failures happen in a separate workflow and do not affect production dependencies.
 Originals, news and deals are not shadowed.
 
-Limits: four attempts, 60,000 total reported tokens checked between calls, 3,000
+Limits per provider: four attempts, 60,000 total reported tokens checked between calls, 3,000
 output tokens per request, 90-second HTTP timeout, zero retries and no fallback.
 One in-flight request can exceed the remaining run budget. No samples means no
-OpenAI calls; this includes Gemini billing failures and unchanged cached sources.
+shadow calls; this includes production Gemini billing failures and unchanged cached sources.
 Missing OpenAI credentials/credits fail the comparison without changing production.
 
 Inputs expire after seven days; comparison reports after fourteen. These artifacts
