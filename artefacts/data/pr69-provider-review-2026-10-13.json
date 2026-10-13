@@ -43,7 +43,13 @@
               "age_range": null,
               "cost_text": null,
               "recurrence": "recurring",
-              "location": "Llandaff North and Gabalfa Hub"
+              "location": "Llandaff North and Gabalfa Hub",
+              "category": "libraries",
+              "is_holiday_camp": false,
+              "venue_name": "Llandaff North and Gabalfa Hub",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Baby Rhyme Time",
@@ -56,7 +62,13 @@
               "age_range": null,
               "cost_text": null,
               "recurrence": "recurring",
-              "location": "Penylan Library and Community Centre"
+              "location": "Penylan Library and Community Centre",
+              "category": "baby_toddler",
+              "is_holiday_camp": false,
+              "venue_name": "Penylan Library and Community Centre",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             }
           ]
         },
@@ -93,7 +105,13 @@
               "age_range": null,
               "cost_text": null,
               "recurrence": "recurring",
-              "location": "Llandaff North and Gabalfa Hub"
+              "location": "Llandaff North and Gabalfa Hub",
+              "category": "baby_toddler",
+              "is_holiday_camp": false,
+              "venue_name": "Llandaff North and Gabalfa Hub",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Baby Rhyme Time",
@@ -106,7 +124,13 @@
               "age_range": null,
               "cost_text": null,
               "recurrence": "recurring",
-              "location": "Penylan Library and Community Centre"
+              "location": "Penylan Library and Community Centre",
+              "category": "baby_toddler",
+              "is_holiday_camp": false,
+              "venue_name": "Penylan Library and Community Centre",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             }
           ]
         }
@@ -121,7 +145,14 @@
       "url_date_comparison": {
         "missing_from_openai": [],
         "additional_openai": [],
-        "changed": []
+        "changed": [
+          {
+            "title": "Story Time and Craft",
+            "fields": [
+              "category"
+            ]
+          }
+        ]
       }
     },
     {
@@ -160,7 +191,13 @@
               "age_range": null,
               "cost_text": "Free",
               "recurrence": "one_off",
-              "location": "National Wool Museum"
+              "location": "National Wool Museum",
+              "category": "family_days_out",
+              "is_holiday_camp": false,
+              "venue_name": "National Wool Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "CREU Young Makers: Family Halloween Wet Felting Workshop",
@@ -173,7 +210,13 @@
               "age_range": null,
               "cost_text": "£20 adult and child I Additional adult and child tickets £10 each",
               "recurrence": "one_off",
-              "location": "National Wool Museum"
+              "location": "National Wool Museum",
+              "category": "arts_crafts",
+              "is_holiday_camp": false,
+              "venue_name": "National Wool Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "CREU Young Makers: Halloween Pom Poms!",
@@ -186,7 +229,13 @@
               "age_range": null,
               "cost_text": "Free",
               "recurrence": "one_off",
-              "location": "National Wool Museum"
+              "location": "National Wool Museum",
+              "category": "arts_crafts",
+              "is_holiday_camp": false,
+              "venue_name": "National Wool Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Festive Fun with Siân Corn (Mrs Claus)",
@@ -199,7 +248,13 @@
               "age_range": "2+",
               "cost_text": "£10 per child",
               "recurrence": "one_off",
-              "location": "National Wool Museum"
+              "location": "National Wool Museum",
+              "category": "family_days_out",
+              "is_holiday_camp": false,
+              "venue_name": "National Wool Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Waterfront Wildings",
@@ -212,7 +267,13 @@
               "age_range": "Under 5s",
               "cost_text": "Pay what you can. Minimum £1 per child",
               "recurrence": "recurring",
-              "location": "National Waterfront Museum"
+              "location": "National Waterfront Museum",
+              "category": "outdoors_nature",
+              "is_holiday_camp": false,
+              "venue_name": "National Waterfront Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Storytime with Babis Bach Babies",
@@ -225,7 +286,13 @@
               "age_range": null,
               "cost_text": "£12.50 (Adult & Child ticket); £8.00 (Additional Adult or Child ticket)",
               "recurrence": "one_off",
-              "location": "National Museum Cardiff"
+              "location": "National Museum Cardiff",
+              "category": "baby_toddler",
+              "is_holiday_camp": false,
+              "venue_name": "National Museum Cardiff",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Nature Trail, Quarry Hospital",
@@ -238,7 +305,13 @@
               "age_range": null,
               "cost_text": "Free",
               "recurrence": "seasonal",
-              "location": "National Slate Museum"
+              "location": "National Slate Museum",
+              "category": "outdoors_nature",
+              "is_holiday_camp": false,
+              "venue_name": "National Slate Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Gods, Heroes, & Monsters: Become a Hero!",
@@ -251,7 +324,13 @@
               "age_range": null,
               "cost_text": "£5/child",
               "recurrence": "seasonal",
-              "location": "National Roman Legion Museum"
+              "location": "National Roman Legion Museum",
+              "category": "family_days_out",
+              "is_holiday_camp": false,
+              "venue_name": "National Roman Legion Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "The Coblynnau of Big Pit",
@@ -264,7 +343,13 @@
               "age_range": null,
               "cost_text": "Free",
               "recurrence": "one_off",
-              "location": "Big Pit National Coal Museum"
+              "location": "Big Pit National Coal Museum",
+              "category": "museums_heritage",
+              "is_holiday_camp": false,
+              "venue_name": "Big Pit National Coal Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Halloween Nights",
@@ -277,7 +362,13 @@
               "age_range": null,
               "cost_text": "£16 / Under 2s free",
               "recurrence": "seasonal",
-              "location": "St Fagans National Museum of History"
+              "location": "St Fagans National Museum of History",
+              "category": "family_days_out",
+              "is_holiday_camp": false,
+              "venue_name": "St Fagans National Museum of History",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Letterpress Christmas Cards",
@@ -290,7 +381,13 @@
               "age_range": null,
               "cost_text": "Free",
               "recurrence": "one_off",
-              "location": "National Waterfront Museum"
+              "location": "National Waterfront Museum",
+              "category": "arts_crafts",
+              "is_holiday_camp": false,
+              "venue_name": "National Waterfront Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Mrs Claus Magical Christmas / Nadolig Hudolus Siân Corn",
@@ -303,7 +400,13 @@
               "age_range": "under 7",
               "cost_text": "Free",
               "recurrence": "seasonal",
-              "location": "National Waterfront Museum"
+              "location": "National Waterfront Museum",
+              "category": "family_days_out",
+              "is_holiday_camp": false,
+              "venue_name": "National Waterfront Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Festive Stop Motion Animation workshops",
@@ -316,7 +419,13 @@
               "age_range": null,
               "cost_text": "£7 per child",
               "recurrence": "seasonal",
-              "location": "National Waterfront Museum"
+              "location": "National Waterfront Museum",
+              "category": "arts_crafts",
+              "is_holiday_camp": false,
+              "venue_name": "National Waterfront Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Storytime with Babis Bach Babies",
@@ -329,7 +438,13 @@
               "age_range": null,
               "cost_text": "£12.50 (Adult & Child); £8.00 (Additional Adult or Child)",
               "recurrence": "one_off",
-              "location": "National Museum Cardiff"
+              "location": "National Museum Cardiff",
+              "category": "baby_toddler",
+              "is_holiday_camp": false,
+              "venue_name": "National Museum Cardiff",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "✨🎄 Big Waterfront Christmas 🎄✨",
@@ -342,7 +457,13 @@
               "age_range": null,
               "cost_text": "Free",
               "recurrence": "one_off",
-              "location": "National Waterfront Museum"
+              "location": "National Waterfront Museum",
+              "category": "family_days_out",
+              "is_holiday_camp": false,
+              "venue_name": "National Waterfront Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             }
           ]
         },
@@ -379,7 +500,13 @@
               "age_range": "Pre-school/Primary",
               "cost_text": "Free",
               "recurrence": "one_off",
-              "location": "National Wool Museum"
+              "location": "National Wool Museum",
+              "category": "arts_crafts",
+              "is_holiday_camp": false,
+              "venue_name": "National Wool Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "CREU Young Makers: Family Halloween Wet Felting Workshop",
@@ -392,7 +519,13 @@
               "age_range": null,
               "cost_text": "£20 adult and child I Additional adult and child tickets £10 each",
               "recurrence": "one_off",
-              "location": "National Wool Museum"
+              "location": "National Wool Museum",
+              "category": "arts_crafts",
+              "is_holiday_camp": false,
+              "venue_name": "National Wool Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "CREU Young Makers: Halloween Pom Poms!",
@@ -405,7 +538,13 @@
               "age_range": null,
               "cost_text": "Free",
               "recurrence": "one_off",
-              "location": "National Wool Museum"
+              "location": "National Wool Museum",
+              "category": "arts_crafts",
+              "is_holiday_camp": false,
+              "venue_name": "National Wool Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Storytime with Babis Bach Babies",
@@ -418,7 +557,13 @@
               "age_range": null,
               "cost_text": "£12.50 (Adult & Child ticket); £8.00 (Additional Adult or Child ticket); HYNT tickets available",
               "recurrence": "one_off",
-              "location": "National Museum Cardiff"
+              "location": "National Museum Cardiff",
+              "category": "baby_toddler",
+              "is_holiday_camp": false,
+              "venue_name": "National Museum Cardiff",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Nature Trail, Quarry Hospital",
@@ -431,7 +576,13 @@
               "age_range": null,
               "cost_text": "Free",
               "recurrence": "one_off",
-              "location": "National Slate Museum"
+              "location": "National Slate Museum",
+              "category": "outdoors_nature",
+              "is_holiday_camp": false,
+              "venue_name": "National Slate Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Gods, Heroes, & Monsters: Become a Hero!",
@@ -444,7 +595,13 @@
               "age_range": null,
               "cost_text": "£5/child",
               "recurrence": "one_off",
-              "location": "National Roman Legion Museum"
+              "location": "National Roman Legion Museum",
+              "category": "museums_heritage",
+              "is_holiday_camp": false,
+              "venue_name": "National Roman Legion Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "The Coblynnau of Big Pit",
@@ -457,7 +614,13 @@
               "age_range": null,
               "cost_text": "Free",
               "recurrence": "one_off",
-              "location": "Big Pit National Coal Museum"
+              "location": "Big Pit National Coal Museum",
+              "category": "farms_animals",
+              "is_holiday_camp": false,
+              "venue_name": "Big Pit National Coal Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Halloween Nights",
@@ -470,7 +633,13 @@
               "age_range": null,
               "cost_text": "£16 / Under 2s free",
               "recurrence": "one_off",
-              "location": "St Fagans National Museum of History"
+              "location": "St Fagans National Museum of History",
+              "category": "museums_heritage",
+              "is_holiday_camp": false,
+              "venue_name": "St Fagans National Museum of History",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Storytime with Babis Bach Babies",
@@ -483,7 +652,13 @@
               "age_range": null,
               "cost_text": "£12.50 (Adult & Child); £8.00 (Additional Adult or Child); HYNT tickets available",
               "recurrence": "one_off",
-              "location": "National Museum Cardiff"
+              "location": "National Museum Cardiff",
+              "category": "baby_toddler",
+              "is_holiday_camp": false,
+              "venue_name": "National Museum Cardiff",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Letterpress Christmas Cards",
@@ -496,7 +671,13 @@
               "age_range": null,
               "cost_text": "Free",
               "recurrence": "one_off",
-              "location": "National Waterfront Museum"
+              "location": "National Waterfront Museum",
+              "category": "arts_crafts",
+              "is_holiday_camp": false,
+              "venue_name": "National Waterfront Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             },
             {
               "title": "Big Waterfront Christmas",
@@ -509,7 +690,13 @@
               "age_range": null,
               "cost_text": "Free",
               "recurrence": "one_off",
-              "location": "National Waterfront Museum"
+              "location": "National Waterfront Museum",
+              "category": "family_days_out",
+              "is_holiday_camp": false,
+              "venue_name": "National Waterfront Museum",
+              "venue_address": null,
+              "postcode": null,
+              "occurrence_dates": null
             }
           ]
         }
@@ -625,9 +812,17 @@
         "additional_openai": [],
         "changed": [
           {
-            "title": "Halloween with Jig-So",
+            "title": "Halloween Nights",
             "fields": [
-              "age_range"
+              "recurrence",
+              "category"
+            ]
+          },
+          {
+            "title": "Gods, Heroes, & Monsters: Become a Hero!",
+            "fields": [
+              "recurrence",
+              "category"
             ]
           },
           {
@@ -637,7 +832,7 @@
             ]
           },
           {
-            "title": "Gods, Heroes, & Monsters: Become a Hero!",
+            "title": "Nature Trail, Quarry Hospital",
             "fields": [
               "recurrence"
             ]
@@ -650,15 +845,16 @@
             ]
           },
           {
-            "title": "Nature Trail, Quarry Hospital",
+            "title": "The Coblynnau of Big Pit",
             "fields": [
-              "recurrence"
+              "category"
             ]
           },
           {
-            "title": "Halloween Nights",
+            "title": "Halloween with Jig-So",
             "fields": [
-              "recurrence"
+              "age_range",
+              "category"
             ]
           },
           {

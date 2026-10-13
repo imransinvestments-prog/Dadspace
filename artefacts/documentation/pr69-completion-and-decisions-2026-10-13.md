@@ -11,7 +11,7 @@ below. No source, provider configuration or production data was changed.
 | Integrate current main | Done: preserved activity dates/session adapters, Sutton qualification, caching, shadow review and minimum-thinking support; resolved five conflicts. |
 | Ground family suitability | Done: an audience label or score cannot substitute for an exact, source-local child/family phrase or explicit child age band. Neighbouring cards/navigation and unsupported paraphrases cannot qualify a model listing. |
 | Repair input coverage | Done: detect truncation before paid extraction; reject partial collection. Cardiff has an opt-in, robots-aware, observed-link paginator capped at 20 pages. All 18 observed pages fetched without model/database calls. |
-| Compare providers | Done for two saved public pages, not representative acceptance. Cardiff agrees; Museum Wales has a material coverage/field gap. |
+| Compare providers | Done for two saved public pages, not representative acceptance. Cardiff agrees on identities but differs on one category; Museum Wales has a material coverage/field gap. |
 | Merge/release | Held for the release decision. The new validation affects Gemini as well as alternative providers; retaining Gemini as default does not make this a behaviour-neutral deployment. |
 | Activate alternatives | Held: successful representative runs, human quality review and worker-specific rollout acceptance remain. Gemini stays default. |
 
@@ -44,7 +44,7 @@ response. Production model limits remain unchanged.
 
 | Source | Gemini raw / accepted | OpenAI raw / accepted | Finding |
 | --- | --- | --- | --- |
-| Cardiff Libraries, first page | 2 / 2 | 7 / 2 | Same two accepted identities; OpenAI's other five claims fail source-local family grounding. |
+| Cardiff Libraries, first page | 2 / 2 | 7 / 2 | Same two accepted identities, with one category difference; OpenAI's other five claims fail source-local family grounding. |
 | Museum Wales listing | 18 / 15 | 15 / 11 | Four genuine URL/date identities missing from OpenAI; several shared fields differ. |
 
 Final rules were replayed offline against the exact saved HTML and raw responses;
@@ -92,7 +92,7 @@ quotes versus neighbouring/global text, child versus senior age bands, observed
 pagination/access/budget failures, pre-request truncation rejection, resume without
 repeated paid calls and nonempty shadow sampling.
 
-Linux CI on the final branch must pass before release. MyLibrary's separately
+Linux provider/usage, shadow, deals/full regressions, news, Originals, SEO, civic safety, venue-review and baseline workflows passed on engineering head `c8a4468`. [Provider checks](https://github.com/imransinvestments-prog/Dadspace/actions/runs/38425366390), [shadow checks](https://github.com/imransinvestments-prog/Dadspace/actions/runs/38425366433), [full regressions](https://github.com/imransinvestments-prog/Dadspace/actions/runs/38425366431). MyLibrary's separately
 documented Ealing/Merton runner HTTP 403 remains a source-qualification failure,
 not a reason to waive regressions or enable those sources.
 
