@@ -40,6 +40,21 @@ class ShadowReviewTests(unittest.TestCase):
             call = capture_calls(self.caller())
             self.assertEqual(call('prompt')[0]['title'], 'Family workshop')
 
+    def test_empty_results_do_not_consume_nonempty_sample_slots(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory, \
+             patch.dict(os.environ, {'SHADOW_CAPTURE_DIR': directory}):
+            original = self.caller()
+            call = Mock(side_effect=[[], [{'title': 'Family workshop'}], [], [{'title': 'Family trail'}]],
+                        metrics=original.metrics, settings=original.settings,
+                        json_schema=original.json_schema, close=original.close)
+            wrapped = capture_calls(call)
+            for index in range(4):
+                wrapped('prompt ' + str(index))
+            paths = sorted(Path(directory).glob('*.json'))
+            self.assertEqual(len(paths), 2)
+            self.assertEqual([json.loads(p.read_text())['prompt'] for p in paths], ['prompt 1', 'prompt 3'])
+            self.assertEqual(call.call_count, 4)
+
     def test_disabled_capture_and_production_error_behavior(self):
         with patch.dict(os.environ, {'SHADOW_CAPTURE_DIR': ''}):
             original = self.caller()
