@@ -29,6 +29,10 @@ def source_soups(documents):
     for _, html in documents:
         soup = BeautifulSoup(html, 'html.parser')
         for node in soup.select('nav, header, footer, script, style, form, [role="navigation"]'):
+            # An article header can contain the real programme title. Only
+            # global headers are discarded; article/main context remains local.
+            if node.name == 'header' and node.find_parent(['article', 'main']):
+                continue
             node.decompose()
         soups.append(soup)
     return soups

@@ -35,6 +35,12 @@ class GroundingTests(unittest.TestCase):
         self.assertFalse(grounded(dict(title='Adult talk', family_evidence='Children welcome'),
                                   docs, 'Children welcome'))
 
+    def test_real_article_header_is_retained_without_global_banner_borrowing(self):
+        docs = [('https://example.org', '<header>Global menu</header><main><article>'
+                 '<header><h1>Family craft</h1></header><p>Children welcome</p></article></main>')]
+        self.assertTrue(grounded(dict(title='Family craft', family_evidence='Children welcome'),
+                                 docs, 'Children welcome'))
+
     def test_rejected_rows_are_counted_and_no_audience_fallback(self):
         stats = {}
         rows = filter_grounded([{'title': 'The Creative Cwtsh', 'audience': 'families'}],

@@ -85,7 +85,7 @@ sample, not a representative benchmark. Continued scheduled evidence is necessar
 
 ## Validation and limitations
 
-Local full suite: 220 tests, 206 passed and 14 provider tests skipped because local
+Local full suite: 221 tests, 207 passed and 14 provider tests skipped because local
 LLM dependencies were unavailable. Those tests are executed by Linux provider CI.
 Action-console checks and the collector self-test passed. New tests cover local
 quotes versus neighbouring/global text, child versus senior age bands, observed
