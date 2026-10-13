@@ -15,8 +15,17 @@ def normalized(value):
     return re.sub(r'[^\w]+', ' ', value).strip()
 
 
+def family_signal(quote):
+    if FAMILY.search(quote):
+        return True
+    ages = re.search(r'\b(?:ages?|aged)\s+(\d{1,2})\s+(?:to\s+)?(\d{1,2})\b', quote)
+    return bool(ages and 0 <= int(ages[1]) < 13 and int(ages[1]) <= int(ages[2]) <= 18)
+
+
 def source_soups(documents):
     soups = []
+    if isinstance(documents, str):
+        documents = [('', documents)]
     for _, html in documents:
         soup = BeautifulSoup(html, 'html.parser')
         for node in soup.select('nav, header, footer, script, style, form, [role="navigation"]'):
@@ -29,7 +38,7 @@ def grounded(item, documents, prepared, *, soups=None):
     """Require a quoted family phrase in the supplied, matching listing context."""
     title = normalized(item.get('title'))
     quote = normalized(item.get('family_evidence'))
-    if not title or not quote or not FAMILY.search(quote):
+    if not title or not quote or not family_signal(quote):
         return False
     if quote not in normalized(prepared):
         return False

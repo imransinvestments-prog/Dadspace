@@ -623,7 +623,7 @@ def extraction_cache_hash(content, source, today):
     The successful timestamp bounds freshness without adding database columns.
     """
     from structured_events import complete_events
-    from family_grounding import filter_grounded, grounded, source_soups, normalized
+    from family_grounding import filter_grounded, grounded, source_soups, normalized, family_signal
     prompt_rules = build_prompt(source, source["url"], "", dt.date(2000, 1, 1))
     settings = {"version": EXTRACTION_CACHE_VERSION,
                 "method": FETCH_ENGINE, "model": MODEL,
@@ -634,7 +634,7 @@ def extraction_cache_hash(content, source, today):
                 "thinking": os.environ.get("GEMINI_THINKING_LEVEL", ""),
                 "extractor": inspect.getsource(make_gemini_caller),
                 "validator": inspect.getsource(clean_events),
-                "family_grounding": inspect.getsource(grounded) + inspect.getsource(filter_grounded) + inspect.getsource(source_soups) + inspect.getsource(normalized),
+                "family_grounding": inspect.getsource(grounded) + inspect.getsource(filter_grounded) + inspect.getsource(source_soups) + inspect.getsource(normalized) + inspect.getsource(family_signal),
                 "preparation": inspect.getsource(prepare_content),
                 "page_extraction": inspect.getsource(extract_documents),
                 "structured_parser": inspect.getsource(complete_events),

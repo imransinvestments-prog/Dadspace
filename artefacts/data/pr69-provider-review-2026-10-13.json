@@ -1,0 +1,674 @@
+{
+  "date": "2026-10-13",
+  "review_runs": [
+    38422443530,
+    38423746573
+  ],
+  "validation": "Final branch rules replayed offline on the exact saved public documents and raw model outputs",
+  "database_writes": 0,
+  "paid_attempts_including_failed": 5,
+  "total_tokens_including_failed": 75417,
+  "sources": [
+    {
+      "source": "Cardiff Libraries",
+      "variants": {
+        "gemini": {
+          "model": "gemini-3.6-flash",
+          "raw_count": 2,
+          "accepted_count": 2,
+          "validation": {
+            "grounding_raw_count": 2,
+            "grounding_accepted_count": 2,
+            "kept": 2,
+            "extracted": 2
+          },
+          "usage": {
+            "api_attempts": 1,
+            "input_chars_sent": 15925,
+            "prompt_tokens": 4238,
+            "output_tokens": 4872,
+            "thinking_tokens": 4269,
+            "total_tokens": 9110,
+            "unknown_usage_attempts": 0
+          },
+          "rows": [
+            {
+              "title": "Story Time and Craft",
+              "event_url": "https://cardiffhubs.co.uk/hub-events/144698/",
+              "listing_type": "activity",
+              "start_date": null,
+              "end_date": null,
+              "time_text": "10:30 am - 11:30 am",
+              "schedule_text": "Monday Morning Weekly at 10:30 am - 11:30 am",
+              "age_range": null,
+              "cost_text": null,
+              "recurrence": "recurring",
+              "location": "Llandaff North and Gabalfa Hub"
+            },
+            {
+              "title": "Baby Rhyme Time",
+              "event_url": "https://cardiffhubs.co.uk/hub-events/rhyme-time/",
+              "listing_type": "activity",
+              "start_date": null,
+              "end_date": null,
+              "time_text": "11:00 am - 11:30 am",
+              "schedule_text": "Monday Morning Weekly at 11:00 am - 11:30 am",
+              "age_range": null,
+              "cost_text": null,
+              "recurrence": "recurring",
+              "location": "Penylan Library and Community Centre"
+            }
+          ]
+        },
+        "openai": {
+          "model": "gpt-4.1-mini",
+          "raw_count": 7,
+          "accepted_count": 2,
+          "validation": {
+            "grounding_raw_count": 7,
+            "ungrounded_family_evidence": 5,
+            "grounding_accepted_count": 2,
+            "kept": 2,
+            "extracted": 2
+          },
+          "usage": {
+            "api_attempts": 1,
+            "input_chars_sent": 15925,
+            "prompt_tokens": 4338,
+            "output_tokens": 1330,
+            "thinking_tokens": 0,
+            "total_tokens": 5668,
+            "unknown_usage_attempts": 0,
+            "unknown_thinking_attempts": 0
+          },
+          "rows": [
+            {
+              "title": "Story Time and Craft",
+              "event_url": "https://cardiffhubs.co.uk/hub-events/144698/",
+              "listing_type": "activity",
+              "start_date": null,
+              "end_date": null,
+              "time_text": "10:30 am - 11:30 am",
+              "schedule_text": "Monday Morning Weekly at 10:30 am - 11:30 am",
+              "age_range": null,
+              "cost_text": null,
+              "recurrence": "recurring",
+              "location": "Llandaff North and Gabalfa Hub"
+            },
+            {
+              "title": "Baby Rhyme Time",
+              "event_url": "https://cardiffhubs.co.uk/hub-events/rhyme-time/",
+              "listing_type": "activity",
+              "start_date": null,
+              "end_date": null,
+              "time_text": "11:00 am - 11:30 am",
+              "schedule_text": "Monday Morning Weekly at 11:00 am - 11:30 am",
+              "age_range": null,
+              "cost_text": null,
+              "recurrence": "recurring",
+              "location": "Penylan Library and Community Centre"
+            }
+          ]
+        }
+      },
+      "comparison": {
+        "baseline_raw_count": 2,
+        "shadow_raw_count": 2,
+        "missing": [],
+        "added": [],
+        "changed": []
+      },
+      "url_date_comparison": {
+        "missing_from_openai": [],
+        "additional_openai": [],
+        "changed": []
+      }
+    },
+    {
+      "source": "Museum Wales",
+      "variants": {
+        "gemini": {
+          "model": "gemini-3.6-flash",
+          "raw_count": 18,
+          "accepted_count": 15,
+          "validation": {
+            "grounding_raw_count": 18,
+            "ungrounded_family_evidence": 1,
+            "grounding_accepted_count": 17,
+            "extracted": 17,
+            "no_date": 2,
+            "kept": 15
+          },
+          "usage": {
+            "api_attempts": 1,
+            "input_chars_sent": 40139,
+            "prompt_tokens": 12919,
+            "output_tokens": 9691,
+            "thinking_tokens": 3505,
+            "total_tokens": 22610,
+            "unknown_usage_attempts": 0
+          },
+          "rows": [
+            {
+              "title": "Halloween with Jig-So",
+              "event_url": "https://museum.wales/wool/whatson/12157/Halloween-with-Jig-So/",
+              "listing_type": "event",
+              "start_date": "2026-10-27",
+              "end_date": "2026-10-27",
+              "time_text": "10.30am-12.30pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "Free",
+              "recurrence": "one_off",
+              "location": "National Wool Museum"
+            },
+            {
+              "title": "CREU Young Makers: Family Halloween Wet Felting Workshop",
+              "event_url": "https://museum.wales/wool/whatson/12695/CREU-Young-Makers-Family-Halloween-Wet-Felting-Workshop/",
+              "listing_type": "event",
+              "start_date": "2026-10-28",
+              "end_date": "2026-10-28",
+              "time_text": "2pm-4pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "£20 adult and child I Additional adult and child tickets £10 each",
+              "recurrence": "one_off",
+              "location": "National Wool Museum"
+            },
+            {
+              "title": "CREU Young Makers: Halloween Pom Poms!",
+              "event_url": "https://museum.wales/wool/whatson/13055/CREU-Young-Makers-Halloween-Pom-Poms/",
+              "listing_type": "event",
+              "start_date": "2026-10-29",
+              "end_date": "2026-10-29",
+              "time_text": "10am-1pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "Free",
+              "recurrence": "one_off",
+              "location": "National Wool Museum"
+            },
+            {
+              "title": "Festive Fun with Siân Corn (Mrs Claus)",
+              "event_url": "https://museum.wales/wool/whatson/13057/Festive-Fun-with-Sin-Corn-Mrs-Claus/",
+              "listing_type": "event",
+              "start_date": "2026-12-05",
+              "end_date": "2026-12-05",
+              "time_text": "10.30am, 12pm and 1.30pm",
+              "schedule_text": null,
+              "age_range": "2+",
+              "cost_text": "£10 per child",
+              "recurrence": "one_off",
+              "location": "National Wool Museum"
+            },
+            {
+              "title": "Waterfront Wildings",
+              "event_url": "https://museum.wales/swansea/whatson/12863/Waterfront-Wildings/",
+              "listing_type": "event",
+              "start_date": "2026-10-14",
+              "end_date": "2026-10-22",
+              "time_text": "10.30am - 12pm",
+              "schedule_text": null,
+              "age_range": "Under 5s",
+              "cost_text": "Pay what you can. Minimum £1 per child",
+              "recurrence": "recurring",
+              "location": "National Waterfront Museum"
+            },
+            {
+              "title": "Storytime with Babis Bach Babies",
+              "event_url": "https://museum.wales/cardiff/whatson/12903/Storytime-with-Babis-Bach-Babies/",
+              "listing_type": "event",
+              "start_date": "2026-10-24",
+              "end_date": "2026-10-24",
+              "time_text": "10:30am; 12.30pm; 2.30pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "£12.50 (Adult & Child ticket); £8.00 (Additional Adult or Child ticket)",
+              "recurrence": "one_off",
+              "location": "National Museum Cardiff"
+            },
+            {
+              "title": "Nature Trail, Quarry Hospital",
+              "event_url": "https://museum.wales/slate/whatson/12661/Nature-Trail-Quarry-Hospital/",
+              "listing_type": "event",
+              "start_date": "2026-10-24",
+              "end_date": "2026-11-01",
+              "time_text": "10:30am - 4pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "Free",
+              "recurrence": "seasonal",
+              "location": "National Slate Museum"
+            },
+            {
+              "title": "Gods, Heroes, & Monsters: Become a Hero!",
+              "event_url": "https://museum.wales/roman/whatson/12557/Gods-Heroes--Monsters--Become-a-Hero/",
+              "listing_type": "event",
+              "start_date": "2026-10-26",
+              "end_date": "2026-10-30",
+              "time_text": "10.30am, 11.30am, 1:30pm & 2:30pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "£5/child",
+              "recurrence": "seasonal",
+              "location": "National Roman Legion Museum"
+            },
+            {
+              "title": "The Coblynnau of Big Pit",
+              "event_url": "https://museum.wales/bigpit/whatson/12763/The-Coblynnau-of-Big-Pit/",
+              "listing_type": "event",
+              "start_date": "2026-10-27",
+              "end_date": "2026-10-27",
+              "time_text": "11am-3pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "Free",
+              "recurrence": "one_off",
+              "location": "Big Pit National Coal Museum"
+            },
+            {
+              "title": "Halloween Nights",
+              "event_url": "https://museum.wales/stfagans/whatson/12647/Halloween-Nights/",
+              "listing_type": "event",
+              "start_date": "2026-10-29",
+              "end_date": "2026-10-31",
+              "time_text": "5.30-9pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "£16 / Under 2s free",
+              "recurrence": "seasonal",
+              "location": "St Fagans National Museum of History"
+            },
+            {
+              "title": "Letterpress Christmas Cards",
+              "event_url": "https://museum.wales/swansea/whatson/6357/Letterpress-Christmas-Cards-/",
+              "listing_type": "event",
+              "start_date": "2026-11-21",
+              "end_date": "2026-11-22",
+              "time_text": "12 - 3pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "Free",
+              "recurrence": "one_off",
+              "location": "National Waterfront Museum"
+            },
+            {
+              "title": "Mrs Claus Magical Christmas / Nadolig Hudolus Siân Corn",
+              "event_url": "https://museum.wales/swansea/whatson/12784/Mrs-Claus-Magical-Christmas--Nadolig-Hudolus-Sin-Corn/",
+              "listing_type": "event",
+              "start_date": "2026-11-21",
+              "end_date": "2026-12-06",
+              "time_text": "12.30pm & 2.30pm",
+              "schedule_text": null,
+              "age_range": "under 7",
+              "cost_text": "Free",
+              "recurrence": "seasonal",
+              "location": "National Waterfront Museum"
+            },
+            {
+              "title": "Festive Stop Motion Animation workshops",
+              "event_url": "https://museum.wales/swansea/whatson/8685/Festive-Stop-Motion-Animation-workshops/",
+              "listing_type": "event",
+              "start_date": "2026-11-22",
+              "end_date": "2026-12-06",
+              "time_text": "11am & 2pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "£7 per child",
+              "recurrence": "seasonal",
+              "location": "National Waterfront Museum"
+            },
+            {
+              "title": "Storytime with Babis Bach Babies",
+              "event_url": "https://museum.wales/cardiff/whatson/12904/Storytime-with-Babis-Bach-Babies/",
+              "listing_type": "event",
+              "start_date": "2026-12-05",
+              "end_date": "2026-12-05",
+              "time_text": "10:30am; 12.30pm: 2.30pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "£12.50 (Adult & Child); £8.00 (Additional Adult or Child)",
+              "recurrence": "one_off",
+              "location": "National Museum Cardiff"
+            },
+            {
+              "title": "✨🎄 Big Waterfront Christmas 🎄✨",
+              "event_url": "https://museum.wales/swansea/whatson/12032/-Big-Waterfront-Christmas/",
+              "listing_type": "event",
+              "start_date": "2026-12-06",
+              "end_date": "2026-12-06",
+              "time_text": "12- 6pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "Free",
+              "recurrence": "one_off",
+              "location": "National Waterfront Museum"
+            }
+          ]
+        },
+        "openai": {
+          "model": "gpt-4.1-mini",
+          "raw_count": 15,
+          "accepted_count": 11,
+          "validation": {
+            "grounding_raw_count": 15,
+            "ungrounded_family_evidence": 4,
+            "grounding_accepted_count": 11,
+            "extracted": 11,
+            "kept": 11
+          },
+          "usage": {
+            "api_attempts": 1,
+            "input_chars_sent": 40139,
+            "prompt_tokens": 11720,
+            "output_tokens": 3406,
+            "thinking_tokens": 0,
+            "total_tokens": 15126,
+            "unknown_usage_attempts": 0,
+            "unknown_thinking_attempts": 0
+          },
+          "rows": [
+            {
+              "title": "Halloween with Jig-So",
+              "event_url": "https://museum.wales/wool/whatson/12157/Halloween-with-Jig-So/",
+              "listing_type": "event",
+              "start_date": "2026-10-27",
+              "end_date": "2026-10-27",
+              "time_text": "10.30am-12.30pm",
+              "schedule_text": null,
+              "age_range": "Pre-school/Primary",
+              "cost_text": "Free",
+              "recurrence": "one_off",
+              "location": "National Wool Museum"
+            },
+            {
+              "title": "CREU Young Makers: Family Halloween Wet Felting Workshop",
+              "event_url": "https://museum.wales/wool/whatson/12695/CREU-Young-Makers-Family-Halloween-Wet-Felting-Workshop/",
+              "listing_type": "event",
+              "start_date": "2026-10-28",
+              "end_date": "2026-10-28",
+              "time_text": "2pm-4pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "£20 adult and child I Additional adult and child tickets £10 each",
+              "recurrence": "one_off",
+              "location": "National Wool Museum"
+            },
+            {
+              "title": "CREU Young Makers: Halloween Pom Poms!",
+              "event_url": "https://museum.wales/wool/whatson/13055/CREU-Young-Makers-Halloween-Pom-Poms/",
+              "listing_type": "event",
+              "start_date": "2026-10-29",
+              "end_date": "2026-10-29",
+              "time_text": "10am-1pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "Free",
+              "recurrence": "one_off",
+              "location": "National Wool Museum"
+            },
+            {
+              "title": "Storytime with Babis Bach Babies",
+              "event_url": "https://museum.wales/cardiff/whatson/12903/Storytime-with-Babis-Bach-Babies/",
+              "listing_type": "event",
+              "start_date": "2026-10-24",
+              "end_date": "2026-10-24",
+              "time_text": "10:30am; 12.30pm; 2.30pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "£12.50 (Adult & Child ticket); £8.00 (Additional Adult or Child ticket); HYNT tickets available",
+              "recurrence": "one_off",
+              "location": "National Museum Cardiff"
+            },
+            {
+              "title": "Nature Trail, Quarry Hospital",
+              "event_url": "https://museum.wales/slate/whatson/12661/Nature-Trail-Quarry-Hospital/",
+              "listing_type": "event",
+              "start_date": "2026-10-24",
+              "end_date": "2026-11-01",
+              "time_text": "10:30am - 4pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "Free",
+              "recurrence": "one_off",
+              "location": "National Slate Museum"
+            },
+            {
+              "title": "Gods, Heroes, & Monsters: Become a Hero!",
+              "event_url": "https://museum.wales/roman/whatson/12557/Gods-Heroes--Monsters--Become-a-Hero/",
+              "listing_type": "event",
+              "start_date": "2026-10-26",
+              "end_date": "2026-10-30",
+              "time_text": "10.30am, 11.30am, 1:30pm & 2:30pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "£5/child",
+              "recurrence": "one_off",
+              "location": "National Roman Legion Museum"
+            },
+            {
+              "title": "The Coblynnau of Big Pit",
+              "event_url": "https://museum.wales/bigpit/whatson/12763/The-Coblynnau-of-Big-Pit/",
+              "listing_type": "event",
+              "start_date": "2026-10-27",
+              "end_date": "2026-10-27",
+              "time_text": "11am-3pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "Free",
+              "recurrence": "one_off",
+              "location": "Big Pit National Coal Museum"
+            },
+            {
+              "title": "Halloween Nights",
+              "event_url": "https://museum.wales/stfagans/whatson/12647/Halloween-Nights/",
+              "listing_type": "event",
+              "start_date": "2026-10-29",
+              "end_date": "2026-10-31",
+              "time_text": "5.30-9pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "£16 / Under 2s free",
+              "recurrence": "one_off",
+              "location": "St Fagans National Museum of History"
+            },
+            {
+              "title": "Storytime with Babis Bach Babies",
+              "event_url": "https://museum.wales/cardiff/whatson/12904/Storytime-with-Babis-Bach-Babies/",
+              "listing_type": "event",
+              "start_date": "2026-12-05",
+              "end_date": "2026-12-05",
+              "time_text": "10:30am; 12.30pm; 2.30pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "£12.50 (Adult & Child); £8.00 (Additional Adult or Child); HYNT tickets available",
+              "recurrence": "one_off",
+              "location": "National Museum Cardiff"
+            },
+            {
+              "title": "Letterpress Christmas Cards",
+              "event_url": "https://museum.wales/swansea/whatson/6357/Letterpress-Christmas-Cards-/",
+              "listing_type": "event",
+              "start_date": "2026-11-21",
+              "end_date": "2026-11-22",
+              "time_text": "12 - 3pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "Free",
+              "recurrence": "one_off",
+              "location": "National Waterfront Museum"
+            },
+            {
+              "title": "Big Waterfront Christmas",
+              "event_url": "https://museum.wales/swansea/whatson/12032/-Big-Waterfront-Christmas/",
+              "listing_type": "event",
+              "start_date": "2026-12-06",
+              "end_date": "2026-12-06",
+              "time_text": "12- 6pm",
+              "schedule_text": null,
+              "age_range": null,
+              "cost_text": "Free",
+              "recurrence": "one_off",
+              "location": "National Waterfront Museum"
+            }
+          ]
+        }
+      },
+      "comparison": {
+        "baseline_raw_count": 15,
+        "shadow_raw_count": 11,
+        "missing": [
+          [
+            "https://museum.wales/swansea/whatson/12784/Mrs-Claus-Magical-Christmas--Nadolig-Hudolus-Sin-Corn/",
+            "2026-11-21",
+            "mrs claus magical christmas / nadolig hudolus siân corn"
+          ],
+          [
+            "https://museum.wales/wool/whatson/13057/Festive-Fun-with-Sin-Corn-Mrs-Claus/",
+            "2026-12-05",
+            "festive fun with siân corn (mrs claus)"
+          ],
+          [
+            "https://museum.wales/swansea/whatson/12863/Waterfront-Wildings/",
+            "2026-10-14",
+            "waterfront wildings"
+          ],
+          [
+            "https://museum.wales/swansea/whatson/8685/Festive-Stop-Motion-Animation-workshops/",
+            "2026-11-22",
+            "festive stop motion animation workshops"
+          ],
+          [
+            "https://museum.wales/swansea/whatson/12032/-Big-Waterfront-Christmas/",
+            "2026-12-06",
+            "✨🎄 big waterfront christmas 🎄✨"
+          ]
+        ],
+        "added": [
+          [
+            "https://museum.wales/swansea/whatson/12032/-Big-Waterfront-Christmas/",
+            "2026-12-06",
+            "big waterfront christmas"
+          ]
+        ],
+        "changed": [
+          {
+            "listing": [
+              "https://museum.wales/cardiff/whatson/12904/Storytime-with-Babis-Bach-Babies/",
+              "2026-12-05",
+              "storytime with babis bach babies"
+            ],
+            "fields": [
+              "time_text",
+              "cost_text"
+            ]
+          },
+          {
+            "listing": [
+              "https://museum.wales/cardiff/whatson/12903/Storytime-with-Babis-Bach-Babies/",
+              "2026-10-24",
+              "storytime with babis bach babies"
+            ],
+            "fields": [
+              "cost_text"
+            ]
+          },
+          {
+            "listing": [
+              "https://museum.wales/stfagans/whatson/12647/Halloween-Nights/",
+              "2026-10-29",
+              "halloween nights"
+            ],
+            "fields": [
+              "recurrence"
+            ]
+          },
+          {
+            "listing": [
+              "https://museum.wales/slate/whatson/12661/Nature-Trail-Quarry-Hospital/",
+              "2026-10-24",
+              "nature trail, quarry hospital"
+            ],
+            "fields": [
+              "recurrence"
+            ]
+          },
+          {
+            "listing": [
+              "https://museum.wales/wool/whatson/12157/Halloween-with-Jig-So/",
+              "2026-10-27",
+              "halloween with jig-so"
+            ],
+            "fields": [
+              "age_range"
+            ]
+          },
+          {
+            "listing": [
+              "https://museum.wales/roman/whatson/12557/Gods-Heroes--Monsters--Become-a-Hero/",
+              "2026-10-26",
+              "gods, heroes, & monsters: become a hero!"
+            ],
+            "fields": [
+              "recurrence"
+            ]
+          }
+        ]
+      },
+      "url_date_comparison": {
+        "missing_from_openai": [
+          "Waterfront Wildings",
+          "Festive Fun with Siân Corn (Mrs Claus)",
+          "Mrs Claus Magical Christmas / Nadolig Hudolus Siân Corn",
+          "Festive Stop Motion Animation workshops"
+        ],
+        "additional_openai": [],
+        "changed": [
+          {
+            "title": "Halloween with Jig-So",
+            "fields": [
+              "age_range"
+            ]
+          },
+          {
+            "title": "Storytime with Babis Bach Babies",
+            "fields": [
+              "cost_text"
+            ]
+          },
+          {
+            "title": "Gods, Heroes, & Monsters: Become a Hero!",
+            "fields": [
+              "recurrence"
+            ]
+          },
+          {
+            "title": "Storytime with Babis Bach Babies",
+            "fields": [
+              "time_text",
+              "cost_text"
+            ]
+          },
+          {
+            "title": "Nature Trail, Quarry Hospital",
+            "fields": [
+              "recurrence"
+            ]
+          },
+          {
+            "title": "Halloween Nights",
+            "fields": [
+              "recurrence"
+            ]
+          },
+          {
+            "title": "✨🎄 Big Waterfront Christmas 🎄✨",
+            "fields": [
+              "title"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

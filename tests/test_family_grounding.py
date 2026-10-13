@@ -41,3 +41,9 @@ class GroundingTests(unittest.TestCase):
                                self.documents(), 'Family craft', stats)
         self.assertEqual(rows, [])
         self.assertEqual(stats['ungrounded_family_evidence'], 1)
+
+    def test_explicit_child_age_band_is_evidence_but_senior_age_band_is_not(self):
+        docs = [('https://example.org', '<main><h1>Museum Makers</h1><p>Ages 7-11</p></main>')]
+        self.assertTrue(grounded(dict(title='Museum Makers', family_evidence='Ages 7-11'), docs, 'Ages 7-11'))
+        docs = [('https://example.org', '<main><h1>Creative Cwtsh</h1><p>Ages 55-75</p></main>')]
+        self.assertFalse(grounded(dict(title='Creative Cwtsh', family_evidence='Ages 55-75'), docs, 'Ages 55-75'))

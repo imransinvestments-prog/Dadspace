@@ -14,7 +14,9 @@ def capture_calls(call):
         nonlocal count
         before = dict(call.metrics)
         raw = call(prompt)  # Production errors/return values retain their behavior.
-        if count < 2:
+        # Empty outputs consumed all four samples in the first real review.
+        # Keep the same two-sample cap, but sample useful extraction candidates.
+        if count < 2 and isinstance(raw, list) and raw:
             count += 1
             try:
                 if not call.json_schema:

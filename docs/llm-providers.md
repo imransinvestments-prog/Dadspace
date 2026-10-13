@@ -84,3 +84,35 @@ validation, usage, budgets, provider selection, and credential failures.
 Live comparisons remain manual and use the same saved pages across providers.
 Do not infer equivalence from mocked tests or automatically activate a provider
 after a synthetic smoke check.
+
+
+## Source grounding and complete review units
+
+Model-generated children/families labels and high relevance scores are insufficient.
+Every model listing now needs an exact family/child phrase or explicit child age
+band in its own visible listing/detail context and in the supplied prepared text.
+Neighbouring cards, navigation and invented paraphrases cannot qualify a listing.
+Unproven listings are counted as `ungrounded_family_evidence`, not deleted from
+historical data. This conservative rule can exclude valid poorly labelled supply;
+review rejected examples before accepting broad rollout.
+
+Whole-source and per-page preparation now detect cut-off content before a paid
+request. They fail without marking the source complete. For Cardiff, reviewed
+`source_adapter=cardiff_paginated` follows observed same-host listing pages only,
+with a maximum of 20 pages, robots checks and failure on incomplete collection.
+Use per-page extraction for this route: the 18 observed pages exceed a combined
+40,000-character budget. This implementation does not activate registry sources.
+
+Manual civic dispatch `provider_quality_only=true` compares Gemini and OpenAI
+on the same saved Cardiff/Museum Wales pages, without database credentials.
+The initial review limit of 10,000 output tokens cut off Museum Wales's Gemini
+response. The revised review limit is 32,000, with zero retries, at most four
+new calls per dispatch and an 80,000-token shared budget checked between calls.
+An in-flight response may exceed that budget. `resume_quality_run_id` reuses
+saved public pages and completed variants from a prior review; reported totals
+include prior failed requests. Production model limits are unchanged.
+
+The comparison is a two-page engineering pilot, not full Cardiff supply or a
+human quality score. News/Originals and DeepSeek need their own live qualification.
+Keep Gemini as production default until representative successful runs and quality,
+coverage and actual cost evidence have been reviewed with Imran.
