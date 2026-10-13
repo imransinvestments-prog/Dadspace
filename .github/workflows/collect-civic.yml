@@ -29,6 +29,10 @@ on:
         description: "API model for smoke check only"
         type: string
         default: gpt-4.1-mini
+      provider_quality_only:
+        description: "Four Gemini/OpenAI comparisons on two saved pages; no database access"
+        type: boolean
+        default: false
       usage_review_only:
         description: "Four paired OpenAI extraction calls only; no database access"
         type: boolean
@@ -95,7 +99,7 @@ jobs:
           if-no-files-found: error
 
   collect:
-    if: github.event_name != 'pull_request' && !inputs.usage_review_only && !inputs.llm_smoke_only && !inputs.llm_source_review_only
+    if: github.event_name != 'pull_request' && !inputs.usage_review_only && !inputs.llm_smoke_only && !inputs.llm_source_review_only && !inputs.provider_quality_only
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -193,7 +197,7 @@ jobs:
           path: .extraction-cache/
           key: extraction-civic-v1-${{ github.run_id }}-${{ github.run_attempt }}
   usage-review:
-    if: github.event_name == 'workflow_dispatch' && inputs.usage_review_only
+    if: github.event_name == 'workflow_dispatch' && inputs.usage_review_only && !inputs.provider_quality_only
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -231,7 +235,7 @@ jobs:
           if-no-files-found: error
 
   provider-smoke:
-    if: github.event_name == 'workflow_dispatch' && inputs.llm_smoke_only && !inputs.usage_review_only
+    if: github.event_name == 'workflow_dispatch' && inputs.llm_smoke_only && !inputs.usage_review_only && !inputs.provider_quality_only
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -259,7 +263,7 @@ jobs:
           if-no-files-found: ignore
 
   provider-source-review:
-    if: github.event_name == 'workflow_dispatch' && inputs.llm_source_review_only && !inputs.llm_smoke_only && !inputs.usage_review_only
+    if: github.event_name == 'workflow_dispatch' && inputs.llm_source_review_only && !inputs.llm_smoke_only && !inputs.usage_review_only && !inputs.provider_quality_only
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -285,7 +289,7 @@ jobs:
           REQUEST_TIMEOUT: '15'
           MAX_RETRIES: '0'
           ACTIVITY_DETAIL_PAGES: '2'
-          MAX_CHARS: '18000'
+          MAX_CHARS: '40000'
           PAUSE_SECONDS: '1'
           GEMINI_TIMEOUT_SECONDS: '60'
       - uses: actions/upload-artifact@v4
@@ -294,3 +298,31 @@ jobs:
           name: llm-source-review
           path: llm-source-review/
           if-no-files-found: error
+
+  provider-quality-review:
+    if: github.event_name == 'workflow_dispatch' && inputs.provider_quality_only
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Compare providers without database credentials
+        run: python scripts/review_provider_quality.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          GEMINI_TIMEOUT_SECONDS: '90'
+          FETCH_ENGINE: requests
+          REQUEST_TIMEOUT: '15'
+          MAX_RETRIES: '0'
+          DRY_RUN: 'true'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: provider-quality-review
+          path: provider-quality-review/
+          if-no-files-found: warn
