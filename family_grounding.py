@@ -15,7 +15,17 @@ def normalized(value):
     return re.sub(r'[^\w]+', ' ', value).strip()
 
 
-def grounded(item, documents, prepared):
+def source_soups(documents):
+    soups = []
+    for _, html in documents:
+        soup = BeautifulSoup(html, 'html.parser')
+        for node in soup.select('nav, header, footer, script, style, form, [role="navigation"]'):
+            node.decompose()
+        soups.append(soup)
+    return soups
+
+
+def grounded(item, documents, prepared, *, soups=None):
     """Require a quoted family phrase in the supplied, matching listing context."""
     title = normalized(item.get('title'))
     quote = normalized(item.get('family_evidence'))
@@ -23,10 +33,7 @@ def grounded(item, documents, prepared):
         return False
     if quote not in normalized(prepared):
         return False
-    for _, html in documents:
-        soup = BeautifulSoup(html, 'html.parser')
-        for node in soup.select('nav, header, footer, script, style, form, [role="navigation"]'):
-            node.decompose()
+    for soup in source_soups(documents) if soups is None else soups:
         for node in soup.find_all(['h1', 'h2', 'h3', 'h4', 'a', 'strong', 'td']):
             label = normalized(node.get_text(' ', strip=True))
             # A small source subtitle/icon is permitted, invented titles are not.
@@ -63,9 +70,12 @@ def filter_grounded(raw, documents, prepared, stats):
     if not isinstance(raw, list) or not all(isinstance(x, dict) for x in raw):
         raise ValueError('Invalid listing extraction')
     accepted = []
+    soups = source_soups(documents)
+    stats['grounding_raw_count'] = len(raw)
     for item in raw:
-        if grounded(item, documents, prepared):
+        if grounded(item, documents, prepared, soups=soups):
             accepted.append(item)
         else:
             stats['ungrounded_family_evidence'] = stats.get('ungrounded_family_evidence', 0) + 1
+    stats['grounding_accepted_count'] = len(accepted)
     return accepted

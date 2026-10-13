@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-13",
+  "run_id": 38360306093,
+  "sample_count": 4,
+  "baseline_rows": 0,
+  "shadow_rows": 0,
+  "baseline_total_tokens": 15656,
+  "shadow_total_tokens": 13142,
+  "price_estimate_available": false,
+  "conclusion": "All four samples yielded zero rows under both providers; not evidence of nonempty listing accuracy or quality equivalence."
+}

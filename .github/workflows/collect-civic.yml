@@ -29,6 +29,10 @@ on:
         description: "API model for smoke check only"
         type: string
         default: gpt-4.1-mini
+      resume_quality_run_id:
+        description: "Optional prior comparison run to reuse saved pages and completed variants"
+        type: string
+        default: ""
       provider_quality_only:
         description: "Four Gemini/OpenAI comparisons on two saved pages; no database access"
         type: boolean
@@ -300,6 +304,9 @@ jobs:
           if-no-files-found: error
 
   provider-quality-review:
+    permissions:
+      contents: read
+      actions: read
     if: github.event_name == 'workflow_dispatch' && inputs.provider_quality_only
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -309,6 +316,13 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
+      - uses: actions/download-artifact@v5
+        if: inputs.resume_quality_run_id != ''
+        with:
+          name: provider-quality-review
+          path: provider-quality-review/
+          run-id: ${{ inputs.resume_quality_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Compare providers without database credentials
         run: python scripts/review_provider_quality.py
         env:
