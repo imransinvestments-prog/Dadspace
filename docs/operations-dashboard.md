@@ -16,6 +16,14 @@ email substring matching or user-editable `user_metadata`. This first increment
 grants read-only visibility; it conveys no reviewer/maintenance mutation powers.
 Role provisioning and owner usability acceptance remain rollout dependencies.
 
+Alternatively set server-only `DADSPACE_OPERATOR_EMAILS` to approved exact email
+addresses. Only an email returned by the verified Auth server user with
+`email_confirmed_at` qualifies; unconfirmed/anonymous users are rejected.
+The owner selected `imransinvestments@gmail.com` in chat on 14 October. This email
+has no account in the current Auth lookup; a confirmed sign-in is still required.
+Do not create passwords or send invitations automatically. This route can be
+configured before the owner completes the existing sign-up/confirmation flow.
+
 No service-role key, GitHub token, new package, schema or database mutation is
 required. Read-only GitHub metadata is available from this public repository.
 

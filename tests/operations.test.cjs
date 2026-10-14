@@ -22,6 +22,16 @@ test('operator identity fails closed and cannot be inferred from metadata or par
   assert.equal(access.isOperationsUser(owner.slice(0, 8), owner), false)
   assert.equal(access.isOperationsUser(owner, ` ${owner.toUpperCase()} `), true)
 })
+test('email authorization requires an exact confirmed server identity, never profile metadata', () => {
+  const user = { email: 'Owner@example.com', email_confirmed_at: '2026-10-14T12:00:00Z' }
+  assert.equal(access.isVerifiedOperationsEmail(user, ' owner@example.com '), true)
+  assert.equal(access.isVerifiedOperationsEmail(user, undefined), false)
+  assert.equal(access.isVerifiedOperationsEmail({ email: user.email }, user.email), false)
+  assert.equal(access.isVerifiedOperationsEmail({ ...user, is_anonymous: true }, user.email), false)
+  assert.equal(access.isVerifiedOperationsEmail({ ...user, email: 'other@example.com' }, user.email), false)
+  assert.equal(access.isVerifiedOperationsEmail({ ...user, email: 'owner@example.com.evil' }, user.email), false)
+  assert.equal(access.isVerifiedOperationsEmail({ ...user, email_confirmed_at: 'invalid' }, user.email), false)
+})
 test('next scheduled UK run handles DST changes and year boundaries', () => {
   assert.equal(health.nextLondonRun(new Date('2026-10-14T06:00:00Z')), '2026-10-14T06:17:00.000Z')
   assert.equal(health.nextLondonRun(new Date('2026-10-24T18:18:00Z')), '2026-10-25T07:17:00.000Z')
