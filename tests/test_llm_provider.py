@@ -173,6 +173,33 @@ class ProviderTests(unittest.TestCase):
         with self.assertRaises(llm.BudgetExhausted):
             gen.generate('review', REVIEW_SCHEMA)
 
+    def test_real_collector_schemas_use_openai_without_gemini_client(self):
+        import worker
+        import events_worker
+        for factory in (worker.make_gemini_caller, events_worker.make_gemini_caller):
+            with self.subTest(factory=factory.__module__), patch('google.genai.Client') as gemini:
+                caller = factory()
+                self.post.return_value = response(data={'items': []})
+                self.assertEqual(caller('source page'), [])
+                self.assertEqual(caller.settings['provider'], 'openai')
+                gemini.assert_not_called()
+                schema = self.post.call_args.args[2]['text']['format']['schema']
+                item = next(iter(schema['$defs'].values()))
+                self.assertIn('family_evidence', item['required'])
+                self.assertIn('event_url', item['required'])
+
+    def test_news_scoring_and_grouping_share_generator_and_use_distinct_schemas(self):
+        import news_worker as news
+        news._generator = None
+        self.addCleanup(setattr, news, '_generator', None)
+        self.post.return_value = response(data={'items': []})
+        self.assertEqual(news.gemini_score([{'i': 0, 'title': 'Family news', 'source': 'Test'}]), [])
+        first = news._generator
+        self.assertIn('relevance', self.post.call_args.args[2]['text']['format']['schema']['properties']['items']['items']['properties'])
+        news.gemini_json('group these stories', news.GROUP_SCHEMA)
+        self.assertIs(news._generator, first)
+        self.assertEqual(news.TOKENS['calls'], 2)
+        self.assertIn('story', self.post.call_args.args[2]['text']['format']['schema']['properties']['items']['items']['properties'])
 
 
     def test_invalid_http_json_marks_usage_unknown_without_retry(self):

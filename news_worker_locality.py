@@ -60,6 +60,8 @@ core.PROMPT = core.PROMPT.replace(
     '"region": "uk", "summary": "..."',
     '"region": "uk", "geo_scope": "nationwide", "geo_region": "", "admin_area": "", "locality": "", "summary": "..."',
 )
+core.SCORE_SCHEMA["items"]["properties"].update({key: {"type": "string"} for key in GEO_KEYS})
+core.SCORE_SCHEMA["items"]["required"].extend(GEO_KEYS)
 _original_gemini_score = core.gemini_score
 _original_save_items = core.save_items
 _original_log_run = core.log_run
@@ -317,8 +319,8 @@ if __name__ == "__main__":
     try:
         if args.self_test:
             rc = self_test()
-        elif not (core.SUPABASE_URL and core.SUPABASE_SERVICE_KEY and core.GEMINI_API_KEY):
-            print("Missing SUPABASE_URL, SUPABASE_SERVICE_KEY or GEMINI_API_KEY")
+        elif not (core.SUPABASE_URL and core.SUPABASE_SERVICE_KEY and os.getenv(core.credential_name("NEWS"))):
+            print("Missing Supabase credentials or selected LLM API key")
             rc = 1
         else:
             rc = run()

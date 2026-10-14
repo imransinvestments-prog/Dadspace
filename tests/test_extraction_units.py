@@ -149,6 +149,14 @@ class ExtractionUnitsTests(unittest.TestCase):
         html += '<main>Family pottery Children create pottery. <a href="/pottery">Book</a></main>'
         return [('https://example.org/events', html)]
 
+    def test_whole_source_truncation_rejects_before_paid_call(self):
+        with patch.object(worker, 'MAX_CHARS', 100):
+            extract = Mock()
+            with self.assertRaisesRegex(ValueError, 'input limit'):
+                worker.extract_documents(self.documents(), dict(self.source, extraction_mode='whole'),
+                                         extract, self.today, {})
+            extract.assert_not_called()
+
     def test_complete_structured_event_preserves_fields_without_call(self):
         rows = complete_events(self.structured(), worker.extract_jsonld_events)
         self.assertEqual(rows[0]['start_date'], '2026-10-15')

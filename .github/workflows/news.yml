@@ -21,7 +21,7 @@ on:
         description: "Dry run? true = only show results, false = save to database"
         default: "true"
       live_smoke_test:
-        description: "Run an additional paid Gemini connectivity check"
+        description: "Run an additional paid LLM connectivity check"
         type: boolean
         default: false
 
@@ -52,7 +52,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pnpm install --frozen-lockfile
-      - run: pip install requests feedparser googlenewsdecoder==0.2.1 selectolax==0.4.12
+      - run: pip install -r requirements-llm.txt requests feedparser googlenewsdecoder==0.2.1 selectolax==0.4.12
       - name: Locality regression checks
         run: |
           node scripts/test-news-locality.mjs
@@ -76,7 +76,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install
-        run: pip install requests feedparser googlenewsdecoder==0.2.1 selectolax==0.4.12
+        run: pip install -r requirements-llm.txt requests feedparser googlenewsdecoder==0.2.1 selectolax==0.4.12
 
       - name: Explicit paid smoke test
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.live_smoke_test }}
@@ -85,6 +85,20 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          LLM_PROVIDER: ${{ vars.LLM_PROVIDER }}
+          LLM_MODEL: ${{ vars.LLM_MODEL }}
+          LLM_RUN_MAX_ATTEMPTS: ${{ vars.LLM_RUN_MAX_ATTEMPTS }}
+          LLM_RUN_TOKEN_BUDGET: ${{ vars.LLM_RUN_TOKEN_BUDGET }}
+          LLM_MAX_RETRIES: ${{ vars.LLM_MAX_RETRIES }}
+          LLM_MAX_OUTPUT_TOKENS: ${{ vars.LLM_MAX_OUTPUT_TOKENS }}
+          EXTRACTION_LLM_PROVIDER: ${{ vars.EXTRACTION_LLM_PROVIDER }}
+          EXTRACTION_LLM_MODEL: ${{ vars.EXTRACTION_LLM_MODEL }}
+          NEWS_LLM_PROVIDER: ${{ vars.NEWS_LLM_PROVIDER }}
+          NEWS_LLM_MODEL: ${{ vars.NEWS_LLM_MODEL }}
+          ORIGINAL_CONTENT_LLM_PROVIDER: ${{ vars.ORIGINAL_CONTENT_LLM_PROVIDER }}
+          ORIGINAL_CONTENT_LLM_MODEL: ${{ vars.ORIGINAL_CONTENT_LLM_MODEL }}
           NEWS_LOCALITY_REPORT_PATH: news-locality-review.jsonl
 
       - name: Run news worker
@@ -93,6 +107,20 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          LLM_PROVIDER: ${{ vars.LLM_PROVIDER }}
+          LLM_MODEL: ${{ vars.LLM_MODEL }}
+          LLM_RUN_MAX_ATTEMPTS: ${{ vars.LLM_RUN_MAX_ATTEMPTS }}
+          LLM_RUN_TOKEN_BUDGET: ${{ vars.LLM_RUN_TOKEN_BUDGET }}
+          LLM_MAX_RETRIES: ${{ vars.LLM_MAX_RETRIES }}
+          LLM_MAX_OUTPUT_TOKENS: ${{ vars.LLM_MAX_OUTPUT_TOKENS }}
+          EXTRACTION_LLM_PROVIDER: ${{ vars.EXTRACTION_LLM_PROVIDER }}
+          EXTRACTION_LLM_MODEL: ${{ vars.EXTRACTION_LLM_MODEL }}
+          NEWS_LLM_PROVIDER: ${{ vars.NEWS_LLM_PROVIDER }}
+          NEWS_LLM_MODEL: ${{ vars.NEWS_LLM_MODEL }}
+          ORIGINAL_CONTENT_LLM_PROVIDER: ${{ vars.ORIGINAL_CONTENT_LLM_PROVIDER }}
+          ORIGINAL_CONTENT_LLM_MODEL: ${{ vars.ORIGINAL_CONTENT_LLM_MODEL }}
           DRY_RUN: ${{ inputs.dry_run || 'false' }}
           MAX_NEW_PER_RUN: ${{ github.event_name == 'pull_request' && '40' || '300' }}
           MAX_RUN_MINUTES: ${{ github.event_name == 'pull_request' && '8' || '20' }}

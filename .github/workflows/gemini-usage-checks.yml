@@ -1,8 +1,15 @@
-name: Gemini usage controls (offline)
+name: LLM provider and usage controls (offline)
 on:
   pull_request:
     paths:
       - 'gemini_usage.py'
+      - 'llm_provider.py'
+      - 'requirements-llm.txt'
+      - 'tests/test_llm_provider.py'
+      - 'news_worker*.py'
+      - 'original_content_worker.py'
+      - '.github/workflows/original-content.yml'
+      - '.github/workflows/llm-smoke.yml'
       - 'shadow_capture.py'
       - 'tests/test_shadow_review.py'
       - 'worker.py'
@@ -29,9 +36,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install -r requirements.txt
+      - run: pip install -r requirements.txt feedparser googlenewsdecoder==0.2.1 selectolax==0.4.12
       - run: python -m unittest discover -s tests -p test_gemini_usage.py -v
       - run: python -m unittest discover -s tests -p test_activity_ingestion.py -v
+      - run: python -m unittest discover -s tests -p test_llm_provider.py -v
+      - run: python -m unittest discover -s tests -p test_original_content.py -v
       - run: python -m unittest discover -s tests -p test_extraction_cache.py -v
       - run: python -m unittest discover -s tests -p test_extraction_units.py -v
       - run: python events_worker.py --self-test

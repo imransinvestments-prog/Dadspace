@@ -1,0 +1,46 @@
+{
+  "checked_on": "2026-10-13",
+  "model_calls": 0,
+  "database_writes": 0,
+  "sources": [
+    {
+      "name": "Cardiff Libraries",
+      "listing_pages": 18,
+      "all_observed_pages_collected": true,
+      "page_prepared_chars": [
+        8903,
+        9263,
+        9040,
+        9414,
+        8799,
+        9069,
+        9011,
+        10085,
+        9628,
+        9551,
+        9328,
+        9178,
+        9661,
+        9618,
+        9402,
+        9728,
+        9483,
+        10625
+      ],
+      "combined_prepared_chars": 168919,
+      "within_40000_per_page": true,
+      "within_old_18000_per_page": true
+    },
+    {
+      "name": "Museum Wales",
+      "listing_pages": 1,
+      "all_observed_pages_collected": true,
+      "page_prepared_chars": [
+        33126
+      ],
+      "combined_prepared_chars": 33126,
+      "within_40000_per_page": true,
+      "within_old_18000_per_page": false
+    }
+  ]
+}

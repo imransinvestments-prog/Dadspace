@@ -12,6 +12,31 @@ on:
       - ".github/workflows/collect-civic.yml"
   workflow_dispatch:
     inputs:
+      llm_source_review_only:
+        description: "Three real-source LLM extractions only; no database access"
+        type: boolean
+        default: false
+      llm_smoke_only:
+        description: "One synthetic LLM check only; no source collection or database access"
+        type: boolean
+        default: false
+      smoke_provider:
+        description: "Provider for smoke check only"
+        type: choice
+        options: [openai, gemini, deepseek]
+        default: openai
+      smoke_model:
+        description: "API model for smoke check only"
+        type: string
+        default: gpt-4.1-mini
+      resume_quality_run_id:
+        description: "Optional prior comparison run to reuse saved pages and completed variants"
+        type: string
+        default: ""
+      provider_quality_only:
+        description: "Four Gemini/OpenAI comparisons on two saved pages; no database access"
+        type: boolean
+        default: false
       usage_review_only:
         description: "Four paired OpenAI extraction calls only; no database access"
         type: boolean
@@ -78,7 +103,7 @@ jobs:
           if-no-files-found: error
 
   collect:
-    if: github.event_name != 'pull_request' && !inputs.usage_review_only
+    if: github.event_name != 'pull_request' && !inputs.usage_review_only && !inputs.llm_smoke_only && !inputs.llm_source_review_only && !inputs.provider_quality_only
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -120,6 +145,20 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          LLM_PROVIDER: ${{ vars.LLM_PROVIDER }}
+          LLM_MODEL: ${{ vars.LLM_MODEL }}
+          LLM_RUN_MAX_ATTEMPTS: ${{ vars.LLM_RUN_MAX_ATTEMPTS }}
+          LLM_RUN_TOKEN_BUDGET: ${{ vars.LLM_RUN_TOKEN_BUDGET }}
+          LLM_MAX_RETRIES: ${{ vars.LLM_MAX_RETRIES }}
+          LLM_MAX_OUTPUT_TOKENS: ${{ vars.LLM_MAX_OUTPUT_TOKENS }}
+          EXTRACTION_LLM_PROVIDER: ${{ vars.EXTRACTION_LLM_PROVIDER }}
+          EXTRACTION_LLM_MODEL: ${{ vars.EXTRACTION_LLM_MODEL }}
+          NEWS_LLM_PROVIDER: ${{ vars.NEWS_LLM_PROVIDER }}
+          NEWS_LLM_MODEL: ${{ vars.NEWS_LLM_MODEL }}
+          ORIGINAL_CONTENT_LLM_PROVIDER: ${{ vars.ORIGINAL_CONTENT_LLM_PROVIDER }}
+          ORIGINAL_CONTENT_LLM_MODEL: ${{ vars.ORIGINAL_CONTENT_LLM_MODEL }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
           # Blank preserves model defaults until quality evaluation approves a setting.
           GEMINI_THINKING_LEVEL: ${{ vars.GEMINI_EXTRACTION_THINKING_LEVEL }}
@@ -162,7 +201,7 @@ jobs:
           path: .extraction-cache/
           key: extraction-civic-v1-${{ github.run_id }}-${{ github.run_attempt }}
   usage-review:
-    if: github.event_name == 'workflow_dispatch' && inputs.usage_review_only
+    if: github.event_name == 'workflow_dispatch' && inputs.usage_review_only && !inputs.provider_quality_only
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -198,3 +237,106 @@ jobs:
           name: usage-review
           path: usage-review/
           if-no-files-found: error
+
+  provider-smoke:
+    if: github.event_name == 'workflow_dispatch' && inputs.llm_smoke_only && !inputs.usage_review_only && !inputs.provider_quality_only
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements-llm.txt
+      - name: Fixed fixture, no database access
+        run: python scripts/llm_smoke.py
+        env:
+          LLM_PROVIDER: ${{ inputs.smoke_provider }}
+          LLM_MODEL: ${{ inputs.smoke_model }}
+          LLM_RUN_MAX_ATTEMPTS: '1'
+          LLM_MAX_RETRIES: '0'
+          LLM_MAX_OUTPUT_TOKENS: '1000'
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: llm-smoke
+          path: llm-smoke.json
+          if-no-files-found: ignore
+
+  provider-source-review:
+    if: github.event_name == 'workflow_dispatch' && inputs.llm_source_review_only && !inputs.llm_smoke_only && !inputs.usage_review_only && !inputs.provider_quality_only
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Three real sources, no database access
+        run: python scripts/review_llm_sources.py
+        env:
+          LLM_PROVIDER: ${{ inputs.smoke_provider }}
+          LLM_MODEL: ${{ inputs.smoke_model }}
+          LLM_RUN_MAX_ATTEMPTS: '3'
+          LLM_RUN_TOKEN_BUDGET: '30000'
+          LLM_MAX_RETRIES: '0'
+          LLM_MAX_OUTPUT_TOKENS: '3000'
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          FETCH_ENGINE: requests
+          DRY_RUN: 'true'
+          REQUEST_TIMEOUT: '15'
+          MAX_RETRIES: '0'
+          ACTIVITY_DETAIL_PAGES: '2'
+          MAX_CHARS: '40000'
+          PAUSE_SECONDS: '1'
+          GEMINI_TIMEOUT_SECONDS: '60'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: llm-source-review
+          path: llm-source-review/
+          if-no-files-found: error
+
+  provider-quality-review:
+    permissions:
+      contents: read
+      actions: read
+    if: github.event_name == 'workflow_dispatch' && inputs.provider_quality_only
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - uses: actions/download-artifact@v5
+        if: inputs.resume_quality_run_id != ''
+        with:
+          name: provider-quality-review
+          path: provider-quality-review/
+          run-id: ${{ inputs.resume_quality_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Compare providers without database credentials
+        run: python scripts/review_provider_quality.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          GEMINI_TIMEOUT_SECONDS: '90'
+          FETCH_ENGINE: requests
+          REQUEST_TIMEOUT: '15'
+          MAX_RETRIES: '0'
+          DRY_RUN: 'true'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: provider-quality-review
+          path: provider-quality-review/
+          if-no-files-found: warn

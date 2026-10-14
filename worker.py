@@ -36,7 +36,7 @@ This version just makes sure that report can no longer fail either.
 """
 
 import datetime as dt
-from gemini_usage import BudgetExhausted
+from llm_provider import BudgetExhausted, credential_name, selection
 
 import hashlib
 import inspect
@@ -59,7 +59,7 @@ from urllib3.util.retry import Retry
 # ----------------------------------------------------------------------------
 # Settings (all can be changed from GitHub without editing this file)
 # ----------------------------------------------------------------------------
-MODEL = os.environ.get("GEMINI_MODEL") or "gemini-3.6-flash"
+MODEL = selection("EXTRACTION", os.environ.get("GEMINI_MODEL") or "gemini-3.6-flash")[1]
 FETCH_ENGINE = (os.environ.get("FETCH_ENGINE", "requests") or "requests").strip().lower()
 CATEGORY_FILTER = [c.strip() for c in os.environ.get("CATEGORIES", "").split(",") if c.strip()]
 EVENTS_TABLE = os.environ.get("EVENTS_TABLE", "collected_events")
@@ -510,6 +510,9 @@ def fetch_source_html(source):
     Browser directory sources may load a small bounded set of public location
     listing pages; requests sources may use narrow source-specific pagination.
     """
+    if source.get('source_adapter') == 'cardiff_paginated':
+        from source_pagination import collect
+        return collect(source, fetch_html, robots_allows, lambda: time.sleep(PAUSE_SECONDS))
     urls = source_fetch_urls(source)
     documents = []
     for i, url in enumerate(urls):
@@ -546,7 +549,7 @@ def soft_404_title(documents):
 
 
 
-def prepare_content(html, url):
+def prepare_content(html, url, *, max_chars=None):
     """Return (content_for_gemini, method_label).
 
     `html` may be one HTML string or a list of (page_url, html) documents.
@@ -554,6 +557,7 @@ def prepare_content(html, url):
     combined. The compact event block is placed first so a long council page
     cannot push the actual listings beyond MAX_CHARS.
     """
+    budget = MAX_CHARS if max_chars is None else max_chars
     documents = html if isinstance(html, list) else [(url, html)]
 
     event_blocks = []
@@ -583,12 +587,12 @@ def prepare_content(html, url):
         jsonld_all = list({json.dumps(item, sort_keys=True, ensure_ascii=False): item
                            for item in jsonld_all}.values())
         jsonld_text = json.dumps(jsonld_all, ensure_ascii=False)
-        parts.append("STRUCTURED EVENT DATA (schema.org JSON-LD):\n" + jsonld_text[:MAX_JSONLD_CHARS])
+        parts.append("STRUCTURED EVENT DATA (schema.org JSON-LD):\n" + (jsonld_text if budget == 0 else jsonld_text[:MAX_JSONLD_CHARS]))
     if visible_blocks:
         parts.append("VISIBLE PAGE TEXT:\n" + "\n\n".join(visible_blocks))
 
     # Allocate space in order of usefulness. Event rows/cards come first.
-    remaining = MAX_CHARS
+    remaining = budget or sum(len(part) + 2 for part in parts)
     kept = []
     for part in parts:
         if remaining <= 0:
@@ -597,7 +601,9 @@ def prepare_content(html, url):
         kept.append(piece)
         remaining -= len(piece)
 
-    content = "\n\n".join(kept)[:MAX_CHARS]
+    content = "\n\n".join(kept)
+    if budget:
+        content = content[:budget]
     if jsonld_all and event_blocks:
         method = "html-listings+jsonld+llm"
     elif jsonld_all:
@@ -617,6 +623,7 @@ def extraction_cache_hash(content, source, today):
     The successful timestamp bounds freshness without adding database columns.
     """
     from structured_events import complete_events
+    from family_grounding import filter_grounded, grounded, source_soups, normalized, family_signal
     prompt_rules = build_prompt(source, source["url"], "", dt.date(2000, 1, 1))
     settings = {"version": EXTRACTION_CACHE_VERSION,
                 "method": FETCH_ENGINE, "model": MODEL,
@@ -627,6 +634,8 @@ def extraction_cache_hash(content, source, today):
                 "thinking": os.environ.get("GEMINI_THINKING_LEVEL", ""),
                 "extractor": inspect.getsource(make_gemini_caller),
                 "validator": inspect.getsource(clean_events),
+                "family_grounding": inspect.getsource(grounded) + inspect.getsource(filter_grounded) + inspect.getsource(source_soups) + inspect.getsource(normalized) + inspect.getsource(family_signal),
+                "preparation": inspect.getsource(prepare_content),
                 "page_extraction": inspect.getsource(extract_documents),
                 "structured_parser": inspect.getsource(complete_events),
                 "source_mode": {key: source.get(key) for key in (
@@ -666,6 +675,9 @@ def extract_documents(documents, source, extract, today, stats):
     if not (source.get('extraction_mode') == 'per_page'
             or os.environ.get('EXTRACTION_PER_PAGE', 'false').lower() == 'true'):
         content, _ = prepare_content(docs, source['url'])
+        full, _ = prepare_content(docs, source['url'], max_chars=0)
+        if content != full:
+            raise ValueError('Prepared source exceeds input limit; use bounded per-page collection')
         prompt = build_prompt(source, source['url'], content, today)
         stats['gemini_logical_calls'] = 1
         stats['gemini_prompt_chars'] = len(prompt)
@@ -681,7 +693,7 @@ def extract_documents(documents, source, extract, today, stats):
     for page_url, html in docs:
         content, _ = prepare_content(html, page_url)
         # A truncated page is not a complete extraction unit. No partial success.
-        if len(content) >= MAX_CHARS:
+        if content != prepare_content(html, page_url, max_chars=0)[0]:
             raise ValueError('Prepared page reaches input limit; review coverage before per-page extraction')
         if len(content.strip()) < 200:
             raise ValueError('Detail/listing page has insufficient readable evidence')
@@ -749,8 +761,8 @@ IMPORTANT RULES:
 - A general attraction may be included only when the supplied page presents a specific dated activity/day-out opportunity (for example an open day, steam day, family trail, guided activity, workshop, special tour or similar). Do not turn ordinary opening information, membership information, ticket sales or equipment hire into events.
 - Return two additional fields:
     audience = one of: children, families, general, adults, unknown.
-    family_evidence = a short phrase copied or closely paraphrased from the supplied content explaining why a parent would do this with a child. If there is no concrete evidence, use null.
-- For family_relevance 3 or 4, family_evidence is required. For 5, it should normally be present too. Never invent evidence.
+    family_evidence = an exact short quotation from this listing or its own detail page explicitly mentioning children, babies, toddlers or families. Do not paraphrase, borrow from another listing or infer suitability from a venue. If absent, use null.
+- For every accepted listing, including audience=children/families and relevance=5, quoted family_evidence is required. Never invent evidence.
 - event_url should be the specific event link if one appears in the content (links appear as [url] after the link text).
 - recurrence is one of: one_off, recurring, seasonal, unknown.
 - confidence is 0-1: how sure you are the event details and family evidence are correct and come from the supplied content.
@@ -783,7 +795,7 @@ def make_gemini_caller():
         audience: Optional[str] = None
         family_evidence: Optional[str] = None
 
-    from gemini_usage import make_extractor
+    from llm_provider import make_extractor
     return make_extractor(MODEL, list[EventSchema], GEMINI_TIMEOUT_SECONDS, FatalError)
 
 
@@ -1015,6 +1027,10 @@ def process_source(source, extract, today):
         stats[f"gemini_{key}"] = max(0, after[key] - before[key])
 
     try:
+        from family_grounding import filter_grounded
+        # Strict structured parsing has its own visible-source family gate.
+        if not stats.get('structured_events'):
+            raw = filter_grounded(raw, documents, prepare_content(documents, url, max_chars=0)[0], stats)
         rows = clean_events(raw, source, url, method, today, stats)
     except Exception:
         finish_result_cache(extract, source['id'], False)
@@ -1245,7 +1261,7 @@ def self_test():
         timed_out = "timed out" in str(exc)
     check("call_with_timeout enforces its deadline", timed_out)
 
-    for name in ("SUPABASE_URL", "SUPABASE_KEY", "GEMINI_API_KEY"):
+    for name in ("SUPABASE_URL", "SUPABASE_KEY", credential_name()):
         present = bool(os.environ.get(name))
         print(f"  [{'ok' if present else 'warn'}] {name} secret is set" if present else f"  [warn] {name} secret is NOT set (fine for self-test, required for a real run)")
 
@@ -1299,7 +1315,7 @@ def main():
     if "--self-test" in sys.argv:
         sys.exit(0 if self_test() else 1)
 
-    missing = [n for n in ("SUPABASE_URL", "SUPABASE_KEY", "GEMINI_API_KEY") if not os.environ.get(n)]
+    missing = [n for n in ("SUPABASE_URL", "SUPABASE_KEY", credential_name()) if not os.environ.get(n)]
     if missing:
         print("Setup problem: these GitHub secrets are missing or empty: " + ", ".join(missing))
         sys.exit(1)
@@ -1327,7 +1343,7 @@ def main():
 
     from shadow_capture import capture_calls
     extract = capture_calls(make_gemini_caller())
-    print("Gemini controls: " + json.dumps(getattr(extract, "settings", {}), sort_keys=True))
+    print("LLM controls: " + json.dumps(getattr(extract, "settings", {}), sort_keys=True))
     today = today_uk()
 
     query = db.table("sources").select("*").eq("active", True)
@@ -1342,7 +1358,7 @@ def main():
     which = ", ".join(CATEGORY_FILTER) if CATEGORY_FILTER else "all categories"
     print(f"Today (UK): {today}. Categories: {which}. Fetch engine: {FETCH_ENGINE}. "
           f"Sources to process: {len(sources)}. Dry run: {DRY_RUN}. Model: {MODEL}. "
-          f"Run budget: {MAX_RUN_MINUTES} min. Gemini timeout: {GEMINI_TIMEOUT_SECONDS}s.")
+          f"Run budget: {MAX_RUN_MINUTES} min. LLM timeout: {GEMINI_TIMEOUT_SECONDS}s.")
 
     # Everything the summary needs is created here, before the loop, so a
     # crash partway through the loop still leaves a valid report to print.
@@ -1490,7 +1506,7 @@ def main():
         # API attempts include retries/timeouts; input chars therefore reflect actual
         # request payloads sent rather than just successful logical source calls.
         print(
-            "Gemini usage: "
+            "LLM usage: "
             f"api_attempts={gemini_metrics.get('api_attempts', 0)}, "
             f"input_chars_sent={gemini_metrics.get('input_chars_sent', 0)}, "
             f"prompt_tokens={gemini_metrics.get('prompt_tokens', 0)}, "

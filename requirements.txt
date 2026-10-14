@@ -2,3 +2,4 @@ requests
 beautifulsoup4
 supabase
 google-genai
+-r requirements-llm.txt
