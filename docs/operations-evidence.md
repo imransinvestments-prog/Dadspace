@@ -42,7 +42,10 @@ New tests cover auth before privileged reads, missing service configuration,
 partial failure/truncation, pagination, genuine empty versus failed queues, source
 zero/unknown yield, unsafe/signed links and source-grounded schedules/dates.
 Authenticated populated routes, pagination, 390px overflow and keyboard navigation
-need integration QA before release. Rollback is a code revert, with no data rollback.
+passed on authenticated production after #81 deployed, including all three populated
+queues, keyboard page-two navigation, exact national counts and no mobile overflow.
+Anonymous production `/ops` and `/ops/review` return login redirects. Rollback is
+a code revert, with no data rollback.
 
 #70 remains open for separate reviewer permissions, previewed/audited actions,
 concurrency guards and rollback. Canonical venue decisions, enrichment rights,
