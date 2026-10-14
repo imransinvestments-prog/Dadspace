@@ -23,6 +23,7 @@ export async function GET(request: NextRequest) {
     point,
   })
 
+  if(page.loadFailed)return NextResponse.json({error:'Activities unavailable'},{status:503,headers:{'Cache-Control':'private, no-store'}})
   return NextResponse.json(page, {
     headers: { "Cache-Control": "private, no-store" },
   })

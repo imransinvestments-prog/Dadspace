@@ -8,4 +8,5 @@ export type ActivityPage = {
   offset: number
   limit: number
   hasMore: boolean
+  loadFailed?: boolean
 }

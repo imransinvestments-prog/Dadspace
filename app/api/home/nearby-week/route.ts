@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
   const today = londonToday(), weekStart = addDays(today,-((weekday(today)+6)%7)), weekEnd = addDays(weekStart,6)
   const [eventsResult,countResult] = await Promise.allSettled([
     fetchUpcomingEvents(point).then(result => {
+      if (result.loadFailed) throw new Error("Events unavailable")
       const seen = new Set<string>()
       return result.isSample ? [] : result.events.filter(e => {
         if ((e.end_date ?? e.start_date) < today || e.distance_miles == null) return false

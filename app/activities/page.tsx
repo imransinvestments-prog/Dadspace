@@ -16,6 +16,7 @@ export default async function ActivitiesPage() {
     fetchActivityPage({ limit: ACTIVITY_PAGE_SIZE }),
     fetchActivityCategories(),
   ])
+  if (initialPage.loadFailed) return <section className="rounded-2xl border bg-card p-8"><h1 className="text-3xl font-bold">Activities are temporarily unavailable</h1><p role="status" className="mt-3 text-muted-foreground">We could not load the listings. Please try again shortly.</p><a href="/activities" className="mt-5 inline-block font-semibold underline">Try again</a></section>
 
   return (
     <div className="flex flex-col gap-10">

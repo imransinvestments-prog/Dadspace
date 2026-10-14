@@ -189,7 +189,7 @@ export function geographicallyBalanceEvents(events: DadEvent[]): DadEvent[] {
   return balanced
 }
 
-export type EventsListing = { events: DadEvent[]; today: string; saturday: string; sunday: string; isSample: boolean }
+export type EventsListing = { events: DadEvent[]; today: string; saturday: string; sunday: string; isSample: boolean; loadFailed: boolean }
 
 export async function fetchUpcomingEvents(point?: Point | null): Promise<EventsListing> {
   const today = londonToday()
@@ -197,11 +197,12 @@ export async function fetchUpcomingEvents(point?: Point | null): Promise<EventsL
   const db = getSupabase()
 
   if (db) {
+    try {
     const data: Record<string,unknown>[] = []
     let error = false
     for(let offset=0;;offset+=MAX_EVENTS){
       const page=await db.from('upcoming_events').select('*').order('start_date').order('id').range(offset,offset+MAX_EVENTS-1)
-      if(page.error){error=true;break}
+      if(page.error || !Array.isArray(page.data)){error=true;break}
       data.push(...(page.data??[]))
       if((page.data?.length??0)<MAX_EVENTS)break
     }
@@ -209,13 +210,16 @@ export async function fetchUpcomingEvents(point?: Point | null): Promise<EventsL
       const mapped = data.map((row) => toEvent(row as Record<string, unknown>))
       const clean = dedupeEvents(qualityForDisplay(mapped))
       const events=point?nearestFirst(await withDistances(clean,point),(a,b)=>a.start_date.localeCompare(b.start_date)):geographicallyBalanceEvents(clean)
-      return { events, today, saturday, sunday, isSample: false }
+      return { events, today, saturday, sunday, isSample: false, loadFailed: false }
     }
     if (point && error) throw new Error('Events unavailable')
-    if (!error) return { events: [], today, saturday, sunday, isSample: false }
+    if (!error) return { events: [], today, saturday, sunday, isSample: false, loadFailed: false }
+    } catch {
+      // Missing configuration, query and transport failures are not empty supply.
+    }
   }
 
-  return { events: [], today, saturday, sunday, isSample: false }
+  return { events: [], today, saturday, sunday, isSample: false, loadFailed: true }
 }
 
 export async function fetchEventById(id: string): Promise<DadEvent | null> {

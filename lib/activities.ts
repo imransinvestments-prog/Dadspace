@@ -50,8 +50,10 @@ export async function fetchActivityPage(options?: {
   const db = getSupabase()
   const offset = Math.max(0, options?.offset ?? 0)
   const limit = Math.min(48, Math.max(1, options?.limit ?? ACTIVITY_PAGE_SIZE))
-  if (!db) return { activities: [], total: 0, offset, limit, hasMore: false }
+  const unavailable = { activities: [], total: 0, offset, limit, hasMore: false, loadFailed: true }
+  if (!db) return unavailable
 
+  try {
   let request = db
     .from("current_activities")
     .select("*", { count: "exact" })
@@ -79,17 +81,17 @@ export async function fetchActivityPage(options?: {
       if((data?.length??0)<500)break
     }
     const sorted=nearestFirst(await withDistances(rows.map(toActivity),options.point),(a,b)=>(b.family_relevance??0)-(a.family_relevance??0)||a.title.localeCompare(b.title))
-    return {activities:sorted.slice(offset,offset+limit),total:sorted.length,offset,limit,hasMore:offset+limit<sorted.length}
+    return {activities:sorted.slice(offset,offset+limit),total:sorted.length,offset,limit,hasMore:offset+limit<sorted.length,loadFailed:false}
   }
   const { data, error, count } = await request.range(offset, offset + limit - 1)
   if (error || !data) {
-    if (error) console.error("Failed to load activities:", error.message)
-    return { activities: [], total: 0, offset, limit, hasMore: false }
+    return unavailable
   }
 
   const activities = data.map((row) => toActivity(row as Record<string, unknown>))
   const total = count ?? activities.length
-  return { activities, total, offset, limit, hasMore: offset + activities.length < total }
+  return { activities, total, offset, limit, hasMore: offset + activities.length < total, loadFailed: false }
+  } catch { return unavailable }
 }
 
 export async function fetchActivityCategories(): Promise<string[]> {

@@ -6,6 +6,10 @@ export async function GET(request:Request){
   const params=new URL(request.url).searchParams
   const point=parsePoint(params)
   if((params.has('lat')||params.has('lng'))&&!point)return Response.json({error:'Invalid location'},{status:400})
-  try{return Response.json(await fetchUpcomingEvents(point),{headers:{'Cache-Control':'private, no-store'}})}
+  try{
+    const result=await fetchUpcomingEvents(point)
+    if(result.loadFailed)return Response.json({error:'Events unavailable'},{status:503,headers:{'Cache-Control':'private, no-store'}})
+    return Response.json(result,{headers:{'Cache-Control':'private, no-store'}})
+  }
   catch{return Response.json({error:'Events unavailable'},{status:503})}
 }
