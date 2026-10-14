@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next"
 import { isProduction, siteUrl } from "@/lib/seo"
 
-const PRIVATE_PATHS = ["/profile", "/api/", "/auth/"]
+const PRIVATE_PATHS = ["/profile", "/ops", "/api/", "/auth/"]
 
 // Named explicitly so AI search and answer engines can cite Dadspace pages.
 const AI_CRAWLERS = [

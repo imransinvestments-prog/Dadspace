@@ -1,4 +1,4 @@
-export const PROTECTED_PREFIXES = ["/profile", "/chat"]
+export const PROTECTED_PREFIXES = ["/profile", "/chat", "/ops"]
 export const NEXT_COOKIE = "dadspace_auth_next"
 
 export function isProtectedPath(pathname: string) {
