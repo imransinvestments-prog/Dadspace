@@ -15,7 +15,7 @@ export default async function OperationsPage() {
   const result = await getOperationsDashboard()
   if (result.access === "sign-in") redirect("/auth/login?next=%2Fops")
   if (result.access === "denied") notFound()
-  if (result.access === "unavailable") return <section className="rounded-3xl border bg-card p-8"><h1 className="text-3xl font-bold">Operations unavailable</h1><p className="mt-3 text-muted-foreground">Operator sign-in could not be verified. Try again later or contact the site owner.</p></section>
+  if (result.access !== "allowed") return <section className="rounded-3xl border bg-card p-8"><h1 className="text-3xl font-bold">Operations unavailable</h1><p className="mt-3 text-muted-foreground">Operator sign-in could not be verified. Try again later or contact the site owner.</p></section>
   const { evidence } = result
   const now = new Date()
   const original = evidence.original ? feedHealth([evidence.original], "publish", now) : null

@@ -34,12 +34,21 @@ repeat on runner, then request reviewed activation.
 - Provenance: https://www.hounslow.gov.uk/libraries
 - Linked directory: https://hounslowconnect.com/pages/local-libraries
 
+Local normal-worker HTTP/robots probes passed for this directory and its Chiswick
+branch, but the branch HTML contains only `Loading results` and no JSON-LD events
+or programme detail links. Static extraction is therefore not qualified: check
+permitted rendered content with the browser worker before proposing an adapter.
+
 Acton Depot's active source points to museum-wide what's-on and has ten 403
 failures. The official booking domain advertises Depot family tours as a candidate
 route. Museum-wide events do not establish an Acton location or ages 0–5 fit.
 Confirm permitted access, individual dates, ages and venue before replacement.
 
 - Candidate: https://bookings.ltmuseum.co.uk/
+
+Local normal-worker HTTP/robots checks passed on the booking homepage, but plain
+HTML supplied no event JSON-LD or programme links. Rendered detail qualification
+is still required. Access to this candidate does not cure the active route's 403.
 
 Sutton is outside the W3 10km pilot: earlier runner checks inform the adapter but
 do not fill this local gap. Inactive status/access failure alone is not unsuitability.

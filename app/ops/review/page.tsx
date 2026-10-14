@@ -17,7 +17,7 @@ export default async function ReviewPage({ searchParams }: { searchParams: Promi
   const data = await getReviewQueue(params.kind, params.page)
   if (data.access === "sign-in") redirect("/auth/login?next=%2Fops%2Freview")
   if (data.access === "denied") notFound()
-  if (data.access === "unavailable") return <section className="rounded-2xl border p-6"><h1 className="text-3xl font-bold">Review unavailable</h1><p className="mt-3">Operator sign-in could not be verified. Retry later.</p></section>
+  if (data.access !== "allowed") return <section className="rounded-2xl border p-6"><h1 className="text-3xl font-bold">Review unavailable</h1><p className="mt-3">Operator sign-in could not be verified. Retry later.</p></section>
   const href = (page: number) => `/ops/review?kind=${data.kind}&page=${page}`
   return <div className="space-y-6">
     <header><Link href="/ops#sources" className="text-sm font-semibold underline">Back to operations</Link><h1 className="mt-4 text-3xl font-bold">{labels[data.kind]}</h1><p className="mt-3 max-w-3xl text-muted-foreground">Read-only evidence, newest observations first. National backlog, including historical listings; no W3 distance or age acceptance is implied. Publication, classification and canonical matching need a reviewed decision.</p></header>
