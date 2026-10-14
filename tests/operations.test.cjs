@@ -88,3 +88,8 @@ test('authorised read shows unavailable evidence honestly and partial API failur
   assert.equal(partial.evidence.shadow, null)
   assert.equal(calls, 4)
 })
+
+test('malformed public evidence fails safely after verified operator access', async () => {
+  const result = await dashboard({ data: { user: { id: owner } }, error: null }, async () => ({ ok: true, json: async () => null })).getOperationsDashboard()
+  assert.equal(result.access, 'unavailable')
+})

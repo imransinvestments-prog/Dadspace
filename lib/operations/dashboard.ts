@@ -44,5 +44,6 @@ const getPublicEvidence = unstable_cache(async () => {
 export async function getOperationsDashboard() {
   const access = await operationsAccess()
   if (access !== "allowed") return { access }
-  return { access: "allowed" as const, evidence: await getPublicEvidence() }
+  try { return { access: "allowed" as const, evidence: await getPublicEvidence() } }
+  catch { return { access: "unavailable" as const } }
 }

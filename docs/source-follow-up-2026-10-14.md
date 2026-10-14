@@ -14,6 +14,15 @@ bypass. This suggests transient failure; normal runner recovery and public quali
 remain unverified. Next: normal worker dry run, then live verification if successful.
 Keep quality gates and failure reporting unchanged.
 
+Follow-up: normal GitHub worker dry run 38596955353 passed with 23 Babipur
+variants, 542 overall fetched and 120 kept, zero AI/tokens/writes. The health report
+correctly still showed old database source failure because dry runs do not update it.
+
+One subsequent normal live collection, 38597533405, passed. Database readback:
+Babipur status `ok`, zero consecutive failures, fresh check/success at
+2026-10-14 16:24 UTC and 19 verified offers. This establishes recovery for this
+run, not sustained reliability or the complete deal/pilot acceptance criteria.
+
 ## W3 supply gaps
 
 Ealing's active council-events source reports zero listings. Its official library
@@ -38,6 +47,15 @@ Local normal-worker HTTP/robots probes passed for this directory and its Chiswic
 branch, but the branch HTML contains only `Loading results` and no JSON-LD events
 or programme detail links. Static extraction is therefore not qualified: check
 permitted rendered content with the browser worker before proposing an adapter.
+
+The permitted in-app rendered page subsequently exposed nine service links,
+including Storytime. Its detail page gives ages 0–5, Tuesday 11:00–11:30, term-time
+only, required booking and explicit October/Christmas holiday exclusions, with
+Chiswick Library W4 2AB provenance. This is a regular activity, not a one-off event.
+It is a strong candidate but still needs source terms, normal browser-worker
+repeat checks, canonical matching and pilot-distance review before activation.
+
+- Detail: https://hounslowconnect.com/services/storytime-at-chiswick-community-hub-and-library
 
 Acton Depot's active source points to museum-wide what's-on and has ten 403
 failures. The official booking domain advertises Depot family tours as a candidate
