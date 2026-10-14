@@ -19,10 +19,16 @@ Role provisioning and owner usability acceptance remain rollout dependencies.
 Alternatively set server-only `DADSPACE_OPERATOR_EMAILS` to approved exact email
 addresses. Only an email returned by the verified Auth server user with
 `email_confirmed_at` qualifies; unconfirmed/anonymous users are rejected.
-The owner selected `imransinvestments@gmail.com` in chat on 14 October. This email
+The owner selected the approved email in chat on 14 October. This email
 has no account in the current Auth lookup; a confirmed sign-in is still required.
 Do not create passwords or send invitations automatically. This route can be
 configured before the owner completes the existing sign-up/confirmation flow.
+
+The selected email allowlist is now saved in Vercel Production and Preview. Initial
+and integrated Linux checks passed, including seven targeted dashboard/access tests,
+TypeScript, production build and full regressions. The signed-out preview redirects
+to the existing login page with the correct `/ops` return path. Authenticated
+populated review remains pending; public GitHub evidence was verified HTTP 200.
 
 No service-role key, GitHub token, new package, schema or database mutation is
 required. Read-only GitHub metadata is available from this public repository.
