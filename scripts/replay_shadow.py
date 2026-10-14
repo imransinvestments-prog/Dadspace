@@ -83,7 +83,21 @@ def replay(directory, output, generator, configure=None):
                     'baseline_settings': snapshot['settings'], 'status': 'unsupported-model; no paid request'})
                 continue
             before = dict(generator.metrics)
-            raw = generator.generate(prompt, snapshot['schema'])
+            try:
+                raw = generator.generate(prompt, snapshot['schema'])
+            except Exception as exc:
+                # Preserve the paid attempt and its identity without copying arbitrary
+                # exception text, credentials, URLs or a partial rejected response.
+                report['samples'].append({'worker': snapshot['worker'],
+                    'prompt_sha256': hashlib.sha256(prompt.encode()).hexdigest(),
+                    'baseline_settings': snapshot['settings'],
+                    'baseline_usage': snapshot['usage'],
+                    'shadow_settings': dict(generator.settings),
+                    'shadow_usage': {k: v - before.get(k, 0) for k, v in generator.metrics.items()},
+                    'status': 'failed; no retry or fallback',
+                    'error_type': type(exc).__name__,
+                    'comparison': None})
+                raise
             usage = {k: v - before.get(k, 0) for k, v in generator.metrics.items()}
             report['samples'].append({'worker': snapshot['worker'],
                 'prompt_sha256': hashlib.sha256(prompt.encode()).hexdigest(),

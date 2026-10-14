@@ -1,7 +1,6 @@
 name: Collect all events
 
-# One manual button: civic first, activities second.
-# Activities starts only if civic finishes successfully.
+# One manual button: both collectors run independently.
 
 on:
   workflow_dispatch:
@@ -32,7 +31,6 @@ jobs:
     secrets: inherit
 
   activities:
-    needs: civic
     uses: ./.github/workflows/collect-activities.yml
     with:
       dry_run: ${{ inputs.dry_run }}

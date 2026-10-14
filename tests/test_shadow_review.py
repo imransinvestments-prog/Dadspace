@@ -96,6 +96,11 @@ class ShadowReviewTests(unittest.TestCase):
                 replay(root, root / 'output', generator)
             generator.generate.assert_called_once()
             self.assertTrue((root / 'output/results.json').exists())
+            report = json.loads((root / 'output/results.json').read_text())
+            self.assertEqual(report['samples'][0]['status'], 'failed; no retry or fallback')
+            self.assertEqual(report['samples'][0]['error_type'], 'RuntimeError')
+            self.assertIsNone(report['samples'][0]['comparison'])
+            self.assertNotIn('failure', json.dumps(report))
 
     def test_cost_unknown_without_rates_and_thinking_is_not_double_counted(self):
         usage = {'prompt_tokens': 100, 'output_tokens': 50, 'thinking_tokens': 20}
