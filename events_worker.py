@@ -551,6 +551,15 @@ def clean_events(raw_events, source, page_url, method, today, stats=None):
 
 
 def process_source(source, extract, today):
+    if source.get('source_adapter')=='hounslow_programme':
+        from hounslow_programmes import collect
+        stats={}
+        try:
+            raw,new_hash,stats=collect(source,today,base.fetch_html_requests,base.robots_allows,stats)
+            rows=clean_events(raw,source,source['url'],'hounslow_programme',today,stats)
+            return ('ok' if rows else 'ok_zero'),rows,new_hash,f'Hounslow: {len(rows)} reviewed programmes; zero model calls',stats
+        except Exception as exc:
+            return base.classify_fetch_error(str(exc)),[],None,str(exc),stats
     if source.get('source_adapter')=='classforkids_calendar':
         from classforkids_calendar import collect
         stats={}
@@ -654,3 +663,4 @@ if __name__ == "__main__":
     except Exception as exc:
         print(f"FATAL EVENT QUALITY WRAPPER ERROR: {type(exc).__name__}: {exc}")
         raise SystemExit(1)
+
