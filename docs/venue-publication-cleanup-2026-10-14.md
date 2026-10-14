@@ -23,3 +23,15 @@ Production database after the transaction: 57,232 public venues; 521 public arca
 The UI removes Rainy-day proof and Outdoors toggles. The API ignores stale indoor/outdoor query parameters and always passes false for both legacy RPC flags. Free entry, location, category, search and pagination remain available. No capability fields or guessed backfill are introduced; restoring these filters requires evidenced data and is deferred.
 
 Local verification: 28 Node regression tests and TypeScript check pass. The new regression checks stale filter URLs and verifies that hidden adult-gaming records stay hidden while a family arcade with Casino in its name remains readable. Local Next build is blocked by Windows filesystem access errors in SWC; Linux PR CI must pass before merging.
+
+## Owner follow-up: no or missing access and events hero scope
+
+The owner subsequently requested hiding the remaining parks/playgrounds with `access=no` or missing access. `supabase/venue-access-cleanup.sql` applies this separate publication transaction. Before execution, a local rollback snapshot saved all 37,761 IDs and their previous visibility/review values (all were visible with null review reason/time).
+
+Additional records hidden: 41 playgrounds with `access=no`; 37,145 playgrounds, 188 theme parks, 112 water parks and 275 animal parks with missing access. Unknown access is a hold pending evidence, not confirmation of private or restricted access. Existing `customers`, `permissive`, `restricted` and `yes` records remain outside this follow-up. No records or source evidence were deleted.
+
+Production verification after the follow-up: 19,471 public venues, including 10,213 parks/playgrounds; zero public parks/playgrounds with private, no, blank or missing access. This deliberately reduces public coverage substantially under the owner's requested publication policy.
+
+For #99, the Events hero now labels both counts as UK-wide listings and explicitly says that the counts do not change with the location or filters below. Counts still describe the national server read; they are not presented as Cardiff or another selected location's results. The existing explorer continues to calculate its result count from its loaded, filtered events. The nearby-radius behavior remains tracked separately in #87.
+
+Follow-up local checks: TypeScript and 32 Node regression tests pass, including event API failure and empty-supply checks. Both Linux CI workflows passed on the initial PR head; the follow-up head must also pass before merge.

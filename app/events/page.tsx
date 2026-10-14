@@ -36,16 +36,17 @@ export default async function EventsPage() {
           <p className="max-w-xl leading-relaxed text-pretty opacity-85">
             Story times, swimming, sport, crafts and days out from councils, libraries and venues across the UK. Refreshed regularly, so the weekend plan is easier to sort before the kids are.
           </p>
-          <dl className="flex flex-wrap gap-x-8 gap-y-2 pt-2">
+          <dl aria-label="UK-wide event listings" className="flex flex-wrap gap-x-8 gap-y-2 pt-2">
             <div className="flex items-baseline gap-2">
-              <dt className="order-2 text-sm opacity-80">on this weekend</dt>
+              <dt className="order-2 text-sm opacity-80">listed UK-wide this weekend</dt>
               <dd className="font-heading text-3xl font-extrabold text-highlight">{weekendCount}</dd>
             </div>
             <div className="flex items-baseline gap-2">
-              <dt className="order-2 text-sm opacity-80">free to go to</dt>
+              <dt className="order-2 text-sm opacity-80">free listings UK-wide</dt>
               <dd className="font-heading text-3xl font-extrabold">{freeCount}</dd>
             </div>
           </dl>
+          <p className="text-sm opacity-80">These UK-wide counts do not change with the location or filters below.</p>
           {isSample && <p className="text-sm opacity-70">Showing example events while the live listings load.</p>}
         </div>
         <div className="relative hidden aspect-[4/5] h-full md:col-span-2 md:block">
