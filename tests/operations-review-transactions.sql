@@ -10,8 +10,8 @@ begin
  insert into public.venues(id,venue_name,address,postcode,source_url,public_visible,discovery_status) values
  (a,'Reviewed branch','1 High Street','W4 2AB','https://example.com/a',false,'discovered'),
  (b,'Canonical branch','1 High Street','W4 2AB','https://example.com/b',true,'verified');
- insert into public.collected_events(id,title,start_date,end_date,recurrence,schedule_text,listing_type)
- values(e,'Weekly Storytime','2026-10-20','2026-10-20','recurring','Tuesday, 11–11:30, term time; holiday exclusions','activity');
+ insert into public.collected_events(id,title,dedupe_key,start_date,end_date,recurrence,schedule_text,listing_type)
+ values(e,'Weekly Storytime','operations-test-'||e::text,'2026-10-20','2026-10-20','recurring','Tuesday, 11–11:30, term time; holiday exclusions','activity');
  insert into public.venue_sources(id,venue_id,source_name,source_record_id) values(s,a,'Reviewed source','branch');
  plan:=public.dadspace_review_plan('approve',a,null);
  begin
