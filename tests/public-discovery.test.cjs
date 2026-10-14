@@ -3,15 +3,31 @@ const ts=require(process.env.DADSPACE_TEST_DEPENDENCIES ? process.env.DADSPACE_T
 const root=path.resolve(__dirname,'..')
 function load(file,requires){
   const code=ts.transpileModule(fs.readFileSync(path.join(root,file),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText
-  const sandbox={exports:{},require:name=>{if(!(name in requires))throw new Error(`Unexpected module ${name}`);return requires[name]},URLSearchParams,AbortSignal,TextEncoder}
+  const sandbox={exports:{},require:name=>{if(!(name in requires))throw new Error(`Unexpected module ${name}`);return requires[name]},URLSearchParams,URL,Request,Response,AbortSignal,TextEncoder}
   vm.runInNewContext(code,sandbox);return {module:sandbox.exports,sandbox}
 }
-test('public reads exclude hidden rows, bound first page and fail honestly',async()=>{
-  const records=[{id:'visible',venue_name:'Visible',public_visible:true},{id:'hidden',venue_name:'Hidden',public_visible:false}]
+test('retired indoor/outdoor URLs cannot activate unsupported RPC filters',async()=>{
+  let rpcArgs=null,pageCalls=0
+  const db={rpc:async(_name,args)=>{rpcArgs=args;return {data:{rows:[{id:'family'}],total:1},error:null}}}
+  const {module:m}=load('app/api/venues/route.ts',{
+    '@/lib/supabase':{getSupabase:()=>db},'@/lib/venues':{toVenue:r=>r},
+    '@/lib/distance':{parsePoint:p=>p.has('lat')?{lat:51.5,lng:-.1}:null},
+    '@/lib/venue-discovery':{publicVenuePage:async()=>{pageCalls++;return {venues:[{id:'family'}],total:1,hasMore:false,loadFailed:false}}},
+  })
+  let response=await m.GET(new Request('https://dadspace.example/api/venues?indoor=true&outdoor=true'))
+  assert.equal(response.status,200);assert.equal(pageCalls,1);assert.equal(rpcArgs,null)
+  response=await m.GET(new Request('https://dadspace.example/api/venues?lat=51.5&lng=-.1&indoor=true&outdoor=true&free=true&q=family'))
+  assert.equal(response.status,200);assert.equal(rpcArgs.p_indoor,false);assert.equal(rpcArgs.p_outdoor,false)
+  assert.equal(rpcArgs.p_free,true);assert.equal(rpcArgs.p_query,'family')
+  assert.equal((await response.json()).venues[0].id,'family')
+})
+test('public reads exclude hidden adult gaming, retain a family casino name and fail honestly',async()=>{
+  const records=[{id:'visible',venue_name:'Grand Casino',public_visible:true},{id:'hidden',venue_name:'Reels Casino Slots',public_visible:false}]
   const calls=[];let error=null,configured=true
   const db={from:()=>{let filters=[];return {select(columns,options){calls.push({columns,options});return this},eq(k,v){filters.push([k,v]);return this},order(){return this},range(a,b){calls.push({range:[a,b]});return Promise.resolve({data:error?null:records.filter(r=>filters.every(([k,v])=>r[k]===v)),error,count:1})},maybeSingle(){return Promise.resolve({data:records.find(r=>filters.every(([k,v])=>r[k]===v))??null,error})}}}}
   const {module:m}=load('lib/venue-discovery.ts',{'server-only':{},react:{cache:f=>f},'./supabase':{getSupabase:()=>configured?db:null},'./venues':{toVenue:r=>({id:r.id,name:r.venue_name})}})
   const page=await m.publicVenuePage();assert.deepEqual(Array.from(page.venues,v=>v.id),['visible']);assert.deepEqual(calls.at(-1).range,[0,23])
+  assert.equal(page.venues[0].name,'Grand Casino');assert.equal((await m.publicVenueById('visible')).name,'Grand Casino')
   assert.equal(await m.publicVenueById('hidden'),null)
   records[0].public_visible=false
   assert.equal(await m.publicVenueById('visible'),null)
