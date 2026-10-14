@@ -1,0 +1,45 @@
+# Source follow-up — 14 October 2026
+
+Investigation for #39 and #48. No source activation, registry/listing writes,
+provider changes or paid AI. Snapshots are not sustained runner qualification
+or permission to republish.
+
+## Babipur
+
+Live run 38584684904 reported HTTP 500 while accepting other merchants. The
+adapter correctly discards failed product batches and renews no freshness.
+A later local run of the unchanged approved adapter passed: Atom collection and
+seven product pages returned `ok`, yielding 23 variants. No alternate host or
+bypass. This suggests transient failure; normal runner recovery and public quality
+remain unverified. Next: normal worker dry run, then live verification if successful.
+Keep quality gates and failure reporting unchanged.
+
+## W3 supply gaps
+
+Ealing's active council-events source reports zero listings. Its official library
+page links to a separate Bookshelf events portal, which returned 403 in this check.
+Prior local MyLibrary success versus runner 403 remains unresolved. Seek permitted
+feed/hosting or source-supported access; no access bypass or activation.
+
+- Provenance: https://www.ealing.gov.uk/libraries
+- Linked route: https://libraries.ealing.gov.uk/events
+
+Hounslow's inactive source is the council library hub. The current official hub
+links to Hounslow Connect's Local Libraries directory with branch routes. The older
+search-indexed council timetable is not sufficient current evidence. Follow the
+current official route, check robots/terms and programme detail in the normal
+worker, preserve dates/term-time/ages, validate canonical venues and W3 distance,
+repeat on runner, then request reviewed activation.
+
+- Provenance: https://www.hounslow.gov.uk/libraries
+- Linked directory: https://hounslowconnect.com/pages/local-libraries
+
+Acton Depot's active source points to museum-wide what's-on and has ten 403
+failures. The official booking domain advertises Depot family tours as a candidate
+route. Museum-wide events do not establish an Acton location or ages 0–5 fit.
+Confirm permitted access, individual dates, ages and venue before replacement.
+
+- Candidate: https://bookings.ltmuseum.co.uk/
+
+Sutton is outside the W3 10km pilot: earlier runner checks inform the adapter but
+do not fill this local gap. Inactive status/access failure alone is not unsuitability.

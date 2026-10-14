@@ -1,7 +1,6 @@
 import "server-only"
 import { unstable_cache } from "next/cache"
-import { createClient } from "@/lib/supabase/server"
-import { isOperationsUser, isVerifiedOperationsEmail } from "./access"
+import { operationsAccess } from "./session"
 import type { Run, Job, Observation } from "./health"
 
 const API = "https://api.github.com/repos/imransinvestments-prog/Dadspace"
@@ -43,15 +42,7 @@ const getPublicEvidence = unstable_cache(async () => {
 }, ["dadspace-operations-public-evidence-v1"], { revalidate: 600 })
 
 export async function getOperationsDashboard() {
-  if (!process.env.NEXT_PUBLIC_DADSPACE_SUPABASE_URL || !process.env.NEXT_PUBLIC_DADSPACE_SUPABASE_ANON_KEY) {
-    return { access: "unavailable" as const }
-  }
-  try {
-    const client = await createClient()
-    const { data, error } = await client.auth.getUser()
-    if (error || !data.user) return { access: "sign-in" as const }
-    if (data.user.is_anonymous || !(isOperationsUser(data.user.id, process.env.DADSPACE_OPERATOR_USER_IDS) ||
-      isVerifiedOperationsEmail(data.user, process.env.DADSPACE_OPERATOR_EMAILS))) return { access: "denied" as const }
-    return { access: "allowed" as const, evidence: await getPublicEvidence() }
-  } catch { return { access: "unavailable" as const } }
+  const access = await operationsAccess()
+  if (access !== "allowed") return { access }
+  return { access: "allowed" as const, evidence: await getPublicEvidence() }
 }
