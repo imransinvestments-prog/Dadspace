@@ -5,7 +5,7 @@ import { getSupabase } from "@/lib/supabase"
 import { reviewIdentity } from "@/lib/operations/reviewer"
 import { reviewIntent, signReview, verifyReview } from "@/lib/operations/review-token"
 
-export type ReviewState = { message: string; preview?: { token: string; summary: string; venues: { id: string; name: string; postcode: string | null; public_visible: boolean }[]; listings: number; provenance: number }; audit?: string }
+export type ReviewState = { message: string; preview?: { token: string; summary: string; reason: string; venues: { id: string; name: string; postcode: string | null; public_visible: boolean }[]; listings: number; provenance: number }; audit?: string }
 export async function previewDecision(_state: ReviewState, form: FormData): Promise<ReviewState> {
   const identity = await reviewIdentity()
   if (!identity) return { message: "Operator access could not be verified." }
@@ -20,7 +20,7 @@ export async function previewDecision(_state: ReviewState, form: FormData): Prom
     if (error || !data || typeof data.summary !== "string" || !/^[0-9a-f]{32}$/.test(data.fingerprint) || !Array.isArray(data.venues) ||
       !Number.isSafeInteger(data.listings) || !Number.isSafeInteger(data.provenance)) return { message: "Preview unavailable: the record may have changed, lack required evidence or exceed the safe review limit. Refresh and review again." }
     return { message: identity.reviewer ? "Review this exact change before applying it." : "Preview only. Your account has read-only access; applying decisions requires a separately approved reviewer role.",
-      preview: { token: signReview(intent, identity.id, data.fingerprint, secret), summary: data.summary,
+      preview: { token: signReview(intent, identity.id, data.fingerprint, secret), summary: data.summary, reason: intent.reason,
         venues: data.venues.map((v: { id: string; name: string; postcode: string | null; public_visible: boolean }) => ({ id: v.id, name: v.name, postcode: v.postcode, public_visible: v.public_visible })),
         listings: data.listings, provenance: data.provenance } }
   } catch { return { message: "Review service is unavailable. No change made." } }
@@ -36,7 +36,9 @@ export async function applyDecision(_state: ReviewState, form: FormData): Promis
     if (!db) return { message: "Review service is unavailable. No change made." }
     const { data, error } = await db.rpc("dadspace_review_apply", { p_actor: identity.id, p_request: intent.request, p_action: intent.action,
       p_record: intent.record, p_target: intent.target, p_expected: intent.fingerprint, p_reason: intent.reason }).abortSignal(AbortSignal.timeout(15_000))
-    if (error || typeof data !== "string") return { message: "Decision not applied. Records may have changed, a duplicate identity may conflict, or the service may be unavailable. Refresh evidence and preview again." }
+    if (error || typeof data !== "string") return { message: ["P0001", "23505", "23503", "55P03", "57014"].includes(error?.code || "") ?
+      "Decision not applied. Records changed, an identity conflicted, or the transaction was blocked. Refresh evidence and preview again." :
+      "The result could not be confirmed. Check decision history before retrying; the same signed request cannot apply twice." }
     revalidatePath("/ops", "layout"); revalidatePath("/venues", "layout"); revalidatePath("/activities", "layout"); revalidatePath("/events", "layout")
     return { message: "Decision recorded. Refresh the queue to see the current state. Rollback is available while the affected evidence remains unchanged.", audit: data }
   } catch { return { message: "The result could not be confirmed. Check decision history before retrying; the same signed request cannot apply twice." } }

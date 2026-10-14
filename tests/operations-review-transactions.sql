@@ -33,13 +33,12 @@ begin
  if (select venue_id from public.collected_events where id=e) is distinct from b or (select venue_id from public.venue_sources where id=s) is distinct from b then raise exception 'Merge lost canonical relationships'; end if;
  if not (select not public_visible and merged_into=b from public.venues where id=a) then raise exception 'Duplicate not retained hidden'; end if;
  if saved is distinct from (select jsonb_build_object('start',start_date,'end',end_date,'recurrence',recurrence,'schedule',schedule_text,'type',listing_type) from public.collected_events where id=e) then raise exception 'Merge changed opportunity evidence'; end if;
- insert into public.venue_sources(id,venue_id,source_name,source_record_id) values(temporary,a,'Repeat source','new record');
- if (select venue_id from public.venue_sources where id=temporary) is distinct from b then raise exception 'Reimport revived merged duplicate'; end if;
  begin
+  insert into public.venue_sources(id,venue_id,source_name,source_record_id) values(temporary,a,'Repeat source','new record');
+  if (select venue_id from public.venue_sources where id=temporary) is distinct from b then raise exception 'Reimport revived merged duplicate'; end if;
   perform public.dadspace_review_plan('rollback',aid,null);
   raise exception 'Expected changed rollback rejection';
  exception when raise_exception then if sqlerrm not like 'Records changed after decision%' then raise; end if; end;
- delete from public.venue_sources where id=temporary;
  plan:=public.dadspace_review_plan('rollback',aid,null);
  rid:=public.dadspace_review_apply(actor,gen_random_uuid(),'rollback',aid,null,plan->>'fingerprint','Rollback verified against unchanged decision evidence');
  if (select venue_id from public.collected_events where id=e) is distinct from a or (select venue_id from public.venue_sources where id=s) is distinct from a then raise exception 'Rollback failed to restore relationships'; end if;
