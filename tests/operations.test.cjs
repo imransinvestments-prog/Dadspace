@@ -59,7 +59,8 @@ test('manual runs do not satisfy scheduled freshness and older successes remain 
 
 function dashboard(authResult, fetcher = async () => { throw new Error('should not fetch') }) {
   const client = { auth: { getUser: async () => authResult } }
-  return load('lib/operations/dashboard.ts', { 'server-only': {}, 'next/cache': { unstable_cache: fn => fn }, '@/lib/supabase/server': { createClient: async () => client }, './access': access },
+  const session = load('lib/operations/session.ts', { 'server-only': {}, '@/lib/supabase/server': { createClient: async () => client }, './access': access }, { process: { env: { NEXT_PUBLIC_DADSPACE_SUPABASE_URL: 'https://example.supabase.co', NEXT_PUBLIC_DADSPACE_SUPABASE_ANON_KEY: 'public', DADSPACE_OPERATOR_USER_IDS: owner } } })
+  return load('lib/operations/dashboard.ts', { 'server-only': {}, 'next/cache': { unstable_cache: fn => fn }, '@/lib/supabase/server': { createClient: async () => client }, './access': access, './session': session },
     { process: { env: { NEXT_PUBLIC_DADSPACE_SUPABASE_URL: 'https://example.supabase.co', NEXT_PUBLIC_DADSPACE_SUPABASE_ANON_KEY: 'public', DADSPACE_OPERATOR_USER_IDS: owner } }, fetch: fetcher })
 }
 test('server gate rejects unauthenticated users and ignores user-editable admin claims before fetching', async () => {
