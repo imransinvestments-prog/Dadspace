@@ -10,12 +10,10 @@ import { VenueSpotlight } from "@/components/venues/venue-spotlight"
 import { categoryPlural, milesBetween, type Venue } from "@/lib/venue-meta"
 import { cn } from "@/lib/utils"
 
-type Toggle = "free" | "indoor" | "outdoor"
+type Toggle = "free"
 
 const TOGGLES: { key: Toggle; label: string }[] = [
   { key: "free", label: "Free entry" },
-  { key: "indoor", label: "Rainy-day proof" },
-  { key: "outdoor", label: "Outdoors" },
 ]
 
 const SPIN_STEPS = 14
@@ -34,11 +32,11 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
   const spotlightRef = useRef<HTMLDivElement>(null)
 
   const enabled=true
-  const params=new URLSearchParams({q:query,category,free:String(toggles.has('free')),indoor:String(toggles.has('indoor')),outdoor:String(toggles.has('outdoor'))})
+  const params=new URLSearchParams({q:query,category,free:String(toggles.has('free'))})
   if(coords){params.set('lat',String(coords.lat));params.set('lng',String(coords.lng))}
   const isDefault=!coords&&!query&&category==='all'&&toggles.size===0
   if(isDefault&&initialPage>1)params.set('offset',String((initialPage-1)*24))
-  const seedParams=new URLSearchParams({q:'',category:'all',free:'false',indoor:'false',outdoor:'false'})
+  const seedParams=new URLSearchParams({q:'',category:'all',free:'false'})
   if(initialPage>1)seedParams.set('offset',String((initialPage-1)*24))
   const feed=useDirectoryPage<{venues:Venue[];total:number;hasMore:boolean}>('/api/venues?'+params,enabled,{url:'/api/venues?'+seedParams,page:{venues,total:initialTotal,hasMore:initialHasMore}})
   const currentVenues=feed.pages.flatMap(p=>p.venues)
