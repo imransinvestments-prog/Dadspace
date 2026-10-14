@@ -16,7 +16,8 @@ export const metadata = pageMetadata(
 export const revalidate = 600
 
 export default async function EventsPage() {
-  const { events, today, saturday, sunday, isSample } = await fetchUpcomingEvents()
+  const { events, today, saturday, sunday, isSample, loadFailed } = await fetchUpcomingEvents()
+  if (loadFailed) return <section className="rounded-2xl border bg-card p-8"><h1 className="text-3xl font-bold">Events are temporarily unavailable</h1><p role="status" className="mt-3 text-muted-foreground">We could not load the listings. Please try again shortly.</p><a href="/events" className="mt-5 inline-block font-semibold underline">Try again</a></section>
   const weekendCount = events.filter(
     (e) => e.start_date.slice(0, 10) <= sunday && (e.end_date ?? e.start_date).slice(0, 10) >= saturday,
   ).length
