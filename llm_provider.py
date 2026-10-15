@@ -14,6 +14,35 @@ class FatalLLMError(RuntimeError):
     """Credentials, billing or configuration require operator intervention."""
 
 
+class IncompleteOutputError(ValueError):
+    """Rejected content with bounded, non-content provider diagnostics."""
+
+    def __init__(self, provider, diagnostics):
+        super().__init__(provider + ' incomplete output rejected')
+        self.diagnostics = diagnostics
+
+
+def response_diagnostics(provider, reply):
+    """Never retain remote free text, IDs, URLs, refusals or partial content."""
+    allowed = {'completed', 'incomplete', 'failed', 'cancelled', 'queued', 'in_progress',
+               'STOP', 'MAX_TOKENS', 'SAFETY', 'RECITATION', 'OTHER', 'BLOCKLIST',
+               'PROHIBITED_CONTENT', 'SPII', 'MALFORMED_FUNCTION_CALL',
+               'max_output_tokens', 'content_filter', 'stop', 'length'}
+    def safe(value):
+        return value if isinstance(value, str) and value in allowed else 'unknown'
+    if provider == 'openai':
+        parts = [p for item in reply.get('output', []) for p in item.get('content', [])]
+        return {'status': safe(reply.get('status')),
+                'finish_reason': safe((reply.get('incomplete_details') or {}).get('reason')),
+                'partial_output_chars': sum(len(p.get('text', '')) for p in parts
+                                            if p.get('type') == 'output_text' and isinstance(p.get('text'), str))}
+    candidates = reply.get('candidates') or []
+    parts = (candidates[0].get('content', {}).get('parts', []) if candidates else [])
+    return {'finish_reason': safe(candidates[0].get('finishReason') if candidates else None),
+            'partial_output_chars': sum(len(p.get('text', '')) for p in parts
+                                        if not p.get('thought') and isinstance(p.get('text'), str))}
+
+
 KEYS = {'gemini': 'GEMINI_API_KEY', 'openai': 'OPENAI_API_KEY', 'deepseek': 'DEEPSEEK_API_KEY'}
 BILLING_ERRORS = {'insufficient_quota', 'credit_balance_exhausted',
                   'organization_spend_limit_exceeded', 'project_spend_limit_exceeded',
@@ -187,7 +216,7 @@ class StructuredGenerator:
             self._usage(reply)
             if self.provider == 'openai':
                 if reply.get('status') != 'completed':
-                    raise ValueError('OpenAI incomplete output rejected')
+                    raise IncompleteOutputError('OpenAI', response_diagnostics('openai', reply))
                 parts = [p for item in reply.get('output', []) for p in item.get('content', [])]
                 if any(p.get('type') == 'refusal' for p in parts):
                     raise ValueError('OpenAI refusal rejected')
@@ -200,7 +229,7 @@ class StructuredGenerator:
             else:
                 candidates = reply.get('candidates') or []
                 if not candidates or candidates[0].get('finishReason') != 'STOP':
-                    raise ValueError('Gemini incomplete output rejected')
+                    raise IncompleteOutputError('Gemini', response_diagnostics('gemini', reply))
                 text = ''.join(p.get('text', '') for p in candidates[0].get('content', {}).get('parts', []) if not p.get('thought'))
             data = json.loads(text)
             # No retry/fallback on malformed content, refusal or failed validation.

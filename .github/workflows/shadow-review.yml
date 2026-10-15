@@ -1,5 +1,11 @@
 name: Extraction shadow comparison
 on:
+  workflow_dispatch:
+    inputs:
+      reviewed_cohort:
+        description: Reviewed directory under artefacts/shadow-cohorts (paid, existing caps)
+        required: true
+        type: string
   workflow_run:
     workflows:
       - Dadspace workers (twice daily, UK time)
@@ -7,7 +13,7 @@ on:
       - Collect events (activities & clubs)
     types: [completed]
   pull_request:
-    paths: ['shadow_capture.py', 'llm_provider.py', 'scripts/replay_shadow.py', 'tests/test_shadow_review.py', 'tests/test_llm_provider.py', '.github/workflows/shadow-review.yml']
+    paths: ['shadow_capture.py', 'llm_provider.py', 'scripts/*shadow*.py', 'tests/test_shadow*.py', 'tests/test_llm_provider.py', 'artefacts/shadow-cohorts/**', '.github/workflows/shadow-review.yml']
 permissions:
   contents: read
   actions: read
@@ -22,9 +28,10 @@ jobs:
           python-version: '3.12'
       - run: pip install jsonschema pydantic
       - run: python -m unittest discover -s tests -p test_shadow_review.py -v
+      - run: python -m unittest discover -s tests -p test_shadow_chunks.py -v
       - run: python -m unittest discover -s tests -p test_llm_provider.py -v
   compare:
-    if: github.event_name == 'workflow_run' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == github.repository
+    if: (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == github.repository) || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
     needs: checks
     strategy:
       fail-fast: false
@@ -49,6 +56,7 @@ jobs:
           python-version: '3.12'
       - run: pip install jsonschema
       - uses: actions/download-artifact@v5
+        if: github.event_name == 'workflow_run'
         with:
           pattern: gemini-shadow-input-*
           path: shadow-input
@@ -63,6 +71,7 @@ jobs:
           EXTRACTION_LLM_PROVIDER: ${{ matrix.provider }}
           EXTRACTION_LLM_MODEL: ${{ matrix.model }}
           SHADOW_VARIANT: ${{ matrix.variant }}
+          SHADOW_REVIEWED_COHORT: ${{ github.event_name == 'workflow_dispatch' && inputs.reviewed_cohort || '' }}
           LLM_RUN_MAX_ATTEMPTS: '4'
           LLM_RUN_TOKEN_BUDGET: '60000'
           LLM_MAX_OUTPUT_TOKENS: '3000'
@@ -75,7 +84,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: shadow-comparison-${{ matrix.variant }}-${{ github.event.workflow_run.id }}
+          name: shadow-comparison-${{ matrix.variant }}-${{ github.event.workflow_run.id || github.run_id }}
           path: shadow-results/
           retention-days: 14
           if-no-files-found: warn

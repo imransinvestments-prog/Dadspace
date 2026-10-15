@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import Mock, patch
 
 from shadow_capture import capture_calls
-from scripts.replay_shadow import replay, estimate, configure_minimum
+from scripts.replay_shadow import replay, estimate, configure_minimum, score_reference
 
 
 class ShadowReviewTests(unittest.TestCase):
@@ -129,6 +129,48 @@ class ShadowReviewTests(unittest.TestCase):
             report = replay(root, root / 'output', generator, configure_minimum)
             generator.generate.assert_not_called()
             self.assertEqual(report['samples'][0]['status'], 'unsupported-model; no paid request')
+
+    def test_content_failure_continues_across_workers_but_budget_stops(self):
+        from gemini_usage import BudgetExhausted
+        from llm_provider import IncompleteOutputError
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory:
+            root = Path(directory)
+            for index, worker in enumerate(['activities', 'activities', 'civic', 'civic']):
+                (root / f'sample-{index}.json').write_text(json.dumps({'prompt': str(index),
+                    'schema': {}, 'raw': [], 'worker': worker, 'settings': {}, 'usage': {}}))
+            gen = Mock(settings={}, metrics={}, generate=Mock(side_effect=[
+                IncompleteOutputError('OpenAI', {'finish_reason': 'max_output_tokens'}), [], [], []]))
+            report = replay(root, root / 'out', gen)
+            self.assertEqual([s['worker'] for s in report['samples']],
+                             ['activities', 'civic', 'activities', 'civic'])
+            self.assertEqual(report['content_failures'], 1)
+            self.assertEqual(report['samples'][0]['diagnostics']['finish_reason'], 'max_output_tokens')
+            gen.generate = Mock(side_effect=BudgetExhausted('budget'))
+            with self.assertRaises(BudgetExhausted):
+                replay(root, root / 'out2', gen)
+            gen.generate.assert_called_once()
+
+    def test_oversized_baseline_is_deferred_without_paid_replay(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory:
+            root = Path(directory)
+            (root / 'sample-1.json').write_text(json.dumps({'prompt': 'source', 'schema': {},
+                'raw': [], 'worker': 'civic', 'settings': {},
+                'usage': {'output_tokens': 8000, 'thinking_tokens': 1000}}))
+            gen = Mock(settings={'max_output_tokens': 3000}, metrics={})
+            report = replay(root, root / 'out', gen)
+            gen.generate.assert_not_called()
+            self.assertIn('needs-reviewed-chunks', report['samples'][0]['status'])
+
+    def test_source_score_keeps_ambiguous_identity_and_cost_unknown(self):
+        reference = {'kind': 'human-reviewed-source', 'expected': [
+            {'id': 'one', 'evidence': 'children', 'fields': {'event_url': 'https://x/a',
+                'start_date': None, 'age_range': '3-5'}}]}
+        score = score_reference(reference, [{'event_url': 'https://x/a', 'age_range': '0-5'}])
+        self.assertEqual(score['candidates'][0]['differing_fields'], ['age_range'])
+        self.assertIsNone(score['accepted_listing_count'])
+        with patch.dict(os.environ, {'BASELINE_INPUT_USD_PER_MILLION': '1',
+                                    'BASELINE_OUTPUT_USD_PER_MILLION': '1'}):
+            self.assertIsNone(estimate({}, 'BASELINE'))
 
 
 if __name__ == '__main__':
