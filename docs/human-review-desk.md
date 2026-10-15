@@ -1,5 +1,13 @@
 # Human review desk
 
+## Explicit Originals editorial checks
+
+Published Originals record forms expose Originality, Claims, Tone and Length, with concise guidance and independent Pass / Needs changes / Not checked or unsure choices. The page shows daily/weekly cadence and a body word count (section headings and paragraphs), without inventing a length requirement. Additional evidence stays optional.
+
+Each new/updated decision saves validated `Originals editorial checks` alongside its verified article snapshot and overall decision. Same-record, same-fingerprint choices restore from the latest repository-owner audit comment; generic historical approvals and other versions do not fabricate individual scores. Existing six owner approvals remain intact. On 16 October the owner separately confirmed those reviews covered the editorial dimensions and that there were no rejected drafts in the reviewed cohort; #128 records that clarification without manufacturing rejected examples or altering historical comments.
+
+Validation: 41 targeted tests and TypeScript, including rubric validation, task isolation, snapshot/author-bound readback, latest decision restoration, independent unknowns, word count and optional evidence. GitHub/Vercel and production browser verification follow deployment.
+
 ## Fixed news acceptance sample
 
 #126 uses the immutable 50-record snapshot in `artefacts/data/news-quality-sample-2026-10-15.json`, frozen from 163 public feed records on 15 October 2026. The manifest records category/geographic-scope strata and selection method: proportional allocation with coverage of each available stratum, deterministic source round-robin/MD5 ordering, and carry-over of two already reviewed records. This is a bounded quality review, not a statistically representative national survey. Feed refreshes cannot change its rows, order, IDs or denominator.

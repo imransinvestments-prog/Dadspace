@@ -11,6 +11,7 @@ function load(file, deps = {}, extra = {}) {
 }
 const tasks = load('lib/operations/review-tasks.ts')
 const access = load('lib/operations/access.ts')
+const originals = load('lib/operations/originals-checks.ts')
 const news = load('lib/operations/news-sample.ts', { '@/artefacts/data/news-quality-sample-2026-10-15.json': JSON.parse(fs.readFileSync('artefacts/data/news-quality-sample-2026-10-15.json', 'utf8')) })
 const uid = '12345678-1234-1234-1234-123456789abc'
 function harness({ allowed = 'allowed', reviewer = true, changed = false, token = 'test-only', materialChanged = false } = {}) {
@@ -18,6 +19,7 @@ function harness({ allowed = 'allowed', reviewer = true, changed = false, token 
   const api = load('lib/operations/task-review.ts', {
     'server-only': {}, './session': { operationsAccess: async () => allowed }, './access': access,
     './news-sample': news,
+    './originals-checks': originals,
     './review-tasks': tasks, '@/lib/supabase/server': { createClient: async () => ({ auth: { getUser: async () => ({ data: { user: { id: uid } } }) } }) },
     './review-material': { getReviewMaterial: async () => ({ available: true, label: 'Live news', notice: 'Not a frozen sample', rows: [{ id: 'record-1', title: 'Article', fields: { summary: 'Actual evidence' } }] }), materialFingerprint: () => materialChanged ? 'changed' : 'snapshot-hash' },
   }, { process: { env: { DADSPACE_REVIEWER_USER_IDS: reviewer ? uid : '', DADSPACE_REVIEW_GITHUB_TOKEN: token } },
@@ -85,4 +87,19 @@ test('news rubric choices are validated and saved independently from the overall
   const denied=harness()
   await assert.rejects(denied.api.recordTaskReview(126,tasks.REVIEW_DECISIONS[0],'scope','','old:0',{...material,checks:{...material.checks,geography:'invented'}}))
   assert.equal(denied.calls.some(c=>c.options.method==='POST'),false)
+})
+test('Originals editorial checks save separately, accept optional evidence and retain unknowns', async () => {
+  const {api,calls}=harness()
+  const editorialChecks={originality:'yes',claims:'unknown',tone:'yes',length:'no'}
+  await api.recordTaskReview(128,tasks.REVIEW_DECISIONS[1],'Shorten the article','','old:0',{rowId:'record-1',page:1,fingerprint:'snapshot-hash',editorialChecks})
+  const body=JSON.parse(calls.find(c=>c.options.method==='POST').options.body).body
+  assert.ok(body.includes('Originals editorial checks: '+JSON.stringify(editorialChecks)))
+  assert.ok(body.includes('Evidence / sample IDs:\nNot supplied'))
+})
+test('Originals checks reject invalid values and the wrong task', async () => {
+  const {api,calls}=harness()
+  const material={rowId:'record-1',page:1,fingerprint:'snapshot-hash',editorialChecks:{originality:'yes',claims:'yes',tone:'yes',length:'yes'}}
+  await assert.rejects(api.recordTaskReview(126,tasks.REVIEW_DECISIONS[0],'scope','','old:0',material))
+  await assert.rejects(api.recordTaskReview(128,tasks.REVIEW_DECISIONS[0],'scope','','old:0',{...material,editorialChecks:{...material.editorialChecks,claims:'fabricated'}}))
+  assert.equal(calls.some(c=>c.options.method==='POST'),false)
 })
