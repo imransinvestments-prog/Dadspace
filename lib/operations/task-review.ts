@@ -6,6 +6,14 @@ import { REVIEW_DECISIONS, reviewTask } from "./review-tasks"
 
 const API = "https://api.github.com/repos/imransinvestments-prog/Dadspace"
 const MARKER = "Dadspace owner review v1"
+export async function reviewReadiness() {
+  if (await operationsAccess() !== "allowed") return { canSave: false, reasons: ["Operator sign-in could not be verified."] }
+  const reasons: string[] = []
+  if (!process.env.DADSPACE_REVIEW_GITHUB_TOKEN?.trim()) reasons.push("Missing DADSPACE_REVIEW_GITHUB_TOKEN on this deployment. Add the repository Issues read/write token in Vercel, then redeploy.")
+  if (!process.env.DADSPACE_REVIEWER_USER_IDS?.trim() && !process.env.DADSPACE_REVIEWER_EMAILS?.trim()) reasons.push("Reviewer access is not configured. Set DADSPACE_REVIEWER_EMAILS to your verified Dadspace login email (or configure reviewer user IDs), then redeploy.")
+  else if (!await reviewWriteAccess()) reasons.push("Your signed-in account does not match the configured reviewer identities. Check DADSPACE_REVIEWER_EMAILS and confirm your Dadspace email.")
+  return { canSave: reasons.length === 0, reasons }
+}
 export async function reviewWriteAccess() {
   if (await operationsAccess() !== "allowed") return false
   const { data, error } = await (await createClient()).auth.getUser()
@@ -38,14 +46,23 @@ export async function getTaskReview(id: number) {
   }
   throw new Error("Review history is too large; inspect the GitHub task")
 }
-export async function recordTaskReview(id: number, decision: string, notes: string, evidence: string, version: string) {
+export async function recordTaskReview(id: number, decision: string, notes: string, evidence: string, version: string, material?: { rowId: string; fingerprint: string; page: number }) {
   if (!reviewTask(id) || !(REVIEW_DECISIONS as readonly string[]).includes(decision) || !notes.trim() || notes.length > 6000 || evidence.length > 2000) throw new Error("Invalid review")
   if (!await reviewWriteAccess()) throw new Error("Reviewer access required")
+  let snapshot = ""
+  if (material) {
+    const { getReviewMaterial, materialFingerprint } = await import("./review-material")
+    const currentMaterial = await getReviewMaterial(id, material.page)
+    const row = currentMaterial.rows.find(row => row.id === material.rowId)
+    if (!currentMaterial.available || !row || materialFingerprint(row) !== material.fingerprint) throw new Error("Record evidence changed; reload before saving")
+    snapshot = `\n\nReviewed record: ${row.id}\nSnapshot SHA-256: ${material.fingerprint}\nDataset: ${currentMaterial.label}\nDataset scope: ${currentMaterial.notice}\nDisplayed record snapshot:\n${JSON.stringify(row, null, 2)}`
+    if (snapshot.length > 40000) throw new Error("Record too large for a review comment")
+  }
   const current = await getTaskReview(id)
   const latest = current.history.at(-1)?.id || 0
   if (`${current.issue.updated_at}:${latest}` !== version || current.issue.state !== "open") throw new Error("Review changed; reload before saving")
   const { data, error } = await (await createClient()).auth.getUser()
   if (error || !data.user) throw new Error("Sign in required")
-  const saved = await github(`/issues/${id}/comments`, JSON.stringify({ body: `${MARKER}\n\nDecision: ${decision}\nReviewer (verified Dadspace user): ${data.user.id}\nReviewed issue version: ${version}\n\nScope / reason / follow-up:\n${notes.trim()}\n\nEvidence / sample IDs:\n${evidence.trim() || "Not supplied"}\n\nRecorded through /ops/reviews/${id}. This records a human decision only; outstanding acceptance, data application and release gates remain open.` })) as Comment
+  const saved = await github(`/issues/${id}/comments`, JSON.stringify({ body: `${MARKER}\n\nDecision: ${decision}\nReviewer (verified Dadspace user): ${data.user.id}\nReviewed issue version: ${version}\n\nScope / reason / follow-up:\n${notes.trim()}\n\nEvidence / sample IDs:\n${evidence.trim() || "Not supplied"}${snapshot}\n\nRecorded through /ops/reviews/${id}. This records a human decision only; outstanding acceptance, data application and release gates remain open.` })) as Comment
   return saved.id
 }

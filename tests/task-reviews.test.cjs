@@ -12,12 +12,13 @@ function load(file, deps = {}, extra = {}) {
 const tasks = load('lib/operations/review-tasks.ts')
 const access = load('lib/operations/access.ts')
 const uid = '12345678-1234-1234-1234-123456789abc'
-function harness({ allowed = 'allowed', reviewer = true, changed = false } = {}) {
+function harness({ allowed = 'allowed', reviewer = true, changed = false, token = 'test-only', materialChanged = false } = {}) {
   const calls = []
   const api = load('lib/operations/task-review.ts', {
     'server-only': {}, './session': { operationsAccess: async () => allowed }, './access': access,
     './review-tasks': tasks, '@/lib/supabase/server': { createClient: async () => ({ auth: { getUser: async () => ({ data: { user: { id: uid } } }) } }) },
-  }, { process: { env: { DADSPACE_REVIEWER_USER_IDS: reviewer ? uid : '', DADSPACE_REVIEW_GITHUB_TOKEN: 'test-only' } },
+    './review-material': { getReviewMaterial: async () => ({ available: true, label: 'Live news', notice: 'Not a frozen sample', rows: [{ id: 'record-1', title: 'Article', fields: { summary: 'Actual evidence' } }] }), materialFingerprint: () => materialChanged ? 'changed' : 'snapshot-hash' },
+  }, { process: { env: { DADSPACE_REVIEWER_USER_IDS: reviewer ? uid : '', DADSPACE_REVIEW_GITHUB_TOKEN: token } },
     fetch: async (url, options) => { calls.push({ url, options }); return { ok: true, json: async () => options.method === 'POST' ? { id: 99 } : url.includes('/comments?') ? [] : { state: 'open', updated_at: changed ? 'new' : 'old' } } },
   })
   return { api, calls }
@@ -48,4 +49,22 @@ test('review records actor scope and evidence without closing or changing issue 
   assert.equal(writes.length, 1); assert.ok(writes[0].url.endsWith('/issues/123/comments'))
   const body = JSON.parse(writes[0].options.body).body
   assert.ok(body.includes(uid)); assert.ok(body.includes('Correct the sample')); assert.ok(body.includes('IDs 1–50')); assert.ok(body.includes('release gates remain open'))
+})
+test('readiness reports missing token and reviewer setup separately', async () => {
+  const { api } = harness({ reviewer: false, token: '' })
+  const result = await api.reviewReadiness()
+  assert.equal(result.canSave, false)
+  assert.ok(result.reasons.some(reason => reason.includes('DADSPACE_REVIEW_GITHUB_TOKEN')))
+  assert.ok(result.reasons.some(reason => reason.includes('DADSPACE_REVIEWER_EMAILS')))
+})
+test('changed record snapshot prevents a review even when issue version matches', async () => {
+  const { api, calls } = harness({ materialChanged: true })
+  await assert.rejects(api.recordTaskReview(126, tasks.REVIEW_DECISIONS[0], 'Record scope', '', 'old:0', { rowId: 'record-1', page: 1, fingerprint: 'snapshot-hash' }))
+  assert.equal(calls.some(c => c.options.method === 'POST'), false)
+})
+test('record decision includes the server-verified snapshot and dataset scope', async () => {
+  const { api, calls } = harness()
+  await api.recordTaskReview(126, tasks.REVIEW_DECISIONS[1], 'Correct attribution', '', 'old:0', { rowId: 'record-1', page: 1, fingerprint: 'snapshot-hash' })
+  const body = JSON.parse(calls.find(c => c.options.method === 'POST').options.body).body
+  assert.ok(body.includes('Actual evidence')); assert.ok(body.includes('snapshot-hash')); assert.ok(body.includes('Not a frozen sample'))
 })
