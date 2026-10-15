@@ -12,10 +12,28 @@ REASONS = {'API_KEY_INVALID', 'API_KEY_EXPIRED', 'API_KEY_NOT_FOUND',
            'CONSUMER_INVALID', 'CONSUMER_SUSPENDED', 'SECURITY_POLICY_VIOLATED'}
 STATUSES = {'PERMISSION_DENIED', 'UNAUTHENTICATED', 'NOT_FOUND', 'INVALID_ARGUMENT',
             'RESOURCE_EXHAUSTED', 'FAILED_PRECONDITION', 'UNAVAILABLE', 'INTERNAL'}
+SIGNALS = {
+    'invalid_key': ('api key not valid', 'api key is invalid'),
+    'expired_key': ('api key expired', 'api key is expired'),
+    'suspended_key': ('api key has been suspended', 'api key is suspended'),
+    'blocked_key': ('api key has been blocked', 'api key is blocked'),
+    'caller_permission': ('caller does not have permission',),
+    'unregistered_caller': ("method doesn't allow unregistered callers",),
+    'unsupported_key_auth': ('api keys are not supported',),
+    'service_restriction': ('requests to this api',),
+    'service_not_enabled': ('has not been used in project', 'api is disabled'),
+    'ip_restriction': ('requests from ip address',),
+    'referrer_restriction': ('requests from referer', 'requests from referrer'),
+    'insufficient_scopes': ('insufficient authentication scopes',),
+    'location_restriction': ('location is not supported',),
+    'organization_policy': ("organization's policy", 'organization policy'),
+    'billing_disabled': ('billing account is disabled', 'billing is disabled'),
+    'resource_permission': ('permission denied on resource',),
+}
 
 
 def safe_error(payload):
-    error = payload.get('error', {}) if isinstance(payload, dict) else {}
+    error = payload.get('error', payload) if isinstance(payload, dict) else {}
     status = error.get('status')
     reasons = [detail['reason'] for detail in error.get('details', [])
                if isinstance(detail, dict) and detail.get('reason') in REASONS]
@@ -23,16 +41,24 @@ def safe_error(payload):
     message = str(error.get('message', '')).lower()
     return {'status': status if status in STATUSES else 'unknown',
             'reasons': sorted(set(reasons)),
+            'denial_signals': [name for name, phrases in SIGNALS.items()
+                               if any(phrase in message for phrase in phrases)],
             'known_leaked_key_message': 'reported as leaked' in message or 'key was leaked' in message,
             'project_denied_message': 'project has been denied access' in message}
 
 
-def rest_probe(key, model):
-    req = Request('https://generativelanguage.googleapis.com/v1beta/models/' + model,
+def rest_probe(key, model, catalogue=False):
+    path = 'models?pageSize=1000' if catalogue else 'models/' + model
+    req = Request('https://generativelanguage.googleapis.com/v1beta/' + path,
                   headers={'x-goog-api-key': key}, method='GET')
     try:
         with urlopen(req, timeout=30) as response:
             payload = json.load(response)
+            if catalogue:
+                return {'http_status': response.status,
+                        'configured_model_listed': any(item.get('name') == 'models/' + model
+                                                      for item in payload.get('models', [])),
+                        'more_pages': bool(payload.get('nextPageToken'))}
             return {'http_status': response.status,
                     'supports_generate_content': 'generateContent' in payload.get('supportedGenerationMethods', [])}
     except HTTPError as exc:
@@ -71,9 +97,11 @@ def main():
         raise ValueError('Invalid diagnostic model')
     report = {'model': model, 'generation_requests': 0, 'database_access': False,
               'credential_present': bool(key), 'credential_outer_whitespace': key != key.strip(),
+              'credential_wrapped_quotes': bool(key) and key[0] in ('"', "'"),
               'note': 'Metadata access alone does not prove generateContent permission'}
     if key:
-        report.update(rest=rest_probe(key, model), sdk=sdk_probe(key, model))
+        report.update(rest=rest_probe(key, model), sdk=sdk_probe(key, model),
+                      catalogue=rest_probe(key, model, catalogue=True))
     Path('gemini-access-diagnostic.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
     print(json.dumps(report, indent=2))
 
