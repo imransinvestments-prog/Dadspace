@@ -68,3 +68,9 @@ test('record decision includes the server-verified snapshot and dataset scope', 
   const body = JSON.parse(calls.find(c => c.options.method === 'POST').options.body).body
   assert.ok(body.includes('Actual evidence')); assert.ok(body.includes('snapshot-hash')); assert.ok(body.includes('Not a frozen sample'))
 })
+test('approval succeeds without additional evidence and records it as not supplied', async () => {
+  const { api, calls } = harness()
+  assert.equal(await api.recordTaskReview(126, tasks.REVIEW_DECISIONS[0], 'Relevant article', '', 'old:0', { rowId: 'record-1', page: 1, fingerprint: 'snapshot-hash' }), 99)
+  const body = JSON.parse(calls.find(c => c.options.method === 'POST').options.body).body
+  assert.ok(body.includes('Evidence / sample IDs:\nNot supplied'))
+})
