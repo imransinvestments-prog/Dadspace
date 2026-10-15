@@ -5,6 +5,7 @@ import { getDeals } from "@/lib/deals"
 import { operationsAccess } from "./session"
 import { OPERATIONS_PROCESSES } from "./processes"
 import { reviewTask } from "./review-tasks"
+import { NEWS_SAMPLE } from "./news-sample"
 import historical from "@/artefacts/data/ds10-remaining-source-review-2026-10-12.json"
 import manifest1 from "@/artefacts/shadow-cohorts/quality-2026-10-15/manifest-001.json"
 import manifest2 from "@/artefacts/shadow-cohorts/quality-2026-10-15/manifest-002.json"
@@ -33,6 +34,7 @@ function slice(rows: MaterialRow[], page: number, label: string, notice: string)
 }
 export async function getReviewMaterial(id: number, page = 1): Promise<ReviewMaterial> {
   if (!reviewTask(id) || !Number.isSafeInteger(page) || page < 1 || page > 9999 || await operationsAccess() !== "allowed") throw new Error("Review access denied")
+  if (id === 126) return slice(NEWS_SAMPLE.rows, page, "Fixed 50-article quality sample", `Frozen on ${NEWS_SAMPLE.frozen_on} from ${NEWS_SAMPLE.pool_count} published articles, covering categories and geographic scopes. New articles do not change this sample. Your two previously reviewed records are retained. Review usefulness for the intended area, attribution and working links; local does not mean irrelevant.`)
   if (id === 149) return slice(OPERATIONS_PROCESSES.map((p, index) => ({ id: `process-${index + 1}`, title: p.name, fields: { owner: p.owner, permission: p.permission, cadence: p.cadence, evidence: p.evidence, outstanding_work: p.next, evidence_url: p.href } })), page, "Upkeep process inventory", "Review each process and its outstanding capability. Live source counts and health are shown below. Configuration text alone does not prove a working recovery path.")
   if (id === 123) return slice(REVIEW_RUBRIC, page, "Quality and coverage decisions", "Review each threshold and record your exact agreement or requested change. The pilot scope is already settled. Numeric gates must be checked against current task criteria; this is not a completed sample review.")
   if (id === 135) return slice(historical.records.map(row => ({ id: row.record_id, title: row.title, fields: { checked_on: row.checked_on, status: row.status, recommendation: row.recommendation, remaining: row.remaining, links: row.links } })), page, "Retained source proposals", "Saved evidence from 12 October 2026, not current source verification. These are the remaining source proposals, not the full 201-proposal / 191-record queues. Recording a decision does not apply a database correction.")
