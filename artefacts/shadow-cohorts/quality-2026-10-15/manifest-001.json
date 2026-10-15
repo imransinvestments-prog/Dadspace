@@ -1,0 +1,66 @@
+{
+  "prompt_sha256": "165253c927e9e167252f3a4b93087a955e30bd3a07d8e4fed721e1a5170982df",
+  "reviewer": "Codex AI source review; owner acceptance pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 1990,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "unity",
+          "evidence": "4 years to 17 years",
+          "fields": {
+            "title": "Unity FC",
+            "listing_type": "activity",
+            "start_date": null,
+            "postcode": "SE11 4BE",
+            "cost_text": null,
+            "venue_name": "Kennington Park Extension",
+            "event_url": "https://unity-fc.classforkids.io"
+          }
+        },
+        {
+          "id": "tennis",
+          "evidence": "18 months to 7 years",
+          "fields": {
+            "title": "Tennis Time",
+            "listing_type": "activity",
+            "start_date": null,
+            "postcode": "N5 1UP",
+            "cost_text": null,
+            "venue_name": "Court 11 at Highbury Fields",
+            "event_url": "https://tennis-time.classforkids.io"
+          }
+        },
+        {
+          "id": "penguins-tower",
+          "evidence": "3 years to 18 years",
+          "fields": {
+            "title": "Penguins Palace",
+            "listing_type": "activity",
+            "start_date": null,
+            "postcode": "SE1 2EZ",
+            "cost_text": null,
+            "event_url": "https://penguins-palace.classforkids.io"
+          }
+        },
+        {
+          "id": "penguins-kent",
+          "evidence": "0 months to 18 years 11 months",
+          "fields": {
+            "title": "Penguins Palace",
+            "listing_type": "activity",
+            "start_date": null,
+            "postcode": "SE1 5JT",
+            "cost_text": null,
+            "event_url": "https://penguins-palace.classforkids.io"
+          }
+        }
+      ],
+      "excluded": []
+    }
+  ]
+}

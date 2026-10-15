@@ -80,7 +80,7 @@ def select_samples(directory):
 
 def score_reference(reference, rows):
     """Conservative exact evidence scoring; ambiguity never becomes acceptance."""
-    if reference.get('kind') != 'human-reviewed-source':
+    if reference.get('kind') != 'source-reviewed':
         return None
     scores = []
     used = set()
@@ -188,7 +188,7 @@ if __name__ == '__main__':
     directory = Path(cohort or 'shadow-input')
     paths = list(directory.rglob('sample-*.json'))
     if cohort and (not paths or any(json.loads(p.read_text(encoding='utf-8')).get(
-            'reference', {}).get('kind') != 'human-reviewed-source' for p in paths)):
+            'reference', {}).get('kind') != 'source-reviewed' for p in paths)):
         raise ValueError('Manual cohort requires prepared source-reviewed samples')
     if not paths:
         Path('shadow-results').mkdir(exist_ok=True)

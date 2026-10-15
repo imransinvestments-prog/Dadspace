@@ -68,11 +68,11 @@ Commit reviewed prepared inputs under `artefacts/shadow-cohorts/COHORT_NAME`.
 From trusted main only, manually dispatch `Extraction shadow comparison` with that
 directory as `reviewed_cohort`. This is an explicit paid evaluation within existing
 caps; no manual dispatch has been run as part of this implementation. Both variants
-use the identical prepared prompts and human-reviewed reference. Each dispatch
+use the identical prepared prompts and source-reviewed reference. Each dispatch
 selects at most four samples; organize cohorts of at most four or explicitly account
 for unselected chunks. `coverage.json` records full preparation, not full replay.
 
-Reports distinguish `human-reviewed-source` from `unreviewed-production-output`.
+Reports distinguish `source-reviewed` from `unreviewed-production-output`.
 `source_score` checks reviewed fields against unique URL/date matches and lists
 ambiguous/missing matches, field differences and unmatched output indices. Exact
 title/URL comparisons are review aids: do not discard differing URL queries or

@@ -1,0 +1,58 @@
+{
+  "prompt_sha256": "c4202779dcdd4439d2cba4ea21d969c1ee5ac682651ad15c6c33261f9dcb9910",
+  "reviewer": "Codex AI source review; owner acceptance pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 987,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "sport-camp",
+          "evidence": "26/10/2026",
+          "fields": {
+            "title": "Not Just Sport",
+            "listing_type": "event",
+            "is_holiday_camp": true,
+            "start_date": "2026-10-26",
+            "end_date": "2026-10-27",
+            "postcode": "E2 7NQ",
+            "cost_text": null,
+            "event_url": "https://notjustsportfootballcentre.classforkids.io"
+          }
+        },
+        {
+          "id": "art-camp",
+          "evidence": "1/11/2026",
+          "fields": {
+            "title": "Hackney Fine Arts Holiday Classes",
+            "listing_type": "event",
+            "is_holiday_camp": true,
+            "start_date": "2026-11-01",
+            "end_date": "2026-11-01",
+            "postcode": "E2 8EL",
+            "cost_text": null,
+            "event_url": "https://hackneyfineartsholidays.classforkids.io"
+          }
+        },
+        {
+          "id": "drama-camp",
+          "evidence": "15/2/2027",
+          "fields": {
+            "title": "Creative Mash UK",
+            "listing_type": "event",
+            "is_holiday_camp": true,
+            "start_date": "2027-02-15",
+            "end_date": "2027-02-19",
+            "postcode": "E8 4EA",
+            "cost_text": null,
+            "event_url": "https://creative-mash-uk.classforkids.io"
+          }
+        }
+      ],
+      "excluded": []
+    }
+  ]
+}
