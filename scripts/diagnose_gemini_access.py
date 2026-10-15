@@ -1,4 +1,4 @@
-"""Non-generating Gemini model metadata probes; never logs remote error text."""
+"""Non-generating probes with bounded, redacted Google error explanations."""
 import json
 import os
 import re
@@ -32,7 +32,23 @@ SIGNALS = {
 }
 
 
-def safe_error(payload):
+def redacted_message(message, key=''):
+    text = str(message)
+    # Remove the exact credential first, including nonstandard key formats.
+    if key:
+        text = text.replace(key, '[REDACTED_KEY]')
+    text = re.sub(r'https?://\S+', '[REDACTED_URL]', text)
+    text = re.sub(r'[\w.+-]+@[\w.-]+', '[REDACTED_EMAIL]', text)
+    text = re.sub(r'\b(?:AIza|AQ\.)[A-Za-z0-9_.-]+', '[REDACTED_KEY]', text)
+    text = re.sub(r'\b(?:projects|consumers)/[A-Za-z0-9_.:-]+', '[REDACTED_RESOURCE]', text)
+    text = re.sub(r'(?i)\b(project(?: id)?\s+)[A-Za-z0-9_-]+', r'\1[REDACTED_PROJECT]', text)
+    text = re.sub(r'\b\d{6,}\b', '[REDACTED_ID]', text)
+    # No terminal control sequences or multiline log injection.
+    text = re.sub(r'[\x00-\x1f\x7f-\x9f]', ' ', text)
+    return text[:1200]
+
+
+def safe_error(payload, key=''):
     error = payload.get('error', payload) if isinstance(payload, dict) else {}
     status = error.get('status')
     reasons = [detail['reason'] for detail in error.get('details', [])
@@ -40,6 +56,7 @@ def safe_error(payload):
     # Classify documented messages locally without exposing any remote text.
     message = str(error.get('message', '')).lower()
     return {'status': status if status in STATUSES else 'unknown',
+            'message_redacted': redacted_message(error.get('message', ''), key),
             'reasons': sorted(set(reasons)),
             'denial_signals': [name for name, phrases in SIGNALS.items()
                                if any(phrase in message for phrase in phrases)],
@@ -64,7 +81,7 @@ def rest_probe(key, model, catalogue=False):
     except HTTPError as exc:
         raw = exc.read(65536)
         try:
-            detail = safe_error(json.loads(raw))
+            detail = safe_error(json.loads(raw), key)
             body_kind = 'json'
         except (ValueError, UnicodeError):
             detail, body_kind = {}, 'non-json'
@@ -83,7 +100,10 @@ def sdk_probe(key, model):
         return {'http_status': 200, 'supports_generate_content': 'generateContent' in (info.supported_actions or [])}
     except Exception as exc:
         code = getattr(exc, 'code', None)
-        detail = safe_error(getattr(exc, 'response_json', {}))
+        payload = getattr(exc, 'response_json', {})
+        if not payload and isinstance(getattr(exc, 'details', None), dict):
+            payload = exc.details
+        detail = safe_error(payload, key)
         return {'http_status': code if isinstance(code, int) else None,
                 'error_type': type(exc).__name__, **detail}
     finally:
