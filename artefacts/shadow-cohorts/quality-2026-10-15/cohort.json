@@ -1,0 +1,109 @@
+{
+  "reviewer_type": "ai",
+  "owner_acceptance": "pending",
+  "upstream_run": "38618944321",
+  "samples": [
+    {
+      "sample": 1,
+      "expected": 4,
+      "excluded": 0,
+      "prompt_chars": 8944,
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "9869b816a737a0af69187f33c8648ba1d3451a88d38e18c1720b201230e71ec6",
+        "original_source_chars": 24001,
+        "original_source_spans": [
+          {
+            "start": 12442,
+            "end": 12886
+          },
+          {
+            "start": 19301,
+            "end": 19803
+          },
+          {
+            "start": 2904,
+            "end": 3418
+          },
+          {
+            "start": 18774,
+            "end": 19301
+          }
+        ],
+        "full_original_source_coverage": false
+      }
+    },
+    {
+      "sample": 2,
+      "expected": 3,
+      "excluded": 0,
+      "prompt_chars": 7941,
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "9869b816a737a0af69187f33c8648ba1d3451a88d38e18c1720b201230e71ec6",
+        "original_source_chars": 24001,
+        "original_source_spans": [
+          {
+            "start": 8377,
+            "end": 8711
+          },
+          {
+            "start": 8711,
+            "end": 9044
+          },
+          {
+            "start": 9044,
+            "end": 9362
+          }
+        ],
+        "full_original_source_coverage": false
+      }
+    },
+    {
+      "sample": 3,
+      "expected": 2,
+      "excluded": 1,
+      "prompt_chars": 9836,
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "5d0e9bc17a6b682fd7ed282a923c0468f9b96ecaae39c4128c034e60f8d2409c",
+        "original_source_chars": 40001,
+        "original_source_spans": [
+          {
+            "start": 695,
+            "end": 1554
+          },
+          {
+            "start": 2878,
+            "end": 3616
+          },
+          {
+            "start": 30724,
+            "end": 32014
+          }
+        ],
+        "full_original_source_coverage": false
+      }
+    },
+    {
+      "sample": 4,
+      "expected": 2,
+      "excluded": 5,
+      "prompt_chars": 8908,
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "8642e2cd1d5c104bdb3deabc16efec240beb46632a26e49691867d6b1d0b3af9",
+        "original_source_chars": 25381,
+        "original_source_spans": [
+          {
+            "start": 751,
+            "end": 2708
+          }
+        ],
+        "full_original_source_coverage": false
+      }
+    }
+  ],
+  "scope": "Four purposive complete-record extracts; not representative national coverage or full-page equivalence",
+  "baseline_cost_comparable": false
+}

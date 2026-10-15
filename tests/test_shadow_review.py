@@ -162,7 +162,7 @@ class ShadowReviewTests(unittest.TestCase):
             self.assertIn('needs-reviewed-chunks', report['samples'][0]['status'])
 
     def test_source_score_keeps_ambiguous_identity_and_cost_unknown(self):
-        reference = {'kind': 'human-reviewed-source', 'expected': [
+        reference = {'kind': 'source-reviewed', 'expected': [
             {'id': 'one', 'evidence': 'children', 'fields': {'event_url': 'https://x/a',
                 'start_date': None, 'age_range': '3-5'}}]}
         score = score_reference(reference, [{'event_url': 'https://x/a', 'age_range': '0-5'}])

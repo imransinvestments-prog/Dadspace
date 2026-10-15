@@ -1,0 +1,52 @@
+{
+  "prompt_sha256": "71510369d98393ddb75075fc9a7ceb81ec52233bf881656b20199c9876b9a484",
+  "reviewer": "Codex AI source review; owner acceptance pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 2889,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "archive-club",
+          "evidence": "free stay and play session for parents, carers and under-fives",
+          "fields": {
+            "title": "Archive Explorers Club: Essex Record Office",
+            "listing_type": "activity",
+            "occurrence_dates": [
+              "2026-10-15",
+              "2026-11-12",
+              "2026-11-26",
+              "2026-12-10"
+            ],
+            "venue_name": "Essex Record Office",
+            "postcode": null,
+            "event_url": "https://www.explore-essex.com/whats-on/essex-record-office-archive-explorers-club-5"
+          }
+        },
+        {
+          "id": "spooky-trail",
+          "evidence": "Primary School aged children",
+          "fields": {
+            "title": "Spooky Magic Trail at Belhus Woods Country Park",
+            "listing_type": "event",
+            "start_date": "2026-10-17",
+            "end_date": "2026-11-01",
+            "venue_name": "Belhus Woods Country Park",
+            "postcode": null,
+            "event_url": "https://www.explore-essex.com/whats-on/spooky-trail-belhus"
+          }
+        }
+      ],
+      "excluded": [
+        {
+          "id": "adults-decoration",
+          "evidence": "For adults",
+          "reason": "Explicit adult-only audience"
+        }
+      ]
+    }
+  ]
+}

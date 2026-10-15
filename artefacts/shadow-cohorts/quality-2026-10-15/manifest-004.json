@@ -1,0 +1,64 @@
+{
+  "prompt_sha256": "eb15ad02de5aa3da5638bbf1aaccf0cd04ef21bfadf88780d9df857fb57eb1ff",
+  "reviewer": "Codex AI source review; owner acceptance pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 1957,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "under5-story",
+          "evidence": "Storytimes for Under 5s",
+          "fields": {
+            "title": "Storytimes for Under 5s",
+            "listing_type": "activity",
+            "start_date": null,
+            "end_date": null,
+            "event_url": "https://www.library.live/our-answers-blog/storytimes-HXEoS"
+          }
+        },
+        {
+          "id": "baby-rhyme",
+          "evidence": "Rhymetimes for Babies and Toddlers",
+          "fields": {
+            "title": "Rhymetimes for Babies and Toddlers",
+            "listing_type": "activity",
+            "start_date": null,
+            "end_date": null,
+            "event_url": "https://www.library.live/our-answers-blog/zd5f1gmmgrq47os18452njc80yev2o-A4pDD"
+          }
+        }
+      ],
+      "excluded": [
+        {
+          "id": "Queer Café",
+          "evidence": "Queer Café",
+          "reason": "No explicit child/family component in captured index"
+        },
+        {
+          "id": "LGBTQIA+ Board Games",
+          "evidence": "LGBTQIA+ Board Games",
+          "reason": "No explicit child/family component in captured index"
+        },
+        {
+          "id": "Knit and Natter",
+          "evidence": "Knit and Natter",
+          "reason": "No explicit child/family component in captured index"
+        },
+        {
+          "id": "Good Mood Café",
+          "evidence": "Good Mood Café",
+          "reason": "No explicit child/family component in captured index"
+        },
+        {
+          "id": "Improve Your English",
+          "evidence": "Improve Your English",
+          "reason": "No explicit child/family component in captured index"
+        }
+      ]
+    }
+  ]
+}

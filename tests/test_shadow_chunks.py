@@ -24,7 +24,7 @@ class ChunkTests(unittest.TestCase):
             rows = prepare(capture, manifest, Path(directory) / 'cohort')
             self.assertEqual(''.join(r['prompt'].split('\nCONTENT:\n')[1] for r in rows),
                              capture['prompt'].split('\nCONTENT:\n')[1])
-            self.assertEqual(rows[0]['reference']['kind'], 'human-reviewed-source')
+            self.assertEqual(rows[0]['reference']['kind'], 'source-reviewed')
             self.assertEqual(rows[0]['usage'], {})
 
     def test_gaps_missing_evidence_and_unreviewed_boundaries_fail_before_write(self):
