@@ -1,5 +1,94 @@
 # Extraction shadow comparison (#65)
 
+## Diagnostic and evaluation repair — 15 October 2026
+
+Production provider, thinking, publication and source settings are unchanged.
+The 15 October scheduled run was dispatched late; this change does not replace
+GitHub's scheduler or claim to fix scheduler delivery. Keep missed-start monitoring.
+
+Rejected Gemini/OpenAI outputs now expose only allowlisted finish/status/reason
+codes and non-thinking partial-output character counts. No partial content, remote
+error text, request IDs or refusal text is stored. Unknown codes become `unknown`.
+Existing token metrics retain unknown-thinking flags; unknown is not zero.
+
+Replay interleaves workers (up to four captures). A content rejection is recorded
+and the next distinct capture is considered, with no retry/fallback. Billing,
+configuration, budget and uncertain transport failures still stop globally. A run
+with rejected, skipped or unsupported samples exits unsuccessfully after saving
+its report. Coverage reports include captures not selected under the four-call cap.
+This is balanced worker sampling, not proof of representative national coverage.
+
+When a production response's non-thinking output exceeds the shadow response cap,
+replay marks it `needs-reviewed-chunks` without a paid request. This avoids repeating
+the known full-page ClassForKids comparison. It is a conservative preflight, not
+a guarantee that other inputs fit. Limits remain four attempts/60,000 tokens per
+variant, 3,000 output tokens/call, zero retries, no fallback. Completing another
+sample after rejection can use more of the existing four-attempt allowance than
+the previous stop-on-first-failure behavior.
+
+### Prepare and score complete smaller samples
+
+`scripts/prepare_shadow_chunks.py capture.json manifest.json NEW_OUTPUT_DIRECTORY`
+is offline. Split only at reviewed complete-record boundaries after `CONTENT:`.
+The manifest must cover every source character exactly once, including excluded
+candidates and trailing text; the tool rejects gaps, overlaps, missing evidence,
+unreviewed boundaries and prompts over 14,000 characters. This size is conservative,
+not a token guarantee. No files are written until the whole manifest validates.
+
+Manifest shape (offsets refer to the content after `\nCONTENT:\n`, not the prompt):
+
+```json
+{
+  "prompt_sha256": "SHA256_OF_EXACT_CAPTURED_PROMPT_UTF8",
+  "reviewer": "named reviewer",
+  "chunks": [{
+    "start": 0,
+    "end": 123,
+    "complete_records": true,
+    "all_candidates_reviewed": true,
+    "expected": [{
+      "id": "stable-candidate-id",
+      "evidence": "exact phrase within this source chunk",
+      "fields": {"event_url": "https://example.org/session", "start_date": null,
+                 "listing_type": "activity", "age_range": "3–5"}
+    }],
+    "excluded": [{"id": "adult-talk", "evidence": "Adults only", "reason": "adult audience"}]
+  }]
+}
+```
+
+Review dates, schedule/occurrences, age, family evidence, price, venue and URL;
+apply `docs/discovery-model.md` to classification. Review every source candidate,
+not just Gemini's returned rows, and include baseline defects in the reference.
+The attestations require actual review; the tool cannot certify semantic truth.
+Prepare both civic and activity cohorts with varied sources, positive listings,
+empty cases and edge cases; repeated copies of one source are not independent data.
+
+Commit reviewed prepared inputs under `artefacts/shadow-cohorts/COHORT_NAME`.
+From trusted main only, manually dispatch `Extraction shadow comparison` with that
+directory as `reviewed_cohort`. This is an explicit paid evaluation within existing
+caps; no manual dispatch has been run as part of this implementation. Both variants
+use the identical prepared prompts and human-reviewed reference. Each dispatch
+selects at most four samples; organize cohorts of at most four or explicitly account
+for unselected chunks. `coverage.json` records full preparation, not full replay.
+
+Reports distinguish `human-reviewed-source` from `unreviewed-production-output`.
+`source_score` checks reviewed fields against unique URL/date matches and lists
+ambiguous/missing matches, field differences and unmatched output indices. Exact
+title/URL comparisons are review aids: do not discard differing URL queries or
+merge different venue/session records automatically. Resolve aliases and semantic
+differences against source text; accepted count stays null until that review.
+Excluded candidates remain in the reference for false-positive review.
+
+Chunk references have no comparable production baseline usage: baseline cost stays
+null even when pricing is configured. Reconcile coverage across all chunks and
+record reviewed accepted/missing/incorrect counts before calculating cost per
+accepted listing. Chunking itself is not evidence of savings or provider parity.
+
+Rollback this increment by reverting the replay/workflow/provider helper changes;
+no database changes are involved. Keep Gemini default until reviewed results justify
+a separate rollout decision.
+
 ## Minimum-thinking comparison
 
 Shadow jobs now run independently for OpenAI and Gemini minimum thinking on the

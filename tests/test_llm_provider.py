@@ -113,6 +113,25 @@ class ProviderTests(unittest.TestCase):
                 self.generator().generate('source', SCHEMA)
             self.assertEqual(self.post.call_count, 1)
 
+    def test_incomplete_diagnostics_do_not_copy_remote_content(self):
+        for provider in ('openai', 'gemini'):
+            os.environ['LLM_PROVIDER'] = provider
+            reply = response(provider)
+            if provider == 'openai':
+                reply.update(status='incomplete', incomplete_details={'reason': 'max_output_tokens',
+                             'message': 'private-secret'})
+            else:
+                reply['candidates'][0]['finishReason'] = 'MAX_TOKENS'
+            self.post.return_value = reply
+            with self.assertRaises(llm.IncompleteOutputError) as caught:
+                self.generator().generate('source', SCHEMA)
+            diagnostics = caught.exception.diagnostics
+            self.assertGreater(diagnostics['partial_output_chars'], 0)
+            self.assertNotIn('private-secret', json.dumps(diagnostics))
+            self.assertNotIn('Family workshop', json.dumps(diagnostics))
+        self.assertEqual(llm.response_diagnostics('openai', {'status': 'secret',
+            'incomplete_details': {'reason': 'https://private'}})['finish_reason'], 'unknown')
+
     def test_transport_retry_bounded_and_credential_error_not_retried(self):
         self.post.side_effect = [URLError('private details'), response()]
         gen = self.generator()
