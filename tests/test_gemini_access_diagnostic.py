@@ -7,6 +7,13 @@ from scripts.diagnose_gemini_access import safe_error, rest_probe
 
 
 class AccessTests(unittest.TestCase):
+    def test_flat_sdk_errors_and_reason_signals_are_sanitized(self):
+        result = safe_error({'status': 'PERMISSION_DENIED',
+                            'message': 'Permission denied on resource project private-id'})
+        self.assertEqual(result['status'], 'PERMISSION_DENIED')
+        self.assertEqual(result['denial_signals'], ['resource_permission'])
+        self.assertNotIn('private-id', json.dumps(result))
+
     def test_sanitizes_error_details_and_leak_classification(self):
         result = safe_error({'error': {'status': 'PERMISSION_DENIED',
             'message': 'secret-key was reported as leaked; project private',
