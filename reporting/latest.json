@@ -1,7 +1,8 @@
 {
-  "date": "2026-10-14",
-  "generated_at": "2026-10-14T14:55:51.327Z",
+  "date": "2026-10-15",
+  "generated_at": "2026-10-15T10:23:36Z",
   "status": "success",
-  "snapshot": "reporting/snapshots/2026-10-14/",
-  "limitations": "County mapping and complete production/billing evidence unavailable"
+  "snapshot": "reporting/snapshots/2026-10-15/",
+  "previous_success_at": "2026-10-14T14:55:51.327Z",
+  "limitations": "Missing 15 October scheduled run; stale registry; county public coverage and complete billing totals unavailable"
 }
