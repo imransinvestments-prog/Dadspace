@@ -3,10 +3,24 @@ from io import BytesIO
 import unittest
 from urllib.error import HTTPError
 from unittest.mock import patch
-from scripts.diagnose_gemini_access import safe_error, rest_probe, redacted_message
+from scripts.diagnose_gemini_access import safe_error, rest_probe, redacted_message, main
 
 
 class AccessTests(unittest.TestCase):
+    @patch('scripts.diagnose_gemini_access.Path.write_text')
+    @patch('builtins.print')
+    @patch('scripts.diagnose_gemini_access.sdk_probe')
+    @patch('scripts.diagnose_gemini_access.rest_probe')
+    @patch.dict('os.environ', {'GEMINI_API_KEY': 'test'})
+    def test_denied_probe_fails_and_preserves_report(self, rest, sdk, output, write):
+        rest.return_value = sdk.return_value = {'http_status': 403}
+        self.assertEqual(main(), 1)
+        self.assertFalse(json.loads(write.call_args.args[0])['metadata_access_ok'])
+        rest.side_effect = [{'http_status': 200, 'supports_generate_content': True},
+                            {'http_status': 200, 'configured_model_listed': True}]
+        sdk.return_value = {'http_status': 200, 'supports_generate_content': True}
+        self.assertEqual(main(), 0)
+        self.assertTrue(json.loads(write.call_args.args[0])['metadata_access_ok'])
     def test_flat_sdk_errors_and_reason_signals_are_sanitized(self):
         result = safe_error({'status': 'PERMISSION_DENIED',
                             'message': 'Permission denied on resource project private-id'})

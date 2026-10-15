@@ -30,9 +30,28 @@ class OriginalContentTests(unittest.TestCase):
             generate.assert_not_called()
     def test_rejection_does_not_write(self):
         env = {"SUPABASE_URL": "https://example.com", "SUPABASE_SERVICE_KEY": "test", "GEMINI_API_KEY": "test"}
-        with patch.dict(worker.os.environ, env), patch.object(worker, "due_slots", return_value=[("daily", datetime.now().date())]), patch.object(worker, "api", side_effect=[[], []]) as api, patch.object(worker, "gemini", side_effect=[draft(), {"approved": False, "reason": "unsafe"}]):
+        with patch.dict(worker.os.environ, env), patch.object(worker, "due_slots", return_value=[("daily", datetime.now().date())]), patch.object(worker, "api", side_effect=[[], []]) as api, patch.object(worker, "gemini", side_effect=[draft(), {"approved": False, "reason": "unsafe"}] * 2) as generate:
             with self.assertRaises(ValueError): worker.run()
             self.assertEqual(api.call_count, 2)
+            self.assertEqual(generate.call_count, 4)
+    def test_editor_feedback_repairs_once_before_publication(self):
+        env = {"SUPABASE_URL": "https://example.com", "SUPABASE_SERVICE_KEY": "test", "GEMINI_API_KEY": "test"}
+        with patch.dict(worker.os.environ, env), patch.object(worker, "due_slots", return_value=[("daily", datetime.now().date())]), patch.object(worker, "api", side_effect=[[], [], [{}]]) as api, patch.object(worker, "gemini", side_effect=[draft(), {"approved": False, "reason": "add supervision"}, draft(), {"approved": True, "reason": "ok"}]) as generate:
+            worker.run()
+            self.assertEqual(api.call_count, 3)
+            self.assertIn("add supervision", generate.call_args_list[2].args[0])
+    def test_invalid_word_count_is_revised_before_review(self):
+        invalid = draft()
+        invalid['sections'][0]['paragraphs'] = ['A short drawing idea to share together.']
+        with patch.object(worker, "gemini", side_effect=[invalid, draft(), {"approved": True}]) as generate:
+            self.assertEqual(worker.reviewed_post('brief', 'daily', []), draft())
+            self.assertEqual(generate.call_count, 3)
+            self.assertIn('Invalid word count', generate.call_args_list[1].args[0])
+    def test_remote_denial_is_not_retried(self):
+        with patch.object(worker, "gemini", side_effect=RuntimeError('Remote service returned HTTP 403')) as generate:
+            with self.assertRaises(RuntimeError):
+                worker.reviewed_post('brief', 'daily', [])
+            generate.assert_called_once()
     def test_dry_run_does_not_write(self):
         env = {"SUPABASE_URL": "https://example.com", "SUPABASE_SERVICE_KEY": "test", "GEMINI_API_KEY": "test"}
         with patch.dict(worker.os.environ, env), patch.object(worker, "due_slots", return_value=[("daily", datetime.now().date())]), patch.object(worker, "api", side_effect=[[], []]) as api, patch.object(worker, "gemini", side_effect=[draft(), {"approved": True, "reason": "ok"}]):
