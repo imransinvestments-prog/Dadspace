@@ -122,9 +122,16 @@ def main():
     if key:
         report.update(rest=rest_probe(key, model), sdk=sdk_probe(key, model),
                       catalogue=rest_probe(key, model, catalogue=True))
+    healthy = bool(key) and all(report[name].get('http_status') == 200
+                               for name in ('rest', 'sdk', 'catalogue'))
+    healthy = healthy and all(report[name].get('supports_generate_content') is True
+                              for name in ('rest', 'sdk'))
+    healthy = healthy and report['catalogue'].get('configured_model_listed') is True
+    report['metadata_access_ok'] = healthy
     Path('gemini-access-diagnostic.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
     print(json.dumps(report, indent=2))
+    return 0 if healthy else 1
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())
