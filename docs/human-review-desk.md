@@ -1,5 +1,15 @@
 # Human review desk
 
+## Fixed news acceptance sample
+
+#126 uses the immutable 50-record snapshot in `artefacts/data/news-quality-sample-2026-10-15.json`, frozen from 163 public feed records on 15 October 2026. The manifest records category/geographic-scope strata and selection method: proportional allocation with coverage of each available stratum, deterministic source round-robin/MD5 ordering, and carry-over of two already reviewed records. This is a bounded quality review, not a statistically representative national survey. Feed refreshes cannot change its rows, order, IDs or denominator.
+
+Stored scope/nation/region/admin area/locality accompany each record. Missing metadata stays unknown; locality relevance is judged for that locality. The screen does not assert actual audience delivery from stored metadata alone. Article checks independently record usefulness, attribution, working destination and geographic targeting; unknown is not a pass. Targets are 45/50 jointly relevant/correctly attributed and 48/50 working destinations. Geographic correctness is reported separately, with no invented numeric threshold.
+
+Progress counts distinct frozen-record decisions from repository-owner audit comments with matching SHA-256 snapshots. Duplicate comments count once and the latest matching decision wins. Previous two record decisions accept only their exact legacy fingerprints and carry no inferred rubric scores. Overall task approvals, other commenters and mismatched records do not advance progress. Reviewed items collapse with an update option, and Continue points to the next unreviewed record. All 50 decisions do not automatically close the issue or satisfy individual quality gates.
+
+Validation: 34 targeted tests plus TypeScript; includes immutable sample paging, carry-over and deduplication, exact fingerprint/author matching, missing geography, explicit rubric scores and unknown results. GitHub/Vercel and signed-in browser checks follow deployment.
+
 ## Data and forms repair
 
 Review detail pages lead with actual record cards and a decision form per card. #149 renders the eleven-process inventory plus existing live database/source-health evidence. #123 renders the quality/coverage rubric; #135 the retained dated remaining-source proposals; #145 four saved source texts and AI-labelled candidate manifests. #34/#126/#128/#136 query explicit bounded projections of published venues/news/Originals/current activities. #130 reuses the public deals selector. Current browsing datasets are not frozen #122 samples or verified pilot-only cohorts; saved proposals are not current source checks. Rejected Originals drafts and provider result/cost comparisons are explicitly identified as missing evidence.

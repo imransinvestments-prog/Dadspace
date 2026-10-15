@@ -5,7 +5,8 @@ export async function saveReview(_: { message: string; ok: boolean }, form: Form
   try {
     const id = Number(form.get("id"))
     const rowId = String(form.get("rowId") || "")
-    await recordTaskReview(id, String(form.get("decision") || ""), String(form.get("notes") || ""), String(form.get("evidence") || ""), String(form.get("version") || ""), rowId ? { rowId, fingerprint: String(form.get("fingerprint") || ""), page: Number(form.get("page")) } : undefined)
+    const checks = id === 126 ? Object.fromEntries(["relevance", "attribution", "destination", "geography"].map(key => [key, String(form.get(`check_${key}`) || "unknown")])) as { relevance: string; attribution: string; destination: string; geography: string } : undefined
+    await recordTaskReview(id, String(form.get("decision") || ""), String(form.get("notes") || ""), String(form.get("evidence") || ""), String(form.get("version") || ""), rowId ? { rowId, fingerprint: String(form.get("fingerprint") || ""), page: Number(form.get("page")), checks } : undefined)
     revalidatePath(`/ops/reviews/${id}`)
     revalidatePath("/ops/reviews")
     return { ok: true, message: "Decision saved to the GitHub task. Outstanding delivery gates remain open." }

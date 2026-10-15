@@ -1,0 +1,1163 @@
+{
+  "id": "news-quality-2026-10-15-v1",
+  "frozen_on": "2026-10-15",
+  "pool_count": 163,
+  "target": 50,
+  "method": "Frozen category/geographic-scope proportional sample with at least one record per available stratum, preserving two previously reviewed records. Within each stratum, source round-robin order and md5(id + ':news-quality-2026-10-15') select deterministically. Purposive carry-over and small-stratum coverage mean this is not a statistical national-coverage claim.",
+  "strata": [
+    {
+      "key": "activities|local",
+      "pool": 34,
+      "selected": 10
+    },
+    {
+      "key": "activities|nationwide",
+      "pool": 11,
+      "selected": 3
+    },
+    {
+      "key": "activities|unknown",
+      "pool": 32,
+      "selected": 9
+    },
+    {
+      "key": "activities|regional",
+      "pool": 2,
+      "selected": 1
+    },
+    {
+      "key": "education|nationwide",
+      "pool": 12,
+      "selected": 3
+    },
+    {
+      "key": "education|local",
+      "pool": 1,
+      "selected": 1
+    },
+    {
+      "key": "education|unknown",
+      "pool": 6,
+      "selected": 1
+    },
+    {
+      "key": "health|local",
+      "pool": 1,
+      "selected": 1
+    },
+    {
+      "key": "health|unknown",
+      "pool": 2,
+      "selected": 1
+    },
+    {
+      "key": "health|nationwide",
+      "pool": 1,
+      "selected": 1
+    },
+    {
+      "key": "money|nationwide",
+      "pool": 7,
+      "selected": 2
+    },
+    {
+      "key": "money|unknown",
+      "pool": 8,
+      "selected": 2
+    },
+    {
+      "key": "money|local",
+      "pool": 1,
+      "selected": 1
+    },
+    {
+      "key": "parenting|unknown",
+      "pool": 6,
+      "selected": 1
+    },
+    {
+      "key": "parenting|nationwide",
+      "pool": 3,
+      "selected": 1
+    },
+    {
+      "key": "parenting|regional",
+      "pool": 1,
+      "selected": 1
+    },
+    {
+      "key": "policy|nationwide",
+      "pool": 3,
+      "selected": 1
+    },
+    {
+      "key": "policy|unknown",
+      "pool": 4,
+      "selected": 1
+    },
+    {
+      "key": "safety|local",
+      "pool": 1,
+      "selected": 1
+    },
+    {
+      "key": "safety|nationwide",
+      "pool": 15,
+      "selected": 4
+    },
+    {
+      "key": "safety|unknown",
+      "pool": 5,
+      "selected": 1
+    },
+    {
+      "key": "wellbeing|unknown",
+      "pool": 3,
+      "selected": 1
+    },
+    {
+      "key": "wellbeing|nationwide",
+      "pool": 2,
+      "selected": 1
+    },
+    {
+      "key": "wellbeing|local",
+      "pool": 2,
+      "selected": 1
+    }
+  ],
+  "legacy_rows": [
+    {
+      "id": "928",
+      "title": "Conflict with fathers deters youth from seeking mental health services - News-Medical",
+      "fields": {
+        "id": 928,
+        "title": "Conflict with fathers deters youth from seeking mental health services - News-Medical",
+        "url": "https://www.news-medical.net/news/20261015/Conflict-with-fathers-deters-youth-from-seeking-mental-health-services.aspx",
+        "source_name": "News-Medical",
+        "published_at": "2026-10-15T18:13:00+00:00",
+        "summary": "Research shows that conflict with fathers can discourage young people from seeking mental health support.",
+        "why_it_matters": "Highlights how your relationship with your child impacts their willingness to seek mental health help.",
+        "category": "health",
+        "relevance": 3
+      }
+    },
+    {
+      "id": "926",
+      "title": "What’s In The Employment Rights Act? - Employee Rights/ Labour Relations - United Kingdom - Mondaq",
+      "fields": {
+        "id": 926,
+        "title": "What’s In The Employment Rights Act? - Employee Rights/ Labour Relations - United Kingdom - Mondaq",
+        "url": "https://www.mondaq.com/uk/employee-rights-labour-relations/1855484/whats-in-the-employment-rights-act",
+        "source_name": "Mondaq",
+        "published_at": "2026-10-15T18:11:15+00:00",
+        "summary": "An overview of statutory changes under the UK Employment Rights Act affecting worker and parental rights.",
+        "why_it_matters": "Covers key employment changes, including paternity leave and flexible working rights.",
+        "category": "policy",
+        "relevance": 4
+      }
+    }
+  ],
+  "rows": [
+    {
+      "id": "928",
+      "title": "Conflict with fathers deters youth from seeking mental health services - News-Medical",
+      "fields": {
+        "id": 928,
+        "title": "Conflict with fathers deters youth from seeking mental health services - News-Medical",
+        "url": "https://www.news-medical.net/news/20261015/Conflict-with-fathers-deters-youth-from-seeking-mental-health-services.aspx",
+        "source_name": "News-Medical",
+        "published_at": "2026-10-15T18:13:00+00:00",
+        "summary": "Research shows that conflict with fathers can discourage young people from seeking mental health support.",
+        "why_it_matters": "Highlights how your relationship with your child impacts their willingness to seek mental health help.",
+        "category": "health",
+        "relevance": 3,
+        "region": "uk",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "926",
+      "title": "What’s In The Employment Rights Act? - Employee Rights/ Labour Relations - United Kingdom - Mondaq",
+      "fields": {
+        "id": 926,
+        "title": "What’s In The Employment Rights Act? - Employee Rights/ Labour Relations - United Kingdom - Mondaq",
+        "url": "https://www.mondaq.com/uk/employee-rights-labour-relations/1855484/whats-in-the-employment-rights-act",
+        "source_name": "Mondaq",
+        "published_at": "2026-10-15T18:11:15+00:00",
+        "summary": "An overview of statutory changes under the UK Employment Rights Act affecting worker and parental rights.",
+        "why_it_matters": "Covers key employment changes, including paternity leave and flexible working rights.",
+        "category": "policy",
+        "relevance": 4,
+        "region": "uk",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "738",
+      "title": "The Hunslet Club announces packed October half term camps - South Leeds Life",
+      "fields": {
+        "id": 738,
+        "title": "The Hunslet Club announces packed October half term camps - South Leeds Life",
+        "url": "https://southleedslife.com/the-hunslet-club-announces-packed-october-half-term-camps/",
+        "source_name": "South Leeds Life",
+        "published_at": "2026-10-13 13:52:15+00",
+        "summary": "The Hunslet Club in South Leeds has announced its timetable of activity camps for October half term.",
+        "why_it_matters": "Offers local holiday club childcare and activities for half term.",
+        "category": "activities",
+        "relevance": 3,
+        "region": "england",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": "leeds"
+      }
+    },
+    {
+      "id": "933",
+      "title": "We Tested These STEM Toys on Our Own Kids - WIRED",
+      "fields": {
+        "id": 933,
+        "title": "We Tested These STEM Toys on Our Own Kids - WIRED",
+        "url": "https://www.wired.com/gallery/best-stem-toys-for-kids/",
+        "source_name": "WIRED",
+        "published_at": "2026-10-02 07:00:00+00",
+        "summary": "Hands-on testing and reviews of top STEM toys evaluated directly by children.",
+        "why_it_matters": "Offers reliable recommendations for engaging, educational toys for your kids.",
+        "category": "activities",
+        "relevance": 4,
+        "region": "uk",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "430",
+      "title": "Hampshire’s Top Autumn Days Out: From Owl-O-Ween to Pumpkin Time - Great British Life",
+      "fields": {
+        "id": 430,
+        "title": "Hampshire’s Top Autumn Days Out: From Owl-O-Ween to Pumpkin Time - Great British Life",
+        "url": "https://www.greatbritishlife.co.uk/magazines/hampshire/26545045.hampshires-best-autumn-halloween-events-2026/",
+        "source_name": "Great British Life",
+        "published_at": "2026-10-04 11:00:00+00",
+        "summary": "Explore Hampshire's best autumn family events, featuring owl displays and pumpkin-themed activities.",
+        "why_it_matters": "Offers fun autumn day out ideas for families based in Hampshire.",
+        "category": "activities",
+        "relevance": 3,
+        "region": "england",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "872",
+      "title": "The very best kids' theatre in London - Time Out Worldwide",
+      "fields": {
+        "id": 872,
+        "title": "The very best kids' theatre in London - Time Out Worldwide",
+        "url": "https://www.timeout.com/london/theatre/childrens-theatre-in-london",
+        "source_name": "Time Out Worldwide",
+        "published_at": "2026-10-11 23:00:00+00",
+        "summary": "A guide to the best current and upcoming children's theatre shows across London.",
+        "why_it_matters": "Great ideas for taking your kids to a London theatre show.",
+        "category": "activities",
+        "relevance": 4,
+        "region": "england",
+        "geo_scope": "regional",
+        "geo_region": "london",
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "625",
+      "title": "Primary assessments: future dates",
+      "fields": {
+        "id": 625,
+        "title": "Primary assessments: future dates",
+        "url": "https://www.gov.uk/guidance/primary-assessments-future-dates",
+        "source_name": "GOV.UK - Department for Education",
+        "published_at": "2026-10-12 08:30:01+00",
+        "summary": "The Department for Education has published future assessment dates for primary schools in England.",
+        "why_it_matters": "Helps parents stay aware of key testing periods in their child's primary education.",
+        "category": "education",
+        "relevance": 3,
+        "region": "england",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "909",
+      "title": "Monmouthshire children set to benefit from £1.4m additional learning needs funding - Free Press Series",
+      "fields": {
+        "id": 909,
+        "title": "Monmouthshire children set to benefit from £1.4m additional learning needs funding - Free Press Series",
+        "url": "https://www.freepressseries.co.uk/news/26636691.monmouthshire-children-benefit-1-4m-funding/",
+        "source_name": "Free Press Series",
+        "published_at": "2026-10-14 22:30:00+00",
+        "summary": "Monmouthshire has secured £1.4m in funding to support local children with additional learning needs.",
+        "why_it_matters": "Extra support and funding is coming for children with additional learning needs in Monmouthshire.",
+        "category": "education",
+        "relevance": 3,
+        "region": "wales",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": "monmouthshire"
+      }
+    },
+    {
+      "id": "453",
+      "title": "Accredited official statistics: Education and training statistics for the UK: 2026",
+      "fields": {
+        "id": 453,
+        "title": "Accredited official statistics: Education and training statistics for the UK: 2026",
+        "url": "https://www.gov.uk/government/statistics/announcements/education-and-training-statistics-for-the-uk-2026",
+        "source_name": "GOV.UK - Department for Education",
+        "published_at": "2026-10-06 12:22:30+00",
+        "summary": "The DfE has published comprehensive statistics on UK schools, pupil attainment, qualifications, and education spending.",
+        "why_it_matters": "Gives a broad overview of the state of UK education and school standards.",
+        "category": "education",
+        "relevance": 3,
+        "region": "uk",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "818",
+      "title": "Walk around Preston's Avenham Park to remember all babies loved but lost - Lancashire Evening Post",
+      "fields": {
+        "id": 818,
+        "title": "Walk around Preston's Avenham Park to remember all babies loved but lost - Lancashire Evening Post",
+        "url": "https://www.lep.co.uk/health/walk-around-prestons-avenham-park-to-remember-all-babies-loved-but-lost-9247681",
+        "source_name": "Lancashire Evening Post",
+        "published_at": "2026-10-02 07:00:00+00",
+        "summary": "A memorial walk is taking place at Preston's Avenham Park to remember lost babies.",
+        "why_it_matters": "Offers a supportive local gathering for parents affected by pregnancy or infant loss.",
+        "category": "health",
+        "relevance": 3,
+        "region": "england",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": "lancashire",
+        "locality": "preston"
+      }
+    },
+    {
+      "id": "653",
+      "title": "Bereaved Silsden dad hopes to educate school children on mental health - Rayo",
+      "fields": {
+        "id": 653,
+        "title": "Bereaved Silsden dad hopes to educate school children on mental health - Rayo",
+        "url": "https://www.hellorayo.co.uk/greatest-hits/west-yorkshire/news/dad-of-teen-wants-to-educate-children-on-mental-health-after-sons-death",
+        "source_name": "Rayo",
+        "published_at": "2026-10-09 06:10:59+00",
+        "summary": "A bereaved dad from Silsden is visiting local school children to raise awareness about mental health support.",
+        "why_it_matters": "Highlights local school mental health initiatives and emotional wellbeing support for kids.",
+        "category": "health",
+        "relevance": 3,
+        "region": "england",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "650",
+      "title": "Disabled children’s families face childcare cost and provision barriers - CYP Now",
+      "fields": {
+        "id": 650,
+        "title": "Disabled children’s families face childcare cost and provision barriers - CYP Now",
+        "url": "https://www.cypnow.co.uk/content/news/disabled-children-s-families-face-childcare-cost-and-provision-barriers",
+        "source_name": "CYP Now",
+        "published_at": "2026-10-12 10:46:51+00",
+        "summary": "A report highlights significant childcare cost and accessibility barriers faced by families of disabled children.",
+        "why_it_matters": "Highlights key childcare cost challenges and provision gaps for dads raising disabled children.",
+        "category": "money",
+        "relevance": 4,
+        "region": "uk",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "486",
+      "title": "OakNorth Enters Children's Savings Market with 3.5% Junior Cash ISA and Bubble Partnership - FF News",
+      "fields": {
+        "id": 486,
+        "title": "OakNorth Enters Children's Savings Market with 3.5% Junior Cash ISA and Bubble Partnership - FF News",
+        "url": "https://ffnews.com/news/oaknorth-launches-junior-cash-isa-offering-3-5-aer-and-partners-with-childcare-a-48c6d2b9",
+        "source_name": "FF News",
+        "published_at": "2026-10-05 13:55:49+00",
+        "summary": "OakNorth has launched a Junior Cash ISA offering 3.5% interest in partnership with childcare app Bubble.",
+        "why_it_matters": "A new savings option to help you build a nest egg for your child.",
+        "category": "money",
+        "relevance": 3,
+        "region": "uk",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "601",
+      "title": "Kids eat three course meal free this October half term - Melton Times",
+      "fields": {
+        "id": 601,
+        "title": "Kids eat three course meal free this October half term - Melton Times",
+        "url": "https://meltontimes.co.uk/your-world/kids-eat-three-course-meal-free-this-october-half-term-9272614?itm_source=Internal&itm_campaign=breaking-news-ticker&itm_channel=homepage_banner&itm_content=3",
+        "source_name": "Melton Times",
+        "published_at": "2026-10-07 12:08:00+00",
+        "summary": "Local venues in Melton are offering free three-course meals for children during the October half-term.",
+        "why_it_matters": "Helps cut down the cost of eating out with kids this half-term.",
+        "category": "money",
+        "relevance": 4,
+        "region": "england",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": "leicestershire",
+        "locality": "melton"
+      }
+    },
+    {
+      "id": "321",
+      "title": "Nurseries should be recognised for the practical and emotional support they provide families beyond their formal roles, argues research - Nursery World",
+      "fields": {
+        "id": 321,
+        "title": "Nurseries should be recognised for the practical and emotional support they provide families beyond their formal roles, argues research - Nursery World",
+        "url": "https://www.nurseryworld.co.uk/content/news/nurseries-should-be-recognised-for-the-practical-and-emotional-support-they-provide-families-beyond-their-formal-roles-argues-research",
+        "source_name": "Nursery World",
+        "published_at": "2026-10-02 11:58:04+00",
+        "summary": "New research highlights that nurseries provide vital practical and emotional support to families beyond early education.",
+        "why_it_matters": "Recognises the broader support network nurseries offer to struggling parents.",
+        "category": "parenting",
+        "relevance": 3,
+        "region": "uk",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "819",
+      "title": "22 best toys for two-year-olds, according to parents - Good Housekeeping",
+      "fields": {
+        "id": 819,
+        "title": "22 best toys for two-year-olds, according to parents - Good Housekeeping",
+        "url": "https://www.goodhousekeeping.com/uk/product-reviews/parenting/g62747969/best-toys-for-two-year-olds/",
+        "source_name": "Good Housekeeping",
+        "published_at": "2026-10-05 07:00:00+00",
+        "summary": "Parents recommend top toys for two-year-olds to support early play and development.",
+        "why_it_matters": "Useful advice when buying engaging, age-appropriate gifts for your toddler.",
+        "category": "parenting",
+        "relevance": 4,
+        "region": "uk",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "609",
+      "title": "Why are so many four-year-olds not potty-trained before school?",
+      "fields": {
+        "id": 609,
+        "title": "Why are so many four-year-olds not potty-trained before school?",
+        "url": "https://www.bbc.co.uk/news/articles/c5x2vnp4jrkdo?at_medium=RSS&at_campaign=rss",
+        "source_name": "BBC News - Education",
+        "published_at": "2026-10-11 02:33:35+00",
+        "summary": "A survey reveals that a third of four-year-olds starting school in the West Midlands were not toilet-trained.",
+        "why_it_matters": "Highlights growing concerns around potty training and school readiness for young children.",
+        "category": "parenting",
+        "relevance": 4,
+        "region": "england",
+        "geo_scope": "regional",
+        "geo_region": "west_midlands",
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "306",
+      "title": "Mum petitions UK Parliament for paid breastfeeding breaks at work - AOL.com",
+      "fields": {
+        "id": 306,
+        "title": "Mum petitions UK Parliament for paid breastfeeding breaks at work - AOL.com",
+        "url": "https://www.aol.co.uk/articles/mum-petitions-uk-parliament-paid-042457000.html",
+        "source_name": "AOL.com",
+        "published_at": "2026-10-02 04:24:00+00",
+        "summary": "A petition calls on the UK Parliament to introduce statutory paid breastfeeding breaks for working mothers.",
+        "why_it_matters": "This proposed change would help support your partner when returning to work after maternity.",
+        "category": "policy",
+        "relevance": 4,
+        "region": "uk",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "618",
+      "title": "Camden council was warned about paedophile nursery worker years before arrest",
+      "fields": {
+        "id": 618,
+        "title": "Camden council was warned about paedophile nursery worker years before arrest",
+        "url": "https://www.theguardian.com/society/2026/oct/10/vincent-chan-paedophile-nursery-worker-camden-council-warning-years-before-arrest",
+        "source_name": "Guardian - Education",
+        "published_at": "2026-10-10 15:00:01+00",
+        "summary": "Camden Council failed to act on warnings about a nursery worker later convicted of child abuse.",
+        "why_it_matters": "Highlights safeguarding oversight issues in nursery childcare settings.",
+        "category": "safety",
+        "relevance": 3,
+        "region": "england",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": "camden"
+      }
+    },
+    {
+      "id": "553",
+      "title": "Product Safety Report: Oakes Leisure Limited Warrior Crossbow Toy (2609-0218)",
+      "fields": {
+        "id": 553,
+        "title": "Product Safety Report: Oakes Leisure Limited Warrior Crossbow Toy (2609-0218)",
+        "url": "https://www.gov.uk/product-safety-alerts-reports-recalls/product-safety-report-oakes-leisure-limited-warrior-crossbow-toy-2609-0218",
+        "source_name": "GOV.UK - Product safety alerts and recalls",
+        "published_at": "2026-10-08 08:35:05+00",
+        "summary": "A product safety report has been published warning about the Warrior Crossbow Toy by Oakes Leisure.",
+        "why_it_matters": "This toy crossbow presents a serious safety hazard to children.",
+        "category": "safety",
+        "relevance": 5,
+        "region": "uk",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "378",
+      "title": "Thousands of child-on-child sexual offences reported at schools in England and Wales",
+      "fields": {
+        "id": 378,
+        "title": "Thousands of child-on-child sexual offences reported at schools in England and Wales",
+        "url": "https://www.theguardian.com/education/2026/oct/04/child-on-child-sexual-abuse-schools-england-and-wales",
+        "source_name": "Guardian - Education",
+        "published_at": "2026-10-04 15:00:31+00",
+        "summary": "Thousands of child-on-child sexual offences are being reported to police from schools in England and Wales.",
+        "why_it_matters": "Highlights crucial safeguarding and safety issues affecting children in schools today.",
+        "category": "safety",
+        "relevance": 4,
+        "region": "england",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "328",
+      "title": "North East play café tackling parental loneliness expands support to dads - The Northern Echo",
+      "fields": {
+        "id": 328,
+        "title": "North East play café tackling parental loneliness expands support to dads - The Northern Echo",
+        "url": "https://www.thenorthernecho.co.uk/news/26600711.guisborough-play-caf-launches-monthly-sessions-dads/",
+        "source_name": "The Northern Echo",
+        "published_at": "2026-10-03 04:30:00+00",
+        "summary": "A play café in the North East is expanding its services to help tackle loneliness among dads.",
+        "why_it_matters": "Provides a welcoming space for local dads to connect and combat isolation.",
+        "category": "wellbeing",
+        "relevance": 4,
+        "region": "england",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "855",
+      "title": "Baby loss leaves ‘permanent scar’, says bereaved dad amid 'incredible' support - Colchester Gazette",
+      "fields": {
+        "id": 855,
+        "title": "Baby loss leaves ‘permanent scar’, says bereaved dad amid 'incredible' support - Colchester Gazette",
+        "url": "https://www.gazette-news.co.uk/news/26632520.bereaved-dad-praises-maldon-support-baby-loss-week/",
+        "source_name": "Colchester Gazette",
+        "published_at": "2026-10-14 16:00:00+00",
+        "summary": "A grieving father shares his experience of baby loss and highlights the vital support available for bereaved parents.",
+        "why_it_matters": "Offers emotional validation and highlights crucial support resources for dads coping with baby loss.",
+        "category": "wellbeing",
+        "relevance": 3,
+        "region": "uk",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "630",
+      "title": "County Durham young dad says more support needed for new fathers - BBC",
+      "fields": {
+        "id": 630,
+        "title": "County Durham young dad says more support needed for new fathers - BBC",
+        "url": "https://www.bbc.co.uk/news/articles/ckgel90yzvjdo",
+        "source_name": "BBC",
+        "published_at": "2026-10-11 07:56:31+00",
+        "summary": "A young father from County Durham is campaigning for better mental health and practical support for new dads.",
+        "why_it_matters": "Emphasises the need for improved local support networks for new fathers.",
+        "category": "wellbeing",
+        "relevance": 4,
+        "region": "england",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": "county_durham"
+      }
+    },
+    {
+      "id": "808",
+      "title": "Small Swansea free museum with just three staff is named best in UK - Wales Online",
+      "fields": {
+        "id": 808,
+        "title": "Small Swansea free museum with just three staff is named best in UK - Wales Online",
+        "url": "https://www.walesonline.co.uk/whats-on/family-kids-news/small-swansea-free-museum-just-34757151",
+        "source_name": "Wales Online",
+        "published_at": "2026-10-13 13:39:48+00",
+        "summary": "A small, free museum in Swansea has been named the best in the UK.",
+        "why_it_matters": "A great free option for an educational family day out in Wales.",
+        "category": "activities",
+        "relevance": 3,
+        "region": "wales",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": "swansea"
+      }
+    },
+    {
+      "id": "739",
+      "title": "Wand making, dodgeball and glow stick disco: your guide to half-term holiday fun - Sandbach Nub News",
+      "fields": {
+        "id": 739,
+        "title": "Wand making, dodgeball and glow stick disco: your guide to half-term holiday fun - Sandbach Nub News",
+        "url": "https://sandbach.nub.news/news/local-news/sp14219-wand-making-dodgeball-and-glow-stick-disco-your-guide-to-half-term-holiday-fun-310364",
+        "source_name": "Sandbach Nub News",
+        "published_at": "2026-10-13 06:50:00+00",
+        "summary": "Sandbach offers a variety of half-term activities including wand making, dodgeball, and a glow stick disco.",
+        "why_it_matters": "Gives you fun local event options to keep kids busy.",
+        "category": "activities",
+        "relevance": 3,
+        "region": "england",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "898",
+      "title": "Find family friendly activities this October half term - Leeds City Council News",
+      "fields": {
+        "id": 898,
+        "title": "Find family friendly activities this October half term - Leeds City Council News",
+        "url": "https://news.leeds.gov.uk/news/find-family-friendly-activities-this-october-half-term",
+        "source_name": "Leeds City Council News",
+        "published_at": "2026-10-14 15:45:08+00",
+        "summary": "Leeds City Council has compiled a list of family-friendly activities for half term.",
+        "why_it_matters": "Quick guide for Leeds dads looking for local events to take the kids to.",
+        "category": "activities",
+        "relevance": 3,
+        "region": "england",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": "leeds"
+      }
+    },
+    {
+      "id": "596",
+      "title": "Foundation Holiday Courses return for October half-term - Foundation of Light",
+      "fields": {
+        "id": 596,
+        "title": "Foundation Holiday Courses return for October half-term - Foundation of Light",
+        "url": "https://foundationoflight.co.uk/news/foundation-holiday-courses-return-for-october-half-term/",
+        "source_name": "Foundation of Light",
+        "published_at": "2026-10-08 16:41:06+00",
+        "summary": "The Foundation of Light is running sports and activity courses for children during the October half-term.",
+        "why_it_matters": "Keeps kids active and entertained locally during the school holidays.",
+        "category": "activities",
+        "relevance": 4,
+        "region": "england",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "903",
+      "title": "FROM REAL BATS TO SPOOKY STORIES - ISLE OF WIGHT LIBRARIES OFFER HALF-TERM HALLOWEEN FUN - Island Echo",
+      "fields": {
+        "id": 903,
+        "title": "FROM REAL BATS TO SPOOKY STORIES - ISLE OF WIGHT LIBRARIES OFFER HALF-TERM HALLOWEEN FUN - Island Echo",
+        "url": "https://www.islandecho.co.uk/from-real-bats-to-spooky-stories-isle-of-wight-libraries-offer-half-term-halloween-fun/",
+        "source_name": "Island Echo",
+        "published_at": "2026-10-14 13:10:47+00",
+        "summary": "Isle of Wight libraries are holding Halloween-themed stories and bat events for kids this half term.",
+        "why_it_matters": "Free local Halloween activities for Isle of Wight families.",
+        "category": "activities",
+        "relevance": 3,
+        "region": "england",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": "isle_of_wight"
+      }
+    },
+    {
+      "id": "736",
+      "title": "Port Glasgow mum praises £2 hot meal scheme as families 'can't afford days out' - Yahoo News UK",
+      "fields": {
+        "id": 736,
+        "title": "Port Glasgow mum praises £2 hot meal scheme as families 'can't afford days out' - Yahoo News UK",
+        "url": "https://uk.news.yahoo.com/port-glasgow-mum-praises-2-094132002.html",
+        "source_name": "Yahoo News UK",
+        "published_at": "2026-10-07 09:41:32+00",
+        "summary": "A Port Glasgow initiative offers two-pound hot meals for local families struggling with high activity costs.",
+        "why_it_matters": "A cheap, hot meal option for local families during days out.",
+        "category": "activities",
+        "relevance": 3,
+        "region": "scotland",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "737",
+      "title": "Free and low-cost activities for October half term - Vale of White Horse District Council",
+      "fields": {
+        "id": 737,
+        "title": "Free and low-cost activities for October half term - Vale of White Horse District Council",
+        "url": "https://www.whitehorsedc.gov.uk/community-wellbeing/active-communities/free-and-low-cost-activities-for-october-half-term/",
+        "source_name": "Vale of White Horse District Council",
+        "published_at": "2026-10-13 13:37:59+00",
+        "summary": "Vale of White Horse council is offering free and low-cost activities for kids over October half term.",
+        "why_it_matters": "Saves money on half-term entertainment for your children.",
+        "category": "activities",
+        "relevance": 3,
+        "region": "england",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": "oxfordshire",
+        "locality": "vale_of_white_horse"
+      }
+    },
+    {
+      "id": "708",
+      "title": "Children offered free entry into former National Trust site on these dates - malverngazette.co.uk",
+      "fields": {
+        "id": 708,
+        "title": "Children offered free entry into former National Trust site on these dates - malverngazette.co.uk",
+        "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPNWJzLVF2N25mSzBqLUZJV0dCNzNLTkRYNzZnR2E2SnFpRUQyQ0RiZEpFZnllRjlfVHh4QkF1U1Q3YTJHemRISl9UWDJhV1hTNF9FeF9pTGlvemQ4dEZPSlhEbVQwYTFULWFRU1V0bWxQTDNaZ0FyRkJaU2pFczZPNVMwVWo5dW9DQk5uUkh4WVdYN1hWWElFWEtQNHItenRWblVoWXBhVWo?oc=5",
+        "source_name": "malverngazette.co.uk",
+        "published_at": "2026-10-12 11:00:00+00",
+        "summary": "Children are being offered free entry on selected dates to a former National Trust property.",
+        "why_it_matters": "A budget-friendly heritage day out option for families.",
+        "category": "activities",
+        "relevance": 3,
+        "region": "england",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "918",
+      "title": "Get Ready For A Spooktacular Family Halloween At W5 - Love Belfast",
+      "fields": {
+        "id": 918,
+        "title": "Get Ready For A Spooktacular Family Halloween At W5 - Love Belfast",
+        "url": "https://lovebelfast.co.uk/w5-spooktacular-family-halloween-2026/",
+        "source_name": "Love Belfast",
+        "published_at": "2026-10-15 15:56:42+00",
+        "summary": "Belfast science centre W5 is hosting special family Halloween activities during the October half term.",
+        "why_it_matters": "A fun, interactive Halloween day out for kids in Belfast over half term.",
+        "category": "activities",
+        "relevance": 4,
+        "region": "northern_ireland",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": "belfast"
+      }
+    },
+    {
+      "id": "877",
+      "title": "More than 40% off Alton Towers tickets with these discount codes - The Independent",
+      "fields": {
+        "id": 877,
+        "title": "More than 40% off Alton Towers tickets with these discount codes - The Independent",
+        "url": "https://www.independent.co.uk/deals/alton-towers-discount-code-b2705011.html",
+        "source_name": "The Independent",
+        "published_at": "2026-10-12 13:11:32+00",
+        "summary": "Discount deals offer more than 40% off entry tickets to Alton Towers theme park.",
+        "why_it_matters": "Saves money on tickets for a popular theme park outing.",
+        "category": "activities",
+        "relevance": 4,
+        "region": "england",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "894",
+      "title": "Kids eat free and family fun at Fort Kinnaird this October week - The Edinburgh Reporter",
+      "fields": {
+        "id": 894,
+        "title": "Kids eat free and family fun at Fort Kinnaird this October week - The Edinburgh Reporter",
+        "url": "https://theedinburghreporter.co.uk/2026/10/kids-eat-free-and-family-fun-at-fort-kinnaird-this-october-week/",
+        "source_name": "The Edinburgh Reporter",
+        "published_at": "2026-10-15 11:02:54+00",
+        "summary": "Fort Kinnaird is hosting family fun and kids-eat-free offers during October week.",
+        "why_it_matters": "Offers cheap dining and activities for kids during the Scottish school break.",
+        "category": "activities",
+        "relevance": 3,
+        "region": "scotland",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": "city_of_edinburgh"
+      }
+    },
+    {
+      "id": "362",
+      "title": "Virgin Media gives TV customers access to kids' channels including Sky Kids, Cartoon Network, Nickelodeon and Baby TV at no extra cost throughout October - Virgin Media O2",
+      "fields": {
+        "id": 362,
+        "title": "Virgin Media gives TV customers access to kids' channels including Sky Kids, Cartoon Network, Nickelodeon and Baby TV at no extra cost throughout October - Virgin Media O2",
+        "url": "https://news.virginmediao2.co.uk/virgin-media-gives-tv-customers-access-to-kids-channels-including-sky-kids-cartoon-network-nickelodeon-and-baby-tv-at-no-extra-cost-throughout-october-2/",
+        "source_name": "Virgin Media O2",
+        "published_at": "2026-10-02 07:52:24+00",
+        "summary": "Virgin Media is giving its TV customers free access to major kids' channels throughout October.",
+        "why_it_matters": "Get free premium children's entertainment to help keep kids busy this month.",
+        "category": "activities",
+        "relevance": 4,
+        "region": "uk",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "727",
+      "title": "‘Immediately stop using’: Recall of baby strollers due to injury hazard - BNN Bloomberg",
+      "fields": {
+        "id": 727,
+        "title": "‘Immediately stop using’: Recall of baby strollers due to injury hazard - BNN Bloomberg",
+        "url": "https://news.google.com/rss/articles/CBMi6AJBVV95cUxPckJabDV6LWxYdElaNVRVX2hmLXR1anZ3STAxSjFQOFZPeFpBTExuY252eW00ZlFiOWF6dGhENWR4WVllNE8wMDhOM05QTXRucVJPV1hMVWNVM282RFdMWDBOQzVvYmxHaGdEWjlwOVl4V1dNeVQ5ZEVvd2ZHZGJDZWFzX29xMWZydjVUWjJPb2lWNDFWS3prMVh0ZktET3YzUnhmX2NYRXdIZ3BWcTN5UDhmMDVIa0dlazJma1g5VC0ybW1fVmJLNWxDYTNqN2dBTWVUQWdvczZlbUNVTEZ2aGU1WlpjbDJqSHBKczcya3NIOWhSWHdoeHhKdDlaU3hfdXlsZm5PUW9xRV8yNzZ1MG9fNlp1a1A0SmM0ZTBpUnAwNC10WXpHVVhENHFqbHZaWThtMVNJeV93SHlDeXVWNGJ1dU83Q2hENDdNVkh0bGJBUjlyZEhsU1Uxa3VLMTdveGNtSUlsa2Q?oc=5",
+        "source_name": "BNN Bloomberg",
+        "published_at": "2026-10-02 09:18:55+00",
+        "summary": "A recall has been issued for baby strollers due to a potential injury hazard for children.",
+        "why_it_matters": "Check your pram immediately to ensure your baby's safety from potential injury.",
+        "category": "safety",
+        "relevance": 5,
+        "region": "uk",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "703",
+      "title": "Forest of Dean families to get free food and activities in October half-term - The Forester",
+      "fields": {
+        "id": 703,
+        "title": "Forest of Dean families to get free food and activities in October half-term - The Forester",
+        "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5xUURwR2pzNG9tdGNxaEtFbEFlLU4tUVBFejVkOWpkTjY1NDltR1BYMllEcVJqR3M0SmxQbi1tOXhhdnBidlYxRmNMNlotV0MtRmd5Vm42a2xUY3R3aGRsUzdOSXRrQVVCYl9rcDh4MGNxdFVoWm1KcjMyaWRqb00?oc=5",
+        "source_name": "The Forester",
+        "published_at": "2026-10-09 11:05:13+00",
+        "summary": "Families in the Forest of Dean can access free food and holiday activity schemes this October half-term.",
+        "why_it_matters": "Free food and activity support for eligible local families.",
+        "category": "activities",
+        "relevance": 4,
+        "region": "england",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": "gloucestershire",
+        "locality": "forest_of_dean"
+      }
+    },
+    {
+      "id": "705",
+      "title": "Loch Lomond Shores to offer activities for October school holidays - Helensburgh Advertiser",
+      "fields": {
+        "id": 705,
+        "title": "Loch Lomond Shores to offer activities for October school holidays - Helensburgh Advertiser",
+        "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNdXk0X0Q0cFBoa3BybURjbmd5dVZCN0NIemoxT2NQUFgzWnctT2dTS2FjcEtRNXJkNEdZQ0t1emhSM0NzTnVJMTdqTmprandpQW9iQ1lDWjRJVi02aklRalVzYUhwNFpBQ25DbW4zZnVkcUNlcGZmbHFwaFhWeVBhMkRoOHU2WUR5eW0taFVXU2FZUlR1MTRHblc2SWlhWjJYa1hZZTg1NUljbzNB?oc=5",
+        "source_name": "Helensburgh Advertiser",
+        "published_at": "2026-10-10 07:52:00+00",
+        "summary": "Loch Lomond Shores is putting on family activities for the October school break.",
+        "why_it_matters": "A Scottish day out destination offering family entertainment during half term.",
+        "category": "activities",
+        "relevance": 4,
+        "region": "scotland",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "747",
+      "title": "Cut screen time in classrooms to avoid long-term health issues, clinicians urge",
+      "fields": {
+        "id": 747,
+        "title": "Cut screen time in classrooms to avoid long-term health issues, clinicians urge",
+        "url": "https://www.bbc.co.uk/news/articles/cq4g18prn4l4o?at_medium=RSS&at_campaign=rss",
+        "source_name": "BBC News - Education",
+        "published_at": "2026-10-13 09:35:43+00",
+        "summary": "Clinicians warn that increasing screen and technology use in English classrooms is linked to health problems like short-sightedness in pupils.",
+        "why_it_matters": "School screen time could be affecting your child's eyesight and health.",
+        "category": "education",
+        "relevance": 4,
+        "region": "england",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "721",
+      "title": "In the UK, a safety creator warns Meta's 'toy-like' AI charm can hear, watch, and remember - The Cool Down",
+      "fields": {
+        "id": 721,
+        "title": "In the UK, a safety creator warns Meta's 'toy-like' AI charm can hear, watch, and remember - The Cool Down",
+        "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBidkF1aW5VRjB6OTFZVngzWnBIeVVNa3lyQnk5c3hUVEFaUnJnai10amRHUndvYi1YTlpWaHdRcGpBRmhzX0wyVEVqYVM3YlR1MG1HUm10Rzc0UkZ6YUlqelRhSWlYQ2c4WHpEa1A3aEVxM0QzOEpwZWhZX3RiQQ?oc=5",
+        "source_name": "The Cool Down",
+        "published_at": "2026-10-10 00:47:00+00",
+        "summary": "A safety expert warns parents about privacy risks with a toy-like Meta AI charm that records audio and video.",
+        "why_it_matters": "Highlights privacy and data risks associated with smart AI toys.",
+        "category": "safety",
+        "relevance": 3,
+        "region": "uk",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "741",
+      "title": "Free pumpkin decorating workshops for Glasgow kids perfect for October half-term - Glasgow Live",
+      "fields": {
+        "id": 741,
+        "title": "Free pumpkin decorating workshops for Glasgow kids perfect for October half-term - Glasgow Live",
+        "url": "https://www.glasgowlive.co.uk/whats-on/family-kids-news/free-pumpkin-decorating-workshops-glasgow-34741229",
+        "source_name": "Glasgow Live",
+        "published_at": "2026-10-09 11:55:00+00",
+        "summary": "Free pumpkin decorating workshops are available for kids in Glasgow during the October half-term.",
+        "why_it_matters": "A free, seasonal activity to entertain the kids in Glasgow.",
+        "category": "activities",
+        "relevance": 3,
+        "region": "scotland",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": "glasgow_city"
+      }
+    },
+    {
+      "id": "878",
+      "title": "Where kids can eat free or for £1 during October half-term - including IKEA, Bill’s and Zizzi - InYourArea",
+      "fields": {
+        "id": 878,
+        "title": "Where kids can eat free or for £1 during October half-term - including IKEA, Bill’s and Zizzi - InYourArea",
+        "url": "https://www.inyourarea.co.uk/news/where-kids-can-eat-free-or-for-1-during-october-half-term-including-ikea-bills-and-zizzi/",
+        "source_name": "InYourArea",
+        "published_at": "2026-10-13 07:32:35+00",
+        "summary": "A list of UK restaurant chains offering free or £1 meals for kids during October half-term.",
+        "why_it_matters": "Helps reduce meal costs when out with children over the school holiday.",
+        "category": "activities",
+        "relevance": 4,
+        "region": "uk",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "342",
+      "title": "More than a day out: creating fairer holidays for Cambridge children - cambridgenetwork.co.uk",
+      "fields": {
+        "id": 342,
+        "title": "More than a day out: creating fairer holidays for Cambridge children - cambridgenetwork.co.uk",
+        "url": "https://www.cambridgenetwork.co.uk/news/more-day-out-creating-fairer-holidays-cambridge-children",
+        "source_name": "cambridgenetwork.co.uk",
+        "published_at": "2026-10-02 08:55:40+00",
+        "summary": "A Cambridge initiative aims to provide fairer access to holiday activities and trips for local children.",
+        "why_it_matters": "Highlights local efforts to make school holiday activities accessible for all kids.",
+        "category": "activities",
+        "relevance": 3,
+        "region": "england",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "614",
+      "title": "English councils warn of ‘catastrophic’ Send debts forecast to hit £10bn by 2028",
+      "fields": {
+        "id": 614,
+        "title": "English councils warn of ‘catastrophic’ Send debts forecast to hit £10bn by 2028",
+        "url": "https://www.theguardian.com/education/2026/oct/13/english-councils-catastrophic-send-debts-forecast-2028",
+        "source_name": "Guardian - Education",
+        "published_at": "2026-10-12 23:01:07+00",
+        "summary": "English councils warn that rising special educational needs debt could reach £10bn by 2028.",
+        "why_it_matters": "Funding shortfalls could impact support levels for pupils with special educational needs.",
+        "category": "education",
+        "relevance": 3,
+        "region": "england",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "725",
+      "title": "PACEARTH Recalls About 110,550 Amazon Swing Seats After Breaking Parts Led to Falls, Fractures and Head Injuries - inkl",
+      "fields": {
+        "id": 725,
+        "title": "PACEARTH Recalls About 110,550 Amazon Swing Seats After Breaking Parts Led to Falls, Fractures and Head Injuries - inkl",
+        "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQai12Y0hzSHRxbUdBOUxSbmhCUTZ6YUp0WTlSZ212QWlTU1pXUkJibExkVDIxeW1vYU9LS3c5Smo4ejFUdVBOYzUtQ3V3cGsxVEg1Qnd6ZjczTWoyMWo2RXROcExDYVF3cnRxRTV1clJGbTNpSnVvQUlBOWdCeHFhZmFFUUdHOVFna0RRb3VUUlk0LVFVVWxyVGF3b3pvVy1KaE5ZVDVPQ292QU9YS2VPNHlWdmUtNlI3bTZwVUp1QXhLRE9seFVaaWFPOUY4azJyOHlR?oc=5",
+        "source_name": "inkl",
+        "published_at": "2026-10-11 08:13:56+00",
+        "summary": "PACEARTH has recalled over 110,000 Amazon swing seats after component breakages caused falls and head injuries.",
+        "why_it_matters": "Urgent safety recall on popular garden swing seats to prevent injury.",
+        "category": "safety",
+        "relevance": 5,
+        "region": "uk",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "474",
+      "title": "Inheritance tax: Expert says when parents should give money early - AOL.com",
+      "fields": {
+        "id": 474,
+        "title": "Inheritance tax: Expert says when parents should give money early - AOL.com",
+        "url": "https://www.aol.co.uk/articles/inheritance-tax-expert-says-parents-123000000.html",
+        "source_name": "AOL.com",
+        "published_at": "2026-10-06 12:30:47+00",
+        "summary": "An expert explains the rules and benefits of parents gifting money early to children to manage inheritance tax.",
+        "why_it_matters": "Useful advice if you are planning your family's long-term financial future.",
+        "category": "money",
+        "relevance": 3,
+        "region": "uk",
+        "geo_scope": null,
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "920",
+      "title": "Free October half term Play Days return to Mid Sussex - SussexWorld",
+      "fields": {
+        "id": 920,
+        "title": "Free October half term Play Days return to Mid Sussex - SussexWorld",
+        "url": "https://www.sussexexpress.co.uk/your-world/free-october-half-term-play-days-return-to-mid-sussex-9290641",
+        "source_name": "SussexWorld",
+        "published_at": "2026-10-15 15:57:00+00",
+        "summary": "Free outdoor Play Day sessions are returning to Mid Sussex towns during the October half term.",
+        "why_it_matters": "Free local outdoor activities to keep your kids busy over the school break.",
+        "category": "activities",
+        "relevance": 4,
+        "region": "england",
+        "geo_scope": "local",
+        "geo_region": null,
+        "admin_area": "west_sussex",
+        "locality": "mid_sussex"
+      }
+    },
+    {
+      "id": "916",
+      "title": "9 Cheap UK Half Term Holiday Ideas for 2026 - VickyFlipFlopTravels",
+      "fields": {
+        "id": 916,
+        "title": "9 Cheap UK Half Term Holiday Ideas for 2026 - VickyFlipFlopTravels",
+        "url": "https://vickyflipfloptravels.com/cheap-uk-half-term-holiday-ideas/",
+        "source_name": "VickyFlipFlopTravels",
+        "published_at": "2026-10-15 12:50:30+00",
+        "summary": "A roundup features nine budget-friendly family holiday and activity ideas across the UK for half term.",
+        "why_it_matters": "Affordable ideas to help plan family trips and activities this half term.",
+        "category": "activities",
+        "relevance": 4,
+        "region": "uk",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    },
+    {
+      "id": "566",
+      "title": "Locked out of Childcare - Family Fund",
+      "fields": {
+        "id": 566,
+        "title": "Locked out of Childcare - Family Fund",
+        "url": "https://www.familyfund.org.uk/impact/research/research-reports/childcare-report-2026/",
+        "source_name": "Family Fund",
+        "published_at": "2026-10-06 07:00:00+00",
+        "summary": "A report by Family Fund highlights how parents of disabled children are being locked out of the childcare system.",
+        "why_it_matters": "It exposes the severe childcare barriers faced by families of disabled children.",
+        "category": "money",
+        "relevance": 4,
+        "region": "uk",
+        "geo_scope": "nationwide",
+        "geo_region": null,
+        "admin_area": null,
+        "locality": null
+      }
+    }
+  ]
+}

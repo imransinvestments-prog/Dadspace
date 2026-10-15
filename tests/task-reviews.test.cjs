@@ -11,11 +11,13 @@ function load(file, deps = {}, extra = {}) {
 }
 const tasks = load('lib/operations/review-tasks.ts')
 const access = load('lib/operations/access.ts')
+const news = load('lib/operations/news-sample.ts', { '@/artefacts/data/news-quality-sample-2026-10-15.json': JSON.parse(fs.readFileSync('artefacts/data/news-quality-sample-2026-10-15.json', 'utf8')) })
 const uid = '12345678-1234-1234-1234-123456789abc'
 function harness({ allowed = 'allowed', reviewer = true, changed = false, token = 'test-only', materialChanged = false } = {}) {
   const calls = []
   const api = load('lib/operations/task-review.ts', {
     'server-only': {}, './session': { operationsAccess: async () => allowed }, './access': access,
+    './news-sample': news,
     './review-tasks': tasks, '@/lib/supabase/server': { createClient: async () => ({ auth: { getUser: async () => ({ data: { user: { id: uid } } }) } }) },
     './review-material': { getReviewMaterial: async () => ({ available: true, label: 'Live news', notice: 'Not a frozen sample', rows: [{ id: 'record-1', title: 'Article', fields: { summary: 'Actual evidence' } }] }), materialFingerprint: () => materialChanged ? 'changed' : 'snapshot-hash' },
   }, { process: { env: { DADSPACE_REVIEWER_USER_IDS: reviewer ? uid : '', DADSPACE_REVIEW_GITHUB_TOKEN: token } },
@@ -73,4 +75,14 @@ test('approval succeeds without additional evidence and records it as not suppli
   assert.equal(await api.recordTaskReview(126, tasks.REVIEW_DECISIONS[0], 'Relevant article', '', 'old:0', { rowId: 'record-1', page: 1, fingerprint: 'snapshot-hash' }), 99)
   const body = JSON.parse(calls.find(c => c.options.method === 'POST').options.body).body
   assert.ok(body.includes('Evidence / sample IDs:\nNot supplied'))
+})
+test('news rubric choices are validated and saved independently from the overall decision', async () => {
+  const { api, calls } = harness()
+  const material={ rowId:'record-1', page:1, fingerprint:'snapshot-hash', checks:{relevance:'yes',attribution:'unknown',destination:'no',geography:'unknown'} }
+  await api.recordTaskReview(126,tasks.REVIEW_DECISIONS[1],'Broken destination','', 'old:0',material)
+  const body=JSON.parse(calls.find(c=>c.options.method==='POST').options.body).body
+  assert.ok(body.includes('News quality checks: {"relevance":"yes","attribution":"unknown","destination":"no","geography":"unknown"}'))
+  const denied=harness()
+  await assert.rejects(denied.api.recordTaskReview(126,tasks.REVIEW_DECISIONS[0],'scope','','old:0',{...material,checks:{...material.checks,geography:'invented'}}))
+  assert.equal(denied.calls.some(c=>c.options.method==='POST'),false)
 })

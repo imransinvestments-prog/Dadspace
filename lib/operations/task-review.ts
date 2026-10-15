@@ -3,6 +3,7 @@ import { operationsAccess } from "./session"
 import { createClient } from "@/lib/supabase/server"
 import { isOperationsUser, isVerifiedOperationsEmail } from "./access"
 import { REVIEW_DECISIONS, reviewTask } from "./review-tasks"
+import { validNewsChecks, type NewsChecks } from "./news-sample"
 
 const API = "https://api.github.com/repos/imransinvestments-prog/Dadspace"
 const MARKER = "Dadspace owner review v1"
@@ -46,9 +47,10 @@ export async function getTaskReview(id: number) {
   }
   throw new Error("Review history is too large; inspect the GitHub task")
 }
-export async function recordTaskReview(id: number, decision: string, notes: string, evidence: string, version: string, material?: { rowId: string; fingerprint: string; page: number }) {
+export async function recordTaskReview(id: number, decision: string, notes: string, evidence: string, version: string, material?: { rowId: string; fingerprint: string; page: number; checks?: NewsChecks }) {
   if (!reviewTask(id) || !(REVIEW_DECISIONS as readonly string[]).includes(decision) || !notes.trim() || notes.length > 6000 || evidence.length > 2000) throw new Error("Invalid review")
   if (!await reviewWriteAccess()) throw new Error("Reviewer access required")
+  if (material?.checks && (id !== 126 || !validNewsChecks(material.checks))) throw new Error("Invalid news quality checks")
   let snapshot = ""
   if (material) {
     const { getReviewMaterial, materialFingerprint } = await import("./review-material")
@@ -56,6 +58,7 @@ export async function recordTaskReview(id: number, decision: string, notes: stri
     const row = currentMaterial.rows.find(row => row.id === material.rowId)
     if (!currentMaterial.available || !row || materialFingerprint(row) !== material.fingerprint) throw new Error("Record evidence changed; reload before saving")
     snapshot = `\n\nReviewed record: ${row.id}\nSnapshot SHA-256: ${material.fingerprint}\nDataset: ${currentMaterial.label}\nDataset scope: ${currentMaterial.notice}\nDisplayed record snapshot:\n${JSON.stringify(row, null, 2)}`
+    if (id === 126 && material.checks) snapshot = `\n\nNews quality checks: ${JSON.stringify(material.checks)}${snapshot}`
     if (snapshot.length > 40000) throw new Error("Record too large for a review comment")
   }
   const current = await getTaskReview(id)
