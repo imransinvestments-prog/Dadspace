@@ -55,6 +55,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-30 flex items-center justify-between border-b bg-background/85 px-4 py-3 backdrop-blur-md lg:hidden">
         <Logo />
         <div className="flex items-center gap-2">
+          <Link href="/ops" className="rounded-full border px-3 py-2 text-sm font-semibold hover:bg-muted" aria-current={isActive(pathname, "/ops") ? "page" : undefined}>Operations</Link>
           <ThemeToggle />
           <HeaderUserButton />
         </div>
