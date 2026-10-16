@@ -7,7 +7,8 @@ import { useDirectoryPage } from "@/hooks/use-directory-page"
 import { MapPin, Search } from "lucide-react"
 import { activitySlug } from "@/lib/activity-slug"
 import { ACTIVITY_PAGE_SIZE, type ActivityPage } from "@/lib/activity-shared"
-import type { DadActivity } from "@/lib/types"
+import { DEFAULT_RADIUS_KM, type DiscoveryScope } from '@/lib/discovery-radius'
+import { DiscoveryRadiusControls, LocalCoverageGap } from '@/components/discovery-radius-controls'
 
 function priceLabel(value: string | null) {
   return value?.trim() || "Check price on site"
@@ -20,10 +21,12 @@ function categoryLabel(value: string | null | undefined) {
 
 export function ActivitiesExplorer({ initialPage, categories }: { initialPage: ActivityPage; categories: string[] }) {
   const {coords,browseAll}=useLocation()
+  const [radiusKm,setRadiusKm]=useState<number>(DEFAULT_RADIUS_KM)
+  const [scope,setScope]=useState<DiscoveryScope>('local')
   const [query,setQuery]=useState("")
   const [category,setCategory]=useState("all")
   const params=new URLSearchParams({q:query,category,limit:String(ACTIVITY_PAGE_SIZE)})
-  if(coords){params.set('lat',String(coords.lat));params.set('lng',String(coords.lng))}
+  if(coords){params.set('lat',String(coords.lat));params.set('lng',String(coords.lng));params.set('radiusKm',String(radiusKm));params.set('scope',scope)}
   const enabled=Boolean(coords)||browseAll
   const feed=useDirectoryPage<ActivityPage>('/api/activities?'+params,enabled)
   const activities=feed.pages.flatMap(p=>p.activities)
@@ -33,6 +36,7 @@ export function ActivitiesExplorer({ initialPage, categories }: { initialPage: A
   const loadMore=()=>feed.loadMore(activities.length)
   return (
     <section className="flex flex-col gap-6">
+      {coords && <DiscoveryRadiusControls radiusKm={radiusKm} scope={scope} onRadius={setRadiusKm} onScope={setScope} />}
       <div className="grid gap-3 rounded-2xl border bg-card p-4 md:grid-cols-[1fr_220px]">
         <label className="relative">
           <span className="sr-only">Search activities</span>
@@ -57,9 +61,9 @@ export function ActivitiesExplorer({ initialPage, categories }: { initialPage: A
         </select>
       </div>
 
-      <p className="text-sm opacity-70" aria-live="polite">
-        {loading && !activities.length ? "Loading activitiesâ€¦" : enabled ? `${total} current ${total === 1 ? "activity" : "activities"}${coords ? ", nearest first" : ""}` : "Choose a location or browse all UK to see activities."}
-      </p>
+      {!error && <p className="text-sm opacity-70" aria-live="polite">
+        {loading && !activities.length ? "Loading activitiesâ€¦" : enabled ? `${total} current ${total === 1 ? "activity" : "activities"}${coords ? ` in ${scope === 'local' ? radiusKm + ' km' : scope === 'online' ? 'online listings' : 'distance-unknown listings'}` : ""}` : "Choose a location or browse all UK to see activities."}
+      </p>}
       {error && <p role="alert">{error} <button onClick={feed.retry} className="underline">Retry</button></p>}
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -85,7 +89,7 @@ export function ActivitiesExplorer({ initialPage, categories }: { initialPage: A
               </p>
             )}
 
-            {coords && <p className="text-sm font-semibold">{activity.distance_miles == null ? 'Distance unavailable' : `About ${activity.distance_miles < 1 ? 'less than 1' : Math.round(activity.distance_miles)} miles away`}</p>}
+            {coords && scope !== 'online' && <p className="text-sm font-semibold">{activity.distance_miles == null ? 'Distance unavailable' : `About ${activity.distance_miles < 1 ? 'less than 1' : Math.round(activity.distance_miles)} miles away (straight-line)`}</p>}
             {activity.description && <p className="line-clamp-3 text-sm leading-relaxed opacity-80">{activity.description}</p>}
 
             <Link
@@ -109,7 +113,7 @@ export function ActivitiesExplorer({ initialPage, categories }: { initialPage: A
         </button>
       )}
 
-      {enabled && !loading && !error && !activities.length && <p className="rounded-2xl border bg-card p-6 text-center">No activities match those filters yet.</p>}
+      {enabled && !loading && !error && !activities.length && (coords && scope === 'local' ? <LocalCoverageGap /> : <p className="rounded-2xl border bg-card p-6 text-center">No activities match those filters yet.</p>)}
     </section>
   )
 }

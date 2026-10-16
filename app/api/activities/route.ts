@@ -1,3 +1,4 @@
+import { parseDiscoveryRadius } from '@/lib/discovery-radius'
 import { NextRequest, NextResponse } from "next/server"
 import { ACTIVITY_PAGE_SIZE, fetchActivityPage } from "@/lib/activities"
 import { parsePoint } from '@/lib/distance'
@@ -11,6 +12,8 @@ export async function GET(request: NextRequest) {
   const limit = Number(searchParams.get("limit") || String(ACTIVITY_PAGE_SIZE))
   const query = searchParams.get("q")
   const category = searchParams.get("category")
+  const discovery = parseDiscoveryRadius(searchParams)
+  if (!discovery) return NextResponse.json({error:'Invalid radius or scope'},{status:400})
   const point = parsePoint(searchParams)
   if((searchParams.has('lat')||searchParams.has('lng'))&&!point)return NextResponse.json({error:'Invalid location'},{status:400})
 
@@ -21,6 +24,7 @@ export async function GET(request: NextRequest) {
     query,
     category,
     point,
+    ...discovery,
   })
 
   if(page.loadFailed)return NextResponse.json({error:'Activities unavailable'},{status:503,headers:{'Cache-Control':'private, no-store'}})

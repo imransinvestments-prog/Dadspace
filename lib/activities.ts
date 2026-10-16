@@ -1,3 +1,4 @@
+import { withinDiscoveryScope, type DiscoveryScope } from './discovery-radius'
 import "server-only"
 import { getSupabase } from "./supabase"
 import { ACTIVITY_PAGE_SIZE, type ActivityPage } from "./activity-shared"
@@ -45,6 +46,8 @@ export async function fetchActivityPage(options?: {
   limit?: number
   query?: string | null
   category?: string | null
+  radiusKm?: number
+  scope?: DiscoveryScope
   point?: Point | null
 }): Promise<ActivityPage> {
   const db = getSupabase()
@@ -80,7 +83,7 @@ export async function fetchActivityPage(options?: {
       rows.push(...(data??[]))
       if((data?.length??0)<500)break
     }
-    const sorted=nearestFirst(await withDistances(rows.map(toActivity),options.point),(a,b)=>(b.family_relevance??0)-(a.family_relevance??0)||a.title.localeCompare(b.title))
+    const sorted=nearestFirst(withinDiscoveryScope(await withDistances(rows.map(toActivity),options.point), options.radiusKm, options.scope),(a,b)=>(b.family_relevance??0)-(a.family_relevance??0)||a.title.localeCompare(b.title))
     return {activities:sorted.slice(offset,offset+limit),total:sorted.length,offset,limit,hasMore:offset+limit<sorted.length,loadFailed:false}
   }
   const { data, error, count } = await request.range(offset, offset + limit - 1)
