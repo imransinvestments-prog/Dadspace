@@ -43,7 +43,7 @@ export async function getTaskReview(id: number) {
   // Fetch every page, or fail explicitly rather than silently omitting decisions.
   for (let page = 1; page <= 20; page++) {
     const comments = await github(`/issues/${id}/comments?per_page=100&page=${page}`) as Comment[]
-    history.push(...comments.filter(comment => comment.body.startsWith(`${MARKER}\n`)))
+    history.push(...comments.filter(comment => comment.body.startsWith(`${MARKER}\n`) || comment.body.startsWith("Dadspace news supplemental review v1\n")))
     if (comments.length < 100) return { issue, history }
   }
   throw new Error("Review history is too large; inspect the GitHub task")

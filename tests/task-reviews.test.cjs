@@ -12,7 +12,8 @@ function load(file, deps = {}, extra = {}) {
 const tasks = load('lib/operations/review-tasks.ts')
 const access = load('lib/operations/access.ts')
 const originals = load('lib/operations/originals-checks.ts')
-const news = load('lib/operations/news-sample.ts', { '@/artefacts/data/news-quality-sample-2026-10-15.json': JSON.parse(fs.readFileSync('artefacts/data/news-quality-sample-2026-10-15.json', 'utf8')) })
+const newsChecks = load('lib/operations/news-checks.ts')
+const news = load('lib/operations/news-sample.ts', { './news-checks': newsChecks, '@/artefacts/data/news-quality-sample-2026-10-15.json': JSON.parse(fs.readFileSync('artefacts/data/news-quality-sample-2026-10-15.json', 'utf8')) })
 const uid = '12345678-1234-1234-1234-123456789abc'
 function harness({ allowed = 'allowed', reviewer = true, changed = false, token = 'test-only', materialChanged = false } = {}) {
   const calls = []

@@ -2,18 +2,25 @@ import { createHash } from "node:crypto"
 import sample from "@/artefacts/data/news-quality-sample-2026-10-15.json"
 
 export const NEWS_SAMPLE = sample
-export type NewsChecks = { relevance: string; attribution: string; destination: string; geography: string }
-export const UNKNOWN_NEWS_CHECKS: NewsChecks = { relevance: "unknown", attribution: "unknown", destination: "unknown", geography: "unknown" }
-export function validNewsChecks(value: unknown): value is NewsChecks {
-  if (!value || typeof value !== "object") return false
-  const row = value as Record<string, unknown>
-  return ["relevance", "attribution", "destination", "geography"].every(key => ["yes", "no", "unknown"].includes(String(row[key])))
-}
+import { NEWS_EXTRA_KEYS, UNKNOWN_NEWS_CHECKS, validNewsChecks, type NewsChecks } from "./news-checks"
+export { UNKNOWN_NEWS_CHECKS, validNewsChecks, type NewsChecks } from "./news-checks"
 const hash = (row: unknown) => createHash("sha256").update(JSON.stringify(row)).digest("hex")
 type ReviewComment = { id: number; body: string; user: { login: string } }
 export function newsProgress(comments: ReviewComment[]) {
   const latest = new Map<string, { decision: string; checks: NewsChecks; commentId: number }>()
+  const supplements = new Map<string, { commentId: number; checks: Partial<NewsChecks> }>()
   for (const comment of [...comments].sort((a, b) => a.id - b.id)) {
+    if (comment.user.login.toLowerCase() === "imransinvestments-prog" && comment.body.startsWith("Dadspace news supplemental review v1\n")) {
+      try {
+        const payload=JSON.parse(comment.body.match(/^News supplemental checks: (\{[^\n]+\})$/m)?.[1] || "null")
+        if (payload?.sampleId === sample.id && Array.isArray(payload.records) && payload.records.length <= 50) for(const record of payload.records) {
+          const row=sample.rows.find(row=>row.id===record.id)
+          if (!row || hash(row)!==record.fingerprint || !record.checks || !NEWS_EXTRA_KEYS.every(key=>["yes","no","unknown"].includes(record.checks[key]))) continue
+          supplements.set(row.id,{commentId:comment.id,checks:Object.fromEntries(NEWS_EXTRA_KEYS.map(key=>[key,record.checks[key]]))})
+        }
+      } catch { /* Malformed or unrelated confirmations never count. */ }
+      continue
+    }
     // Only the repository owner's audit comments with an exact frozen/legacy
     // snapshot count. Arbitrary public comments and task-wide approvals do not.
     if (comment.user.login.toLowerCase() !== "imransinvestments-prog" || !comment.body.startsWith("Dadspace owner review v1\n")) continue
@@ -28,9 +35,13 @@ export function newsProgress(comments: ReviewComment[]) {
     let checks: NewsChecks = { ...UNKNOWN_NEWS_CHECKS }
     try {
       const parsed = JSON.parse(comment.body.match(/^News quality checks: (\{[^\n]+\})$/m)?.[1] || "null")
-      if (validNewsChecks(parsed) && hash(row) === fingerprint) checks = parsed
+      if (validNewsChecks(parsed) && hash(row) === fingerprint) checks = { ...UNKNOWN_NEWS_CHECKS, ...parsed }
     } catch { /* Older notes remain decisions, never invented rubric scores. */ }
     latest.set(id, { decision, checks, commentId: comment.id })
+  }
+  for(const [id, supplement] of supplements) {
+    const review=latest.get(id)
+    if(review && supplement.commentId > review.commentId) review.checks={...review.checks,...supplement.checks}
   }
   const reviews = Object.fromEntries(latest)
   const values = [...latest.values()]
@@ -40,7 +51,8 @@ export function newsProgress(comments: ReviewComment[]) {
     relevantAndAttributed: values.filter(row => row.checks.relevance === "yes" && row.checks.attribution === "yes").length,
     relevanceChecked: checked("relevance"), attributionChecked: checked("attribution"),
     linksWorking: yes("destination"), linksChecked: checked("destination"),
-    geographyCorrect: yes("geography"), geographyChecked: checked("geography") }
+    geographyCorrect: yes("geography"), geographyChecked: checked("geography"),
+    summariesAccepted: yes("summary"), datesAccepted: yes("date"), sensitiveLabelsAccepted: yes("sensitiveLabel"), homepagePicksAccepted: yes("homepagePick") }
 }
 export function newsGeography(fields: Record<string, unknown>) {
   const scope = typeof fields.geo_scope === "string" ? fields.geo_scope : "unknown"
