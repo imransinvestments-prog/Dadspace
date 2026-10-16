@@ -8,6 +8,8 @@ import { EventCard } from "@/components/event-card"
 import { addDays } from "@/lib/dates"
 import { EVENT_CATEGORIES, eventCategory, isFreeEvent, type EventCategory } from "@/lib/event-meta"
 import type { DadEvent } from "@/lib/types"
+import { DEFAULT_RADIUS_KM, type DiscoveryScope } from '@/lib/discovery-radius'
+import { DiscoveryRadiusControls, LocalCoverageGap } from '@/components/discovery-radius-controls'
 import { cn } from "@/lib/utils"
 
 type When = "all" | "weekend" | "week"
@@ -65,9 +67,11 @@ function matchesAge(event: DadEvent, age: Age) {
 
 export function EventsExplorer({ events, today, saturday, sunday }: Props) {
   const {coords,browseAll}=useLocation()
+  const [radiusKm,setRadiusKm]=useState<number>(DEFAULT_RADIUS_KM)
+  const [scope,setScope]=useState<DiscoveryScope>('local')
   const enabled=Boolean(coords)||browseAll
   const params=new URLSearchParams()
-  if(coords){params.set('lat',String(coords.lat));params.set('lng',String(coords.lng))}
+  if(coords){params.set('lat',String(coords.lat));params.set('lng',String(coords.lng));params.set('radiusKm',String(radiusKm));params.set('scope',scope)}
   const feed=useDirectoryPage<{events:DadEvent[]}>('/api/events?'+params,enabled)
   const currentEvents=feed.pages[0]?.events??[]
   const [query, setQuery] = useState("")
@@ -104,10 +108,10 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
       .map(({ event }) => event)
   }, [withCategory, category, freeOnly, age, when, query, saturday, sunday, weekEnd])
 
-  useEffect(() => setVisibleCount(PAGE_SIZE), [query, when, category, age, freeOnly, coords])
+  useEffect(() => setVisibleCount(PAGE_SIZE), [query, when, category, age, freeOnly, coords, radiusKm, scope])
 
   const groups = useMemo(() => {
-    if(coords)return [["Nearest events",matches.slice(0,visibleCount)]] as [string,DadEvent[]][]
+    if(coords)return [[scope === 'local' ? `Events within ${radiusKm} km` : scope === 'online' ? 'Online events' : 'Distance unknown',matches.slice(0,visibleCount)]] as [string,DadEvent[]][]
     const buckets = new Map<string, DadEvent[]>()
     const push = (label: string, event: DadEvent) => buckets.set(label, [...(buckets.get(label) ?? []), event])
     for (const event of matches.slice(0, visibleCount)) {
@@ -117,7 +121,7 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
       else push(monthFmt.format(new Date(`${starts(event)}T00:00:00Z`)), event)
     }
     return [...buckets.entries()]
-  }, [matches, visibleCount, today, saturday, sunday, weekEnd, coords])
+  }, [matches, visibleCount, today, saturday, sunday, weekEnd, coords, radiusKm, scope])
 
   const filtered = query !== "" || when !== "all" || category !== "all" || age !== "all" || freeOnly
   const clear = () => {
@@ -133,6 +137,7 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
 
   return (
     <div className="flex flex-col gap-8">
+      {coords && <DiscoveryRadiusControls radiusKm={radiusKm} scope={scope} onRadius={setRadiusKm} onScope={setScope} />}
       {feed.loading && <p role="status">Finding nearby events…</p>}
       {feed.error && <p role="alert">{feed.error} <button onClick={feed.retry} className="underline">Retry</button></p>}
       <div className="sticky top-[69px] z-20 -mx-4 flex flex-col gap-3 border-b border-border/60 bg-background/85 px-4 py-3 backdrop-blur-md lg:top-0 lg:mx-0 lg:px-0">
@@ -187,7 +192,7 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
         </div>
       </div>
 
-      <p role="status" aria-live="polite" className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+      {!feed.loading && !feed.error && enabled && <p role="status" aria-live="polite" className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
         <span>
           <span className="font-bold text-foreground">{matches.length}</span> {matches.length === 1 ? "event" : "events"}
           {filtered ? " match your filters" : " coming up"}
@@ -199,16 +204,16 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
             Clear filters
           </button>
         )}
-      </p>
+      </p>}
 
-      {!enabled || feed.loading || feed.error ? null : matches.length === 0 ? (
+      {!enabled || feed.loading || feed.error ? null : matches.length === 0 ? (coords && scope === 'local' ? <LocalCoverageGap /> : (
         <div className="flex flex-col items-center gap-2 rounded-lg border border-dashed bg-card px-6 py-14 text-center">
           <p className="font-heading text-xl font-bold">Nothing on for that one.</p>
           <p className="max-w-sm leading-relaxed text-muted-foreground">
             Try a different day, age or type. Worst case, there&apos;s always the park and a flask of tea.
           </p>
         </div>
-      ) : (
+      )) : (
         <>
           {groups.map(([label, items]) => (
             <section key={label} aria-labelledby={`events-${label}`} className="flex flex-col gap-4">

@@ -67,7 +67,7 @@ export function EventCard({ event, index = 0, showCategory = false }: { event: D
           {event.distance_miles != null && (
             <li className="flex items-start gap-2">
               <Navigation className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
-              <span className="font-semibold text-foreground">{formatMiles(event.distance_miles)}</span>
+              <span className="font-semibold text-foreground">{formatMiles(event.distance_miles)} (straight-line)</span>
             </li>
           )}
           <li className="flex items-start gap-2">

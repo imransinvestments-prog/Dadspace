@@ -10,7 +10,7 @@ function load(file, dependencies) {
   return module.exports
 }
 function feeds(db) {
-  const dependencies = { 'server-only': {}, './supabase': { getSupabase: () => db }, './dates': { londonToday: () => '2026-10-14', upcomingWeekend: () => ({ saturday: '2026-10-17', sunday: '2026-10-18' }) }, './distance': {}, './listing-distance': {}, './event-meta': {}, './activity-shared': { ACTIVITY_PAGE_SIZE: 24 } }
+  const dependencies = { 'server-only': {}, './supabase': { getSupabase: () => db }, './dates': { londonToday: () => '2026-10-14', upcomingWeekend: () => ({ saturday: '2026-10-17', sunday: '2026-10-18' }) }, './distance': {}, './listing-distance': {}, './event-meta': {}, './activity-shared': { ACTIVITY_PAGE_SIZE: 24 }, './discovery-radius': load('lib/discovery-radius.ts', {}) }
   return { events: load('lib/events.ts', dependencies), activities: load('lib/activities.ts', dependencies) }
 }
 function database(results) {
@@ -39,9 +39,9 @@ test('failure after a full events page cannot publish a partial successful respo
 })
 test('public directory APIs return 503 for unavailable supply and 200 for genuine empty supply', async () => {
   for (const loadFailed of [true, false]) {
-    const events = load('app/api/events/route.ts', { '@/lib/events': { fetchUpcomingEvents: async () => ({ events: [], loadFailed }) }, '@/lib/distance': { parsePoint: () => null } })
+    const events = load('app/api/events/route.ts', { '@/lib/events': { fetchUpcomingEvents: async () => ({ events: [], loadFailed }) }, '@/lib/distance': { parsePoint: () => null }, '@/lib/discovery-radius': load('lib/discovery-radius.ts', {}) })
     assert.equal((await events.GET(new Request('https://example.com/api/events'))).status, loadFailed ? 503 : 200)
-    const activities = load('app/api/activities/route.ts', { 'next/server': { NextResponse: Response }, '@/lib/activities': { ACTIVITY_PAGE_SIZE: 24, fetchActivityPage: async () => ({ activities: [], loadFailed }) }, '@/lib/distance': { parsePoint: () => null } })
+    const activities = load('app/api/activities/route.ts', { 'next/server': { NextResponse: Response }, '@/lib/activities': { ACTIVITY_PAGE_SIZE: 24, fetchActivityPage: async () => ({ activities: [], loadFailed }) }, '@/lib/distance': { parsePoint: () => null }, '@/lib/discovery-radius': load('lib/discovery-radius.ts', {}) })
     assert.equal((await activities.GET(new Request('https://example.com/api/activities'))).status, loadFailed ? 503 : 200)
   }
 })

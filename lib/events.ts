@@ -1,3 +1,4 @@
+import { withinDiscoveryScope, type DiscoveryScope } from './discovery-radius'
 import "server-only"
 import { getSupabase } from "./supabase"
 import { londonToday, upcomingWeekend } from "./dates"
@@ -191,7 +192,7 @@ export function geographicallyBalanceEvents(events: DadEvent[]): DadEvent[] {
 
 export type EventsListing = { events: DadEvent[]; today: string; saturday: string; sunday: string; isSample: boolean; loadFailed: boolean }
 
-export async function fetchUpcomingEvents(point?: Point | null): Promise<EventsListing> {
+export async function fetchUpcomingEvents(point?: Point | null, radiusKm?: number, scope?: DiscoveryScope): Promise<EventsListing> {
   const today = londonToday()
   const { saturday, sunday } = upcomingWeekend(today)
   const db = getSupabase()
@@ -209,7 +210,7 @@ export async function fetchUpcomingEvents(point?: Point | null): Promise<EventsL
     if (!error && data?.length) {
       const mapped = data.map((row) => toEvent(row as Record<string, unknown>))
       const clean = dedupeEvents(qualityForDisplay(mapped))
-      const events=point?nearestFirst(await withDistances(clean,point),(a,b)=>a.start_date.localeCompare(b.start_date)):geographicallyBalanceEvents(clean)
+      const events=point?nearestFirst(withinDiscoveryScope(await withDistances(clean,point), radiusKm, scope),(a,b)=>a.start_date.localeCompare(b.start_date)):geographicallyBalanceEvents(clean)
       return { events, today, saturday, sunday, isSample: false, loadFailed: false }
     }
     if (point && error) throw new Error('Events unavailable')
