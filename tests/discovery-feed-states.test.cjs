@@ -31,6 +31,15 @@ test('successful empty national results remain an honest empty state', async () 
   assert.equal((await f.events.fetchUpcomingEvents()).loadFailed, false)
   assert.equal((await f.activities.fetchActivityPage()).loadFailed, false)
 })
+
+test('activity public mapping preserves recurrence and original schedule without inventing future dates', async () => {
+  const f=feeds(database([{data:[{id:'reviewed',title:'Carterton: Rhyme Time',recurrence:'recurring',start_date:'2026-10-13',end_date:'2026-10-13',schedule_text:'Published dates: 2026-10-13; Tuesday, 10.30am - 11.00am'}],error:null,count:1}]))
+  const result=await f.activities.fetchActivityPage()
+  assert.equal(result.activities[0].recurrence,'recurring')
+  assert.equal(result.activities[0].start_date,'2026-10-13')
+  assert.match(result.activities[0].schedule_text,/Published dates: 2026-10-13/)
+  assert.equal(result.total,1)
+})
 test('failure after a full events page cannot publish a partial successful response', async () => {
   const f = feeds(database([{ data: Array.from({length:500}, () => ({})), error: null }, { data: null, error: {} }]))
   const result = await f.events.fetchUpcomingEvents()

@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { ActivityScheduleSummary } from './activity-schedule'
 import { useState } from "react"
 import { useLocation } from "@/components/location-provider"
 import { useDirectoryPage } from "@/hooks/use-directory-page"
@@ -78,7 +79,7 @@ export function ActivitiesExplorer({ initialPage, categories }: { initialPage: A
               </h2>
             </div>
 
-            {activity.schedule_text && <p className="font-semibold">{activity.schedule_text}</p>}
+            <ActivityScheduleSummary activity={activity} />
             {activity.age_range && <p className="text-sm">Ages: {activity.age_range}</p>}
             <p className="text-sm font-semibold">{priceLabel(activity.cost_text)}</p>
 
