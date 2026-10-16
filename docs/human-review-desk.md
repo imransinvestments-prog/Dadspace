@@ -1,5 +1,13 @@
 # Human review desk
 
+## News review in one pass
+
+News record forms now expose eight keyboard-accessible radio-button groups: relevance, attribution, destination, geography, summary, date, sensitive-label handling and homepage presentation/pick. Choices are Acceptable / Needs changes / Not checked or unsure; additional evidence stays optional. Sensitive/homepage checks allow an appropriate absence or non-selection and do not claim every sampled article appeared on the homepage. Values save with the verified snapshot, restore on the record and contribute separately to progress.
+
+The owner explicitly confirmed the four additional checks acceptable for the existing frozen 50-record cohort on 16 October. One `Dadspace news supplemental review v1` owner audit comment lists exact IDs/fingerprints and the four scores. Progress applies only those four dimensions to already-reviewed matching records. Original decisions, geography labels/corrections and historical comments remain intact. Later per-record reviews override an earlier supplemental confirmation; malformed, mismatched or non-owner supplements never count.
+
+Legacy four-field records remain valid with additional checks unknown until explicitly scored or confirmed. All 45 targeted tests and TypeScript passed before CI/deployment, including cohort isolation, fingerprint/author checks, preserved geography and later per-record corrections.
+
 ## Explicit Originals editorial checks
 
 Published Originals record forms expose Originality, Claims, Tone and Length, with concise guidance and independent Pass / Needs changes / Not checked or unsure choices. The page shows daily/weekly cadence and a body word count (section headings and paragraphs), without inventing a length requirement. Additional evidence stays optional.
