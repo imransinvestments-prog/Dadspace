@@ -55,6 +55,7 @@ export function toVenue(row: Row): Venue | null {
     website_url: publicLink(row.website ?? row.website_url ?? row.url),
     phone: str(row.phone),
     opening_hours: str(row.opening_hours),
+    access: str(row.access)?.toLowerCase() ?? null,
     price_text: str(row.price_text) ?? fee.price_text,
     is_free: bool(row.is_free) ?? fee.is_free,
     age_range: str(row.age_range),

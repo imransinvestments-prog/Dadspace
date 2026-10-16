@@ -5,7 +5,7 @@ import { toVenue } from "./venues"
 import type { Venue } from "./venue-meta"
 
 // Explicit projection: never send internal notes, review evidence or imported JSON to clients.
-export const VENUE_PUBLIC_COLUMNS = "id,venue_name,venue_label,category,address,address_line_1,address_line_2,town_city,postcode,country,nearby_settlement,latitude,longitude,website,fee,opening_hours,image_url,image_source_url,image_attribution,image_license,image_license_url,image_title,image_credit"
+export const VENUE_PUBLIC_COLUMNS = "id,venue_name,venue_label,category,address,address_line_1,address_line_2,town_city,postcode,country,nearby_settlement,latitude,longitude,website,fee,opening_hours,access,image_url,image_source_url,image_attribution,image_license,image_license_url,image_title,image_credit"
 export type VenuePage = { venues: Venue[]; total: number; hasMore: boolean; loadFailed: boolean }
 export const PILOT_AREAS = [
   { slug: "hounslow", name: "Hounslow", intro: "Browse Hounslow libraries for your next family visit. Check the library's own website for current opening times and children's sessions." },

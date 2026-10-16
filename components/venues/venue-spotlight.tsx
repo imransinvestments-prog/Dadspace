@@ -1,4 +1,5 @@
 import { VenuePhoto } from "@/components/venues/venue-photo"
+import { VenueAccess } from "@/components/venues/venue-access"
 import { Dices, Globe, MapPin, Navigation, X } from "lucide-react"
 import { categoryLabel, type Venue } from "@/lib/venue-meta"
 import { cn } from "@/lib/utils"
@@ -80,6 +81,7 @@ export function VenueSpotlight({ venue, distance, rolling, onReroll, onClose }: 
 
         {venue.description && <p className="line-clamp-3 leading-relaxed text-pretty text-muted-foreground">{venue.description}</p>}
 
+        <VenueAccess venue={venue} />
         <div className="mt-auto flex flex-wrap gap-2 pt-2">
           <a
             href={directionsUrl(venue)}

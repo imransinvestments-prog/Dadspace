@@ -1,4 +1,5 @@
 import { VenuePhoto } from "@/components/venues/venue-photo"
+import { VenueAccess } from "@/components/venues/venue-access"
 import Link from "next/link"
 import { venueSlug } from "@/lib/venue-slug"
 import { Accessibility, Baby, Clock, Coffee, Dog, Globe, MapPin, Navigation, Phone, SquareParking, type LucideIcon } from "lucide-react"
@@ -91,6 +92,7 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
           </ul>
         )}
 
+        <VenueAccess venue={venue} />
         <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t pt-3">
           <div className="flex flex-wrap gap-1.5 text-xs font-semibold">
             {venue.age_range && <span className="rounded-full bg-accent/15 px-2.5 py-1 text-accent">Ages {venue.age_range}</span>}
