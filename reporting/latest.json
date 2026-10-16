@@ -1,8 +1,8 @@
 {
-  "date": "2026-10-15",
-  "generated_at": "2026-10-15T10:23:36Z",
+  "date": "2026-10-16",
+  "generated_at": "2026-10-16T09:57:39.154Z",
   "status": "success",
-  "snapshot": "reporting/snapshots/2026-10-15/",
-  "previous_success_at": "2026-10-14T14:55:51.327Z",
-  "limitations": "Missing 15 October scheduled run; stale registry; county public coverage and complete billing totals unavailable"
+  "snapshot": "reporting/snapshots/2026-10-16/",
+  "previous_success_at": "2026-10-15T10:23:36Z",
+  "limitations": "No 16 October scheduled run visible; county public supply, fresh production recount and full billing unavailable."
 }
