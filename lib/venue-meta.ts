@@ -15,6 +15,7 @@ export type Venue = {
   website_url: string | null
   phone: string | null
   opening_hours: string | null
+  access?: string | null
   price_text: string | null
   is_free: boolean | null
   age_range: string | null

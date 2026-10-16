@@ -9,6 +9,7 @@ import { VenuePhoto } from "@/components/venues/venue-photo"
 import { venueSchema } from "@/components/venues/venues-json-ld"
 import { JsonLd } from "@/components/seo/json-ld"
 import { directionsUrl } from "@/components/venues/venue-spotlight"
+import { VenueAccess } from "@/components/venues/venue-access"
 export const dynamic = "force-dynamic"
 type Props = {params: Promise<{slug: string}>}
 async function venueFor(props: Props) {
@@ -35,7 +36,7 @@ export default async function VenueDetail(props: Props) {
       <div><dt className="font-semibold">Opening times</dt><dd>{v.opening_hours || "Check with the venue"}</dd></div>
       <div><dt className="font-semibold">Entry</dt><dd>{v.is_free === true ? "Listed as free entry; check conditions with the venue" : v.price_text || "Check prices with the venue"}</dd></div>
       {!!v.facilities.length && <div><dt className="font-semibold">Listed facilities</dt><dd>{v.facilities.map(f => FACILITY_LABELS[f] ?? f.replace(/_/g," ")).join(", ")}</dd></div>}
-    </dl><div className="mt-6 flex flex-wrap gap-4">{v.website_url && <a className="font-semibold underline" href={v.website_url} target="_blank" rel="noopener noreferrer">Venue website</a>}<a className="font-semibold underline" href={directionsUrl(v)} target="_blank" rel="noopener noreferrer">Directions</a></div></section></div>
+    </dl><div className="mt-4"><VenueAccess venue={v} /></div><div className="mt-6 flex flex-wrap gap-4">{v.website_url && <a className="font-semibold underline" href={v.website_url} target="_blank" rel="noopener noreferrer">Venue website</a>}<a className="font-semibold underline" href={directionsUrl(v)} target="_blank" rel="noopener noreferrer">Directions</a></div></section></div>
     <p className="max-w-2xl text-sm text-muted-foreground">Visitor information may change. Confirm opening times, accessibility, suitability for your children and any charges with the venue before travelling. A directory listing does not imply independently verified child suitability.</p>
   </div>
 }
