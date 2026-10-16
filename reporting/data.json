@@ -1,16 +1,26 @@
 {
-  "generated_at": "2026-10-16T09:57:39.154Z",
+  "generated_at": "2026-10-16T10:00:25Z",
   "timezone": "Europe/London",
   "repository": "imransinvestments-prog/Dadspace",
-  "scope": "All 156 repository issues/PRs reconciled across two pages. Board-only draft cards and status fields unavailable. Parent/epic counts include hierarchy; they are not unique deliverable totals.",
+  "scope": "All 157 repository issues/PRs reconciled across two pages. Board-only draft cards and status fields unavailable. Parent/epic counts include hierarchy; they are not unique deliverable totals.",
   "counts": {
-    "open_issues": 63,
+    "open_issues": 64,
     "open_prs": 4,
     "completed_issues": 7,
     "merged_prs": 72,
     "closed_without_completion": 10
   },
   "items": [
+    {
+      "number": 157,
+      "title": "[P1] Restore on-time Morning Brief email delivery",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/157",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Operations and feed reliability",
+      "updated_at": "2026-10-16T09:59:41Z"
+    },
     {
       "number": 156,
       "title": "Capture complete news checks in one review pass",
@@ -4627,7 +4637,7 @@
   ],
   "county_limit": "County-named source outcomes only, not verified item geography or public coverage. Full UK county boundary universe and geocoded publication/quality/freshness joins unavailable. Regional/national routes remain unmapped.",
   "report_date": "2026-10-16",
-  "previous_success_at": "2026-10-15T10:23:36Z",
+  "previous_success_at": "2026-10-16T09:57:39.154Z",
   "repository_head": "340fb63f8194ba6c8efef320ff44d1fc23198f17",
   "usage_scope": "Latest visible scheduled worker run: 15 October evening (created 21:23 UTC). Civic, activities, news and deals only; not calendar-day/project-wide/billing totals. Originals/shadow monetary and token totals unavailable. Thinking included in output.",
   "scheduler": {
@@ -4689,7 +4699,8 @@
     "gemini": "Access recovery completed #142; paid limits and provider rollout gates unchanged.",
     "originals": "Editorial #128 completed for six owner-reviewed publications; operational reliability remains #129. Latest evening job skipped already published 15 October daily article; no 16 October/Friday guide evidence visible.",
     "news": "#126: 50/50 owner decisions, 32 approvals and 18 changes requested; 46/50 relevant/correct attribution and 48/50 links meet numeric gates. Remediation/re-review remains #126/#127; avoid repeating accepted sample checks.",
-    "venues": "#106 supersedes blanket unknown-playground hold: 37,145 restored; private/no access and 80 arcade exclusions remain held. Dated issue evidence, not today's database recount."
+    "venues": "#106 supersedes blanket unknown-playground hold: 37,145 restored; private/no access and 80 arcade exclusions remain held. Dated issue evidence, not today's database recount.",
+    "brief_delivery": "Today's email sent at 10:59 BST and confirmed in Gmail Sent. #157 tracks late dispatch and bounded/duplicate-safe delivery; root cause unconfirmed. Earlier snapshot and confirmed delivery record preserved."
   },
   "evidence_limitations": [
     "No 16 October scheduled worker or Friday Originals publication evidence visible at report time.",
@@ -4698,5 +4709,13 @@
     "Historical 10–11 October registry; current source-run outcomes kept separate.",
     "Backlog restructuring closed superseded tickets as not planned; these are not delivered outcomes."
   ],
-  "pr_checks": []
+  "pr_checks": [],
+  "incremental_check": {
+    "since": "2026-10-16T09:57:39.154Z",
+    "issues_changed": [
+      157
+    ],
+    "new_scheduled_runs": 0,
+    "email": "Already sent/verified at 10:59 BST; this reporting refresh does not send another email."
+  }
 }
