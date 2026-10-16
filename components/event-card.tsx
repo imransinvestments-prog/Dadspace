@@ -4,6 +4,7 @@ import { Clock, MapPin, Navigation } from "lucide-react"
 import { formatEventDate } from "@/lib/dates"
 import { categoryLabel, eventCategory, eventImage, isFreeEvent } from "@/lib/event-meta"
 import { eventSlug } from "@/lib/event-slug"
+import { isOnlineListing } from '@/lib/discovery-radius'
 import type { DadEvent } from "@/lib/types"
 
 function formatMiles(miles: number) {
@@ -64,7 +65,7 @@ export function EventCard({ event, index = 0, showCategory = false }: { event: D
               <span className="line-clamp-1">{event.location}</span>
             </li>
           )}
-          {event.distance_miles != null && (
+          {!isOnlineListing(event) && event.distance_miles != null && (
             <li className="flex items-start gap-2">
               <Navigation className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
               <span className="font-semibold text-foreground">{formatMiles(event.distance_miles)} (straight-line)</span>

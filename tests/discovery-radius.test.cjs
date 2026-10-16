@@ -80,3 +80,10 @@ test('both APIs reject invalid radius/location without querying supply and pass 
     assert.equal(kind === 'events' ? calls[0][2] : calls[0].scope, 'unknown')
   }
 })
+
+
+test('homepage can retain its explicitly labelled 30-mile scope', async () => {
+  const { events } = feeds([row('twenty-miles', 20), row('thirty-one-miles', 31)])
+  assert.equal((await events.fetchUpcomingEvents(point)).events.length, 0)
+  assert.deepEqual(ids((await events.fetchUpcomingEvents(point, 30 * 1.609344)).events), ['twenty-miles'])
+})

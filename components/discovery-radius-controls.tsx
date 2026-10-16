@@ -8,13 +8,13 @@ export function DiscoveryRadiusControls({ radiusKm, scope, onRadius, onScope }: 
 }) {
   const next = RADIUS_OPTIONS.find(value => value > radiusKm)
   return <div className="flex flex-wrap items-center gap-3 rounded-xl border bg-card p-4">
-    <label className="flex items-center gap-2">Search radius
-      <select aria-label="Search radius" value={radiusKm} onChange={event => onRadius(Number(event.target.value))} className="rounded-lg border bg-background p-2">
+    <label className="flex min-w-0 max-w-full flex-col gap-2 sm:flex-row sm:items-center">Search radius
+      <select aria-label="Search radius" value={radiusKm} onChange={event => onRadius(Number(event.target.value))} className="min-w-0 max-w-full rounded-lg border bg-background p-2">
         {RADIUS_OPTIONS.map(value => <option key={value} value={value}>{value} km</option>)}
       </select>
     </label>
-    <label className="flex items-center gap-2">Listings
-      <select aria-label="Listing location scope" value={scope} onChange={event => onScope(event.target.value as DiscoveryScope)} className="rounded-lg border bg-background p-2">
+    <label className="flex min-w-0 max-w-full flex-col gap-2 sm:flex-row sm:items-center">Listings
+      <select aria-label="Listing location scope" value={scope} onChange={event => onScope(event.target.value as DiscoveryScope)} className="min-w-0 max-w-full rounded-lg border bg-background p-2">
         <option value="local">Within radius</option><option value="unknown">Distance unknown — separate listings</option><option value="online">Online — separate listings</option>
       </select>
     </label>

@@ -89,7 +89,7 @@ export function ActivitiesExplorer({ initialPage, categories }: { initialPage: A
               </p>
             )}
 
-            {coords && <p className="text-sm font-semibold">{activity.distance_miles == null ? 'Distance unavailable' : `About ${activity.distance_miles < 1 ? 'less than 1' : Math.round(activity.distance_miles)} miles away (straight-line)`}</p>}
+            {coords && scope !== 'online' && <p className="text-sm font-semibold">{activity.distance_miles == null ? 'Distance unavailable' : `About ${activity.distance_miles < 1 ? 'less than 1' : Math.round(activity.distance_miles)} miles away (straight-line)`}</p>}
             {activity.description && <p className="line-clamp-3 text-sm leading-relaxed opacity-80">{activity.description}</p>}
 
             <Link
