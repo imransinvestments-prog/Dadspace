@@ -7,6 +7,7 @@ import { activityIdFromSlug, activitySlug } from "@/lib/activity-slug"
 import { fetchActivityById, fetchSimilarActivities } from "@/lib/activities"
 import { pageMetadata, siteUrl } from "@/lib/seo"
 import { ActivityScheduleSummary } from '@/components/activities/activity-schedule'
+import { activityPrice, activitySource } from '@/lib/activity-presentation'
 
 type PageProps = { params: Promise<{ slug: string }> }
 
@@ -39,8 +40,8 @@ export default async function ActivityDetailPage({ params }: PageProps) {
   const canonical = `${siteUrl}/activities/${activitySlug(activity)}`
   const description = originalActivityDescription(activity)
   const placeName = activity.venue_name || activity.location
-  const officialUrl = activity.event_url || activity.source_url
-  const price = activity.cost_text || "Check price on site"
+  const officialUrl = activitySource(activity)
+  const price = activityPrice(activity.cost_text)
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -130,7 +131,7 @@ export default async function ActivityDetailPage({ params }: PageProps) {
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-navy px-6 py-3.5 text-sm font-bold text-navy-foreground transition hover:-translate-y-0.5 hover:shadow-lg sm:w-fit"
             >
-              Check official site <ExternalLink className="size-4" aria-hidden />
+              Check source <ExternalLink className="size-4" aria-hidden />
             </a>
           )}
 
