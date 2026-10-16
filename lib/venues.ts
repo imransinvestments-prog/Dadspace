@@ -48,6 +48,7 @@ export function toVenue(row: Row): Venue | null {
     region: str(row.country) ?? str(row.region),
     latitude: num(row.latitude ?? row.lat),
     longitude: num(row.longitude ?? row.lng ?? row.lon),
+    distance_miles: num(row.distance_miles),
     website_url: publicLink(row.website ?? row.website_url ?? row.url),
     phone: str(row.phone),
     opening_hours: str(row.opening_hours),

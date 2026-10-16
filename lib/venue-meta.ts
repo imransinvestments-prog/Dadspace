@@ -11,6 +11,7 @@ export type Venue = {
   region: string | null
   latitude: number | null
   longitude: number | null
+  distance_miles?: number | null
   website_url: string | null
   phone: string | null
   opening_hours: string | null

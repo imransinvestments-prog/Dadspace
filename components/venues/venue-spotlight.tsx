@@ -72,7 +72,7 @@ export function VenueSpotlight({ venue, distance, rolling, onReroll, onClose }: 
           {distance != null && (
             <span className="flex items-center gap-1.5 font-semibold text-foreground">
               <Navigation className="size-4 text-accent" aria-hidden />
-              {formatMiles(distance)} away
+              {formatMiles(distance)} away (straight-line)
             </span>
           )}
           {venue.is_free && <span className="font-semibold text-accent">Free entry</span>}
