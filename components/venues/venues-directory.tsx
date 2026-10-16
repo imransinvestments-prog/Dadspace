@@ -25,9 +25,8 @@ type Result = { venue: Venue; distance: number | null }
 
 export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialPage = 1, allCategories = [] }: { venues: Venue[]; initialTotal: number; initialHasMore: boolean; initialPage?: number; allCategories?: {key:string;count:number}[] }) {
   const { coords: selectedCoords } = useLocation()
-  const locationKey=selectedCoords ? `${selectedCoords.lat},${selectedCoords.lng}` : 'none'
-  const [nationalLocation,setNationalLocation]=useState<string|null>(null)
-  const coords=nationalLocation===locationKey ? null : selectedCoords
+  const [browseNational,setBrowseNational]=useState(initialPage>1)
+  const coords=browseNational ? null : selectedCoords
   const [radiusKm,setRadiusKm]=useState<number>(DEFAULT_RADIUS_KM)
   const [scope,setScope]=useState<DiscoveryScope>('local')
   const [query, setQuery] = useState("")
@@ -146,7 +145,7 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
       </header>
 
       <div className="flex flex-wrap items-center gap-3">
-        <button type="button" onClick={()=>setNationalLocation(coords?locationKey:null)} className="font-semibold underline">{coords?'Browse all UK places':'Return to nearby places'}</button>
+        <button type="button" onClick={()=>setBrowseNational(!browseNational)} className="font-semibold underline">{coords?'Browse all UK places':'Return to nearby places'}</button>
         {!coords && <p className="text-sm text-muted-foreground">Browsing all UK places. Results are not limited by distance.</p>}
       </div>
       {coords && <DiscoveryRadiusControls radiusKm={radiusKm} scope={scope} onRadius={setRadiusKm} onScope={setScope} includeOnline={false} />}
@@ -171,7 +170,7 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
       </div>
 
       <p className="text-sm text-muted-foreground">Category totals below are UK-wide; the result count below the filters uses your current search.</p>
-      <CategoryRail categories={categories} total={categories.reduce((sum,c)=>sum+Number(c.count),0)} selected={category} onSelect={setCategory} />
+      <CategoryRail categories={categories} total={initialTotal} selected={category} onSelect={setCategory} />
 
       <div className="sticky top-[69px] z-20 -mx-4 flex flex-col gap-3 border-b border-border/60 bg-background/85 px-4 py-3 backdrop-blur-md lg:top-0 lg:mx-0 lg:px-0">
         <label className="relative block">

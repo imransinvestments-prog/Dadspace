@@ -15,7 +15,7 @@ function harness() {
   }
   const module={exports:{}}
   const code=ts.transpileModule(fs.readFileSync('hooks/use-directory-page.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText
-  vm.runInNewContext(code,{module,exports:module.exports,AbortController,require:()=>react,
+  vm.runInNewContext(code,{module,exports:module.exports,AbortController,URLSearchParams,require:()=>react,
     setTimeout:fn=>{timers.set(++timerId,fn);return timerId},clearTimeout:id=>timers.delete(id),
     fetch:(url,options)=>new Promise((resolve,reject)=>requests.push({url,signal:options.signal,resolve,reject})),
   })
@@ -71,4 +71,15 @@ test('national seed is used only for its exact URL; disabled feeds expose no res
   view=h.render('/places?local',true,seed);assert.equal(view.pages.length,0);h.flush()
   view=h.render('/places?local',false,seed);assert.equal(view.pages.length,0);assert.equal(view.error,'');h.flush()
   assert.equal(h.requests[0].signal.aborted,true)
+})
+
+test('load-more replaces a national page offset instead of appending a duplicate',async()=>{
+  const h=harness(),url='/places?q=&offset=24'
+  const seed={url,page:{venues:[{id:'page-two'}],total:50}}
+  h.render(url,true,seed);h.flush()
+  const more=h.render(url,true,seed).loadMore(48)
+  const params=new URL(h.requests[0].url,'https://example.com').searchParams
+  assert.deepEqual(params.getAll('offset'),['48'])
+  await respond(h.requests[0],{venues:[{id:'last-page'}],total:50});await more
+  assert.equal(h.render(url,true,seed).pages[1].venues[0].id,'last-page')
 })

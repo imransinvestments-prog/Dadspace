@@ -34,8 +34,10 @@ export function useDirectoryPage<T>(url:string,enabled:boolean,seed?:{url:string
     if(busy.current||!controller.current||controller.current.signal.aborted)return
     const c=controller.current;busy.current=true;setLoading(true);setError('')
     try{
-      const separator=url.includes('?')?'&':'?'
-      const r=await fetch(`${url}${separator}offset=${offset}`,{signal:c.signal,cache:'no-store'})
+      const [path,query]=url.split('?',2)
+      const params=new URLSearchParams(query)
+      params.set('offset',String(offset))
+      const r=await fetch(`${path}?${params}`,{signal:c.signal,cache:'no-store'})
       if(!r.ok)throw new Error('Could not load more results. Please try again.')
       const page=await r.json() as T
       if(!c.signal.aborted)setState(s=>s.url===url?{url,pages:[...s.pages,page]}:s)

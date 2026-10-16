@@ -105,8 +105,11 @@ test('venue API returns exact bounded pages through the SQL function without int
   assert(!('notes' in first.venues[0])); assert.equal(typeof first.venues[0].distance_miles,'number')
   const second = await (await api.GET(new Request('https://example.com/api/venues?lat=0&lng=0&offset=24'))).json()
   assert.equal(second.total,31); assert.equal(second.hasMore,false); assert.equal(second.venues.length,7)
+  const unknown = await (await api.GET(new Request('https://example.com/api/venues?lat=0&lng=0&scope=unknown'))).json()
+  assert.equal(unknown.total,2)
+  assert(unknown.venues.every(v=>v.latitude===null&&v.longitude===null&&v.distance_miles===null))
   for (const query of ['lat=NaN&lng=0','lat=0&lng=0&radiusKm=101','scope=unknown','lat=0&lng=0&scope=online']) {
     assert.equal((await api.GET(new Request('https://example.com/api/venues?'+query))).status,400)
   }
-  assert.equal(calls,2)
+  assert.equal(calls,3)
 })

@@ -36,6 +36,9 @@ export function toVenue(row: Row): Venue | null {
   const name = str(row.venue_name) ?? str(row.venue_label) ?? str(row.name)
   if (!name) return null
   const fee = feeInfo(str(row.fee))
+  const latitude = num(row.latitude ?? row.lat)
+  const longitude = num(row.longitude ?? row.lng ?? row.lon)
+  const validCoordinates = latitude != null && longitude != null && Math.abs(latitude) <= 90 && Math.abs(longitude) <= 180
   const addressLines = [str(row.address_line_1), str(row.address_line_2)].filter(Boolean).join(", ")
   return {
     id: String(row.id ?? name),
@@ -46,8 +49,8 @@ export function toVenue(row: Row): Venue | null {
     town: str(row.town_city) ?? str(row.town) ?? str(row.city) ?? str(row.nearby_settlement),
     postcode: str(row.postcode),
     region: str(row.country) ?? str(row.region),
-    latitude: num(row.latitude ?? row.lat),
-    longitude: num(row.longitude ?? row.lng ?? row.lon),
+    latitude: validCoordinates ? latitude : null,
+    longitude: validCoordinates ? longitude : null,
     distance_miles: num(row.distance_miles),
     website_url: publicLink(row.website ?? row.website_url ?? row.url),
     phone: str(row.phone),

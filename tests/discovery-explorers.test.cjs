@@ -26,14 +26,15 @@ const button=(tree,label)=>nodes(tree).find(n=>n.type==='button'&&text(n)===labe
 test('places wire radius/scope, preserve national ordering and hide a surprise pick on scope change',()=>{
   let location={coords:{lat:51.5,lng:-.1}},url
   const venues=[{id:'z',name:'Zulu',category:'park',distance_miles:1},{id:'a',name:'Alpha',category:'park',distance_miles:2}]
-  const render=component('components/venues/venues-directory.tsx',{
+  const dependencies={
     'lucide-react':{},'@/components/location-provider':{useLocation:()=>location},
     '@/hooks/use-directory-page':{useDirectoryPage:(value,_enabled,seed)=>{url=value;return{pages:[value===seed.url?seed.page:{venues,total:2,hasMore:false}],loading:false,error:'',loadMore:()=>{},retry:()=>{}}}},
     '@/components/venues/category-rail':{CategoryRail:'CategoryRail'},'@/components/venues/venue-card':{VenueCard:'VenueCard'},'@/components/venues/venue-spotlight':{VenueSpotlight:'VenueSpotlight'},
     '@/lib/venue-meta':{categoryPlural:key=>key},'@/lib/utils':{cn:()=>''},
     '@/lib/discovery-radius':{DEFAULT_RADIUS_KM:10},'@/components/discovery-radius-controls':{DiscoveryRadiusControls:'RadiusControls'},
-  })
-  const props={venues,initialTotal:100,initialHasMore:true,allCategories:[{key:'park',count:100}]}
+  }
+  const render=component('components/venues/venues-directory.tsx',dependencies)
+  const props={venues,initialTotal:100,initialHasMore:true,allCategories:[{key:'park',count:99}]}
   let tree=render(props),controls=nodes(tree).find(n=>n.type==='RadiusControls')
   assert.equal(controls.props.radiusKm,10);assert.equal(controls.props.includeOnline,false);assert(url.includes('radiusKm=10'))
   button(tree,'Surprise me').props.onClick();tree=render(props);assert(nodes(tree).some(n=>n.type==='VenueSpotlight'))
@@ -42,7 +43,11 @@ test('places wire radius/scope, preserve national ordering and hide a surprise p
   button(tree,'Browse all UK places').props.onClick();tree=render(props)
   assert(!url.includes('lat='));assert(!url.includes('radiusKm='));assert(text(tree).includes('100 places UK-wide'))
   assert.deepEqual(nodes(tree).filter(n=>n.type==='VenueCard').map(n=>n.props.venue.id),['z','a'])
+  assert.equal(nodes(tree).find(n=>n.type==='CategoryRail').props.total,100)
+  button(tree,'Return to nearby places').props.onClick();tree=render(props)
   location={coords:{lat:52,lng:-.2}};tree=render(props);assert(url.includes('lat=52'));assert(nodes(tree).some(n=>n.type==='RadiusControls'))
+  const nationalPage=component('components/venues/venues-directory.tsx',dependencies)
+  tree=nationalPage({...props,initialPage:2});assert(url.includes('offset=24'));assert(!url.includes('lat='));assert(text(tree).includes('100 places UK-wide'))
 })
 
 test('event totals/cards use the same age/time/free/text filters and failures never look like zero supply',()=>{

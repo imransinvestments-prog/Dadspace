@@ -15,8 +15,9 @@ fields plus the server-calculated distance. Neither SQL nor the API changes
 venue publication decisions, canonical identities or records.
 
 The directory's explicit national-browse action preserves the server-rendered
-national page and its ordering; a newly selected location returns to nearby
-discovery. Category-tile totals are explicitly UK-wide. The separate result
+national page and its ordering, including directly linked national pages.
+The return-to-nearby action uses the currently selected location. Category-tile
+totals are explicitly UK-wide. The separate result
 count follows the current filters and radius. National event hero totals also
 remain explicitly UK-wide. No unsupported venue age/time/indoor/outdoor filter
 is invented; applicable event age/time/free filters remain in the event explorer.
@@ -33,7 +34,7 @@ Owner accepted the S1 preview and release on 16 October 2026. The owner later
 requested S2 be brought forward to complete and close the whole ticket,
 replacing #88 in the same 8-point sprint scope.
 
-S2 targeted suite: 27 checks across `venue-radius`, `directory-page`,
+S2 targeted suite: 28 checks across `venue-radius`, `directory-page`,
 `discovery-explorers`, `public-discovery`, `discovery-radius` and
 `discovery-feed-states`. PostgreSQL SQL tests use pinned PGlite, isolated
 fixtures and the actual migration. They cover inside/outside radius, paging,
