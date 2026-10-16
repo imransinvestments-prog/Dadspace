@@ -1,19 +1,13 @@
 "use client"
 
-import Link from "next/link"
-import { ActivityScheduleSummary } from './activity-schedule'
+import { ActivityCard } from './activity-card'
 import { useState } from "react"
 import { useLocation } from "@/components/location-provider"
 import { useDirectoryPage } from "@/hooks/use-directory-page"
-import { MapPin, Search } from "lucide-react"
-import { activitySlug } from "@/lib/activity-slug"
+import { Search } from "lucide-react"
 import { ACTIVITY_PAGE_SIZE, type ActivityPage } from "@/lib/activity-shared"
 import { DEFAULT_RADIUS_KM, type DiscoveryScope } from '@/lib/discovery-radius'
 import { DiscoveryRadiusControls, LocalCoverageGap } from '@/components/discovery-radius-controls'
-
-function priceLabel(value: string | null) {
-  return value?.trim() || "Check price on site"
-}
 
 function categoryLabel(value: string | null | undefined) {
   if (!value) return "Other"
@@ -69,37 +63,7 @@ export function ActivitiesExplorer({ initialPage, categories }: { initialPage: A
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {activities.map((activity) => (
-          <article key={activity.id} className="flex flex-col gap-3 rounded-2xl border bg-card p-5 shadow-sm">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-wide text-highlight">{categoryLabel(activity.category)}</p>
-              <h2 className="font-heading text-xl font-extrabold leading-tight">
-                <Link href={`/activities/${activitySlug(activity)}`} className="hover:underline">
-                  {activity.title}
-                </Link>
-              </h2>
-            </div>
-
-            <ActivityScheduleSummary activity={activity} />
-            {activity.age_range && <p className="text-sm">Ages: {activity.age_range}</p>}
-            <p className="text-sm font-semibold">{priceLabel(activity.cost_text)}</p>
-
-            {(activity.venue_name || activity.location || activity.postcode) && (
-              <p className="flex gap-2 text-sm opacity-80">
-                <MapPin className="mt-0.5 size-4 shrink-0" />
-                <span>{[activity.venue_name || activity.location, activity.postcode].filter(Boolean).join(", ")}</span>
-              </p>
-            )}
-
-            {coords && scope !== 'online' && <p className="text-sm font-semibold">{activity.distance_miles == null ? 'Distance unavailable' : `About ${activity.distance_miles < 1 ? 'less than 1' : Math.round(activity.distance_miles)} miles away (straight-line)`}</p>}
-            {activity.description && <p className="line-clamp-3 text-sm leading-relaxed opacity-80">{activity.description}</p>}
-
-            <Link
-              href={`/activities/${activitySlug(activity)}`}
-              className="mt-auto inline-flex items-center font-semibold underline underline-offset-4"
-            >
-              View activity details
-            </Link>
-          </article>
+          <ActivityCard key={activity.id} activity={activity} showDistance={!!coords && scope !== 'online'} />
         ))}
       </div>
 
