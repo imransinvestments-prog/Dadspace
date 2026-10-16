@@ -26,6 +26,7 @@ export type DadEvent = {
 }
 
 export type DadActivity = {
+  recurrence?: string | null
   start_date?: string | null
   end_date?: string | null
   distance_miles?: number | null

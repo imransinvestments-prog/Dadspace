@@ -1,0 +1,68 @@
+{
+  "id": "activity-schedule-91-v1",
+  "captured_on": "2026-10-16",
+  "count": 5,
+  "method": "Purposive current_activities snapshot: two named reproductions plus explicit future dates, missing schedule and source-explicit programme bounds. Not a national quality sample.",
+  "rows": [
+    {
+      "id": "07f3ec2b-87cf-4ee0-95a1-5fd36d769afc",
+      "title": "Baby Gym",
+      "start_date": null,
+      "end_date": null,
+      "recurrence": "recurring",
+      "schedule_text": null,
+      "time_text": null,
+      "event_url": "https://salfordcommunityleisure.co.uk/event/baby-gym-53/",
+      "source_url": "https://salfordcommunityleisure.co.uk/whats-on/",
+      "last_seen_at": "2026-10-15 21:26:42.629097+00"
+    },
+    {
+      "id": "31cec798-a604-4b4e-9524-8ef2fe062c11",
+      "title": "Carterton: Rhyme Time",
+      "start_date": "2026-10-13",
+      "end_date": "2026-10-13",
+      "recurrence": "recurring",
+      "schedule_text": "Published dates: 2026-10-13; Tuesday, 10.30am - 11.00am",
+      "time_text": "10.30am - 11.00am",
+      "event_url": "https://www.oxfordshire.gov.uk/events/carterton-rhyme-time",
+      "source_url": "https://www.oxfordshire.gov.uk/events",
+      "last_seen_at": "2026-10-13 18:44:04.385276+00"
+    },
+    {
+      "id": "f77cf9d7-c692-4d39-91ec-6c3b7b310ea2",
+      "title": "Henley: Rhymetime",
+      "start_date": "2026-10-19",
+      "end_date": "2026-11-16",
+      "recurrence": "recurring",
+      "schedule_text": "Published dates: 2026-10-19, 2026-10-26, 2026-11-02, 2026-11-09, 2026-11-16; Monday 19 Oct 2026, 9.30am-10am; Monday 26 Oct 2026, 9.30am-10am; Monday 2 Nov 2026, 9.30am-10am; Monday 9 Nov 2026, 9.30am-10am; Monday 16 Nov 2026, 9.30am-10am",
+      "time_text": "9.30am - 10.00am",
+      "event_url": "https://www.oxfordshire.gov.uk/events/libraries/henley-rhymetime",
+      "source_url": "https://www.oxfordshire.gov.uk/events",
+      "last_seen_at": "2026-10-07 06:06:47.53034+00"
+    },
+    {
+      "id": "811fed40-04bf-41ba-9d62-056a929efcd2",
+      "title": "Henley: Stay and Play",
+      "start_date": "2026-10-17",
+      "end_date": "2026-10-17",
+      "recurrence": "recurring",
+      "schedule_text": "10.00am - 11.00am",
+      "time_text": "10.00am - 11.00am",
+      "event_url": "https://www.oxfordshire.gov.uk/events/libraries/henley-stay-and-play",
+      "source_url": "https://www.oxfordshire.gov.uk/events",
+      "last_seen_at": "2026-10-16 11:28:41.127179+00"
+    },
+    {
+      "id": "162848db-2615-4063-b761-589b2bc6b15c",
+      "title": "Tots Time",
+      "start_date": "2026-07-09",
+      "end_date": "2027-01-08",
+      "recurrence": "recurring",
+      "schedule_text": "9th July 2026 - 8th January 2027 Recurs every other week on Thursday.; Time: 10:00 - 11:15; term time only",
+      "time_text": null,
+      "event_url": "https://www.coventry.gov.uk/events/event/8828/tots-time",
+      "source_url": "https://www.coventry.gov.uk/events",
+      "last_seen_at": "2026-10-09 06:11:11.140126+00"
+    }
+  ]
+}
