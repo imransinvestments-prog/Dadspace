@@ -7,7 +7,9 @@ import { useDirectoryPage } from "@/hooks/use-directory-page"
 import { CategoryRail } from "@/components/venues/category-rail"
 import { VenueCard } from "@/components/venues/venue-card"
 import { VenueSpotlight } from "@/components/venues/venue-spotlight"
-import { categoryPlural, milesBetween, type Venue } from "@/lib/venue-meta"
+import { categoryPlural, type Venue } from "@/lib/venue-meta"
+import { DEFAULT_RADIUS_KM, type DiscoveryScope } from '@/lib/discovery-radius'
+import { DiscoveryRadiusControls } from '@/components/discovery-radius-controls'
 import { cn } from "@/lib/utils"
 
 type Toggle = "free"
@@ -21,28 +23,35 @@ const SPIN_INTERVAL_MS = 70
 
 type Result = { venue: Venue; distance: number | null }
 
-export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialPage = 1, allCategories = [] }: { venues: Venue[]; initialTotal: number; initialHasMore: boolean; initialPage?: number; allCategories?: {key:string;count:number}[] }) {
-  const { coords, browseAll } = useLocation()
+export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialPage = 1, initialBrowseNational = initialPage > 1, allCategories = [] }: { venues: Venue[]; initialTotal: number; initialHasMore: boolean; initialPage?: number; initialBrowseNational?: boolean; allCategories?: {key:string;count:number}[] }) {
+  const { coords: selectedCoords } = useLocation()
+  const [browseNational,setBrowseNational]=useState(initialBrowseNational)
+  const coords=browseNational ? null : selectedCoords
+  const [radiusKm,setRadiusKm]=useState<number>(DEFAULT_RADIUS_KM)
+  const [scope,setScope]=useState<DiscoveryScope>('local')
   const [query, setQuery] = useState("")
   const [category, setCategory] = useState("all")
   const [toggles, setToggles] = useState<Set<Toggle>>(new Set())
-  const [pick, setPick] = useState<Result | null>(null)
+  const [selection, setSelection] = useState<{url:string;result:Result} | null>(null)
   const [rolling, setRolling] = useState(false)
   const spinTimer = useRef<number | null>(null)
   const spotlightRef = useRef<HTMLDivElement>(null)
 
   const enabled=true
   const params=new URLSearchParams({q:query,category,free:String(toggles.has('free'))})
-  if(coords){params.set('lat',String(coords.lat));params.set('lng',String(coords.lng))}
+  if(coords){params.set('lat',String(coords.lat));params.set('lng',String(coords.lng));params.set('radiusKm',String(radiusKm));params.set('scope',scope)}
   const isDefault=!coords&&!query&&category==='all'&&toggles.size===0
   if(isDefault&&initialPage>1)params.set('offset',String((initialPage-1)*24))
   const seedParams=new URLSearchParams({q:'',category:'all',free:'false'})
   if(initialPage>1)seedParams.set('offset',String((initialPage-1)*24))
-  const feed=useDirectoryPage<{venues:Venue[];total:number;hasMore:boolean}>('/api/venues?'+params,enabled,{url:'/api/venues?'+seedParams,page:{venues,total:initialTotal,hasMore:initialHasMore}})
+  const feedUrl='/api/venues?'+params
+  const feed=useDirectoryPage<{venues:Venue[];total:number;hasMore:boolean}>(feedUrl,enabled,{url:'/api/venues?'+seedParams,page:{venues,total:initialTotal,hasMore:initialHasMore}})
   const currentVenues=feed.pages.flatMap(p=>p.venues)
   const total=feed.pages.at(-1)?.total??0
   const hasMore=feed.pages.at(-1)?.hasMore??false
-  useEffect(()=>{stopSpin();setPick(null);setRolling(false)},[coords,query,category,toggles,browseAll])
+  const pick=selection?.url===feedUrl&&!feed.error ? selection.result : null
+  const setPick=(result:Result|null)=>setSelection(result?{url:feedUrl,result}:null)
+  useEffect(()=>{stopSpin();setSelection(null);setRolling(false)},[feedUrl])
   useEffect(() => () => stopSpin(), [])
 
   const categories = useMemo(() => {
@@ -52,21 +61,9 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
     return Array.from(counts, ([key, count]) => ({ key, count })).sort((a, b) => b.count - a.count)
   }, [venues,allCategories])
 
-  const results = useMemo<Result[]>(() => {
-
-    return currentVenues
-      .map((v) => ({
-        venue: v,
-        distance:
-          coords && v.latitude != null && v.longitude != null ? milesBetween(coords, { lat: v.latitude, lng: v.longitude }) : null,
-      }))
-      .sort((a, b) => {
-        if (a.distance != null && b.distance != null) return a.distance - b.distance
-        if (a.distance != null) return -1
-        if (b.distance != null) return 1
-        return a.venue.name.localeCompare(b.venue.name)
-      })
-  }, [currentVenues, query, category, toggles, coords])
+  // Server ordering and distances use the same point/radius as its count and
+  // pagination. Re-sorting individual pages here would change national order.
+  const results: Result[] = currentVenues.map(venue=>({venue,distance:coords?venue.distance_miles??null:null}))
 
   function stopSpin() {
     if (spinTimer.current != null) window.clearInterval(spinTimer.current)
@@ -137,7 +134,7 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
           <button
             type="button"
             onClick={surprise}
-            disabled={rolling || results.length === 0}
+            disabled={rolling || feed.loading || !!feed.error || results.length === 0}
             className="group flex items-center gap-2.5 rounded-full bg-primary px-6 py-3 font-heading text-base font-extrabold text-primary-foreground shadow-[0_6px_0_0] shadow-primary/40 transition hover:-translate-y-0.5 active:translate-y-1 active:shadow-none disabled:opacity-60"
           >
             <Dices className={cn("size-5 transition", rolling ? "animate-spin" : "group-hover:rotate-45")} aria-hidden />
@@ -147,7 +144,12 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
         </div>
       </header>
 
-      {feed.loading && <p role="status">Finding nearby venues…</p>}
+      <div className="flex flex-wrap items-center gap-3">
+        <button type="button" onClick={()=>setBrowseNational(!browseNational)} className="font-semibold underline">{coords?'Browse all UK places':'Return to nearby places'}</button>
+        {!coords && <p className="text-sm text-muted-foreground">Browsing all UK places. Results are not limited by distance.</p>}
+      </div>
+      {coords && <DiscoveryRadiusControls radiusKm={radiusKm} scope={scope} onRadius={setRadiusKm} onScope={setScope} includeOnline={false} />}
+      {feed.loading && <p role="status">{coords?'Finding places in your search area…':'Loading UK places…'}</p>}
       {feed.error && <p role="alert">{feed.error} <button onClick={feed.retry} className="underline">Retry</button></p>}
 
 
@@ -167,7 +169,8 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
         )}
       </div>
 
-      <CategoryRail categories={categories} total={categories.reduce((sum,c)=>sum+Number(c.count),0)} selected={category} onSelect={setCategory} />
+      <p className="text-sm text-muted-foreground">Category totals below are UK-wide; the result count below the filters uses your current search.</p>
+      <CategoryRail categories={categories} total={initialTotal} selected={category} onSelect={setCategory} />
 
       <div className="sticky top-[69px] z-20 -mx-4 flex flex-col gap-3 border-b border-border/60 bg-background/85 px-4 py-3 backdrop-blur-md lg:top-0 lg:mx-0 lg:px-0">
         <label className="relative block">
@@ -211,10 +214,10 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
 
       <div className="flex items-baseline justify-between gap-3">
         <h2 className="font-heading text-2xl font-extrabold">{heading}</h2>
-        <p className="text-sm font-semibold text-muted-foreground" aria-live="polite">
+        {!feed.loading && !feed.error && <p className="text-sm font-semibold text-muted-foreground" aria-live="polite">
           {total} {total === 1 ? "place" : "places"}
-          {coords ? ", nearest first" : ""}
-        </p>
+          {coords ? scope==='local' ? ` within ${radiusKm} km, nearest first` : ' with unknown distance — separate listings' : ' UK-wide'}
+        </p>}
       </div>
 
       {!enabled || (feed.loading&&!results.length) || feed.error ? null : results.length > 0 ? (
@@ -229,7 +232,7 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
       ) : (
         <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed bg-card px-6 py-12 text-center">
           <Dices className="size-8 text-primary" aria-hidden />
-          <p className="font-heading text-lg font-bold">Nothing matches those filters</p>
+          <p className="font-heading text-lg font-bold">{coords&&scope==='local'?`No confirmed places within ${radiusKm} km match these filters`:'Nothing matches those filters'}</p>
           <p className="text-sm text-muted-foreground">Try a different type or clear the filters.</p>
           <button type="button" onClick={clear} className="rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground">
             Clear filters

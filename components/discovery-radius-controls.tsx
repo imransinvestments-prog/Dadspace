@@ -3,8 +3,8 @@
 import Link from 'next/link'
 import { RADIUS_OPTIONS, type DiscoveryScope } from '@/lib/discovery-radius'
 
-export function DiscoveryRadiusControls({ radiusKm, scope, onRadius, onScope }: {
-  radiusKm: number; scope: DiscoveryScope; onRadius: (radius: number) => void; onScope: (scope: DiscoveryScope) => void
+export function DiscoveryRadiusControls({ radiusKm, scope, onRadius, onScope, includeOnline = true }: {
+  radiusKm: number; scope: DiscoveryScope; onRadius: (radius: number) => void; onScope: (scope: DiscoveryScope) => void; includeOnline?: boolean
 }) {
   const next = RADIUS_OPTIONS.find(value => value > radiusKm)
   return <div className="flex flex-wrap items-center gap-3 rounded-xl border bg-card p-4">
@@ -15,7 +15,7 @@ export function DiscoveryRadiusControls({ radiusKm, scope, onRadius, onScope }: 
     </label>
     <label className="flex min-w-0 max-w-full flex-col gap-2 sm:flex-row sm:items-center">Listings
       <select aria-label="Listing location scope" value={scope} onChange={event => onScope(event.target.value as DiscoveryScope)} className="min-w-0 max-w-full rounded-lg border bg-background p-2">
-        <option value="local">Within radius</option><option value="unknown">Distance unknown — separate listings</option><option value="online">Online — separate listings</option>
+        <option value="local">Within radius</option><option value="unknown">Distance unknown — separate listings</option>{includeOnline && <option value="online">Online — separate listings</option>}
       </select>
     </label>
     {scope === 'local' && next && <button type="button" className="font-semibold underline" onClick={() => onRadius(next)}>Widen search to {next} km</button>}

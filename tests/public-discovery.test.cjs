@@ -12,12 +12,13 @@ test('retired indoor/outdoor URLs cannot activate unsupported RPC filters',async
   const {module:m}=load('app/api/venues/route.ts',{
     '@/lib/supabase':{getSupabase:()=>db},'@/lib/venues':{toVenue:r=>r},
     '@/lib/distance':{parsePoint:p=>p.has('lat')?{lat:51.5,lng:-.1}:null},
+    '@/lib/discovery-radius':load('lib/discovery-radius.ts',{}).module,
     '@/lib/venue-discovery':{publicVenuePage:async()=>{pageCalls++;return {venues:[{id:'family'}],total:1,hasMore:false,loadFailed:false}}},
   })
   let response=await m.GET(new Request('https://dadspace.example/api/venues?indoor=true&outdoor=true'))
   assert.equal(response.status,200);assert.equal(pageCalls,1);assert.equal(rpcArgs,null)
   response=await m.GET(new Request('https://dadspace.example/api/venues?lat=51.5&lng=-.1&indoor=true&outdoor=true&free=true&q=family'))
-  assert.equal(response.status,200);assert.equal(rpcArgs.p_indoor,false);assert.equal(rpcArgs.p_outdoor,false)
+  assert.equal(response.status,200);assert.equal(rpcArgs.p_indoor,undefined);assert.equal(rpcArgs.p_outdoor,undefined)
   assert.equal(rpcArgs.p_free,true);assert.equal(rpcArgs.p_query,'family')
   assert.equal((await response.json()).venues[0].id,'family')
 })

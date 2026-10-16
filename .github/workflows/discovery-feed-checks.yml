@@ -1,7 +1,7 @@
 name: Discovery feed state checks
 on:
   pull_request:
-    paths: ['lib/events.ts', 'lib/activities.ts', 'lib/activity-shared.ts', 'lib/discovery-radius.ts', 'components/activities/**', 'components/events/**', 'components/discovery-radius-controls.tsx', 'components/event-card.tsx', 'app/api/events/**', 'app/api/activities/**', 'app/api/home/nearby-week/**', 'app/events/**', 'app/activities/**', 'tests/discovery-feed-states.test.cjs', 'tests/discovery-radius.test.cjs', '.github/workflows/discovery-feed-checks.yml']
+    paths: ['lib/events.ts', 'lib/activities.ts', 'lib/activity-shared.ts', 'lib/discovery-radius.ts', 'components/activities/**', 'components/events/**', 'components/discovery-radius-controls.tsx', 'components/event-card.tsx', 'app/api/events/**', 'app/api/activities/**', 'app/api/home/nearby-week/**', 'app/events/**', 'app/activities/**', 'tests/discovery-feed-states.test.cjs', 'tests/discovery-radius.test.cjs', 'hooks/use-directory-page.ts', 'tests/directory-page.test.cjs', '.github/workflows/discovery-feed-checks.yml']
 permissions:
   contents: read
 jobs:
@@ -16,7 +16,7 @@ jobs:
           node-version: '24'
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: node --test tests/discovery-feed-states.test.cjs tests/discovery-radius.test.cjs
+      - run: node --test tests/discovery-feed-states.test.cjs tests/discovery-radius.test.cjs tests/directory-page.test.cjs
       - run: pnpm exec tsc --noEmit
       - run: pnpm build
         env:
