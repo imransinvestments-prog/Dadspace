@@ -26,7 +26,7 @@ const WHEN: { key: When; label: string }[] = [
 const AGES: { key: Age; label: string }[] = [
   { key: "all", label: "Any age" },
   { key: "under5", label: "Under 5" },
-  { key: "primary", label: "5â€“11" },
+  { key: "primary", label: "5–11" },
   { key: "older", label: "12+" },
   { key: "family", label: "Whole family" },
 ]

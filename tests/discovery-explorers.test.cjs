@@ -69,6 +69,7 @@ test('event totals/cards use the same age/time/free/text filters and failures ne
   const props={events:[],today:'2026-10-16',saturday:'2026-10-17',sunday:'2026-10-18'}
   const counts=tree=>text(nodes(tree).find(n=>n.props?.['aria-live']==='polite'))
   let tree=render(props);assert.match(counts(tree),/^4 events/)
+  assert(button(tree,'5–11'));assert(!text(tree).includes('â'))
   button(tree,'This weekend').props.onClick();tree=render(props);assert.match(counts(tree),/^3 events/)
   button(tree,'Under 5').props.onClick();tree=render(props);assert.match(counts(tree),/^2 events/)
   button(tree,'Free only').props.onClick();tree=render(props);assert.match(counts(tree),/^1 event/)
@@ -77,4 +78,21 @@ test('event totals/cards use the same age/time/free/text filters and failures ne
   assert(nodes(tree).some(n=>n.type==='CoverageGap'))
   feed={pages:[],loading:true,error:''};tree=render(props);assert.equal(counts(tree),'');assert(!nodes(tree).some(n=>n.type==='CoverageGap'))
   feed={pages:[],loading:false,error:'Unavailable'};tree=render(props);assert.equal(counts(tree),'');assert(!nodes(tree).some(n=>n.type==='CoverageGap'))
+})
+
+test('activity initial and pagination loading copy renders readable ellipses',()=>{
+  let feed={pages:[],loading:true,error:''}
+  const render=component('components/activities/activities-explorer.tsx',{
+    './activity-card':{ActivityCard:'ActivityCard'},'lucide-react':{},
+    '@/components/location-provider':{useLocation:()=>({coords:{lat:51,lng:0}})},
+    '@/hooks/use-directory-page':{useDirectoryPage:()=>feed},
+    '@/lib/activity-shared':{ACTIVITY_PAGE_SIZE:24},
+    '@/lib/discovery-radius':{DEFAULT_RADIUS_KM:10},
+    '@/components/discovery-radius-controls':{DiscoveryRadiusControls:'RadiusControls',LocalCoverageGap:'CoverageGap'},
+  })
+  let tree=render({categories:[]})
+  assert(text(tree).includes('Loading activities…'));assert(!text(tree).includes('â'))
+  feed={pages:[{activities:[],total:1,hasMore:true}],loading:true,error:''}
+  tree=render({categories:[]})
+  assert(button(tree,'Loading…'));assert(!text(tree).includes('â'))
 })

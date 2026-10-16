@@ -138,7 +138,7 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
             className="group flex items-center gap-2.5 rounded-full bg-primary px-6 py-3 font-heading text-base font-extrabold text-primary-foreground shadow-[0_6px_0_0] shadow-primary/40 transition hover:-translate-y-0.5 active:translate-y-1 active:shadow-none disabled:opacity-60"
           >
             <Dices className={cn("size-5 transition", rolling ? "animate-spin" : "group-hover:rotate-45")} aria-hidden />
-            {rolling ? "Rollingâ€¦" : "Surprise me"}
+            {rolling ? "Rolling…" : "Surprise me"}
           </button>
 
         </div>

@@ -57,7 +57,7 @@ export function ActivitiesExplorer({ initialPage, categories }: { initialPage: A
       </div>
 
       {!error && <p className="text-sm opacity-70" aria-live="polite">
-        {loading && !activities.length ? "Loading activitiesâ€¦" : enabled ? `${total} current ${total === 1 ? "activity" : "activities"}${coords ? ` in ${scope === 'local' ? radiusKm + ' km' : scope === 'online' ? 'online listings' : 'distance-unknown listings'}` : ""}` : "Choose a location or browse all UK to see activities."}
+        {loading && !activities.length ? "Loading activities…" : enabled ? `${total} current ${total === 1 ? "activity" : "activities"}${coords ? ` in ${scope === 'local' ? radiusKm + ' km' : scope === 'online' ? 'online listings' : 'distance-unknown listings'}` : ""}` : "Choose a location or browse all UK to see activities."}
       </p>}
       {error && <p role="alert">{error} <button onClick={feed.retry} className="underline">Retry</button></p>}
 
@@ -74,7 +74,7 @@ export function ActivitiesExplorer({ initialPage, categories }: { initialPage: A
           disabled={loading}
           className="mx-auto rounded-xl border px-5 py-2.5 font-semibold disabled:opacity-60"
         >
-          {loading ? "Loadingâ€¦" : "Load more"}
+          {loading ? "Loading…" : "Load more"}
         </button>
       )}
 
