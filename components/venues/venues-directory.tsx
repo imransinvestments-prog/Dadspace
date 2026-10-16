@@ -23,9 +23,9 @@ const SPIN_INTERVAL_MS = 70
 
 type Result = { venue: Venue; distance: number | null }
 
-export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialPage = 1, allCategories = [] }: { venues: Venue[]; initialTotal: number; initialHasMore: boolean; initialPage?: number; allCategories?: {key:string;count:number}[] }) {
+export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialPage = 1, initialBrowseNational = initialPage > 1, allCategories = [] }: { venues: Venue[]; initialTotal: number; initialHasMore: boolean; initialPage?: number; initialBrowseNational?: boolean; allCategories?: {key:string;count:number}[] }) {
   const { coords: selectedCoords } = useLocation()
-  const [browseNational,setBrowseNational]=useState(initialPage>1)
+  const [browseNational,setBrowseNational]=useState(initialBrowseNational)
   const coords=browseNational ? null : selectedCoords
   const [radiusKm,setRadiusKm]=useState<number>(DEFAULT_RADIUS_KM)
   const [scope,setScope]=useState<DiscoveryScope>('local')

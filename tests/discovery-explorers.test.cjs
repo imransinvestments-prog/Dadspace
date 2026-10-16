@@ -48,6 +48,8 @@ test('places wire radius/scope, preserve national ordering and hide a surprise p
   location={coords:{lat:52,lng:-.2}};tree=render(props);assert(url.includes('lat=52'));assert(nodes(tree).some(n=>n.type==='RadiusControls'))
   const nationalPage=component('components/venues/venues-directory.tsx',dependencies)
   tree=nationalPage({...props,initialPage:2});assert(url.includes('offset=24'));assert(!url.includes('lat='));assert(text(tree).includes('100 places UK-wide'))
+  const nationalStart=component('components/venues/venues-directory.tsx',dependencies)
+  tree=nationalStart({...props,initialBrowseNational:true});assert(!url.includes('lat='));assert(text(tree).includes('100 places UK-wide'))
 })
 
 test('event totals/cards use the same age/time/free/text filters and failures never look like zero supply',()=>{
