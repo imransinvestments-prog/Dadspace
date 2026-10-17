@@ -65,3 +65,19 @@ test('merged detail URLs redirect temporarily and rollback restores the original
  destination={id:sourceId,name:'Old'};await page.generateMetadata(params)
  destination=null;await assert.rejects(page.generateMetadata(params),/NOT_FOUND/)
 })
+test('fresh public directory reads reflect revocation without dropping independent venues',async()=>{
+ const rows=[{id:'revoked',venue_name:'A',public_visible:true},{id:'distinct',venue_name:'B',public_visible:true}]
+ const db={from(){const b={select(){return b},eq(){return b},order(){return b},range:async()=>{const eligible=rows.filter(r=>r.public_visible);return{data:eligible,count:eligible.length,error:null}}};return b}}
+ const v=venues(db);assert.equal((await v.publicVenuePage()).venues.length,2);rows[0].public_visible=false
+ const fresh=await v.publicVenuePage();assert.equal(fresh.loadFailed,false);assert.equal(fresh.venues.length,1);assert.equal(fresh.venues[0].id,'distinct')
+})
+test('core sitemap excludes withdrawn Event identities and never includes personal coordinates',async()=>{
+ const records=[{id:'visible',title:'Family day',listing_type:'event',withdrawn_at:null},{id:'withdrawn',title:'Withdrawn',listing_type:'event',withdrawn_at:'2026-10-17'}]
+ const db={from(table){const filters=[];const b={select(){return b},eq(k,v){filters.push([k,v]);return b},is(k,v){filters.push([k,v]);return b},order(){return b},limit(){return b},then(resolve,reject){return Promise.resolve({data:table==='current_activities'?[]:records.filter(r=>filters.every(([k,v])=>r[k]===v)),error:null}).then(resolve,reject)}};return b}}
+ const s=load('lib/core-sitemap.ts',{'@/lib/activity-slug':load('lib/activity-slug.ts'),'@/lib/event-slug':eventSlug,'@/lib/supabase':{getSupabase:()=>db},'@/lib/seo':seo,'@/lib/launch':{COMING_SOON:false},'@/lib/originals':{getOriginals:async()=>[]}})
+ const urls=Array.from(await s.default(),r=>r.url);assert(urls.some(x=>x.endsWith('--visible')));assert(!urls.some(x=>x.includes('--withdrawn')));assert(!urls.some(x=>/[?&](lat|lng)=/.test(x)))
+})
+test('a hidden venue cannot resolve a photo or invoke the upstream provider',async()=>{
+ let upstream=0;const p=load('app/api/venues/[id]/photo/route.ts',{'@/lib/supabase':{getSupabase:()=>dbRows([{id:'12345678-1234-1234-1234-123456789abc',public_visible:false,image_url:'private'}])},'@/lib/google-venue-photos.mjs':{googleApiKey:()=> 'test-key',googlePlaceId:v=>v||null,fetchVenuePhoto:async()=>{upstream++;return 'photo'}}})
+ const response=await p.GET(new Request('https://example.com'),{params:Promise.resolve({id:'12345678-1234-1234-1234-123456789abc'})});assert.equal(response.status,404);assert.equal(upstream,0);assert.equal(response.headers.get('cache-control'),'private, no-store')
+})
