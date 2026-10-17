@@ -23,11 +23,11 @@ Matalan #190: one-product / one-size public adapter with 6 MB bound, strict URLs
 
 ## Hosted review
 
-The previous hosted session verified owner sign-in, 17 displayed offers, alias filtering, empty audit state, disabled preview apply, source decision preview and invalidation after editing the record. Owner accepted workspace usability. New uniform snapshot and final hosted checks are pending deployment of this update; record their results below before recommending release.
+The previous hosted session verified owner sign-in, 17 displayed offers, alias filtering, empty audit state, disabled preview apply, source decision preview and invalidation after editing the record. Owner accepted workspace usability. Final deployed code **f31650f8f74af91fc140072a3c26d2ddd5e16900** passed all four GitHub jobs (Operations checks, discovery checks, Deals regression and maintenance transactions), plus Vercel deployment. In the signed-in owner browser, the Matalan row appears first as unapproved; the NBS row remains owner-approved. The Matalan link retains `?variation=14894527`, fulfilment costs and conservative cutoff are visible, keyboard Tab reaches the exact source link, and the desktop page has no horizontal overflow. A source #42 pause preview resolved its exact name without applying; editing the record invalidated the preview. No live action was submitted. Screenshot: `artefacts/documentation/sprint7-uniform-review.png`. The available browser does not expose viewport resizing and its zoom shortcut did not change the viewport; an actual phone/narrow-screen check remains for the consolidated owner review. No mobile test is claimed.
 
 ## Remaining gates
 
-1. Final hosted tests and deployed browser review of the new Matalan snapshot.
+1. Owner phone/narrow-screen inspection of the updated offer review; desktop/browser and hosted checks are complete.
 2. Owner's single new offer / source-route / release decision pack.
 3. After approval, fresh Matalan validation, audited source registration/activation, normal collector and public readback. Do not count the trial as publication.
 4. Account-side AWIN MasterTag investigation: exact owner-confirmed URL still 404. Official publisher documentation confirms format; no replacement URL guessed or plugin activated. #131 remains open until actual delivery is established.

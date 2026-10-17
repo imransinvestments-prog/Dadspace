@@ -6,7 +6,7 @@
 
 1. **One new offer:** approve the Matalan black school-jumper two-pack, **age 4 years**, exact variation **14894527**, item price **£7.20** against **merchant-advertised RRP £9**. Item saving £1.80 / 20%; no independent previous-price claim. Home delivery £3.99 gives £11.19 total for this item alone; standard click & collect £0.99 gives £8.19, subject to availability. Free-delivery thresholds and exclusions are in the offer evidence. This is a useful item-price reduction, not a claim that ordering this item alone saves money against an in-store purchase.
 2. **One source route:** approve the bounded Matalan uniform pilot at https://www.matalan.co.uk/c/offers/school-uniform/ . First recipe checks only the exact product/size above, plus current category membership, delivery and promotion conditions. No general catalogue expansion, account or affiliate application. It stops conservatively at **19 October 00:00 BST (18 October 23:00 UTC)** because the published “19.10.26 at Midnight” wording is ambiguous. Any extension requires a fresh terms review; no automatic extension. Refresh exact evidence before any registration/activation and normal collector/public readback.
-3. **Release:** approve the tested Deals workspace and bounded Matalan adapter in PR #188, once hosted checks pass. Keep existing owner-only permissions and disabled preview writes. No paid AI, automatic merchant applications or AWIN account changes are included.
+3. **Release:** check the new offer review on your phone (not available in the automated browser) and approve the tested Deals workspace and bounded Matalan adapter in PR #188, once hosted checks pass. Keep existing owner-only permissions and disabled preview writes. No paid AI, automatic merchant applications or AWIN account changes are included.
 
 Preview entry: https://dadspace-git-sprint-7-useful-deals-imransinvestments-6859.vercel.app/ops/deals?kind=trial . **One new content decision** is outstanding. The approved car-seat snapshot remains visible for context; the unchanged accepted 17-row Sprint 5 pack needs no repeat review. Matalan frozen fingerprint: `aac35fd5fc6c3f8db7c31c04a594e738b64a543d3efef515aa445d807cd0e311`.
 
@@ -49,7 +49,7 @@ Prepared account-side investigation: inspect Toolbox → Publisher MasterTag for
 
 Read-only Matalan trial: one fetched / one kept, canonical 160, exact variation and independent second merchant check, zero database writes / zero model calls. Six Matalan tests cover identity/currency/stock/price mismatches, malformed payloads, duplicate corroboration, unsafe URLs, redirects, response bounds, changed terms/delivery, network failures, cutoff and price changes. The test clock is frozen so an expired campaign does not break future regression runs.
 
-Full Node suite **177 passed**; full Python discovery passed; TypeScript and webpack production build passed. No standalone lint command exists in package.json. Hosted checks and final deployed browser evidence are recorded in sprint-7-progress.md.
+Full Node suite **177 passed**; full Python discovery passed; TypeScript and webpack production build passed. No standalone lint command exists in package.json. Hosted checks all passed at f31650f8f74af91fc140072a3c26d2ddd5e16900; exact-variant links, owner states, keyboard navigation, disabled apply and stale-preview invalidation were verified on the deployed preview. Phone/narrow-screen inspection remains in the owner pack; see sprint-7-progress.md for the exact evidence and limitations.
 
 ## Scheduled evidence and acceptance
 
