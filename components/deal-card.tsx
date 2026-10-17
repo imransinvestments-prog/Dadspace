@@ -1,5 +1,5 @@
 import { ExternalLink } from "lucide-react"
-import { dealBenefit, merchantAdvertised, type LiveDeal } from "@/lib/deals-selection"
+import { dealBenefit, dealDisplayTitle, merchantAdvertised, type LiveDeal } from "@/lib/deals-selection"
 
 const gbp = new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" })
 
@@ -16,7 +16,7 @@ export function DealCard({ deal }: { deal: LiveDeal }) {
       ) : null}
       <div className="flex flex-col gap-3 p-5">
         <p className="text-xs font-semibold text-cyan-400">{deal.display_group} · {deal.retailer ?? "See source for retailer"}</p>
-        <h3 className="text-lg font-bold leading-snug">{deal.title}</h3>
+        <h3 className="text-lg font-bold leading-snug">{dealDisplayTitle(deal.title)}</h3>
         {advertised && <p className="text-xs font-semibold text-orange-400">Merchant-advertised sale</p>}
         {benefit ? <p className="font-bold text-orange-400">{benefit}</p> : (
           <p className="text-sm">
