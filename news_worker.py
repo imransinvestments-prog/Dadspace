@@ -250,7 +250,13 @@ def sb(method, path, params=None, json_body=None, extra_headers=None):
 
 
 def load_sources():
-    r = sb("GET", "news_sources", params={"active": "eq.true", "select": "*", "order": "id"})
+    params = {"active": "eq.true", "select": "*", "order": "id"}
+    source_id = os.environ.get("NEWS_SOURCE_ID", "").strip()
+    if source_id:
+        if not re.fullmatch(r"[1-9][0-9]{0,14}", source_id):
+            raise ValueError("Invalid bounded News source")
+        params["id"] = f"eq.{source_id}"
+    r = sb("GET", "news_sources", params=params)
     return r.json()
 
 

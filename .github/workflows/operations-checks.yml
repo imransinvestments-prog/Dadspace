@@ -20,6 +20,7 @@ jobs:
       - run: node --test tests/operations.test.cjs tests/operations-evidence.test.cjs tests/operations-review.test.cjs
       - run: node --test tests/sprint5-evidence.test.cjs tests/task-reviews.test.cjs
       - run: node --test tests/sprint5-news-rehearsal.test.mjs
+      - run: node --test tests/news-maintenance.test.mjs tests/maintenance-access.test.cjs
       - run: pnpm exec tsc --noEmit
       - run: pnpm build
         env:

@@ -1,0 +1,10 @@
+{
+  "sprint": 6,
+  "tracker": 185,
+  "committed_points": 22,
+  "scope": [{"issue":146,"points":11},{"issue":147,"points":8},{"issue":129,"points":3}],
+  "accepted_points": 0,
+  "remaining_points": 22,
+  "acceptance_events": [],
+  "note": "No agreed end date; no ideal line. Code completion and elapsed observation are not acceptance."
+}

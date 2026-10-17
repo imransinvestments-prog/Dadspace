@@ -1,4 +1,5 @@
 name: Dadspace news
+run-name: News ${{ github.event_name }} ${{ inputs.maintenance_request || '' }}
 
 on:
   pull_request:
@@ -24,6 +25,18 @@ on:
         description: "Run an additional paid Gemini connectivity check"
         type: boolean
         default: false
+      source_id:
+        description: Optional single active source ID
+        default: ''
+      max_new:
+        description: Candidate cap for manual collection
+        default: '10'
+      max_minutes:
+        description: Time cap for manual collection
+        default: '5'
+      maintenance_request:
+        description: Optional Operations audit request UUID
+        default: ''
 
   workflow_call:
     inputs:
@@ -68,6 +81,9 @@ jobs:
     if: ${{ !cancelled() && github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    concurrency:
+      group: dadspace-news-collection
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
 
@@ -87,16 +103,37 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           NEWS_LOCALITY_REPORT_PATH: news-locality-review.jsonl
 
+      - name: Validate maintenance claim
+        run: python scripts/maintenance-run.py start news
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          MAINTENANCE_REQUEST: ${{ inputs.maintenance_request }}
+          MAINTENANCE_DRY_RUN: ${{ inputs.dry_run || 'false' }}
+          MAINTENANCE_SOURCE: ${{ inputs.source_id }}
+          MAINTENANCE_MAX_NEW: ${{ inputs.max_new }}
+          MAINTENANCE_MAX_MINUTES: ${{ inputs.max_minutes }}
       - name: Run news worker
+        id: collect
         run: python news_worker_locality.py
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DRY_RUN: ${{ inputs.dry_run || 'false' }}
-          MAX_NEW_PER_RUN: ${{ github.event_name == 'pull_request' && '40' || '300' }}
-          MAX_RUN_MINUTES: ${{ github.event_name == 'pull_request' && '8' || '20' }}
+          NEWS_SOURCE_ID: ${{ inputs.source_id }}
+          MAX_NEW_PER_RUN: ${{ inputs.max_new || '300' }}
+          MAX_RUN_MINUTES: ${{ inputs.max_minutes || '20' }}
           NEWS_LOCALITY_REPORT_PATH: news-locality-review.jsonl
+
+      - name: Reconcile maintenance result
+        if: always()
+        run: python scripts/maintenance-run.py finish news
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          MAINTENANCE_REQUEST: ${{ inputs.maintenance_request }}
+          MAINTENANCE_RESULT: ${{ job.status }}
 
       - name: Upload locality review evidence
         if: always() && (github.event_name == 'pull_request' || inputs.dry_run == 'true')

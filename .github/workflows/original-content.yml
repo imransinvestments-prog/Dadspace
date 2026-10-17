@@ -1,7 +1,8 @@
 name: Dadspace original content
+run-name: Originals ${{ github.event_name }} ${{ inputs.maintenance_request || '' }}
 on:
   schedule:
-    - cron: '17 7,19 * * *'
+    - cron: '17 7,9 * * *'
       timezone: Europe/London
   workflow_dispatch:
     inputs:
@@ -9,6 +10,17 @@ on:
         description: Validate content without publishing
         type: boolean
         default: true
+      cadence:
+        description: Optional single cadence for a bounded maintenance retry
+        type: choice
+        options: ['', daily, weekly]
+        default: ''
+      slot_date:
+        description: Optional current London date (YYYY-MM-DD); older slots cannot be regenerated
+        default: ''
+      maintenance_request:
+        description: Optional Operations audit request UUID
+        default: ''
   push:
     branches: [main]
     paths: ['original_content_worker.py', '.github/workflows/original-content.yml']
@@ -29,6 +41,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m unittest discover -s tests -p test_original_content.py -v
+      - run: python -m unittest discover -s tests -p test_maintenance_run.py -v
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
@@ -41,7 +54,7 @@ jobs:
           NEXT_TELEMETRY_DISABLED: '1'
   publish:
     needs: checks
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -49,9 +62,36 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Validate maintenance claim
+        run: python scripts/maintenance-run.py start originals
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          MAINTENANCE_REQUEST: ${{ inputs.maintenance_request }}
+          MAINTENANCE_DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+          MAINTENANCE_CADENCE: ${{ inputs.cadence }}
+          MAINTENANCE_SLOT_DATE: ${{ inputs.slot_date }}
       - name: Generate, review and publish due originals
-        run: python original_content_worker.py ${{ inputs.dry_run == true && '--dry-run' || '' }}
+        shell: bash
+        run: |
+          args=()
+          if [ "$DRY_RUN" = true ]; then args+=(--dry-run); fi
+          if [ -n "$CADENCE" ]; then args+=(--cadence "$CADENCE"); fi
+          if [ -n "$SLOT_DATE" ]; then args+=(--slot-date "$SLOT_DATE"); fi
+          python original_content_worker.py "${args[@]}"
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ORIGINAL_CONTENT_RETAIN_EVIDENCE: 'true'
+          DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+          CADENCE: ${{ inputs.cadence }}
+          SLOT_DATE: ${{ inputs.slot_date }}
+      - name: Reconcile maintenance result
+        if: always()
+        run: python scripts/maintenance-run.py finish originals
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          MAINTENANCE_REQUEST: ${{ inputs.maintenance_request }}
+          MAINTENANCE_RESULT: ${{ job.status }}
