@@ -28,14 +28,17 @@ These are research findings, not proposals to publish these pages as offers. New
 1. Reuse shared maintenance identity/signatures/atomic audit; expose source pause, activate and restore only. No taxonomy write API was needed to make current evidence inspectable.
 2. Keep previews read-only. Pause affects future collection; it does not override the existing offer freshness/expiry rules.
 3. Default the offer queue to the exact displayed set. Put long supporting evidence behind expandable details; retain paged access to all stored rows.
-4. Preserve the accepted 17-row pack. Current incremental offer-review count is **zero**; this will change only if new qualifying supply or material changes are frozen.
+4. Preserve the accepted 17-row pack. Current incremental offer-review count is **one**, the separately frozen Natural Baby Shower trial below.
 5. Leave all feature tickets open. No points awarded for this progress, no scope padding and no live data changes.
 
 ## Owner involvement still needed
 
 - Review the workspace usability once hosted QA is complete; this is not source or release approval.
 - MasterTag needs the current account-generated publisher script or account-side configuration check. The observed 404 cannot be fixed by marking installation as accepted. No plugin/account activation is authorised by this document.
-- Source recommendations will be consolidated after product-level qualification. There is no safe concrete source activation or new offer batch to approve yet.
+- A bounded Natural Baby Shower car-seat route has now passed a local read-only trial and independent exact-variant recheck using the normal classifier/value/verifier functions. It yielded **one** candidate: Britax Römer Dualfix M Plus, Carbon Black, variant 55678800527739, £169 against merchant-advertised £289. Canonical item 75 is reused. Fingerprint: cd2b79e83f834099d0173cac0dadb6dfacd30757e5804552859f397baf221f71.
+- Review that one candidate under “New offer review”. Recommended decision: approve its content and the narrow source route https://www.naturalbabyshower.co.uk/collections/sale-car-seats.atom under the existing merchant-advertised comparison policy, subject to a fresh check before any live collection. No source row has been created or activated. No affiliate tracking/commission is claimed.
+- That candidate would add a second priority category alongside bicycles, **not satisfy all three required categories**. Uniforms, holidays and tuition remain gaps. The candidate is not a reason to close #131.
+- The owner supplied the account installation snippet; it matches the configured 404 URL exactly. Do not ask for the same snippet again or substitute a guessed endpoint. Account/vendor troubleshooting remains open; no account/plugin setting has changed.
 
 ## Scheduled evidence (#132)
 

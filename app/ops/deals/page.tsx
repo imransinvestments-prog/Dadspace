@@ -7,11 +7,11 @@ import { maintenanceConfiguration } from "@/lib/operations/maintenance"
 
 export const dynamic = "force-dynamic"
 export const metadata = pageMetadata("Deals maintenance", "/ops/deals", "Deal coverage, evidence and merchant readiness", { noIndex: true })
-const tabs = [{ id: "offers", name: "Offer evidence" }, { id: "taxonomy", name: "Canonical items & aliases" }, { id: "sources", name: "Sources & merchant readiness" }, { id: "audit", name: "Action history" }]
+const tabs = [{ id: "offers", name: "Offer evidence" }, { id: "trial", name: "New offer review" }, { id: "taxonomy", name: "Canonical items & aliases" }, { id: "sources", name: "Sources & merchant readiness" }, { id: "audit", name: "Action history" }]
 export default async function DealsOperationsPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const params = await searchParams
   const kind = tabs.some(t => t.id === params.kind) ? String(params.kind) : "offers"
-  const filters = kind === "taxonomy" ? ["all", "active", "inactive", "aliases"] : kind === "sources" ? ["all", "active", "inactive"] : kind === "audit" ? ["all"] : ["displayed", "all", "live"]
+  const filters = kind === "taxonomy" ? ["all", "active", "inactive", "aliases"] : kind === "sources" ? ["all", "active", "inactive"] : ["audit", "trial"].includes(kind) ? ["all"] : ["displayed", "all", "live"]
   const filter = typeof params.filter === "string" && filters.includes(params.filter) ? params.filter : kind === "offers" ? "displayed" : "all"
   const page = typeof params.page === "string" && /^[1-9]\d{0,3}$/.test(params.page) ? Number(params.page) : 1
   const { access, evidence } = await getDealsEvidence(kind, page, filter)
@@ -28,7 +28,7 @@ export default async function DealsOperationsPage({ searchParams }: { searchPara
     <section aria-label="Deals evidence" className="space-y-4">
       <nav aria-label="Queue filters" className="flex flex-wrap gap-4">{filters.map(f => <Link key={f} aria-current={filter === f ? "page" : undefined} className="underline" href={`/ops/deals?kind=${kind}&filter=${f}`}>{f}</Link>)}</nav>
       {!evidence.available ? <p role="status" className="rounded-xl border p-5">This queue is unavailable. A failed evidence request does not establish an empty feed.</p> : <>
-        <p>{evidence.total} stored records · page {page}. Stored status is separate from public eligibility and owner acceptance.</p>
+        <p>{evidence.total} {kind === "trial" ? "trial records" : "stored records"} · page {page}. Stored status is separate from public eligibility and owner acceptance.</p>
         {evidence.rows.length === 0 && <p className="rounded-xl border p-5">No records match this queue and page.</p>}
         {evidence.rows.map(row => <article key={row.id} className="min-w-0 space-y-3 rounded-2xl border bg-card p-5"><p className="text-sm text-muted-foreground">Record {row.id} · {row.source}</p><h2 className="text-xl font-bold">{row.title}</h2><p className="font-semibold">{row.state}</p>{row.date && <p className="text-sm">Last checked: {row.date}</p>}<details className="rounded-lg border p-3"><summary className="cursor-pointer font-semibold">Inspect supporting evidence</summary><p className="mt-3 whitespace-pre-wrap break-words text-sm">{row.detail}</p></details>{row.url && <a className="block break-all underline" href={row.url} target="_blank" rel="noreferrer">Source evidence: {row.url}</a>}{kind === "sources" && <Link className="inline-block underline" href={`/ops/deals?kind=sources&action=${row.state === "Active" ? "pause" : "activate"}&record=${row.id}#maintenance`}>Prepare source decision</Link>}</article>)}
         <nav aria-label="Queue pages" className="flex gap-5">{page > 1 && <Link className="underline" href={`/ops/deals?kind=${kind}&filter=${filter}&page=${page - 1}`}>Previous</Link>}{page * 20 < (evidence.total ?? 0) && <Link className="underline" href={`/ops/deals?kind=${kind}&filter=${filter}&page=${page + 1}`}>Next</Link>}</nav>

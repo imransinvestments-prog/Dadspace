@@ -5,7 +5,8 @@ function load(access, result, publicResult={items:[],loadFailed:false}) {
   let reads=0
   const chain={select:()=>chain,eq:()=>chain,in:()=>chain,not:()=>chain,order:()=>chain,range:()=>chain,abortSignal:async()=>result}
   const module={exports:{}}
-  const deps={'server-only':{},'@/lib/supabase':{getSupabase:()=>({from:()=>{reads++;return chain}})},'@/lib/deals':{getDeals:async()=>publicResult},'./session':{operationsAccess:async()=>access},'./evidence-shared':{evidenceUrl:value=>value?.startsWith('https://')?value:null}}
+  const deps={'server-only':{},'@/artefacts/data/sprint7-new-offers.json':{default:{rows:[{id:'trial-1',title:'New offer',price:169,comparison:289,link:'https://example.com/offer',fingerprint:'fixture'}],checkedOn:'2026-10-17'}},'@/lib/supabase':{getSupabase:()=>({from:()=>{reads++;return chain}})},'@/lib/deals':{getDeals:async()=>publicResult},'./session':{operationsAccess:async()=>access},'./evidence-shared':{evidenceUrl:value=>value?.startsWith('https://')?value:null}}
+  deps['@/lib/deals-selection']={dealDisplayTitle:title=>title}
   vm.runInNewContext(ts.transpileModule(fs.readFileSync('lib/operations/deals-evidence.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText,{module,exports:module.exports,require:name=>deps[name]??require(name),AbortSignal,Set,JSON,String,Number})
   return {get:module.exports.getDealsEvidence,reads:()=>reads}
 }
@@ -44,4 +45,11 @@ test('displayed-only filter fails closed when public membership cannot be establ
   assert.equal(r.evidence.available,true)
   assert.equal(r.evidence.total,0)
   assert.equal(empty.reads(),0)
+})
+test('trial snapshots cannot masquerade as published or owner-approved offers',async()=>{
+  const m=load('allowed',{data:[],count:0,error:null})
+  const r=await m.get('trial',1,'all')
+  assert.equal(r.evidence.total,1)
+  assert.match(r.evidence.rows[0].state,/not published or owner-approved/)
+  assert.match(r.evidence.rows[0].detail,/rechecked before activation/)
 })

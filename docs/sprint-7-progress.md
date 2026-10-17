@@ -22,7 +22,15 @@ Source pause/activate/restore reuses the existing signed intent, identity, atomi
 
 Four queue/access/error tests and one real PostgreSQL-compatible Deals pause/stale/idempotency/restore rehearsal passed, together with the existing seven maintenance/access regressions (12 checks). TypeScript passed. Initial workspace production build passed using webpack; subsequent form refinements require final hosted checks and browser QA.
 
-## Remaining before owner pack
+## Further progress
+
+Hosted owner sign-in succeeded. Verified 17 displayed offers, canonical alias filtering, the genuine empty action history, disabled preview writes, a Deals source preview and invalidation after editing its record ID. No Deals maintenance audit entries were created. Current AWIN audit and scheduled dispatch misses are recorded in sprint-7-decisions.md.
+
+Natural Baby Shower's narrow car-seat collection was read without database credentials or writes; one exact variant passed the existing normal classifier/value/verifier functions and is frozen in sprint7-new-offers.json. Its candidate route is allowlisted in code but no database source exists or is active. It remains unaccepted/unpublished and does not fulfil the three-group requirement.
+
+Full Node regression suite: 177 passed before the final display-title reuse. Full Python discovery passed after supplying the existing Beautiful Soup dependency to the isolated local test directory; initial import failures were environmental. Focused Shopify suite: 23 passed. Hosted checks passed at 24b50e8; later trial changes need their own hosted checks.
+
+## Remaining before release
 
 - Qualify missing priority supply with exact current merchant evidence and permitted normal collector routes; do not publish search snippets or old seasonal campaigns.
 - Refresh AWIN membership/yield and verify MasterTag delivery.
