@@ -14,6 +14,15 @@ def product(available=True, price=900):
 
 
 class ShopifyTests(unittest.TestCase):
+    def test_candidate_car_seat_route_is_narrow_and_preserves_canonical_types(self):
+        shop = s.SHOPS["https://www.naturalbabyshower.co.uk/collections/sale-car-seats.atom"]
+        self.assertEqual(s.taxonomy_label({"title": "Britax Römer Dualfix M Plus 360 Spin Car Seat - Carbon Black"}, shop), "Convertible car seat")
+        self.assertEqual(s.taxonomy_label({"title": "Britax Romer KIDFIX i-Size High Back Booster Car Seat - Cosmos Black"}, shop), "Booster car seat")
+        for title in ["Britax Römer Dualfix M Plus 360 Spin Car Seat Bundle", "Car seat rain cover", "Unknown car seat", "Britax Römer Dualfix M Plus 360 Spin Car Seat Pre-order"]:
+            self.assertIsNone(s.taxonomy_label({"title": title}, shop))
+        self.assertFalse(s.allowed("https://www.naturalbabyshower.co.uk.evil.invalid/products/car-seat", shop))
+        self.assertFalse(s.allowed("https://www.naturalbabyshower.co.uk/collections/sale.atom", shop))
+
     def setUp(self):
         self.feed, self.shop = next(iter(s.SHOPS.items()))
         self.url = "https://" + self.shop["host"] + "/products/baby-hat"
