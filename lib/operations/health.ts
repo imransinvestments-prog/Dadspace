@@ -2,6 +2,33 @@ export type Run = {
   id: number; event: string; status: string; conclusion: string | null
   created_at: string; updated_at: string; html_url: string
 }
+
+/** Slot-based warning, separate from job status and source/publication success.
+ * Proposed deadlines only until owner approval under #123/#124.
+ * Public GitHub metadata cannot establish why dispatch was late.
+ */
+export function scheduledSlotHealth(observations: Observation[] | null, key: string, now = new Date(), dispatchMinutes = 60, completionMinutes = 240) {
+  let slot = new Date(now.getTime() - 36 * 3600_000)
+  for (;;) {
+    const next = new Date(nextLondonRun(slot))
+    if (next > now) break
+    slot = next
+  }
+  const expectedAt = slot.toISOString()
+  if (observations === null) return { expectedAt, signal: "Evidence unavailable", delayMinutes: null }
+  const latest = observations.filter(o => o.run.event === "schedule" && Date.parse(o.run.created_at) >= slot.getTime() && Date.parse(o.run.created_at) <= now.getTime())
+    .sort((a,b) => Date.parse(a.run.created_at) - Date.parse(b.run.created_at))[0]
+  const elapsed = (now.getTime() - slot.getTime()) / 60000
+  if (!latest) return { expectedAt, signal: elapsed > dispatchMinutes ? "Missing scheduled dispatch" : "Within dispatch allowance", delayMinutes: null }
+  const delayMinutes = Math.floor((Date.parse(latest.run.created_at) - slot.getTime()) / 60000)
+  if (latest.jobs === null) return { expectedAt, signal: "Job evidence unavailable", delayMinutes }
+  const job = latest.jobs.find(j => j.name === key)
+  if (job?.conclusion === "cancelled" || latest.run.conclusion === "cancelled" && !job) return { expectedAt, signal: "Cancelled — inspect feed evidence", delayMinutes }
+  if (job?.conclusion === "failure" || job?.conclusion === "timed_out") return { expectedAt, signal: "Feed failed — inspect source evidence", delayMinutes }
+  if (job?.conclusion === "skipped") return { expectedAt, signal: "Feed skipped — refresh not established", delayMinutes }
+  if (job?.conclusion === "success") return { expectedAt, signal: delayMinutes > dispatchMinutes ? "Late dispatch; job passed" : "Job passed; verify useful supply", delayMinutes }
+  return { expectedAt, signal: elapsed > completionMinutes ? "Feed completion overdue" : delayMinutes > dispatchMinutes ? "Late dispatch; collection pending" : "Collection pending", delayMinutes }
+}
 export type Job = { name: string; status: string; conclusion: string | null; completed_at: string | null }
 export type Observation = { run: Run; jobs: Job[] | null }
 

@@ -28,19 +28,19 @@ test('unauthorized readers cannot query review records', async () => {
   await assert.rejects(api.getReviewMaterial(126)); assert.equal(calls.length, 0)
 })
 test('missing service credential and query failures are unavailable rather than empty', async () => {
-  assert.equal((await harness({ configured: false }).api.getReviewMaterial(136)).available, false)
-  assert.equal((await harness({ failed: true }).api.getReviewMaterial(136)).available, false)
+  assert.equal((await harness({ configured: false }).api.getReviewMaterial(128)).available, false)
+  assert.equal((await harness({ failed: true }).api.getReviewMaterial(128)).available, false)
 })
-test('live activity records retain actual content and deterministic bounded pagination', async () => {
+test('live Originals records retain actual content and deterministic bounded pagination', async () => {
   const { api, calls } = harness({ data: [{ id: 42, title: 'Article', summary: 'Full review text' }], count: 11 })
-  const result = await api.getReviewMaterial(136, 2)
+  const result = await api.getReviewMaterial(128, 2)
   assert.equal(result.available, true); assert.equal(result.rows[0].fields.summary, 'Full review text')
   assert.ok(calls.some(call => call[0] === 'range' && call[1] === 10 && call[2] === 19))
   assert.equal(result.total, 11); assert.ok(result.notice.includes('not a frozen'))
 })
 test('partial pages cannot silently drop records', async () => {
   const { api } = harness({ data: [{ id: 42, title: 'Article' }], count: 15 })
-  assert.equal((await api.getReviewMaterial(136, 1)).available, false)
+  assert.equal((await api.getReviewMaterial(128, 1)).available, false)
 })
 test('operations inventory is reviewable per process and page two retains eleventh process', async () => {
   const { api } = harness()

@@ -175,7 +175,7 @@ async function getLatestArticles(): Promise<HomeData["articles"]> {
   try {
     const { data, error } = await db.from("feed_items")
       .select("id,title,url,source_name,category,published_at,summary,why_it_matters,relevance")
-      .order("published_at", { ascending: false, nullsFirst: false }).limit(300)
+      .order("published_at", { ascending: false, nullsFirst: false }).order("id", { ascending: false }).limit(300)
     if (error || !Array.isArray(data)) return unavailable
     const items = selectNewsCards((data ?? []).map(row => ({
       id: String(row.id), title: row.title, source: row.source_name, url: row.url,

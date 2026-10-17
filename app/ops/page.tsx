@@ -2,7 +2,7 @@ import Link from "next/link"
 import DatabaseEvidence from "./database-evidence"
 import { redirect, notFound } from "next/navigation"
 import { getOperationsDashboard } from "@/lib/operations/dashboard"
-import { feedHealth, FEEDS, nextLondonRun } from "@/lib/operations/health"
+import { feedHealth, FEEDS, nextLondonRun, scheduledSlotHealth } from "@/lib/operations/health"
 import { OPERATIONS_PROCESSES } from "@/lib/operations/processes"
 import { pageMetadata } from "@/lib/seo"
 
@@ -24,6 +24,7 @@ export default async function OperationsPage() {
       <p className="text-sm font-semibold opacity-80">DADSPACE UPKEEP</p>
       <h1 className="mt-2 text-3xl font-bold sm:text-4xl">Operations</h1>
       <p className="mt-3 max-w-2xl">Collection status, evidence and the work that needs attention.</p>
+      <Link href="/ops/sprint-5" className="mt-4 inline-block font-semibold underline">Sprint 5: consolidated review pack</Link>
       <div className="mt-5 flex flex-wrap gap-3 text-sm"><span className="rounded-full border border-current px-3 py-1">Read-only</span><span className="rounded-full border border-current px-3 py-1">W3 · 10 km · Ages 0–5</span></div>
     </header>
     <nav aria-label="Operations sections" className="flex flex-wrap gap-4 text-sm font-semibold"><a href="#collections" className="underline underline-offset-4">Collections</a><a href="#sources" className="underline underline-offset-4">Source health & review</a><a href="#editorial" className="underline underline-offset-4">Editorial & AI review</a><a href="#processes" className="underline underline-offset-4">Upkeep processes</a></nav>
@@ -34,9 +35,11 @@ export default async function OperationsPage() {
       <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {FEEDS.map(feed => {
           const health = feedHealth(evidence.observations || [], feed.key, now)
+          const slot = scheduledSlotHealth(evidence.observations, feed.key, now)
           return <article key={feed.key} className="rounded-2xl border bg-card p-5">
             <div className="flex flex-wrap items-center justify-between gap-2"><h3 className="font-bold">{feed.label}</h3><span className={`rounded-full px-3 py-1 text-xs font-semibold ${badge(health.status)}`}>{health.status}</span></div>
             {evidence.observations && health.missed && <p className="mt-3 text-sm font-semibold text-amber-800 dark:text-amber-300">No scheduled start observed within 16 hours.</p>}
+            <p className="mt-3 text-sm font-semibold">{slot.signal}</p><p className="mt-1 text-xs text-muted-foreground">Expected slot: {time(slot.expectedAt)} UK. Proposed warning allowances: dispatch 60 minutes; completion four hours. Owner confirmation pending. Dispatch-to-slot association is inferred from timing.</p>
             <dl className="mt-4 space-y-3 text-sm"><div><dt className="text-muted-foreground">Latest scheduled start</dt><dd>{time(health.latestAt)}</dd></div><div><dt className="text-muted-foreground">Last job success in the three-run window</dt><dd>{time(health.lastSuccess)}</dd></div><div><dt className="text-muted-foreground">Source freshness / supply evidence</dt><dd><a href="#sources" className="underline">See source health & review</a></dd></div></dl>
             <div className="mt-5 flex flex-wrap gap-4 text-sm font-semibold">{health.url && <a href={health.url} className="underline underline-offset-4">Run evidence</a>}<a href={`https://github.com/imransinvestments-prog/Dadspace/issues/${feed.issue}`} className="underline underline-offset-4">Delivery ticket</a></div>
           </article>

@@ -162,6 +162,7 @@ export async function fetchNews({
     .from("feed_items")
     .select(COLUMNS)
     .order("published_at", { ascending: false, nullsFirst: false })
+    .order("id", { ascending: false })
     .range(from, to)
 
   if (category !== "all") query = query.eq("category", category)
