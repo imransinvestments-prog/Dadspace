@@ -1,0 +1,50 @@
+[
+  {
+    "canonical": "https://www.dad-space.co.uk/venues",
+    "headings": [
+      "UK places for family days out "
+    ],
+    "robots": "index, follow",
+    "schemaScripts": 2,
+    "title": "UK places for family days out · Dadspace",
+    "url": "https://www.dad-space.co.uk/venues"
+  },
+  {
+    "canonical": "https://www.dad-space.co.uk/activities",
+    "headings": [
+      "Activities, classes and clubs"
+    ],
+    "robots": "index, follow",
+    "schemaScripts": 1,
+    "title": "Kids' Activities, Classes & Clubs · Dadspace",
+    "url": "https://www.dad-space.co.uk/activities"
+  },
+  {
+    "canonical": "https://www.dad-space.co.uk/events",
+    "headings": [
+      "Family events and things to do with the kids"
+    ],
+    "robots": "index, follow",
+    "schemaScripts": 3,
+    "title": "Family Events & Things to Do With Kids This Weekend · Dadspace",
+    "url": "https://www.dad-space.co.uk/events"
+  },
+  {
+    "canonical": "https://www.dad-space.co.uk/news",
+    "headings": [],
+    "robots": "index, follow",
+    "schemaScripts": 1,
+    "title": "News · Dadspace",
+    "url": "https://www.dad-space.co.uk/news"
+  },
+  {
+    "canonical": "https://www.dad-space.co.uk/deals",
+    "headings": [
+      "Deals worth a dad look"
+    ],
+    "robots": "index, follow",
+    "schemaScripts": 1,
+    "title": "Family Deals · Dadspace",
+    "url": "https://www.dad-space.co.uk/deals"
+  }
+]

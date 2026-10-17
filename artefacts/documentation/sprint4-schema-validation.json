@@ -1,0 +1,33 @@
+[
+  {
+    "path": "/activities",
+    "errors": 0,
+    "warnings": 0
+  },
+  {
+    "path": "/activities/nct-lampton-baby-cafe--f741c231-f580-4e3d-9335-828b8d37469c",
+    "errors": 0,
+    "warnings": 0
+  },
+  {
+    "path": "/venues/sea-life-aquarium-london--67ec8f30-7e2e-4c9f-a889-2bdeb5558e92",
+    "errors": 0,
+    "warnings": 0
+  },
+  {
+    "path": "/events",
+    "errors": 0,
+    "warnings": 0
+  },
+  {
+    "path": "/events/nct-staines-ashford-and-egham-nearly-new-sale--a95c7cce-23a5-4294-84c9-12e4885d7dda",
+    "errors": 0,
+    "warnings": 0
+  },
+  {
+    "path": "/venues",
+    "errors": 0,
+    "warnings": 0,
+    "evidence": "CollectionPage expanded: 0 ERRORS 0 WARNINGS"
+  }
+]

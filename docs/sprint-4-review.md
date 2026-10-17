@@ -33,3 +33,12 @@ The fixture matrix covers missing configuration, query errors, thrown transport 
 External Schema.org reports and current preview readback are saved with the sprint artifacts. Validation demonstrates schema vocabulary/shape and conservative claims; it does not establish Google indexing or event-rich-result eligibility. Missing optional facts remain omitted. Final checks/results are recorded in the PR and tracker.
 
 No remaining ticket is closed by this document alone. After decisions: deploy approved code, enable only approved reviewer access, apply the one approved aquarium merge, confirm old/new URLs and public surfaces, verify imports preserve the resolved identity, then close applicable stories/tickets and record accepted points once. Retaining Inwood is a legitimate evidence-based outcome for that group.
+
+## Final verification — 17 October
+
+- 147 Node tests pass, including 13 Sprint 4 regressions; TypeScript and all PR CI checks pass at source commit a34ea893b9cd1af6019c94c26f401a165f76b0de. Vercel preview build succeeds.
+- External Schema.org validator: zero errors and zero warnings on six representative list/detail pages. [Schema reports](../artefacts/documentation/sprint4-schema-validation.json).
+- [Visible detail/structured ID comparison](../artefacts/documentation/sprint4-detail-readback.json): aquarium, NCT Lampton Baby Cafe and NCT Staines/Ashford/Egham Nearly New Sale names and canonical IDs match the rendered detail pages. Preview robots are noindex,nofollow.
+- [Production route readback](../artefacts/documentation/sprint4-public-readback.json) records current production listing routes and canonical metadata before this proposed release. Home was separately inspected. This is a route smoke check, not certification of every content record.
+- Existing hidden Little Garden Nursery detail returns 404 in the proposed preview; no venue entity is published there. Newly revoked states, alias rollback and hidden-photo refusal are controlled regressions; no live fixtures were introduced.
+- Final owner decisions and approved follow-through remain pending. These results do not close #89 before the approved data outcome and post-release readback.
