@@ -39,8 +39,8 @@ function reviewer(user, env={}) {
   return load('lib/operations/reviewer.ts', { 'server-only': {}, '@/lib/supabase/server': { createClient: async () => ({ auth: { getUser: async () => ({ data:{user},error:null }) } }) }, './access':access }, env)
 }
 test('reviewer permission is separate from operator permission and metadata claims', async () => {
-  const user = { id: owner, email:'owner@example.com',email_confirmed_at:'2026-10-14T12:00:00Z',user_metadata:{reviewer:true} }
-  assert.equal(await reviewer(user,{DADSPACE_REVIEWER_USER_IDS:owner}).reviewIdentity(),null)
+  const user = { id: owner, email:'imransinvestments@gmail.com',email_confirmed_at:'2026-10-14T12:00:00Z',user_metadata:{reviewer:true} }
+  assert.equal(await reviewer({...user,email:'other@example.com'},{DADSPACE_OPERATOR_USER_IDS:owner,DADSPACE_OPERATOR_EMAILS:'other@example.com',DADSPACE_REVIEWER_USER_IDS:owner}).reviewIdentity(),null)
   assert.equal((await reviewer(user,{DADSPACE_OPERATOR_EMAILS:user.email}).reviewIdentity()).reviewer,false)
   assert.equal((await reviewer(user,{DADSPACE_OPERATOR_EMAILS:user.email,DADSPACE_REVIEWER_USER_IDS:owner}).reviewIdentity()).reviewer,true)
   assert.equal(await reviewer({...user,is_anonymous:true},{DADSPACE_OPERATOR_EMAILS:user.email,DADSPACE_REVIEWER_USER_IDS:owner}).reviewIdentity(),null)

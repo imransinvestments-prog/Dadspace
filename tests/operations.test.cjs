@@ -14,6 +14,7 @@ const health = load('lib/operations/health.ts')
 const access = load('lib/operations/access.ts')
 const owner = '12345678-1234-1234-1234-123456789abc'
 const other = '12345678-1234-1234-1234-123456789def'
+const ownerUser = { id: owner, email: 'imransinvestments@gmail.com', email_confirmed_at: '2026-10-17T10:00:00Z' }
 
 test('operator identity fails closed and cannot be inferred from metadata or partial ID', () => {
   assert.equal(access.isOperationsUser(owner, undefined), false)
@@ -68,11 +69,11 @@ test('server gate rejects unauthenticated users and ignores user-editable admin 
   const fetcher = async () => { calls++; throw new Error('offline') }
   assert.equal((await dashboard({ data: { user: null }, error: null }, fetcher).getOperationsDashboard()).access, 'sign-in')
   assert.equal((await dashboard({ data: { user: { id: other, user_metadata: { admin: true }, app_metadata: { role: 'operator' } } }, error: null }, fetcher).getOperationsDashboard()).access, 'denied')
-  assert.equal((await dashboard({ data: { user: { id: owner } }, error: { message: 'expired' } }, fetcher).getOperationsDashboard()).access, 'sign-in')
+  assert.equal((await dashboard({ data: { user: ownerUser }, error: { message: 'expired' } }, fetcher).getOperationsDashboard()).access, 'sign-in')
   assert.equal(calls, 0)
 })
 test('authorised read shows unavailable evidence honestly and partial API failure does not drop other workers', async () => {
-  const result = await dashboard({ data: { user: { id: owner } }, error: null }).getOperationsDashboard()
+  const result = await dashboard({ data: { user: ownerUser }, error: null }).getOperationsDashboard()
   assert.equal(result.access, 'allowed')
   assert.equal(result.evidence.observations, null)
   let calls = 0
@@ -82,7 +83,7 @@ test('authorised read shows unavailable evidence honestly and partial API failur
     if (url.includes('/jobs?')) return { ok: true, json: async () => ({ jobs: [{ name: 'news / news', status: 'completed', conclusion: 'success', completed_at: run.updated_at }], total_count: 1 }) }
     return { ok: true, json: async () => ({ workflow_runs: [run, { ...run, event: 'workflow_dispatch' }] }) }
   }
-  const partial = await dashboard({ data: { user: { id: owner } }, error: null }, fetcher).getOperationsDashboard()
+  const partial = await dashboard({ data: { user: ownerUser }, error: null }, fetcher).getOperationsDashboard()
   assert.equal(partial.evidence.observations.length, 1)
   assert.equal(partial.evidence.original, null)
   assert.equal(partial.evidence.shadow, null)
@@ -90,6 +91,13 @@ test('authorised read shows unavailable evidence honestly and partial API failur
 })
 
 test('malformed public evidence fails safely after verified operator access', async () => {
-  const result = await dashboard({ data: { user: { id: owner } }, error: null }, async () => ({ ok: true, json: async () => null })).getOperationsDashboard()
+  const result = await dashboard({ data: { user: ownerUser }, error: null }, async () => ({ ok: true, json: async () => null })).getOperationsDashboard()
   assert.equal(result.access, 'unavailable')
 })
+
+ test('only the confirmed owner can enter operations even with legacy allowlists', async () => {
+  for (const user of [{ id: owner }, { ...ownerUser, email: 'other@example.com' }, { ...ownerUser, email_confirmed_at: undefined }, { ...ownerUser, is_anonymous: true }, { id: owner, user_metadata: { email: ownerUser.email } }]) {
+    assert.equal((await dashboard({ data: { user }, error: null }).getOperationsDashboard()).access, 'denied')
+  }
+  assert.equal(access.isOperationsOwner({ ...ownerUser, email: 'IMRANSINVESTMENTS@gmail.com' }), true)
+ })

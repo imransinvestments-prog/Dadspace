@@ -1,6 +1,6 @@
 import "server-only"
 import { createClient } from "@/lib/supabase/server"
-import { isOperationsUser, isVerifiedOperationsEmail } from "./access"
+import { isOperationsOwner } from "./access"
 
 // Every entry point verifies the server identity before any privileged reads.
 export async function operationsAccess(): Promise<"allowed" | "denied" | "sign-in" | "unavailable"> {
@@ -9,7 +9,6 @@ export async function operationsAccess(): Promise<"allowed" | "denied" | "sign-i
     const { data, error } = await (await createClient()).auth.getUser()
     if (error || !data.user) return "sign-in"
     if (data.user.is_anonymous) return "denied"
-    return isOperationsUser(data.user.id, process.env.DADSPACE_OPERATOR_USER_IDS) ||
-      isVerifiedOperationsEmail(data.user, process.env.DADSPACE_OPERATOR_EMAILS) ? "allowed" : "denied"
+    return isOperationsOwner(data.user) ? "allowed" : "denied"
   } catch { return "unavailable" }
 }

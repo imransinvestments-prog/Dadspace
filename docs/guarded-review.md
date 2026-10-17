@@ -3,7 +3,9 @@
 Sprint 4 (#174), #33. Routes: `/ops/review` to `/ops/decision`.
 
 Operators can inspect venue evidence, canonical candidates and signed previews.
-Applying requires existing operator access and the separate server-only
+Only the confirmed Auth email `imransinvestments@gmail.com` can access Operations.
+Legacy operator UUID/email environment allowlists cannot widen this policy.
+Applying additionally requires the separate server-only
 `DADSPACE_REVIEWER_USER_IDS` allowlist of exact verified Auth UUIDs. Empty means
 no reviewers. Never derive permission from profile metadata or email fragments.
 Reviewer provisioning requires explicit owner approval after preview review.
