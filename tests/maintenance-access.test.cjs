@@ -4,7 +4,7 @@ const fs=require('node:fs'),vm=require('node:vm'),ts=require('typescript')
 function load(file,deps={},env={}){
   const module={exports:{}}
   const code=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText
-  vm.runInNewContext(code,{module,exports:module.exports,Buffer,Date,Number,Intl,AbortSignal,URL,process:{env},require:n=>deps[n]??require(n)})
+  vm.runInNewContext(code,{module,exports:module.exports,Buffer,Date,Number,Intl,AbortSignal,URL,FormData,process:{env},require:n=>deps[n]??require(n)})
   return module.exports
 }
 const tokens=load('lib/operations/maintenance-token.ts',{'server-only':{}})
@@ -75,4 +75,14 @@ test('Google feed links retain their public search identity without retaining to
   assert.equal(url.searchParams.get('q'),'paternity leave UK')
   assert.equal(url.searchParams.get('token'),null)
   assert.equal(module.newsFeedEvidenceUrl('https://other.example/feed?q=private&token=secret'),'https://other.example/feed')
+})
+test('preview validation explains invalid reasons and mismatched inputs without calling privileged planning',async()=>{
+  let calls=0
+  const actions=load('app/ops/editorial/actions.ts',{'next/cache':{revalidatePath:()=>{}},'@/lib/operations/maintenance-token':tokens,'@/lib/operations/maintenance':{previewMaintenance:async()=>{calls++;return {canApply:false,description:'Read-only plan'}}}})
+  const form=new FormData();form.set('family','originals');form.set('action','hide');form.set('record','daily-2026-10-17');form.set('reason','   test   ')
+  assert.match((await actions.preview({},form)).message,/detailed reason/);assert.equal(calls,0)
+  form.set('reason','Preview test only; no live action.');form.set('family','news')
+  assert.match((await actions.preview({},form)).message,/area, action and record ID/);assert.equal(calls,0)
+  form.set('family','originals')
+  assert.match((await actions.preview({},form)).message,/Preview only/);assert.equal(calls,1)
 })
