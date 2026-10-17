@@ -12,7 +12,6 @@ on:
       - 'lib/distance.ts'
       - 'news*'
       - 'scripts/test*news*'
-      - 'tests/test_news_maintenance.py'
       - 'tests/test_maintenance_run.py'
       - 'scripts/maintenance-run.py'
       - 'package.json'
@@ -73,7 +72,7 @@ jobs:
         run: |
           node scripts/test-news-locality.mjs
           python scripts/test_news_locality.py
-          python -m unittest discover -s tests -p test_news_maintenance.py -v
+          python scripts/test_news_maintenance.py
           python -m unittest discover -s tests -p test_maintenance_run.py -v
       - name: Production build
         run: pnpm build
