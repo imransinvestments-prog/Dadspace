@@ -1,6 +1,19 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { eligibleDeal, selectDeals, dealItemKey, merchantAdvertised, dealBenefit } from "../lib/deals-selection.ts"
+import { eligibleDeal, selectDeals, dealItemKey, merchantAdvertised, dealBenefit, dealDisplayTitle } from "../lib/deals-selection.ts"
+
+test('display suppresses only trailing empty/default merchant variants', () => {
+  for (const suffix of ['Default Title', 'default title', '  DeFaUlT   TiTle  ', 'Default', '', '  ']) {
+    assert.equal(dealDisplayTitle(`Peppa Pig Trunki — ${suffix}`), 'Peppa Pig Trunki')
+  }
+  for (const title of ['Coat — 7 years', 'Pyjamas — Lilac / 2 - 3 Y', 'Bike — 20 inch wheel', 'Default Title', 'Default Choice Cot', 'The Default Title Collection — Blue', 'Cot — Default Title Edition']) {
+    assert.equal(dealDisplayTitle(title), title)
+  }
+  const original = { id: 'variant-123', title: 'Trunki — Default Title', link: 'https://shop.example/product?variant=123' }
+  const snapshot = { ...original }
+  assert.equal(dealDisplayTitle(original.title), 'Trunki')
+  assert.deepEqual(original, snapshot)
+})
 
 const now = Date.parse("2026-10-05T12:00:00Z")
 
