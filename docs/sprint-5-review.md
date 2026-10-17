@@ -1,5 +1,15 @@
 # Sprint 5 — consolidated review
 
+## Current status — 17 October 2026, after owner decisions
+
+**18/24 accepted; six remain.** #122, #123, #124, #130 and #176 are closed. #126/#127 remain open for three held News location revisions and final targeted acceptance. The 16 approved News corrections committed at 15:30 UTC, with exact readback and no unintended selected-field changes; three held rows plus the Monmouthshire no-op were unchanged. Fresh Deals readback confirmed the same 17 selected offers, all owner-scored passes. Freshness targets and diagnostic Activities interpretation are explicitly approved.
+
+New follow-up #180 (5), #181 (5), #182 (5), #183 (3) are refined, provisional backlog stories outside Sprint 5. They do not promise a complete Activities epic or start a new sprint. See [final News proposals](./sprint-5-remaining-news-decisions.md) and the timestamped `artefacts/data/sprint5-burndown-ledger.json`.
+
+The initial review packet below is retained as history. Its references to pending decisions, unapplied corrections and zero accepted points describe the pre-review state, not current status. The update also refreshes the operator status copy; its additional county-filter fix requires review before release/application.
+
+## Initial review packet (historical)
+
 Started 17 October 2026, tracker [#178](https://github.com/imransinvestments-prog/Dadspace/issues/178). Committed 24 points; **accepted 0, remaining 24** until applicable human, release and data-readback gates pass. Scope is #122 (5), #123 (2), #124 (3), #127 (3), #126 (3), #130 (5), #176 (3). No deadline or ideal historical burndown has been invented.
 
 ## Owner decisions, together

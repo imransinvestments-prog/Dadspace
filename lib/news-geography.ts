@@ -32,7 +32,11 @@ export function newsDistrict(value: unknown, nation: string): string | null {
 
 export function newsCounty(value: unknown, nation: string): string | null {
   const token = newsArea(value)
-  return token && (geography.counties as Record<string, string>)[token] === nation ? token : null
+  if (!token) return null
+  const counties = geography.counties as Record<string, string>
+  if (counties[token] === nation) return token
+  const district = (geography.districts as Record<string, { nation: string; county: string | null }>)[token]
+  return district?.nation === nation && district.county && counties[district.county] === nation ? district.county : null
 }
 
 /** Persisted values must already be plain slugs; never interpolate raw input. */

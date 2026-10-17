@@ -70,6 +70,17 @@ const cases = [
   [{ region: 'wales', geo_scope: 'local', locality: 'cambridge' }, false],
 ]
 for (const [row, expected] of cases) assert.equal(split(filter).some(part => match(part, row)), expected, JSON.stringify(row))
+// County-wide multi-district stories reach each constituent district, while
+// district-specific stories still do not leak to other districts or nations.
+for (const district of ['cheshire_east','cheshire_west_and_chester','halton','warrington']) {
+  const cheshire={version:2,region:'england',geoRegion:'north_west',adminArea:district,locality:district}
+  assert.equal(parseNewsLocation(cheshire).adminArea,'cheshire')
+  const expr=newsLocationFilter('england',cheshire)
+  assert.equal(split(expr).some(p=>match(p,{region:'england',geo_scope:'local',admin_area:'cheshire',locality:null})),true)
+  assert.equal(split(expr).some(p=>match(p,{region:'england',geo_scope:'local',admin_area:'cheshire',locality:district==='cheshire_east'?'cheshire_west_and_chester':'cheshire_east'})),false)
+  assert.equal(split(expr).some(p=>match(p,{region:'wales',geo_scope:'local',admin_area:'cheshire',locality:null})),false)
+}
+assert.equal(parseNewsLocation({...location,adminArea:'lancashire',locality:'preston'}).adminArea,'lancashire')
 assert.equal(newsLocationFilter('all', location), null)
 assert.equal(newsLocationFilter('england', null), 'region.eq.uk,region.eq.england')
 assert.equal(newsLocationFilter('scotland', location), 'region.eq.uk,region.eq.scotland')

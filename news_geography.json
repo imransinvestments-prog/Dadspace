@@ -296,11 +296,11 @@
     },
     "cheshire_east": {
       "nation": "england",
-      "county": null
+      "county": "cheshire"
     },
     "cheshire_west_and_chester": {
       "nation": "england",
-      "county": null
+      "county": "cheshire"
     },
     "chesterfield": {
       "nation": "england",
@@ -580,7 +580,7 @@
     },
     "halton": {
       "nation": "england",
-      "county": null
+      "county": "cheshire"
     },
     "hammersmith_and_fulham": {
       "nation": "england",
@@ -1352,7 +1352,7 @@
     },
     "warrington": {
       "nation": "england",
-      "county": null
+      "county": "cheshire"
     },
     "warwick": {
       "nation": "england",
@@ -1500,6 +1500,7 @@
     "surrey": "england",
     "warwickshire": "england",
     "west_sussex": "england",
-    "worcestershire": "england"
+    "worcestershire": "england",
+    "cheshire": "england"
   }
 }

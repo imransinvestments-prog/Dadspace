@@ -25,6 +25,17 @@ class LocalityTests(unittest.TestCase):
         self.assertEqual(worker.normalise_geo({"region": "england"}), worker.UNKNOWN_GEO)
         self.assertIsNotNone(worker.raw_geo_problem({"region": "england"}))
 
+    def test_cheshire_county_context_preserves_district_specificity(self):
+        for name in ("cheshire_east", "cheshire_west_and_chester", "halton", "warrington"):
+            self.assertEqual(worker.county(name, "england"), "cheshire")
+            self.assertIsNone(worker.county(name, "wales"))
+        data = result()
+        data.update(admin_area="Cheshire", locality="")
+        self.assertEqual(worker.normalise_geo(data), {"geo_scope":"local","geo_region":None,"admin_area":"cheshire","locality":None})
+        data.update(locality="Cheshire East")
+        self.assertEqual(worker.normalise_geo(data)["locality"],"cheshire_east")
+        self.assertEqual(worker.normalise_geo(data)["admin_area"],"cheshire")
+
     def test_normalisation_and_supported_regions(self):
         data = result()
         self.assertEqual(worker.normalise_geo(data)["locality"], "cambridge")
@@ -54,7 +65,7 @@ class LocalityTests(unittest.TestCase):
         data = result(); data.update(locality="Warrington", admin_area="Greater Manchester")
         geo = worker.normalise_geo(data, {"title": "Warrington council opens family sessions"})
         self.assertEqual(geo["locality"], "warrington")
-        self.assertIsNone(geo["admin_area"])
+        self.assertEqual(geo["admin_area"], "cheshire")
         data.update(geo_scope="admin_area", admin_area="Norfolk", locality="")
         geo = worker.normalise_geo(data, {"title": "Family days out across Norfolk"})
         self.assertEqual(geo["geo_scope"], "local")
@@ -102,6 +113,18 @@ class LocalityTests(unittest.TestCase):
         self.assertIn("NEWS GEOGRAPHY", output.getvalue())
         self.assertIn('"locality": "cambridge"', output.getvalue())
         self.assertEqual(worker._review[0]["stage"], "collection")
+
+
+    def test_repeat_url_save_uses_ignore_duplicates_not_metadata_overwrite(self):
+        rows = [{"url":"https://example.test/reviewed", "geo_scope":"local", "locality":"cambridge"}]
+        with patch.object(worker.core, "sb") as request:
+            worker._original_save_items(rows)
+            worker._original_save_items(rows)
+        self.assertEqual(request.call_count, 2)
+        for call in request.call_args_list:
+            self.assertEqual(call.args[:2], ("POST", "news_items"))
+            self.assertEqual(call.kwargs["params"], {"on_conflict":"url"})
+            self.assertEqual(call.kwargs["extra_headers"]["Prefer"], "resolution=ignore-duplicates,return=minimal")
 
 
 if __name__ == "__main__":
