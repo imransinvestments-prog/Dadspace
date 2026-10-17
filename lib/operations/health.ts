@@ -4,7 +4,7 @@ export type Run = {
 }
 
 /** Slot-based warning, separate from job status and source/publication success.
- * Proposed deadlines only until owner approval under #123/#124.
+ * Deadlines approved by the owner on 17 October 2026 under #124.
  * Public GitHub metadata cannot establish why dispatch was late.
  */
 export function scheduledSlotHealth(observations: Observation[] | null, key: string, now = new Date(), dispatchMinutes = 60, completionMinutes = 240) {

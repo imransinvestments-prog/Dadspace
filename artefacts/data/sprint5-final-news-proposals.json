@@ -1,0 +1,115 @@
+{
+  "rows": [
+    {
+      "id": "736",
+      "title": "Port Glasgow mum praises £2 hot meal scheme as families 'can't afford days out' - Yahoo News UK",
+      "before": {
+        "id": 736,
+        "url": "https://uk.news.yahoo.com/port-glasgow-mum-praises-2-094132002.html",
+        "title": "Port Glasgow mum praises £2 hot meal scheme as families 'can't afford days out' - Yahoo News UK",
+        "region": "scotland",
+        "summary": "A Port Glasgow initiative offers two-pound hot meals for local families struggling with high activity costs.",
+        "category": "activities",
+        "locality": null,
+        "geo_scope": null,
+        "relevance": 3,
+        "admin_area": null,
+        "geo_region": null,
+        "source_name": "Yahoo News UK",
+        "published_at": "2026-10-07T09:41:32+00:00",
+        "why_it_matters": "A cheap, hot meal option for local families during days out."
+      },
+      "proposed": {
+        "id": 736,
+        "url": "https://uk.news.yahoo.com/port-glasgow-mum-praises-2-094132002.html",
+        "title": "Port Glasgow mum praises £2 hot meal scheme as families 'can't afford days out' - Yahoo News UK",
+        "region": "scotland",
+        "summary": "A Port Glasgow initiative offers two-pound hot meals for local families struggling with high activity costs.",
+        "category": "activities",
+        "locality": "inverclyde",
+        "geo_scope": "local",
+        "relevance": 3,
+        "admin_area": null,
+        "geo_region": null,
+        "source_name": "Yahoo News UK",
+        "published_at": "2026-10-07T09:41:32+00:00",
+        "why_it_matters": "A cheap, hot meal option for local families during days out."
+      },
+      "status": "Held — requires revised owner approval; Cheshire also requires the prepared filter fix deployed first"
+    },
+    {
+      "id": "739",
+      "title": "Wand making, dodgeball and glow stick disco: your guide to half-term holiday fun - Sandbach Nub News",
+      "before": {
+        "id": 739,
+        "url": "https://sandbach.nub.news/news/local-news/sp14219-wand-making-dodgeball-and-glow-stick-disco-your-guide-to-half-term-holiday-fun-310364",
+        "title": "Wand making, dodgeball and glow stick disco: your guide to half-term holiday fun - Sandbach Nub News",
+        "region": "england",
+        "summary": "Sandbach offers a variety of half-term activities including wand making, dodgeball, and a glow stick disco.",
+        "category": "activities",
+        "locality": null,
+        "geo_scope": null,
+        "relevance": 3,
+        "admin_area": null,
+        "geo_region": null,
+        "source_name": "Sandbach Nub News",
+        "published_at": "2026-10-13T06:50:00+00:00",
+        "why_it_matters": "Gives you fun local event options to keep kids busy."
+      },
+      "proposed": {
+        "id": 739,
+        "url": "https://sandbach.nub.news/news/local-news/sp14219-wand-making-dodgeball-and-glow-stick-disco-your-guide-to-half-term-holiday-fun-310364",
+        "title": "Wand making, dodgeball and glow stick disco: your guide to half-term holiday fun - Sandbach Nub News",
+        "region": "england",
+        "summary": "Sandbach offers a variety of half-term activities including wand making, dodgeball, and a glow stick disco.",
+        "category": "activities",
+        "locality": null,
+        "geo_scope": "local",
+        "relevance": 3,
+        "admin_area": "cheshire",
+        "geo_region": null,
+        "source_name": "Sandbach Nub News",
+        "published_at": "2026-10-13T06:50:00+00:00",
+        "why_it_matters": "Gives you fun local event options to keep kids busy."
+      },
+      "status": "Held — requires revised owner approval; Cheshire also requires the prepared filter fix deployed first"
+    },
+    {
+      "id": "855",
+      "title": "Baby loss leaves ‘permanent scar’, says bereaved dad amid 'incredible' support - Colchester Gazette",
+      "before": {
+        "id": 855,
+        "url": "https://www.gazette-news.co.uk/news/26632520.bereaved-dad-praises-maldon-support-baby-loss-week/",
+        "title": "Baby loss leaves ‘permanent scar’, says bereaved dad amid 'incredible' support - Colchester Gazette",
+        "region": "uk",
+        "summary": "A grieving father shares his experience of baby loss and highlights the vital support available for bereaved parents.",
+        "category": "wellbeing",
+        "locality": null,
+        "geo_scope": "nationwide",
+        "relevance": 3,
+        "admin_area": null,
+        "geo_region": null,
+        "source_name": "Colchester Gazette",
+        "published_at": "2026-10-14T16:00:00+00:00",
+        "why_it_matters": "Offers emotional validation and highlights crucial support resources for dads coping with baby loss."
+      },
+      "proposed": {
+        "id": 855,
+        "url": "https://www.gazette-news.co.uk/news/26632520.bereaved-dad-praises-maldon-support-baby-loss-week/",
+        "title": "Baby loss leaves ‘permanent scar’, says bereaved dad amid 'incredible' support - Colchester Gazette",
+        "region": "england",
+        "summary": "A grieving father shares his experience of baby loss and highlights the vital support available for bereaved parents.",
+        "category": "wellbeing",
+        "locality": "maldon",
+        "geo_scope": "local",
+        "relevance": 3,
+        "admin_area": "essex",
+        "geo_region": null,
+        "source_name": "Colchester Gazette",
+        "published_at": "2026-10-14T16:00:00+00:00",
+        "why_it_matters": "Offers emotional validation and highlights crucial support resources for dads coping with baby loss."
+      },
+      "status": "Held — requires revised owner approval; Cheshire also requires the prepared filter fix deployed first"
+    }
+  ]
+}

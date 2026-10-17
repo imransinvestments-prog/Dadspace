@@ -1,5 +1,7 @@
 # Activities reliability discovery — #176
 
+Owner accepted this discovery on 17 October 2026. #176 is closed. Refined residual backlog: #180 (5), #181 (5, bounded source family), #182 (5, eligibility reporting, not canonical matching), #183 (3, programme identity regressions, not historical repair). Existing #40/#135/#146 scopes are explicitly excluded from those stories. No next sprint is committed.
+
 Evidence captured 17 October 2026. Discovery only; no source activation, paid extraction, cleanup or schema change has been applied.
 
 ## Current baseline
@@ -33,7 +35,7 @@ Source-page retrieval on 17 October used web-indexed pages; crawl dates range fr
 
 ## Proposed additional engineering slices
 
-These are provisional refinement estimates, not extra Sprint 5 commitments. Final splitting depends on the 12-record source checks; do not estimate a full source estate from this small cohort.
+These are provisional refinement estimates, not extra Sprint 5 commitments. The deduplicated source-check cohort contains eight records; do not estimate a full source estate from this small cohort.
 
 | Slice | Boundary and evidence | Provisional size | Dependencies / owner gate |
 | --- | --- | ---: | --- |

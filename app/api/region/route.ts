@@ -49,7 +49,7 @@ export async function GET(request: Request) {
       version: NEWS_LOCATION_VERSION,
       region: nation,
       geoRegion: place.country === "England" ? newsGeoRegion(place.region) : null,
-      adminArea: nation ? newsCounty(place.admin_county, nation) ?? newsDistrict(place.admin_district, nation) : null,
+      adminArea: nation ? newsCounty(place.admin_county, nation) ?? newsCounty(place.admin_district, nation) ?? newsDistrict(place.admin_district, nation) : null,
       // Match the worker's council district, never a parish or electoral ward.
       locality: nation ? newsDistrict(place.admin_district, nation) : null,
     })

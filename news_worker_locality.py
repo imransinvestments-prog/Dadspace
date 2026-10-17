@@ -126,7 +126,11 @@ def district(value, nation):
 
 def county(value, nation):
     token = area(value)
-    return token if GEOGRAPHY["counties"].get(token) == nation else None
+    if GEOGRAPHY["counties"].get(token) == nation:
+        return token
+    row = GEOGRAPHY["districts"].get(token, {})
+    parent = row.get("county")
+    return parent if row.get("nation") == nation and GEOGRAPHY["counties"].get(parent) == nation else None
 
 
 def named_in_item(token, item):
