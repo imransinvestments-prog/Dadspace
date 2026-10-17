@@ -1,8 +1,8 @@
 {
-  "date": "2026-10-16",
-  "generated_at": "2026-10-16T10:00:25Z",
+  "date": "2026-10-17",
+  "generated_at": "2026-10-17T08:52:38.603Z",
   "status": "success",
-  "snapshot": "reporting/snapshots/2026-10-16/100025Z/",
-  "previous_success_at": "2026-10-16T09:57:39.154Z",
-  "limitations": "Brief delivery late but confirmed at 10:59 BST; no 16 October worker/Friday publication evidence; county public supply and full billing unavailable."
+  "snapshot": "reporting/snapshots/2026-10-17/",
+  "previous_success_at": "2026-10-16T10:00:25Z",
+  "limitations": "No 17 October morning run visible; county/public quality joins and complete billing unavailable; historical registry dated 10–11 October."
 }

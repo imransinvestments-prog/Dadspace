@@ -1,0 +1,4841 @@
+{
+  "generated_at": "2026-10-17T08:52:38.603Z",
+  "timezone": "Europe/London",
+  "repository": "imransinvestments-prog/Dadspace",
+  "scope": "All 170 repository issues/PRs across two pages. Counts include programme/epic/feature hierarchy, not unique deliverables. Board-only draft cards/status fields unavailable.",
+  "counts": {
+    "open_issues": 59,
+    "open_prs": 4,
+    "completed_issues": 15,
+    "merged_prs": 82,
+    "closed_without_completion": 10
+  },
+  "items": [
+    {
+      "number": 170,
+      "title": "Improve mobile discovery navigation, location controls and client/image reuse",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/170",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T01:33:25Z"
+    },
+    {
+      "number": 169,
+      "title": "[Sprint] Small discovery improvements — 17 October 2026",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/169",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Navigation and interface",
+      "updated_at": "2026-10-17T01:32:52Z"
+    },
+    {
+      "number": 168,
+      "title": "Hide default merchant variant placeholders in deal cards (#103)",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/168",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T00:18:24Z"
+    },
+    {
+      "number": 167,
+      "title": "Keep a single main landmark on Deals (#102)",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/167",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T00:15:13Z"
+    },
+    {
+      "number": 166,
+      "title": "Repair garbled discovery filter and loading copy (#97)",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/166",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T22:46:58Z"
+    },
+    {
+      "number": 165,
+      "title": "Preserve distinct sessions while collapsing confirmed camp variants (#90)",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/165",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T21:41:37Z"
+    },
+    {
+      "number": 164,
+      "title": "Make activity cards concise and comparable (#93)",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/164",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T20:32:57Z"
+    },
+    {
+      "number": 163,
+      "title": "Separate activity sessions from programme validity (#91)",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/163",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T17:37:35Z"
+    },
+    {
+      "number": 162,
+      "title": "[Data correction] Review Little Garden Nursery's playground classification",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/162",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Places and local discovery",
+      "updated_at": "2026-10-16T17:03:51Z"
+    },
+    {
+      "number": 161,
+      "title": "Disclose venue access conditions before Directions (#88)",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/161",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T17:06:46Z"
+    },
+    {
+      "number": 160,
+      "title": "Complete place radius filtering and consistent discovery counts (#87/S2)",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/160",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T14:15:59Z"
+    },
+    {
+      "number": 159,
+      "title": "Bound activity and event discovery to an explicit local radius (#87/S1)",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/159",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T11:29:35Z"
+    },
+    {
+      "number": 158,
+      "title": "[Discovery] Select a reliable Morning Brief scheduling and delivery solution",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/158",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Operations and feed reliability",
+      "updated_at": "2026-10-16T16:07:57Z"
+    },
+    {
+      "number": 157,
+      "title": "[P1] Restore on-time Morning Brief email delivery",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/157",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Operations and feed reliability",
+      "updated_at": "2026-10-16T16:07:59Z"
+    },
+    {
+      "number": 156,
+      "title": "Capture complete news checks in one review pass",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/156",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T00:14:23Z"
+    },
+    {
+      "number": 155,
+      "title": "Add explicit Originals editorial review checks",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/155",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T00:00:10Z"
+    },
+    {
+      "number": 154,
+      "title": "Freeze the 50-article news quality sample and track review progress",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/154",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T22:14:19Z"
+    },
+    {
+      "number": 153,
+      "title": "Clarify optional review evidence and why saving is disabled",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/153",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T21:49:03Z"
+    },
+    {
+      "number": 152,
+      "title": "Show actual review data and keep decision forms visible",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/152",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T21:37:21Z"
+    },
+    {
+      "number": 151,
+      "title": "Make Operations visible throughout the app",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/151",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T21:20:46Z"
+    },
+    {
+      "number": 150,
+      "title": "Add owner review desk and homepage operations login",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/150",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T21:16:51Z"
+    },
+    {
+      "number": 149,
+      "title": "[Feature] Accept upkeep process coverage, usage and release readiness UI",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/149",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Operations and feed reliability",
+      "updated_at": "2026-10-16T16:08:01Z"
+    },
+    {
+      "number": 148,
+      "title": "[Feature] Deliver deals taxonomy, evidence and merchant maintenance queues",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/148",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Deals",
+      "updated_at": "2026-10-16T16:08:03Z"
+    },
+    {
+      "number": 147,
+      "title": "[Feature] Deliver news and Originals editorial maintenance queues",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/147",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "News and Originals",
+      "updated_at": "2026-10-16T16:08:05Z"
+    },
+    {
+      "number": 146,
+      "title": "[Feature] Deliver controlled source and worker maintenance actions",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/146",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Operations and feed reliability",
+      "updated_at": "2026-10-16T16:08:07Z"
+    },
+    {
+      "number": 145,
+      "title": "[Feature] Complete representative provider quality and cost evaluation",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/145",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "AI ingestion and providers",
+      "updated_at": "2026-10-16T16:08:09Z"
+    },
+    {
+      "number": 144,
+      "title": "[Feature] Qualify source-specific deterministic extraction adapters",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/144",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "AI ingestion and providers",
+      "updated_at": "2026-10-16T16:08:11Z"
+    },
+    {
+      "number": 143,
+      "title": "[Feature] Measure production extraction cache and call reduction",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/143",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "AI ingestion and providers",
+      "updated_at": "2026-10-16T16:08:20Z"
+    },
+    {
+      "number": 142,
+      "title": "[Feature] Resolve Gemini access denial and verify the configured model",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/142",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T20:58:00Z"
+    },
+    {
+      "number": 141,
+      "title": "[Feature] Record current performance, field data and Search Console evidence",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/141",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "SEO and performance",
+      "updated_at": "2026-10-16T16:08:21Z"
+    },
+    {
+      "number": 140,
+      "title": "[Feature] Verify discovery image variants at DPR 1, 2 and 3",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/140",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "SEO and performance",
+      "updated_at": "2026-10-17T01:32:50Z"
+    },
+    {
+      "number": 139,
+      "title": "[Feature] Accept validated pilot area and category landing pages",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/139",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "SEO and performance",
+      "updated_at": "2026-10-16T16:08:25Z"
+    },
+    {
+      "number": 138,
+      "title": "[Feature] Validate venue, activity and event structured data",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/138",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "SEO and performance",
+      "updated_at": "2026-10-16T16:08:27Z"
+    },
+    {
+      "number": 137,
+      "title": "[Feature] Verify public visibility revocation, caches and failure paths",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/137",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "SEO and performance",
+      "updated_at": "2026-10-16T16:08:29Z"
+    },
+    {
+      "number": 136,
+      "title": "[Feature] Accept pilot activity quality, breadth and source coverage",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/136",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-16T16:08:31Z"
+    },
+    {
+      "number": 135,
+      "title": "[Feature] Apply reviewed historical programme and session corrections",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/135",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-16T17:24:01Z"
+    },
+    {
+      "number": 134,
+      "title": "[Feature] Resolve permitted Ealing, Merton and Acton programme routes",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/134",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-16T16:08:35Z"
+    },
+    {
+      "number": 133,
+      "title": "[Feature] Qualify Hounslow library programme on the normal runner",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/133",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-16T16:08:37Z"
+    },
+    {
+      "number": 132,
+      "title": "[Feature] Accept scheduled deal refresh, identities and outage recovery",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/132",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Deals",
+      "updated_at": "2026-10-16T16:08:38Z"
+    },
+    {
+      "number": 131,
+      "title": "[Feature] Qualify priority deal supply and canonical taxonomy gaps",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/131",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Deals",
+      "updated_at": "2026-10-16T16:08:40Z"
+    },
+    {
+      "number": 130,
+      "title": "[Feature] Accept published-deal usefulness, ranking and truthful terms",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/130",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Deals",
+      "updated_at": "2026-10-17T00:18:21Z"
+    },
+    {
+      "number": 129,
+      "title": "[Feature] Verify sustained Originals publication and bounded draft recovery",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/129",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "News and Originals",
+      "updated_at": "2026-10-16T16:08:49Z"
+    },
+    {
+      "number": 128,
+      "title": "[Feature] Accept editorial quality of daily tips and Friday guides",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/128",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T00:06:12Z"
+    },
+    {
+      "number": 127,
+      "title": "[Feature] Verify news filters, dates, pagination and repeat ingestion",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/127",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "News and Originals",
+      "updated_at": "2026-10-16T16:08:51Z"
+    },
+    {
+      "number": 126,
+      "title": "[Feature] Accept news relevance, attribution and destination quality",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/126",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "News and Originals",
+      "updated_at": "2026-10-16T16:08:52Z"
+    },
+    {
+      "number": 125,
+      "title": "[Feature] Complete seven-day scheduled feed reliability acceptance",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/125",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Operations and feed reliability",
+      "updated_at": "2026-10-16T16:08:54Z"
+    },
+    {
+      "number": 124,
+      "title": "[Feature] Diagnose delayed scheduled starts and verify freshness alerts",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/124",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Operations and feed reliability",
+      "updated_at": "2026-10-16T16:08:56Z"
+    },
+    {
+      "number": 123,
+      "title": "[Feature] Agree remaining pilot quality and coverage thresholds",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/123",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Programme and pilot readiness",
+      "updated_at": "2026-10-16T16:08:58Z"
+    },
+    {
+      "number": 122,
+      "title": "[Feature] Prepare a reproducible pilot quality review pack",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/122",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Programme and pilot readiness",
+      "updated_at": "2026-10-16T16:09:00Z"
+    },
+    {
+      "number": 121,
+      "title": "[Feature] Accurate activity schedules, identities and cards",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/121",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-16T21:41:34Z"
+    },
+    {
+      "number": 120,
+      "title": "[Feature] Qualify and maintain pilot activity sources",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/120",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-16T16:09:03Z"
+    },
+    {
+      "number": 119,
+      "title": "[Feature] Complete public discovery SEO and performance acceptance",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/119",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "SEO and performance",
+      "updated_at": "2026-10-16T16:09:05Z"
+    },
+    {
+      "number": 118,
+      "title": "[Feature] Accessible mobile discovery journeys",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/118",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Navigation and interface",
+      "updated_at": "2026-10-16T22:46:56Z"
+    },
+    {
+      "number": 117,
+      "title": "[Epic] Community beta",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/117",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Community",
+      "updated_at": "2026-10-16T16:09:16Z"
+    },
+    {
+      "number": 116,
+      "title": "[Epic] Efficient and reliable AI ingestion",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/116",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "AI ingestion and providers",
+      "updated_at": "2026-10-16T16:09:17Z"
+    },
+    {
+      "number": 115,
+      "title": "[Epic] Reliable news and Originals",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/115",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "News and Originals",
+      "updated_at": "2026-10-16T16:09:20Z"
+    },
+    {
+      "number": 114,
+      "title": "[Epic] Useful activities and events",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/114",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-16T16:09:21Z"
+    },
+    {
+      "number": 113,
+      "title": "[Epic] Trusted places and local discovery",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/113",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Places and local discovery",
+      "updated_at": "2026-10-16T16:09:23Z"
+    },
+    {
+      "number": 112,
+      "title": "Recover rejected original drafts once and report Gemini access failures accurately",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/112",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T15:56:10Z"
+    },
+    {
+      "number": 111,
+      "title": "Retain redacted Gemini access denial explanations",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/111",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T14:02:12Z"
+    },
+    {
+      "number": 110,
+      "title": "Distinguish Gemini model discovery from permission denial",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/110",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T12:18:36Z"
+    },
+    {
+      "number": 109,
+      "title": "Diagnose Gemini access without model generation",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/109",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T12:07:46Z"
+    },
+    {
+      "number": 108,
+      "title": "Prepare bounded quality cohort and label AI source review accurately",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/108",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T11:57:02Z"
+    },
+    {
+      "number": 107,
+      "title": "Repair shadow diagnostics and add source-reviewed chunk evaluation",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/107",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T11:53:01Z"
+    },
+    {
+      "number": 106,
+      "title": "Record public playground restoration and live visibility verification",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/106",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T10:33:49Z"
+    },
+    {
+      "number": 105,
+      "title": "Hide reviewed venues and parks lacking access; clarify event count scope",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/105",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-14T22:08:38Z"
+    },
+    {
+      "number": 104,
+      "title": "[P2] Give NCT activity supply an explicit recurring refresh and health contract",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/104",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Operations and feed reliability",
+      "updated_at": "2026-10-16T16:09:25Z"
+    },
+    {
+      "number": 103,
+      "title": "[P2] Strip merchant Default Title placeholders from deal display names",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/103",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T00:18:19Z"
+    },
+    {
+      "number": 102,
+      "title": "[P2] Remove nested main landmarks from the Deals page",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/102",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T00:15:12Z"
+    },
+    {
+      "number": 101,
+      "title": "[P1] Remove the hard-coded exclusion of family events mentioning teenagers",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/101",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-16T16:09:30Z"
+    },
+    {
+      "number": 100,
+      "title": "[P2] Normalize country attribution for public library records",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/100",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Places and local discovery",
+      "updated_at": "2026-10-16T16:09:32Z"
+    },
+    {
+      "number": 99,
+      "title": "[P1] Scope event hero totals to the selected location and filters",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/99",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T19:35:17Z"
+    },
+    {
+      "number": 98,
+      "title": "[P3] Reuse the browser Supabase auth client to eliminate duplicate-client warnings",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/98",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Navigation and interface",
+      "updated_at": "2026-10-17T01:32:49Z"
+    },
+    {
+      "number": 97,
+      "title": "[P3] Repair mojibake in age filters and loading copy",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/97",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T22:46:54Z"
+    },
+    {
+      "number": 96,
+      "title": "[P2] Reduce mobile preamble before the first useful discovery choice",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/96",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Navigation and interface",
+      "updated_at": "2026-10-17T00:38:41Z"
+    },
+    {
+      "number": 95,
+      "title": "[P2] Clarify Venues and Originals navigation labels for new visitors",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/95",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Navigation and interface",
+      "updated_at": "2026-10-17T00:38:39Z"
+    },
+    {
+      "number": 94,
+      "title": "[P2] Restore a discoverable Events destination in mobile navigation",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/94",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Navigation and interface",
+      "updated_at": "2026-10-17T00:38:38Z"
+    },
+    {
+      "number": 93,
+      "title": "[P2] Make activity cost and schedule cards concise and comparable",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/93",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T20:32:53Z"
+    },
+    {
+      "number": 92,
+      "title": "[P2] Enrich pilot library details with actionable operator information",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/92",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Places and local discovery",
+      "updated_at": "2026-10-16T16:09:49Z"
+    },
+    {
+      "number": 91,
+      "title": "[P1] Disambiguate activity programme schedules from past occurrence dates",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/91",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T17:37:15Z"
+    },
+    {
+      "number": 90,
+      "title": "[P1] Collapse duplicate camp occurrence cards without hiding distinct sessions",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/90",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T21:41:33Z"
+    },
+    {
+      "number": 89,
+      "title": "[P1] Resolve duplicate place identities shown as separate family options",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/89",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Places and local discovery",
+      "updated_at": "2026-10-16T16:09:54Z"
+    },
+    {
+      "number": 88,
+      "title": "[P1] Complete conditional and unknown playground access presentation",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/88",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T17:06:30Z"
+    },
+    {
+      "number": 87,
+      "title": "[P1] Bound nearby discovery and expose deliberate wider-area results",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/87",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-16T14:15:56Z"
+    },
+    {
+      "number": 86,
+      "title": "[P0] Make indoor and outdoor venue filters match evidenced data",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/86",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T10:31:41Z"
+    },
+    {
+      "number": 85,
+      "title": "[P0] Exclude confirmed adult-only gaming venues from family discovery",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/85",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-14T22:08:39Z"
+    },
+    {
+      "number": 84,
+      "title": "Add zero-model qualification for reviewed Hounslow library programme",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/84",
+      "state": "open",
+      "kind": "PR",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-14T20:52:13Z"
+    },
+    {
+      "number": 83,
+      "title": "Add guarded venue and listing review decisions with audited rollback",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/83",
+      "state": "open",
+      "kind": "PR",
+      "completion": "open",
+      "feature": "Operations and feed reliability",
+      "updated_at": "2026-10-14T20:51:46Z"
+    },
+    {
+      "number": 82,
+      "title": "Preserve safe operations failure handling and record Batch 2 validation",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/82",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-14T16:28:44Z"
+    },
+    {
+      "number": 81,
+      "title": "Add source health and read-only venue and listing review queues",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/81",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-14T16:22:45Z"
+    },
+    {
+      "number": 80,
+      "title": "Show unavailable states when national discovery queries fail",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/80",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-14T15:02:28Z"
+    },
+    {
+      "number": 79,
+      "title": "Add read-only operations dashboard with verified operator access",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/79",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-14T15:25:57Z"
+    },
+    {
+      "number": 78,
+      "title": "Restore deals collection and isolate feed failures",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/78",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-14T14:45:45Z"
+    },
+    {
+      "number": 77,
+      "title": "Capture nonempty listings for provider shadow review",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/77",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-13T16:06:46Z"
+    },
+    {
+      "number": 76,
+      "title": "Compare minimum-thinking Gemini alongside non-reasoning OpenAI",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/76",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-13T10:50:14Z"
+    },
+    {
+      "number": 75,
+      "title": "Preserve Sutton attendance conditions and qualify reviewed programmes",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/75",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-13T09:46:20Z"
+    },
+    {
+      "number": 74,
+      "title": "Add isolated OpenAI shadow comparison for Gemini extraction",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/74",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-12T20:34:21Z"
+    },
+    {
+      "number": 73,
+      "title": "Run workers twice daily for #65 evidence collection",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/73",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-12T20:14:28Z"
+    },
+    {
+      "number": 72,
+      "title": "Reduce extraction input with per-page cache and structured parsing",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/72",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-12T11:20:49Z"
+    },
+    {
+      "number": 71,
+      "title": "DS-10: preserve activity dates and prepare reviewed session splits",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/71",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-12T20:11:21Z"
+    },
+    {
+      "number": 70,
+      "title": "[Epic] Operations and pilot readiness",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/70",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Operations and feed reliability",
+      "updated_at": "2026-10-16T16:09:58Z"
+    },
+    {
+      "number": 69,
+      "title": "Add configurable LLM providers and source-grounded extraction",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/69",
+      "state": "open",
+      "kind": "PR",
+      "completion": "open",
+      "feature": "AI ingestion and providers",
+      "updated_at": "2026-10-13T16:14:00Z"
+    },
+    {
+      "number": 68,
+      "title": "DS-09: problem-source review and all-London collection routes",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/68",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-10T23:30:48Z"
+    },
+    {
+      "number": 67,
+      "title": "Reduce routine Gemini calls and add extraction usage controls",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/67",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-11T12:52:29Z"
+    },
+    {
+      "number": 66,
+      "title": "[Feature] Complete shared LLM provider integration and reviewed rollout",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/66",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "AI ingestion and providers",
+      "updated_at": "2026-10-16T16:10:00Z"
+    },
+    {
+      "number": 65,
+      "title": "Reduce Gemini API usage and cost across ingestion workers",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/65",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "closed without completion",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T19:35:12Z"
+    },
+    {
+      "number": 64,
+      "title": "Add Originals with automatic daily tips and Friday guides",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/64",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-10T10:14:43Z"
+    },
+    {
+      "number": 63,
+      "title": "Originals page with automatic daily tips and Friday guides",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/63",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "closed without completion",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T19:35:23Z"
+    },
+    {
+      "number": 62,
+      "title": "Promote latest testing changes: interactive monthly news newspaper",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/62",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-09T21:16:17Z"
+    },
+    {
+      "number": 61,
+      "title": "News Feed: interactive monthly newspaper on the homepage",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/61",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-09T21:17:56Z"
+    },
+    {
+      "number": 60,
+      "title": "Repair activities ingestion and audit library/museum source coverage",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/60",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-09T11:39:41Z"
+    },
+    {
+      "number": 59,
+      "title": "Quietly estimate the initial UK area from the internet connection",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/59",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-08T20:07:47Z"
+    },
+    {
+      "number": 58,
+      "title": "Show central London results immediately with inline location search",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/58",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-08T20:01:19Z"
+    },
+    {
+      "number": 57,
+      "title": "Keep national event outages distinct from genuine empty supply",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/57",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-08T15:07:18Z"
+    },
+    {
+      "number": 56,
+      "title": "Distinguish empty homepage news from feed failures and record SEO evidence",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/56",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-08T15:00:41Z"
+    },
+    {
+      "number": 55,
+      "title": "Record live SEO evidence and correct sitemap checks",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/55",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-08T13:20:42Z"
+    },
+    {
+      "number": 54,
+      "title": "Make venue discovery readable without location selection",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/54",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-08T13:00:35Z"
+    },
+    {
+      "number": 53,
+      "title": "Improve public venue SEO, location-independent rendering, performance and content trust",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/53",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "closed without completion",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T19:35:25Z"
+    },
+    {
+      "number": 52,
+      "title": "Fix intermittent venue directory loading timeouts",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/52",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-08T11:54:26Z"
+    },
+    {
+      "number": 51,
+      "title": "Allow users to start with a town or postcode without location permission",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/51",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-08T11:52:45Z"
+    },
+    {
+      "number": 50,
+      "title": "Launch Dadspace homepage and release the integrated MVP",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/50",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-08T11:37:57Z"
+    },
+    {
+      "number": 49,
+      "title": "Validate and activate AWIN deals; install Publisher MasterTag",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/49",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-06T17:10:51Z"
+    },
+    {
+      "number": 48,
+      "title": "[Epic] Valuable and trustworthy deals",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/48",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Deals",
+      "updated_at": "2026-10-16T16:10:02Z"
+    },
+    {
+      "number": 47,
+      "title": "Show only one deal per item type",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/47",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-05T21:35:09Z"
+    },
+    {
+      "number": 46,
+      "title": "Improve deals evidence, family offers and live homepage selection",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/46",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-05T21:25:21Z"
+    },
+    {
+      "number": 45,
+      "title": "Refresh Dadspace architecture, worker and data flow documentation",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/45",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-08T11:37:59Z"
+    },
+    {
+      "number": 44,
+      "title": "[Feature] Discovery pilot acceptance and operational handover",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/44",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Programme and pilot readiness",
+      "updated_at": "2026-10-16T16:10:09Z"
+    },
+    {
+      "number": 43,
+      "title": "[Feature] Community moderation, limits and access enforcement",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/43",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Community",
+      "updated_at": "2026-10-16T16:10:11Z"
+    },
+    {
+      "number": 42,
+      "title": "[Feature] Persistent community rooms and resilient live messaging",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/42",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Community",
+      "updated_at": "2026-10-16T16:10:13Z"
+    },
+    {
+      "number": 41,
+      "title": "[Feature] Community architecture, access and live-delivery spike",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/41",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Community",
+      "updated_at": "2026-10-16T16:10:14Z"
+    },
+    {
+      "number": 40,
+      "title": "[Feature] Canonical listing-to-venue matching and provenance",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/40",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Places and local discovery",
+      "updated_at": "2026-10-16T16:10:17Z"
+    },
+    {
+      "number": 39,
+      "title": "DS-10: Activities feed repair, library/museum sources, freshness and worker validation",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/39",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "closed without completion",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T19:35:20Z"
+    },
+    {
+      "number": 38,
+      "title": "DS-09: Activity source matrix and coverage baseline",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/38",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-12T19:53:25Z"
+    },
+    {
+      "number": 37,
+      "title": "DS-08: Deal verification, useful cards and live homepage integration",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/37",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "closed without completion",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T19:35:28Z"
+    },
+    {
+      "number": 36,
+      "title": "DS-07: Deals source, relevance and value audit with ranking",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/36",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "closed without completion",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T19:35:31Z"
+    },
+    {
+      "number": 35,
+      "title": "DS-06: News correctness and public journey verification",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/35",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "closed without completion",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T19:35:33Z"
+    },
+    {
+      "number": 34,
+      "title": "[Feature] Pilot venue quality audit and bounded remediation",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/34",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Places and local discovery",
+      "updated_at": "2026-10-16T17:06:31Z"
+    },
+    {
+      "number": 33,
+      "title": "[Feature] Guarded venue review decisions and canonical merges",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/33",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Operations and feed reliability",
+      "updated_at": "2026-10-16T16:10:21Z"
+    },
+    {
+      "number": 32,
+      "title": "DS-03: Collector independence, health and freshness reporting",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/32",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "closed without completion",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T19:35:15Z"
+    },
+    {
+      "number": 31,
+      "title": "DS-02: Audience, pilot geography and quality rubric",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/31",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "closed without completion",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T19:35:36Z"
+    },
+    {
+      "number": 30,
+      "title": "DS-01: Production/pipeline baseline and quality samples",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/30",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "closed without completion",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-15T19:35:38Z"
+    },
+    {
+      "number": 29,
+      "title": "[Programme] Dadspace delivery roadmap and acceptance gates",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/29",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Programme and pilot readiness",
+      "updated_at": "2026-10-17T00:38:46Z"
+    },
+    {
+      "number": 28,
+      "title": "Show Coming soon on the public domain and prepare the approved homepage",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/28",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-05T15:52:25Z"
+    },
+    {
+      "number": 27,
+      "title": "Personalise news by locality without new worker process",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/27",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-08T11:37:59Z"
+    },
+    {
+      "number": 26,
+      "title": "Release identifier-first venue image matching",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/26",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-04T08:27:43Z"
+    },
+    {
+      "number": 25,
+      "title": "Sync main into venue image dev branch",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/25",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-04T08:20:56Z"
+    },
+    {
+      "number": 24,
+      "title": "Match missing non-playground venue photos by website and location",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/24",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-04T04:27:00Z"
+    },
+    {
+      "number": 23,
+      "title": "Add source roles and canonical venue reconciliation",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/23",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-03T23:45:17Z"
+    },
+    {
+      "number": 22,
+      "title": "Rename Events to Activities in mobile navigation bar",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/22",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-03T22:26:09Z"
+    },
+    {
+      "number": 21,
+      "title": "Show nearby Events, Activities and Venues first",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/21",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-02T10:49:16Z"
+    },
+    {
+      "number": 20,
+      "title": "Add credited venue photos with labelled illustration fallbacks",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/20",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-01T23:04:29Z"
+    },
+    {
+      "number": 19,
+      "title": "Install Vercel Web Analytics",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/19",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-08T11:37:59Z"
+    },
+    {
+      "number": 18,
+      "title": "Split family listings into Events and Activities",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/18",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-01T22:57:27Z"
+    },
+    {
+      "number": 17,
+      "title": "Prepare Events/Activities split: backup and baseline only",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/17",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-01T21:49:34Z"
+    },
+    {
+      "number": 16,
+      "title": "Improve event data quality, list UX and event SEO pages",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/16",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-01T21:24:09Z"
+    },
+    {
+      "number": 15,
+      "title": "SEO and content quality improvements for review",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/15",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-01T15:46:44Z"
+    },
+    {
+      "number": 14,
+      "title": "Add category navigation rail and enhance venue card styling",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/14",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-01T04:34:44Z"
+    },
+    {
+      "number": 13,
+      "title": "Redesign news and events pages and implement user authentication",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/13",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-01T04:24:07Z"
+    },
+    {
+      "number": 12,
+      "title": "Redesign news and events pages and implement user authentication",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/12",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-01T02:00:26Z"
+    },
+    {
+      "number": 11,
+      "title": "Redesign news and events pages with updated navigation",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/11",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-01T00:13:21Z"
+    },
+    {
+      "number": 10,
+      "title": "SEO foundations based on Vercel starter patterns",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/10",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-09-30T23:01:04Z"
+    },
+    {
+      "number": 9,
+      "title": "Redesign news page and update sidebar navigation",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/9",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-09-30T22:36:40Z"
+    },
+    {
+      "number": 8,
+      "title": "Install and configure Vercel Speed Insights",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/8",
+      "state": "open",
+      "kind": "PR",
+      "completion": "open",
+      "feature": "Places and local discovery",
+      "updated_at": "2026-09-30T21:34:32Z"
+    },
+    {
+      "number": 7,
+      "title": "Redesign news page and update sidebar navigation",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/7",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-09-30T21:17:42Z"
+    },
+    {
+      "number": 6,
+      "title": "Redesign news page and enhance workflow observability",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/6",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-09-30T21:05:46Z"
+    },
+    {
+      "number": 5,
+      "title": "Update venues page to reflect actual venue data",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/5",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-09-30T15:25:58Z"
+    },
+    {
+      "number": 4,
+      "title": "Add venues page and enable rotating home page headline cards",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/4",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-09-30T03:49:22Z"
+    },
+    {
+      "number": 3,
+      "title": "Launch Dadspace with location-aware events and news feed",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/3",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-09-30T02:40:37Z"
+    },
+    {
+      "number": 2,
+      "title": "Launch Dadspace with location-aware event sorting and news feed",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/2",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-09-30T02:18:17Z"
+    },
+    {
+      "number": 1,
+      "title": "Launch Dadspace application with Supabase-powered news feed",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/1",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-09-30T01:18:02Z"
+    }
+  ],
+  "usage": {
+    "civic": {
+      "attempts": 8,
+      "prompt": 55370,
+      "output": 60190,
+      "thinking": 37402,
+      "total": 115560,
+      "cache_hits": 30,
+      "extracted": 74,
+      "kept": 73,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    "activities": {
+      "attempts": 6,
+      "prompt": 44013,
+      "output": 73700,
+      "thinking": 32160,
+      "total": 117713,
+      "cache_hits": 1,
+      "extracted": 143,
+      "kept": 57,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+    },
+    "news": {
+      "attempts": 2,
+      "prompt": 6996,
+      "output": 4319,
+      "thinking": 2545,
+      "total": 11315,
+      "kept": 11,
+      "scored": 25,
+      "source_failures": 0,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197320293"
+    },
+    "deals": {
+      "attempts": 0,
+      "prompt": 0,
+      "output": 0,
+      "thinking": 0,
+      "total": 0,
+      "saved": 120,
+      "eligible_offers": 17,
+      "groups": 7,
+      "providers": 9,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197320100"
+    }
+  },
+  "source_run_evidence": [
+    {
+      "source": "Kids Days Out - Buckinghamshire",
+      "worker": "civic",
+      "status": "OK_ZERO",
+      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=277728, content_chars=17236, jsonld_events=0, eventish_rows=11, title=50 best things to do in Buckinghamshire with children - Kids Days Out; gemini: attempts=1, prompt_tokens=6938, output_tokens=2457, total_tokens=9395 (13.5s)",
+      "extracted": 0,
+      "kept": 0,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "The Bucks Guide - Events",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (0.5s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "BuckinghamshireLive - Family & Kids",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.9s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Buckinghamshire Council",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.3s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Cambridgeshire County Council",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (0.9s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Essex County Council",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Oxfordshire County Council",
+      "worker": "civic",
+      "status": "OK",
+      "detail": "OK - 27 extracted, 27 kept; gemini: attempts=1, prompt_tokens=9468, output_tokens=16039, total_tokens=25507 (64.7s)",
+      "extracted": 27,
+      "kept": 27,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Manchester City Council",
+      "worker": "civic",
+      "status": "SKIPPED_ROBOTS",
+      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.7s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Norfolk County Council",
+      "worker": "civic",
+      "status": "FAILED_403",
+      "detail": "FAILED_403 - http_403: https://norfolk.gov.uk/libraryonline (0.3s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Haringey Council",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (0.8s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Redbridge Council",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.7s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Lewisham Council",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Ealing Council",
+      "worker": "civic",
+      "status": "FAILED_FETCH",
+      "detail": "FAILED_FETCH - http_5xx: https://www.ealing.gov.uk/events (51.3s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Coventry City Council",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (0.9s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Sheffield City Council",
+      "worker": "civic",
+      "status": "OK_ZERO",
+      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=210351, content_chars=23262, jsonld_events=0, eventish_rows=4, title=What's on in Sheffield; gemini: attempts=1, prompt_tokens=8542, output_tokens=458, total_tokens=9000 (4.2s)",
+      "extracted": 0,
+      "kept": 0,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Newcastle City Council",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.4s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Salford City Council",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (2.0s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Dartmoor National Park",
+      "worker": "civic",
+      "status": "FAILED_403",
+      "detail": "FAILED_403 - http_403: https://www.dartmoor.gov.uk/enjoy-dartmoor/events (0.6s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Exmoor National Park",
+      "worker": "civic",
+      "status": "FAILED_403",
+      "detail": "FAILED_403 - http_403: https://www.exmoor-nationalpark.gov.uk/enjoying/events (0.3s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "North York Moors National Park",
+      "worker": "civic",
+      "status": "FAILED_403",
+      "detail": "FAILED_403 - http_403: https://www.northyorkmoors.org.uk/visiting/whats-on (0.3s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Peak District National Park",
+      "worker": "civic",
+      "status": "FAILED_403",
+      "detail": "FAILED_403 - http_403: https://www.peakdistrict.gov.uk/visiting/whats-on (0.5s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "South Downs National Park",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (2.7s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "The Broads Authority",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (3.0s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Northumberland National Park",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (0.8s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Sherwood Forest (RSPB)",
+      "worker": "civic",
+      "status": "FAILED_403",
+      "detail": "FAILED_403 - http_403: https://www.visitsherwood.co.uk/events/ (1.4s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Yorkshire Dales National Park",
+      "worker": "civic",
+      "status": "FAILED_403",
+      "detail": "FAILED_403 - http_403: https://www.yorkshiredales.org.uk/whats-on/ (0.9s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Camden Council",
+      "worker": "civic",
+      "status": "OK",
+      "detail": "OK - 16 extracted, 16 kept; gemini: attempts=1, prompt_tokens=3552, output_tokens=13947, total_tokens=17499 (54.7s)",
+      "extracted": 16,
+      "kept": 16,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Southwark Council",
+      "worker": "civic",
+      "status": "OK",
+      "detail": "OK - 6 extracted, 6 kept; gemini: attempts=1, prompt_tokens=2706, output_tokens=5522, total_tokens=8228 (22.0s)",
+      "extracted": 6,
+      "kept": 6,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Cadw",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.3s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Loch Lomond & The Trossachs National Park",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.6s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Historic Environment Scotland",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.3s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Discover Northern Ireland",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.6s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "English Heritage",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (0.7s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "The Wildlife Trusts",
+      "worker": "civic",
+      "status": "SKIPPED_ROBOTS",
+      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.2s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "French Brothers (Windsor steamboat)",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (0.9s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Kempton Steam Museum",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (0.9s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "London Transport Museum Depot (Acton)",
+      "worker": "civic",
+      "status": "FAILED_403",
+      "detail": "FAILED_403 - http_403: https://www.ltmuseum.co.uk/whats-on (0.1s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Lancashire County Council",
+      "worker": "civic",
+      "status": "SKIPPED_ROBOTS",
+      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.5s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "East Sussex County Council",
+      "worker": "civic",
+      "status": "FAILED_403",
+      "detail": "FAILED_403 - http_403: https://www.escis.org.uk/explore/?type=event&sort=order-by-date (0.3s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Hampshire County Council",
+      "worker": "civic",
+      "status": "FAILED_403",
+      "detail": "FAILED_403 - http_403: https://www.hants.gov.uk/thingstodo/events (0.2s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Kent County Council",
+      "worker": "civic",
+      "status": "OK",
+      "detail": "OK - 16 extracted, 16 kept; gemini: attempts=1, prompt_tokens=7224, output_tokens=11784, total_tokens=19008 (48.8s)",
+      "extracted": 16,
+      "kept": 16,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "How Are You Peterborough?",
+      "worker": "civic",
+      "status": "OK",
+      "detail": "OK - 9 extracted, 7 kept; rejected: event_finished=1, season_date_conflict=1; gemini: attempts=1, prompt_tokens=13269, output_tokens=7952, total_tokens=21221 (42.7s)",
+      "extracted": 9,
+      "kept": 7,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "How Are You Fenland?",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (3.4s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "How Are You Hunts?",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (2.4s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "How Are You East Cambs?",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (2.2s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "How Are You South Cambs?",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (4.9s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "How Are You Cambridge?",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (4.0s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Pembrokeshire Coast National Park",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (5.9s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Tower Hamlets Council",
+      "worker": "civic",
+      "status": "FAILED_NO_CONTENT",
+      "detail": "FAILED_NO_CONTENT - Page had almost no readable content (it may need the browser workflow) (2.4s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Liverpool City Council",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (0.7s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Lake District National Park",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (2.0s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Eryri (Snowdonia) National Park",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (4.4s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Bannau Brycheiniog (Brecon Beacons)",
+      "worker": "civic",
+      "status": "OK_ZERO",
+      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=436610, content_chars=6669, jsonld_events=0, eventish_rows=10, title=Events - Bannau Brycheiniog; gemini: attempts=1, prompt_tokens=3671, output_tokens=2031, total_tokens=5702 (14.5s)",
+      "extracted": 0,
+      "kept": 0,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Cairngorms National Park",
+      "worker": "civic",
+      "status": "FAILED_404",
+      "detail": "FAILED_404 - http_404: https://cairngorms.co.uk/discover-explore/events (1.5s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Woodland Trust",
+      "worker": "civic",
+      "status": "FAILED_404",
+      "detail": "FAILED_404 - http_404: https://www.woodlandtrust.org.uk/visiting-woods/events/ (1.2s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "ClassForKids (London)",
+      "worker": "activities",
+      "status": "OK",
+      "detail": "OK - 32 extracted, 7 kept; rejected: missing_activity_schedule=23; merged duplicates=2; gemini: attempts=1, prompt_tokens=7590, output_tokens=17312, total_tokens=24902 (97.4s)",
+      "extracted": 32,
+      "kept": 7,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+    },
+    {
+      "source": "ClassForKids (Manchester)",
+      "worker": "activities",
+      "status": "OK",
+      "detail": "OK - 38 extracted, 14 kept; rejected: missing_activity_schedule=24; gemini: attempts=1, prompt_tokens=8026, output_tokens=16645, total_tokens=24671 (79.3s)",
+      "extracted": 38,
+      "kept": 14,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+    },
+    {
+      "source": "ClassForKids (Birmingham)",
+      "worker": "activities",
+      "status": "OK",
+      "detail": "OK - 48 extracted, 24 kept; rejected: missing_activity_schedule=24; gemini: attempts=1, prompt_tokens=8511, output_tokens=16836, total_tokens=25347 (74.6s)",
+      "extracted": 48,
+      "kept": 24,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+    },
+    {
+      "source": "Hoop (London)",
+      "worker": "activities",
+      "status": "OK",
+      "detail": "OK - 9 extracted, 3 kept; rejected: missing_activity_url=6; gemini: attempts=1, prompt_tokens=7682, output_tokens=7894, total_tokens=15576 (35.5s)",
+      "extracted": 9,
+      "kept": 3,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+    },
+    {
+      "source": "Hoop (Greater Manchester)",
+      "worker": "activities",
+      "status": "OK",
+      "detail": "OK - 12 extracted, 7 kept; rejected: missing_activity_url=4, teen_or_adult_only=1; gemini: attempts=1, prompt_tokens=7329, output_tokens=9790, total_tokens=17119 (39.7s)",
+      "extracted": 12,
+      "kept": 7,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+    },
+    {
+      "source": "Ni 4 Kids",
+      "worker": "activities",
+      "status": "OK",
+      "detail": "OK - 4 extracted, 2 kept; rejected: event_finished=2; gemini: attempts=1, prompt_tokens=4875, output_tokens=5223, total_tokens=10098 (29.8s)",
+      "extracted": 4,
+      "kept": 2,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+    },
+    {
+      "source": "Hertfordshire County Council",
+      "worker": "activities",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (4.7s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+    }
+  ],
+  "source_matrix": [
+    {
+      "id": "430cabe7-cba4-414d-bdf3-80a12561c3f0",
+      "name": "Aberdeen Museums",
+      "url": "https://www.aberdeencity.gov.uk/AAGM/whats-aberdeen-art-galleries-and-museums",
+      "active": false,
+      "decision": "improve",
+      "access": "insufficient_content",
+      "checked_at": "2026-10-10T19:21:23.176350+00:00",
+      "geography": {
+        "nation": "Scotland",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "1afbdcde-2543-43a5-9383-b63eddf6b172",
+      "name": "Aerospace Bristol",
+      "url": "https://aerospacebristol.org/whats-on",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:23.176350+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "6260ff8c-9d98-487e-95a1-cf651b8f0356",
+      "name": "Amersham Museum",
+      "url": "https://amershammuseum.org/events/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:23.176350+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "28d53ce7-23b2-4ffa-9f81-3843017efaeb",
+      "name": "Birmingham Libraries",
+      "url": "https://www.birmingham.gov.uk/libraries",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:23.180185+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "701989a8-c768-44a7-b912-e0df79aa2882",
+      "name": "Birmingham Museums",
+      "url": "https://www.birminghammuseums.org.uk/whats-on",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:23.485197+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "e24646d3-1673-4021-a972-dd6291cfdafb",
+      "name": "British Museum",
+      "url": "https://www.britishmuseum.org/events",
+      "active": false,
+      "decision": "improve",
+      "access": "http_failed",
+      "checked_at": "2026-10-10T19:21:23.643295+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "ac98cf40-2874-43b1-9220-467c38e6399a",
+      "name": "Buckinghamshire Libraries",
+      "url": "https://www.buckinghamshire.gov.uk/schools-libraries-and-parks/libraries/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:23.798076+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "c87b10cd-d53d-4372-8b23-6fe20a94af07",
+      "name": "Cambridgeshire Libraries",
+      "url": "https://www.cambridgeshire.gov.uk/residents/libraries-leisure-culture/libraries/news-and-events",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:23.806450+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "f1ee8adf-d18e-40ee-8325-011aca00340f",
+      "name": "Camp Beaumont",
+      "url": "https://www.campbeaumont.co.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:23.874041+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "31abe4ad-ef47-437f-91e9-121dca1e2a3e",
+      "name": "Cardiff Libraries",
+      "url": "https://cardiffhubs.co.uk/events/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:23.896077+00:00",
+      "geography": {
+        "nation": "Wales",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "580d81a4-9fb5-46a5-a490-fa80cb6ce844",
+      "name": "ClassForKids",
+      "url": "https://classforkids.co.uk/",
+      "active": false,
+      "decision": "pause",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:24.082197+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-28 06:12:31.932366+00"
+    },
+    {
+      "id": "4196176c-b668-42b6-91f7-24322f318941",
+      "name": "ClassForKids (Birmingham)",
+      "url": "https://classforkids.io/en-GB/classes/Birmingham",
+      "active": true,
+      "decision": "improve",
+      "access": "access_failed",
+      "checked_at": "2026-10-10T19:21:24.109880+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "West Midlands",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-05 06:20:37.38598+00"
+    },
+    {
+      "id": "50950a1b-4160-4193-b11d-c6b33af64313",
+      "name": "ClassForKids (London)",
+      "url": "https://classforkids.io/en-GB/classes/London",
+      "active": true,
+      "decision": "improve",
+      "access": "access_failed",
+      "checked_at": "2026-10-10T19:21:24.182092+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "London",
+        "pilot_relevance": "local route to validate"
+      },
+      "last_success": "2026-10-07 06:15:18.39008+00"
+    },
+    {
+      "id": "254f1361-8385-4374-8a0f-d4fbef2415e5",
+      "name": "ClassForKids (Manchester)",
+      "url": "https://classforkids.io/en-GB/classes/Manchester",
+      "active": true,
+      "decision": "improve",
+      "access": "access_failed",
+      "checked_at": "2026-10-10T19:21:24.592785+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "North West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-07 06:16:50.218369+00"
+    },
+    {
+      "id": "b8b88ea4-c5fa-4bb5-9633-1700b1bec89c",
+      "name": "Club Hub UK",
+      "url": "https://clubhubuk.co.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:24.866869+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "e36a0df4-0a2d-4131-a332-197e8b1c00c4",
+      "name": "Cornwall Council",
+      "url": "https://fis.cornwall.gov.uk/SynergyWeb/CornwallFIS/Whatsonmidcornwall.aspx",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:27.285720+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "b9fd2655-f634-4566-b25b-aaf8990d6e85",
+      "name": "Day Out With The Kids",
+      "url": "https://www.dayoutwiththekids.co.uk/",
+      "active": false,
+      "decision": "replace",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:28.339091+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "53903398-ceb9-4ff0-b40d-9002882d9682",
+      "name": "Derbyshire County Council",
+      "url": "https://www.derbyshire.gov.uk/leisure/whats-on/whats-on.aspx",
+      "active": false,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:29.040573+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "East Midlands",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-28 06:16:24.801511+00"
+    },
+    {
+      "id": "5ebd8c71-f272-4b3e-8c5e-d41b445cecae",
+      "name": "Edinburgh Libraries",
+      "url": "https://www.edinburgh.gov.uk/libraries",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:29.142583+00:00",
+      "geography": {
+        "nation": "Scotland",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "a63a36df-c95c-43d2-aefd-dc7ad791e216",
+      "name": "Essex Libraries",
+      "url": "https://libraries.essex.gov.uk/events",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:29.862590+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "e33e6430-2a55-4b4e-a9fe-91a898a560e8",
+      "name": "Federation of City Farms and Community Gardens",
+      "url": "https://www.farmgarden.org.uk/",
+      "active": false,
+      "decision": "pause",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:32.655297+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-28 06:13:45.491427+00"
+    },
+    {
+      "id": "56b95513-a98a-459d-985a-41ebf2eddd17",
+      "name": "Glasgow Libraries",
+      "url": "https://www.glasgowlife.org.uk/libraries",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:33.118370+00:00",
+      "geography": {
+        "nation": "Scotland",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "d8b7f660-0c08-406a-8d1c-3ee34d229af4",
+      "name": "Gymboree Play & Music UK",
+      "url": "https://gymboreeclasses.co.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:34.069496+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "9f0c7d33-5d6e-4ea2-9839-ddb60a49fd32",
+      "name": "Hampshire Cultural Trust",
+      "url": "https://www.hampshireculture.org.uk/events",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:34.248481+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "8212c9ec-8171-4487-9e58-a126b777d972",
+      "name": "Happity",
+      "url": "https://www.happity.co.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:35.348343+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "90f059d3-6f26-4ac6-ada5-e03b0a722664",
+      "name": "Heritage Railway Association",
+      "url": "https://www.hra.uk.com/",
+      "active": false,
+      "decision": "replace",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:36.089511+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-28 06:14:03.758909+00"
+    },
+    {
+      "id": "c5fc0b84-a9c7-4810-b8f6-6c4d1c852225",
+      "name": "Hertfordshire County Council",
+      "url": "https://www.hertfordshire.gov.uk/services/libraries-and-archives/events-and-things-to-do/library-events.aspx",
+      "active": true,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:36.275311+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "East of England",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:21:52.692166+00"
+    },
+    {
+      "id": "2045621c-1fc6-4ba9-9ef2-e7da22d541a7",
+      "name": "Hoop",
+      "url": "https://hoop.co.uk/",
+      "active": false,
+      "decision": "pause",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:36.318309+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-28 06:13:28.652203+00"
+    },
+    {
+      "id": "8b8b950e-11d9-4b92-a83c-f9284a8fa732",
+      "name": "Hoop (Greater Manchester)",
+      "url": "https://hoop.co.uk/areas/greater-manchester/",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:36.384046+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "North West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:20:50.54365+00"
+    },
+    {
+      "id": "2df575ca-a90a-4386-903f-ae0a1c43135e",
+      "name": "Hoop (London)",
+      "url": "https://hoop.co.uk/areas/london/",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:36.805201+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "London",
+        "pilot_relevance": "local route to validate"
+      },
+      "last_success": "2026-10-09 06:19:57.505754+00"
+    },
+    {
+      "id": "fa3bd851-2d24-403f-8a5e-b8606ee031f1",
+      "name": "Horniman Museum",
+      "url": "https://www.horniman.ac.uk/whats-on/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:37.033980+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "b623a42b-1f78-4e0b-ad75-8999ad2ff209",
+      "name": "Hounslow Libraries",
+      "url": "https://www.hounslow.gov.uk/libraries",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:37.069957+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "local route to validate"
+      },
+      "last_success": null
+    },
+    {
+      "id": "95352cf2-da07-4826-8d80-5473107a5ecb",
+      "name": "Imperial War Museums",
+      "url": "https://www.iwm.org.uk/events",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:37.248364+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "b5ecb89c-6b41-49eb-b08d-821487f022ac",
+      "name": "Ironbridge Museums",
+      "url": "https://www.ironbridge.org.uk/events/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:37.277555+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "ade4ee64-f3a3-46db-b5b6-0247e11bff2a",
+      "name": "Kent Libraries",
+      "url": "https://www.kent.gov.uk/leisure-and-community/libraries/clubs-and-activities-in-libraries",
+      "active": false,
+      "decision": "improve",
+      "access": "http_failed",
+      "checked_at": "2026-10-10T19:21:37.424115+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "a2ed8964-138b-4403-8730-6818cb0f7692",
+      "name": "Kiddle",
+      "url": "https://www.kiddle.co.uk/",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:37.638018+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "c900a56e-4e96-4839-9ae9-66776291e4bd",
+      "name": "Leeds Libraries",
+      "url": "https://libraries.leeds.gov.uk/events",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:37.681360+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "6d03968d-02fc-4a6a-bc2d-6ff3bb978ce9",
+      "name": "Leeds Museums",
+      "url": "https://museumsandgalleries.leeds.gov.uk/whats-on/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:37.762775+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "1ab3bc50-5935-4cb2-91d2-263972d713ed",
+      "name": "Leicester Museums",
+      "url": "https://www.leicestermuseums.org/events/",
+      "active": false,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:37.858060+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "e5575a28-3f2a-43d4-bc3d-afa3e6fbb630",
+      "name": "Libraries NI",
+      "url": "https://www.librariesni.org.uk/events/storytime-events/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:37.948469+00:00",
+      "geography": {
+        "nation": "Northern Ireland",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "7817655d-83ff-42e5-a9e0-d50074f4c8a4",
+      "name": "Little Kickers",
+      "url": "https://www.littlekickers.co.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:38.019607+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "0a976955-7296-4604-a95e-6474d383e1e1",
+      "name": "Little Viking",
+      "url": "https://www.thelittleviking.co.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:38.227822+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "3a661af7-92f3-4c7b-b7de-2dd805259fa2",
+      "name": "London Play",
+      "url": "https://londonplay.org.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:38.236608+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "London",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-28 06:15:13.116129+00"
+    },
+    {
+      "id": "ed76e110-050f-4c82-a3c6-0174a94556ef",
+      "name": "Manchester Libraries",
+      "url": "https://www.manchester.gov.uk/info/200062/libraries",
+      "active": false,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:38.630276+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "c9ca000a-0e7e-4476-a1a2-3dccdd045906",
+      "name": "Muddy Puddles (Forest School Finder)",
+      "url": "https://www.muddypuddles.com/",
+      "active": false,
+      "decision": "replace",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:38.825238+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-28 06:15:24.153502+00"
+    },
+    {
+      "id": "ac34cf3a-4391-431f-a3f8-f8392509bfa6",
+      "name": "Museum Wales",
+      "url": "https://museum.wales/whatson/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:39.332443+00:00",
+      "geography": {
+        "nation": "Wales",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "f2508a09-6cbf-49b8-ae06-c89279986b52",
+      "name": "National Museums Liverpool",
+      "url": "https://www.liverpoolmuseums.org.uk/whatson",
+      "active": false,
+      "decision": "improve",
+      "access": "http_failed",
+      "checked_at": "2026-10-10T19:21:39.744592+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "a8019bd8-f14e-416f-8098-e3fab2b93303",
+      "name": "National Museums NI",
+      "url": "https://www.nmni.com/whats-on",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:40.040750+00:00",
+      "geography": {
+        "nation": "Northern Ireland",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "e3ed3d74-012b-4512-894f-2d1277b3cbcd",
+      "name": "National Museums Scotland",
+      "url": "https://www.nms.ac.uk/whats-on",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:40.157038+00:00",
+      "geography": {
+        "nation": "Scotland",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "63d54732-afb7-4fc6-9648-02732f190db1",
+      "name": "National Trust NI",
+      "url": "https://www.nationaltrust.org.uk/visit/northern-ireland/events",
+      "active": false,
+      "decision": "improve",
+      "access": "http_failed",
+      "checked_at": "2026-10-10T19:21:40.172355+00:00",
+      "geography": {
+        "nation": "Northern Ireland",
+        "region": "Northern Ireland",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "efa9c184-6f85-4e4d-9643-574a1b583600",
+      "name": "Natural History Museum",
+      "url": "https://www.nhm.ac.uk/events.html",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:40.508587+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "562f3099-3b66-4719-9782-57e818d15491",
+      "name": "NCT Local Activities & Meet-ups",
+      "url": "https://www.nct.org.uk/local-activities-meet-ups",
+      "active": false,
+      "decision": "pause",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:40.538227+00:00",
+      "geography": {
+        "nation": "United Kingdom",
+        "region": null,
+        "pilot_relevance": "local route to validate"
+      },
+      "last_success": null
+    },
+    {
+      "id": "7bb06684-8716-40bf-8de8-da0a31200de2",
+      "name": "Netmums Whats On",
+      "url": "https://www.netmums.com/local",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:41.046977+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-28 06:15:04.603103+00"
+    },
+    {
+      "id": "cef3de43-3328-4087-84a8-49cf6e2dd169",
+      "name": "Ni 4 Kids",
+      "url": "https://ni4kids.com/",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:41.296382+00:00",
+      "geography": {
+        "nation": "Northern Ireland",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:21:30.041237+00"
+    },
+    {
+      "id": "6d3ad4b5-0629-49ee-8f31-d9ec77655216",
+      "name": "Norfolk Libraries",
+      "url": "https://www.norfolk.gov.uk/libraries",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:41.379417+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "135b31ec-ee76-4d86-a5e9-a6db9324c068",
+      "name": "Norfolk Museums",
+      "url": "https://www.museums.norfolk.gov.uk/whats-on",
+      "active": false,
+      "decision": "improve",
+      "access": "http_failed",
+      "checked_at": "2026-10-10T19:21:41.609457+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "40abe18f-1322-4ee4-ac73-099ea35eea26",
+      "name": "Our Kids Social",
+      "url": "https://ourkidssocial.co.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:41.848077+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "North West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "af8459c0-ddac-4be7-8a3e-ab6e28c05b54",
+      "name": "Oxfordshire Libraries",
+      "url": "https://www.oxfordshire.gov.uk/oxfordshire-libraries",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:41.867179+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "fa261ed7-25c3-4e76-a8df-f304df80b949",
+      "name": "Primary Times Wales",
+      "url": "https://www.primarytimes.co.uk/wales/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:41.943323+00:00",
+      "geography": {
+        "nation": "Wales",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-28 06:15:42.285041+00"
+    },
+    {
+      "id": "e6a8ff3a-ae38-4121-b297-d72d8ab43faf",
+      "name": "Royal Museums Greenwich",
+      "url": "https://www.rmg.co.uk/whats-on",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:42.228543+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "6a2e4138-6f8c-48d9-a716-d344c372aa34",
+      "name": "RSPB (Royal Society for the Protection of Birds)",
+      "url": "https://www.rspb.org.uk/days-out/events",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:42.540404+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-28 06:17:35.634688+00"
+    },
+    {
+      "id": "67bfff4c-fff7-4bd5-b8c1-272561523c79",
+      "name": "Rugbytots",
+      "url": "https://www.rugbytots.co.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:42.596095+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "db624f05-3c35-4cf6-9da3-d617710da2ed",
+      "name": "Science Museum",
+      "url": "https://www.sciencemuseum.org.uk/see-and-do",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:43.144981+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "e5760e8c-da11-468f-960b-93fb07090e87",
+      "name": "Sheffield Museums",
+      "url": "https://www.sheffieldmuseums.org.uk/whats-on/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:43.631923+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "3ec54288-92e7-4435-9ae9-637575a1e019",
+      "name": "Stagecoach Performing Arts",
+      "url": "https://www.stagecoach.co.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:43.764169+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "aa1bb33a-c792-464a-9988-51b852189d91",
+      "name": "Suffolk Libraries",
+      "url": "https://www.suffolklibraries.co.uk/events/?5e94c774_page=0",
+      "active": false,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:43.995878+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "39cff5fb-1167-4003-a0ae-dc12892f9117",
+      "name": "SuperCamps",
+      "url": "https://www.supercamps.co.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:44.185769+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "6a138e07-6ce4-432e-b883-e59d37bbf5c7",
+      "name": "Surrey Libraries",
+      "url": "https://www.surreycc.gov.uk/libraries/your-library/find-your-nearest",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:44.201383+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "03ff409e-f05c-48e0-ab51-a8a15351ca65",
+      "name": "The Creation Station",
+      "url": "https://www.thecreationstation.co.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:44.637305+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "922bf42e-d977-41bf-ad84-a4c2b798036f",
+      "name": "The National Trust",
+      "url": "https://www.nationaltrust.org.uk/visit/whats-on",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:44.758863+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "59e48981-3c4e-4024-9ece-9580d27f9a9c",
+      "name": "The PGL Adventure",
+      "url": "https://www.pgl.co.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:45.007639+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "4050964e-5fd7-4c69-bb78-c92042424b77",
+      "name": "V&A",
+      "url": "https://www.vam.ac.uk/whatson",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:45.081540+00:00",
+      "geography": {
+        "nation": "England",
+        "region": null,
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "5aa80f81-1212-4c77-a288-6a2c8905dc21",
+      "name": "Visit South East England (family search)",
+      "url": "https://www.visitsoutheastengland.com/things-to-do/searchresults?sr=1&name=family",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:45.104047+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-28 06:16:08.802974+00"
+    },
+    {
+      "id": "20bb395e-cf49-406e-9198-225c82bccec1",
+      "name": "Water Babies",
+      "url": "https://www.waterbabies.co.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:45.298903+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "851c176d-9b60-4457-a289-5644635788d0",
+      "name": "What's On Scotland Kids",
+      "url": "https://whatsonscotland.co.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:46.057367+00:00",
+      "geography": {
+        "nation": "Scotland",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "66203cb6-05f2-40fd-b84e-3987392b6b23",
+      "name": "Aberdeenshire Council",
+      "url": "https://committees.aberdeenshire.gov.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:46.076267+00:00",
+      "geography": {
+        "nation": "Scotland",
+        "region": "North East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "95563151-64d9-4a5e-8e58-1cac78879182",
+      "name": "Belfast City Council",
+      "url": "https://minutes3.belfastcity.gov.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:46.095655+00:00",
+      "geography": {
+        "nation": "Northern Ireland",
+        "region": "Greater Belfast",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "bd249dbb-b90f-4b94-b148-0f7ba33fadcd",
+      "name": "Birmingham City Council",
+      "url": "https://governance.birmingham.gov.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:46.116409+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "West Midlands",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "0b2bc50c-3684-4a83-8078-3d7aacf9dcd1",
+      "name": "Buckinghamshire Council",
+      "url": "https://www.buckinghamshire.gov.uk/events/",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:46.162435+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:07:19.691316+00"
+    },
+    {
+      "id": "d9a7f253-1b3b-424f-b874-e48d7d0a2e2d",
+      "name": "Cambridgeshire County Council",
+      "url": "https://www.library.live/whats-on",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:46.269593+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "East of England",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:07:32.701019+00"
+    },
+    {
+      "id": "8e57d114-04db-4752-8ccd-86a3ac032369",
+      "name": "Camden Council",
+      "url": "https://www.camden.gov.uk/whats-on-this-month",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:46.623277+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "London",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-29 19:01:58.353328+00"
+    },
+    {
+      "id": "2878520b-7ed9-42d1-8981-7ec36e27ad13",
+      "name": "Cardiff Council",
+      "url": "https://cardiff.moderngov.co.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:46.908264+00:00",
+      "geography": {
+        "nation": "Wales",
+        "region": "South Wales",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "a69f83d3-1491-48eb-991a-04be1329be9f",
+      "name": "City of Edinburgh Council",
+      "url": "https://democracy.edinburgh.gov.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:46.989786+00:00",
+      "geography": {
+        "nation": "Scotland",
+        "region": "Edinburgh & Lothians",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "0f773e80-abe5-437d-9359-08ce37a1c947",
+      "name": "Coventry City Council",
+      "url": "https://www.coventry.gov.uk/events",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:47.078165+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "West Midlands",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:10:49.66046+00"
+    },
+    {
+      "id": "27319bfc-1e56-4491-a4ae-f4ddc6583bab",
+      "name": "Derry City & Strabane District Council",
+      "url": "https://derrystrabane.moderngov.co.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:47.093906+00:00",
+      "geography": {
+        "nation": "Northern Ireland",
+        "region": "North West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "1e869385-a0d2-4365-9926-4205337b3e1f",
+      "name": "Devon County Council",
+      "url": "https://democracy.devon.gov.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:47.110181+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "c7296d6d-b8c7-4bd9-9648-ca74e1278c81",
+      "name": "Ealing Council",
+      "url": "https://www.ealing.gov.uk/events",
+      "active": true,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:47.259950+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "London",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-01 06:08:37.951422+00"
+    },
+    {
+      "id": "53b745b1-df89-4be0-8376-7df0c8a2d938",
+      "name": "East Sussex County Council",
+      "url": "https://www.escis.org.uk/explore/?type=event&sort=order-by-date",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:47.394984+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "2209646a-b6ac-4aca-aaaf-197e5ded53ae",
+      "name": "Essex County Council",
+      "url": "https://www.explore-essex.com/whats-on",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:47.408526+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "East of England",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:08:08.451417+00"
+    },
+    {
+      "id": "1a93c814-09ef-4411-8a76-1c537e11adf2",
+      "name": "Glasgow City Council",
+      "url": "https://www.glasgow.gov.uk/councillormeetings",
+      "active": false,
+      "decision": "replace",
+      "access": "http_failed",
+      "checked_at": "2026-10-10T19:21:48.230864+00:00",
+      "geography": {
+        "nation": "Scotland",
+        "region": "Glasgow & West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "38caa7d5-392b-4f1a-a5e6-fff7d11a0caa",
+      "name": "Gloucestershire County Council",
+      "url": "https://glostext.gloucestershire.gov.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:48.672641+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "2191af9b-c2eb-43ca-a36e-f67379a56346",
+      "name": "Gwynedd Council",
+      "url": "https://democracy.gwynedd.llyw.cymru/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:48.751536+00:00",
+      "geography": {
+        "nation": "Wales",
+        "region": "North Wales",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "74662532-4d4a-48fb-bc2e-681efc888f22",
+      "name": "Hampshire County Council",
+      "url": "https://www.hants.gov.uk/thingstodo/events",
+      "active": true,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:48.762541+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "a90d3e97-b6ee-456d-a377-3d4694c3d504",
+      "name": "Haringey Council",
+      "url": "https://haringey.gov.uk/whats-on",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:48.880507+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "London",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:09:54.176959+00"
+    },
+    {
+      "id": "a57c54de-1001-4b19-a588-4ddd6ef7dd8e",
+      "name": "Highland Council",
+      "url": "https://www.highland.gov.uk/meetings",
+      "active": false,
+      "decision": "replace",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:48.944130+00:00",
+      "geography": {
+        "nation": "Scotland",
+        "region": "Highlands and Islands",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "c2177d85-2620-42fe-821d-121d6d46e1b5",
+      "name": "How Are You Cambridge?",
+      "url": "https://haycambridge.co.uk/activities/",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:48.944130+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "Cambridge",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:16:07.355353+00"
+    },
+    {
+      "id": "cc492422-c4bd-4ad0-8b73-118111669f69",
+      "name": "How Are You East Cambs?",
+      "url": "https://hayeastcambs.co.uk/activities/",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:49.324656+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "East Cambridgeshire",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-29 19:05:59.359176+00"
+    },
+    {
+      "id": "c194b023-cb7b-4048-bbbe-f5cfd32d981d",
+      "name": "How Are You Fenland?",
+      "url": "https://hayfenland.co.uk/activities/",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:49.457072+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "Fenland",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-29 19:05:34.606382+00"
+    },
+    {
+      "id": "e179e04b-24b3-4b2e-8c37-6f5ec6f8c312",
+      "name": "How Are You Hunts?",
+      "url": "https://hayhunts.co.uk/activities/",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:50.044501+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "Huntingdonshire",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-29 19:05:45.754395+00"
+    },
+    {
+      "id": "d1c1caf6-4c3e-40f8-8234-10b51b6be5da",
+      "name": "How Are You Peterborough?",
+      "url": "https://discoverpeterborough.co.uk/events/",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:50.104207+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "Peterborough",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:14:33.524238+00"
+    },
+    {
+      "id": "ece2b347-a42a-4020-8344-a7d48b1b47be",
+      "name": "How Are You South Cambs?",
+      "url": "https://haysouthcambs.co.uk/activities/",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:52.200184+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South Cambridgeshire",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:15:36.588934+00"
+    },
+    {
+      "id": "ed06de23-da3d-4e24-8c6c-6e74b617f117",
+      "name": "Kent County Council",
+      "url": "https://seekent.co.uk/whats-on/?type=event&search_keywords=family&sort=order-by-date",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:52.711625+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:13:58.985808+00"
+    },
+    {
+      "id": "222b7510-e5e0-4d5a-9bed-ab4d03d86f2f",
+      "name": "Lancashire County Council",
+      "url": "https://www6.apps.lancashire.gov.uk/w/webpage/all-events?service=ALL",
+      "active": true,
+      "decision": "pause",
+      "access": "robots_disallowed",
+      "checked_at": "2026-10-10T19:21:52.916849+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "North West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "aee8d676-7096-43d4-9aa9-99690fb02425",
+      "name": "Leeds City Council",
+      "url": "https://democracy.leeds.gov.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:53.019054+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "Yorkshire and the Humber",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "610da93f-2710-4a78-8491-09e3278e08f5",
+      "name": "Leicestershire County Council",
+      "url": "https://politics.leics.gov.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "insufficient_content",
+      "checked_at": "2026-10-10T19:21:53.182148+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "East Midlands",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "6f0ab1d7-449c-41e9-809d-8a258c546ad6",
+      "name": "Lewisham Council",
+      "url": "https://lewisham.gov.uk/inmyarea/events",
+      "active": true,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:54.325653+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "London",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-07 06:08:19.73234+00"
+    },
+    {
+      "id": "5627b08e-6aa9-4e3f-89f7-707d84c1584e",
+      "name": "Lincolnshire County Council",
+      "url": "https://lincolnshire.moderngov.co.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:54.465154+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "East Midlands",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "2df92fe3-c3a4-4b46-b594-ce311e36b207",
+      "name": "Liverpool City Council",
+      "url": "https://cultureliverpool.co.uk/whats-on/",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:54.626218+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "North West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-29 19:06:44.821403+00"
+    },
+    {
+      "id": "9a6214b9-a620-4b5d-b8a4-c4969d1c1bed",
+      "name": "Manchester City Council",
+      "url": "https://www.manchesterservicedirectory.co.uk/kb5/manchester/directory/thingstodo.page?thingstodochannel=0",
+      "active": true,
+      "decision": "pause",
+      "access": "robots_disallowed",
+      "checked_at": "2026-10-10T19:21:54.866939+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "North West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "7cd2be4e-5a97-4f69-b2da-f50bf2cb9231",
+      "name": "Newcastle City Council",
+      "url": "https://www.newcastle.gov.uk/services/libraries-and-culture/whats-on-libraries",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:55.130427+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "North East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-29 19:00:17.510431+00"
+    },
+    {
+      "id": "7343484a-ca0b-4959-8d7c-9a20364ea771",
+      "name": "Norfolk County Council",
+      "url": "https://norfolk.gov.uk/libraryonline",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:55.803711+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "East of England",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "5c159b83-ced2-4237-825b-76268b4d1e53",
+      "name": "North Yorkshire Council",
+      "url": "https://edemocracy.northyorks.gov.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:55.882629+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "Yorkshire and the Humber",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "44cee79a-a431-4387-a1a6-20f0b973800f",
+      "name": "Nottinghamshire County Council",
+      "url": "https://www.nottinghamshire.gov.uk/dms/Meetings.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:56.026338+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "East Midlands",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "43a48e50-eac3-435a-bd3c-5caad5d5a2da",
+      "name": "Oxfordshire County Council",
+      "url": "https://www.oxfordshire.gov.uk/events",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:56.876323+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:08:56.7612+00"
+    },
+    {
+      "id": "6cf3f084-ccca-4799-8563-ed9f6f955c95",
+      "name": "Redbridge Council",
+      "url": "https://www.redbridge.gov.uk/discover/whats-on",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:56.907779+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "London",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:10:07.401998+00"
+    },
+    {
+      "id": "a672b406-7bc9-43eb-958e-3cd363f57051",
+      "name": "Salford City Council",
+      "url": "https://salfordcommunityleisure.co.uk/whats-on/",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:57.268841+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "North West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:11:21.03383+00"
+    },
+    {
+      "id": "b0ec6de8-9eee-437d-96ab-539dd1f32132",
+      "name": "Sheffield City Council",
+      "url": "https://www.welcometosheffield.co.uk/visit/whats-on/",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:57.672178+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "Yorkshire and the Humber",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-29 19:00:07.465208+00"
+    },
+    {
+      "id": "5a4ed8c4-3030-444a-8e3a-f9293b839eb5",
+      "name": "Somerset Council",
+      "url": "https://www.somerset.gov.uk/",
+      "active": false,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:57.747949+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "7b9c4eee-a94b-4175-9323-9c353543275d",
+      "name": "Southwark Council",
+      "url": "https://www.southwark.gov.uk/events-culture-and-heritage/all",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:58.001430+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "London",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-07 06:10:36.331249+00"
+    },
+    {
+      "id": "48534230-12d8-49e9-b970-0d104bfac602",
+      "name": "Staffordshire County Council",
+      "url": "https://moderngov.staffordshire.gov.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:58.374632+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "West Midlands",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "f2cad4dc-554c-4cc0-9a09-6f03e3fdb3ec",
+      "name": "Suffolk County Council",
+      "url": "https://committeeminutes.suffolk.gov.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "http_failed",
+      "checked_at": "2026-10-10T19:21:58.602563+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "East of England",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "d81c986a-582e-433f-8782-325d494aa770",
+      "name": "Surrey County Council",
+      "url": "https://mycouncil.surreycc.gov.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "insufficient_content",
+      "checked_at": "2026-10-10T19:21:58.644909+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "9298aae6-2c23-43f9-88e3-ab3c93289f88",
+      "name": "Swansea Council",
+      "url": "https://democracy.swansea.gov.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:58.913041+00:00",
+      "geography": {
+        "nation": "Wales",
+        "region": "South Wales",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "1b2fd4c8-5e46-44f5-82c9-48ef3ac74490",
+      "name": "Tower Hamlets Council",
+      "url": "https://towerhamlets.gov.uk/News_events/Events/Events.aspx",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:58.999956+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "London",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-29 19:06:38.340576+00"
+    },
+    {
+      "id": "ecb8c88e-827a-41be-ad9f-456a3696f46e",
+      "name": "Warwickshire County Council",
+      "url": "https://democracy.warwickshire.gov.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:59.035813+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "West Midlands",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "e8e16e34-2b93-4b9c-a334-1198bd053628",
+      "name": "West Sussex County Council",
+      "url": "https://westsussex.moderngov.co.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:59.107023+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "eb7638a2-f7e8-4e67-96d7-74568105fbf5",
+      "name": "Worcestershire County Council",
+      "url": "https://worcestershire.moderngov.co.uk/mgCalendarMonthView.aspx",
+      "active": false,
+      "decision": "replace",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:59.186014+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "West Midlands",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "faae66f0-968d-4e1c-afb5-ec487eb58d54",
+      "name": "Bannau Brycheiniog (Brecon Beacons)",
+      "url": "https://bannaubrycheiniog.org/event",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:59.256829+00:00",
+      "geography": {
+        "nation": "Wales",
+        "region": "South Wales",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:17:08.448015+00"
+    },
+    {
+      "id": "338ab216-4643-4771-87fa-557ffd44616c",
+      "name": "Cadw",
+      "url": "https://cadw.gov.wales/visit/whats-on",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:21:59.362168+00:00",
+      "geography": {
+        "nation": "Wales",
+        "region": "South Wales",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-29 19:02:56.934375+00"
+    },
+    {
+      "id": "0f9f8b83-c3d6-4657-9a0c-f4ccd46b90bc",
+      "name": "Cairngorms National Park",
+      "url": "https://cairngorms.co.uk/discover-explore/events",
+      "active": true,
+      "decision": "improve",
+      "access": "http_failed",
+      "checked_at": "2026-10-10T19:21:59.556887+00:00",
+      "geography": {
+        "nation": "Scotland",
+        "region": "Highlands",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "d1c3b028-b6b6-4209-aa75-4979ea36860f",
+      "name": "Dartmoor National Park",
+      "url": "https://www.dartmoor.gov.uk/enjoy-dartmoor/events",
+      "active": true,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:21:59.845716+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "c3142b62-c572-4ecc-9aea-32ce1efd84ac",
+      "name": "Discover Northern Ireland",
+      "url": "https://www.discovernorthernireland.com/whats-on",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:00.021524+00:00",
+      "geography": {
+        "nation": "Northern Ireland",
+        "region": "Northern Ireland",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:13:15.874884+00"
+    },
+    {
+      "id": "b7830857-020e-42d9-9e24-dafa4c613c5a",
+      "name": "English Heritage",
+      "url": "https://www.english-heritage.org.uk/visit/whats-on/",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:00.721452+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-29 19:03:53.012029+00"
+    },
+    {
+      "id": "fb60637b-c6ec-4cff-88ba-67b981cb45c5",
+      "name": "Eryri (Snowdonia) National Park",
+      "url": "https://eryri.gov.wales",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:01.283717+00:00",
+      "geography": {
+        "nation": "Wales",
+        "region": "North Wales",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-29 19:07:09.904343+00"
+    },
+    {
+      "id": "27d785ea-ba23-4d77-bb10-936bdb800f59",
+      "name": "Exmoor National Park",
+      "url": "https://www.exmoor-nationalpark.gov.uk/enjoying/events",
+      "active": true,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:22:01.364510+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "29c87314-fc12-41bf-b9d5-da8dfa319cfb",
+      "name": "Historic Environment Scotland",
+      "url": "https://www.historicenvironment.scot/visit-a-place/whats-on/",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:01.484168+00:00",
+      "geography": {
+        "nation": "Scotland",
+        "region": "Scotland Wide",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:12:53.111819+00"
+    },
+    {
+      "id": "5365e423-a70b-4ca1-8d85-55fe02f2749c",
+      "name": "Lake District National Park",
+      "url": "https://www.lakedistrict.gov.uk/visiting/things-to-do",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:02.201333+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "North West",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-03 06:17:51.768618+00"
+    },
+    {
+      "id": "b09d52f8-c87e-4f99-8373-3772635146c8",
+      "name": "Loch Lomond & The Trossachs National Park",
+      "url": "https://www.lochlomond-trossachs.org/whats-on/",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:02.466675+00:00",
+      "geography": {
+        "nation": "Scotland",
+        "region": "Central Scotland",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-29 19:03:02.434902+00"
+    },
+    {
+      "id": "f8c9c47b-deb8-4867-a408-5d97ac6ca555",
+      "name": "National Trust for Scotland",
+      "url": "https://www.nts.org.uk/whats-on",
+      "active": false,
+      "decision": "improve",
+      "access": "http_failed",
+      "checked_at": "2026-10-10T19:22:02.950795+00:00",
+      "geography": {
+        "nation": "Scotland",
+        "region": "Scotland Wide",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "407b6455-487a-45d1-a036-72b72308dee0",
+      "name": "North York Moors National Park",
+      "url": "https://www.northyorkmoors.org.uk/visiting/whats-on",
+      "active": true,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:22:03.756828+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "Yorkshire and the Humber",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "29a5ae90-d7fb-4df6-beca-d86ae03d7859",
+      "name": "Northumberland National Park",
+      "url": "https://www.northumberlandnationalpark.org.uk/whats-on/",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:03.930255+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "North East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-05 06:12:27.679861+00"
+    },
+    {
+      "id": "777486eb-206c-4f92-850d-2f82f8a6566e",
+      "name": "Peak District National Park",
+      "url": "https://www.peakdistrict.gov.uk/visiting/whats-on",
+      "active": true,
+      "decision": "improve",
+      "access": "robots_unavailable",
+      "checked_at": "2026-10-10T19:22:04.118669+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "West Midlands",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "16fa8449-3afa-4f4b-b3e6-17c989e9047a",
+      "name": "Pembrokeshire Coast National Park",
+      "url": "https://www.pembrokeshirecoast.wales/events",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:04.236853+00:00",
+      "geography": {
+        "nation": "Wales",
+        "region": "Mid Wales",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-29 19:06:27.642756+00"
+    },
+    {
+      "id": "538de208-207c-4520-959e-8dfead8fa6e7",
+      "name": "Sherwood Forest (RSPB)",
+      "url": "https://www.visitsherwood.co.uk/events/",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:04.311120+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "East Midlands",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "8e369398-7819-4ed9-bc23-ef339f71bdf4",
+      "name": "South Downs National Park",
+      "url": "https://www.southdowns.gov.uk/whats-on/",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:04.659000+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:11:48.0672+00"
+    },
+    {
+      "id": "39361d71-4480-4706-903d-bdda3702c5f6",
+      "name": "The Broads Authority",
+      "url": "https://www.visitthebroads.co.uk/whats-on",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:05.374452+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "East of England",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:12:02.382406+00"
+    },
+    {
+      "id": "366b2559-31d6-43f8-97ea-f2fbac9eb1c4",
+      "name": "The Wildlife Trusts",
+      "url": "https://www.wildlifetrusts.org/events",
+      "active": true,
+      "decision": "pause",
+      "access": "robots_disallowed",
+      "checked_at": "2026-10-10T19:22:06.530853+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "7cd08580-6082-4a61-9108-6363ef718e70",
+      "name": "Woodland Trust",
+      "url": "https://www.woodlandtrust.org.uk/visiting-woods/events/",
+      "active": true,
+      "decision": "improve",
+      "access": "http_failed",
+      "checked_at": "2026-10-10T19:22:06.700779+00:00",
+      "geography": {
+        "nation": "UK-Wide",
+        "region": "National",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "264dfc8d-f1c5-45cc-9492-52d273b28b47",
+      "name": "Yorkshire Dales National Park",
+      "url": "https://www.yorkshiredales.org.uk/whats-on/",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:07.007406+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "Yorkshire and the Humber",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": null
+    },
+    {
+      "id": "47aedc68-94fd-4cdd-abac-015f5d38ba2b",
+      "name": "BuckinghamshireLive - Family & Kids",
+      "url": "https://www.buckinghamshirelive.com/whats-on/family-kids/",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:07.220050+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-09-29 18:56:21.771964+00"
+    },
+    {
+      "id": "eb284368-0fa8-47eb-a2ac-06914aaf5173",
+      "name": "French Brothers (Windsor steamboat)",
+      "url": "https://www.frenchbrothers.co.uk/",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:08.442477+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-07 06:11:39.828064+00"
+    },
+    {
+      "id": "b771bba1-9fdd-4604-9725-8b3f5764616a",
+      "name": "Kempton Steam Museum",
+      "url": "https://kemptonsteam.org/whats-on/steaming-weekends/",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:08.494387+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "London",
+        "pilot_relevance": "local route to validate"
+      },
+      "last_success": "2026-09-29 19:04:10.17968+00"
+    },
+    {
+      "id": "4cef66e5-90a6-429b-9e33-77850667551e",
+      "name": "Kids Days Out - Buckinghamshire",
+      "url": "https://www.kidsdaysout.co.uk/kids-days-out-england/buckinghamshire.html",
+      "active": true,
+      "decision": "keep",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:08.666368+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-09 06:06:51.350594+00"
+    },
+    {
+      "id": "81f0c800-d05b-4d32-bc5a-55124b825ca5",
+      "name": "London Transport Museum Depot (Acton)",
+      "url": "https://www.ltmuseum.co.uk/whats-on",
+      "active": true,
+      "decision": "improve",
+      "access": "http_failed",
+      "checked_at": "2026-10-10T19:22:08.852096+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "London",
+        "pilot_relevance": "local route to validate"
+      },
+      "last_success": null
+    },
+    {
+      "id": "ab7d7df1-b398-4ab1-b186-4df6d6a9b299",
+      "name": "The Bucks Guide - Events",
+      "url": "https://thebucksguide.co.uk/events",
+      "active": true,
+      "decision": "improve",
+      "access": "readable_pending_validation",
+      "checked_at": "2026-10-10T19:22:08.997885+00:00",
+      "geography": {
+        "nation": "England",
+        "region": "South East",
+        "pilot_relevance": "not demonstrated for W3 9LN"
+      },
+      "last_success": "2026-10-01 06:05:58.349739+00"
+    }
+  ],
+  "county_evidence": [
+    {
+      "source": "Kids Days Out - Buckinghamshire",
+      "worker": "civic",
+      "status": "OK_ZERO",
+      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=277728, content_chars=17236, jsonld_events=0, eventish_rows=11, title=50 best things to do in Buckinghamshire with children - Kids Days Out; gemini: attempts=1, prompt_tokens=6938, output_tokens=2457, total_tokens=9395 (13.5s)",
+      "extracted": 0,
+      "kept": 0,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "The Bucks Guide - Events",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (0.5s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "BuckinghamshireLive - Family & Kids",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.9s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Buckinghamshire Council",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.3s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Cambridgeshire County Council",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (0.9s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Essex County Council",
+      "worker": "civic",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Oxfordshire County Council",
+      "worker": "civic",
+      "status": "OK",
+      "detail": "OK - 27 extracted, 27 kept; gemini: attempts=1, prompt_tokens=9468, output_tokens=16039, total_tokens=25507 (64.7s)",
+      "extracted": 27,
+      "kept": 27,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Norfolk County Council",
+      "worker": "civic",
+      "status": "FAILED_403",
+      "detail": "FAILED_403 - http_403: https://norfolk.gov.uk/libraryonline (0.3s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Lancashire County Council",
+      "worker": "civic",
+      "status": "SKIPPED_ROBOTS",
+      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.5s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "East Sussex County Council",
+      "worker": "civic",
+      "status": "FAILED_403",
+      "detail": "FAILED_403 - http_403: https://www.escis.org.uk/explore/?type=event&sort=order-by-date (0.3s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Hampshire County Council",
+      "worker": "civic",
+      "status": "FAILED_403",
+      "detail": "FAILED_403 - http_403: https://www.hants.gov.uk/thingstodo/events (0.2s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Kent County Council",
+      "worker": "civic",
+      "status": "OK",
+      "detail": "OK - 16 extracted, 16 kept; gemini: attempts=1, prompt_tokens=7224, output_tokens=11784, total_tokens=19008 (48.8s)",
+      "extracted": 16,
+      "kept": 16,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+    },
+    {
+      "source": "Hertfordshire County Council",
+      "worker": "activities",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (4.7s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+    }
+  ],
+  "county_limit": "County-named source outcomes only, not verified item geography or public coverage. Full UK county boundary universe and geocoded publication/quality/freshness joins unavailable. Regional/national routes remain unmapped.",
+  "report_date": "2026-10-17",
+  "previous_success_at": "2026-10-16T10:00:25Z",
+  "repository_head": "2f079ab9faa386227e26da3aa85b9313e7cd5b3c",
+  "usage_scope": "Latest visible scheduled worker run: 16 October evening, created 21:09 UTC. Civic, activities, news and deals only; not daily/project-wide/billing totals. Thinking included in output; Originals/shadow usage unavailable.",
+  "scheduler": {
+    "expected": "07:17 and 19:17 Europe/London (last read configuration)",
+    "latest_visible_run": "2026-10-16T21:09:53Z",
+    "latest_run_id": 38967431792,
+    "conclusion": "success",
+    "status": "No 17 October morning worker/Originals run visible at check time. Saturday has no 07:30 brief-generation task by design; daily email fallback generates this snapshot."
+  },
+  "source_matrix_scope": "Source access/registry matrix dated 10–11 October, carried forward as historical context; no new probes or approvals.",
+  "latest_jobs": [
+    {
+      "id": 117197283384,
+      "name": "gate",
+      "conclusion": "success"
+    },
+    {
+      "id": 117197319737,
+      "name": "activities / collect",
+      "conclusion": "success"
+    },
+    {
+      "id": 117197319745,
+      "name": "venue_reference / sync",
+      "conclusion": "success"
+    },
+    {
+      "id": 117197319878,
+      "name": "civic / collect",
+      "conclusion": "success"
+    },
+    {
+      "id": 117197320100,
+      "name": "deals / collect",
+      "conclusion": "success"
+    },
+    {
+      "id": 117197320293,
+      "name": "news / news",
+      "conclusion": "success"
+    },
+    {
+      "id": 117197321452,
+      "name": "civic / review-safety",
+      "conclusion": "skipped"
+    },
+    {
+      "id": 117197321519,
+      "name": "news / checks",
+      "conclusion": "skipped"
+    },
+    {
+      "id": 117197322308,
+      "name": "civic / usage-review",
+      "conclusion": "skipped"
+    }
+  ],
+  "delivery_updates": {
+    "discovery": "Issues #87/#88/#90/#91/#93/#97/#102/#103 completed. PR #170 merged, but #94/#95/#96/#98/#140 and sprint #169 remain open for remaining acceptance/release/readback criteria.",
+    "news": "18 owner change requests remain under #126/#127; do not repeat completed 50-item review.",
+    "originals": "Latest evening log reports both daily-2026-10-16 and weekly-2026-10-16 already published and skipped. This is log evidence, not fresh public readback or sustained timeliness acceptance.",
+    "brief_delivery": "#157 and bounded solution discovery #158 remain open; root cause and platform selection unsettled. No scheduler migration/new spend authorized by this report."
+  },
+  "evidence_limitations": [
+    "Latest scheduled collection is 16 October evening; no 17 October morning run visible at check time.",
+    "Successful civic job includes 14 failed routes and 3 robots exclusions.",
+    "10–11 October historical registry/access evidence; county/public geocoded supply and complete billing unavailable.",
+    "PR merge does not complete mobile/auth/DPR acceptance.",
+    "No fresh private database/publication recount performed."
+  ]
+}
