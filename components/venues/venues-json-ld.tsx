@@ -9,7 +9,7 @@ const SCHEMA_TYPES: Record<string, string> = {
   museum: "Museum",
   park: "Park",
   playground: "Playground",
-  "children�s_playground": "Playground",
+  "children’s_playground": "Playground",
   library: "Library",
   cafe: "CafeOrCoffeeShop",
   leisure: "SportsActivityLocation",

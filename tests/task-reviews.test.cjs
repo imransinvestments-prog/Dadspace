@@ -13,6 +13,7 @@ const tasks = load('lib/operations/review-tasks.ts')
 const access = load('lib/operations/access.ts')
 const originals = load('lib/operations/originals-checks.ts')
 const newsChecks = load('lib/operations/news-checks.ts')
+const dealChecks = load('lib/operations/deal-check-labels.ts')
 const news = load('lib/operations/news-sample.ts', { './news-checks': newsChecks, '@/artefacts/data/news-quality-sample-2026-10-15.json': JSON.parse(fs.readFileSync('artefacts/data/news-quality-sample-2026-10-15.json', 'utf8')) })
 const uid = '12345678-1234-1234-1234-123456789abc'
 function harness({ allowed = 'allowed', reviewer = true, changed = false, token = 'test-only', materialChanged = false } = {}) {
@@ -21,6 +22,7 @@ function harness({ allowed = 'allowed', reviewer = true, changed = false, token 
     'server-only': {}, './session': { operationsAccess: async () => allowed }, './access': access,
     './news-sample': news,
     './originals-checks': originals,
+    './deal-check-labels': dealChecks,
     './review-tasks': tasks, '@/lib/supabase/server': { createClient: async () => ({ auth: { getUser: async () => ({ data: { user: { id: uid } } }) } }) },
     './review-material': { getReviewMaterial: async () => ({ available: true, label: 'Live news', notice: 'Not a frozen sample', rows: [{ id: 'record-1', title: 'Article', fields: { summary: 'Actual evidence' } }] }), materialFingerprint: () => materialChanged ? 'changed' : 'snapshot-hash' },
   }, { process: { env: { DADSPACE_REVIEWER_USER_IDS: reviewer ? uid : '', DADSPACE_REVIEW_GITHUB_TOKEN: token } },
@@ -31,6 +33,17 @@ function harness({ allowed = 'allowed', reviewer = true, changed = false, token 
 test('read access is checked before fetching GitHub evidence', async () => {
   const { api, calls } = harness({ allowed: 'denied' })
   await assert.rejects(api.getTaskReview(123)); assert.equal(calls.length, 0)
+})
+test('Deal checks save explicitly and malformed or wrong-task scores cannot write',async()=>{
+  const {api,calls}=harness()
+  const checks=Object.fromEntries(Object.keys(dealChecks.DEAL_CHECK_LABELS).map(key=>[key,'unknown']))
+  const material={rowId:'record-1',page:1,fingerprint:'snapshot-hash',dealChecks:checks}
+  await api.recordTaskReview(130,tasks.REVIEW_DECISIONS[2],'Check current availability','','old:0',material)
+  assert.ok(JSON.parse(calls.find(c=>c.options.method==='POST').options.body).body.includes('Deal quality checks: '+JSON.stringify(checks)))
+  const denied=harness()
+  await assert.rejects(denied.api.recordTaskReview(126,tasks.REVIEW_DECISIONS[0],'Wrong task','','old:0',material))
+  await assert.rejects(denied.api.recordTaskReview(130,tasks.REVIEW_DECISIONS[0],'Bad score','','old:0',{...material,dealChecks:{...checks,useful:'invented'}}))
+  assert.equal(denied.calls.some(c=>c.options.method==='POST'),false)
 })
 test('operators do not inherit reviewer writes', async () => {
   const { api, calls } = harness({ reviewer: false })

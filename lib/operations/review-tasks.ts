@@ -1,7 +1,8 @@
 export const REVIEW_TASKS = [
   { id: 123, title: "Pilot quality thresholds", need: "Agree remaining numeric thresholds and accepted/rejected examples.", dependencies: [122], route: "/ops" },
   { id: 34, title: "Pilot venue quality", need: "Review the 50-venue cohort: identity, location, access, facts and photo rights.", dependencies: [122, 33], route: "/ops/review?kind=venues" },
-  { id: 126, title: "News quality", need: "Score 50 news items for relevance, attribution and working destinations.", dependencies: [122, 123], route: "/news" },
+  { id: 126, title: "News quality", need: "The 50-item review is complete. Review only outstanding correction evidence and changed records before acceptance.", dependencies: [122, 123], route: "/news" },
+  { id: 127, title: "News correction proposals", need: "Review the proposed geographic changes and held location conflicts. Saving a review does not apply a database correction.", dependencies: [], route: "/news" },
   { id: 128, title: "Originals editorial acceptance", need: "Review daily tips, Friday guides and rejected drafts for claims, tone and usefulness.", dependencies: [], route: "/originals" },
   { id: 130, title: "Published deals and ranking", need: "Review the published pool and top 20 for usefulness, accuracy, terms and redemption.", dependencies: [122, 123], route: "/deals" },
   { id: 135, title: "Historical programme corrections", need: "Decide unresolved schedule, eligibility and session proposals; guarded application remains separate.", dependencies: [33, 40], route: "/ops/review?kind=activities" },
