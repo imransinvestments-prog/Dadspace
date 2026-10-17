@@ -74,6 +74,19 @@ SHOPS = {
         "title_rules": [(r"^(?:Dougie the Dog|Peppa Pig) Trunki$", "Kids luggage"),
                         (r"^Travel Pillow Turquoise - Una$", "Kids neck pillow")],
     },
+    # Candidate only: this adds no active database source.
+    "https://www.naturalbabyshower.co.uk/collections/sale-car-seats.atom": {
+        "name": "Natural Baby Shower", "host": "www.naturalbabyshower.co.uk",
+        "require_mapping": True, "max_pages": 1, "public_product_json": True,
+        "delivery": "Standard delivery £4.95 below £75, free over £75. Local pickup £3.95 where available. Channel Islands from £5.95; postcode, size and direct-supplier restrictions can apply. Check product dispatch status and the final checkout total.",
+        "delivery_url": "https://www.naturalbabyshower.co.uk/pages/dispatch-delivery",
+        "keywords": ["car seats"],
+        "title_rules": [
+            (r"^Britax R[öo]mer Dualfix M Plus 360 Spin Car Seat\b", "Convertible car seat"),
+            (r"^Britax R[öo]mer (?:KIDFIX|Kidfix)(?: Pro)? i-Size (?:High Back Booster )?Car Seat\b", "Booster car seat"),
+            (r"^CYBEX Cloud T i-Size (?:Plus )?Car Seat\b", "Infant car seat"),
+        ],
+    },
 }
 MAX_PAGES = 2
 MAX_PRODUCTS = 12
