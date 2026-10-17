@@ -3,7 +3,7 @@ const assert=require('node:assert/strict')
 const fs=require('node:fs'),vm=require('node:vm'),ts=require('typescript')
 function load(access, result, publicResult={items:[],loadFailed:false}) {
   let reads=0
-  const chain={select:()=>chain,eq:()=>chain,not:()=>chain,order:()=>chain,range:()=>chain,abortSignal:async()=>result}
+  const chain={select:()=>chain,eq:()=>chain,in:()=>chain,not:()=>chain,order:()=>chain,range:()=>chain,abortSignal:async()=>result}
   const module={exports:{}}
   const deps={'server-only':{},'@/lib/supabase':{getSupabase:()=>({from:()=>{reads++;return chain}})},'@/lib/deals':{getDeals:async()=>publicResult},'./session':{operationsAccess:async()=>access},'./evidence-shared':{evidenceUrl:value=>value?.startsWith('https://')?value:null}}
   vm.runInNewContext(ts.transpileModule(fs.readFileSync('lib/operations/deals-evidence.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText,{module,exports:module.exports,require:name=>deps[name]??require(name),AbortSignal,Set,JSON,String,Number})
@@ -33,6 +33,15 @@ test('successful source fetch and empty yield remain separately inspectable',asy
   const m=load('allowed',{data:[{id:17,name:'AWIN',active:true,source_type:'awin',url:'config://awin',last_status:'ok',last_counts:{fetched:10,verified:0}}],count:1,error:null})
   const row=(await m.get('sources',1,'all')).evidence.rows[0]
   assert.equal(row.url,null)
-  assert.match(row.detail,/"verified":0/)
+  assert.match(row.detail,/Verified offers: 0/)
   assert.match(row.detail,/does not prove useful offers/)
+})
+test('displayed-only filter fails closed when public membership cannot be established',async()=>{
+  const m=load('allowed',{data:[],count:0,error:null},{items:[],loadFailed:true})
+  assert.equal((await m.get('offers',1,'displayed')).evidence.available,false)
+  const empty=load('allowed',{data:[],count:0,error:null})
+  const r=await empty.get('offers',1,'displayed')
+  assert.equal(r.evidence.available,true)
+  assert.equal(r.evidence.total,0)
+  assert.equal(empty.reads(),0)
 })

@@ -5,6 +5,13 @@ import { operationsAccess } from "./session"
 import { evidenceUrl } from "./evidence-shared"
 
 export type DealEvidenceRow = { id: string; title: string; state: string; detail: string; url: string | null; source: string; date: string | null }
+function collectionCounts(value: unknown) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return "Collection yield unknown."
+  const counts = value as Record<string, unknown>
+  const count = (v: unknown) => typeof v === "number" && Number.isFinite(v) && v >= 0 ? String(v) : "unknown"
+  const rejected = counts.rejected && typeof counts.rejected === "object" && !Array.isArray(counts.rejected) ? Object.entries(counts.rejected).slice(0, 25).map(([reason, n]) => `${reason.replaceAll("_", " ").slice(0, 200)}: ${count(n)}`).join("; ") : "unknown"
+  return `Fetched: ${count(counts.fetched)}. Verified offers: ${count(counts.verified)}. Rejection reasons: ${rejected || "none recorded"}.`
+}
 export async function getDealsEvidence(kind: string, page: number, filter: string) {
   const access = await operationsAccess()
   const unavailable = { available: false, total: null as number | null, rows: [] as DealEvidenceRow[] }
@@ -33,7 +40,7 @@ export async function getDealsEvidence(kind: string, page: number, filter: strin
       const result = await query.order("id").range(from, from + 19).abortSignal(AbortSignal.timeout(10_000))
       if (result.error || !result.data || result.count === null) return { access, evidence: unavailable }
       rows = result.data.map(r => ({ id: String(r.id), title: r.name, state: r.active ? "Active" : "Inactive", source: r.source_type, url: evidenceUrl(r.url), date: r.last_checked_at,
-        detail: `Last status: ${r.last_status ?? "unknown"}; last successful fetch: ${r.last_success_at ?? "unknown"}; consecutive failures: ${r.consecutive_failures ?? "unknown"}. Last collection counts: ${JSON.stringify(r.last_counts ?? {}).slice(0, 2500)}. A successful fetch does not prove useful offers. Affiliate membership/terms are not established by source activation.` }))
+        detail: `Last status: ${r.last_status ?? "unknown"}; last successful fetch: ${r.last_success_at ?? "unknown"}; consecutive failures: ${r.consecutive_failures ?? "unknown"}. ${collectionCounts(r.last_counts)} A successful fetch does not prove useful offers. Affiliate membership/terms are not established by source activation.` }))
       total = result.count
     } else if (kind === "audit") {
       const result = await db.from("operations_maintenance_audit").select("id,action,record_id,reason,created_at,status,reverted_by", { count: "exact" }).eq("family", "deals-source").order("created_at", { ascending: false }).order("id").range(from, from + 19).abortSignal(AbortSignal.timeout(10_000))
@@ -41,11 +48,14 @@ export async function getDealsEvidence(kind: string, page: number, filter: strin
       rows = result.data.map(r => ({ id: r.id, title: `${r.action} · source ${r.record_id}`, state: r.status, source: "Deals source maintenance", url: null, date: r.created_at, detail: `${r.reason}${r.reverted_by ? " · Restored by audit " + r.reverted_by : ""}` }))
       total = result.count
     } else {
+      const published = await getDeals()
+      if (filter === "displayed" && published.loadFailed) return { access, evidence: unavailable }
+      if (filter === "displayed" && published.items.length === 0) return { access, evidence: { available: true, total: 0, rows: [] } }
       let query = db.from("deals").select("id,title,status,retailer,link,source_id,item_id,last_seen,expires_at,price,was_price,discount_pct,audience_evidence,classified_by,description", { count: "exact" })
       if (filter === "live") query = query.eq("status", "live")
+      if (filter === "displayed") query = query.in("id", published.items.map(r => r.id))
       const result = await query.order("id", { ascending: false }).range(from, from + 19).abortSignal(AbortSignal.timeout(10_000))
       if (result.error || !result.data || result.count === null) return { access, evidence: unavailable }
-      const published = await getDeals()
       const displayed = new Set(published.items.map(r => String(r.id)))
       rows = result.data.map(r => ({ id: String(r.id), title: r.title, source: `${r.retailer || "Unknown merchant"} · source ${r.source_id ?? "unknown"} · item ${r.item_id ?? "unmapped"}`, url: evidenceUrl(r.link), date: r.last_seen,
         state: published.loadFailed ? "Public status unavailable" : displayed.has(String(r.id)) ? "Displayed by the public selector" : "Stored — outside the current public selection",
