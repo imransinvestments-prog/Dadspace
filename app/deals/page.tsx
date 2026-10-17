@@ -19,7 +19,7 @@ export default async function DealsPage({ searchParams }: { searchParams: Promis
   const deals = group ? items.filter(deal => deal.display_group === group) : items
 
   return (
-    <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <section className="mb-8 rounded-3xl border border-white/10 bg-card/70 p-6 sm:p-8">
         <div className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-cyan-400">
           <Tag className="h-4 w-4" />
@@ -58,6 +58,6 @@ export default async function DealsPage({ searchParams }: { searchParams: Promis
           </div>
         </>
       )}
-    </main>
+    </div>
   )
 }
