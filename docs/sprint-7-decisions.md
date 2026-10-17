@@ -1,61 +1,58 @@
-# Sprint 7 — evidence and decisions
+# Sprint 7 — consolidated decisions and delivery evidence
 
-## Owner decisions received — 17 October 2026
+17 October 2026. [Sprint #187](https://github.com/imransinvestments-prog/Dadspace/issues/187), [preview PR #188](https://github.com/imransinvestments-prog/Dadspace/pull/188). The broader sprint release remains proposed.
 
-### Applied and verified
+## Decisions requested together
 
-Focused collector PR #189 merged as 2821e6bd97d7e20bdc16bc2e6d6fe1e6b342aaf7 after all checks passed. Registered source #42 inactive, then used the existing production signed preview/confirmation flow to activate the approved route. Registration audit 24352380-3a39-4c99-a1a2-33517495fe3f; activation audit 58be958b-5675-4696-976e-91afe5532543. Other source activations were not changed.
+1. **One new offer:** approve the Matalan black school-jumper two-pack, **age 4 years**, exact variation **14894527**, item price **£7.20** against **merchant-advertised RRP £9**. Item saving £1.80 / 20%; no independent previous-price claim. Home delivery £3.99 gives £11.19 total for this item alone; standard click & collect £0.99 gives £8.19, subject to availability. Free-delivery thresholds and exclusions are in the offer evidence. This is a useful item-price reduction, not a claim that ordering this item alone saves money against an in-store purchase.
+2. **One source route:** approve the bounded Matalan uniform pilot at https://www.matalan.co.uk/c/offers/school-uniform/ . First recipe checks only the exact product/size above, plus current category membership, delivery and promotion conditions. No general catalogue expansion, account or affiliate application. It stops conservatively at **19 October 00:00 BST (18 October 23:00 UTC)** because the published “19.10.26 at Midnight” wording is ambiguous. Any extension requires a fresh terms review; no automatic extension. Refresh exact evidence before any registration/activation and normal collector/public readback.
+3. **Release:** approve the tested Deals workspace and bounded Matalan adapter in PR #188, once hosted checks pass. Keep existing owner-only permissions and disabled preview writes. No paid AI, automatic merchant applications or AWIN account changes are included.
 
-Normal rules-only collection [39070828554](https://github.com/imransinvestments-prog/Dadspace/actions/runs/39070828554) fetched and verified one offer for source #42. Database deal #1994 is live, canonical item #75, exact variant 55678800527739, £169 vs merchant-advertised £289, last verified 17 October at 22:27 BST. The [production Car Seats & Pushchairs page](https://www.dad-space.co.uk/deals?group=Car%20Seats%20%26%20Pushchairs) was read back in the browser: correct title, price, comparison disclosure and exact variant link are visible. This manual run is supporting delivery evidence, not scheduled acceptance for #132/#125.
+Preview entry: https://dadspace-git-sprint-7-useful-deals-imransinvestments-6859.vercel.app/ops/deals?kind=trial . **One new content decision** is outstanding. The approved car-seat snapshot remains visible for context; the unchanged accepted 17-row Sprint 5 pack needs no repeat review. Matalan frozen fingerprint: `aac35fd5fc6c3f8db7c31c04a594e738b64a543d3efef515aa445d807cd0e311`.
 
-Workspace usability and this offer/route are accepted; the third priority category and MasterTag delivery remain open. No whole feature points are awarded at this checkpoint.
+## Decisions already approved and applied
 
-The owner approved the workspace's usability and the one exact car-seat offer plus its proposed Natural Baby Shower source route. This accepts the frozen variant 55678800527739 at £169 against merchant-advertised £289, fingerprint cd2b79e83f834099d0173cac0dadb6dfacd30757e5804552859f397baf221f71. A fresh read-only recheck passed. Collector support is being released through the focused PR #189 before activation and normal collection readback. The broader workspace remains on the Sprint 7 preview. Historical unaccepted notes below describe the earlier review checkpoint.
+Owner approved workspace usability and the Natural Baby Shower exact car-seat variant **55678800527739**, £169 vs merchant-advertised £289, plus its narrow source route. Focused PR #189 merged as 2821e6bd97d7e20bdc16bc2e6d6fe1e6b342aaf7. Source #42 was registered inactive and then activated through the production signed preview/confirmation flow. Registration audit 24352380-3a39-4c99-a1a2-33517495fe3f; activation audit 58be958b-5675-4696-976e-91afe5532543.
 
-This approval does not close #131, accept the seven-day window, fix MasterTag delivery, or approve new merchant applications.
+Normal rules-only collection [39070828554](https://github.com/imransinvestments-prog/Dadspace/actions/runs/39070828554) fetched/verified one offer for source #42. Deal #1994 was read back live at £169/£289 and exact variant link on the [production Car Seats & Pushchairs page](https://www.dad-space.co.uk/deals?group=Car%20Seats%20%26%20Pushchairs). Last verification 17 October 22:27 BST. This manual run does not count as scheduled acceptance. No car-seat fitting recommendation is implied.
 
-17 October 2026. [Tracker #187](https://github.com/imransinvestments-prog/Dadspace/issues/187), [draft PR #188](https://github.com/imransinvestments-prog/Dadspace/pull/188). Implementation is not released or accepted.
+## Engineering decisions made on the owner's behalf
 
-## What has been established
+- Reuse the canonical taxonomy and public selector; no new taxonomy or affiliate-led ranking. Matalan maps to **School uniform sweaters #160**.
+- Use an explicit 6 MB Matalan response bound (the product page is about 4.94 MB). Keep the existing 4.5 MB Shopify bound. Exact URL allowlist, four required public reads, no redirects, no merchant JavaScript execution or checkout access.
+- Corroborate exact size/colour/stock/GBP price across the product's structured variant data and JSON-LD; use that variant's RRP only. Fail closed on missing or conflicting identity, price, currency, stock, terms, delivery or category membership. Re-fetch before verification.
+- Summarise factual offer terms in our own words; no merchant description/image republication. Public robots inspection did not disallow the selected category/product paths; this does not confer an affiliate licence or blanket republication permission.
+- Keep previews read-only. Source pause stops future collection; it does not immediately hide existing offers. Source decisions reuse signed identity, stale/concurrent checks, atomic audit and reversible readback. No taxonomy-writing API is added.
+- Keep unaccepted observations separate from implementation. No whole feature points awarded yet.
 
-- Frozen public selector replay: **17 displayed offers**, the same IDs and material offer evidence as the accepted Sprint 5 pack. No new review request for these unchanged rows. Routine last-seen refresh is not a new content decision.
-- Full taxonomy snapshot: 932 items, 294 active; 308 active/priority rows mapped to observed item-level route history, configured candidate feeds or explicit qualification gaps.
-- Existing supply does **not** satisfy three of the five priority categories. Bicycles have verified Halfords supply; car-seat and uniform feeds have zero verified offers in the latest collection. Holidays/tuition lack a qualified item-level route in this snapshot.
-- Fresh read-only [AWIN audit](https://github.com/imransinvestments-prog/Dadspace/actions/runs/39069018906): six joined, six pending programmes, ten joined active UK promotions. Baby discovery found 55 candidate programmes and 53 network promotions; these are not 53 qualifying deals.
-- Natural Baby Shower (64830), Bundle Baby (120946) and Kokoso Baby (49101) are joined. Kiddies Kingdom (2191), Medela (26969), Kit & Kin (47501), Mam Baby UK (75690) and Chicco (99689) are pending. This list is the relevant baby subset, not the full six/six account list. No application or membership change was submitted.
-- Direct browser check of the configured [publisher script](https://www.dwin2.com/pub.3111278.min.js) returned a 404 page. Successful MasterTag delivery is **not** accepted.
+## Priority coverage
 
-## Source qualification findings
-
-| Priority | Evidence | Next bounded step |
+| Priority | Outcome | Follow-up |
 |---|---|---|
-| Bicycles | Existing Halfords collector verified two offers; accepted public sample contains bicycle supply. | Retain existing route and recheck only materially changed offers. |
-| Car seats | Car-seat RSS fetched 30, verified zero. [Kiddies Kingdom catalogue](https://www.kiddies-kingdom.com/best-sales) advertises product-specific RRP comparisons, but catalogue/search evidence is not a qualified current product/variant/stock check. Programme remains pending. | Investigate a small direct merchant adapter or product-level evidence from an already joined merchant. Apply the existing merchant-advertised disclosure; do not represent RRP as historical selling price. No source activation prepared yet. |
-| Uniforms | Uniform RSS fetched 30, verified zero. [Matalan uniform offers](https://www.matalan.co.uk/c/offers/school-uniform/?page=4) provides a candidate route; the category headline does not establish a qualifying discount on a specific size. [Tu campaign terms](https://tuclothing.sainsburys.co.uk/events/sale) surfaced an August offer that has ended. | Qualify exact current product/size/comparison evidence. Do not republish expired summer campaigns. |
-| Holidays | Active canonical IDs 919/922 exist but no observed item-level supply. | Retain gap until dates, party size, mandatory charges and genuine comparison evidence are available. Breakfast discounts are not holiday-package coverage. |
-| Tuition | [Explore Learning pricing](https://www.explorelearning.co.uk/product/maths-english-tuition) and [support conditions](https://www.explorelearning.co.uk/pricing/financial-support/) identify a candidate, with eligibility-specific conditions. No qualified collector route exists. | Do not combine a generic “from” fee with a scholarship percentage into an invented package price. Qualify exact duration, age, location/mode, commitment and applicable discount first. |
+| Bicycles | Existing accepted Halfords supply; latest scheduled evidence verified two. | Retain route; review material changes only. |
+| Car seats | One approved exact NBS variant, normal collector and production display verified. | Keep current stock/price checks. |
+| Uniforms | One Matalan exact variant passed read-only normal classifier/value/verifier; no writes or model calls. Not yet owner-approved or published. | Owner decisions above, then fresh validation and audited activation/readback. #190. |
+| Holidays | Canonical items 919/922 remain mapped gaps; no qualifying package route demonstrated. | Require dates, party size, mandatory charges and real comparison; breakfast discounts do not count as holidays. |
+| Tuition | Explore Learning has pricing and eligibility-dependent financial support; no qualified collector route. | Require precise age, duration, location/mode, commitment and applicable discount; do not combine generic “from” prices with scholarship percentages. |
 
-These are research findings, not proposals to publish these pages as offers. New merchant adapters and any activation need concrete evidence before the owner is asked to approve them.
+932 canonical rows, 294 active; all 308 active/priority rows mapped in the frozen coverage artefact. Stored status, source fetch success and actual public display remain separate. Bicycles and car seats establish two approved priority categories. Uniforms can become the third only after acceptance and live evidence. Missing holidays/tuition remain explicit follow-ups, not fabricated offers.
 
-## Decisions made during implementation
+## AWIN dependency — still unresolved
 
-1. Reuse shared maintenance identity/signatures/atomic audit; expose source pause, activate and restore only. No taxonomy write API was needed to make current evidence inspectable.
-2. Keep previews read-only. Pause affects future collection; it does not override the existing offer freshness/expiry rules.
-3. Default the offer queue to the exact displayed set. Put long supporting evidence behind expandable details; retain paged access to all stored rows.
-4. Preserve the accepted 17-row pack. Current incremental offer-review count is **one**, the separately frozen Natural Baby Shower trial below.
-5. Leave all feature tickets open. No points awarded for this progress, no scope padding and no live data changes.
+Fresh [read-only audit 39069018906](https://github.com/imransinvestments-prog/Dadspace/actions/runs/39069018906): six joined / six pending programmes, ten joined active UK promotions, normal collection zero verified AWIN offers. Relevant joined subset: Natural Baby Shower 64830, Bundle Baby 120946, Kokoso Baby 49101. Relevant pending subset: Kiddies Kingdom 2191, Medela 26969, Kit & Kin 47501, Mam Baby UK 75690, Chicco 99689. No applications or membership changes were made. Candidate network promotions are not accepted deals.
 
-## Owner involvement still needed
+The owner-supplied and installed script `https://www.dwin2.com/pub.3111278.min.js` **still returns HTTP 404** on recheck. [AWIN's publisher installation guide](https://success.awin.com/articles/en_US/Knowledge/how-do-i-install-the-publisher-mastertag) confirms that URL format and describes activating a publisher plugin before testing. Its advertiser dwin1 script is a different product and must not be substituted. Actual account/plugin configuration has not been inspected or changed. Do not infer that a specific plugin is disabled solely from the 404.
 
-- Review the workspace usability once hosted QA is complete; this is not source or release approval.
-- MasterTag needs the current account-generated publisher script or account-side configuration check. The observed 404 cannot be fixed by marking installation as accepted. No plugin/account activation is authorised by this document.
-- A bounded Natural Baby Shower car-seat route has now passed a local read-only trial and independent exact-variant recheck using the normal classifier/value/verifier functions. It yielded **one** candidate: Britax Römer Dualfix M Plus, Carbon Black, variant 55678800527739, £169 against merchant-advertised £289. Canonical item 75 is reused. Fingerprint: cd2b79e83f834099d0173cac0dadb6dfacd30757e5804552859f397baf221f71.
-- Review that one candidate under “New offer review”. Recommended decision: approve its content and the narrow source route https://www.naturalbabyshower.co.uk/collections/sale-car-seats.atom under the existing merchant-advertised comparison policy, subject to a fresh check before any live collection. No source row has been created or activated. No affiliate tracking/commission is claimed.
-- That candidate would add a second priority category alongside bicycles, **not satisfy all three required categories**. Uniforms, holidays and tuition remain gaps. The candidate is not a reason to close #131.
-- The owner supplied the account installation snippet; it matches the configured 404 URL exactly. Do not ask for the same snippet again or substitute a guessed endpoint. Account/vendor troubleshooting remains open; no account/plugin setting has changed.
+Prepared account-side investigation: inspect Toolbox → Publisher MasterTag for publisher 3111278, record plugin/configuration state and use the existing account's supported test. If no active configuration explains the failure, provide the exact failing URL, HTTP 404 and the installed snippet to AWIN support. **No message sent and no plugin activated.** This dependency prevents claiming MasterTag delivery or closing #131; it does not block independent offer collection or workspace release. No repeated request for the same snippet is needed.
 
-## Scheduled evidence (#132)
+## Verification
 
-Two consecutive normal scheduled orchestrations ran on 17 October: [39026086855](https://github.com/imransinvestments-prog/Dadspace/actions/runs/39026086855) and [39067495389](https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389). Deals jobs completed successfully at 10:47:42Z and 20:40:09Z; pipeline records 98 and 102 record 538 fetched / 120 kept, live mode, no health-write failures. “Kept” is a collector counter, not 120 distinct public offers or proof of insertion.
+Read-only Matalan trial: one fetched / one kept, canonical 160, exact variation and independent second merchant check, zero database writes / zero model calls. Six Matalan tests cover identity/currency/stock/price mismatches, malformed payloads, duplicate corroboration, unsafe URLs, redirects, response bounds, changed terms/delivery, network failures, cutoff and price changes. The test clock is frozen so an expired campaign does not break future regression runs.
 
-The normal scheduler expects 07:17 and 19:17 Europe/London (06:17Z/18:17Z on this date). Those orchestration creation times, 10:45:06Z and 20:37:24Z, exceed the agreed 60-minute dispatch allowance. Timing associates slots provisionally; do not infer a passing window from green jobs. Source-level evidence, identity/terms/outage readback and #125's full seven-day cross-feed reconciliation remain required. No acceptance window is declared passed.
+Full Node suite **177 passed**; full Python discovery passed; TypeScript and webpack production build passed. No standalone lint command exists in package.json. Hosted checks and final deployed browser evidence are recorded in sprint-7-progress.md.
+
+## Scheduled evidence and acceptance
+
+#132 is outside the 21-point delivery commitment and still depends on #125's qualifying seven-day cross-feed window. Scheduled runs 39026086855 and 39067495389 on 17 October completed Deals successfully (pipeline 98/102, 538 fetched / 120 kept, zero health-write failures), but creation at 10:45:06Z / 20:37:24Z exceeded the expected 06:17Z / 18:17Z slots by more than the 60-minute allowance. “Kept” does not mean that many public offers. No passing window is declared; manual collection cannot replace scheduled evidence. #125 still requires at least three scheduled Activities collections. No Activities implementation is added.
+
+21 committed / 0 whole-feature accepted / 21 remaining. #148 is a release/acceptance candidate; #131 and #190 still need the concrete Matalan decisions and live evidence, while #131 also retains MasterTag delivery. Close the iteration only after the agreed sprint review; do not close feature tickets merely to close an iteration.

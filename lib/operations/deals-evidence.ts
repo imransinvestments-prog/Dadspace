@@ -4,6 +4,7 @@ import { getDeals } from "@/lib/deals"
 import { operationsAccess } from "./session"
 import { evidenceUrl } from "./evidence-shared"
 import trial from "@/artefacts/data/sprint7-new-offers.json"
+import uniforms from "@/artefacts/data/sprint7-uniform-offers.json"
 import { dealDisplayTitle } from "@/lib/deals-selection"
 
 export type DealEvidenceRow = { id: string; title: string; state: string; detail: string; url: string | null; source: string; date: string | null }
@@ -24,9 +25,13 @@ export async function getDealsEvidence(kind: string, page: number, filter: strin
   try {
     let rows: DealEvidenceRow[] = [], total: number | null = null
     if (kind === "trial") {
-      rows = trial.rows.slice(from, from + 20).map(r => ({ id: r.id, title: dealDisplayTitle(r.title), state: trial.ownerAccepted ? "Owner-approved offer snapshot — collection/publication verified separately" : "Candidate only — not published or owner-approved", source: "Natural Baby Shower · canonical item " + r.itemId, url: evidenceUrl(r.link), date: trial.checkedOn,
-        detail: `Trial price: £${r.price}; merchant comparison: £${r.comparison}. ${r.description} Independently rechecked exact variant using the existing merchant-advertised policy. This is a dated snapshot: stock/prices must be rechecked before activation/publication. No car-seat fitting or compatibility recommendation is implied. Snapshot SHA-256: ${r.fingerprint}` }))
-      total = trial.rows.length
+      const snapshots = [
+        ...uniforms.rows.map(r => ({ ...r, merchant: "Matalan", accepted: uniforms.ownerAccepted, checked: uniforms.checkedOn, expiry: r.expiresAt })),
+        ...trial.rows.map(r => ({ ...r, merchant: "Natural Baby Shower", accepted: trial.ownerAccepted, checked: trial.checkedOn, expiry: null })),
+      ]
+      rows = snapshots.slice(from, from + 20).map(r => ({ id: r.merchant + ":" + r.id, title: dealDisplayTitle(r.title), state: r.accepted ? "Owner-approved offer snapshot — collection/publication verified separately" : "Candidate only — not published or owner-approved", source: r.merchant + " · canonical item " + r.itemId, url: evidenceUrl(r.link), date: r.checked,
+        detail: `Trial price: £${r.price}; merchant comparison: £${r.comparison}. ${r.description} Independently rechecked exact variant using the existing merchant-advertised policy. This is a dated snapshot: stock/prices must be rechecked before activation/publication. ${r.expiry ? "Conservative review cutoff: " + r.expiry + ". " : ""}${r.merchant === "Natural Baby Shower" ? "No car-seat fitting or compatibility recommendation is implied. " : ""}Snapshot SHA-256: ${r.fingerprint}` }))
+      total = snapshots.length
     } else if (kind === "taxonomy") {
       let query = db.from("parent_discount_items").select("id,item_or_service,active,inactive_reason,display_group,uk_terms,deal_type,equivalent_item_id,needs_child_evidence", { count: "exact" })
       if (filter === "active") query = query.eq("active", true)

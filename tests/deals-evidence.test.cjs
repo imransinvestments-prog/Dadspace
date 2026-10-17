@@ -7,6 +7,7 @@ function load(access, result, publicResult={items:[],loadFailed:false}) {
   const module={exports:{}}
   const deps={'server-only':{},'@/artefacts/data/sprint7-new-offers.json':{default:{rows:[{id:'trial-1',title:'New offer',price:169,comparison:289,link:'https://example.com/offer',fingerprint:'fixture'}],checkedOn:'2026-10-17'}},'@/lib/supabase':{getSupabase:()=>({from:()=>{reads++;return chain}})},'@/lib/deals':{getDeals:async()=>publicResult},'./session':{operationsAccess:async()=>access},'./evidence-shared':{evidenceUrl:value=>value?.startsWith('https://')?value:null}}
   deps['@/lib/deals-selection']={dealDisplayTitle:title=>title}
+  deps['@/artefacts/data/sprint7-uniform-offers.json']={default:{rows:[{id:'uniform-1',title:'School jumper',price:7.2,comparison:9,link:'https://example.com/uniform',fingerprint:'uniform-fixture',expiresAt:'2026-10-18T23:00:00Z'}],checkedOn:'2026-10-17',ownerAccepted:false}}
   vm.runInNewContext(ts.transpileModule(fs.readFileSync('lib/operations/deals-evidence.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText,{module,exports:module.exports,require:name=>deps[name]??require(name),AbortSignal,Set,JSON,String,Number})
   return {get:module.exports.getDealsEvidence,reads:()=>reads}
 }
@@ -49,7 +50,9 @@ test('displayed-only filter fails closed when public membership cannot be establ
 test('trial snapshots cannot masquerade as published or owner-approved offers',async()=>{
   const m=load('allowed',{data:[],count:0,error:null})
   const r=await m.get('trial',1,'all')
-  assert.equal(r.evidence.total,1)
+  assert.equal(r.evidence.total,2)
   assert.match(r.evidence.rows[0].state,/not published or owner-approved/)
+  assert.match(r.evidence.rows[0].source,/Matalan/)
+  assert.match(r.evidence.rows[0].detail,/Conservative review cutoff/)
   assert.match(r.evidence.rows[0].detail,/rechecked before activation/)
 })

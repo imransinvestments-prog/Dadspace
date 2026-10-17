@@ -50,6 +50,9 @@ def page_text(url):
 
 
 def fetch_direct(source):
+    from deals_matalan import SOURCE_URL as MATALAN_URL, fetch_matalan
+    if source.get("url") == MATALAN_URL:
+        return fetch_matalan(source)
     from deals_shopify import SHOPS, fetch_shopify
     if source.get("url") in SHOPS:
         return fetch_shopify(source)
