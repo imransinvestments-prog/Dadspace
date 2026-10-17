@@ -33,6 +33,9 @@ test('queue inputs are bounded and links cannot execute scripts or expose signed
   for (const link of ['javascript:alert(1)', 'data:text/html,test', 'https://user:pass@example.com/', '/relative']) assert.equal(shared.evidenceUrl(link), null)
   assert.equal(shared.evidenceUrl('https://example.com/detail?token=secret#track'), 'https://example.com/detail')
   assert.equal(shared.evidenceUrl('https://example.com/event?id=320734&token=secret'), 'https://example.com/event?id=320734')
+  assert.equal(shared.evidenceUrl('https://www.matalan.co.uk/p/uniform/14894526/?variation=14894527&token=secret'), 'https://www.matalan.co.uk/p/uniform/14894526/?variation=14894527')
+  assert.equal(shared.evidenceUrl('https://example.com/detail?variation=secret'), 'https://example.com/detail')
+  assert.equal(shared.evidenceUrl('https://www.matalan.co.uk/p/uniform/14894526/?variation=secret'), 'https://www.matalan.co.uk/p/uniform/14894526/')
 })
 function database(access, responseFor, configured = true) {
   const queries = []

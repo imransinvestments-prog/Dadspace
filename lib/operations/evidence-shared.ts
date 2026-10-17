@@ -33,7 +33,8 @@ export function evidenceUrl(value: unknown): string | null {
     if (!["https:", "http:"].includes(url.protocol) || url.username || url.password) return null
     // Keep public record identities (e.g. MyLibrary ?id=...), remove signed tokens.
     const identities = [...url.searchParams.entries()].filter(([key, value]) =>
-      ["id", "eventid", "variant", "page"].includes(key.toLowerCase()) && /^[a-zA-Z0-9_-]{1,100}$/.test(value))
+      (["id", "eventid", "variant", "page"].includes(key.toLowerCase()) && /^[a-zA-Z0-9_-]{1,100}$/.test(value)) ||
+      (url.hostname === "www.matalan.co.uk" && key === "variation" && /^\d{1,12}$/.test(value)))
     url.search = ""
     for (const [key, value] of identities) url.searchParams.append(key, value)
     url.hash = ""
