@@ -1,5 +1,9 @@
 # Sprint 6 — implementation and decisions
 
+## Post-closure owner decision — 17 October 2026
+
+The owner confirmed maintenance access for the existing verified owner account only and accepted finding articles and inspecting their evidence/publication views. Production-only maintainer identity, signing and maintenance-enabled settings were configured and deployed in Vercel (`FcEdbRLUpsK1D6UJnfuCuqkQNfdq`). Production readback verified that the owner can prepare a signed non-paid confirmation; no confirmation was checked or applied. Paid retry preview has no Apply control: the retry policy and Actions dispatch token remain unconfigured/unapproved. No preview environment was enabled. Database readback: zero maintenance/dispatched requests, zero hidden News and zero hidden Originals. Remaining live execution/recovery and scheduled acceptance are unchanged; the feature tickets remain open. This later decision supersedes the disabled-maintenance release snapshot below without changing the sprint's historical acceptance ledger.
+
 ## Release and iteration closure
 
 Owner approved release of PR #186 with live maintenance and paid manual retries disabled, then requested sprint review and closure. It merged as `31b8c1fe7a99af4a5b47cd96ed022acec6ebeae0`. [Final review and carryover](./sprint-6-closure.md) supersedes the historical proposal/status below. The iteration closes with all three feature tickets open; no future scheduled evidence or unenabled action acceptance is claimed.
