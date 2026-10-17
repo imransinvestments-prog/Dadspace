@@ -6,6 +6,9 @@ import requests
 
 
 def verify_offer(deal, shopify_pages=None):
+    if deal.get("matalan_variant_id"):
+        from deals_matalan import verify_matalan
+        return verify_matalan(deal)
     if deal.get("shopify_variant_id"):
         from deals_shopify import verify_shopify
         return verify_shopify(deal, shopify_pages)

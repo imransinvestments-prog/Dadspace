@@ -1,0 +1,22 @@
+{
+  "checkedOn": "2026-10-17T22:43:32.028334+00:00",
+  "published": false,
+  "ownerAccepted": false,
+  "sourceRouteApproved": false,
+  "merchant": "Matalan",
+  "sourceUrl": "https://www.matalan.co.uk/c/offers/school-uniform/",
+  "rows": [
+    {
+      "id": "14894527",
+      "title": "2 Pack Kids Black School Knit Jumpers (3-13yrs) - Age 4 Years",
+      "link": "https://www.matalan.co.uk/p/childrens-clothing/2-pack-kids-black-school-knit-jumpers-3-13yrs/14894526/?variation=14894527",
+      "price": 7.2,
+      "comparison": 9.0,
+      "itemId": 160,
+      "description": "Two school-uniform jumpers; black, age 4 years. Online only. Item price £7.20 excludes fulfilment. Standard home delivery £3.99 (£11.19 total for this item alone); free on orders over £49.99. Standard click & collect £0.99 (£8.19 total), free over £19.99, subject to store availability. No combined offers or discount codes. Check checkout and current delivery restrictions. Delivery terms: https://www.matalan.co.uk/c/customer-services/delivery/ Promotion terms: https://www.matalan.co.uk/c/customer-services/terms-and-conditions/promotions/ Merchant-advertised RRP comparison; not independently verified as a previous selling price.",
+      "verification": "quality-v1:source-page:rules",
+      "expiresAt": "2026-10-18T23:00:00Z",
+      "fingerprint": "aac35fd5fc6c3f8db7c31c04a594e738b64a543d3efef515aa445d807cd0e311"
+    }
+  ]
+}
