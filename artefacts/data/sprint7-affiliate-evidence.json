@@ -1,0 +1,54 @@
+{
+  "capturedOn": "2026-10-17",
+  "scope": "Read-only affiliate audit; no membership changes",
+  "runId": 39069018906,
+  "sourceCommit": "020b00f6c2dbf8d1aae51cc9ecd3f51232d3858d",
+  "joinedProgrammes": 6,
+  "pendingProgrammes": 6,
+  "joinedActiveUkPromotions": 10,
+  "babyCandidateProgrammes": 55,
+  "babyNetworkPromotions": 53,
+  "relevantJoined": [
+    {
+      "id": 49101,
+      "name": "Kokoso Baby"
+    },
+    {
+      "id": 64830,
+      "name": "Natural Baby Shower Ltd"
+    },
+    {
+      "id": 120946,
+      "name": "Bundle Baby"
+    }
+  ],
+  "relevantPending": [
+    {
+      "id": 2191,
+      "name": "Kiddies Kingdom"
+    },
+    {
+      "id": 26969,
+      "name": "Medela UK"
+    },
+    {
+      "id": 47501,
+      "name": "Kit & Kin"
+    },
+    {
+      "id": 75690,
+      "name": "Mam Baby UK"
+    },
+    {
+      "id": 99689,
+      "name": "Chicco"
+    }
+  ],
+  "masterTag": {
+    "url": "https://www.dwin2.com/pub.3111278.min.js",
+    "browserResult": "404 page",
+    "ownerConfirmedSameAccountSnippet": true,
+    "acceptedDelivery": false
+  },
+  "note": "Programme subsets are not full account lists. Promotions are not qualifying offers; normal rules rejected all ten joined promotions in the observed collector run."
+}
