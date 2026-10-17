@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "venue_reference_loader_v2.py"
+      - "venue_country.py"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -45,5 +46,5 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-          DRY_RUN: ${{ github.event_name == 'push' && 'false' || inputs.dry_run || 'true' }}
+          DRY_RUN: ${{ github.event_name == 'push' && 'true' || inputs.dry_run || 'true' }}
           LIMIT: ${{ inputs.limit || '0' }}
