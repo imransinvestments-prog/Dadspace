@@ -121,7 +121,7 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
           Days out
         </p>
         <h1 className="max-w-3xl font-heading text-4xl leading-[1.05] font-extrabold text-balance md:text-6xl">
-          UK venues for{" "}
+          UK places for{" "}
           <span className="relative inline-block">
             <span className="relative z-10">family days out</span>
             <span className="absolute inset-x-0 bottom-1 -z-0 h-3 -rotate-1 rounded-sm bg-primary/70 md:h-4" aria-hidden />
@@ -174,7 +174,7 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
 
       <div className="sticky top-[69px] z-20 -mx-4 flex flex-col gap-3 border-b border-border/60 bg-background/85 px-4 py-3 backdrop-blur-md lg:top-0 lg:mx-0 lg:px-0">
         <label className="relative block">
-          <span className="sr-only">Search venues</span>
+          <span className="sr-only">Search places</span>
           <Search className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
           <input
             type="search"

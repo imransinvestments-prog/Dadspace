@@ -33,7 +33,7 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
       <div className="relative aspect-[16/10] overflow-hidden">
         <VenuePhoto
           venue={venue}
-          sizes="(min-width: 1280px) 320px, (min-width: 640px) 40vw, 90vw"
+          sizes="(min-width: 1280px) 320px, (min-width: 640px) 40vw, calc(100vw - 48px)"
           className="object-cover transition duration-500 group-hover:scale-105"
         />
         <span className="absolute top-3 left-3 -rotate-2 rounded-md bg-card px-2.5 py-1 text-xs font-extrabold text-card-foreground shadow-sm transition group-hover:rotate-0">

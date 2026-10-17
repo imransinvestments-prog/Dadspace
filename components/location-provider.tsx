@@ -15,12 +15,17 @@ export function LocationProvider({children}:{children:React.ReactNode}) {
   const [searching,setSearching]=useState(false)
   const [searchError,setSearchError]=useState("")
   const [results,setResults]=useState<(Coords & {label:string})[]>([])
+  const [expanded,setExpanded]=useState(false)
+  const changeButton=useRef<HTMLButtonElement>(null)
+  const searchInput=useRef<HTMLInputElement>(null)
   const searchGeneration=useRef(0)
   const generation=useRef(0)
   const setLocation=useCallback((p:Coords,name="Selected destination")=>{
     const point=parsePoint(new URLSearchParams({lat:String(p.lat),lng:String(p.lng)}))
     if(!point)return
     generation.current++;setCoords(point);setStatus("ready");setLabel(name)
+    setExpanded(false)
+    requestAnimationFrame(()=>changeButton.current?.focus())
     try {sessionStorage.setItem(KEY,JSON.stringify({point,label:name,authorized:true}))} catch {}
   },[])
   const request=useCallback(()=>{
@@ -81,12 +86,15 @@ export function LocationProvider({children}:{children:React.ReactNode}) {
   },[request])
   return <LocationContext.Provider value={{coords,status,label,request,setLocation,browseAll:false}}>
     <div className="mx-auto w-full max-w-6xl px-4 pt-4 lg:pl-72">
-      <section aria-label="Search location" className="rounded-xl border bg-card p-4">
-        <p role="status" className="mb-3 text-sm text-muted-foreground">Showing nearby results for <strong className="text-foreground">{label}</strong>. Search a town or postcode to change area.</p>
-        <form onSubmit={search} className="space-y-3">
+      <section aria-label="Search location" className="rounded-xl border bg-card p-3 sm:p-4">
+        <div className="flex items-center justify-between gap-3">
+          <p role="status" className="min-w-0 text-sm text-muted-foreground">Nearby: <strong className="text-foreground">{label}</strong></p>
+          <button ref={changeButton} type="button" aria-expanded={expanded} aria-controls="location-search-form" onClick={()=>{setExpanded(value=>!value);if(!expanded)requestAnimationFrame(()=>searchInput.current?.focus())}} className="min-h-11 shrink-0 rounded-full px-3 text-sm font-semibold underline">{expanded?'Close':'Change location'}</button>
+        </div>
+        <form id="location-search-form" hidden={!expanded} onSubmit={search} className="mt-3 space-y-3">
           <label htmlFor="starting-location" className="sr-only">Town, city or UK postcode</label>
           <div className="flex flex-col gap-2 sm:flex-row">
-            <input id="starting-location" type="search" value={query} maxLength={100} onChange={event=>{searchGeneration.current++;setSearching(false);setQuery(event.target.value);setResults([]);setSearchError("")}} placeholder="Search a town, city or UK postcode" autoComplete="postal-code" aria-describedby={searchError?"location-search-error":undefined} aria-invalid={!!searchError} className="min-w-0 flex-1 rounded-lg border bg-background px-3 py-3 text-base" />
+            <input ref={searchInput} id="starting-location" type="search" value={query} maxLength={100} onChange={event=>{searchGeneration.current++;setSearching(false);setQuery(event.target.value);setResults([]);setSearchError("")}} placeholder="Search a town, city or UK postcode" autoComplete="postal-code" aria-describedby={searchError?"location-search-error":undefined} aria-invalid={!!searchError} className="min-w-0 flex-1 rounded-lg border bg-background px-3 py-3 text-base" />
             <button type="submit" disabled={searching} className="rounded-full bg-primary px-5 py-3 font-semibold text-primary-foreground disabled:opacity-50">{searching?"Searching…":"Search location"}</button>
             <button type="button" onClick={()=>{searchGeneration.current++;setSearching(false);setResults([]);setSearchError("");request()}} disabled={status==="locating"} className="rounded-full border px-4 py-3 text-sm font-semibold disabled:opacity-50">{status==="locating"?"Finding location…":"Use my location"}</button>
           </div>

@@ -5,13 +5,13 @@ export type NavItem = { href: string; label: string; icon: LucideIcon; mobile: b
 
 export const NAV_ITEMS: NavItem[] = ([
   { href: "/", label: "Home", icon: Home, mobile: true },
-  { href: "/news", label: "News", icon: Newspaper, mobile: true },
-  { href: "/originals", label: "Originals", icon: BookOpen, mobile: true },
-  { href: "/venues", label: "Venues", icon: MapPinned, mobile: true },
-  { href: "/deals", label: "Deals", icon: Tag, mobile: true },
-  { href: "/events", label: "Events", icon: CalendarHeart, mobile: false },
+  { href: "/news", label: "News", icon: Newspaper, mobile: false },
+  { href: "/originals", label: "Ideas", icon: BookOpen, mobile: false },
+  { href: "/venues", label: "Places", icon: MapPinned, mobile: true },
+  { href: "/deals", label: "Deals", icon: Tag, mobile: false },
+  { href: "/events", label: "Events", icon: CalendarHeart, mobile: true },
   { href: "/activities", label: "Activities", icon: Dumbbell, mobile: true },
-  { href: "/forum", label: "Forum", icon: MessagesSquare, mobile: true },
+  { href: "/forum", label: "Forum", icon: MessagesSquare, mobile: false },
   { href: "/ops", label: "Operations", icon: Settings, mobile: false },
   { href: "/profile", label: "Profile", icon: UserRound, mobile: false },
 ] satisfies NavItem[]).filter(item => item.href !== "/forum" || FORUM_ENABLED)
