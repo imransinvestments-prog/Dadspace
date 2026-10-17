@@ -248,4 +248,3 @@ begin
 end $$;
 revoke execute on function public.dadspace_review_patch(jsonb),public.dadspace_review_plan_v2(text,uuid,uuid,jsonb),public.dadspace_review_apply_v2(uuid,uuid,text,uuid,uuid,text,text,jsonb) from public,anon,authenticated;
 grant execute on function public.dadspace_review_patch(jsonb),public.dadspace_review_plan_v2(text,uuid,uuid,jsonb),public.dadspace_review_apply_v2(uuid,uuid,text,uuid,uuid,text,text,jsonb) to service_role;
-
