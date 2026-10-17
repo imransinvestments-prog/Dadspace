@@ -43,7 +43,7 @@ export default async function DecisionPage({ searchParams }: { searchParams: Pro
       if (!targetError) targets = candidates.data as typeof targets
     }
     const history = await db.from("operations_review_audit").select("id,actor_id,action,reason,created_at,reverted_by").eq("record_id", record).order("created_at", { ascending: false }).order("id").limit(20).abortSignal(AbortSignal.timeout(10_000))
-    const title = rollback ? `Rollback: ${String(row.action)}` : String(listing ? row.title : row.venue_name)
+    const title = rollback ? `Rollback: ${String(row.action)}` : listing ? String(row.title) : typeof row.venue_name === "string" && row.venue_name.trim() ? row.venue_name : "Unnamed venue — identity evidence missing"
     const url = evidenceUrl(row.source_url)
     const detail = evidenceUrl(row.event_url)
     return <div className="space-y-6">

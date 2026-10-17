@@ -82,8 +82,8 @@ export async function getReviewQueue(kind?: string | string[], page?: string | s
     const all = total(response)
     if (records.length !== Math.min(PAGE_SIZE, Math.max(0, all - (selection.page - 1) * PAGE_SIZE))) throw new Error("Incomplete queue")
     return { total: all, rows: records.map((row): ReviewRow => {
-      if (typeof row.id !== "string" || typeof (venue ? row.venue_name : row.title) !== "string") throw new Error("Invalid candidate")
-      return { id: row.id, title: String(venue ? row.venue_name : row.title), postcode: text(row.postcode), venue: text(row.venue_name), address: text(venue ? row.address : row.venue_address),
+      if (typeof row.id !== "string" || (venue ? row.venue_name !== null && typeof row.venue_name !== "string" : typeof row.title !== "string")) throw new Error("Invalid candidate")
+      return { id: row.id, title: venue ? text(row.venue_name)?.trim() || "Unnamed venue — identity evidence missing" : String(row.title), postcode: text(row.postcode), venue: text(row.venue_name), address: text(venue ? row.address : row.venue_address),
         source: text(row.source), sourceUrl: text(row.source_url), detailUrl: text(venue ? row.discovered_source_url : row.event_url), observed: text(venue ? row.discovered_at : row.last_verified_at),
         status: text(venue ? row.discovery_status : row.listing_type), age: text(row.age_range), start: text(row.start_date), end: text(row.end_date), recurrence: text(row.recurrence), schedule: text(row.schedule_text) }
     }) }

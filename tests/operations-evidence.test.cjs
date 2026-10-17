@@ -84,6 +84,17 @@ test('partial database failure retains other metrics and incomplete source rows 
   assert.equal(test.queries.every(q => !q.fields.includes('*')), true)
   assert.equal(test.queries.find(q => q.table === 'sources').range[1], 499)
 })
+test('unnamed hidden venues remain reviewable without invalidating the queue', async () => {
+  const fixture = database('allowed', () => ({ data: [{ id: 'unnamed', venue_name: null }, { id: 'named', venue_name: 'Library' }], count: 2, error: null }))
+  const result = (await fixture.module.getReviewQueue('venues')).result
+  assert.equal(result.available, true)
+  assert.equal(result.value.total, 2)
+  assert.equal(result.value.rows[0].title, 'Unnamed venue — identity evidence missing')
+  assert.equal(result.value.rows[1].title, 'Library')
+  const invalid = database('allowed', () => ({ data: [{ id: 'broken', venue_name: 42 }], count: 1, error: null }))
+  assert.equal((await invalid.module.getReviewQueue('venues')).result.available, false)
+})
+
 test('queue pagination preserves source-grounded recurrence and distinguishes empty, out-of-range and failed pages', async () => {
   const row = { id: 'record', title: 'Regular programme', listing_type: 'activity', start_date: '2026-10-16', end_date: '2026-10-16', recurrence: 'recurring', schedule_text: 'Friday in term time', source_url: 'https://example.com/', event_url: 'https://example.com/detail', notes: 'private' }
   const test = database('allowed', () => ({ data: [row], count: 21, error: null }))
