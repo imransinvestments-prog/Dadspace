@@ -170,6 +170,6 @@ export async function fetchNews({
   if (filter) query = query.or(filter)
 
   const { data, error } = await query
-  if (error) throw new Error(error.message)
+  if (error || !Array.isArray(data)) throw new Error("News is temporarily unavailable")
   return (data ?? []).map((row) => ({ ...row, id: String(row.id) })) as NewsItem[]
 }

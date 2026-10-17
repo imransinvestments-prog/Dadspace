@@ -23,6 +23,7 @@ export function discoveryCategory(slug: string) { return DISCOVERY_CATEGORIES.fi
 const empty = (loadFailed: boolean): VenuePage => ({ venues: [], total: 0, hasMore: false, loadFailed })
 
 const readPublicPage = cache(async (page: number, town?: string, category?: string): Promise<VenuePage> => {
+  try {
   const db = getSupabase()
   if (!db) return empty(true)
   const offset = (page - 1) * 24
@@ -30,9 +31,10 @@ const readPublicPage = cache(async (page: number, town?: string, category?: stri
   if (town) query = query.eq("town_city", town)
   if (category) query = query.eq("category", category)
   const { data, error, count } = await query.order("venue_name").order("id").range(offset, offset + 23)
-  if (error) return empty(true)
+  if (error || !Array.isArray(data) || !Number.isSafeInteger(count) || count! < 0 || data.length != Math.min(24, Math.max(0,count! - offset))) return empty(true)
   const venues = (data ?? []).map(toVenue).filter((v): v is Venue => v !== null)
   return { venues, total: count ?? 0, hasMore: offset + (data?.length ?? 0) < (count ?? 0), loadFailed: false }
+  } catch { return empty(true) }
 })
 export function publicVenuePage({page = 1, town, category}: {page?: number; town?: string; category?: string} = {}) {
   return readPublicPage(page, town, category)
@@ -52,3 +54,20 @@ export async function approvedDiscoveryPages() {
   // No synthetic pages to fill a coverage quota. Below-threshold supply stays unindexed.
   return results.filter(p => !p.result.loadFailed && p.result.total >= 3)
 }
+
+// Follow only explicit reviewed aliases. Never infer identity from names/postcodes.
+export const publicVenueDestination = cache(async (id: string): Promise<Venue | null> => {
+  const db = getSupabase()
+  if (!db) throw new Error("Venue information is temporarily unavailable")
+  const seen = new Set<string>()
+  for (let hop = 0; hop < 8; hop++) {
+    if (seen.has(id)) return null
+    seen.add(id)
+    const { data, error } = await db.from("venues").select("id,merged_into,public_visible").eq("id", id).maybeSingle()
+    if (error) throw new Error("Venue information is temporarily unavailable")
+    if (!data) return null
+    if (data.merged_into) { id = data.merged_into; continue }
+    return data.public_visible === true ? publicVenueById(id) : null
+  }
+  return null
+})

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { notFound, permanentRedirect } from "next/navigation"
-import { publicVenueById } from "@/lib/venue-discovery"
+import { notFound, permanentRedirect, redirect } from "next/navigation"
+import { publicVenueDestination } from "@/lib/venue-discovery"
 import { venueIdFromSlug, venueSlug } from "@/lib/venue-slug"
 import { categoryImage, categoryLabel, FACILITY_LABELS, venuePhotoUrl } from "@/lib/venue-meta"
 import { pageMetadata, siteUrl } from "@/lib/seo"
@@ -15,8 +15,10 @@ type Props = {params: Promise<{slug: string}>}
 async function venueFor(props: Props) {
   const {slug} = await props.params, id = venueIdFromSlug(slug)
   if (!id) notFound()
-  const venue = await publicVenueById(id)
+  const venue = await publicVenueDestination(id)
   if (!venue) notFound()
+  // A merge is reversible: avoid a permanently cached redirect after rollback.
+  if (venue.id !== id) redirect(`/venues/${venueSlug(venue)}`)
   if (slug !== venueSlug(venue)) permanentRedirect(`/venues/${venueSlug(venue)}`)
   return venue
 }

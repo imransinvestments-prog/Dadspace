@@ -14,7 +14,7 @@ export const getDeals = cache(async (): Promise<{ items: LiveDeal[]; loadFailed:
       .like("classified_by", "quality-v1:source-%")
       .gte("last_seen", new Date(Date.now() - 72 * 3600000).toISOString())
       .order("last_seen", { ascending: false }).limit(1000)
-    if (error) return { items: [], loadFailed: true }
+    if (error || !Array.isArray(data)) return { items: [], loadFailed: true }
     const rows = (data ?? []).map(row => {
       const taxonomy = row.taxonomy as unknown as {display_group: string; equivalent_item_id: number | null; deal_type: string}
       return { ...row, display_group: taxonomy.display_group, equivalent_item_id: taxonomy.equivalent_item_id, deal_type: taxonomy.deal_type }

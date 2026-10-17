@@ -80,7 +80,7 @@ export async function fetchActivityPage(options?: {
     const rows: Record<string,unknown>[]=[]
     for(let start=0;;start+=500){
       const {data,error}=await request.range(start,start+499)
-      if(error)throw new Error('Activities unavailable')
+      if(error || !Array.isArray(data))throw new Error('Activities unavailable')
       rows.push(...(data??[]))
       if((data?.length??0)<500)break
     }
@@ -112,14 +112,16 @@ export async function fetchActivityCategories(): Promise<string[]> {
 
 export async function fetchActivityById(id: string): Promise<DadActivity | null> {
   const db = getSupabase()
-  if (!db || !id) return null
+  if (!db) throw new Error("Activity information is temporarily unavailable")
+  if (!id) return null
   const { data, error } = await db
     .from("current_activities")
     .select("*")
     .eq("id", id)
     .limit(1)
     .maybeSingle()
-  if (error || !data) return null
+  if (error) throw new Error("Activity information is temporarily unavailable")
+  if (!data) return null
   return toActivity(data as Record<string, unknown>)
 }
 

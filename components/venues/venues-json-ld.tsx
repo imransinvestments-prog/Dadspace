@@ -9,6 +9,7 @@ const SCHEMA_TYPES: Record<string, string> = {
   museum: "Museum",
   park: "Park",
   playground: "Playground",
+  "children�s_playground": "Playground",
   library: "Library",
   cafe: "CafeOrCoffeeShop",
   leisure: "SportsActivityLocation",
@@ -19,7 +20,8 @@ const SCHEMA_TYPES: Record<string, string> = {
 
 export function venueSchema(venue: Venue) {
   return {
-    "@type": (venue.category && SCHEMA_TYPES[venue.category]) || "TouristAttraction",
+    "@type": (venue.category && SCHEMA_TYPES[venue.category]) || "Place",
+    "@id": `${siteUrl}/venues/${venueSlug(venue)}#venue`,
     name: venue.name,
     description: venue.description || `${categoryLabel(venue.category)}${venue.town ? ` in ${venue.town}` : ""}.`,
     image: venuePhotoUrl(venue) ? absoluteUrl(venuePhotoUrl(venue)!) : undefined,
@@ -38,7 +40,7 @@ export function venueSchema(venue: Venue) {
         ? { "@type": "GeoCoordinates", latitude: venue.latitude, longitude: venue.longitude }
         : undefined,
     isAccessibleForFree: venue.is_free ?? undefined,
-    publicAccess: true,
+    publicAccess: venue.access === "yes" || venue.access === "public" ? true : venue.access === "private" || venue.access === "no" ? false : undefined,
     amenityFeature: venue.facilities.length
       ? venue.facilities.map((f) => ({ "@type": "LocationFeatureSpecification", name: f.replace(/_/g, " "), value: true }))
       : undefined,

@@ -13,7 +13,7 @@ export const metadata = pageMetadata(
   { image: "/images/events/family-day.png" },
 )
 
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 export default async function EventsPage() {
   const { events, today, saturday, sunday, isSample, loadFailed } = await fetchUpcomingEvents()

@@ -276,15 +276,18 @@ export async function fetchUpcomingEvents(point?: Point | null, radiusKm?: numbe
 
 export async function fetchEventById(id: string): Promise<DadEvent | null> {
   const db = getSupabase()
-  if (!db || !id) return null
+  if (!db) throw new Error("Event information is temporarily unavailable")
+  if (!id) return null
   const { data, error } = await db
     .from("collected_events")
     .select("*")
     .eq("id", id)
     .eq("listing_type", "event")
+    .is("withdrawn_at", null)
     .limit(1)
     .maybeSingle()
-  if (error || !data) return null
+  if (error) throw new Error("Event information is temporarily unavailable")
+  if (!data) return null
   const event = toEvent(data as Record<string, unknown>)
   return qualityForDisplay([event])[0] ?? null
 }
