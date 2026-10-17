@@ -15,7 +15,7 @@ async function setup(){
     create policy original_posts_public_read on original_posts for select to anon,authenticated using (published_at<=now());
     create table news_sources(id bigint primary key,name text,active boolean);insert into news_sources values(1,'Approved feed',true);
     create table deal_sources(id bigint primary key,name text,active boolean);
-    create table sources(id bigint primary key,name text,active boolean);
+    create table sources(id uuid primary key,name text,active boolean);insert into sources values('44444444-4444-4444-8444-444444444444','Discovery source',true);
     create view feed_items as select id,title,url,source_name,published_at,summary,why_it_matters,category,relevance,region,geo_scope,geo_region,admin_area,locality from news_items where relevance>=3 and coalesce(is_primary,true) and coalesce(published_at,created_at)>now()-interval '14 days';
     grant select,update on news_items,original_posts,news_sources,deal_sources,sources to service_role;`)
   await db.exec(schema)
@@ -51,6 +51,10 @@ test('source pause and restore retain registry; malformed actions/roles cannot w
     const p=await plan(db,'pause','news-source','1')
     await db.query('select dadspace_maintenance_apply($1,$2,$3,$4,$5,$6,$7)',[actor,request,'pause','news-source','1',p.fingerprint,'Reviewed pause evidence'])
     assert.equal((await db.query('select active from news_sources')).rows[0].active,false)
+    const discoveryId='44444444-4444-4444-8444-444444444444'
+    const discovery=await plan(db,'pause','discovery-source',discoveryId)
+    await db.query('select dadspace_maintenance_apply($1,$2,$3,$4,$5,$6,$7)',[actor,restore,'pause','discovery-source',discoveryId,discovery.fingerprint,'Reviewed source pause evidence'])
+    assert.equal((await db.query('select active from sources')).rows[0].active,false)
     for(const role of ['anon','authenticated']){
       await db.exec(`set role ${role}`)
       await assert.rejects(db.query('select * from original_content_attempts'),/permission denied/)

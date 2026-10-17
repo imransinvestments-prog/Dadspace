@@ -12,6 +12,7 @@ export function maintenanceIntent(value: unknown): MaintenanceIntent | null {
   if (!MAINTENANCE_FAMILIES.includes(v.family) || !["hide", "pause", "activate", "restore", "retry", "reconcile"].includes(v.action) ||
     typeof v.record !== "string" || typeof v.reason !== "string" || v.reason.trim().length < 10 || v.reason.length > 1000 || typeof v.dryRun !== "boolean") return null
   if (v.action === "restore" || v.action === "reconcile") { if (!uuid.test(v.record)) return null }
+  else if (v.family === "discovery-source") { if (!uuid.test(v.record)) return null }
   else if (v.family === "originals") { if (!/^(daily|weekly)-\d{4}-\d{2}-\d{2}$/.test(v.record)) return null }
   else if (!/^[1-9][0-9]{0,14}$/.test(v.record)) return null
   const source = v.family.endsWith("-source")

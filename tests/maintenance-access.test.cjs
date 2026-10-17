@@ -18,6 +18,8 @@ test('maintenance signature binds identity, scope, mode and expiry; malformed in
   assert.equal(tokens.verifyMaintenance(signed,owner,key,601000),null)
   assert.equal(tokens.verifyMaintenance(signed+'x',owner,key,2000),null)
   for(const patch of [{record:'1&active=eq.true'},{action:'pause'},{family:'discovery-source',action:'retry'},{reason:'short'},{dryRun:'false'}])assert.equal(tokens.maintenanceIntent({...intent,...patch}),null)
+  assert.ok(tokens.maintenanceIntent({...intent,family:'discovery-source',action:'pause',record:other}))
+  assert.equal(tokens.maintenanceIntent({...intent,family:'discovery-source',action:'pause',record:'1'}),null)
 })
 function maintenance(user,env){
   let privileged=0
