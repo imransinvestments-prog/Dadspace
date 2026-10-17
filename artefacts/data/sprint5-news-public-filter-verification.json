@@ -1,0 +1,65 @@
+{
+  "query": "with cases(label,id,nation,county,district,expected) as (values ('Port Glasgow reader',736,'scotland',null::text,'inverclyde',true),('Glasgow City reader',736,'scotland',null::text,'glasgow_city',false),('Cheshire East reader',739,'england','cheshire','cheshire_east',true),('Cheshire West reader',739,'england','cheshire','cheshire_west_and_chester',true),('Warrington reader',739,'england','cheshire','warrington',true),('Halton reader',739,'england','cheshire','halton',true),('Manchester reader',739,'england',null::text,'manchester',false),('Maldon reader',855,'england','essex','maldon',true),('Colchester reader',855,'england','essex','colchester',false),('Wrong nation',739,'wales',null::text,'cardiff',false)) select c.label,c.id,c.expected,exists(select 1 from public.feed_items f where f.id=c.id and (f.region='uk' or (f.region=c.nation and (f.geo_scope='nationwide' or f.geo_scope is null or (f.geo_scope='local' and (f.locality=c.district or (f.locality is null and f.admin_area=c.county))))))) visible from cases c order by c.id,c.label",
+  "rows": [
+    {
+      "label": "Glasgow City reader",
+      "id": 736,
+      "expected": false,
+      "visible": false
+    },
+    {
+      "label": "Port Glasgow reader",
+      "id": 736,
+      "expected": true,
+      "visible": true
+    },
+    {
+      "label": "Cheshire East reader",
+      "id": 739,
+      "expected": true,
+      "visible": true
+    },
+    {
+      "label": "Cheshire West reader",
+      "id": 739,
+      "expected": true,
+      "visible": true
+    },
+    {
+      "label": "Halton reader",
+      "id": 739,
+      "expected": true,
+      "visible": true
+    },
+    {
+      "label": "Manchester reader",
+      "id": 739,
+      "expected": false,
+      "visible": false
+    },
+    {
+      "label": "Warrington reader",
+      "id": 739,
+      "expected": true,
+      "visible": true
+    },
+    {
+      "label": "Wrong nation",
+      "id": 739,
+      "expected": false,
+      "visible": false
+    },
+    {
+      "label": "Colchester reader",
+      "id": 855,
+      "expected": false,
+      "visible": false
+    },
+    {
+      "label": "Maldon reader",
+      "id": 855,
+      "expected": true,
+      "visible": true
+    }
+  ]
+}

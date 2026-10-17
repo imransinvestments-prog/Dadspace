@@ -1,5 +1,11 @@
 # Proposed delivery roadmap — 17 October 2026
 
+## Delivery update after Sprint 5
+
+The owner approved this roadmap through PR #177. Sprint 5 (#178) is complete: 24 committed /24 accepted /zero remaining, following the recorded sprint review. See [closure](./sprint-5-closure.md). New, separately estimated Activities foundation stories #180 (5), #181 (5), #182 (5), #183 (3) were refined during discovery and remain provisional backlog outside Sprint 5. They must be sequenced and reconciled with source qualification/matching before the old Slot 7 final Activities acceptance; later slot numbers below remain conditional placeholders, not commitments. No next sprint is started.
+
+The initial 207-point known backlog plus 18 refined residual points, less 24 accepted in Sprint 5, leaves **201 provisional known remaining points**, including the previously deferred estimated items. This excludes unestimated Morning Brief implementation and further source/Activities findings; it is not a calendar forecast. The initial proposal below remains an auditable planning snapshot.
+
 Status: proposal for owner review; no new sprint or implementation has been started. Replaces earlier delivery forecasts for planning purposes; historical issue notes remain an audit trail.
 
 ## What recent delivery tells us

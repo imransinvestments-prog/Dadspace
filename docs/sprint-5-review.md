@@ -2,6 +2,8 @@
 
 ## Current status — 17 October 2026, after owner decisions
 
+**Sprint complete: 24/24 accepted, zero remaining.** All seven tickets and the final three News mappings are accepted and production-verified. Read the [closure and sprint review](./sprint-5-closure.md) for the final outcome and follow-up work. The intermediate 18-point status below is retained as dated review history.
+
 **18/24 accepted; six remain.** #122, #123, #124, #130 and #176 are closed. #126/#127 remain open for three held News location revisions and final targeted acceptance. The 16 approved News corrections committed at 15:30 UTC, with exact readback and no unintended selected-field changes; three held rows plus the Monmouthshire no-op were unchanged. Fresh Deals readback confirmed the same 17 selected offers, all owner-scored passes. Freshness targets and diagnostic Activities interpretation are explicitly approved.
 
 New follow-up #180 (5), #181 (5), #182 (5), #183 (3) are refined, provisional backlog stories outside Sprint 5. They do not promise a complete Activities epic or start a new sprint. See [final News proposals](./sprint-5-remaining-news-decisions.md) and the timestamped `artefacts/data/sprint5-burndown-ledger.json`.

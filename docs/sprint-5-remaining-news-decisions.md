@@ -1,5 +1,7 @@
 # Final three News location decisions
 
+**Approved, applied and verified on 17 October 2026 at 15:44 UTC.** PR #184 deployed before the three-row transaction. Full 20-row readback and all ten public targeting cases pass. The proposal and application-gate wording below is retained as the reviewed before-state; no location decision remains on hold. See [Sprint 5 closure](./sprint-5-closure.md).
+
 The 16 previously approved changes were committed and verified at 15:30 UTC on 17 October 2026. The following three rows are still unchanged, as instructed. These are revised, evidence-backed proposals for owner approval, not applied corrections.
 
 | ID | Source evidence | Recommended targeting |

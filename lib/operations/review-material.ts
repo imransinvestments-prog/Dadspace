@@ -1,7 +1,7 @@
 import "server-only"
 import sprint5Pack from "@/artefacts/data/sprint5-review-pack.json"
 import newsCorrections from "@/artefacts/data/sprint5-news-corrections.json"
-import newsApplied from "@/artefacts/data/sprint5-news-applied-readback.json"
+import newsApplied from "@/artefacts/data/sprint5-news-final-readback.json"
 import { createHash } from "node:crypto"
 import { getSupabase } from "@/lib/supabase"
 import { getDeals } from "@/lib/deals"
@@ -41,7 +41,7 @@ export async function getReviewMaterial(id: number, page = 1): Promise<ReviewMat
     const pack = id === 34 ? sprint5Pack.venues : id === 130 ? sprint5Pack.deals : sprint5Pack.activities
     return slice(pack.rows as MaterialRow[], page, id === 34 ? "Fixed 50-venue pilot sample" : id === 130 ? "Fixed published Deals pool" : "Fixed 100-activity diagnostic sample", `Frozen ${pack.captured_at}. ${pack.method} Human quality scores are not inferred. This is a saved snapshot; verify changed or time-sensitive facts before publication acceptance.`)
   }
-  if (id === 127) return slice(newsCorrections.rows.map(row=>({ ...row, fields:{...row.fields,status:row.fields.changed?"Applied and verified — 17 October 2026":row.fields.proposed===null?"Held — revised location approval required":"Verified no-op; existing targeting retained",production_readback:newsApplied.rows.find(actual=>String(actual.id)===row.id)??null} })) as MaterialRow[], page, "News correction readback — 20 records", "16 approved changes are applied and verified, three conflicting location instructions remain held, and Monmouthshire is a verified no-op. The original 50-row review is retained. Revised source-backed proposals are linked from the Sprint 5 review pack. Nationwide corrections preserve each existing nation.")
+  if (id === 127) return slice(newsCorrections.rows.map(row=>({ ...row, fields:{...row.fields,status:row.id==="909"?"Verified no-op; existing targeting retained":"Applied and verified — 17 October 2026",production_readback:newsApplied.rows.find(actual=>String(actual.id)===row.id)??null} })) as MaterialRow[], page, "News correction readback — 20 records", "All 19 approved geography changes are applied and verified; Monmouthshire is a verified no-op. The original 50-row review is retained. The final three source-backed mappings are owner-approved and production-verified; original proposals remain historical evidence. Nationwide corrections preserve each existing nation.")
   if (id === 126) return slice(NEWS_SAMPLE.rows, page, "Fixed 50-article quality sample", `Frozen on ${NEWS_SAMPLE.frozen_on} from ${NEWS_SAMPLE.pool_count} published articles, covering categories and geographic scopes. New articles do not change this sample. Your two previously reviewed records are retained. Review usefulness for the intended area, attribution and working links; local does not mean irrelevant.`)
   if (id === 149) return slice(OPERATIONS_PROCESSES.map((p, index) => ({ id: `process-${index + 1}`, title: p.name, fields: { owner: p.owner, permission: p.permission, cadence: p.cadence, evidence: p.evidence, outstanding_work: p.next, evidence_url: p.href } })), page, "Upkeep process inventory", "Review each process and its outstanding capability. Live source counts and health are shown below. Configuration text alone does not prove a working recovery path.")
   if (id === 123) return slice([
