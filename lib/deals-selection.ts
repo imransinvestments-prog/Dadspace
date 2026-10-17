@@ -34,6 +34,12 @@ export function merchantAdvertised(deal: LiveDeal) {
   return /^quality-v1:source-page:merchant-advertised:/.test(deal.classified_by ?? "")
 }
 
+/** Hide only the trailing placeholder produced by merchant variant composition. */
+export function dealDisplayTitle(title: string) {
+  const match = title.match(/^(.+?)\s+—\s*(?:default(?:\s+title)?)?\s*$/i)
+  return match?.[1].trim() || title
+}
+
 export function dealBenefit(deal: LiveDeal) {
   if (merchantAdvertised(deal)) return null
   return familyBenefit(`${deal.title} ${deal.description ?? ""}`)

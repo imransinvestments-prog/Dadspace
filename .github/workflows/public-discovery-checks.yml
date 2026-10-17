@@ -3,7 +3,7 @@ on:
   push:
     branches: [codex/53-public-discovery-seo]
   pull_request:
-    paths: ['app/**', 'components/**', 'hooks/**', 'lib/**', 'tests/**', '.github/workflows/public-discovery-checks.yml']
+    paths: ['app/**', 'components/**', 'hooks/**', 'lib/**', 'tests/**', 'supabase/migrations/**', '.github/workflows/public-discovery-checks.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,7 +19,7 @@ jobs:
           node-version: '24'
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: node --test tests/venue-seo.test.mjs tests/public-discovery.test.cjs tests/deals-selection.test.mjs tests/news-newspaper.test.cjs
+      - run: node --test tests/venue-seo.test.mjs tests/public-discovery.test.cjs tests/deals-selection.test.mjs tests/news-newspaper.test.cjs tests/venue-radius.test.cjs tests/directory-page.test.cjs tests/discovery-explorers.test.cjs tests/venue-access.test.cjs tests/browser-client.test.cjs tests/small-discovery-sprint.test.cjs
       - run: pnpm exec tsc --noEmit
       - run: pnpm build
         env:

@@ -6,11 +6,12 @@ const ts = require('typescript')
 function load(file, dependencies = {}, env = {}) {
   const module = { exports: {} }
   const code = ts.transpileModule(fs.readFileSync(file, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText
-  vm.runInNewContext(code, { module, exports: module.exports, process: { env }, Buffer, Date, Number, Promise, AbortSignal, FormData,
+  vm.runInNewContext(code, { module, exports: module.exports, process: { env }, Buffer, Date, Number, Promise, AbortSignal, FormData, URL,
     require: name => dependencies[name] ?? require(name) })
   return module.exports
 }
-const token = load('lib/operations/review-token.ts', { 'server-only': {} })
+const edits = load('lib/operations/review-edit.ts', { 'server-only': {} })
+const token = load('lib/operations/review-token.ts', { 'server-only': {}, './review-edit':edits })
 const owner = '12345678-1234-1234-1234-123456789abc'
 const other = '12345678-1234-1234-1234-123456789def'
 const fingerprint = '1'.repeat(32)
@@ -47,7 +48,7 @@ test('reviewer permission is separate from operator permission and metadata clai
 function actions(identity, result={data:null,error:{message:'private error'}}) {
   let calls=0; const requests=[]
   const db={rpc:(name,args)=>{requests.push({name,args});return{abortSignal:async()=>result}}}
-  const module=load('app/ops/decision/actions.ts', {'next/cache':{revalidatePath:()=>{}}, '@/lib/supabase':{getSupabase:()=>{calls++;return db}}, '@/lib/operations/reviewer':{reviewIdentity:async()=>identity}, '@/lib/operations/review-token':token}, {DADSPACE_SUPABASE_SERVICE_ROLE_KEY:secret})
+  const module=load('app/ops/decision/actions.ts', {'next/cache':{revalidatePath:()=>{}}, '@/lib/supabase':{getSupabase:()=>{calls++;return db}}, '@/lib/operations/reviewer':{reviewIdentity:async()=>identity}, '@/lib/operations/review-token':token, '@/lib/operations/review-edit':edits}, {DADSPACE_SUPABASE_SERVICE_ROLE_KEY:secret})
   return {module,requests,calls:()=>calls}
 }
 function previewForm(){ const form=new FormData();form.set('record',owner);form.set('action','approve');form.set('target','');form.set('reason','Verified identity, access and evidence');form.set('evidence','reviewed');return form }
@@ -87,4 +88,30 @@ test('stale conflicts and failed evidence retain safe messages without payload o
   const applied=await failed.module.applyDecision({},form)
   assert.equal(applied.audit,undefined)
   assert.equal(JSON.stringify(applied).includes(secret),false)
+})
+test('edits whitelist facts, bind the exact source and patch, and require explicit location pairs', () => {
+  const patch={changes:{category:'nursery',website:'https://example.com/branch'},source_url:'https://example.com/evidence'}
+  const intent=token.reviewIntent('edit',owner,null,'Confirmed nursery identity from the operator',patch)
+  assert.ok(intent)
+  const signed=token.signReview(intent,owner,fingerprint,secret,1000)
+  assert.equal(token.verifyReview(signed,owner,secret,2000).patch.changes.category,'nursery')
+  for(const changes of [{country:'Wales'},{public_visible:true},{merged_into:other},{venue_name:''},{latitude:91,longitude:0},{address:'New street'},{latitude:null,longitude:1},{website:'https://user:password@example.com/'}]){
+    assert.equal(edits.editPatch({changes,source_url:'https://example.com/evidence'}),null)
+  }
+  assert.ok(edits.editPatch({changes:{address:'New street',latitude:null,longitude:null},source_url:'https://example.com/evidence'}))
+  assert.equal(edits.editPatch({...patch,source_url:'javascript:alert(1)'}),null)
+  assert.equal(token.reviewIntent('hide',owner,null,'Valid review reason',patch),null)
+})
+test('edit preview contains selected corrections and source; apply ignores changed form facts', async () => {
+  const reader=actions({id:owner,reviewer:false},{data:{fingerprint,summary:'Facts',venues:[{id:owner,name:'Branch',postcode:'W4 2AB',public_visible:false}],listings:0,provenance:1},error:null})
+  const form=previewForm();form.set('action','edit');form.set('edit_category','yes');form.set('category','nursery');form.set('evidence_url','https://example.com/evidence')
+  const preview=await reader.module.previewDecision({},form)
+  assert.equal(preview.preview.patch.changes.category,'nursery')
+  assert.equal(reader.requests[0].name,'dadspace_review_plan_v2')
+  const writer=actions({id:owner,reviewer:true},{data:other,error:null})
+  const apply=new FormData();apply.set('token',preview.preview.token);apply.set('confirm','apply');apply.set('category','playground')
+  await writer.module.applyDecision({},apply)
+  assert.equal(writer.requests[0].name,'dadspace_review_apply_v2')
+  assert.equal(writer.requests[0].args.p_patch.changes.category,'nursery')
+  assert.equal(writer.requests[0].args.p_patch.source_url,'https://example.com/evidence')
 })

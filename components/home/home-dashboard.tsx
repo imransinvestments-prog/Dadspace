@@ -1,6 +1,7 @@
 "use client"
 
 import useSWR from "swr"
+import Link from "next/link"
 import { HeroGreeting } from "./hero-greeting"
 import { DadJoke } from "./dad-joke"
 import { LocalPlaces } from "./local-places"
@@ -28,12 +29,15 @@ export function HomeDashboard({ initial, publicPlaces = [], initialDeals = [], c
 
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-5 sm:gap-8">
       <header className="flex flex-col gap-3">
         <p className="text-xs font-bold tracking-wider text-accent uppercase">Your weekend starts here</p>
-        <h1 className="font-heading text-3xl leading-tight font-extrabold tracking-tight text-balance sm:text-4xl xl:text-5xl">Family days out for UK dads</h1>
+        <h1 className="font-heading text-2xl leading-tight font-extrabold tracking-tight text-balance sm:text-4xl xl:text-5xl">Family days out for UK dads</h1>
         <p className="text-base text-muted-foreground sm:text-lg">Days out, news and deals for UK dads.</p>
       </header>
+      <nav aria-label="Explore nearby" className="flex flex-wrap gap-2 sm:hidden">
+        {[['/venues','Places nearby'],['/events','Events nearby'],['/activities','Activities nearby']].map(([href,label])=><Link key={href} href={href} className="inline-flex min-h-11 items-center rounded-full border bg-card px-3 text-sm font-semibold">{label}</Link>)}
+      </nav>
       <div className="grid items-stretch gap-5 md:grid-cols-[minmax(0,1.8fr)_minmax(280px,1fr)] lg:grid-cols-1 xl:grid-cols-[minmax(0,1.8fr)_minmax(280px,1fr)]">
         <HeroGreeting greeting={data.greeting} sleeps={data.sleepsToWeekend} weekendLabel={data.weekendLabel} />
         <DadJoke />

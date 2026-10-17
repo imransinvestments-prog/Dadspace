@@ -1,61 +1,62 @@
-# Guarded operations review
+# Guarded venue review
 
-Routes: `/ops/review` → `/ops/decision`. Related #33, #40, #70.
+Sprint 4 (#174), #33. Routes: `/ops/review` to `/ops/decision`.
 
-Existing exact operator UUID/confirmed-email access is unchanged. All operators
-can inspect current evidence, possible canonical candidates and signed previews.
-Applying requires **separate** server-only `DADSPACE_REVIEWER_USER_IDS`, exact
-verified Auth UUIDs; empty means no reviewers. Operator access is also required.
-Never infer this permission from email fragments, profile metadata or client input.
-The selected owner's reviewer role is disabled until explicit approval.
+Operators can inspect venue evidence, canonical candidates and signed previews.
+Applying requires existing operator access and the separate server-only
+`DADSPACE_REVIEWER_USER_IDS` allowlist of exact verified Auth UUIDs. Empty means
+no reviewers. Never derive permission from profile metadata or email fragments.
+Reviewer provisioning requires explicit owner approval after preview review.
+Activity/event matching remains #40; this UI accepts venue decisions only.
 
-Each preview binds the verified actor, exact action/record/target/reason, current
-database fingerprint, unique request and 15-minute expiry. HMAC uses the existing
-server service key with a distinct purpose prefix; no key is sent to the client.
-Next server actions enforce same-origin requests and recheck identity/role on every
-apply. Changed form fields cannot alter the signed intent. Separate evidence and
-apply confirmations are required. No GET request performs a decision.
+Actions are approve, temporary hide, reject, correct facts, duplicate merge and
+rollback. Corrections select only name, category, address, postcode, latitude,
+longitude, website and access, with an HTTPS evidence URL. Address/postcode edits
+must explicitly replace or clear both coordinates. Corrections preserve publication,
+country and relationships. Restrictive public playground/park facts require hiding
+first. Customer access blocks playgrounds only. Existing accepted classification
+holds cannot be bypassed by approval.
 
-Service-only SECURITY INVOKER functions provide approval/hiding, duplicate merge,
-unresolved listing link and rollback. RLS and explicit revokes prevent ordinary
-anon/authenticated access to both RPCs and private audit records. The audit stores
-actor, time, reason and bounded before/after state; client previews show only selected
-names/postcodes/current visibility/counts. Raw record hashes, notes and payloads
-do not render. Reasons are private operator evidence, HTML-escaped.
+Each 15-minute preview signs actor, action, record, target, reason, exact edit patch,
+current record/provenance fingerprint and unique request ID. Apply verifies Auth,
+operator/reviewer permission, signature and expiry again. Changed form fields cannot
+alter signed intent. Preview and apply have separate confirmations; GET never writes.
+Client projections exclude raw source payloads, private notes and record hashes.
 
-Transactions serialize review changes against imports with three-second lock waits,
-stale fingerprints, a unique request key and a 200-relationship merge bound. Identity
-collisions fail atomically; no automatic event deletion/deduplication. Merge keeps
-the source venue hidden with `merged_into`, moves event/activity links and provenance,
-and preserves dates/recurrence/classification. Future inserts follow the canonical
-chain; reviewed venue fields and listing matches resist subsequent upsert overwrites.
-Missing evidence cannot approve a venue. Public target visibility is required, but
-reviewers must independently verify branch identity; name/postcode equality is not proof.
+Private SECURITY INVOKER transactions serialize review changes against imports,
+use bounded lock/statement waits, reject stale previews and make repeated identical
+requests idempotent. The audit retains actor, reason, source URL and before/after
+facts and relationships. Ordinary anon/authenticated roles cannot execute the RPCs
+or read the audit. No additional public policy or user capability is granted.
 
-Rollback previews compare the full affected snapshot. Subsequent import/source or
-decision changes block rollback rather than overwrite newer evidence. Restores only
-review fields and original relationships, retains original audit and adds a reversal
-audit record. Generic rollback does not delete venues/listings/provenance. Removing
-the reviewer allowlist immediately disables new applies. Reverting application code
-leaves the private audit/canonical protection in place; do not drop it while merged
-records exist. Never roll back schema by discarding decision history.
+Merge retains the hidden source identity and moves listing/provenance relationships
+to a public canonical venue. Identity conflicts fail atomically; no listings are
+deleted. Imports follow canonical relationships and preserve reviewed facts.
+Reviewers must verify branch identity; matching names/postcodes alone are insufficient.
+Before #89 live merges, verify canonical public URL behavior for old links.
 
-Isolated PostgreSQL regressions and production transaction/ROLLBACK verification
-cover stale previews, one-time application, approve/hide, reviewed-field protection,
-listing evidence preservation, merge/provenance, repeat imports and guarded rollback.
-Production verification leaves zero test records and zero decisions. Security checks
-confirm the API is invoker-only and anon/authenticated have no execute grants. The
-audit's RLS-with-no-policy INFO notice is intentional: only the existing service role
-reads/writes it. No policy grants ordinary users access.
+Rollback compares the full affected snapshot, including provenance, and refuses
+newer changes. It restores reviewed facts/relationships and retains reversal history.
+Legacy code cannot partially undo a new edit/reject decision. Removing the reviewer
+allowlist stops new applies; application rollback retains audit/schema protection.
+Never discard decision history to roll back a deployment.
 
-The official CLI generated the migration name in Linux because the local Windows
-CLI requires an unwritable home config directory. Repository migration timestamp
-is aligned to the managed Supabase migration history, `20261014203725`, after apply.
-No home-directory permission expansion was requested.
+The original `20261014203725` transaction migration is already in the managed
+database. Do not reapply it. Its historical verification left zero test records and
+zero review decisions. Sprint 4's incremental migration is
+`20261017093801_operations_review_edit_reject.sql`, generated by the official CLI.
+It is not yet applied and no Sprint 4 reviewer role or data decision is enabled.
 
-Separate maintenance/run controls, source activation, editorial corrections, field
-editing/photo rights and wider pilot/seven-day acceptance remain their own gates.
-This increment grants no such powers. See the process inventory in `/ops` and tickets.
+Read-only preview first tries v2; only a missing-function response falls back to
+the existing plan for a compatible fingerprint. Apply always requires v2. After
+release approval: apply the incremental schema, verify permissions, deploy, then
+provision only explicitly approved reviewers. Real data decisions require fresh
+evidence and previews; deploying does not apply them automatically.
+
+Local validation: 20 targeted Node tests and TypeScript checks pass. PostgreSQL 17
+CI fixtures cover stale previews, grants, idempotency, merges, importer protection,
+edit rollback, classification holds and playground customer-access restrictions.
+Report transaction checks as passing only once their workflow succeeds.
 
 References: https://nextjs.org/docs/app/guides/data-security,
 https://supabase.com/docs/guides/database/functions

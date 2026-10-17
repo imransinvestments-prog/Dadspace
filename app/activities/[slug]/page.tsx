@@ -6,6 +6,8 @@ import { originalActivityDescription } from "@/lib/activity-copy"
 import { activityIdFromSlug, activitySlug } from "@/lib/activity-slug"
 import { fetchActivityById, fetchSimilarActivities } from "@/lib/activities"
 import { pageMetadata, siteUrl } from "@/lib/seo"
+import { ActivityScheduleSummary } from '@/components/activities/activity-schedule'
+import { activityPrice, activitySource } from '@/lib/activity-presentation'
 
 type PageProps = { params: Promise<{ slug: string }> }
 
@@ -38,8 +40,8 @@ export default async function ActivityDetailPage({ params }: PageProps) {
   const canonical = `${siteUrl}/activities/${activitySlug(activity)}`
   const description = originalActivityDescription(activity)
   const placeName = activity.venue_name || activity.location
-  const officialUrl = activity.event_url || activity.source_url
-  const price = activity.cost_text || "Check price on site"
+  const officialUrl = activitySource(activity)
+  const price = activityPrice(activity.cost_text)
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -95,13 +97,13 @@ export default async function ActivityDetailPage({ params }: PageProps) {
           </div>
 
           <dl className="grid gap-4 sm:grid-cols-2">
-            {activity.start_date && <div className="flex gap-3 rounded-xl bg-muted/60 p-4">
-              <CalendarClock className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
-              <div><dt className="text-xs font-bold uppercase text-muted-foreground">Programme dates</dt><dd className="mt-1 font-semibold">{activity.start_date}{activity.end_date && activity.end_date !== activity.start_date ? ` to ${activity.end_date}` : ""}</dd><dd className="mt-1 text-sm text-muted-foreground">See the session schedule for individual dates and exceptions.</dd></div>
-            </div>}
             <div className="flex gap-3 rounded-xl bg-muted/60 p-4">
               <CalendarClock className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
-              <div><dt className="text-xs font-bold uppercase text-muted-foreground">Schedule</dt><dd className="mt-1 font-semibold">{activity.schedule_text || activity.time_text || "Check schedule on site"}</dd></div>
+              <div><dt className="text-xs font-bold uppercase text-muted-foreground">Session information</dt><dd className="mt-1"><ActivityScheduleSummary activity={activity} /></dd></div>
+            </div>
+            <div className="flex gap-3 rounded-xl bg-muted/60 p-4">
+              <CalendarClock className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
+              <div><dt className="text-xs font-bold uppercase text-muted-foreground">Original schedule evidence</dt><dd className="mt-1 break-words font-semibold">{activity.schedule_text || activity.time_text || "Not supplied"}</dd>{activity.start_date && <dd className="mt-2 text-sm">Stored date bounds: {activity.start_date}{activity.end_date && activity.end_date !== activity.start_date ? ` to ${activity.end_date}` : ''}. These may describe listed sessions rather than the programme’s lifetime.</dd>}</div>
             </div>
             <div className="flex gap-3 rounded-xl bg-muted/60 p-4">
               <Ticket className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
@@ -129,7 +131,7 @@ export default async function ActivityDetailPage({ params }: PageProps) {
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-navy px-6 py-3.5 text-sm font-bold text-navy-foreground transition hover:-translate-y-0.5 hover:shadow-lg sm:w-fit"
             >
-              Check official site <ExternalLink className="size-4" aria-hidden />
+              Check source <ExternalLink className="size-4" aria-hidden />
             </a>
           )}
 
@@ -152,7 +154,7 @@ export default async function ActivityDetailPage({ params }: PageProps) {
                 <h3 className="mt-1 font-heading text-lg font-extrabold">
                   <Link href={`/activities/${activitySlug(item)}`} className="hover:underline">{item.title}</Link>
                 </h3>
-                {item.schedule_text && <p className="mt-2 text-sm">{item.schedule_text}</p>}
+                <ActivityScheduleSummary activity={item} />
                 <Link href={`/activities/${activitySlug(item)}`} className="mt-3 inline-block text-sm font-semibold underline underline-offset-4">View details</Link>
               </article>
             ))}

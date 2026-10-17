@@ -5,7 +5,8 @@ import { useEffect, useRef, useState } from 'react'
 export function useDirectoryPage<T>(url:string,enabled:boolean,seed?:{url:string;page:T;error?:string}){
   const [state,setState]=useState<{url:string;pages:T[]}>({url:seed?.url??'',pages:seed?[seed.page]:[]})
   const [loading,setLoading]=useState(false)
-  const [error,setError]=useState(seed?.error??'')
+  const [failure,setFailure]=useState({url:seed?.url??'',message:seed?.error??''})
+  const setError=(message:string)=>setFailure({url,message})
   const [retry,setRetry]=useState(0)
   const controller=useRef<AbortController|null>(null)
   const busy=useRef(false)
@@ -33,8 +34,10 @@ export function useDirectoryPage<T>(url:string,enabled:boolean,seed?:{url:string
     if(busy.current||!controller.current||controller.current.signal.aborted)return
     const c=controller.current;busy.current=true;setLoading(true);setError('')
     try{
-      const separator=url.includes('?')?'&':'?'
-      const r=await fetch(`${url}${separator}offset=${offset}`,{signal:c.signal,cache:'no-store'})
+      const [path,query]=url.split('?',2)
+      const params=new URLSearchParams(query)
+      params.set('offset',String(offset))
+      const r=await fetch(`${path}?${params}`,{signal:c.signal,cache:'no-store'})
       if(!r.ok)throw new Error('Could not load more results. Please try again.')
       const page=await r.json() as T
       if(!c.signal.aborted)setState(s=>s.url===url?{url,pages:[...s.pages,page]}:s)
@@ -42,5 +45,5 @@ export function useDirectoryPage<T>(url:string,enabled:boolean,seed?:{url:string
     finally{if(!c.signal.aborted){setLoading(false);busy.current=false}}
   }
   const pages=enabled&&state.url===url?state.pages:[]
-  return {pages,loading:enabled&&(loading||state.url!==url),error,loadMore,retry:()=>setRetry(n=>n+1)}
+  return {pages,loading:enabled&&(loading||state.url!==url),error:enabled&&failure.url===url?failure.message:'',loadMore,retry:()=>setRetry(n=>n+1)}
 }

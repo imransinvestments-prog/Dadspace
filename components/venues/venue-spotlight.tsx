@@ -1,4 +1,5 @@
 import { VenuePhoto } from "@/components/venues/venue-photo"
+import { VenueAccess } from "@/components/venues/venue-access"
 import { Dices, Globe, MapPin, Navigation, X } from "lucide-react"
 import { categoryLabel, type Venue } from "@/lib/venue-meta"
 import { cn } from "@/lib/utils"
@@ -72,7 +73,7 @@ export function VenueSpotlight({ venue, distance, rolling, onReroll, onClose }: 
           {distance != null && (
             <span className="flex items-center gap-1.5 font-semibold text-foreground">
               <Navigation className="size-4 text-accent" aria-hidden />
-              {formatMiles(distance)} away
+              {formatMiles(distance)} away (straight-line)
             </span>
           )}
           {venue.is_free && <span className="font-semibold text-accent">Free entry</span>}
@@ -80,6 +81,7 @@ export function VenueSpotlight({ venue, distance, rolling, onReroll, onClose }: 
 
         {venue.description && <p className="line-clamp-3 leading-relaxed text-pretty text-muted-foreground">{venue.description}</p>}
 
+        <VenueAccess venue={venue} />
         <div className="mt-auto flex flex-wrap gap-2 pt-2">
           <a
             href={directionsUrl(venue)}

@@ -24,13 +24,8 @@ jobs:
       PGDATABASE: postgres
     steps:
       - uses: actions/checkout@v4
-      - uses: supabase/setup-cli@v1
-        with:
-          version: 2.121.0
-      - name: Generate migration name with the official CLI
-        run: supabase migration new operations_review_transactions
-      - name: Show generated migration path
-        run: find supabase/migrations -name '*operations_review_transactions.sql' -print
       - run: psql -v ON_ERROR_STOP=1 -f tests/operations-review-fixture.sql
       - run: psql -v ON_ERROR_STOP=1 -f scripts/operations-review.sql
+      - run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261017093801_operations_review_edit_reject.sql
       - run: psql -v ON_ERROR_STOP=1 -f tests/operations-review-transactions.sql
+      - run: psql -v ON_ERROR_STOP=1 -f tests/operations-review-edit-transactions.sql

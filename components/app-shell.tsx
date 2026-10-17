@@ -8,9 +8,16 @@ import { ThemeToggle } from "./theme-toggle"
 import { InstallPrompt } from "./install-prompt"
 import { NAV_ITEMS, isActive } from "./nav-items"
 import { cn } from "@/lib/utils"
+import { useEffect, useRef, useState } from "react"
+import { MoreHorizontal } from "lucide-react"
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
+  const [moreOpen, setMoreOpen] = useState(false)
+  const moreButton = useRef<HTMLButtonElement>(null)
+  const morePanel = useRef<HTMLDivElement>(null)
+  useEffect(() => setMoreOpen(false), [pathname])
+  useEffect(() => { if (moreOpen) morePanel.current?.querySelector('a')?.focus() }, [moreOpen])
 
   return (
     <div className="min-h-dvh">
@@ -52,7 +59,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </aside>
 
-      <header className="sticky top-0 z-30 flex items-center justify-between border-b bg-background/85 px-4 py-3 backdrop-blur-md lg:hidden">
+      <header className="sticky top-0 z-30 flex items-center justify-between gap-2 border-b bg-background/85 px-3 py-2 backdrop-blur-md lg:hidden">
         <Logo />
         <div className="flex items-center gap-2">
           <ThemeToggle />
@@ -69,7 +76,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </main>
 
-      <nav aria-label="Main" className="pb-safe fixed inset-x-0 bottom-0 z-30 border-t bg-card/95 backdrop-blur-md lg:hidden">
+      <nav aria-label="Main" onKeyDown={event => { if (event.key === 'Escape' && moreOpen) { setMoreOpen(false); moreButton.current?.focus() } }} className="pb-safe fixed inset-x-0 bottom-0 z-30 border-t bg-card/95 backdrop-blur-md lg:hidden">
+        {moreOpen && <div ref={morePanel} id="mobile-more-navigation" className="absolute inset-x-2 bottom-full mb-2 max-h-[65dvh] overflow-y-auto rounded-2xl border bg-card p-2 shadow-xl">
+          <p className="px-3 py-2 text-sm font-semibold">More from Dadspace</p>
+          {NAV_ITEMS.filter(item => !item.mobile).map(({href,label,icon:Icon}) => <Link key={href} href={href} onClick={() => setMoreOpen(false)} aria-current={isActive(pathname,href) ? 'page' : undefined} className={cn('flex min-h-12 items-center gap-3 rounded-xl px-3 font-semibold',isActive(pathname,href) ? 'bg-primary text-primary-foreground' : 'hover:bg-muted')}><Icon className="size-5" aria-hidden />{label}</Link>)}
+        </div>}
         <ul className="mx-auto flex max-w-lg items-stretch justify-around px-2">
           {NAV_ITEMS.filter((i) => i.mobile).map(({ href, label, icon: Icon }) => {
             const active = isActive(pathname, href)
@@ -91,6 +102,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </li>
             )
           })}
+          <li className="min-w-0 flex-1"><button ref={moreButton} type="button" aria-expanded={moreOpen} aria-controls="mobile-more-navigation" onClick={() => setMoreOpen(value => !value)} className={cn('flex h-16 w-full flex-col items-center justify-center gap-1 text-xs font-semibold',NAV_ITEMS.some(item => !item.mobile && isActive(pathname,item.href)) ? 'text-primary' : 'text-muted-foreground')}><span className="flex h-8 items-center"><MoreHorizontal className="size-5" aria-hidden /></span>More</button></li>
         </ul>
       </nav>
     </div>

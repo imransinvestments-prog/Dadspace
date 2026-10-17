@@ -10,7 +10,7 @@ function load(file, dependencies) {
   return module.exports
 }
 function feeds(db) {
-  const dependencies = { 'server-only': {}, './supabase': { getSupabase: () => db }, './dates': { londonToday: () => '2026-10-14', upcomingWeekend: () => ({ saturday: '2026-10-17', sunday: '2026-10-18' }) }, './distance': {}, './listing-distance': {}, './event-meta': {}, './activity-shared': { ACTIVITY_PAGE_SIZE: 24 } }
+  const dependencies = { 'server-only': {}, './supabase': { getSupabase: () => db }, './dates': { londonToday: () => '2026-10-14', upcomingWeekend: () => ({ saturday: '2026-10-17', sunday: '2026-10-18' }) }, './distance': {}, './listing-distance': {}, './event-meta': {}, './activity-shared': { ACTIVITY_PAGE_SIZE: 24 }, './discovery-radius': load('lib/discovery-radius.ts', {}) }
   return { events: load('lib/events.ts', dependencies), activities: load('lib/activities.ts', dependencies) }
 }
 function database(results) {
@@ -31,6 +31,15 @@ test('successful empty national results remain an honest empty state', async () 
   assert.equal((await f.events.fetchUpcomingEvents()).loadFailed, false)
   assert.equal((await f.activities.fetchActivityPage()).loadFailed, false)
 })
+
+test('activity public mapping preserves recurrence and original schedule without inventing future dates', async () => {
+  const f=feeds(database([{data:[{id:'reviewed',title:'Carterton: Rhyme Time',recurrence:'recurring',start_date:'2026-10-13',end_date:'2026-10-13',schedule_text:'Published dates: 2026-10-13; Tuesday, 10.30am - 11.00am'}],error:null,count:1}]))
+  const result=await f.activities.fetchActivityPage()
+  assert.equal(result.activities[0].recurrence,'recurring')
+  assert.equal(result.activities[0].start_date,'2026-10-13')
+  assert.match(result.activities[0].schedule_text,/Published dates: 2026-10-13/)
+  assert.equal(result.total,1)
+})
 test('failure after a full events page cannot publish a partial successful response', async () => {
   const f = feeds(database([{ data: Array.from({length:500}, () => ({})), error: null }, { data: null, error: {} }]))
   const result = await f.events.fetchUpcomingEvents()
@@ -39,9 +48,9 @@ test('failure after a full events page cannot publish a partial successful respo
 })
 test('public directory APIs return 503 for unavailable supply and 200 for genuine empty supply', async () => {
   for (const loadFailed of [true, false]) {
-    const events = load('app/api/events/route.ts', { '@/lib/events': { fetchUpcomingEvents: async () => ({ events: [], loadFailed }) }, '@/lib/distance': { parsePoint: () => null } })
+    const events = load('app/api/events/route.ts', { '@/lib/events': { fetchUpcomingEvents: async () => ({ events: [], loadFailed }) }, '@/lib/distance': { parsePoint: () => null }, '@/lib/discovery-radius': load('lib/discovery-radius.ts', {}) })
     assert.equal((await events.GET(new Request('https://example.com/api/events'))).status, loadFailed ? 503 : 200)
-    const activities = load('app/api/activities/route.ts', { 'next/server': { NextResponse: Response }, '@/lib/activities': { ACTIVITY_PAGE_SIZE: 24, fetchActivityPage: async () => ({ activities: [], loadFailed }) }, '@/lib/distance': { parsePoint: () => null } })
+    const activities = load('app/api/activities/route.ts', { 'next/server': { NextResponse: Response }, '@/lib/activities': { ACTIVITY_PAGE_SIZE: 24, fetchActivityPage: async () => ({ activities: [], loadFailed }) }, '@/lib/distance': { parsePoint: () => null }, '@/lib/discovery-radius': load('lib/discovery-radius.ts', {}) })
     assert.equal((await activities.GET(new Request('https://example.com/api/activities'))).status, loadFailed ? 503 : 200)
   }
 })

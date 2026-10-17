@@ -1,3 +1,4 @@
+import { withinDiscoveryScope, type DiscoveryScope } from './discovery-radius'
 import "server-only"
 import { getSupabase } from "./supabase"
 import { londonToday, upcomingWeekend } from "./dates"
@@ -95,12 +96,47 @@ function protectedRecurring(event: DadEvent) {
   return PROTECTED_RECURRING.test(`${event.title} ${event.description ?? ""}`)
 }
 
+// Reviewed against provider camp pages on 16 October 2026. These aliases are
+// deliberately venue/programme specific: a provider homepage is not a session ID.
+const CAMP_ALIASES = [
+  { host: 'sportsstars.classforkids.io', place: 'Ryland Centre, Bromsgrove, B60 2JS', venue: 'Ryland Centre, Bromsgrove', titles: ['SportsStars', 'SportsStars Multi Sport Camp - Bromsgrove'], programme: 'sportsstars-ryland-multisport' },
+  { host: 'sportsstars.classforkids.io', place: 'St Thomas More Catholic Primary School, B98 7RY', venue: 'St Thomas More Catholic Primary School', titles: ['SportsStars', 'SportsStars Multi Sport Camp'], programme: 'sportsstars-st-thomas-multisport' },
+  { host: 'pandesports.classforkids.io', place: 'Arrow Vale Sports Centre, B98 0GF', venue: 'Arrow Vale Sports Centre', titles: ['PandESports', 'PandESports Multi Activity Camp'], programme: 'pande-arrow-vale-multiactivity' },
+  { host: 'pandesports.classforkids.io', place: 'Trinity High School, B98 8DS', venue: 'Trinity High School', titles: ['PandESports', 'PandESports Football Camp'], programme: 'pande-trinity-football' },
+]
+
+function reviewedCamp(event: DadEvent) {
+  if (!event.is_holiday_camp || event.source_url !== 'https://classforkids.io/en-GB/classes/Birmingham') return null
+  try {
+    const url = new URL(event.event_url ?? '')
+    if (url.protocol !== 'https:' || url.username || url.password || url.port || url.pathname !== '/' || url.hash) return null
+    return CAMP_ALIASES.find(alias => url.hostname === alias.host &&
+      normalise(event.location) === normalise(alias.place) &&
+      (!event.venue_name || normalise(event.venue_name) === normalise(alias.venue)) &&
+      (!event.postcode || normalise(event.postcode) === normalise(alias.place.match(/[A-Z0-9]+ [0-9][A-Z]{2}$/)?.[0])) &&
+      alias.titles.some(title => normalise(title) === normalise(event.title)) &&
+      [...url.searchParams.keys()].every(key => key === 'venueName') &&
+      (!url.search || (url.searchParams.getAll('venueName').length === 1 && normalise(url.searchParams.get('venueName')) === normalise(alias.venue))))?.programme ?? null
+  } catch { return null }
+}
+
+function sameSessionBounds(a: DadEvent, b: DadEvent) {
+  // Keep absent/conflicting evidence distinct; never discard times from a timestamp.
+  return !!a.start_date && a.start_date === b.start_date &&
+    (a.end_date ?? '') === (b.end_date ?? '') &&
+    (a.time_text ?? '').trim().toLowerCase() === (b.time_text ?? '').trim().toLowerCase() &&
+    normalise(a.age_range) === normalise(b.age_range) &&
+    (a.cost_text ?? '').trim() === (b.cost_text ?? '').trim() &&
+    (!a.venue_id || !b.venue_id || a.venue_id === b.venue_id)
+}
+
 function sameExactListingOccurrence(a: DadEvent, b: DadEvent) {
   return (
     !!a.event_url &&
     !!b.event_url &&
     a.event_url === b.event_url &&
-    a.start_date.slice(0, 10) === b.start_date.slice(0, 10) &&
+    normalise(a.title) === normalise(b.title) &&
+    sameSessionBounds(a, b) &&
     sameVenue(a, b)
   )
 }
@@ -109,16 +145,32 @@ function sameExactListingOccurrence(a: DadEvent, b: DadEvent) {
 export function dedupeEvents(events: DadEvent[]): DadEvent[] {
   const kept: DadEvent[] = []
   for (const event of events) {
-    const duplicate = kept.some((other) => {
+    const duplicate = kept.findIndex((other) => {
+      if (!sameSessionBounds(event, other)) return false
+      const camp = reviewedCamp(event)
+      if (camp && camp === reviewedCamp(other) && event.end_date && event.time_text) return true
       if (sameExactListingOccurrence(event, other)) return true
+      // Never fuzzy-match camps: an unknown programme is a separate choice.
+      if (event.is_holiday_camp || other.is_holiday_camp) return false
       if (protectedRecurring(event) || protectedRecurring(other)) return false
       return (
-        other.start_date.slice(0, 10) === event.start_date.slice(0, 10) &&
         sameVenue(event, other) &&
         similarTitle(event.title, other.title)
       )
     })
-    if (!duplicate) kept.push(event)
+    if (duplicate < 0) kept.push(event)
+    else {
+      const previous = kept[duplicate]
+      const preferred = event.title.length > previous.title.length ||
+        (event.title.length === previous.title.length && event.id < previous.id) ? event : previous
+      const other = preferred === event ? previous : event
+      kept[duplicate] = reviewedCamp(event) ? {
+        ...preferred,
+        venue_id: preferred.venue_id ?? other.venue_id,
+        venue_name: preferred.venue_name ?? other.venue_name,
+        postcode: preferred.postcode ?? other.postcode,
+      } : preferred
+    }
   }
   return kept
 }
@@ -191,7 +243,7 @@ export function geographicallyBalanceEvents(events: DadEvent[]): DadEvent[] {
 
 export type EventsListing = { events: DadEvent[]; today: string; saturday: string; sunday: string; isSample: boolean; loadFailed: boolean }
 
-export async function fetchUpcomingEvents(point?: Point | null): Promise<EventsListing> {
+export async function fetchUpcomingEvents(point?: Point | null, radiusKm?: number, scope?: DiscoveryScope): Promise<EventsListing> {
   const today = londonToday()
   const { saturday, sunday } = upcomingWeekend(today)
   const db = getSupabase()
@@ -209,7 +261,7 @@ export async function fetchUpcomingEvents(point?: Point | null): Promise<EventsL
     if (!error && data?.length) {
       const mapped = data.map((row) => toEvent(row as Record<string, unknown>))
       const clean = dedupeEvents(qualityForDisplay(mapped))
-      const events=point?nearestFirst(await withDistances(clean,point),(a,b)=>a.start_date.localeCompare(b.start_date)):geographicallyBalanceEvents(clean)
+      const events=point?nearestFirst(withinDiscoveryScope(await withDistances(clean,point), radiusKm, scope),(a,b)=>a.start_date.localeCompare(b.start_date)):geographicallyBalanceEvents(clean)
       return { events, today, saturday, sunday, isSample: false, loadFailed: false }
     }
     if (point && error) throw new Error('Events unavailable')

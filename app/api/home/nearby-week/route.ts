@@ -13,15 +13,11 @@ export async function GET(request: NextRequest) {
   const point = {lat:Number(params.get("lat")),lng:Number(params.get("lng"))}
   const today = londonToday(), weekStart = addDays(today,-((weekday(today)+6)%7)), weekEnd = addDays(weekStart,6)
   const [eventsResult,countResult] = await Promise.allSettled([
-    fetchUpcomingEvents(point).then(result => {
+    fetchUpcomingEvents(point, 30 * 1.609344).then(result => {
       if (result.loadFailed) throw new Error("Events unavailable")
-      const seen = new Set<string>()
       return result.isSample ? [] : result.events.filter(e => {
         if ((e.end_date ?? e.start_date) < today || e.distance_miles == null) return false
-        // Legacy collectors can store the same session under slightly different titles.
-        const key = [e.source_id ?? e.source_url ?? e.id,(e.location ?? e.id).trim().toLowerCase(),e.start_date,e.end_date,e.time_text,e.category].join("|")
-        if (seen.has(key)) return false
-        seen.add(key)
+        // fetchUpcomingEvents already applies the shared occurrence rule.
         return true
       }).slice(0,2)
     }),

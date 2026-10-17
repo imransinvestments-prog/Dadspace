@@ -3,15 +3,32 @@ const ts=require(process.env.DADSPACE_TEST_DEPENDENCIES ? process.env.DADSPACE_T
 const root=path.resolve(__dirname,'..')
 function load(file,requires){
   const code=ts.transpileModule(fs.readFileSync(path.join(root,file),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText
-  const sandbox={exports:{},require:name=>{if(!(name in requires))throw new Error(`Unexpected module ${name}`);return requires[name]},URLSearchParams,AbortSignal,TextEncoder}
+  const sandbox={exports:{},require:name=>{if(!(name in requires))throw new Error(`Unexpected module ${name}`);return requires[name]},URLSearchParams,URL,Request,Response,AbortSignal,TextEncoder}
   vm.runInNewContext(code,sandbox);return {module:sandbox.exports,sandbox}
 }
-test('public reads exclude hidden rows, bound first page and fail honestly',async()=>{
-  const records=[{id:'visible',venue_name:'Visible',public_visible:true},{id:'hidden',venue_name:'Hidden',public_visible:false}]
+test('retired indoor/outdoor URLs cannot activate unsupported RPC filters',async()=>{
+  let rpcArgs=null,pageCalls=0
+  const db={rpc:async(_name,args)=>{rpcArgs=args;return {data:{rows:[{id:'family'}],total:1},error:null}}}
+  const {module:m}=load('app/api/venues/route.ts',{
+    '@/lib/supabase':{getSupabase:()=>db},'@/lib/venues':{toVenue:r=>r},
+    '@/lib/distance':{parsePoint:p=>p.has('lat')?{lat:51.5,lng:-.1}:null},
+    '@/lib/discovery-radius':load('lib/discovery-radius.ts',{}).module,
+    '@/lib/venue-discovery':{publicVenuePage:async()=>{pageCalls++;return {venues:[{id:'family'}],total:1,hasMore:false,loadFailed:false}}},
+  })
+  let response=await m.GET(new Request('https://dadspace.example/api/venues?indoor=true&outdoor=true'))
+  assert.equal(response.status,200);assert.equal(pageCalls,1);assert.equal(rpcArgs,null)
+  response=await m.GET(new Request('https://dadspace.example/api/venues?lat=51.5&lng=-.1&indoor=true&outdoor=true&free=true&q=family'))
+  assert.equal(response.status,200);assert.equal(rpcArgs.p_indoor,undefined);assert.equal(rpcArgs.p_outdoor,undefined)
+  assert.equal(rpcArgs.p_free,true);assert.equal(rpcArgs.p_query,'family')
+  assert.equal((await response.json()).venues[0].id,'family')
+})
+test('public reads exclude hidden adult gaming, retain a family casino name and fail honestly',async()=>{
+  const records=[{id:'visible',venue_name:'Grand Casino',public_visible:true},{id:'hidden',venue_name:'Reels Casino Slots',public_visible:false}]
   const calls=[];let error=null,configured=true
   const db={from:()=>{let filters=[];return {select(columns,options){calls.push({columns,options});return this},eq(k,v){filters.push([k,v]);return this},order(){return this},range(a,b){calls.push({range:[a,b]});return Promise.resolve({data:error?null:records.filter(r=>filters.every(([k,v])=>r[k]===v)),error,count:1})},maybeSingle(){return Promise.resolve({data:records.find(r=>filters.every(([k,v])=>r[k]===v))??null,error})}}}}
   const {module:m}=load('lib/venue-discovery.ts',{'server-only':{},react:{cache:f=>f},'./supabase':{getSupabase:()=>configured?db:null},'./venues':{toVenue:r=>({id:r.id,name:r.venue_name})}})
   const page=await m.publicVenuePage();assert.deepEqual(Array.from(page.venues,v=>v.id),['visible']);assert.deepEqual(calls.at(-1).range,[0,23])
+  assert.equal(page.venues[0].name,'Grand Casino');assert.equal((await m.publicVenueById('visible')).name,'Grand Casino')
   assert.equal(await m.publicVenueById('hidden'),null)
   records[0].public_visible=false
   assert.equal(await m.publicVenueById('visible'),null)
@@ -24,12 +41,18 @@ test('public reads exclude hidden rows, bound first page and fail honestly',asyn
 test('location remains optional before selection and after denied geolocation',async()=>{
   let states=[],refs=[],i=0,j=0,geoError,geoCalls=0
   const jsx=(type,props)=>({type,props})
-  const react={createContext:()=>({Provider:'provider'}),useState:init=>{const n=i++;if(!(n in states))states[n]=init;return[states[n],v=>states[n]=v]},useRef:init=>refs[j++]??=( {current:init}),useCallback:f=>f,useEffect:()=>{},useContext:()=>{}}
+  const react={createContext:()=>({Provider:'provider'}),useState:init=>{const n=i++;if(!(n in states))states[n]=init;return[states[n],v=>states[n]=typeof v==='function'?v(states[n]):v]},useRef:init=>refs[j++]??=( {current:init}),useCallback:f=>f,useEffect:()=>{},useContext:()=>{}}
   const {module:m,sandbox}=load('components/location-provider.tsx',{react,'react/jsx-runtime':{jsx,jsxs:jsx},'@/lib/distance':{parsePoint:p=>({lat:Number(p.get('lat')),lng:Number(p.get('lng'))})}})
   Object.assign(sandbox,{window:{isSecureContext:true},navigator:{geolocation:{getCurrentPosition:(_s,e)=>{geoCalls++;geoError=e}}},sessionStorage:{setItem:()=>{}},fetch:async()=>({ok:true,json:async()=>({results:[{lat:51.47,lng:-.39,label:'Hounslow'}]})})})
   const render=()=>{i=j=0;return m.LocationProvider({children:'PUBLIC_CONTENT'})}
+  sandbox.requestAnimationFrame=fn=>fn()
   const nodes=n=>!n||typeof n!=='object'?[]:[n,...[n.props?.children].flat(Infinity).flatMap(nodes)]
   let tree=render();assert(tree.props.children.includes('PUBLIC_CONTENT'));assert.equal(geoCalls,0)
+  assert.equal(nodes(tree).find(n=>n.type==='form').props.hidden,true)
+  nodes(tree).find(n=>n.type==='button'&&n.props['aria-controls']==='location-search-form').props.onClick()
+  tree=render();assert.equal(nodes(tree).find(n=>n.type==='form').props.hidden,false)
+  await nodes(tree).find(n=>n.type==='form').props.onSubmit({preventDefault(){}})
+  tree=render();assert(nodes(tree).some(n=>n.props?.role==='alert'));assert.equal(nodes(tree).find(n=>n.type==='form').props.hidden,false)
   // Main now starts with the owner-approved London fallback (#58/#59).
   assert.equal(tree.props.value.browseAll,false);assert.equal(tree.props.value.label,'Central London')
   assert.equal(tree.props.value.coords.lat,51.5074);assert.equal(tree.props.value.coords.lng,-0.1278)
@@ -37,6 +60,9 @@ test('location remains optional before selection and after denied geolocation',a
   nodes(tree).find(n=>n.type==='input').props.onChange({target:{value:'Hounslow'}})
   tree=render();await nodes(tree).find(n=>n.type==='form').props.onSubmit({preventDefault(){}})
   tree=render();assert.equal(tree.props.value.label,'Hounslow');assert.equal(tree.props.value.browseAll,false);assert(tree.props.children.includes('PUBLIC_CONTENT'))
+  assert.equal(nodes(tree).find(n=>n.type==='form').props.hidden,true)
+  nodes(tree).find(n=>n.type==='button'&&n.props['aria-controls']==='location-search-form').props.onClick()
+  tree=render();assert.equal(nodes(tree).find(n=>n.type==='input').props.value,'Hounslow')
 })
 test('news homepage prefers actionable relevance, never pads with weak stories',()=>{
   const {module:m}=load('lib/home-selection.ts',{})

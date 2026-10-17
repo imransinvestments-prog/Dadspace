@@ -13,20 +13,22 @@ type Props = {searchParams: Promise<Record<string, string | string[] | undefined
 export async function generateMetadata({searchParams}: Props): Promise<Metadata> {
   const search = await searchParams, page = browsePage(search.page)
   if (!page) notFound()
-  return pageMetadata(`UK venues for family days out${page > 1 ? ` – page ${page}` : ""}`, `/venues${page > 1 ? `?page=${page}` : ""}`, "Browse published UK venues, museums, libraries, play spaces and more. Choose a location for nearby results.", {image:"/images/venues/playground.png",noIndex:Object.keys(search).some(k=>k!=="page")})
+  return pageMetadata(`UK places for family days out${page > 1 ? ` – page ${page}` : ""}`, `/venues${page > 1 ? `?page=${page}` : ""}`, "Browse published UK venues, museums, libraries, play spaces and more. Choose a location for nearby results.", {image:"/images/venues/playground.png",noIndex:Object.keys(search).some(k=>k!=="page")})
 }
 export default async function VenuesPage({searchParams}: Props) {
-  const page = browsePage((await searchParams).page)
+  const search = await searchParams
+  const page = browsePage(search.page)
   if (!page) notFound()
   const initial = await publicVenuePage({page})
   if (initial.loadFailed) throw new Error("Venues are temporarily unavailable")
   if (page > 1 && !initial.venues.length) notFound()
   const db = getSupabase()
   const {data: categories} = db ? await db.rpc("venue_category_counts") : {data:null}
+  const nationalBrowse = page > 1 || search.browse === "uk"
   return <>
     <VenuesJsonLd venues={initial.venues} path={`/venues${page > 1 ? `?page=${page}` : ""}`}/>
-    <VenuesDirectory venues={initial.venues} initialTotal={initial.total} initialHasMore={initial.hasMore} initialPage={page} allCategories={categories??[]}/>
+    <VenuesDirectory key={`${page}:${nationalBrowse}`} venues={initial.venues} initialTotal={initial.total} initialHasMore={initial.hasMore} initialPage={page} initialBrowseNational={nationalBrowse} allCategories={categories??[]}/>
     <DiscoveryLinks/>
-    <nav aria-label="Browse all UK venue pages" className="flex justify-between">{page > 1 && <Link href={page > 2 ? `/venues?page=${page-1}` : "/venues"}>← Previous UK page</Link>}{initial.hasMore && <Link href={`/venues?page=${page+1}`}>Next UK page →</Link>}</nav>
+    <nav aria-label="Browse all UK place pages" className="flex justify-between">{page > 1 && <Link href={page > 2 ? `/venues?page=${page-1}` : "/venues?browse=uk"}>← Previous UK page</Link>}{initial.hasMore && <Link href={`/venues?page=${page+1}`}>Next UK page →</Link>}</nav>
   </>
 }

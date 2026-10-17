@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic"
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const post = await getOriginal(slug)
-  return post ? pageMetadata(post.title, `/originals/${post.slug}`, post.summary) : pageMetadata("Original not found", "/originals", "Dadspace Originals", { noIndex: true })
+  return post ? pageMetadata(post.title, `/originals/${post.slug}`, post.summary) : pageMetadata("Idea not found", "/originals", "Dadspace Ideas", { noIndex: true })
 }
 export default async function OriginalPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -16,7 +16,7 @@ export default async function OriginalPage({ params }: { params: Promise<{ slug:
   const jsonLd = { "@context": "https://schema.org", "@type": "Article", headline: post.title, description: post.summary, datePublished: post.published_at, author: { "@type": "Organization", name: "Dadspace" }, mainEntityOfPage: `${siteUrl}/originals/${post.slug}` }
   return <article className="mx-auto w-full max-w-3xl space-y-7 pb-8">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
-    <Link href="/originals" className="inline-block font-semibold text-accent">← All originals</Link>
+    <Link href="/originals" className="inline-block font-semibold text-accent">← All ideas</Link>
     <header className="space-y-4">
       <p className="text-sm font-semibold text-accent">{post.cadence === "daily" ? "Daily tip" : "Weekend guide"} · <time dateTime={post.published_at}>{originalDate(post.published_at)}</time></p>
       <h1 className="font-heading text-4xl font-bold sm:text-5xl">{post.title}</h1>

@@ -23,7 +23,7 @@ export function CategoryRail({ categories, total, selected, onSelect }: Props) {
       <button type="button" aria-pressed={selected === "all"} onClick={() => onSelect("all")} className={cn(tile(selected === "all"), "bg-navy text-navy-foreground")}>
         <Sparkles className="absolute top-3 left-3 size-6 text-highlight transition group-hover:rotate-12" aria-hidden />
         <span className="font-heading text-lg leading-tight font-extrabold">Everything</span>
-        <span className="text-xs font-semibold opacity-80">{total} places</span>
+        <span className="text-xs font-semibold opacity-80">{total} UK-wide places</span>
       </button>
 
       {categories.map(({ key, count }) => (
@@ -33,14 +33,14 @@ export function CategoryRail({ categories, total, selected, onSelect }: Props) {
             alt=""
             fill
             quality={60}
-            sizes="144px"
+            sizes="(min-width: 768px) 144px, 128px"
             className="object-cover transition duration-500 group-hover:scale-110"
           />
           <span className="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent" aria-hidden />
           <span className="relative font-heading text-base leading-tight font-extrabold text-navy-foreground text-balance">
             {categoryPlural(key)}
           </span>
-          <span className="relative text-xs font-semibold text-navy-foreground/80">{count} places</span>
+          <span className="relative text-xs font-semibold text-navy-foreground/80">{count} UK-wide</span>
         </button>
       ))}
     </div>

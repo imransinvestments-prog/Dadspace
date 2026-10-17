@@ -1,0 +1,11 @@
+{
+  "report_date": "2026-10-16",
+  "subject": "Dadspace Morning Brief — 16 October 2026",
+  "status": "sent",
+  "verified_at": "2026-10-16T09:59:47Z",
+  "verification": "Confirmed matching message in authenticated Gmail Sent",
+  "report_commit": "af7f0f02d9f772f8ca8637f4dfa5a3fcb4aa8591",
+  "scheduled_local_time": "09:00 Europe/London",
+  "delivered_local_time": "10:59 Europe/London",
+  "late_delivery": true
+}

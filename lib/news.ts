@@ -127,7 +127,8 @@ function getNewsClient(): SupabaseClient {
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? process.env.NEXT_PUBLIC_DADSPACE_SUPABASE_ANON_KEY
   if (!url || !anonKey) throw new Error("The Supabase URL or anon key is missing.")
   if (!client) {
-    client = createClient(url, anonKey, { auth: { persistSession: false, autoRefreshToken: false } })
+    // Anonymous reads must not compete with the cookie-bearing auth client.
+    client = createClient(url, anonKey, { auth: { storageKey: "dadspace-public-news", persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } })
   }
   return client
 }
