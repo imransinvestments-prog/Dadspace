@@ -106,7 +106,7 @@ async function getWeekendEvents(saturday: string, sunday: string, today: string)
       .order("family_relevance", { ascending: false })
       .order("start_date", { ascending: true })
       .limit(30)
-    if (weekend.error) return unavailable
+    if (weekend.error || !Array.isArray(weekend.data)) return unavailable
     if (weekend.data?.length) {
       return {
         ...base,
@@ -124,7 +124,7 @@ async function getWeekendEvents(saturday: string, sunday: string, today: string)
       .order("start_date", { ascending: true })
       .order("family_relevance", { ascending: false })
       .limit(30)
-    if (upcoming.error) return unavailable
+    if (upcoming.error || !Array.isArray(upcoming.data)) return unavailable
     if (upcoming.data?.length) {
       return {
         ...base,
@@ -176,7 +176,7 @@ async function getLatestArticles(): Promise<HomeData["articles"]> {
     const { data, error } = await db.from("feed_items")
       .select("id,title,url,source_name,category,published_at,summary,why_it_matters,relevance")
       .order("published_at", { ascending: false, nullsFirst: false }).limit(300)
-    if (error) return unavailable
+    if (error || !Array.isArray(data)) return unavailable
     const items = selectNewsCards((data ?? []).map(row => ({
       id: String(row.id), title: row.title, source: row.source_name, url: row.url,
       category: row.category, published_at: row.published_at, relevance: row.relevance,

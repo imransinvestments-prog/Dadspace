@@ -43,3 +43,25 @@ test('JSON-LD output safely round-trips hostile names without closing the script
  const {renderToStaticMarkup}=require('react-dom/server');const text='</script><script>alert(1)</script> & “place”';const html=renderToStaticMarkup(json.JsonLd({data:{'@context':'https://schema.org','@type':'Thing',name:text}}));const body=html.slice(html.indexOf('>')+1,html.lastIndexOf('</script>'))
  assert(!body.includes('<script>'));assert.equal(JSON.parse(body).name,text)
 })
+test('missing server credential does not silently fall back to an RLS-empty anonymous client',()=>{
+ let created=0;const s=load('lib/supabase.ts',{'server-only':{},'@supabase/supabase-js':{createClient(){created++;return{}}}},{NEXT_PUBLIC_DADSPACE_SUPABASE_URL:'https://example.supabase.co',NEXT_PUBLIC_DADSPACE_SUPABASE_ANON_KEY:'public-test'})
+ assert.equal(s.getSupabase(),null);assert.equal(created,0)
+})
+test('news and deals distinguish absent evidence and transport/query failures from genuine empty supply',async()=>{
+ for(const mode of ['empty','null','error','throw']){
+  const q={};for(const k of ['select','eq','like','gte','order','range','or'])q[k]=()=>q
+  q.then=(resolve,reject)=>Promise.resolve().then(()=>{if(mode==='throw')throw Error('transport');return{data:mode==='null'?null:[],error:mode==='error'?{}:null}}).then(resolve,reject);q.limit=()=>q
+  const db={from:()=>q};const deals=load('lib/deals.ts',{'server-only':{},react:cache,'./supabase':{getSupabase:()=>db},'./deals-selection':{selectDeals:r=>r}})
+  assert.equal((await deals.getDeals()).loadFailed,mode!=='empty',mode)
+  const news=load('lib/news.ts',{'@supabase/supabase-js':{createClient:()=>db},'./news-geography':{}},{NEXT_PUBLIC_DADSPACE_SUPABASE_URL:'https://example.supabase.co',NEXT_PUBLIC_DADSPACE_SUPABASE_ANON_KEY:'public-test'})
+  const run=()=>news.fetchNews({region:'all',category:'all',page:0});if(mode==='empty')assert.equal((await run()).length,0);else await assert.rejects(run())
+ }
+})
+test('merged detail URLs redirect temporarily and rollback restores the original URL',async()=>{
+ const sourceId='12345678-1234-1234-1234-123456789abc', targetId='12345678-1234-1234-1234-123456789def'
+ let destination={id:targetId,name:'Survivor'}
+ const page=load('app/venues/[slug]/page.tsx',{'next/link':{},'next/navigation':{notFound(){throw Error('NOT_FOUND')},redirect:p=>{throw Error('TEMPORARY '+p)},permanentRedirect:p=>{throw Error('PERMANENT '+p)}},'@/lib/venue-discovery':{publicVenueDestination:async()=>destination},'@/lib/venue-slug':slug,'@/lib/venue-meta':{categoryLabel:()=> 'Place',venuePhotoUrl:()=>null,categoryImage:()=>null},'@/lib/seo':{...seo,pageMetadata:()=>({})},'@/components/venues/venue-photo':{},'@/components/venues/venues-json-ld':{},'@/components/seo/json-ld':{},'@/components/venues/venue-spotlight':{},'@/components/venues/venue-access':{}})
+ const params={params:Promise.resolve({slug:'old--'+sourceId})};await assert.rejects(page.generateMetadata(params),/TEMPORARY.*survivor/)
+ destination={id:sourceId,name:'Old'};await page.generateMetadata(params)
+ destination=null;await assert.rejects(page.generateMetadata(params),/NOT_FOUND/)
+})
