@@ -6,5 +6,8 @@
   "accepted_points": 0,
   "remaining_points": 22,
   "acceptance_events": [],
-  "note": "No agreed end date; no ideal line. Code completion and elapsed observation are not acceptance."
+  "iteration_status": "closed_with_carryover",
+  "carried_forward_original_points": 22,
+  "release_commit": "31b8c1fe7a99af4a5b47cd96ed022acec6ebeae0",
+  "note": "Owner requested closure after review on 17 October 2026. No fabricated ideal line or accepted points. 22 is original unaccepted commitment, not a new residual engineering estimate; refine before recommitment."
 }

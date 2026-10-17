@@ -1,5 +1,9 @@
 # Sprint 6 — implementation and decisions
 
+## Release and iteration closure
+
+Owner approved release of PR #186 with live maintenance and paid manual retries disabled, then requested sprint review and closure. It merged as `31b8c1fe7a99af4a5b47cd96ed022acec6ebeae0`. [Final review and carryover](./sprint-6-closure.md) supersedes the historical proposal/status below. The iteration closes with all three feature tickets open; no future scheduled evidence or unenabled action acceptance is claimed.
+
 Tracker [#185](https://github.com/imransinvestments-prog/Dadspace/issues/185). **22 committed / 0 accepted / 22 remaining**. This is a preview increment, not sprint closure.
 
 ## Entry point and owner workload

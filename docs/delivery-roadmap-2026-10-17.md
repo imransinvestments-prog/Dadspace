@@ -1,5 +1,9 @@
 # Proposed delivery roadmap — 17 October 2026
 
+## Sprint 6 release and iteration closure
+
+The owner approved PR #186 release and requested review/closure on 17 October 2026. See [Sprint 6 closure](./sprint-6-closure.md). News maintenance code is released with live actions and paid manual retries disabled. The iteration closes with 22 original committed points unaccepted and carried forward; #146/#147/#129 stay open. This is not 22 points of newly estimated coding. Refine residual permissions, live recovery and scheduled evidence before recommitment. Deals remains the next proposed focus; do not silently add carryover to its 24 provisional points or imply the News epic is fully accepted.
+
 ## Current sequencing — Sprint 6 approved
 
 After Sprint 5 closure, the owner requested News and Deals before Activities and approved starting News first. Sprint 6 [#185](https://github.com/imransinvestments-prog/Dadspace/issues/185) commits #146 (11), #147 (8), #129 (3): **22 points**. See [Sprint 6 plan](./sprint-6-plan.md). Deals follows with #131 (13), #148 (8), #132 (3), subject to refinement and its scheduled evidence dependency. The old numbered slots below are historical and superseded for ordering; they are not current commitments.
