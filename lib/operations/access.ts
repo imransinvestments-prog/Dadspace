@@ -14,3 +14,8 @@ export function isVerifiedOperationsEmail(user: { email?: string; email_confirme
   return (configuredEmails || "").split(",").map(value => value.trim().toLowerCase())
     .filter(value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)).includes(email)
 }
+
+// Owner-approved single-account policy. Deployment allowlists cannot widen it.
+export function isOperationsOwner(user: { email?: string; email_confirmed_at?: string; is_anonymous?: boolean }) {
+  return isVerifiedOperationsEmail(user, "imransinvestments@gmail.com")
+}

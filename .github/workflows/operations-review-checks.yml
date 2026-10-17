@@ -1,0 +1,31 @@
+name: Guarded operations review checks
+on:
+  pull_request:
+    paths: ['app/ops/**', 'lib/operations/**', 'tests/operations-review*', 'scripts/operations-review.sql', 'supabase/migrations/*operations_review*', '.github/workflows/operations-review-checks.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  transactions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: fixture-only
+        ports: ['5432:5432']
+        options: --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: postgres
+      PGPASSWORD: fixture-only
+      PGDATABASE: postgres
+    steps:
+      - uses: actions/checkout@v4
+      - run: psql -v ON_ERROR_STOP=1 -f tests/operations-review-fixture.sql
+      - run: psql -v ON_ERROR_STOP=1 -f scripts/operations-review.sql
+      - run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261017102447_operations_review_edit_reject.sql
+      - run: psql -v ON_ERROR_STOP=1 -f tests/operations-review-transactions.sql
+      - run: psql -v ON_ERROR_STOP=1 -f tests/operations-review-edit-transactions.sql
