@@ -42,3 +42,12 @@ No remaining ticket is closed by this document alone. After decisions: deploy ap
 - [Production route readback](../artefacts/documentation/sprint4-public-readback.json) records current production listing routes and canonical metadata before this proposed release. Home was separately inspected. This is a route smoke check, not certification of every content record.
 - Existing hidden Little Garden Nursery detail returns 404 in the proposed preview; no venue entity is published there. Newly revoked states, alias rollback and hidden-photo refusal are controlled regressions; no live fixtures were introduced.
 - Final owner decisions and approved follow-through remain pending. These results do not close #89 before the approved data outcome and post-release readback.
+
+## Approved production completion — 17 October 2026
+
+Owner approved all four recommendations in chat. PR #175 merged to main as `29a54185497b43d0bc86001afcc751010759e4f4`; Production deployment and subsequent reviewer-setting redeployment are Ready. Owner-only Operations access remains enforced. DADSPACE_REVIEWER_USER_IDS was configured for the verified owner UUID in Production only; the existing Google sign-in successfully displayed Reviewer access on the live decision page.
+
+Aquarium decision audit: `531d1f49-1e0d-408e-8f2e-f5dc5a30a59e`, approved owner actor, one source hidden into the agreed survivor. Fresh fingerprint matched the approved snapshot; 0 relationships/provenance rows needed moving. Both Inwood polygons remain public and unmerged. The old London Aquarium URL was verified to redirect to the canonical SEA LIFE detail on the production custom domain. Live directory search excludes the old ID and includes the survivor; the old ID is absent from its sitemap shard. A transaction/ROLLBACK replay of the source importer update could not restore public visibility. Guarded rollback planning remains available and production history shows the audit and Preview rollback control.
+
+The approved release and bounded data outcome are complete. Ticket and Sprint 4 acceptance are recorded in #174. Existing browser tabs and external search caches retain the refresh limitations described above.
+
