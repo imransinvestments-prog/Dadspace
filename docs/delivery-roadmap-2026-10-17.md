@@ -1,5 +1,11 @@
 # Proposed delivery roadmap — 17 October 2026
 
+## Current sequencing — Sprint 6 approved
+
+After Sprint 5 closure, the owner requested News and Deals before Activities and approved starting News first. Sprint 6 [#185](https://github.com/imransinvestments-prog/Dadspace/issues/185) commits #146 (11), #147 (8), #129 (3): **22 points**. See [Sprint 6 plan](./sprint-6-plan.md). Deals follows with #131 (13), #148 (8), #132 (3), subject to refinement and its scheduled evidence dependency. The old numbered slots below are historical and superseded for ordering; they are not current commitments.
+
+Activities engineering remains queued. #125 retains all seven-day cross-feed criteria, including Activities collections; News-specific evidence can be captured and reused without claiming #125 closure. Wider #149 and #44 handover remain outside Sprint 6. No new provider/source activation or paid run is authorized by this sequencing.
+
 ## Delivery update after Sprint 5
 
 The owner approved this roadmap through PR #177. Sprint 5 (#178) is complete: 24 committed /24 accepted /zero remaining, following the recorded sprint review. See [closure](./sprint-5-closure.md). New, separately estimated Activities foundation stories #180 (5), #181 (5), #182 (5), #183 (3) were refined during discovery and remain provisional backlog outside Sprint 5. They must be sequenced and reconciled with source qualification/matching before the old Slot 7 final Activities acceptance; later slot numbers below remain conditional placeholders, not commitments. No next sprint is started.

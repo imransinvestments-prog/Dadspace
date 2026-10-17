@@ -307,7 +307,7 @@ def run():
     core.run()
     # The core logs a failed batch but returns normally. Make this review gate visible.
     missing_results = any(row.get("warning") == "missing/duplicate/out-of-range article results" for row in _review)
-    if core.DRY_RUN and (_run_stats is None or _run_stats.get("batches_failed") or missing_results or not _run_stats.get("sources_ok")):
+    if (_run_stats is None or _run_stats.get("fatal_error") or _run_stats.get("batches_failed") or _run_stats.get("sources_failed") or missing_results or not _run_stats.get("sources_ok")):
         return 1
     if not _run_stats.get("scored"):
         print("No new articles scored; inspect the self-test sample for classification evidence.")
