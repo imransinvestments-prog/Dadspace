@@ -4,7 +4,7 @@ const fs=require('node:fs'),vm=require('node:vm'),ts=require('typescript')
 function load(file,deps={},env={}){
   const module={exports:{}}
   const code=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText
-  vm.runInNewContext(code,{module,exports:module.exports,Buffer,Date,Number,Intl,AbortSignal,process:{env},require:n=>deps[n]??require(n)})
+  vm.runInNewContext(code,{module,exports:module.exports,Buffer,Date,Number,Intl,AbortSignal,URL,process:{env},require:n=>deps[n]??require(n)})
   return module.exports
 }
 const tokens=load('lib/operations/maintenance-token.ts',{'server-only':{}})
@@ -43,4 +43,28 @@ test('service-reader Originals list and direct detail both exclude operator-hidd
   const originals=load('lib/originals.ts',{'server-only':{},'@/lib/supabase':{getSupabase:()=>db}})
   await originals.getOriginals();await originals.getOriginal('daily-2026-10-17')
   assert.equal(requests.filter(r=>r.key==='ops_hidden'&&r.value===false).length,2)
+})
+function editorial(accessResult,results){
+  let reads=0
+  const db={from:table=>{reads++;const chain={select:()=>chain,eq:()=>chain,lt:()=>chain,or:()=>chain,in:()=>chain,order:()=>chain,range:()=>chain,abortSignal:async()=>results[table]};return chain}}
+  const module=load('lib/operations/editorial.ts',{'server-only':{},'@/lib/supabase':{getSupabase:()=>db},'./session':{operationsAccess:async()=>accessResult},'./evidence-shared':load('lib/operations/evidence-shared.ts')},{DADSPACE_SUPABASE_SERVICE_ROLE_KEY:'test'})
+  return {module,reads:()=>reads}
+}
+test('editorial gate prevents all private reads and failed reads never become an empty queue',async()=>{
+  const denied=editorial('denied',{})
+  await denied.module.getEditorialEvidence('news',1);assert.equal(denied.reads(),0)
+  const failure=editorial('allowed',{news_items:{data:null,count:null,error:{message:'private payload'}}})
+  const result=await failure.module.getEditorialEvidence('news',1)
+  assert.equal(result.evidence.available,false);assert.equal(result.evidence.total,null)
+  assert.ok(!JSON.stringify(result).includes('private payload'))
+})
+test('editorial News uses actual public membership and strips credential query values from evidence',async()=>{
+  const rows=[{id:1,title:'Published article',ops_hidden:false,url:'https://example.com/story?id=12&token=secret'}, {id:2,title:'Older stored article',ops_hidden:false}]
+  const ok=editorial('allowed',{news_items:{data:rows,count:2,error:null},feed_items:{data:[{id:1}],error:null}})
+  const {evidence}=await ok.module.getEditorialEvidence('news',1)
+  assert.equal(evidence.rows[0].state,'Published in the News feed')
+  assert.equal(evidence.rows[1].state,'Stored — outside the current public feed')
+  assert.equal(evidence.rows[0].url,'https://example.com/story?id=12')
+  const missing=editorial('allowed',{news_items:{data:rows,count:2,error:null},feed_items:{data:null,error:{message:'unavailable'}}})
+  assert.equal((await missing.module.getEditorialEvidence('news',1)).evidence.rows[0].state,'Public status unavailable')
 })

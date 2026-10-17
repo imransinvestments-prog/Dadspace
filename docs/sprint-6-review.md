@@ -25,7 +25,7 @@ These are implementation recommendations awaiting the consolidated review; no ne
 - A News-only source selector and shared non-cancelling News concurrency group. Other healthy feed collectors stay independent.
 - A targeted News retry is capped inside a single feed, skips feed-wide deletion and automatic source pause, and reports source/batch/fatal failures in both live and dry runs. Remote authentication/billing/rate-limit denials are not retried.
 
-Local validation: 166 Node tests (including PostgreSQL rehearsal), 12 Originals tests, four runner-claim tests and five bounded-News tests; 11 Python locality tests, TypeScript and webpack production build. Initial hosted checks and Vercel passed; subsequent changes must pass again before release. No live collection or paid test was started.
+Local validation: 168 Node tests (including PostgreSQL rehearsal), 12 Originals tests, four runner-claim tests and five bounded-News tests; 11 Python locality tests, TypeScript and webpack production build. Initial hosted checks and Vercel passed; subsequent changes must pass again before release. A broad Python discovery job initially lacked News-only dependencies: News-specific regressions now run alongside locality checks in the dedicated News workflow. No live collection or paid test was started.
 
 ## Database setup evidence
 
