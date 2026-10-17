@@ -7,6 +7,20 @@ export type EditorialRow = { id: string; title: string; state: string; source: s
 type Evidence = { available: boolean; total: number | null; rows: EditorialRow[] }
 const unavailable: Evidence = { available: false, total: null, rows: [] }
 const text = (v: unknown, max = 300) => typeof v === "string" ? v.slice(0, max) : null
+export function newsFeedEvidenceUrl(value: unknown) {
+  const safe = evidenceUrl(value)
+  if (!safe || typeof value !== "string") return safe
+  const original = new URL(value), result = new URL(safe)
+  // Google RSS search needs its public query to identify the actual feed.
+  // Retain only those documented feed parameters, never arbitrary credentials.
+  if (original.hostname === "news.google.com" && original.pathname === "/rss/search") {
+    for (const name of ["q", "hl", "gl", "ceid"]) {
+      const v = original.searchParams.get(name)
+      if (v && v.length <= 500) result.searchParams.set(name, v)
+    }
+  }
+  return result.toString()
+}
 function draftText(v: unknown) {
   if (!v || typeof v !== "object" || Array.isArray(v)) return null
   const d = v as Record<string, unknown>
@@ -53,7 +67,7 @@ export async function getEditorialEvidence(kind: string, page: number, filter = 
       if (!error && data && count !== null) evidence = { available: true, total: count, rows: data.map(r => ({ id: r.id, title: `${r.cadence} ${r.slot_date} — attempt ${r.attempt}`, source: r.run_id ? `Workflow run ${r.run_id}` : "Run not recorded", url: /^\d+$/.test(r.run_id || "") ? `https://github.com/imransinvestments-prog/Dadspace/actions/runs/${r.run_id}` : null, date: r.created_at, state: stageLabels[r.stage] || "Unknown stage", detail: `${r.dry_run ? "Dry run (model calls may cost money)" : "Live mode"}. ${text(r.detail, 1500)}. Cumulative requests for this slot run: ${r.model_calls ?? "unknown"}; ${r.input_tokens ?? "unknown"} input / ${r.output_tokens ?? "unknown"} output tokens. Billed cost unknown.`, draft: draftText(r.draft) })) }
     } else if (kind === "sources") {
       const { data, error, count } = await db.from("news_sources").select("id,name,feed_url,active,last_checked_at,consecutive_failures,last_error", { count: "exact" }).order("id").range(from, from + 19).abortSignal(AbortSignal.timeout(10_000))
-      if (!error && data && count !== null) evidence = { available: true, total: count, rows: data.map(r => ({ id: String(r.id), title: r.name, source: "News feed", url: evidenceUrl(r.feed_url), date: r.last_checked_at, state: r.active ? "Active" : "Inactive", detail: `${r.consecutive_failures ?? "unknown"} consecutive failures. ${r.last_error ? "A source error is recorded; inspect the workflow." : "No error currently recorded; this does not prove useful yield."}`, draft: null })) }
+      if (!error && data && count !== null) evidence = { available: true, total: count, rows: data.map(r => ({ id: String(r.id), title: r.name, source: "News feed", url: newsFeedEvidenceUrl(r.feed_url), date: r.last_checked_at, state: r.active ? "Active" : "Inactive", detail: `${r.consecutive_failures ?? "unknown"} consecutive failures. ${r.last_error ? "A source error is recorded; inspect the workflow." : "No error currently recorded; this does not prove useful yield."}`, draft: null })) }
     } else if (kind === "audit") {
       const { data, error, count } = await db.from("operations_maintenance_audit").select("id,actor_id,action,family,record_id,reason,created_at,status,run_id,reverted_by", { count: "exact" }).order("created_at", { ascending: false }).order("id").range(from, from + 19).abortSignal(AbortSignal.timeout(10_000))
       if (!error && data && count !== null) evidence = { available: true, total: count, rows: data.map(r => ({ id: r.id, title: `${r.action} · ${r.family} · ${r.record_id}`, source: `Actor ${r.actor_id}`, url: r.run_id ? `https://github.com/imransinvestments-prog/Dadspace/actions/runs/${r.run_id}` : null, date: r.created_at, state: r.status, detail: `${text(r.reason, 1000)}${r.reverted_by ? ` · Restored by ${r.reverted_by}` : ""}`, draft: null })) }

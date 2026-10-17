@@ -43,6 +43,10 @@ The Supabase advisor reports intentional service-only tables without public RLS 
 
 ## Remaining acceptance
 
+### Signed-in preview verification
+
+Owner sign-in succeeded in the in-app browser. Engineering verified all nine Originals, the 1,009-row News queue with actual published/stored distinctions, 19 named feed sources and the empty draft/action-history queues. A read-only unpublish preview resolved the exact article and stated effect; no Apply control was exposed and no publication action was submitted. Browser checks also identified generic empty-state wording, Google search-feed query identity and native select width as small corrections included before review. This is engineering verification, not a new owner content judgment or permission approval.
+
 - Finish hosted deployment/browser checks and normal-runner evidence; verify owner keyboard/mobile usability and any approved configuration/live actions before accepting #146/#147.
 - #146's wider source recommendations, schedule management and non-News bounded collection coverage must be reconciled against its complete criteria; News/Originals retry support alone does not close that shared ticket.
 - #129 requires actual scheduled daily/Friday publication plus duplicate-safe 09:17 evidence after release. No observed week or future Friday is invented. #125 remains open for all cross-feed criteria.

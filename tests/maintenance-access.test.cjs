@@ -68,3 +68,11 @@ test('editorial News uses actual public membership and strips credential query v
   const missing=editorial('allowed',{news_items:{data:rows,count:2,error:null},feed_items:{data:null,error:{message:'unavailable'}}})
   assert.equal((await missing.module.getEditorialEvidence('news',1)).evidence.rows[0].state,'Public status unavailable')
 })
+test('Google feed links retain their public search identity without retaining token parameters',()=>{
+  const {module}=editorial('allowed',{})
+  const link=module.newsFeedEvidenceUrl('https://news.google.com/rss/search?q=paternity+leave+UK&hl=en-GB&gl=GB&ceid=GB:en&token=secret')
+  const url=new URL(link)
+  assert.equal(url.searchParams.get('q'),'paternity leave UK')
+  assert.equal(url.searchParams.get('token'),null)
+  assert.equal(module.newsFeedEvidenceUrl('https://other.example/feed?q=private&token=secret'),'https://other.example/feed')
+})
