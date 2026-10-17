@@ -13,8 +13,8 @@ on:
       cadence:
         description: Optional single cadence for a bounded maintenance retry
         type: choice
-        options: ['', daily, weekly]
-        default: ''
+        options: [all, daily, weekly]
+        default: all
       slot_date:
         description: Optional current London date (YYYY-MM-DD); older slots cannot be regenerated
         default: ''
@@ -23,9 +23,9 @@ on:
         default: ''
   push:
     branches: [main]
-    paths: ['original_content_worker.py', '.github/workflows/original-content.yml']
+    paths: ['original_content_worker.py', 'scripts/maintenance-run.py', '.github/workflows/original-content.yml']
   pull_request:
-    paths: ['app/originals/**', 'lib/originals.ts', 'original_content_worker.py', 'tests/test_original_content.py', '.github/workflows/original-content.yml']
+    paths: ['app/originals/**', 'lib/originals.ts', 'original_content_worker.py', 'scripts/maintenance-run.py', 'tests/test_original_content.py', 'tests/test_maintenance_run.py', '.github/workflows/original-content.yml']
 permissions:
   contents: read
 concurrency:
@@ -76,7 +76,7 @@ jobs:
         run: |
           args=()
           if [ "$DRY_RUN" = true ]; then args+=(--dry-run); fi
-          if [ -n "$CADENCE" ]; then args+=(--cadence "$CADENCE"); fi
+          if [ -n "$CADENCE" ] && [ "$CADENCE" != all ]; then args+=(--cadence "$CADENCE"); fi
           if [ -n "$SLOT_DATE" ]; then args+=(--slot-date "$SLOT_DATE"); fi
           python original_content_worker.py "${args[@]}"
         env:

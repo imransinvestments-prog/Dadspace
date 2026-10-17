@@ -35,3 +35,10 @@ test('review access never grants maintenance; preview environment refuses live w
   assert.equal(await imposter.module.maintenanceIdentity(),null)
   await assert.rejects(imposter.module.applyMaintenance('unsigned'));assert.equal(imposter.calls(),0)
 })
+test('service-reader Originals list and direct detail both exclude operator-hidden records',async()=>{
+  const requests=[]
+  const db={from:table=>{const chain={select:()=>chain,eq:(key,value)=>{requests.push({key,value,table});return chain},lte:()=>chain,order:()=>chain,limit:async()=>({data:[],error:null}),maybeSingle:async()=>({data:null,error:null})};return chain}}
+  const originals=load('lib/originals.ts',{'server-only':{},'@/lib/supabase':{getSupabase:()=>db}})
+  await originals.getOriginals();await originals.getOriginal('daily-2026-10-17')
+  assert.equal(requests.filter(r=>r.key==='ops_hidden'&&r.value===false).length,2)
+})

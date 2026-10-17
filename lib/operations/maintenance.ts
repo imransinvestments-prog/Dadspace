@@ -19,6 +19,7 @@ export function maintenanceConfiguration() {
     signing: (process.env.DADSPACE_MAINTENANCE_SIGNING_KEY?.length || 0) >= 32,
     database: !!process.env.DADSPACE_SUPABASE_SERVICE_ROLE_KEY,
     dispatch: !!process.env.DADSPACE_MAINTENANCE_GITHUB_TOKEN,
+    retryPolicy: process.env.DADSPACE_MAINTENANCE_RETRY_POLICY === "bounded-news-originals-v1",
   }
 }
 async function github(path: string, body?: unknown) {
@@ -55,7 +56,7 @@ export async function maintenancePlan(intent: MaintenanceIntent) {
     const { data, error } = await db.from("news_sources").select("id,name,feed_url,active,last_checked_at,consecutive_failures").eq("id", intent.record).eq("active", true).single()
     if (error || !data) throw new Error("Active source unavailable")
     const state = JSON.stringify({ source: data, dryRun: intent.dryRun, maxCandidates: 10, minutes: 5 })
-    return { fingerprint: createHash("sha256").update(state).digest("hex"), description: `Retry one active News source: ${data.name}; up to 10 candidates, five minutes.`, cost: "Dry run still calls the model. Billed amount unknown; live dispatch requires the approved retry policy." }
+    return { fingerprint: createHash("sha256").update(state).digest("hex"), description: `Retry one active News source: ${data.name}; up to 10 candidates, five-minute collection budget (in-flight requests may finish later). No feed-wide cleanup or automatic pause.`, cost: "Dry run still calls the model. Billed amount unknown; live dispatch requires the approved retry policy." }
   }
   const [cadence, ...dateParts] = intent.record.split("-")
   const date = dateParts.join("-")
@@ -74,7 +75,7 @@ export async function previewMaintenance(value: unknown) {
   const plan = await maintenancePlan(intent)
   const config = maintenanceConfiguration()
   const token = config.signing ? signMaintenance(intent, identity.id, plan.fingerprint, process.env.DADSPACE_MAINTENANCE_SIGNING_KEY!) : null
-  return { ...plan, token, canApply: !!token && config.live && identity.maintainer && config.database && (intent.action !== "retry" || config.dispatch) }
+  return { ...plan, token, canApply: !!token && config.live && identity.maintainer && config.database && (intent.action !== "retry" || (config.dispatch && config.retryPolicy)) }
 }
 export async function applyMaintenance(token: unknown) {
   const identity = await maintenanceIdentity(), config = maintenanceConfiguration()
@@ -96,7 +97,7 @@ export async function applyMaintenance(token: unknown) {
     if (error || data !== intent.request) throw new Error("Could not confirm apply; inspect audit before retry")
     return intent.request
   }
-  if (!config.dispatch || process.env.DADSPACE_MAINTENANCE_RETRY_POLICY !== "bounded-news-originals-v1") throw new Error("Retry policy not approved")
+  if (!config.dispatch || !config.retryPolicy) throw new Error("Retry policy not approved")
   // A timed-out dispatch is never automatically repeated. Audit is written first.
   const plan = await maintenancePlan(intent)
   if (plan.fingerprint !== intent.fingerprint) throw new Error("Preview changed")

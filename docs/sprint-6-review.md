@@ -10,7 +10,7 @@ Open `/ops/editorial` on the PR preview and sign in with the existing owner acco
 
 1. **Publish schedule:** replace the existing 19:17 Originals run with the specified 09:17 London retry, retaining the 07:17 daily/Friday run. Retry skips any existing slot, including an operator-hidden slot. Pushing code will run checks but no longer generate a paid article automatically.
 2. **Maintenance access:** retain owner-only Operations access and add a separate exact-user-ID maintainer setting. Recommendation: only the same confirmed owner account. Review permission never confers maintenance permission. Keep live maintenance disabled until approved configuration and release readback.
-3. **Bounded retries:** recommend opt-in News retry for one currently active source, at most ten candidates/five minutes; Originals retry for today's due slot only, at most two drafts/two independent editorial review requests. Dry runs may still cost money. Billed cost is unknown; no paid diagnostic or maintenance run has been performed. A separate approved retry-policy flag and Actions token are needed before this is usable in production.
+3. **Bounded retries:** recommend opt-in News retry for one currently active source, at most ten candidates and a five-minute collection budget (in-flight requests may finish later), with no global retention cleanup or automatic source pause; Originals retry for today's due slot only, at most two drafts/two independent editorial review requests. Dry runs may still cost money. Billed cost is unknown; no paid diagnostic or maintenance run has been performed. A separate approved retry-policy flag and Actions token are needed before this is usable in production.
 4. **Publication/source actions:** one-record hide, source pause/activation and restore have exact previews and audit history. Actual source activation still needs its specific policy decision; no activation or unpublish is proposed in this pack. Restore refuses newer evidence and never deletes an identity/history.
 
 These are implementation recommendations awaiting the consolidated review; no new maintenance role, token, live retry policy or publication decision has been enabled.
@@ -23,6 +23,9 @@ These are implementation recommendations awaiting the consolidated review; no ne
 - Atomic hide/pause/activate/restore, stale checks, duplicate request guards and full private before/after snapshots. Public News view and Originals RLS/readers enforce hiding without destroying slot identities.
 - Remote dispatch claimed before submission. Ambiguous responses stay unresolved and block another request. The normal runner consumes the exact claim once, rechecks the scope and reports its result. Manual reconciliation requires a completed matching main-branch workflow whose displayed request UUID matches; it never runs a worker itself.
 - A News-only source selector and shared non-cancelling News concurrency group. Other healthy feed collectors stay independent.
+- A targeted News retry is capped inside a single feed, skips feed-wide deletion and automatic source pause, and reports source/batch/fatal failures in both live and dry runs. Remote authentication/billing/rate-limit denials are not retried.
+
+Local validation: 166 Node tests (including PostgreSQL rehearsal), 12 Originals tests, four runner-claim tests and five bounded-News tests; 11 Python locality tests, TypeScript and webpack production build. Initial hosted checks and Vercel passed; subsequent changes must pass again before release. No live collection or paid test was started.
 
 ## Database setup evidence
 

@@ -74,3 +74,15 @@ test('remote dispatch outbox consumes one request and blocks uncertain/concurren
     assert.equal((await claim(restore)).rows[0].claimed,true)
   }finally{await db.close()}
 })
+test('unpublishing removes News from its public view and Originals from anon reads while keeping identity',async()=>{
+  const db=await setup();try{
+    await apply(db,(await plan(db)).fingerprint)
+    assert.equal((await db.query('select count(*)::int as n from feed_items')).rows[0].n,0)
+    const original=await plan(db,'hide','originals','daily-2026-10-17')
+    await db.query('select dadspace_maintenance_apply($1,$2,$3,$4,$5,$6,$7)',[actor,restore,'hide','originals','daily-2026-10-17',original.fingerprint,'Reviewed Original unpublish'])
+    await db.exec('set role anon')
+    assert.equal((await db.query('select count(*)::int as n from original_posts')).rows[0].n,0)
+    await db.exec('reset role')
+    assert.equal((await db.query('select count(*)::int as n from original_posts')).rows[0].n,1)
+  }finally{await db.close()}
+})

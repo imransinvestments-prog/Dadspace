@@ -199,7 +199,12 @@ def iso(dt):
 
 
 def out_of_time():
-    return (time.time() - START) > MAX_RUN_MINUTES * 60
+    minutes = min(MAX_RUN_MINUTES, 5) if os.environ.get("NEWS_SOURCE_ID") else MAX_RUN_MINUTES
+    return (time.time() - START) > minutes * 60
+
+
+def candidate_limit():
+    return min(MAX_NEW_PER_RUN, 10) if os.environ.get("NEWS_SOURCE_ID") else MAX_NEW_PER_RUN
 
 
 def clean_text(text, limit=400):
@@ -289,7 +294,7 @@ def mark_source(src, ok, error=None):
     else:
         fails = (src.get("consecutive_failures") or 0) + 1
         patch.update({"consecutive_failures": fails, "last_error": str(error)[:300]})
-        if fails >= MAX_FAILURES:
+        if fails >= MAX_FAILURES and not os.environ.get("NEWS_SOURCE_ID"):
             patch["active"] = False
     try:
         sb("PATCH", "news_sources", params={"id": f"eq.{src['id']}"}, json_body=patch)
@@ -355,6 +360,8 @@ def gemini_json(prompt):
                 data = data.get("articles") or data.get("results") or data.get("stories") or [data]
             return data
         except Exception as exc:
+            if isinstance(exc, requests.HTTPError) and exc.response is not None and exc.response.status_code in (401, 402, 403, 429):
+                raise RuntimeError("Remote authentication, billing or rate-limit denial; not retried") from None
             last_error = exc
             time.sleep(3)
     raise RuntimeError(f"Gemini failed: {last_error}")
@@ -540,7 +547,7 @@ def run():
         # ---- 1) collect new articles from every feed
         candidates = []
         for src in sources:
-            if out_of_time() or len(candidates) >= MAX_NEW_PER_RUN:
+            if out_of_time() or len(candidates) >= candidate_limit():
                 print("Stopping collection early (time or article limit reached).")
                 break
             t0 = time.time()
@@ -557,6 +564,8 @@ def run():
             stats["sources_ok"] += 1
             added = too_old = already = 0
             for e in entries:
+                if out_of_time() or len(candidates) >= candidate_limit():
+                    break
                 title = clean_text(e.get("title"), 300)
                 link = clean_url(e.get("link", "")) if e.get("link") else ""
                 if not title or not link:
@@ -685,10 +694,11 @@ def run():
             stats["saved"] = len(all_rows)
 
         # ---- 3) tidy up
-        if not DRY_RUN:
+        if not DRY_RUN and not os.environ.get("NEWS_SOURCE_ID"):
             delete_old()
 
     except Exception:
+        stats["fatal_error"] = 1
         print("UNEXPECTED ERROR:")
         traceback.print_exc()
     finally:
