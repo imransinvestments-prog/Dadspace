@@ -21,7 +21,7 @@ export default async function ActivitiesPage() {
   return (
     <div className="flex flex-col gap-4 md:gap-10">
       <header className="rounded-2xl bg-navy p-4 text-navy-foreground md:p-10">
-        <p className="text-sm font-bold uppercase tracking-wide text-highlight">Regular things to join</p>
+        <p className="hidden text-sm font-bold uppercase tracking-wide text-highlight md:block">Regular things to join</p>
         <h1 className="mt-2 font-heading text-2xl font-extrabold tracking-tight md:text-5xl">Activities, classes and clubs</h1>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed opacity-85 md:mt-4 md:text-base">
           Weekly and term-time groups, classes and clubs. Check the organiser for current schedules.
