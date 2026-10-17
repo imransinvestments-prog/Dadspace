@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv, datetime as dt, difflib, io, os, re
 import requests
 from supabase import create_client
+from venue_country import enrich_country_candidate, lookup_postcodes
 
 ACTIVE_URL='https://services-eu1.arcgis.com/s9MgJChYyPlPX2Nk/ArcGIS/rest/services/APP_SitePage_View/FeatureServer/0/query'
 LIBRARY_URL='https://blog.librarydata.uk/files/basic-dataset-for-libraries-2023-enhanced.csv'
@@ -30,7 +31,7 @@ def fnum(v):
 def load_venues(db):
     rows=[];start=0
     while True:
-        part=db.table('venues').select('id,venue_name,postcode,address,town_city,latitude,longitude,website,operator,source_url').range(start,start+999).execute().data or []
+        part=db.table('venues').select('id,venue_name,postcode,address,town_city,latitude,longitude,website,operator,source_url,country').range(start,start+999).execute().data or []
         rows.extend(part)
         if len(part)<1000:break
         start+=1000
@@ -53,7 +54,7 @@ def prov(vid,c,method,conf):
     return {'venue_id':str(vid),'source_name':c['source_name'],'source_record_id':c['source_record_id'],'source_url':c['source_url'],'source_role':'venue_reference','match_method':method,'match_confidence':conf,'source_payload':c['payload'],'last_seen_at':now,'updated_at':now}
 def enrich(db,v,c):
     patch={}
-    for k in ('address','town_city','postcode','website','operator'):
+    for k in ('address','town_city','postcode','website','operator','country'):
         if not v.get(k) and c.get(k):patch[k]=c[k]
     for k in ('latitude','longitude'):
         if v.get(k) is None and c.get(k) is not None:patch[k]=c[k]
@@ -78,12 +79,14 @@ def active_rows():
 
 def library_rows():
     r=requests.get(LIBRARY_URL,timeout=60,headers=H);r.raise_for_status()
-    for row in csv.DictReader(io.StringIO(r.content.decode('utf-8-sig','replace'))):
+    rows=list(csv.DictReader(io.StringIO(r.content.decode('utf-8-sig','replace'))))
+    countries=lookup_postcodes(first(row,'Postcode','Post code') for row in rows)
+    for row in rows:
         name=first(row,'Library name','Library Name','Name');p=pc(first(row,'Postcode','Post code'))
         if not name:continue
         uprn=str(first(row,'UPRN','uprn','Unique property reference number') or '').strip()
         rid=uprn or f'{norm(str(name))}|{p}'
-        yield {'source_name':'Public Library Open Data','source_record_id':rid,'source_url':LIBRARY_URL,'venue_name':str(name),'postcode':p,'address':first(row,'Address','Address 1','Address line 1'),'town_city':first(row,'Town','Local authority','Upper Tier Local Authority'),'website':first(row,'Website','Web address','URL'),'operator':None,'latitude':fnum(first(row,'Latitude')),'longitude':fnum(first(row,'Longitude')),'payload':row}
+        yield enrich_country_candidate({'source_name':'Public Library Open Data','source_record_id':rid,'source_url':LIBRARY_URL,'venue_name':str(name),'postcode':p,'address':first(row,'Address','Address 1','Address line 1'),'town_city':first(row,'Town','Local authority','Upper Tier Local Authority'),'website':first(row,'Website','Web address','URL'),'operator':None,'latitude':fnum(first(row,'Latitude')),'longitude':fnum(first(row,'Longitude')),'payload':row},countries)
 
 def run_active(db,bypc):
     seen=matched=ambiguous=0;provs=[]
@@ -128,8 +131,9 @@ def run_libraries(db,bypc,bysource):
         else:
             synthetic=f"reference:{c['source_name']}:{c['source_record_id']}"
             existing=bysource.get(synthetic)
-            if existing:provs.append(prov(existing['id'],c,'new_reference_venue',1.0));hidden+=1
-            else:pending.append(({'venue_name':c['venue_name'],'category':'library','address':c.get('address'),'town_city':c.get('town_city'),'postcode':c.get('postcode'),'latitude':c.get('latitude'),'longitude':c.get('longitude'),'website':c.get('website'),'source':c['source_name'],'source_url':synthetic,'discovered_source_url':LIBRARY_URL,'discovery_status':'verified','public_visible':True,'licence':'Open Government Licence v3.0','review_reason':None},c))
+            if existing:
+                enrich(db,existing,c);provs.append(prov(existing['id'],c,'new_reference_venue',1.0));hidden+=1
+            else:pending.append(({'venue_name':c['venue_name'],'category':'library','address':c.get('address'),'town_city':c.get('town_city'),'postcode':c.get('postcode'),'country':c.get('country'),'latitude':c.get('latitude'),'longitude':c.get('longitude'),'website':c.get('website'),'source':c['source_name'],'source_url':synthetic,'discovered_source_url':LIBRARY_URL,'discovery_status':'verified','public_visible':True,'licence':'Open Government Licence v3.0','review_reason':None},c))
         if len(pending)>=100:flush_pending()
         if len(provs)>=200:flush_prov(db,provs);provs=[]
     flush_pending();flush_prov(db,provs)
