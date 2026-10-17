@@ -1,6 +1,6 @@
 {
   "checkedOn": "2026-10-17",
-  "published": false,
+  "published": true,
   "ownerAccepted": true,
   "sourceUrl": "https://www.naturalbabyshower.co.uk/collections/sale-car-seats.atom",
   "rows": [
@@ -17,5 +17,9 @@
     }
   ],
   "ownerAcceptedOn": "2026-10-17",
-  "sourceRouteApproved": true
+  "sourceRouteApproved": true,
+  "productionDealId": 1994,
+  "productionSourceId": 42,
+  "publicationObservedAt": "2026-10-17T21:27:02.740295Z",
+  "collectionRunId": 39070828554
 }

@@ -2,6 +2,14 @@
 
 ## Owner decisions received — 17 October 2026
 
+### Applied and verified
+
+Focused collector PR #189 merged as 2821e6bd97d7e20bdc16bc2e6d6fe1e6b342aaf7 after all checks passed. Registered source #42 inactive, then used the existing production signed preview/confirmation flow to activate the approved route. Registration audit 24352380-3a39-4c99-a1a2-33517495fe3f; activation audit 58be958b-5675-4696-976e-91afe5532543. Other source activations were not changed.
+
+Normal rules-only collection [39070828554](https://github.com/imransinvestments-prog/Dadspace/actions/runs/39070828554) fetched and verified one offer for source #42. Database deal #1994 is live, canonical item #75, exact variant 55678800527739, £169 vs merchant-advertised £289, last verified 17 October at 22:27 BST. The [production Car Seats & Pushchairs page](https://www.dad-space.co.uk/deals?group=Car%20Seats%20%26%20Pushchairs) was read back in the browser: correct title, price, comparison disclosure and exact variant link are visible. This manual run is supporting delivery evidence, not scheduled acceptance for #132/#125.
+
+Workspace usability and this offer/route are accepted; the third priority category and MasterTag delivery remain open. No whole feature points are awarded at this checkpoint.
+
 The owner approved the workspace's usability and the one exact car-seat offer plus its proposed Natural Baby Shower source route. This accepts the frozen variant 55678800527739 at £169 against merchant-advertised £289, fingerprint cd2b79e83f834099d0173cac0dadb6dfacd30757e5804552859f397baf221f71. A fresh read-only recheck passed. Collector support is being released through the focused PR #189 before activation and normal collection readback. The broader workspace remains on the Sprint 7 preview. Historical unaccepted notes below describe the earlier review checkpoint.
 
 This approval does not close #131, accept the seven-day window, fix MasterTag delivery, or approve new merchant applications.
