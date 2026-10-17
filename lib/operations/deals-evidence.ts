@@ -24,7 +24,7 @@ export async function getDealsEvidence(kind: string, page: number, filter: strin
   try {
     let rows: DealEvidenceRow[] = [], total: number | null = null
     if (kind === "trial") {
-      rows = trial.rows.slice(from, from + 20).map(r => ({ id: r.id, title: dealDisplayTitle(r.title), state: "Candidate only — not published or owner-approved", source: "Natural Baby Shower · canonical item " + r.itemId, url: evidenceUrl(r.link), date: trial.checkedOn,
+      rows = trial.rows.slice(from, from + 20).map(r => ({ id: r.id, title: dealDisplayTitle(r.title), state: trial.ownerAccepted ? "Owner-approved offer snapshot — collection/publication verified separately" : "Candidate only — not published or owner-approved", source: "Natural Baby Shower · canonical item " + r.itemId, url: evidenceUrl(r.link), date: trial.checkedOn,
         detail: `Trial price: £${r.price}; merchant comparison: £${r.comparison}. ${r.description} Independently rechecked exact variant using the existing merchant-advertised policy. This is a dated snapshot: stock/prices must be rechecked before activation/publication. No car-seat fitting or compatibility recommendation is implied. Snapshot SHA-256: ${r.fingerprint}` }))
       total = trial.rows.length
     } else if (kind === "taxonomy") {

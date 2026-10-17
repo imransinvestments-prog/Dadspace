@@ -1,5 +1,11 @@
 # Sprint 7 — evidence and decisions
 
+## Owner decisions received — 17 October 2026
+
+The owner approved the workspace's usability and the one exact car-seat offer plus its proposed Natural Baby Shower source route. This accepts the frozen variant 55678800527739 at £169 against merchant-advertised £289, fingerprint cd2b79e83f834099d0173cac0dadb6dfacd30757e5804552859f397baf221f71. A fresh read-only recheck passed. Collector support is being released through the focused PR #189 before activation and normal collection readback. The broader workspace remains on the Sprint 7 preview. Historical unaccepted notes below describe the earlier review checkpoint.
+
+This approval does not close #131, accept the seven-day window, fix MasterTag delivery, or approve new merchant applications.
+
 17 October 2026. [Tracker #187](https://github.com/imransinvestments-prog/Dadspace/issues/187), [draft PR #188](https://github.com/imransinvestments-prog/Dadspace/pull/188). Implementation is not released or accepted.
 
 ## What has been established
