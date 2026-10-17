@@ -89,7 +89,7 @@ def validate(post, cadence, existing_titles=()):
 
 def due_slots(now):
     local = now.astimezone(ZoneInfo("Europe/London"))
-    if local.hour < 7:
+    if (local.hour, local.minute) < (7, 17):
         return []
     slots = [("daily", local.date())]
     if local.weekday() == 4:

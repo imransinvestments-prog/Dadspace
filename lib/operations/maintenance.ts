@@ -61,6 +61,8 @@ export async function maintenancePlan(intent: MaintenanceIntent) {
   const [cadence, ...dateParts] = intent.record.split("-")
   const date = dateParts.join("-")
   const localDate = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date())
+  const localTime = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(new Date())
+  if (localTime < "07:17") throw new Error("Today's publication slot is not due yet")
   if (date !== localDate || (cadence === "weekly" && new Date(`${date}T12:00:00Z`).getUTCDay() !== 5)) throw new Error("Retry only today's due slot")
   const { data, error } = await db.from("original_posts").select("slug").eq("cadence", cadence).eq("slot_date", date)
   if (error || data?.length) throw new Error("Slot exists or cannot be verified; no generation allowed")

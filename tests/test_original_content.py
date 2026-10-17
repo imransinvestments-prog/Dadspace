@@ -14,6 +14,8 @@ class OriginalContentTests(unittest.TestCase):
     def test_no_early_or_midweek_guide(self):
         self.assertEqual(worker.due_slots(datetime(2026, 12, 4, 6, tzinfo=timezone.utc)), [])
         self.assertEqual([s[0] for s in worker.due_slots(datetime(2026, 10, 10, 8, tzinfo=timezone.utc))], ["daily"])
+        for minute in (0,16):
+            self.assertEqual(worker.due_slots(datetime(2026,12,4,7,minute,tzinfo=timezone.utc)),[])
     def test_validation(self):
         self.assertEqual(worker.validate(draft(), "daily")["title"], draft()["title"])
         for change in ({"title": "short"}, {"sections": []}, {"summary": "https://example.com " * 5}):
