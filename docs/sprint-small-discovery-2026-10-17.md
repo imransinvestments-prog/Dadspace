@@ -48,8 +48,7 @@ preview. First actual 375×812 Home verification: nearby links at y292–388,
 five mobile targets 68.8px wide with no horizontal overflow. More opens focusing
 News; Escape restores More. Invalid lookup, preserved query after reopening and
 valid W3 9LN selection/collapse passed. Plan the weekend reaches active Events.
-The first Activities count was below the usable viewport; radius layout and
-spacing were corrected, with final preview recheck pending at this snapshot.
+Final Activities count sits at y722–743, above the fixed navigation at y747 on 375×812; 28 current activities loaded for W3 9LN / 10 km. All seven public destinations retain direct Events access without horizontal overflow. 24 final targeted checks passed after layout corrections. All applicable GitHub checks and Vercel deployment passed for implementation cc93ece.
 
 Nine HTTP candidate images were decoded successfully; measured dimensions and
 compressed payload bytes are in `artefacts/data/sprint-image-candidates-2026-10-17.json`.
@@ -60,3 +59,17 @@ produced no console warnings. No real-account lifecycle is claimed.
 
 No production data changes, source activation,
 community release or wider Activities remediation is part of this sprint.
+
+## ECC delivery self-evaluation
+
+Preview is reviewable; two acceptance limits remain explicit.
+
+| Axis | Score | Evidence and improvement |
+|---|---:|---|
+| Accuracy | 4 | Tests and browser evidence support implementation; actual DPR 2/3 and account lifecycle are not claimed. Complete those observations before full acceptance. |
+| Completeness | 3 | All five implementations delivered, but real-account and device acceptance remain. Keep those tickets open. |
+| Clarity | 4 | Decision log names every delegated choice; final reply should foreground the preview and remaining limits. |
+| Actionability | 4 | One integrated preview and linked tickets are ready; release awaits review. |
+| Conciseness | 4 | Detailed evidence is kept here; keep the user handover short. |
+
+Overall 3.8/5. Improvements by impact: complete actual auth lifecycle; record DPR 2/3 device observations; review and release. Would the user agree? Likely on preview readiness, with completion bounded by those outstanding criteria.
