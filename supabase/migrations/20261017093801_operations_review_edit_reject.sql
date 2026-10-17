@@ -44,7 +44,7 @@ begin
    if value<>'null'::jsonb then
     if jsonb_typeof(value)<>'number' then raise exception 'Invalid coordinates'; end if;
     n:=value::text::numeric;
-    if abs(n)>case when k='latitude' then 90 else 180 end then raise exception 'Invalid coordinates'; end if;
+    if abs(n)>(case when k='latitude' then 90 else 180 end) then raise exception 'Invalid coordinates'; end if;
    end if;
   else
    if jsonb_typeof(value) not in ('string','null') then raise exception 'Invalid text field'; end if;
@@ -248,3 +248,4 @@ begin
 end $$;
 revoke execute on function public.dadspace_review_patch(jsonb),public.dadspace_review_plan_v2(text,uuid,uuid,jsonb),public.dadspace_review_apply_v2(uuid,uuid,text,uuid,uuid,text,text,jsonb) from public,anon,authenticated;
 grant execute on function public.dadspace_review_patch(jsonb),public.dadspace_review_plan_v2(text,uuid,uuid,jsonb),public.dadspace_review_apply_v2(uuid,uuid,text,uuid,uuid,text,text,jsonb) to service_role;
+
