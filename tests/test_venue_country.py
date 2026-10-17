@@ -61,6 +61,8 @@ class CountryEvidenceTests(unittest.TestCase):
         with self.assertRaises(ValueError):review.build_sql(duplicated)
         invalid=copy.deepcopy(plan);invalid['changes'][0]['country']='Scotland'
         with self.assertRaises(ValueError):review.build_sql(invalid)
+        extra=copy.deepcopy(plan);another=copy.deepcopy(extra['changes'][-1]);another['id']='00000000-0000-0000-0000-000000000000';extra['changes'].append(another)
+        with self.assertRaises(ValueError):review.build_sql(extra)
 
 class LibraryImportTests(unittest.TestCase):
     def test_known_country_preserved_and_missing_country_filled_on_repeat_import(self):

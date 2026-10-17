@@ -57,6 +57,8 @@ def build_sql(plan, commit=False):
             raise ValueError('Invalid ID/fingerprint')
         if r['kind'] not in ('nursery', 'library') or r['country'] not in (None, 'England', 'Wales', 'Scotland', 'Northern Ireland'):
             raise ValueError('Unapproved change')
+        if r['kind'] == 'nursery' and r['id'] != NURSERY:
+            raise ValueError('Unapproved nursery identity')
         if r['kind'] == 'library' and r['country'] != r['evidence']['country']:
             raise ValueError('Country differs from evidence')
     raw = sql_literal(json.dumps(changes, ensure_ascii=True))
