@@ -11,7 +11,7 @@ export const metadata = pageMetadata(
   {image:"/images/news/money.png"},
 )
 
-export const revalidate = 900
+export const dynamic = "force-dynamic"
 
 export default async function DealsPage({ searchParams }: { searchParams: Promise<{ group?: string }> }) {
   const [{ items, loadFailed }, groups, params] = await Promise.all([getDeals(), getDealGroups(), searchParams])

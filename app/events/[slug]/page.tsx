@@ -9,11 +9,12 @@ import { originalEventDescription } from "@/lib/event-copy"
 import { categoryLabel, eventCategory, eventImage, isFreeEvent } from "@/lib/event-meta"
 import { eventIdFromSlug, eventSlug } from "@/lib/event-slug"
 import { fetchEventById, fetchSimilarUpcomingEvents } from "@/lib/events"
+import { eventSchema } from "@/components/events/events-json-ld"
 import { pageMetadata, siteUrl } from "@/lib/seo"
 
 type PageProps = { params: Promise<{ slug: string }> }
 
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
@@ -43,20 +44,8 @@ export default async function EventDetailPage({ params }: PageProps) {
   const description = originalEventDescription(event)
   const canonical = `${siteUrl}/events/${eventSlug(event)}`
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Event",
-    name: event.title,
-    description,
-    startDate: event.start_date,
-    endDate: event.end_date || event.start_date,
-    url: canonical,
-    eventStatus: ended ? undefined : "https://schema.org/EventScheduled",
-    image: image.src.startsWith("http") ? image.src : `${siteUrl}${image.src}`,
-    location: event.location
-      ? { "@type": "Place", name: event.location, address: event.location }
-      : undefined,
-  }
+  const jsonLd = { "@context": "https://schema.org", ...eventSchema(event), description }
+
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">

@@ -282,6 +282,7 @@ export async function fetchEventById(id: string): Promise<DadEvent | null> {
     .select("*")
     .eq("id", id)
     .eq("listing_type", "event")
+    .is("withdrawn_at", null)
     .limit(1)
     .maybeSingle()
   if (error || !data) return null

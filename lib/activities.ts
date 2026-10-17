@@ -80,7 +80,7 @@ export async function fetchActivityPage(options?: {
     const rows: Record<string,unknown>[]=[]
     for(let start=0;;start+=500){
       const {data,error}=await request.range(start,start+499)
-      if(error)throw new Error('Activities unavailable')
+      if(error || !Array.isArray(data))throw new Error('Activities unavailable')
       rows.push(...(data??[]))
       if((data?.length??0)<500)break
     }

@@ -11,7 +11,7 @@ import { activityPrice, activitySource } from '@/lib/activity-presentation'
 
 type PageProps = { params: Promise<{ slug: string }> }
 
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 function label(value: string | null | undefined) {
   if (!value) return "Family activity"
@@ -59,15 +59,7 @@ export default async function ActivityDetailPage({ params }: PageProps) {
         "@id": `${canonical}#activity`,
         name: activity.title,
         description,
-        category: label(activity.category),
         url: canonical,
-        location: placeName
-          ? {
-              "@type": "Place",
-              name: placeName,
-              address: activity.venue_address || activity.postcode || activity.location || undefined,
-            }
-          : undefined,
       },
       {
         "@type": "BreadcrumbList",

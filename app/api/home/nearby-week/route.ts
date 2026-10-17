@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
       const rows: {id:string;location:string|null;postcode:string|null;venue_id:string|null;source_id:string|null;start_date:string|null;end_date:string|null;recurrence:string|null}[] = []
       for(let offset=0;;offset+=500) {
         const {data,error} = await db.from("current_activities").select("id,location,postcode,venue_id,source_id,start_date,end_date,recurrence").order("id").range(offset,offset+499)
-        if(error) throw error
+        if(error || !Array.isArray(data)) throw new Error("Activities unavailable")
         rows.push(...(data ?? []))
         if((data?.length ?? 0)<500) break
       }
@@ -35,5 +35,5 @@ export async function GET(request: NextRequest) {
       return new Set(located.filter(row => row.distance_miles != null && row.distance_miles <= 30).map(row => row.id)).size
     })()
   ])
-  return NextResponse.json({events:eventsResult.status === "fulfilled" ? eventsResult.value : [],eventsUnavailable:eventsResult.status === "rejected",activityCount:countResult.status === "fulfilled" ? countResult.value : null,weekStart,weekEnd,radiusMiles:30})
+  return NextResponse.json({events:eventsResult.status === "fulfilled" ? eventsResult.value : [],eventsUnavailable:eventsResult.status === "rejected",activityCount:countResult.status === "fulfilled" ? countResult.value : null,weekStart,weekEnd,radiusMiles:30}, {headers:{"Cache-Control":"private, no-store"}})
 }

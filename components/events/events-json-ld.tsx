@@ -1,4 +1,5 @@
 import { eventImage, isFreeEvent } from "@/lib/event-meta"
+import { eventSlug } from "@/lib/event-slug"
 import { siteName, siteUrl } from "@/lib/seo"
 import type { DadEvent } from "@/lib/types"
 
@@ -8,19 +9,17 @@ function absolute(src: string) {
   return src.startsWith("http") ? src : `${siteUrl}${src}`
 }
 
-function eventSchema(event: DadEvent) {
-  const url = event.event_url || event.source_url || undefined
+export function eventSchema(event: DadEvent) {
+  const url = `${siteUrl}/events/${eventSlug(event)}`
   const free = isFreeEvent(event.cost_text)
-  const price = event.cost_text?.match(/£\s*(\d+(?:\.\d{1,2})?)/)?.[1]
 
   return {
     "@type": "Event",
+    "@id": `${url}#event`,
     name: event.title,
     description: event.description?.slice(0, 500) || undefined,
     startDate: event.start_date.slice(0, 10),
     endDate: (event.end_date ?? event.start_date).slice(0, 10),
-    eventStatus: "https://schema.org/EventScheduled",
-    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     image: [absolute(eventImage(event).src)],
     url,
     isAccessibleForFree: free || undefined,
@@ -28,10 +27,7 @@ function eventSchema(event: DadEvent) {
     location: event.location
       ? { "@type": "Place", name: event.location, address: { "@type": "PostalAddress", streetAddress: event.location, addressCountry: "GB" } }
       : undefined,
-    offers:
-      free || price
-        ? { "@type": "Offer", price: free ? "0" : price, priceCurrency: "GBP", availability: "https://schema.org/InStock", url }
-        : undefined,
+
   }
 }
 

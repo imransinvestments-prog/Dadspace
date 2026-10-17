@@ -11,7 +11,7 @@ export const metadata = pageMetadata(
 )
 
 // Re-check the database for new articles at most every 10 minutes.
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 export default async function NewsPage({ searchParams }: { searchParams: Promise<{ category?: string | string[] }> }) {
   const category = newsCategory((await searchParams).category)

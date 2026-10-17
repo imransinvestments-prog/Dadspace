@@ -1,3 +1,4 @@
+import { ActivitiesJsonLd } from "@/components/activities/activities-json-ld"
 import { ActivitiesExplorer } from "@/components/activities/activities-explorer"
 import { ACTIVITY_PAGE_SIZE, fetchActivityCategories, fetchActivityPage } from "@/lib/activities"
 import { pageMetadata } from "@/lib/seo"
@@ -9,7 +10,7 @@ export const metadata = pageMetadata(
   {image:"/images/event-outdoor.png"},
 )
 
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 export default async function ActivitiesPage() {
   const [initialPage, categories] = await Promise.all([
@@ -20,6 +21,7 @@ export default async function ActivitiesPage() {
 
   return (
     <div className="flex flex-col gap-3 md:gap-10">
+      <ActivitiesJsonLd activities={initialPage.activities} />
       <header className="rounded-2xl bg-navy p-3 text-navy-foreground md:p-10">
         <p className="hidden text-sm font-bold uppercase tracking-wide text-highlight md:block">Regular things to join</p>
         <h1 className="mt-2 font-heading text-2xl font-extrabold tracking-tight md:text-5xl">Activities, classes and clubs</h1>

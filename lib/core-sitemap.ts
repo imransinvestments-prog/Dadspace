@@ -36,6 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .from("collected_events")
       .select("id,title,last_verified_at")
       .eq("listing_type", "event")
+      .is("withdrawn_at", null)
       .order("last_verified_at", { ascending: false })
       .limit(1000),
     db
