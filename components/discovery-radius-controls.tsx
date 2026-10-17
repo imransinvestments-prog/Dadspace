@@ -7,19 +7,19 @@ export function DiscoveryRadiusControls({ radiusKm, scope, onRadius, onScope, in
   radiusKm: number; scope: DiscoveryScope; onRadius: (radius: number) => void; onScope: (scope: DiscoveryScope) => void; includeOnline?: boolean
 }) {
   const next = RADIUS_OPTIONS.find(value => value > radiusKm)
-  return <div className="flex flex-wrap items-center gap-3 rounded-xl border bg-card p-4">
-    <label className="flex min-w-0 max-w-full flex-col gap-2 sm:flex-row sm:items-center">Search radius
-      <select aria-label="Search radius" value={radiusKm} onChange={event => onRadius(Number(event.target.value))} className="min-w-0 max-w-full rounded-lg border bg-background p-2">
+  return <div className="grid grid-cols-2 items-center gap-3 rounded-xl border bg-card p-3 sm:flex sm:flex-wrap sm:p-4">
+    <label className="flex min-w-0 max-w-full flex-col gap-1 text-sm sm:flex-row sm:items-center sm:gap-2">Search radius
+      <select aria-label="Search radius" value={radiusKm} onChange={event => onRadius(Number(event.target.value))} className="min-h-11 min-w-0 max-w-full rounded-lg border bg-background p-2">
         {RADIUS_OPTIONS.map(value => <option key={value} value={value}>{value} km</option>)}
       </select>
     </label>
-    <label className="flex min-w-0 max-w-full flex-col gap-2 sm:flex-row sm:items-center">Listings
-      <select aria-label="Listing location scope" value={scope} onChange={event => onScope(event.target.value as DiscoveryScope)} className="min-w-0 max-w-full rounded-lg border bg-background p-2">
+    <label className="flex min-w-0 max-w-full flex-col gap-1 text-sm sm:flex-row sm:items-center sm:gap-2">Listings
+      <select aria-label="Listing location scope" value={scope} onChange={event => onScope(event.target.value as DiscoveryScope)} className="min-h-11 min-w-0 max-w-full rounded-lg border bg-background p-2">
         <option value="local">Within radius</option><option value="unknown">Distance unknown — separate listings</option>{includeOnline && <option value="online">Online — separate listings</option>}
       </select>
     </label>
-    {scope === 'local' && next && <button type="button" className="font-semibold underline" onClick={() => onRadius(next)}>Widen search to {next} km</button>}
-    <p className="w-full text-sm text-muted-foreground">{scope === 'local' ? `Only listings within ${radiusKm} km. Distances are straight-line, not travel distances.` : scope === 'online' ? 'Online listings are separate from local matches.' : 'These listings have no confirmed distance and are not local matches.'}</p>
+    {scope === 'local' && next && <button type="button" className="col-span-2 min-h-11 text-left text-sm font-semibold underline" onClick={() => onRadius(next)}>Widen search to {next} km</button>}
+    <p className="col-span-2 w-full text-sm text-muted-foreground">{scope === 'local' ? `Only listings within ${radiusKm} km. Distances are straight-line, not travel distances.` : scope === 'online' ? 'Online listings are separate from local matches.' : 'These listings have no confirmed distance and are not local matches.'}</p>
   </div>
 }
 

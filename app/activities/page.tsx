@@ -19,12 +19,12 @@ export default async function ActivitiesPage() {
   if (initialPage.loadFailed) return <section className="rounded-2xl border bg-card p-8"><h1 className="text-3xl font-bold">Activities are temporarily unavailable</h1><p role="status" className="mt-3 text-muted-foreground">We could not load the listings. Please try again shortly.</p><a href="/activities" className="mt-5 inline-block font-semibold underline">Try again</a></section>
 
   return (
-    <div className="flex flex-col gap-10">
-      <header className="rounded-2xl bg-navy p-6 text-navy-foreground md:p-10">
-        <p className="text-sm font-bold uppercase tracking-wide text-highlight">Regular things to join</p>
-        <h1 className="mt-3 font-heading text-4xl font-extrabold tracking-tight md:text-5xl">Activities, classes and clubs</h1>
-        <p className="mt-4 max-w-2xl leading-relaxed opacity-85">
-          Weekly and term-time activities for families: sport, swimming, toddler groups, arts, clubs and classes. Schedules come from the organiser&apos;s page and listings disappear if we stop seeing them for 60 days.
+    <div className="flex flex-col gap-3 md:gap-10">
+      <header className="rounded-2xl bg-navy p-3 text-navy-foreground md:p-10">
+        <p className="hidden text-sm font-bold uppercase tracking-wide text-highlight md:block">Regular things to join</p>
+        <h1 className="mt-2 font-heading text-2xl font-extrabold tracking-tight md:text-5xl">Activities, classes and clubs</h1>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed opacity-85 md:mt-4 md:text-base">
+          Weekly and term-time groups, classes and clubs. Check the organiser for current schedules.
         </p>
       </header>
 

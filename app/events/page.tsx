@@ -54,7 +54,6 @@ export default async function EventsPage() {
             src="/images/events/family-day.png"
             alt="A dad carrying his daughter on his shoulders at a busy family fun day"
             fill
-            priority
             sizes="40vw"
             className="object-cover"
           />

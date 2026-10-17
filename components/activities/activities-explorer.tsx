@@ -30,7 +30,7 @@ export function ActivitiesExplorer({ initialPage, categories }: { initialPage: A
   const {loading,error}=feed
   const loadMore=()=>feed.loadMore(activities.length)
   return (
-    <section className="flex flex-col gap-6">
+    <section className="flex flex-col gap-3 md:gap-6">
       {coords && <DiscoveryRadiusControls radiusKm={radiusKm} scope={scope} onRadius={setRadiusKm} onScope={setScope} />}
       <div className="grid gap-3 rounded-2xl border bg-card p-4 md:grid-cols-[1fr_220px]">
         <label className="relative">

@@ -41,12 +41,18 @@ test('public reads exclude hidden adult gaming, retain a family casino name and 
 test('location remains optional before selection and after denied geolocation',async()=>{
   let states=[],refs=[],i=0,j=0,geoError,geoCalls=0
   const jsx=(type,props)=>({type,props})
-  const react={createContext:()=>({Provider:'provider'}),useState:init=>{const n=i++;if(!(n in states))states[n]=init;return[states[n],v=>states[n]=v]},useRef:init=>refs[j++]??=( {current:init}),useCallback:f=>f,useEffect:()=>{},useContext:()=>{}}
+  const react={createContext:()=>({Provider:'provider'}),useState:init=>{const n=i++;if(!(n in states))states[n]=init;return[states[n],v=>states[n]=typeof v==='function'?v(states[n]):v]},useRef:init=>refs[j++]??=( {current:init}),useCallback:f=>f,useEffect:()=>{},useContext:()=>{}}
   const {module:m,sandbox}=load('components/location-provider.tsx',{react,'react/jsx-runtime':{jsx,jsxs:jsx},'@/lib/distance':{parsePoint:p=>({lat:Number(p.get('lat')),lng:Number(p.get('lng'))})}})
   Object.assign(sandbox,{window:{isSecureContext:true},navigator:{geolocation:{getCurrentPosition:(_s,e)=>{geoCalls++;geoError=e}}},sessionStorage:{setItem:()=>{}},fetch:async()=>({ok:true,json:async()=>({results:[{lat:51.47,lng:-.39,label:'Hounslow'}]})})})
   const render=()=>{i=j=0;return m.LocationProvider({children:'PUBLIC_CONTENT'})}
+  sandbox.requestAnimationFrame=fn=>fn()
   const nodes=n=>!n||typeof n!=='object'?[]:[n,...[n.props?.children].flat(Infinity).flatMap(nodes)]
   let tree=render();assert(tree.props.children.includes('PUBLIC_CONTENT'));assert.equal(geoCalls,0)
+  assert.equal(nodes(tree).find(n=>n.type==='form').props.hidden,true)
+  nodes(tree).find(n=>n.type==='button'&&n.props['aria-controls']==='location-search-form').props.onClick()
+  tree=render();assert.equal(nodes(tree).find(n=>n.type==='form').props.hidden,false)
+  await nodes(tree).find(n=>n.type==='form').props.onSubmit({preventDefault(){}})
+  tree=render();assert(nodes(tree).some(n=>n.props?.role==='alert'));assert.equal(nodes(tree).find(n=>n.type==='form').props.hidden,false)
   // Main now starts with the owner-approved London fallback (#58/#59).
   assert.equal(tree.props.value.browseAll,false);assert.equal(tree.props.value.label,'Central London')
   assert.equal(tree.props.value.coords.lat,51.5074);assert.equal(tree.props.value.coords.lng,-0.1278)
@@ -54,6 +60,9 @@ test('location remains optional before selection and after denied geolocation',a
   nodes(tree).find(n=>n.type==='input').props.onChange({target:{value:'Hounslow'}})
   tree=render();await nodes(tree).find(n=>n.type==='form').props.onSubmit({preventDefault(){}})
   tree=render();assert.equal(tree.props.value.label,'Hounslow');assert.equal(tree.props.value.browseAll,false);assert(tree.props.children.includes('PUBLIC_CONTENT'))
+  assert.equal(nodes(tree).find(n=>n.type==='form').props.hidden,true)
+  nodes(tree).find(n=>n.type==='button'&&n.props['aria-controls']==='location-search-form').props.onClick()
+  tree=render();assert.equal(nodes(tree).find(n=>n.type==='input').props.value,'Hounslow')
 })
 test('news homepage prefers actionable relevance, never pads with weak stories',()=>{
   const {module:m}=load('lib/home-selection.ts',{})

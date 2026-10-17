@@ -13,7 +13,7 @@ type Props = {searchParams: Promise<Record<string, string | string[] | undefined
 export async function generateMetadata({searchParams}: Props): Promise<Metadata> {
   const search = await searchParams, page = browsePage(search.page)
   if (!page) notFound()
-  return pageMetadata(`UK venues for family days out${page > 1 ? ` – page ${page}` : ""}`, `/venues${page > 1 ? `?page=${page}` : ""}`, "Browse published UK venues, museums, libraries, play spaces and more. Choose a location for nearby results.", {image:"/images/venues/playground.png",noIndex:Object.keys(search).some(k=>k!=="page")})
+  return pageMetadata(`UK places for family days out${page > 1 ? ` – page ${page}` : ""}`, `/venues${page > 1 ? `?page=${page}` : ""}`, "Browse published UK venues, museums, libraries, play spaces and more. Choose a location for nearby results.", {image:"/images/venues/playground.png",noIndex:Object.keys(search).some(k=>k!=="page")})
 }
 export default async function VenuesPage({searchParams}: Props) {
   const search = await searchParams
@@ -29,6 +29,6 @@ export default async function VenuesPage({searchParams}: Props) {
     <VenuesJsonLd venues={initial.venues} path={`/venues${page > 1 ? `?page=${page}` : ""}`}/>
     <VenuesDirectory key={`${page}:${nationalBrowse}`} venues={initial.venues} initialTotal={initial.total} initialHasMore={initial.hasMore} initialPage={page} initialBrowseNational={nationalBrowse} allCategories={categories??[]}/>
     <DiscoveryLinks/>
-    <nav aria-label="Browse all UK venue pages" className="flex justify-between">{page > 1 && <Link href={page > 2 ? `/venues?page=${page-1}` : "/venues?browse=uk"}>← Previous UK page</Link>}{initial.hasMore && <Link href={`/venues?page=${page+1}`}>Next UK page →</Link>}</nav>
+    <nav aria-label="Browse all UK place pages" className="flex justify-between">{page > 1 && <Link href={page > 2 ? `/venues?page=${page-1}` : "/venues?browse=uk"}>← Previous UK page</Link>}{initial.hasMore && <Link href={`/venues?page=${page+1}`}>Next UK page →</Link>}</nav>
   </>
 }
