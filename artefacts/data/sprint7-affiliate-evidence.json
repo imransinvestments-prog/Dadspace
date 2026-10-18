@@ -46,9 +46,18 @@
   ],
   "masterTag": {
     "url": "https://www.dwin2.com/pub.3111278.min.js",
-    "browserResult": "404 page",
+    "browserResult": "HTTP 200 text/javascript; live page bootstraps https://www.dwin2.com/init.js",
     "ownerConfirmedSameAccountSnippet": true,
-    "acceptedDelivery": false
+    "acceptedDelivery": true,
+    "checkedOn": "2026-10-18T08:35:49Z",
+    "publisherId": 3111278,
+    "site": "https://www.dad-space.co.uk",
+    "enabledPlugins": [
+      "Awin Tracking Optimisation (Bounceless Tracking)",
+      "Awin Convert-a-Link"
+    ],
+    "settingsChangedBy": "Owner",
+    "conversionAttributionTested": false
   },
   "note": "Programme subsets are not full account lists. Promotions are not qualifying offers; normal rules rejected all ten joined promotions in the observed collector run."
 }
