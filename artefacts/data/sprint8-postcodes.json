@@ -1,0 +1,1381 @@
+{
+  "captured_at": "2026-10-18T16:53:38.330Z",
+  "method": "Read-only public venues with the same complete published postcode; coordinate spread over ~200m is unresolved. No external geocoding performed.",
+  "query": "select regexp_replace(upper(postcode),'[^A-Z0-9]','','g') postcode, count(*) venue_count, min(latitude) min_latitude,max(latitude) max_latitude,min(longitude) min_longitude,max(longitude) max_longitude,avg(latitude) latitude,avg(longitude) longitude from venues where public_visible and latitude between -90 and 90 and longitude between -180 and 180 and regexp_replace(upper(postcode),'[^A-Z0-9]','','g') in ('BB45PG','M169QE','WD31NB','MK404LE','EC1V2NX','NW88LA','SE114BE','M201HP','SO226AJ','BB80EL','TW77AP','RG457LD','GU212HU','M219JG','N168DF','M250EG','M46EY','SW198SJ','WC1N3LA','M167GX','BR34LW','M67FR','M202ZD','PL23DG','SM51SQ','SO532LH','CV470LY','BL96AB','GU479BJ','M217SX','M156HP','EC1V8BB','N12TZ','SG52NU','SO152LU','M201JG','N195DH','B153SJ','PL71UH','BB54RY','M167WR','MK417SA','E1W3DH','MK451HP','M35DW','PL74BA','B168PF','SO531JG','MK420DL','SG51HF','SM52TG','BD232NB','AB116UD','WA158AP','M65PN','WD33QL','WR142YF','RG67JN','SE10BU','N12SN','NW61AU','W42JR','NW64BJ','LA45DL','CH24EB','RM126DS','SG49SU','TW25QA','S71GR','ME72XH','S626NU','NW54HH','GU341DT','B179NJ','N167SH','CW83NJ','N194RS','RG17QE','TS159BU','KT26PW','NW11BD','M90RA','SO531TP','NW33HA','M73NQ','EX28PF','B311RH','N1C4AG','SE12EZ','SM51JJ','BR28AT','MK417TB','PL99BD','B152UJ','BB114BU','SM60HY','SM11EA','SW46SP','E182PA','M88XB','E26HG','WC1X8PA','FY85EP','CV327QE','N42NP','SE115TN','M44DR','SO509LH','BB72JY','SE15JT','PR77LJ','HA52LX','TW135AF','M204ZA','SM38QH','SG89AW','B54TB','E153JT','WR142JY','WD48JS','SE50JB','GU13UX','E83RP','SO237QA','TW80BJ','WV14PJ','N51UP','SE167BW','EH88AZ','SE207JA','SE228NB','SE16EX','CB13UZ','M219JA','SE164EE','PR73DU','PR26EE','CB248RX','DN58BP','SE15LA','B153AA','NW65UH','MK451AE','M210UH','TW34LD','SE57SB','LA13HL','HA20AD','NW52AA','SE164QD','E50EG','CB29FN','ME11RF','TW34JG','E12NE','SG49SP','SE15UJ') group by 1 order by 1",
+  "results": {
+    "BB45PG": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "M169QE": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "WD31NB": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "MK404LE": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "EC1V2NX": {
+      "postcode": "EC1V2NX",
+      "venue_count": 1,
+      "min_latitude": 51.527304,
+      "max_latitude": 51.527304,
+      "min_longitude": -0.088894,
+      "max_longitude": -0.088894,
+      "latitude": 51.527304,
+      "longitude": -0.088894,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "NW88LA": {
+      "postcode": "NW88LA",
+      "venue_count": 1,
+      "min_latitude": 51.52755,
+      "max_latitude": 51.52755,
+      "min_longitude": -0.172617,
+      "max_longitude": -0.172617,
+      "latitude": 51.52755,
+      "longitude": -0.172617,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SE114BE": {
+      "postcode": "SE114BE",
+      "venue_count": 2,
+      "min_latitude": 51.482518,
+      "max_latitude": 51.483662,
+      "min_longitude": -0.1078143,
+      "max_longitude": -0.107633,
+      "latitude": 51.48309,
+      "longitude": -0.10772365,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "M201HP": {
+      "postcode": "M201HP",
+      "venue_count": 1,
+      "min_latitude": 53.432899,
+      "max_latitude": 53.432899,
+      "min_longitude": -2.245313,
+      "max_longitude": -2.245313,
+      "latitude": 53.432899,
+      "longitude": -2.245313,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SO226AJ": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "BB80EL": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "TW77AP": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "RG457LD": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "GU212HU": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "M219JG": {
+      "postcode": "M219JG",
+      "venue_count": 1,
+      "min_latitude": 53.441905,
+      "max_latitude": 53.441905,
+      "min_longitude": -2.282415,
+      "max_longitude": -2.282415,
+      "latitude": 53.441905,
+      "longitude": -2.282415,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "N168DF": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "M250EG": {
+      "postcode": "M250EG",
+      "venue_count": 1,
+      "min_latitude": 53.52369,
+      "max_latitude": 53.52369,
+      "min_longitude": -2.262835,
+      "max_longitude": -2.262835,
+      "latitude": 53.52369,
+      "longitude": -2.262835,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "M46EY": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SW198SJ": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "WC1N3LA": {
+      "postcode": "WC1N3LA",
+      "venue_count": 1,
+      "min_latitude": 51.521131,
+      "max_latitude": 51.521131,
+      "min_longitude": -0.11755,
+      "max_longitude": -0.11755,
+      "latitude": 51.521131,
+      "longitude": -0.11755,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "M167GX": {
+      "postcode": "M167GX",
+      "venue_count": 1,
+      "min_latitude": 53.457155,
+      "max_latitude": 53.457155,
+      "min_longitude": -2.268164,
+      "max_longitude": -2.268164,
+      "latitude": 53.457155,
+      "longitude": -2.268164,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "BR34LW": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "M67FR": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "M202ZD": {
+      "postcode": "M202ZD",
+      "venue_count": 1,
+      "min_latitude": 53.422746,
+      "max_latitude": 53.422746,
+      "min_longitude": -2.255864,
+      "max_longitude": -2.255864,
+      "latitude": 53.422746,
+      "longitude": -2.255864,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "PL23DG": {
+      "postcode": "PL23DG",
+      "venue_count": 1,
+      "min_latitude": 50.3849182,
+      "max_latitude": 50.3849182,
+      "min_longitude": -4.1518781,
+      "max_longitude": -4.1518781,
+      "latitude": 50.3849182,
+      "longitude": -4.1518781,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SM51SQ": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SO532LH": {
+      "postcode": "SO532LH",
+      "venue_count": 1,
+      "min_latitude": 50.9879629,
+      "max_latitude": 50.9879629,
+      "min_longitude": -1.3730136,
+      "max_longitude": -1.3730136,
+      "latitude": 50.9879629,
+      "longitude": -1.3730136,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "CV470LY": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "BL96AB": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "GU479BJ": {
+      "postcode": "GU479BJ",
+      "venue_count": 1,
+      "min_latitude": 51.3439465,
+      "max_latitude": 51.3439465,
+      "min_longitude": -0.7922514,
+      "max_longitude": -0.7922514,
+      "latitude": 51.3439465,
+      "longitude": -0.7922514,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "M217SX": {
+      "postcode": "M217SX",
+      "venue_count": 1,
+      "min_latitude": 53.437911,
+      "max_latitude": 53.437911,
+      "min_longitude": -2.255639,
+      "max_longitude": -2.255639,
+      "latitude": 53.437911,
+      "longitude": -2.255639,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "M156HP": {
+      "postcode": "M156HP",
+      "venue_count": 1,
+      "min_latitude": 53.464929,
+      "max_latitude": 53.464929,
+      "min_longitude": -2.239246,
+      "max_longitude": -2.239246,
+      "latitude": 53.464929,
+      "longitude": -2.239246,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "EC1V8BB": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "N12TZ": {
+      "postcode": "N12TZ",
+      "venue_count": 1,
+      "min_latitude": 51.539914,
+      "max_latitude": 51.539914,
+      "min_longitude": -0.102311,
+      "max_longitude": -0.102311,
+      "latitude": 51.539914,
+      "longitude": -0.102311,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SG52NU": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SO152LU": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "M201JG": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "N195DH": {
+      "postcode": "N195DH",
+      "venue_count": 1,
+      "min_latitude": 51.563391,
+      "max_latitude": 51.563391,
+      "min_longitude": -0.145062,
+      "max_longitude": -0.145062,
+      "latitude": 51.563391,
+      "longitude": -0.145062,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "B153SJ": {
+      "postcode": "B153SJ",
+      "venue_count": 1,
+      "min_latitude": 52.465379,
+      "max_latitude": 52.465379,
+      "min_longitude": -1.923234,
+      "max_longitude": -1.923234,
+      "latitude": 52.465379,
+      "longitude": -1.923234,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "PL71UH": {
+      "postcode": "PL71UH",
+      "venue_count": 1,
+      "min_latitude": 50.38091,
+      "max_latitude": 50.38091,
+      "min_longitude": -4.081217,
+      "max_longitude": -4.081217,
+      "latitude": 50.38091,
+      "longitude": -4.081217,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "BB54RY": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "M167WR": {
+      "postcode": "M167WR",
+      "venue_count": 1,
+      "min_latitude": 53.461724,
+      "max_latitude": 53.461724,
+      "min_longitude": -2.259034,
+      "max_longitude": -2.259034,
+      "latitude": 53.461724,
+      "longitude": -2.259034,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "MK417SA": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "E1W3DH": {
+      "postcode": "E1W3DH",
+      "venue_count": 1,
+      "min_latitude": 51.509519,
+      "max_latitude": 51.509519,
+      "min_longitude": -0.05302,
+      "max_longitude": -0.05302,
+      "latitude": 51.509519,
+      "longitude": -0.05302,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "MK451HP": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "M35DW": {
+      "postcode": "M35DW",
+      "venue_count": 1,
+      "min_latitude": 53.484806,
+      "max_latitude": 53.484806,
+      "min_longitude": -2.250327,
+      "max_longitude": -2.250327,
+      "latitude": 53.484806,
+      "longitude": -2.250327,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "PL74BA": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "B168PF": {
+      "postcode": "B168PF",
+      "venue_count": 1,
+      "min_latitude": 52.471719,
+      "max_latitude": 52.471719,
+      "min_longitude": -1.925888,
+      "max_longitude": -1.925888,
+      "latitude": 52.471719,
+      "longitude": -1.925888,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SO531JG": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "MK420DL": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SG51HF": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SM52TG": {
+      "postcode": "SM52TG",
+      "venue_count": 1,
+      "min_latitude": 51.367356,
+      "max_latitude": 51.367356,
+      "min_longitude": -0.156676,
+      "max_longitude": -0.156676,
+      "latitude": 51.367356,
+      "longitude": -0.156676,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "BD232NB": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "AB116UD": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "WA158AP": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "M65PN": {
+      "postcode": "M65PN",
+      "venue_count": 1,
+      "min_latitude": 53.486064,
+      "max_latitude": 53.486064,
+      "min_longitude": -2.294327,
+      "max_longitude": -2.294327,
+      "latitude": 53.486064,
+      "longitude": -2.294327,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "WD33QL": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "WR142YF": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "RG67JN": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SE10BU": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "N12SN": {
+      "postcode": "N12SN",
+      "venue_count": 1,
+      "min_latitude": 51.53987,
+      "max_latitude": 51.53987,
+      "min_longitude": -0.097409,
+      "max_longitude": -0.097409,
+      "latitude": 51.53987,
+      "longitude": -0.097409,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "NW61AU": {
+      "postcode": "NW61AU",
+      "venue_count": 1,
+      "min_latitude": 51.550314,
+      "max_latitude": 51.550314,
+      "min_longitude": -0.191634,
+      "max_longitude": -0.191634,
+      "latitude": 51.550314,
+      "longitude": -0.191634,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "W42JR": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "NW64BJ": {
+      "postcode": "NW64BJ",
+      "venue_count": 1,
+      "min_latitude": 51.540533,
+      "max_latitude": 51.540533,
+      "min_longitude": -0.185234,
+      "max_longitude": -0.185234,
+      "latitude": 51.540533,
+      "longitude": -0.185234,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "LA45DL": {
+      "postcode": "LA45DL",
+      "venue_count": 1,
+      "min_latitude": 54.0712461,
+      "max_latitude": 54.0712461,
+      "min_longitude": -2.8654433,
+      "max_longitude": -2.8654433,
+      "latitude": 54.0712461,
+      "longitude": -2.8654433,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "CH24EB": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "RM126DS": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SG49SU": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "TW25QA": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "S71GR": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "ME72XH": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "S626NU": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "NW54HH": {
+      "postcode": "NW54HH",
+      "venue_count": 1,
+      "min_latitude": 51.550485,
+      "max_latitude": 51.550485,
+      "min_longitude": -0.151198,
+      "max_longitude": -0.151198,
+      "latitude": 51.550485,
+      "longitude": -0.151198,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "GU341DT": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "B179NJ": {
+      "postcode": "B179NJ",
+      "venue_count": 1,
+      "min_latitude": 52.459665,
+      "max_latitude": 52.459665,
+      "min_longitude": -1.946144,
+      "max_longitude": -1.946144,
+      "latitude": 52.459665,
+      "longitude": -1.946144,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "N167SH": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "CW83NJ": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "N194RS": {
+      "postcode": "N194RS",
+      "venue_count": 1,
+      "min_latitude": 51.561134,
+      "max_latitude": 51.561134,
+      "min_longitude": -0.129604,
+      "max_longitude": -0.129604,
+      "latitude": 51.561134,
+      "longitude": -0.129604,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "RG17QE": {
+      "postcode": "RG17QE",
+      "venue_count": 1,
+      "min_latitude": 51.4549194,
+      "max_latitude": 51.4549194,
+      "min_longitude": -0.9773969,
+      "max_longitude": -0.9773969,
+      "latitude": 51.4549194,
+      "longitude": -0.9773969,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "TS159BU": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "KT26PW": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "NW11BD": {
+      "postcode": "NW11BD",
+      "venue_count": 1,
+      "min_latitude": 51.534248,
+      "max_latitude": 51.534248,
+      "min_longitude": -0.137769,
+      "max_longitude": -0.137769,
+      "latitude": 51.534248,
+      "longitude": -0.137769,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "M90RA": {
+      "postcode": "M90RA",
+      "venue_count": 3,
+      "min_latitude": 53.533686,
+      "max_latitude": 53.5343267,
+      "min_longitude": -2.222735,
+      "max_longitude": -2.2219666,
+      "latitude": 53.5339245666667,
+      "longitude": -2.22231886666667,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SO531TP": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "NW33HA": {
+      "postcode": "NW33HA",
+      "venue_count": 1,
+      "min_latitude": 51.542287,
+      "max_latitude": 51.542287,
+      "min_longitude": -0.173234,
+      "max_longitude": -0.173234,
+      "latitude": 51.542287,
+      "longitude": -0.173234,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "M73NQ": {
+      "postcode": "M73NQ",
+      "venue_count": 2,
+      "min_latitude": 53.508329,
+      "max_latitude": 53.5083295,
+      "min_longitude": -2.2863531,
+      "max_longitude": -2.286353,
+      "latitude": 53.50832925,
+      "longitude": -2.28635305,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "EX28PF": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "B311RH": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "N1C4AG": {
+      "postcode": "N1C4AG",
+      "venue_count": 1,
+      "min_latitude": 51.533481,
+      "max_latitude": 51.533481,
+      "min_longitude": -0.125043,
+      "max_longitude": -0.125043,
+      "latitude": 51.533481,
+      "longitude": -0.125043,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SE12EZ": {
+      "postcode": "SE12EZ",
+      "venue_count": 2,
+      "min_latitude": 51.500594,
+      "max_latitude": 51.5007666,
+      "min_longitude": -0.0767349,
+      "max_longitude": -0.076151,
+      "latitude": 51.5006803,
+      "longitude": -0.07644295,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SM51JJ": {
+      "postcode": "SM51JJ",
+      "venue_count": 1,
+      "min_latitude": 51.386731,
+      "max_latitude": 51.386731,
+      "min_longitude": -0.1759,
+      "max_longitude": -0.1759,
+      "latitude": 51.386731,
+      "longitude": -0.1759,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "BR28AT": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "MK417TB": {
+      "postcode": "MK417TB",
+      "venue_count": 1,
+      "min_latitude": 52.1466789,
+      "max_latitude": 52.1466789,
+      "min_longitude": -0.469337,
+      "max_longitude": -0.469337,
+      "latitude": 52.1466789,
+      "longitude": -0.469337,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "PL99BD": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "B152UJ": {
+      "postcode": "B152UJ",
+      "venue_count": 1,
+      "min_latitude": 52.463893,
+      "max_latitude": 52.463893,
+      "min_longitude": -1.918409,
+      "max_longitude": -1.918409,
+      "latitude": 52.463893,
+      "longitude": -1.918409,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "BB114BU": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SM60HY": {
+      "postcode": "SM60HY",
+      "venue_count": 1,
+      "min_latitude": 51.357264,
+      "max_latitude": 51.357264,
+      "min_longitude": -0.150861,
+      "max_longitude": -0.150861,
+      "latitude": 51.357264,
+      "longitude": -0.150861,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SM11EA": {
+      "postcode": "SM11EA",
+      "venue_count": 2,
+      "min_latitude": 51.36163,
+      "max_latitude": 51.36163,
+      "min_longitude": -0.194924,
+      "max_longitude": -0.194924,
+      "latitude": 51.36163,
+      "longitude": -0.194924,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SW46SP": {
+      "postcode": "SW46SP",
+      "venue_count": 1,
+      "min_latitude": 51.473477,
+      "max_latitude": 51.473477,
+      "min_longitude": -0.128152,
+      "max_longitude": -0.128152,
+      "latitude": 51.473477,
+      "longitude": -0.128152,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "E182PA": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "M88XB": {
+      "postcode": "M88XB",
+      "venue_count": 1,
+      "min_latitude": 53.504267,
+      "max_latitude": 53.504267,
+      "min_longitude": -2.232124,
+      "max_longitude": -2.232124,
+      "latitude": 53.504267,
+      "longitude": -2.232124,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "E26HG": {
+      "postcode": "E26HG",
+      "venue_count": 1,
+      "min_latitude": 51.526368,
+      "max_latitude": 51.526368,
+      "min_longitude": -0.061484,
+      "max_longitude": -0.061484,
+      "latitude": 51.526368,
+      "longitude": -0.061484,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "WC1X8PA": {
+      "postcode": "WC1X8PA",
+      "venue_count": 1,
+      "min_latitude": 51.52118,
+      "max_latitude": 51.52118,
+      "min_longitude": -0.115728,
+      "max_longitude": -0.115728,
+      "latitude": 51.52118,
+      "longitude": -0.115728,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "FY85EP": {
+      "postcode": "FY85EP",
+      "venue_count": 1,
+      "min_latitude": 53.7361695,
+      "max_latitude": 53.7361695,
+      "min_longitude": -2.9628362,
+      "max_longitude": -2.9628362,
+      "latitude": 53.7361695,
+      "longitude": -2.9628362,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "CV327QE": {
+      "postcode": "CV327QE",
+      "venue_count": 1,
+      "min_latitude": 52.3019195,
+      "max_latitude": 52.3019195,
+      "min_longitude": -1.5151287,
+      "max_longitude": -1.5151287,
+      "latitude": 52.3019195,
+      "longitude": -1.5151287,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "N42NP": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SE115TN": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "M44DR": {
+      "postcode": "M44DR",
+      "venue_count": 1,
+      "min_latitude": 53.488855,
+      "max_latitude": 53.488855,
+      "min_longitude": -2.239666,
+      "max_longitude": -2.239666,
+      "latitude": 53.488855,
+      "longitude": -2.239666,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SO509LH": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "BB72JY": {
+      "postcode": "BB72JY",
+      "venue_count": 1,
+      "min_latitude": 53.8703704,
+      "max_latitude": 53.8703704,
+      "min_longitude": -2.395716,
+      "max_longitude": -2.395716,
+      "latitude": 53.8703704,
+      "longitude": -2.395716,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SE15JT": {
+      "postcode": "SE15JT",
+      "venue_count": 1,
+      "min_latitude": 51.486124,
+      "max_latitude": 51.486124,
+      "min_longitude": -0.067355,
+      "max_longitude": -0.067355,
+      "latitude": 51.486124,
+      "longitude": -0.067355,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "PR77LJ": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "HA52LX": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "TW135AF": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "M204ZA": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SM38QH": {
+      "postcode": "SM38QH",
+      "venue_count": 1,
+      "min_latitude": 51.360528,
+      "max_latitude": 51.360528,
+      "min_longitude": -0.216901,
+      "max_longitude": -0.216901,
+      "latitude": 51.360528,
+      "longitude": -0.216901,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SG89AW": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "B54TB": {
+      "postcode": "B54TB",
+      "venue_count": 1,
+      "min_latitude": 52.474297,
+      "max_latitude": 52.474297,
+      "min_longitude": -1.898618,
+      "max_longitude": -1.898618,
+      "latitude": 52.474297,
+      "longitude": -1.898618,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "E153JT": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "WR142JY": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "WD48JS": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SE50JB": {
+      "postcode": "SE50JB",
+      "venue_count": 1,
+      "min_latitude": 51.484368,
+      "max_latitude": 51.484368,
+      "min_longitude": -0.07708,
+      "max_longitude": -0.07708,
+      "latitude": 51.484368,
+      "longitude": -0.07708,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "GU13UX": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "E83RP": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SO237QA": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "TW80BJ": {
+      "postcode": "TW80BJ",
+      "venue_count": 1,
+      "min_latitude": 51.4889245,
+      "max_latitude": 51.4889245,
+      "min_longitude": -0.2969784,
+      "max_longitude": -0.2969784,
+      "latitude": 51.4889245,
+      "longitude": -0.2969784,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "WV14PJ": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "N51UP": {
+      "postcode": "N51UP",
+      "venue_count": 1,
+      "min_latitude": 51.551494,
+      "max_latitude": 51.551494,
+      "min_longitude": -0.10216,
+      "max_longitude": -0.10216,
+      "latitude": 51.551494,
+      "longitude": -0.10216,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SE167BW": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "EH88AZ": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SE207JA": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SE228NB": {
+      "postcode": "SE228NB",
+      "venue_count": 1,
+      "min_latitude": 51.448805,
+      "max_latitude": 51.448805,
+      "min_longitude": -0.074584,
+      "max_longitude": -0.074584,
+      "latitude": 51.448805,
+      "longitude": -0.074584,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SE16EX": {
+      "postcode": "SE16EX",
+      "venue_count": 1,
+      "min_latitude": 51.496981,
+      "max_latitude": 51.496981,
+      "min_longitude": -0.106112,
+      "max_longitude": -0.106112,
+      "latitude": 51.496981,
+      "longitude": -0.106112,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "CB13UZ": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "M219JA": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SE164EE": {
+      "postcode": "SE164EE",
+      "venue_count": 1,
+      "min_latitude": 51.496107,
+      "max_latitude": 51.496107,
+      "min_longitude": -0.062553,
+      "max_longitude": -0.062553,
+      "latitude": 51.496107,
+      "longitude": -0.062553,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "PR73DU": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "PR26EE": {
+      "postcode": "PR26EE",
+      "venue_count": 1,
+      "min_latitude": 53.7777826,
+      "max_latitude": 53.7777826,
+      "min_longitude": -2.6587648,
+      "max_longitude": -2.6587648,
+      "latitude": 53.7777826,
+      "longitude": -2.6587648,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "CB248RX": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "DN58BP": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SE15LA": {
+      "postcode": "SE15LA",
+      "venue_count": 1,
+      "min_latitude": 51.489227,
+      "max_latitude": 51.489227,
+      "min_longitude": -0.064674,
+      "max_longitude": -0.064674,
+      "latitude": 51.489227,
+      "longitude": -0.064674,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "B153AA": {
+      "postcode": "B153AA",
+      "venue_count": 1,
+      "min_latitude": 52.470863,
+      "max_latitude": 52.470863,
+      "min_longitude": -1.922032,
+      "max_longitude": -1.922032,
+      "latitude": 52.470863,
+      "longitude": -1.922032,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "NW65UH": {
+      "postcode": "NW65UH",
+      "venue_count": 1,
+      "min_latitude": 51.536387,
+      "max_latitude": 51.536387,
+      "min_longitude": -0.191148,
+      "max_longitude": -0.191148,
+      "latitude": 51.536387,
+      "longitude": -0.191148,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "MK451AE": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "M210UH": {
+      "postcode": "M210UH",
+      "venue_count": 1,
+      "min_latitude": 53.442879,
+      "max_latitude": 53.442879,
+      "min_longitude": -2.269489,
+      "max_longitude": -2.269489,
+      "latitude": 53.442879,
+      "longitude": -2.269489,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "TW34LD": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SE57SB": {
+      "postcode": "SE57SB",
+      "venue_count": 1,
+      "min_latitude": 51.476049,
+      "max_latitude": 51.476049,
+      "min_longitude": -0.083089,
+      "max_longitude": -0.083089,
+      "latitude": 51.476049,
+      "longitude": -0.083089,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "LA13HL": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "HA20AD": {
+      "postcode": "HA20AD",
+      "venue_count": 1,
+      "min_latitude": 51.573597,
+      "max_latitude": 51.573597,
+      "min_longitude": -0.352848,
+      "max_longitude": -0.352848,
+      "latitude": 51.573597,
+      "longitude": -0.352848,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "NW52AA": {
+      "postcode": "NW52AA",
+      "venue_count": 1,
+      "min_latitude": 51.550103,
+      "max_latitude": 51.550103,
+      "min_longitude": -0.140557,
+      "max_longitude": -0.140557,
+      "latitude": 51.550103,
+      "longitude": -0.140557,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SE164QD": {
+      "postcode": "SE164QD",
+      "venue_count": 1,
+      "min_latitude": 51.499738,
+      "max_latitude": 51.499738,
+      "min_longitude": -0.058624,
+      "max_longitude": -0.058624,
+      "latitude": 51.499738,
+      "longitude": -0.058624,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "E50EG": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "CB29FN": {
+      "postcode": "CB29FN",
+      "venue_count": 1,
+      "min_latitude": 52.1735065,
+      "max_latitude": 52.1735065,
+      "min_longitude": 0.1226657,
+      "max_longitude": 0.1226657,
+      "latitude": 52.1735065,
+      "longitude": 0.1226657,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "ME11RF": {
+      "postcode": "ME11RF",
+      "venue_count": 1,
+      "min_latitude": 51.387106,
+      "max_latitude": 51.387106,
+      "min_longitude": 0.50515,
+      "max_longitude": 0.50515,
+      "latitude": 51.387106,
+      "longitude": 0.50515,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "TW34JG": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "E12NE": {
+      "postcode": "E12NE",
+      "venue_count": 1,
+      "min_latitude": 51.51443,
+      "max_latitude": 51.51443,
+      "min_longitude": -0.059008,
+      "max_longitude": -0.059008,
+      "latitude": 51.51443,
+      "longitude": -0.059008,
+      "method": "existing_public_venues_same_full_postcode",
+      "state": "found"
+    },
+    "SG49SP": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    },
+    "SE15UJ": {
+      "state": "unresolved",
+      "latitude": null,
+      "longitude": null,
+      "method": "no_existing_public_venue_coordinates"
+    }
+  }
+}
