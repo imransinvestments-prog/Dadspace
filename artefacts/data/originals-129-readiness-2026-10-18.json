@@ -1,0 +1,153 @@
+{
+  "capturedAt": "2026-10-18 09:21:27 UTC",
+  "scope": "Read-only closure readiness; no paid generation, workflow dispatch or data writes",
+  "stableRelease": {
+    "sha": "31b8c1fe7a99af4a5b47cd96ed022acec6ebeae0",
+    "committedAt": "2026-10-17T20:33:40Z"
+  },
+  "workflow": {
+    "path": ".github/workflows/original-content.yml",
+    "cron": "17 7,9 * * *",
+    "timezone": "Europe/London",
+    "enabledObserved": true,
+    "syntaxVerifiedAgainst": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule"
+  },
+  "posts": [
+    {
+      "slug": "weekly-2026-10-09",
+      "hidden": false,
+      "cadence": "weekly",
+      "slot_date": "2026-10-09",
+      "published_at": "2026-10-10T10:14:41.28844+00:00"
+    },
+    {
+      "slug": "daily-2026-10-10",
+      "hidden": false,
+      "cadence": "daily",
+      "slot_date": "2026-10-10",
+      "published_at": "2026-10-10T10:16:57.503224+00:00"
+    },
+    {
+      "slug": "daily-2026-10-12",
+      "hidden": false,
+      "cadence": "daily",
+      "slot_date": "2026-10-12",
+      "published_at": "2026-10-12T06:46:58.053276+00:00"
+    },
+    {
+      "slug": "daily-2026-10-13",
+      "hidden": false,
+      "cadence": "daily",
+      "slot_date": "2026-10-13",
+      "published_at": "2026-10-13T18:36:58.893894+00:00"
+    },
+    {
+      "slug": "daily-2026-10-14",
+      "hidden": false,
+      "cadence": "daily",
+      "slot_date": "2026-10-14",
+      "published_at": "2026-10-14T06:49:56.944955+00:00"
+    },
+    {
+      "slug": "daily-2026-10-15",
+      "hidden": false,
+      "cadence": "daily",
+      "slot_date": "2026-10-15",
+      "published_at": "2026-10-15T16:11:59.657135+00:00"
+    },
+    {
+      "slug": "daily-2026-10-16",
+      "hidden": false,
+      "cadence": "daily",
+      "slot_date": "2026-10-16",
+      "published_at": "2026-10-16T11:19:10.254345+00:00"
+    },
+    {
+      "slug": "weekly-2026-10-16",
+      "hidden": false,
+      "cadence": "weekly",
+      "slot_date": "2026-10-16",
+      "published_at": "2026-10-16T11:19:44.804247+00:00"
+    },
+    {
+      "slug": "daily-2026-10-17",
+      "hidden": false,
+      "cadence": "daily",
+      "slot_date": "2026-10-17",
+      "published_at": "2026-10-17T10:39:30.078429+00:00"
+    }
+  ],
+  "attemptCount": 0,
+  "duplicateSlots": 0,
+  "scheduledRuns": [
+    {
+      "id": 39067197795,
+      "createdAt": "2026-10-17T20:33:09Z",
+      "conclusion": "success",
+      "sha": "51c6815eb9dc99dbf1b6a774680a77a924fe6e96"
+    },
+    {
+      "id": 39025653264,
+      "createdAt": "2026-10-17T10:38:14Z",
+      "conclusion": "success",
+      "sha": "6af3546d552211dce8b4ed7e56fb0ff808084a01"
+    },
+    {
+      "id": 38966732234,
+      "createdAt": "2026-10-16T21:03:57Z",
+      "conclusion": "success",
+      "sha": "7121305052a85c11ddb4e81200ac463dcce5b7e1"
+    },
+    {
+      "id": 38892860271,
+      "createdAt": "2026-10-16T11:18:06Z",
+      "conclusion": "success",
+      "sha": "40ba498381c95d14c289473bcc0794c6d307d0e9"
+    },
+    {
+      "id": 38809070945,
+      "createdAt": "2026-10-15T21:20:08Z",
+      "conclusion": "success",
+      "sha": "d43bfeca5445ffbe2790eb802ef34bd0cd6c6640"
+    },
+    {
+      "id": 38726962607,
+      "createdAt": "2026-10-15T11:23:15Z",
+      "conclusion": "failure",
+      "sha": "36ce44c14591e38c6f2de6084b2fa7769392088f"
+    },
+    {
+      "id": 38618093284,
+      "createdAt": "2026-10-14T18:47:07Z",
+      "conclusion": "success",
+      "sha": "36b6d666fe7e65eebe9b48a2adde00d10591d854"
+    },
+    {
+      "id": 38524416785,
+      "createdAt": "2026-10-14T06:48:46Z",
+      "conclusion": "success",
+      "sha": "bfd3b3c61a066dccd1ee2b8a3cebb7d1b068a3c7"
+    }
+  ],
+  "expectedToday": [
+    {
+      "london": "2026-10-18T07:17:00+01:00",
+      "utc": "2026-10-18T06:17:00Z",
+      "state": "Not observed; more than 60 minutes overdue at capture"
+    },
+    {
+      "london": "2026-10-18T09:17:00+01:00",
+      "utc": "2026-10-18T08:17:00Z",
+      "state": "Not observed; more than 60 minutes overdue at capture"
+    }
+  ],
+  "nextFriday": "2026-10-23",
+  "acceptance": {
+    "rejectionRevisionAndTwoDraftStop": "13 offline Originals tests pass; fixtures only",
+    "noAuthBillingRetry": "Covered by offline safeguards; no paid diagnostic invoked",
+    "uncertainInsertRecovery": "New regression: one committed article, lost response, next run duplicate skip with zero further model calls",
+    "newScheduleDailyFridayRetry": "Not yet established",
+    "retainedOperationsRuntime": "No rows observed; pending real normal-run evidence",
+    "sharedWindow": "Not declared passed"
+  }
+}
