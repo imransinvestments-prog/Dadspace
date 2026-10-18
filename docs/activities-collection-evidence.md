@@ -57,5 +57,9 @@ Remaining: clean branch/hosted checks, concrete release review, representative
 production artifact/source/public readback and acceptance of coverage semantics.
 MyLibrary now supplies bounded item coverage including fetched/included/withheld
 links and completion/failure state; other adapters retain unknown coverage.
+The existing hosted MyLibrary read-only validation also writes one exclusive
+ledger per source/pass. Its preview source IDs are explicitly diagnostic, not
+production source-registration or scheduled-run acceptance. No database or model
+write is enabled by these ledgers.
 Ticket #180 remains open with zero accepted points. Sustained scheduled evidence
 belongs to #125 in planned Sprint 9 #197; it is not manufactured by local fixtures.

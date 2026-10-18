@@ -10,6 +10,7 @@ sys.path.insert(0,str(ROOT))
 os.environ['DRY_RUN']='true'
 import events_worker
 import worker
+from collection_evidence import CollectionEvidence
 
 SOURCES=[
     ('Ealing libraries','https://libraries.ealing.gov.uk/events'),
@@ -41,7 +42,11 @@ def main():
                     source_adapter='library_portal' if 'libraries.' in url else 'mylibrary_calendar',
                     collection_days=7 if name=='Merton libraries' else 30)
         for attempt in (1,2):
+            ledger=CollectionEvidence([source],dry_run=True,
+                path=path.parent/(name.lower().replace(' ','-')+'-'+str(attempt)+'.jsonl'))
             status,rows,digest,message,stats=events_worker.process_source(source,None,worker.today_uk())
+            ledger.source(source,status,stats,rows,write_state='dry_run',health_state='dry_run')
+            ledger.finish(stopped_early=False,fatal=False)
             results.append(dict(name=name,url=url,attempt=attempt,status=status,rows=rows,
                                 page_hash=digest,message=message,stats=stats))
             print(name,attempt,status,len(rows),message,flush=True)

@@ -14,7 +14,7 @@ were excluded. Review: [sprint-8-review.md](sprint-8-review.md).
   real SQL renewal checks demonstrate unseen rows are not renewed on accepted or
   failed snapshots. Existing public 60-day filter unchanged. No source activated.
 - #182: frozen 495-row production snapshot and exact query; 20 evidenced candidate
-  opportunities / 3 categories / 2 providers, with 379 unknown-location and 281
+  rows / 3 categories / 2 providers, with 380 unknown-location and 281
   unknown-age rows retained (overlapping sets). Fixed review cohort: seven IDs.
 
 Local verification: Python 261 run, 13 skipped (248 passed); Node full suite 178
