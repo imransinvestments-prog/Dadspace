@@ -29,6 +29,8 @@ class NCTRefreshTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'budget'): n.collect_branch('one')
         with patch.object(n,'page_events',return_value=n.EventPage([('1',row)],True)),patch.object(n.time,'sleep'):
             with self.assertRaisesRegex(ValueError,'Repeated'): n.collect_branch('one')
+        with patch.object(n,'page_events',return_value=n.EventPage([],True)):
+            with self.assertRaisesRegex(ValueError,'Empty'): n.collect_branch('one')
 
     def test_explicit_year_is_required_and_never_rolled_forward(self):
         import worker

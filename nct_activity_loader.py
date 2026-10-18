@@ -2,6 +2,7 @@
 from __future__ import annotations
 import datetime as dt, hashlib, json, os, re, time
 from urllib.parse import urlparse, urljoin
+from zoneinfo import ZoneInfo
 import requests
 from bs4 import BeautifulSoup
 from supabase import create_client
@@ -15,7 +16,7 @@ MAX_BRANCHES=int(os.getenv('LIMIT','0') or 0)
 PAGE_LIMIT=10
 REVIEWED_BRANCHES=[BASE+'/local-activities-meet-ups/twickenham-hounslow-and-district']
 SOURCE_ID='562f3099-3b66-4719-9782-57e818d15491'
-TODAY=dt.date.today()
+TODAY=dt.datetime.now(ZoneInfo('Europe/London')).date()
 GENERIC={'baby-first-aid','feeding-support','nct-baby-bundles','nct-nearly-new-sales','nct-newborn-talks','nct-walk-and-talk','parent-and-baby-groups'}
 H={'User-Agent':UA,'Accept-Language':'en-GB,en;q=0.9'}
 
@@ -117,7 +118,9 @@ def collect_branch(branch_url):
         events=page_events(next_url,0)
         fresh=[(eid,row) for eid,row in events if eid not in seen]
         if events and not fresh: raise ValueError('Repeated NCT pagination; completeness unknown')
-        if not events: return rows
+        if not events:
+            if events.has_next: raise ValueError('Empty NCT page still advertises more results')
+            return rows
         dates=[dt.date.fromisoformat(row['start_date']) for eid,row in fresh]
         if dates!=sorted(dates) or (dates and previous and dates[0]<previous):
             raise ValueError('NCT occurrence order is unqualified')
