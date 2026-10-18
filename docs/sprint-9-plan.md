@@ -1,5 +1,5 @@
 ## Sprint 9 — scheduled observation and acceptance
-**Status: Planned, not started.** Provisionally scheduled by owner agreement on 18 October 2026 before Sprint 8 delivery begins. No fixed finish date or earned points.
+**Status: Started, 18 October 2026.** Approved delivery scope/readiness is recorded in `docs/sprint-9-readiness.md` and tracker #197. First slice: #198 provider qualification and isolated compatibility rehearsal, in `docs/sprint-9-identity-design.md`. No fixed finish date, earned delivery points or qualifying observation window yet. The observation criteria below remain unchanged.
 
 Goal: accept sustained behaviour from released stable configurations, reusing one shared evidence ledger.
 - [ ] #125 (3 existing points): complete seven days, every expected feed/source slot, at least three successful scheduled Activities collections, source yields/freshness/public readback and misses/recovery.

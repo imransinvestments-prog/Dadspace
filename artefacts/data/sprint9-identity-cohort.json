@@ -1,0 +1,9 @@
+{
+  "checked_on": "2026-10-18",
+  "query": "scripts/audit-provider-identity.sql",
+  "candidate_rows": [],
+  "eligible_production_adoptions": [],
+  "result": "No existing listing IDs selected for the Ealing session proposal. Do not invent a historical repair cohort.",
+  "production_writes": 0,
+  "production_schema_changes": 0
+}

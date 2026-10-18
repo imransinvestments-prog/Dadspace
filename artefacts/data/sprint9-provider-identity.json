@@ -1,0 +1,157 @@
+{
+  "source_url": "https://libraries.ealing.gov.uk/events",
+  "selected_series": [
+    {
+      "namespace": "ealing.events.mylibrary.digital",
+      "session_id": "264038",
+      "programme_id": null,
+      "occurrences": [
+        {
+          "event_id": 264082,
+          "series_id": 264038,
+          "name": "Bounce and Rhyme and Storytime",
+          "location_id": 60,
+          "location_name": "Northolt library",
+          "start_time": 1792404000,
+          "end_time": 1792405800,
+          "url": "https://ealing.events.mylibrary.digital/event?id=264082",
+          "recurring_dates_tagline": "Every Monday"
+        },
+        {
+          "event_id": 264083,
+          "series_id": 264038,
+          "name": "Bounce and Rhyme and Storytime",
+          "location_id": 60,
+          "location_name": "Northolt library",
+          "start_time": 1793012400,
+          "end_time": 1793014200,
+          "url": "https://ealing.events.mylibrary.digital/event?id=264083",
+          "recurring_dates_tagline": "Every Monday"
+        },
+        {
+          "event_id": 264084,
+          "series_id": 264038,
+          "name": "Bounce and Rhyme and Storytime",
+          "location_id": 60,
+          "location_name": "Northolt library",
+          "start_time": 1793617200,
+          "end_time": 1793619000,
+          "url": "https://ealing.events.mylibrary.digital/event?id=264084",
+          "recurring_dates_tagline": "Every Monday"
+        },
+        {
+          "event_id": 264085,
+          "series_id": 264038,
+          "name": "Bounce and Rhyme and Storytime",
+          "location_id": 60,
+          "location_name": "Northolt library",
+          "start_time": 1794222000,
+          "end_time": 1794223800,
+          "url": "https://ealing.events.mylibrary.digital/event?id=264085",
+          "recurring_dates_tagline": "Every Monday"
+        },
+        {
+          "event_id": 264086,
+          "series_id": 264038,
+          "name": "Bounce and Rhyme and Storytime",
+          "location_id": 60,
+          "location_name": "Northolt library",
+          "start_time": 1794826800,
+          "end_time": 1794828600,
+          "url": "https://ealing.events.mylibrary.digital/event?id=264086",
+          "recurring_dates_tagline": "Every Monday"
+        },
+        {
+          "event_id": 264087,
+          "series_id": 264038,
+          "name": "Bounce and Rhyme and Storytime",
+          "location_id": 60,
+          "location_name": "Northolt library",
+          "start_time": 1795431600,
+          "end_time": 1795433400,
+          "url": "https://ealing.events.mylibrary.digital/event?id=264087",
+          "recurring_dates_tagline": "Every Monday"
+        }
+      ]
+    },
+    {
+      "namespace": "ealing.events.mylibrary.digital",
+      "session_id": "319285",
+      "programme_id": null,
+      "occurrences": [
+        {
+          "event_id": 319318,
+          "series_id": 319285,
+          "name": "Bounce and Rhyme and Storytime",
+          "location_id": 63,
+          "location_name": "Southall library",
+          "start_time": 1792400400,
+          "end_time": 1792404000,
+          "url": "https://ealing.events.mylibrary.digital/event?id=319318",
+          "recurring_dates_tagline": "Every Monday"
+        },
+        {
+          "event_id": 319319,
+          "series_id": 319285,
+          "name": "Bounce and Rhyme and Storytime",
+          "location_id": 63,
+          "location_name": "Southall library",
+          "start_time": 1793613600,
+          "end_time": 1793617200,
+          "url": "https://ealing.events.mylibrary.digital/event?id=319319",
+          "recurring_dates_tagline": "Every Monday"
+        },
+        {
+          "event_id": 319320,
+          "series_id": 319285,
+          "name": "Bounce and Rhyme and Storytime",
+          "location_id": 63,
+          "location_name": "Southall library",
+          "start_time": 1794218400,
+          "end_time": 1794222000,
+          "url": "https://ealing.events.mylibrary.digital/event?id=319320",
+          "recurring_dates_tagline": "Every Monday"
+        },
+        {
+          "event_id": 319321,
+          "series_id": 319285,
+          "name": "Bounce and Rhyme and Storytime",
+          "location_id": 63,
+          "location_name": "Southall library",
+          "start_time": 1794823200,
+          "end_time": 1794826800,
+          "url": "https://ealing.events.mylibrary.digital/event?id=319321",
+          "recurring_dates_tagline": "Every Monday"
+        },
+        {
+          "event_id": 319322,
+          "series_id": 319285,
+          "name": "Bounce and Rhyme and Storytime",
+          "location_id": 63,
+          "location_name": "Southall library",
+          "start_time": 1795428000,
+          "end_time": 1795431600,
+          "url": "https://ealing.events.mylibrary.digital/event?id=319322",
+          "recurring_dates_tagline": "Every Monday"
+        }
+      ]
+    }
+  ],
+  "scope": "Two observed public series; not full index completeness or long-term stability",
+  "policy": "Host-scoped numeric series identifies a session container; event_id identifies an occurrence. Cross-series programme identity remains unknown.",
+  "production_adoption": false,
+  "model_calls": 0,
+  "database_writes": 0,
+  "captured_at": [
+    "2026-10-18T18:19:09.615151+00:00",
+    "2026-10-18T18:19:11.116058+00:00"
+  ],
+  "page_hashes": [
+    "df2ab60288bf63101fdb1ffd268d58492859772a9d9f64e4e1f1c55b3275c83a",
+    "5cbbf4c0a361742bdcbf1b1132cc414aedbade5edc008471fd6c99c2cc95bf42"
+  ],
+  "index_record_counts": [
+    200,
+    200
+  ]
+}
