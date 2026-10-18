@@ -301,7 +301,7 @@ def _activity_row(item: dict, source: dict, page_url: str, method: str, stats: d
         stats['invalid_activity_dates'] = stats.get('invalid_activity_dates', 0) + 1
         return None
     published_dates = sorted({base.parse_date(value).isoformat() for value in published_dates})
-    if published_dates and method in ('mylibrary_calendar', 'library_portal'):
+    if published_dates and method in ('mylibrary_calendar', 'library_portal','library_portal_sessions_v1'):
         # These adapters' start/end describe the root session, not the series.
         start = base.parse_date(published_dates[0])
         end = base.parse_date(published_dates[-1])
@@ -329,8 +329,14 @@ def _activity_row(item: dict, source: dict, page_url: str, method: str, stats: d
     venue_id = _resolve_venue(item, page_url)
     now_iso = dt.datetime.now(dt.timezone.utc).isoformat()
     key = _activity_dedupe_key(title, venue_name or location)
+    from provider_session_identity import row_identity
+    identity=row_identity(item,source,method)
+    provider_fields={}
+    if identity:
+        key,provider_fields=identity
 
     return {
+        **provider_fields,
         "source_id": source["id"],
         "title": title,
         "description": base.clean_str(item.get("description"), 1000),
@@ -474,12 +480,12 @@ def process_source(source, extract, today):
             return ('ok' if rows else 'ok_zero'),rows,new_hash,f'ClassForKids: {len(rows)} classes; zero model calls',stats
         except Exception as exc:
             return base.classify_fetch_error(str(exc)),[],None,str(exc),stats
-    if source.get('source_adapter')=='library_portal':
+    if source.get('source_adapter') in ('library_portal','library_portal_sessions_v1'):
         from library_portal import collect_portal, fetch_portal
         stats={}
         try:
             raw,new_hash,stats=collect_portal(source,today,fetch_portal,base.robots_allows,stats)
-            rows=clean_events(raw,source,source['url'],'library_portal',today,stats)
+            rows=clean_events(raw,source,source['url'],source['source_adapter'],today,stats)
             stats['extracted']=len(raw)
             return ('ok' if rows else 'ok_zero'),rows,new_hash,f'Public library portal: {len(rows)} kept; zero model calls',stats
         except Exception as exc:

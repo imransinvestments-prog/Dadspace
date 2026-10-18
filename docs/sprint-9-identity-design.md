@@ -1,6 +1,6 @@
 # Sprint 9 #198 — provider identity evidence and compatibility proposal
 
-Status: investigation and isolated design rehearsal complete; policy/integration review pending. No production rollout, source activation, schema migration or historical repair. #198 remains open; no points earned from this partial slice. #40 remains the next implementation dependency.
+Current engineering follow-through: owner accepted the proposals on 18 October. The real opt-in collector/cleaner/database path, durable provenance audit, legacy review-fingerprint compatibility and empty-release inverse are implemented in PR #201. Local integration tests pass; real multi-connection PostgreSQL and current hosted-source checks are required before release. See `docs/sprint-9-engineering-gates.md`. No production migration, provider enrolment or historical repair has occurred. The earlier proposal/rehearsal notes below are historical evidence, not the current implementation status.
 
 ## Provider evidence
 
