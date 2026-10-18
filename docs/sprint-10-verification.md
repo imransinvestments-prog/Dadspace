@@ -15,6 +15,8 @@ Development branch `dev/geographic-coverage`; production untouched. Scope and ac
 | Lint | No lint script/configured linter in repository; no lint pass claimed. |
 | Review | ECC Blueprint plan and implementation review performed; normalisation and stale national-evidence findings fixed and re-tested. |
 
+First hosted head a91b138 passed Geography (including actual PostgreSQL 17), Operations, Guarded review, SEO and Vercel preview. The broad Deals job exposed an existing Matalan fixture clock mismatch at the real offer cutoff (#209). A test-only correction freezes both fixture clocks consistently and additionally asserts expiry at the exact cutoff; production offer dates and expiry rules are unchanged. Final-head hosted evidence is recorded on #202/#208 rather than treating the earlier red check as a pass.
+
 Remaining owner checks: actual sign-in/session/location switching, denied-location/manual fallback, source/age/schedule/content quality, mobile/keyboard review and explicit decisions in `docs/sprint-10-geography-review.md`. News/Originals content review is manual. National-scale postcode import/performance and authority-wide sampling remain #207; NI commercial data basis remains unresolved. #206's scheduled observation starts only after an approved release and belongs to the subsequent sprint.
 
 ## ECC self-evaluation

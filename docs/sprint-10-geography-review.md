@@ -67,3 +67,5 @@ Execution plan and ECC adversarial-review refinements: `plans/sprint-10-geograph
 #206 is identified before release and belongs to the **next sprint after approved release**: record exact reference/pack/release boundaries, compare after at least two normal scheduled collection cycles, retain failures and unknowns, and validate a reference refresh in isolation. #207 is uncommitted national expansion. Their points are not included in Sprint 10 and manual API snapshots cannot satisfy their scheduled criteria.
 
 Sprint 9 Activities identity/canonical/NCT work and #134 Ealing/Merton access remain separate. No previous observation window is restarted by this dev work. No production postcodes, visitor locations, listings, sources, providers or paid-service settings were changed. Owner acceptance and any release remain pending.
+
+Verification also exposed #209, an existing Matalan test that used two different clocks and failed when the real review cutoff passed. Its fixture now fixes both clocks and verifies expiry at the exact cutoff. This is a test-only readiness repair, with no production date extension or extra sprint points.
