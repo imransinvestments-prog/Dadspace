@@ -1,3 +1,15 @@
+## MasterTag carryover resolved — 18 October 2026, 09:35 BST
+
+The owner signed in to AWIN and personally enabled **Awin Tracking Optimisation** and **Awin Convert-a-Link**. adMission, TRENDii and wecantrack remain off. Engineering did not change any plugin setting. The account confirmed publisher **3111278** and the exact installed script URL.
+
+After that change, https://www.dwin2.com/pub.3111278.min.js changed from HTTP 404 / HTML to **HTTP 200 / text/javascript**, with publisher 3111278 and Dadspace's site in the delivered script. A fresh production browser page contains the primary BODY tag and the dynamically added https://www.dwin2.com/init.js bootstrap; no errors were captured. Thus successful MasterTag delivery is established, not merely placement. No checkout, test sale or commission-attribution result is claimed.
+
+**#131/S3's remaining 5 points are accepted and #131 can close. Cumulative Sprint 7 acceptance is now 21/21, with zero delivery carryover.** Preserve the historical closure event of 16 accepted / 5 carried forward: these additional 5 were accepted after closure, not retroactively on the earlier chart date. #190 adds no separate points. #132/#125 real scheduled-observation gates remain open outside the 21-point commitment.
+
+The prior 404 and pending-action notes below are historical, superseded by this successful delivery readback. Convert-a-Link was the owner's choice; its documented automatic-link/application behaviour is separate from a verified sale. No additional plugins, merchant applications or paid service were activated by Engineering.
+
+---
+
 ## Final accepted release — 18 October 2026
 
 The owner inspected all items and confirmed acceptance of the consolidated offer/source/release pack. PR #188 merged as afb57cdd90c7b0fa148ccfeae8ab398299ea4090 and production deployment passed. Matalan source #43 was registered inactive (audit 689379a7-a06a-42e8-970a-03db64cf7ec5), then activated via the signed production workspace (audit cb382f17-76ad-4d2a-b1f5-014e48d233a6).
