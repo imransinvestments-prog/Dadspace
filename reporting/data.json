@@ -1,16 +1,216 @@
 {
-  "generated_at": "2026-10-17T08:52:38.603Z",
+  "generated_at": "2026-10-18T08:08:58.983Z",
   "timezone": "Europe/London",
   "repository": "imransinvestments-prog/Dadspace",
-  "scope": "All 170 repository issues/PRs across two pages. Counts include programme/epic/feature hierarchy, not unique deliverables. Board-only draft cards/status fields unavailable.",
+  "scope": "All 190 repository issues/PRs across two pages. Counts include hierarchy, not unique deliverables. Board-only draft cards/status fields unavailable.",
   "counts": {
-    "open_issues": 59,
-    "open_prs": 4,
-    "completed_issues": 15,
-    "merged_prs": 82,
+    "open_issues": 46,
+    "open_prs": 3,
+    "completed_issues": 39,
+    "merged_prs": 92,
     "closed_without_completion": 10
   },
   "items": [
+    {
+      "number": 190,
+      "title": "Qualify and integrate Matalan school-uniform deals for #131",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/190",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Deals",
+      "updated_at": "2026-10-17T22:47:47Z"
+    },
+    {
+      "number": 189,
+      "title": "Support the approved Natural Baby Shower car-seat source",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/189",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T21:23:20Z"
+    },
+    {
+      "number": 188,
+      "title": "Sprint 7: Deals evidence workspace and bounded uniform qualification",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/188",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T22:54:50Z"
+    },
+    {
+      "number": 187,
+      "title": "Sprint 7 — Useful Deals and safe maintenance (21 points; scheduled evidence tracked separately)",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/187",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Deals",
+      "updated_at": "2026-10-17T22:49:38Z"
+    },
+    {
+      "number": 186,
+      "title": "Sprint 6: guarded News maintenance and Originals reliability",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/186",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T20:33:41Z"
+    },
+    {
+      "number": 185,
+      "title": "Sprint 6 — News reliability: released, reviewed and closed with carryover",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/185",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T20:36:04Z"
+    },
+    {
+      "number": 184,
+      "title": "Sprint 5: finish News location decisions and verify applied corrections",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/184",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T15:43:28Z"
+    },
+    {
+      "number": 183,
+      "title": "Activities reliability: programme identity and session regression evidence",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/183",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-17T15:31:19Z"
+    },
+    {
+      "number": 182,
+      "title": "Activities reliability: reproducible pilot eligibility and location evidence",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/182",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-17T15:31:17Z"
+    },
+    {
+      "number": 181,
+      "title": "Activities reliability: bounded programme renewal and disappearance handling",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/181",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-17T15:31:17Z"
+    },
+    {
+      "number": 180,
+      "title": "Activities reliability: per-source run evidence and public readback",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/180",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-17T15:31:16Z"
+    },
+    {
+      "number": 179,
+      "title": "Sprint 5: fixed evidence packs, freshness warnings and consolidated review",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/179",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T15:23:59Z"
+    },
+    {
+      "number": 178,
+      "title": "Sprint 5 — Evidence, thresholds and current content (24 points)",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/178",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T15:50:15Z"
+    },
+    {
+      "number": 177,
+      "title": "Propose delivery roadmap and bounded Activities refinement after Sprint 4",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/177",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T11:17:38Z"
+    },
+    {
+      "number": 176,
+      "title": "Activities reliability: bounded discovery and delivery decomposition",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/176",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T15:33:52Z"
+    },
+    {
+      "number": 175,
+      "title": "Complete Sprint 4 discovery safeguards and structured data",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/175",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T10:55:32Z"
+    },
+    {
+      "number": 174,
+      "title": "[Sprint 4] Trustworthy discovery and safe maintenance — 20 points",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/174",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T11:00:10Z"
+    },
+    {
+      "number": 173,
+      "title": "Align Sprint 3 migration history and record verified release",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/173",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T09:22:49Z"
+    },
+    {
+      "number": 172,
+      "title": "Prepare nursery classification and evidenced library nation corrections",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/172",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T09:20:05Z"
+    },
+    {
+      "number": 171,
+      "title": "[Sprint 3] Places data accuracy — nursery classification and library nations",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/171",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-17T09:23:20Z"
+    },
     {
       "number": 170,
       "title": "Improve mobile discovery navigation, location controls and client/image reuse",
@@ -25,11 +225,11 @@
       "number": 169,
       "title": "[Sprint] Small discovery improvements — 17 October 2026",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/169",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Navigation and interface",
-      "updated_at": "2026-10-17T01:32:52Z"
+      "updated_at": "2026-10-17T08:53:21Z"
     },
     {
       "number": 168,
@@ -95,11 +295,11 @@
       "number": 162,
       "title": "[Data correction] Review Little Garden Nursery's playground classification",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/162",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Places and local discovery",
-      "updated_at": "2026-10-16T17:03:51Z"
+      "updated_at": "2026-10-17T09:23:18Z"
     },
     {
       "number": 161,
@@ -239,7 +439,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Deals",
-      "updated_at": "2026-10-16T16:08:03Z"
+      "updated_at": "2026-10-17T22:49:40Z"
     },
     {
       "number": 147,
@@ -249,7 +449,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "News and Originals",
-      "updated_at": "2026-10-16T16:08:05Z"
+      "updated_at": "2026-10-17T20:41:50Z"
     },
     {
       "number": 146,
@@ -259,7 +459,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Operations and feed reliability",
-      "updated_at": "2026-10-16T16:08:07Z"
+      "updated_at": "2026-10-17T20:43:31Z"
     },
     {
       "number": 145,
@@ -315,11 +515,11 @@
       "number": 140,
       "title": "[Feature] Verify discovery image variants at DPR 1, 2 and 3",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/140",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "SEO and performance",
-      "updated_at": "2026-10-17T01:32:50Z"
+      "updated_at": "2026-10-17T08:53:19Z"
     },
     {
       "number": 139,
@@ -335,21 +535,21 @@
       "number": 138,
       "title": "[Feature] Validate venue, activity and event structured data",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/138",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "SEO and performance",
-      "updated_at": "2026-10-16T16:08:27Z"
+      "updated_at": "2026-10-17T11:00:06Z"
     },
     {
       "number": 137,
       "title": "[Feature] Verify public visibility revocation, caches and failure paths",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/137",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "SEO and performance",
-      "updated_at": "2026-10-16T16:08:29Z"
+      "updated_at": "2026-10-17T11:00:05Z"
     },
     {
       "number": 136,
@@ -359,7 +559,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Activities and source coverage",
-      "updated_at": "2026-10-16T16:08:31Z"
+      "updated_at": "2026-10-17T15:33:55Z"
     },
     {
       "number": 135,
@@ -399,7 +599,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Deals",
-      "updated_at": "2026-10-16T16:08:38Z"
+      "updated_at": "2026-10-17T20:49:23Z"
     },
     {
       "number": 131,
@@ -409,17 +609,17 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Deals",
-      "updated_at": "2026-10-16T16:08:40Z"
+      "updated_at": "2026-10-17T22:49:39Z"
     },
     {
       "number": 130,
       "title": "[Feature] Accept published-deal usefulness, ranking and truthful terms",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/130",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Deals",
-      "updated_at": "2026-10-17T00:18:21Z"
+      "updated_at": "2026-10-17T15:33:50Z"
     },
     {
       "number": 129,
@@ -429,7 +629,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "News and Originals",
-      "updated_at": "2026-10-16T16:08:49Z"
+      "updated_at": "2026-10-17T20:36:03Z"
     },
     {
       "number": 128,
@@ -445,21 +645,21 @@
       "number": 127,
       "title": "[Feature] Verify news filters, dates, pagination and repeat ingestion",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/127",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "News and Originals",
-      "updated_at": "2026-10-16T16:08:51Z"
+      "updated_at": "2026-10-17T15:46:06Z"
     },
     {
       "number": 126,
       "title": "[Feature] Accept news relevance, attribution and destination quality",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/126",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "News and Originals",
-      "updated_at": "2026-10-16T16:08:52Z"
+      "updated_at": "2026-10-17T15:46:08Z"
     },
     {
       "number": 125,
@@ -475,31 +675,31 @@
       "number": 124,
       "title": "[Feature] Diagnose delayed scheduled starts and verify freshness alerts",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/124",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Operations and feed reliability",
-      "updated_at": "2026-10-16T16:08:56Z"
+      "updated_at": "2026-10-17T15:33:47Z"
     },
     {
       "number": 123,
       "title": "[Feature] Agree remaining pilot quality and coverage thresholds",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/123",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Programme and pilot readiness",
-      "updated_at": "2026-10-16T16:08:58Z"
+      "updated_at": "2026-10-17T15:33:45Z"
     },
     {
       "number": 122,
       "title": "[Feature] Prepare a reproducible pilot quality review pack",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/122",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Programme and pilot readiness",
-      "updated_at": "2026-10-16T16:09:00Z"
+      "updated_at": "2026-10-17T15:33:44Z"
     },
     {
       "number": 121,
@@ -529,17 +729,17 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "SEO and performance",
-      "updated_at": "2026-10-16T16:09:05Z"
+      "updated_at": "2026-10-17T11:00:07Z"
     },
     {
       "number": 118,
       "title": "[Feature] Accessible mobile discovery journeys",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/118",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Navigation and interface",
-      "updated_at": "2026-10-16T22:46:56Z"
+      "updated_at": "2026-10-17T08:53:23Z"
     },
     {
       "number": 117,
@@ -569,7 +769,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "News and Originals",
-      "updated_at": "2026-10-16T16:09:20Z"
+      "updated_at": "2026-10-17T15:46:09Z"
     },
     {
       "number": 114,
@@ -579,7 +779,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Activities and source coverage",
-      "updated_at": "2026-10-16T16:09:21Z"
+      "updated_at": "2026-10-17T15:33:56Z"
     },
     {
       "number": 113,
@@ -589,7 +789,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Places and local discovery",
-      "updated_at": "2026-10-16T16:09:23Z"
+      "updated_at": "2026-10-17T11:00:09Z"
     },
     {
       "number": 112,
@@ -715,11 +915,11 @@
       "number": 100,
       "title": "[P2] Normalize country attribution for public library records",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/100",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Places and local discovery",
-      "updated_at": "2026-10-16T16:09:32Z"
+      "updated_at": "2026-10-17T09:23:16Z"
     },
     {
       "number": 99,
@@ -735,11 +935,11 @@
       "number": 98,
       "title": "[P3] Reuse the browser Supabase auth client to eliminate duplicate-client warnings",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/98",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Navigation and interface",
-      "updated_at": "2026-10-17T01:32:49Z"
+      "updated_at": "2026-10-17T08:53:17Z"
     },
     {
       "number": 97,
@@ -755,31 +955,31 @@
       "number": 96,
       "title": "[P2] Reduce mobile preamble before the first useful discovery choice",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/96",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Navigation and interface",
-      "updated_at": "2026-10-17T00:38:41Z"
+      "updated_at": "2026-10-17T08:53:15Z"
     },
     {
       "number": 95,
       "title": "[P2] Clarify Venues and Originals navigation labels for new visitors",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/95",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Navigation and interface",
-      "updated_at": "2026-10-17T00:38:39Z"
+      "updated_at": "2026-10-17T08:53:13Z"
     },
     {
       "number": 94,
       "title": "[P2] Restore a discoverable Events destination in mobile navigation",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/94",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Navigation and interface",
-      "updated_at": "2026-10-17T00:38:38Z"
+      "updated_at": "2026-10-17T08:53:12Z"
     },
     {
       "number": 93,
@@ -825,11 +1025,11 @@
       "number": 89,
       "title": "[P1] Resolve duplicate place identities shown as separate family options",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/89",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Places and local discovery",
-      "updated_at": "2026-10-16T16:09:54Z"
+      "updated_at": "2026-10-17T11:00:03Z"
     },
     {
       "number": 88,
@@ -883,13 +1083,13 @@
     },
     {
       "number": 83,
-      "title": "Add guarded venue and listing review decisions with audited rollback",
+      "title": "Add guarded venue decisions, evidenced corrections and audited rollback",
       "url": "https://github.com/imransinvestments-prog/Dadspace/pull/83",
-      "state": "open",
+      "state": "closed",
       "kind": "PR",
-      "completion": "open",
+      "completion": "merged",
       "feature": "Operations and feed reliability",
-      "updated_at": "2026-10-14T20:51:46Z"
+      "updated_at": "2026-10-17T10:26:11Z"
     },
     {
       "number": 82,
@@ -1019,7 +1219,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Operations and feed reliability",
-      "updated_at": "2026-10-16T16:09:58Z"
+      "updated_at": "2026-10-17T15:33:48Z"
     },
     {
       "number": 69,
@@ -1239,7 +1439,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Deals",
-      "updated_at": "2026-10-16T16:10:02Z"
+      "updated_at": "2026-10-17T15:33:51Z"
     },
     {
       "number": 47,
@@ -1279,7 +1479,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Programme and pilot readiness",
-      "updated_at": "2026-10-16T16:10:09Z"
+      "updated_at": "2026-10-17T15:33:54Z"
     },
     {
       "number": 43,
@@ -1309,7 +1509,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Community",
-      "updated_at": "2026-10-16T16:10:14Z"
+      "updated_at": "2026-10-17T08:53:18Z"
     },
     {
       "number": 40,
@@ -1379,17 +1579,17 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Places and local discovery",
-      "updated_at": "2026-10-16T17:06:31Z"
+      "updated_at": "2026-10-17T09:22:39Z"
     },
     {
       "number": 33,
       "title": "[Feature] Guarded venue review decisions and canonical merges",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/33",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Operations and feed reliability",
-      "updated_at": "2026-10-16T16:10:21Z"
+      "updated_at": "2026-10-17T11:00:08Z"
     },
     {
       "number": 32,
@@ -1429,7 +1629,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Programme and pilot readiness",
-      "updated_at": "2026-10-17T00:38:46Z"
+      "updated_at": "2026-10-17T15:49:21Z"
     },
     {
       "number": 28,
@@ -1714,37 +1914,37 @@
   ],
   "usage": {
     "civic": {
-      "attempts": 8,
-      "prompt": 55370,
-      "output": 60190,
-      "thinking": 37402,
-      "total": 115560,
-      "cache_hits": 30,
-      "extracted": 74,
-      "kept": 73,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "attempts": 10,
+      "prompt": 67144,
+      "output": 53790,
+      "thinking": 38801,
+      "total": 120934,
+      "cache_hits": 29,
+      "extracted": 62,
+      "kept": 58,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     "activities": {
-      "attempts": 6,
-      "prompt": 44013,
-      "output": 73700,
-      "thinking": 32160,
-      "total": 117713,
-      "cache_hits": 1,
-      "extracted": 143,
-      "kept": 57,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+      "attempts": 2,
+      "prompt": 13622,
+      "output": 14880,
+      "thinking": 8368,
+      "total": 28502,
+      "cache_hits": 5,
+      "extracted": 20,
+      "kept": 5,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
     },
     "news": {
       "attempts": 2,
-      "prompt": 6996,
-      "output": 4319,
-      "thinking": 2545,
-      "total": 11315,
-      "kept": 11,
-      "scored": 25,
+      "prompt": 6245,
+      "output": 1147,
+      "thinking": 505,
+      "total": 7392,
+      "kept": 3,
+      "scored": 5,
       "source_failures": 0,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197320293"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498096193"
     },
     "deals": {
       "attempts": 0,
@@ -1756,7 +1956,8 @@
       "eligible_offers": 17,
       "groups": 7,
       "providers": 9,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197320100"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095903",
+      "scope": "17 October evening, predates approved Natural Baby Shower activation/readback; not current all-source inventory."
     }
   },
   "source_run_evidence": [
@@ -1764,10 +1965,10 @@
       "source": "Kids Days Out - Buckinghamshire",
       "worker": "civic",
       "status": "OK_ZERO",
-      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=277728, content_chars=17236, jsonld_events=0, eventish_rows=11, title=50 best things to do in Buckinghamshire with children - Kids Days Out; gemini: attempts=1, prompt_tokens=6938, output_tokens=2457, total_tokens=9395 (13.5s)",
+      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=277730, content_chars=17238, jsonld_events=0, eventish_rows=11, title=50 best things to do in Buckinghamshire with children - Kids Days Out; gemini: attempts=1, prompt_tokens=6938, output_tokens=1764, total_tokens=8702 (10.8s)",
       "extracted": 0,
       "kept": 0,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "The Bucks Guide - Events",
@@ -1776,16 +1977,16 @@
       "detail": "UNCHANGED - Page unchanged since last run (0.5s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "BuckinghamshireLive - Family & Kids",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.9s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.8s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Buckinghamshire Council",
@@ -1794,16 +1995,16 @@
       "detail": "UNCHANGED - Page unchanged since last run (1.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Cambridgeshire County Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.9s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.7s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Essex County Council",
@@ -1812,16 +2013,16 @@
       "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Oxfordshire County Council",
       "worker": "civic",
       "status": "OK",
-      "detail": "OK - 27 extracted, 27 kept; gemini: attempts=1, prompt_tokens=9468, output_tokens=16039, total_tokens=25507 (64.7s)",
-      "extracted": 27,
-      "kept": 27,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "detail": "OK - 30 extracted, 30 kept; gemini: attempts=1, prompt_tokens=9447, output_tokens=14860, total_tokens=24307 (57.1s)",
+      "extracted": 30,
+      "kept": 30,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Manchester City Council",
@@ -1830,97 +2031,97 @@
       "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.7s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Norfolk County Council",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://norfolk.gov.uk/libraryonline (0.3s)",
+      "detail": "FAILED_403 - http_403: https://norfolk.gov.uk/libraryonline (0.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Haringey Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.8s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.6s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Redbridge Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.7s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.6s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Lewisham Council",
       "worker": "civic",
-      "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
-      "extracted": null,
-      "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "status": "OK_ZERO",
+      "detail": "OK_ZERO - 1 extracted, 0 kept; diagnostics: html_chars=170692, content_chars=4779, jsonld_events=0, eventish_rows=3, title=Lewisham Council - What's on; rejected: event_finished=1; gemini: attempts=1, prompt_tokens=2891, output_tokens=3482, total_tokens=6373 (17.7s)",
+      "extracted": 1,
+      "kept": 0,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Ealing Council",
       "worker": "civic",
-      "status": "FAILED_FETCH",
-      "detail": "FAILED_FETCH - http_5xx: https://www.ealing.gov.uk/events (51.3s)",
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.5s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Coventry City Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.9s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Sheffield City Council",
       "worker": "civic",
-      "status": "OK_ZERO",
-      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=210351, content_chars=23262, jsonld_events=0, eventish_rows=4, title=What's on in Sheffield; gemini: attempts=1, prompt_tokens=8542, output_tokens=458, total_tokens=9000 (4.2s)",
-      "extracted": 0,
-      "kept": 0,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.8s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Newcastle City Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.4s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.5s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Salford City Council",
       "worker": "civic",
-      "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (2.0s)",
-      "extracted": null,
-      "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "status": "OK",
+      "detail": "OK - 4 extracted, 3 kept; rejected: missing_activity_schedule=1; gemini: attempts=1, prompt_tokens=5006, output_tokens=3474, total_tokens=8480 (17.0s)",
+      "extracted": 4,
+      "kept": 3,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Dartmoor National Park",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.dartmoor.gov.uk/enjoy-dartmoor/events (0.6s)",
+      "detail": "FAILED_403 - http_403: https://www.dartmoor.gov.uk/enjoy-dartmoor/events (0.5s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Exmoor National Park",
@@ -1929,52 +2130,52 @@
       "detail": "FAILED_403 - http_403: https://www.exmoor-nationalpark.gov.uk/enjoying/events (0.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "North York Moors National Park",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.northyorkmoors.org.uk/visiting/whats-on (0.3s)",
+      "detail": "FAILED_403 - http_403: https://www.northyorkmoors.org.uk/visiting/whats-on (0.4s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Peak District National Park",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.peakdistrict.gov.uk/visiting/whats-on (0.5s)",
+      "detail": "FAILED_403 - http_403: https://www.peakdistrict.gov.uk/visiting/whats-on (0.4s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "South Downs National Park",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (2.7s)",
+      "detail": "UNCHANGED - Page unchanged since last run (2.4s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "The Broads Authority",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (3.0s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.6s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Northumberland National Park",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.8s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.9s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Sherwood Forest (RSPB)",
@@ -1983,97 +2184,97 @@
       "detail": "FAILED_403 - http_403: https://www.visitsherwood.co.uk/events/ (1.4s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Yorkshire Dales National Park",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.yorkshiredales.org.uk/whats-on/ (0.9s)",
+      "detail": "FAILED_403 - http_403: https://www.yorkshiredales.org.uk/whats-on/ (1.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Camden Council",
       "worker": "civic",
-      "status": "OK",
-      "detail": "OK - 16 extracted, 16 kept; gemini: attempts=1, prompt_tokens=3552, output_tokens=13947, total_tokens=17499 (54.7s)",
-      "extracted": 16,
-      "kept": 16,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Southwark Council",
       "worker": "civic",
       "status": "OK",
-      "detail": "OK - 6 extracted, 6 kept; gemini: attempts=1, prompt_tokens=2706, output_tokens=5522, total_tokens=8228 (22.0s)",
-      "extracted": 6,
-      "kept": 6,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "detail": "OK - 2 extracted, 2 kept; gemini: attempts=1, prompt_tokens=2767, output_tokens=3553, total_tokens=6320 (17.1s)",
+      "extracted": 2,
+      "kept": 2,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Cadw",
       "worker": "civic",
-      "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.3s)",
-      "extracted": null,
-      "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "status": "OK_ZERO",
+      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=53670, content_chars=2309, jsonld_events=0, eventish_rows=1, title=What's On | Cadw; gemini: attempts=1, prompt_tokens=2109, output_tokens=196, total_tokens=2305 (3.7s)",
+      "extracted": 0,
+      "kept": 0,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Loch Lomond & The Trossachs National Park",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.6s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.5s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Historic Environment Scotland",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.3s)",
+      "detail": "UNCHANGED - Page unchanged since last run (2.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Discover Northern Ireland",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.6s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.8s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "English Heritage",
       "worker": "civic",
-      "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.7s)",
-      "extracted": null,
-      "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "status": "OK",
+      "detail": "OK - 3 extracted, 2 kept; rejected: no_date=1; gemini: attempts=1, prompt_tokens=13608, output_tokens=5446, total_tokens=19054 (23.8s)",
+      "extracted": 3,
+      "kept": 2,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "The Wildlife Trusts",
       "worker": "civic",
       "status": "SKIPPED_ROBOTS",
-      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.2s)",
+      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.4s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "French Brothers (Windsor steamboat)",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.9s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.1s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Kempton Steam Museum",
@@ -2082,7 +2283,7 @@
       "detail": "UNCHANGED - Page unchanged since last run (0.9s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "London Transport Museum Depot (Acton)",
@@ -2091,16 +2292,16 @@
       "detail": "FAILED_403 - http_403: https://www.ltmuseum.co.uk/whats-on (0.1s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Lancashire County Council",
       "worker": "civic",
       "status": "SKIPPED_ROBOTS",
-      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.5s)",
+      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.9s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "East Sussex County Council",
@@ -2109,79 +2310,79 @@
       "detail": "FAILED_403 - http_403: https://www.escis.org.uk/explore/?type=event&sort=order-by-date (0.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Hampshire County Council",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.hants.gov.uk/thingstodo/events (0.2s)",
+      "detail": "FAILED_403 - http_403: https://www.hants.gov.uk/thingstodo/events (0.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Kent County Council",
       "worker": "civic",
       "status": "OK",
-      "detail": "OK - 16 extracted, 16 kept; gemini: attempts=1, prompt_tokens=7224, output_tokens=11784, total_tokens=19008 (48.8s)",
-      "extracted": 16,
-      "kept": 16,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "detail": "OK - 13 extracted, 13 kept; gemini: attempts=1, prompt_tokens=7160, output_tokens=13169, total_tokens=20329 (52.1s)",
+      "extracted": 13,
+      "kept": 13,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "How Are You Peterborough?",
       "worker": "civic",
       "status": "OK",
-      "detail": "OK - 9 extracted, 7 kept; rejected: event_finished=1, season_date_conflict=1; gemini: attempts=1, prompt_tokens=13269, output_tokens=7952, total_tokens=21221 (42.7s)",
+      "detail": "OK - 9 extracted, 8 kept; rejected: event_finished=1; gemini: attempts=1, prompt_tokens=13547, output_tokens=6387, total_tokens=19934 (42.8s)",
       "extracted": 9,
-      "kept": 7,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "kept": 8,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "How Are You Fenland?",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (3.4s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.6s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "How Are You Hunts?",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (2.4s)",
+      "detail": "UNCHANGED - Page unchanged since last run (3.1s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "How Are You East Cambs?",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (2.2s)",
+      "detail": "UNCHANGED - Page unchanged since last run (2.7s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "How Are You South Cambs?",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (4.9s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "How Are You Cambridge?",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (4.0s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.8s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Pembrokeshire Coast National Park",
@@ -2190,34 +2391,34 @@
       "detail": "UNCHANGED - Page unchanged since last run (5.9s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Tower Hamlets Council",
       "worker": "civic",
       "status": "FAILED_NO_CONTENT",
-      "detail": "FAILED_NO_CONTENT - Page had almost no readable content (it may need the browser workflow) (2.4s)",
+      "detail": "FAILED_NO_CONTENT - Page had almost no readable content (it may need the browser workflow) (2.7s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Liverpool City Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.7s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.8s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Lake District National Park",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (2.0s)",
+      "detail": "UNCHANGED - Page unchanged since last run (2.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Eryri (Snowdonia) National Park",
@@ -2226,16 +2427,16 @@
       "detail": "UNCHANGED - Page unchanged since last run (4.4s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Bannau Brycheiniog (Brecon Beacons)",
       "worker": "civic",
       "status": "OK_ZERO",
-      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=436610, content_chars=6669, jsonld_events=0, eventish_rows=10, title=Events - Bannau Brycheiniog; gemini: attempts=1, prompt_tokens=3671, output_tokens=2031, total_tokens=5702 (14.5s)",
+      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=436610, content_chars=6669, jsonld_events=0, eventish_rows=10, title=Events - Bannau Brycheiniog; gemini: attempts=1, prompt_tokens=3671, output_tokens=1459, total_tokens=5130 (11.9s)",
       "extracted": 0,
       "kept": 0,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Cairngorms National Park",
@@ -2244,79 +2445,79 @@
       "detail": "FAILED_404 - http_404: https://cairngorms.co.uk/discover-explore/events (1.5s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Woodland Trust",
       "worker": "civic",
       "status": "FAILED_404",
-      "detail": "FAILED_404 - http_404: https://www.woodlandtrust.org.uk/visiting-woods/events/ (1.2s)",
+      "detail": "FAILED_404 - http_404: https://www.woodlandtrust.org.uk/visiting-woods/events/ (1.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "ClassForKids (London)",
       "worker": "activities",
-      "status": "OK",
-      "detail": "OK - 32 extracted, 7 kept; rejected: missing_activity_schedule=23; merged duplicates=2; gemini: attempts=1, prompt_tokens=7590, output_tokens=17312, total_tokens=24902 (97.4s)",
-      "extracted": 32,
-      "kept": 7,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (10.5s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
     },
     {
       "source": "ClassForKids (Manchester)",
       "worker": "activities",
-      "status": "OK",
-      "detail": "OK - 38 extracted, 14 kept; rejected: missing_activity_schedule=24; gemini: attempts=1, prompt_tokens=8026, output_tokens=16645, total_tokens=24671 (79.3s)",
-      "extracted": 38,
-      "kept": 14,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (6.5s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
     },
     {
       "source": "ClassForKids (Birmingham)",
       "worker": "activities",
-      "status": "OK",
-      "detail": "OK - 48 extracted, 24 kept; rejected: missing_activity_schedule=24; gemini: attempts=1, prompt_tokens=8511, output_tokens=16836, total_tokens=25347 (74.6s)",
-      "extracted": 48,
-      "kept": 24,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (6.0s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
     },
     {
       "source": "Hoop (London)",
       "worker": "activities",
       "status": "OK",
-      "detail": "OK - 9 extracted, 3 kept; rejected: missing_activity_url=6; gemini: attempts=1, prompt_tokens=7682, output_tokens=7894, total_tokens=15576 (35.5s)",
+      "detail": "OK - 9 extracted, 3 kept; rejected: missing_activity_url=6; gemini: attempts=1, prompt_tokens=6267, output_tokens=6764, total_tokens=13031 (30.0s)",
       "extracted": 9,
       "kept": 3,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
     },
     {
       "source": "Hoop (Greater Manchester)",
       "worker": "activities",
       "status": "OK",
-      "detail": "OK - 12 extracted, 7 kept; rejected: missing_activity_url=4, teen_or_adult_only=1; gemini: attempts=1, prompt_tokens=7329, output_tokens=9790, total_tokens=17119 (39.7s)",
-      "extracted": 12,
-      "kept": 7,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+      "detail": "OK - 11 extracted, 2 kept; rejected: missing_activity_url=9; gemini: attempts=1, prompt_tokens=7355, output_tokens=8116, total_tokens=15471 (34.9s)",
+      "extracted": 11,
+      "kept": 2,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
     },
     {
       "source": "Ni 4 Kids",
       "worker": "activities",
-      "status": "OK",
-      "detail": "OK - 4 extracted, 2 kept; rejected: event_finished=2; gemini: attempts=1, prompt_tokens=4875, output_tokens=5223, total_tokens=10098 (29.8s)",
-      "extracted": 4,
-      "kept": 2,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (4.2s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
     },
     {
       "source": "Hertfordshire County Council",
       "worker": "activities",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (4.7s)",
+      "detail": "UNCHANGED - Page unchanged since last run (5.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
     }
   ],
   "source_matrix": [
@@ -4651,10 +4852,10 @@
       "source": "Kids Days Out - Buckinghamshire",
       "worker": "civic",
       "status": "OK_ZERO",
-      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=277728, content_chars=17236, jsonld_events=0, eventish_rows=11, title=50 best things to do in Buckinghamshire with children - Kids Days Out; gemini: attempts=1, prompt_tokens=6938, output_tokens=2457, total_tokens=9395 (13.5s)",
+      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=277730, content_chars=17238, jsonld_events=0, eventish_rows=11, title=50 best things to do in Buckinghamshire with children - Kids Days Out; gemini: attempts=1, prompt_tokens=6938, output_tokens=1764, total_tokens=8702 (10.8s)",
       "extracted": 0,
       "kept": 0,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "The Bucks Guide - Events",
@@ -4663,16 +4864,16 @@
       "detail": "UNCHANGED - Page unchanged since last run (0.5s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "BuckinghamshireLive - Family & Kids",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.9s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.8s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Buckinghamshire Council",
@@ -4681,16 +4882,16 @@
       "detail": "UNCHANGED - Page unchanged since last run (1.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Cambridgeshire County Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.9s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.7s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Essex County Council",
@@ -4699,34 +4900,34 @@
       "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Oxfordshire County Council",
       "worker": "civic",
       "status": "OK",
-      "detail": "OK - 27 extracted, 27 kept; gemini: attempts=1, prompt_tokens=9468, output_tokens=16039, total_tokens=25507 (64.7s)",
-      "extracted": 27,
-      "kept": 27,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "detail": "OK - 30 extracted, 30 kept; gemini: attempts=1, prompt_tokens=9447, output_tokens=14860, total_tokens=24307 (57.1s)",
+      "extracted": 30,
+      "kept": 30,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Norfolk County Council",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://norfolk.gov.uk/libraryonline (0.3s)",
+      "detail": "FAILED_403 - http_403: https://norfolk.gov.uk/libraryonline (0.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Lancashire County Council",
       "worker": "civic",
       "status": "SKIPPED_ROBOTS",
-      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.5s)",
+      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.9s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "East Sussex County Council",
@@ -4735,107 +4936,106 @@
       "detail": "FAILED_403 - http_403: https://www.escis.org.uk/explore/?type=event&sort=order-by-date (0.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Hampshire County Council",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.hants.gov.uk/thingstodo/events (0.2s)",
+      "detail": "FAILED_403 - http_403: https://www.hants.gov.uk/thingstodo/events (0.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Kent County Council",
       "worker": "civic",
       "status": "OK",
-      "detail": "OK - 16 extracted, 16 kept; gemini: attempts=1, prompt_tokens=7224, output_tokens=11784, total_tokens=19008 (48.8s)",
-      "extracted": 16,
-      "kept": 16,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319878"
+      "detail": "OK - 13 extracted, 13 kept; gemini: attempts=1, prompt_tokens=7160, output_tokens=13169, total_tokens=20329 (52.1s)",
+      "extracted": 13,
+      "kept": 13,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
     },
     {
       "source": "Hertfordshire County Council",
       "worker": "activities",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (4.7s)",
+      "detail": "UNCHANGED - Page unchanged since last run (5.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/38967431792/job/117197319737"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
     }
   ],
   "county_limit": "County-named source outcomes only, not verified item geography or public coverage. Full UK county boundary universe and geocoded publication/quality/freshness joins unavailable. Regional/national routes remain unmapped.",
-  "report_date": "2026-10-17",
-  "previous_success_at": "2026-10-16T10:00:25Z",
-  "repository_head": "2f079ab9faa386227e26da3aa85b9313e7cd5b3c",
-  "usage_scope": "Latest visible scheduled worker run: 16 October evening, created 21:09 UTC. Civic, activities, news and deals only; not daily/project-wide/billing totals. Thinking included in output; Originals/shadow usage unavailable.",
+  "report_date": "2026-10-18",
+  "previous_success_at": "2026-10-17T08:52:38.603Z",
+  "repository_head": "afb57cdd90c7b0fa148ccfeae8ab398299ea4090",
+  "usage_scope": "Latest visible scheduled run: 17 October evening. Civic, activities, news and deals only; thinking included in output. Not daily/project-wide/billing totals. Later manual approved car-seat route evidence reported separately.",
   "scheduler": {
-    "expected": "07:17 and 19:17 Europe/London (last read configuration)",
-    "latest_visible_run": "2026-10-16T21:09:53Z",
-    "latest_run_id": 38967431792,
+    "latest_visible_run": "2026-10-17T20:37:24Z",
+    "latest_run_id": 39067495389,
     "conclusion": "success",
-    "status": "No 17 October morning worker/Originals run visible at check time. Saturday has no 07:30 brief-generation task by design; daily email fallback generates this snapshot."
+    "status": "No 18 October morning scheduled worker/Originals run visible at check time. Collector late-warning acceptance #124 is complete; actual shared seven-day acceptance #125 remains open. Sunday has no 07:30 brief task; email fallback generated this report."
   },
   "source_matrix_scope": "Source access/registry matrix dated 10–11 October, carried forward as historical context; no new probes or approvals.",
   "latest_jobs": [
     {
-      "id": 117197283384,
+      "id": 117498075505,
       "name": "gate",
       "conclusion": "success"
     },
     {
-      "id": 117197319737,
-      "name": "activities / collect",
-      "conclusion": "success"
-    },
-    {
-      "id": 117197319745,
+      "id": 117498095822,
       "name": "venue_reference / sync",
       "conclusion": "success"
     },
     {
-      "id": 117197319878,
+      "id": 117498095823,
       "name": "civic / collect",
       "conclusion": "success"
     },
     {
-      "id": 117197320100,
+      "id": 117498095903,
       "name": "deals / collect",
       "conclusion": "success"
     },
     {
-      "id": 117197320293,
+      "id": 117498095958,
+      "name": "activities / collect",
+      "conclusion": "success"
+    },
+    {
+      "id": 117498096193,
       "name": "news / news",
       "conclusion": "success"
     },
     {
-      "id": 117197321452,
-      "name": "civic / review-safety",
-      "conclusion": "skipped"
-    },
-    {
-      "id": 117197321519,
+      "id": 117498096613,
       "name": "news / checks",
       "conclusion": "skipped"
     },
     {
-      "id": 117197322308,
+      "id": 117498097027,
       "name": "civic / usage-review",
+      "conclusion": "skipped"
+    },
+    {
+      "id": 117498097277,
+      "name": "civic / review-safety",
       "conclusion": "skipped"
     }
   ],
   "delivery_updates": {
-    "discovery": "Issues #87/#88/#90/#91/#93/#97/#102/#103 completed. PR #170 merged, but #94/#95/#96/#98/#140 and sprint #169 remain open for remaining acceptance/release/readback criteria.",
-    "news": "18 owner change requests remain under #126/#127; do not repeat completed 50-item review.",
-    "originals": "Latest evening log reports both daily-2026-10-16 and weekly-2026-10-16 already published and skipped. This is log evidence, not fresh public readback or sustained timeliness acceptance.",
-    "brief_delivery": "#157 and bounded solution discovery #158 remain open; root cause and platform selection unsettled. No scheduler migration/new spend authorized by this report."
+    "deals": "Approved Natural Baby Shower source #42 active; later normal manual collection 39070828554 fetched/verified one offer and live car-seat readback recorded in #131/#187. Matalan candidate/route #190 unapproved; no activation inferred from merged #188. Third priority category and MasterTag remain open.",
+    "news": "News quality #126/#127 completed; reuse accepted reviews. #129/#146/#147 remain carryover for scheduled/controlled maintenance evidence; permission approval is not paid action approval.",
+    "discovery": "Mobile sprint, nursery/library correction, guarded venue decisions, canonical duplicates and structured-data safeguards completed. Activities refinement #180–#183 remains open.",
+    "brief_delivery": "#157/#158 remain open; no scheduler/platform selection made."
   },
   "evidence_limitations": [
-    "Latest scheduled collection is 16 October evening; no 17 October morning run visible at check time.",
-    "Successful civic job includes 14 failed routes and 3 robots exclusions.",
-    "10–11 October historical registry/access evidence; county/public geocoded supply and complete billing unavailable.",
-    "PR merge does not complete mobile/auth/DPR acceptance.",
-    "No fresh private database/publication recount performed."
+    "Latest scheduled collection is 17 October evening; no 18 October morning run visible.",
+    "Successful civic job includes 13 failed routes and 3 robots exclusions.",
+    "Historical 10–11 October registry; county geocoded public-quality coverage, fresh private production recount and complete billing unavailable.",
+    "Scheduled deals counters predate separately approved live car-seat route; do not call that category absent now.",
+    "Sprint/permission/release approval does not prove observation or unapproved source acceptance."
   ]
 }
