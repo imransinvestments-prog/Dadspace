@@ -73,11 +73,14 @@ class CollectionEvidence:
         extracted = stats.get('extracted')
         qualified = stats.get('kept', len(rows) if status in ('ok', 'ok_zero') else None)
         duplicates = stats.get('duplicates', 0)
-        rejected = (max(0, extracted - qualified - duplicates)
-                    if isinstance(extracted, int) and isinstance(qualified, int) else None)
+        accounted = (type(extracted) is int and type(qualified) is int
+                     and type(duplicates) is int and min(extracted,qualified,duplicates)>=0
+                     and extracted>=qualified+duplicates)
+        rejected = extracted - qualified - duplicates if accounted else None
         record = {'kind': 'source', 'at': utc_now(), 'source_id': source_id,
             'status': status, 'extracted': extracted, 'validated': qualified,
             'rejected': rejected, 'merged_duplicates': duplicates,
+            'accounting_complete': accounted,
             'write_state': write_state, 'health_state': health_state,
             'saved_count': len(rows) if write_state == 'succeeded' else None,
             'unchanged': status == 'unchanged',
@@ -102,7 +105,8 @@ class CollectionEvidence:
             'not_processed_source_ids': missing, 'stopped_early': stopped_early,
             'fatal': fatal, 'all_sources_checked': not missing and not any(
                 row['deferred'] for row in self.outcomes),
-            'all_sources_succeeded': not missing and not fatal and all(
+            'empty_selection': not self.expected,
+            'all_sources_succeeded': bool(self.expected) and not missing and not fatal and all(
                 row['status'] in ('ok', 'ok_zero', 'unchanged')
                 and row['health_state'] in ('succeeded', 'dry_run') for row in self.outcomes)}
         self.append(summary)

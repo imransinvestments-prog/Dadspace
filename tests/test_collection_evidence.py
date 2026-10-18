@@ -9,6 +9,17 @@ from collection_evidence import CollectionEvidence, public_view_readback
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_empty_selection_and_inconsistent_counts_are_not_healthy_supply(self):
+        empty=CollectionEvidence([],dry_run=False)
+        summary=empty.finish(stopped_early=False,fatal=False)
+        self.assertTrue(summary['empty_selection'])
+        self.assertFalse(summary['all_sources_succeeded'])
+        report=CollectionEvidence([{'id':'a'}],dry_run=False)
+        report.source({'id':'a'},'ok',{'extracted':1,'kept':2},[],
+                      write_state='succeeded',health_state='succeeded')
+        self.assertIsNone(report.outcomes[0]['rejected'])
+        self.assertFalse(report.outcomes[0]['accounting_complete'])
+
     def test_partial_failure_and_deferred_sources_are_retained(self):
         with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory:
             path = Path(directory) / 'evidence.jsonl'
