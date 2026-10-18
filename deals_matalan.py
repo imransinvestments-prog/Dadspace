@@ -159,4 +159,4 @@ def verify_matalan(deal):
     if (money(row["merchant_price"]) != money(deal.get("price")) or money(row["merchant_comparison_price"]) != money(deal.get("was_price"))
             or deal.get("value_evidence_status") != "merchant_advertised" or deal.get("expires_at") != VALID_UNTIL):
         return "matalan_evidence_changed", None
-    return None, "source-page"
+    return None, "source-page:merchant-advertised"

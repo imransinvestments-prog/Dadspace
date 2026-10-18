@@ -78,7 +78,7 @@ class MatalanTests(unittest.TestCase):
             self.assertEqual(d["price"],7.2)
             self.assertEqual(d["was_price"],9)
             self.assertIn("£11.19",d["description"])
-            self.assertEqual(verify_offer(d),(None,"source-page"))
+            self.assertEqual(verify_offer(d),(None,"source-page:merchant-advertised"))
             d["price"]=7
             self.assertEqual(verify_offer(d)[0],"matalan_evidence_changed")
 
