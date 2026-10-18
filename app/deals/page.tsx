@@ -3,6 +3,7 @@ import { getDeals, getDealGroups } from "@/lib/deals"
 import Link from "next/link"
 import { DealCard } from "@/components/deal-card"
 import { pageMetadata } from "@/lib/seo"
+import { AwinPublisherTag } from "@/components/awin-publisher-tag"
 
 export const metadata = pageMetadata(
   "Family Deals",
@@ -20,6 +21,7 @@ export default async function DealsPage({ searchParams }: { searchParams: Promis
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <AwinPublisherTag />
       <section className="mb-8 rounded-3xl border border-white/10 bg-card/70 p-6 sm:p-8">
         <div className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-cyan-400">
           <Tag className="h-4 w-4" />
