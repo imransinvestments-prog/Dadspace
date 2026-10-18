@@ -35,7 +35,7 @@ def main():
     raw=Path('supabase/migrations/20261012121658_ds10_reversible_listing_withdrawal.sql').read_text(encoding='utf-8')
     psql(raw[raw.index('CREATE OR REPLACE FUNCTION public.dadspace_set_event_identity()'):])
     psql(f"insert into sources values('{SOURCE}','library_portal_sessions_v1');")
-    psql(Path('supabase/migrations/20261018213916_reviewed_provider_session_identity.sql').read_text(encoding='utf-8'))
+    psql('begin;\n'+Path('supabase/migrations/20261018213916_reviewed_provider_session_identity.sql').read_text(encoding='utf-8')+'\ncommit;')
     for file in ['tests/operations-review-transactions.sql','tests/operations-review-edit-transactions.sql']:
         psql(Path(file).read_text(encoding='utf-8'))
     psql(f"insert into activity_identity_sources values('{SOURCE}','ealing.events.mylibrary.digital',array['264038','319285'],'Disposable approved-policy fixture',now());")

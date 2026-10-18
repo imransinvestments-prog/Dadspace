@@ -137,11 +137,11 @@ def flush(db,batch):
     unique={row['dedupe_key']:row for row in batch}
     rows=list(unique.values())
     if DRY_RUN:return 0
-    written=0
-    for row in rows:
-        db.table('collected_events').upsert(row,on_conflict='dedupe_key').execute()
-        written+=1
-    return written
+    # Current candidates are dated occurrences, while the legacy database key
+    # coalesces title/place and would retain only the final occurrence. Keep
+    # publication blocked until reviewed programme bindings and a writer that
+    # preserves the complete accepted occurrence window are in place.
+    raise ValueError('NCT programme bindings and occurrence-preserving publication are not qualified')
 
 def run_refresh(db,source,branches,evidence):
     if not branches:

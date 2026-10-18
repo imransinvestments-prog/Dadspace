@@ -10,6 +10,11 @@ class NCTRefreshTests(unittest.TestCase):
         with patch.object(n,'DRY_RUN',True):
             self.assertEqual(n.flush(None,[{'dedupe_key':'a'}]),0)
 
+    def test_occurrence_candidates_cannot_publish_through_legacy_identity(self):
+        with patch.object(n,'DRY_RUN',False):
+            with self.assertRaisesRegex(ValueError,'programme bindings'):
+                n.flush(None,[{'dedupe_key':'a'}])
+
     def test_partial_branch_failure_does_not_flush_or_renew_but_other_branch_runs(self):
         row={'dedupe_key':'a','start_date':'2026-10-19'}
         evidence=CollectionEvidence([{'id':'one'},{'id':'two'}],dry_run=True)
