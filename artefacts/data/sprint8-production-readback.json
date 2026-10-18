@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-18T17:10:51.131Z",
+  "phase": "pre- and post-release verification",
+  "release_sha": "d270ad255431ad951257080dc6b182c16410b618",
+  "production_vercel": "success",
+  "post_release_sql": {"checked_at":"2026-10-18T17:15:27Z","public_view_count":495,"sutton_active":false},
+  "post_release_browser_reload_ids": ["bc1ee5d9-77d8-4284-95db-037da0c2eacf"],
+  "database": {
+    "current_activity_count": 495,
+    "sutton_active": false,
+    "representative_public_view_rows": [
+      {
+        "id": "08fc64a3-8ce0-4dad-8c78-8730ce08ad9e",
+        "title": "Little Kickers Football Classes - St Johns Wood",
+        "age_range": "18 months to 8 years",
+        "event_url": "https://hoop.co.uk/areas/london/www.littlekickers.co.uk",
+        "last_seen_at": "2026-10-15T21:27:18.143126+00:00"
+      },
+      {
+        "id": "bc1ee5d9-77d8-4284-95db-037da0c2eacf",
+        "title": "NCT Brentford Walk & Talk",
+        "age_range": "Pregnant parents, babies and young children",
+        "event_url": "https://www.nct.org.uk/events/twickenham-hounslow-and-district/nct-brentford-walk-talk-9",
+        "last_seen_at": "2026-10-04T00:19:19.747872+00:00"
+      }
+    ]
+  },
+  "browser": {
+    "method": "Live in-app browser rendered accessibility inspection; signed-in session, not anonymous-access certification",
+    "pages": [
+      {
+        "id": "08fc64a3-8ce0-4dad-8c78-8730ce08ad9e",
+        "title": "Little Kickers Football Classes - St Johns Wood",
+        "age": "18 months to 8 years",
+        "location": "Church of our Lady, 54 Lodge Road, NW8 8LA",
+        "source_link": "https://hoop.co.uk/areas/london/www.littlekickers.co.uk",
+        "finding": "Visible rendered fields match snapshot; source link needs quality review, not corrected in Sprint 8"
+      },
+      {
+        "id": "bc1ee5d9-77d8-4284-95db-037da0c2eacf",
+        "title": "NCT Brentford Walk & Talk",
+        "age": "Pregnant parents, babies and young children",
+        "location": "Brentford Family Hub East, Brentford, TW8 0BJ",
+        "finding": "Visible age text retained; diagnostic keeps numeric age eligibility unknown"
+      }
+    ]
+  },
+  "limits": [
+    "No worker/source/data mutation performed for this readback.",
+    "495 current-view identities are not a certified number of distinct actionable opportunities.",
+    "No observation window has been accepted."
+  ]
+}

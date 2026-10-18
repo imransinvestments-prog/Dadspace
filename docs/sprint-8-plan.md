@@ -1,5 +1,9 @@
 ## Sprint 8 — Activities reliability foundation (18 points)
 
+Completed 18 October 2026: 18/18 bounded delivery points, PR #199 merged/production
+verified. Current acceptance record: [sprint-8-closure.md](sprint-8-closure.md).
+The plan below is retained as planning history; Sprint 9 observation remains open.
+
 The owner approved the expanded scope and Sprint 9 observation split on 18 October 2026. This current plan supersedes the initial 8-point plan preserved below.
 
 - #180 (5): source/run evidence; first active implementation.

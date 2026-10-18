@@ -1,0 +1,48 @@
+{
+  "sprint": 8,
+  "tracker": 196,
+  "committed_points": 18,
+  "accepted_points": 18,
+  "remaining_points": 0,
+  "events": [
+    {
+      "at": "2026-10-18T17:15:27Z",
+      "kind": "accepted_delivery",
+      "issues": [
+        {
+          "issue": 180,
+          "points": 5
+        },
+        {
+          "issue": 183,
+          "points": 3
+        },
+        {
+          "issue": 181,
+          "points": 5
+        },
+        {
+          "issue": 182,
+          "points": 5
+        }
+      ],
+      "release_pr": 199,
+      "release_sha": "d270ad255431ad951257080dc6b182c16410b618",
+      "basis": "Owner requested completion; bounded engineering acceptance and production/read-only evidence. No invented owner quality scoring."
+    }
+  ],
+  "excluded": {
+    "observation": [
+      125,
+      129,
+      132
+    ],
+    "planned_sprint": 197,
+    "identity_repair": 198,
+    "portal_qualification": 134
+  },
+  "notes": [
+    "No ideal burndown or conversion to weekly velocity.",
+    "No parent roll-up or #198 repair points counted."
+  ]
+}
