@@ -91,10 +91,16 @@ def collect_portal(source,today,fetch,robots,stats):
     from provider_session_identity import ADAPTER, scope, metadata
     provider_mode=source.get('source_adapter')==ADAPTER
     namespace,selected_sessions=scope(url) if provider_mode else (None,None)
+    provider_occurrence_ids=set()
     def reject(reason): stats[reason]=stats.get(reason,0)+1
     for record,start in zip(records,starts):
         if provider_mode and record.get('series_id') not in selected_sessions:
             reject('outside_reviewed_session_scope'); continue
+        if provider_mode:
+            occurrence_id=record.get('event_id')
+            if type(occurrence_id) is not int or occurrence_id<=0 or occurrence_id in provider_occurrence_ids:
+                raise CalendarError('Duplicate or contradictory provider occurrence identity')
+            provider_occurrence_ids.add(occurrence_id)
         if not today<=start.date()<=cutoff: reject('outside_window'); continue
         if record.get('is_private') is not False or record.get('is_published') is not True: reject('not_public');continue
         if record.get('is_cancelled') or record.get('is_fully_booked'): reject('cancelled_or_full');continue

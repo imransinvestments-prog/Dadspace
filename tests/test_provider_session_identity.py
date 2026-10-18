@@ -34,4 +34,11 @@ class ProviderSessionTests(unittest.TestCase):
         with self.assertRaises(ValueError):metadata(row['provider_namespace'],row['provider_session_id'],occurrences)
         with self.assertRaises(ValueError):metadata(row['provider_namespace'],row['provider_session_id'],[row['provider_occurrences'][0]]*2)
 
+    def test_one_occurrence_cannot_belong_to_two_selected_sessions(self):
+        records=json.loads(Path('tests/fixtures/library-portal-records.json').read_text(encoding='utf-8'))
+        contradictory={**records[0],'series_id':264038}
+        records.append(contradictory);records.sort(key=lambda r:r['start_time'])
+        with self.assertRaisesRegex(RuntimeError,'contradictory provider occurrence'):
+            f.worker_rows(records)
+
 if __name__=='__main__':unittest.main()
