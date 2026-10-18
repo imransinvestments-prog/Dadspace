@@ -156,6 +156,12 @@ def run_refresh(db,source,branches,evidence):
             for row in rows: row['source_id']=source['id']
             unique=list({row['dedupe_key']:row for row in rows}.values())
             saved=flush(db,unique)
+            if not DRY_RUN:
+                now=dt.datetime.now(dt.timezone.utc).isoformat()
+                health=db.table('sources').update({'last_checked_at':now,'last_success_at':now,
+                    'fail_count':0,'last_error':None}).eq('id',source['id']).execute()
+                if not isinstance(health.data,list) or len(health.data)!=1 or health.data[0].get('id')!=source['id']:
+                    raise ValueError('NCT source health write unconfirmed')
             stats={'extracted':len(rows),'kept':len(unique),'duplicates':len(rows)-len(unique),
                 'item_coverage':{'scope':'reviewed_branch_30_day_window','complete':True,'url':branch,
                                  'window_start':TODAY.isoformat(),'window_end':(TODAY+dt.timedelta(days=30)).isoformat(),
@@ -166,6 +172,13 @@ def run_refresh(db,source,branches,evidence):
             print(json.dumps({'branch':branch,'accepted':len(unique),'saved':saved,'dry_run':DRY_RUN}))
         except Exception as exc:
             failed=True
+            if not DRY_RUN:
+                try:
+                    db.table('sources').update({'last_checked_at':dt.datetime.now(dt.timezone.utc).isoformat(),
+                        'last_error':'Dedicated NCT refresh failed: '+type(exc).__name__,
+                        'fail_count':(source.get('fail_count') or 0)+1}).eq('id',source['id']).execute()
+                except Exception:
+                    pass
             evidence.source(selected,'failed_refresh',{},[],write_state='failed' if not DRY_RUN else 'not_attempted',health_state='failed')
             # Evidence contains a safe exception type, not credential-bearing URLs/errors.
             print(json.dumps({'branch':branch,'status':'failed','error_type':type(exc).__name__}))
@@ -187,8 +200,10 @@ def main():
             if os.getenv('NCT_REFRESH_ENABLED','false').lower()!='true':
                 raise ValueError('NCT refresh activation not approved')
             db=create_client(os.environ['SUPABASE_URL'],os.environ['SUPABASE_KEY'])
-            source=(db.table('sources').select('id,active').eq('id',SOURCE_ID).limit(1).execute().data or [None])[0]
+            source=(db.table('sources').select('id,active,source_adapter,url,fail_count').eq('id',SOURCE_ID).limit(1).execute().data or [None])[0]
             if not source or not source.get('active'): raise ValueError('NCT source is inactive')
+            if source.get('source_adapter')!='nct_dedicated' or source.get('url')!=REVIEWED_BRANCHES[0]:
+                raise ValueError('NCT dedicated routing/scope configuration requires review')
         return run_refresh(db,source,branches,evidence)
     except Exception:
         evidence.finish(stopped_early=True,fatal=True)

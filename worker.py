@@ -1334,6 +1334,12 @@ def main():
     if CATEGORY_FILTER:
         query = query.in_("category", CATEGORY_FILTER)
     sources = query.execute().data or []
+    # Dedicated NCT has its own bounded runner and health owner. Never let a
+    # registry activation also send it through the general/model collector.
+    dedicated = [s for s in sources if s.get('source_adapter') == 'nct_dedicated']
+    if dedicated:
+        print(f"Excluded {len(dedicated)} dedicated NCT source(s) from general collection")
+    sources = [s for s in sources if s.get('source_adapter') != 'nct_dedicated']
     # Never-checked sources first, then the ones checked longest ago.
     sources.sort(key=lambda s: s.get("last_checked_at") or "")
     if LIMIT > 0:

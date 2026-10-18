@@ -1,6 +1,6 @@
 import datetime as dt
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 import nct_activity_loader as n
 from collection_evidence import CollectionEvidence
 
@@ -66,6 +66,16 @@ class NCTRefreshTests(unittest.TestCase):
         self.assertEqual(evidence.outcomes[0]['write_state'],'failed')
         self.assertEqual(evidence.outcomes[0]['health_state'],'failed')
         self.assertIsNone(evidence.outcomes[0]['saved_count'])
+
+    def test_health_confirmation_is_required_after_successful_saves(self):
+        for response, expected in [([{'id':'test'}],0),([],1)]:
+            db=Mock()
+            db.table.return_value.update.return_value.eq.return_value.execute.return_value.data=response
+            e=CollectionEvidence([{'id':'one'}],dry_run=False)
+            with patch.object(n,'DRY_RUN',False),patch.object(n,'collect_branch',return_value=[{'dedupe_key':'a'}]),patch.object(n,'flush',return_value=1):
+                self.assertEqual(n.run_refresh(db,{'id':'test'},['one'],e),expected)
+            self.assertEqual(e.outcomes[0]['health_state'],'succeeded' if expected==0 else 'failed')
+
 
 
 if __name__=='__main__': unittest.main()
