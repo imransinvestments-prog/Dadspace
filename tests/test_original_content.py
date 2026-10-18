@@ -84,4 +84,38 @@ class OriginalContentTests(unittest.TestCase):
             with self.assertRaises(ValueError): worker.run(slot_date="2000-01-01")
             generate.assert_not_called()
 
+    def test_uncertain_publish_is_recovered_without_generating_a_duplicate(self):
+        """A lost insert response must not turn a retry into a second article."""
+        records, articles = [], []
+        env = {"SUPABASE_URL": "https://example.com", "SUPABASE_SERVICE_KEY": "test",
+               "GEMINI_API_KEY": "test", "ORIGINAL_CONTENT_RETAIN_EVIDENCE": "true",
+               "GITHUB_RUN_ID": "first-run"}
+
+        def api(url, headers, data=None):
+            if "/original_content_attempts" in url:
+                records.extend(copy.deepcopy(data))
+                return None
+            if data is not None:
+                articles.extend(copy.deepcopy(data))
+                raise RuntimeError("Insert response lost after commit")
+            if "cadence=" in url:
+                return [{"slug": article["slug"]} for article in articles]
+            return []
+
+        with patch.dict(worker.os.environ, env), patch.object(worker, "api", side_effect=api), \
+             patch.object(worker, "due_slots", return_value=[("daily", datetime.now().date())]), \
+             patch.object(worker, "gemini", side_effect=[draft(), {"approved": True}]) as generate:
+            with self.assertRaisesRegex(RuntimeError, "Insert response lost"):
+                worker.run()
+            self.assertEqual(len(articles), 1)
+            self.assertEqual(records[-1]["stage"], "failed")
+            self.assertIn("insert may have succeeded", records[-1]["detail"])
+            worker.os.environ["GITHUB_RUN_ID"] = "recovery-run"
+            worker.run()
+            self.assertEqual(len(articles), 1)
+            self.assertEqual(generate.call_count, 2)
+            self.assertEqual([r["stage"] for r in records], ["draft", "approved", "failed", "duplicate"])
+            self.assertEqual(records[-1]["run_id"], "recovery-run")
+            self.assertEqual(records[-1]["model_calls"], 0)
+
 if __name__ == "__main__": unittest.main()
