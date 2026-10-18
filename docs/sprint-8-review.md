@@ -1,5 +1,11 @@
 # Sprint 8 — review and release pack
 
+Completed 18 October 2026 under the owner's request to finish #196. PR #199 is
+merged and production verified; bounded delivery is 18/18. The concrete proposals
+below are retained as the pre-release pack. See [sprint-8-closure.md](sprint-8-closure.md)
+for final verification, acceptance accounting, remaining quality/observation gates
+and the engineering retrospective. No separate owner scoring is invented.
+
 Tracker: #196. Delivery scope: #180 (5), #183 (3), #181 (5), #182 (5).
 Status: engineering complete locally; hosted/release and owner decisions remain required. No ticket acceptance or sprint closure is inferred.
 

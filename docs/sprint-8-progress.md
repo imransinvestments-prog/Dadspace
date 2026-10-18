@@ -1,5 +1,19 @@
 # Sprint 8 commencement — 18 October 2026
 
+## Completed — 18 October 2026
+
+PR #199 merged and production verified. #180/#183/#181/#182 delivered their bounded
+scope: 18/18 accepted, zero committed carryover. Final Python 251 passed/13 skipped,
+179 distinct Node checks, TypeScript/build and all five final hosted workflows pass.
+Two actual read-only Sutton passes accepted the same programme identity at zero
+model/database writes. Evidence files are preserved. Current closure and limits:
+[sprint-8-closure.md](sprint-8-closure.md). Earlier pending checkpoints below are historical.
+
+Sprint 9 #197 still owns real observation; #198 identity repair and #134 source
+qualification stay separate. No unprovided owner content review is claimed.
+
+---
+
 ## Current delivery completion checkpoint
 
 All four bounded implementations/evidence packs are prepared on the isolated
