@@ -1,3 +1,15 @@
+## Final accepted release — 18 October 2026
+
+The owner inspected all items and confirmed acceptance of the consolidated offer/source/release pack. PR #188 merged as afb57cdd90c7b0fa148ccfeae8ab398299ea4090 and production deployment passed. Matalan source #43 was registered inactive (audit 689379a7-a06a-42e8-970a-03db64cf7ec5), then activated via the signed production workspace (audit cb382f17-76ad-4d2a-b1f5-014e48d233a6).
+
+Normal main collector [39110392406](https://github.com/imransinvestments-prog/Dadspace/actions/runs/39110392406) succeeded: source #43 fetched 1 / verified 1, deal #2114 live at £7.20 / merchant RRP £9, exact approved variation 14894527, canonical #160, verified 18 October 09:12 BST. The production Kids' Clothes & Shoes page was read back with exact variant, price, delivery conditions and expiry. A missing merchant-advertised provenance suffix found during readback was corrected without changing price/freshness/expiry under audit d533b5d2-7a08-4fa2-ac60-234f041e42ce; PR #192 prevents recurrence and its hosted checks passed. The card now visibly uses the merchant-advertised label and independent-history disclaimer.
+
+The earlier installed-MasterTag note was stale: the current code had removed the tag. PR #191 restored the exact owner-confirmed URL on public Home/Deals using afterInteractive rendered-body insertion; all applicable hosted checks passed, merged as 8da136ab4df4ae52ba8844449ee0bd221e0a6ed5. Production browser readback found one matching script in BODY on Home and Deals; a fresh direct Operations load has none. This is rendered-DOM placement evidence, not a claim that an executable script appears in the initial HTML source. A direct request still returns HTTP 404. The owner's [current AWIN guide](https://success.awin.com/s/article/what-is-publisher-mastertag?language=en_US) explicitly distinguishes placement from loading. No plugin or account settings changed.
+
+#148 and #190 meet their accepted delivery criteria. #131/S1 (3) and S2 (5) are accepted; #131/S3 (5) remains open for actual AWIN script delivery. Together with #148 (8), **16 of 21 points accepted, 5 carried forward**. #190 is contained within #131 and adds no extra points. #132/#125 remain separate observation work. See sprint-7-review.md for the review and closure record. Earlier decision requests below are historical, superseded by this acceptance and readback.
+
+---
+
 # Sprint 7 — consolidated decisions and delivery evidence
 
 17 October 2026. [Sprint #187](https://github.com/imransinvestments-prog/Dadspace/issues/187), [preview PR #188](https://github.com/imransinvestments-prog/Dadspace/pull/188). The broader sprint release remains proposed.

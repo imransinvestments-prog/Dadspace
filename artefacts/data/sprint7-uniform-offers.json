@@ -1,8 +1,8 @@
 {
   "checkedOn": "2026-10-17T22:43:32.028334+00:00",
-  "published": false,
-  "ownerAccepted": false,
-  "sourceRouteApproved": false,
+  "published": true,
+  "ownerAccepted": true,
+  "sourceRouteApproved": true,
   "merchant": "Matalan",
   "sourceUrl": "https://www.matalan.co.uk/c/offers/school-uniform/",
   "rows": [
@@ -18,5 +18,10 @@
       "expiresAt": "2026-10-18T23:00:00Z",
       "fingerprint": "aac35fd5fc6c3f8db7c31c04a594e738b64a543d3efef515aa445d807cd0e311"
     }
-  ]
+  ],
+  "ownerAcceptedOn": "2026-10-18",
+  "productionSourceId": 43,
+  "productionDealId": 2114,
+  "publicationObservedAt": "2026-10-18T08:12:11.005928Z",
+  "collectionRunId": 39110392406
 }

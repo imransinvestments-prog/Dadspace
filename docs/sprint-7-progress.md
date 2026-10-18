@@ -1,3 +1,11 @@
+## Released and accepted — 18 October 2026
+
+PR #188 is merged and production verified. User confirmed acceptance of all reviewed items. Matalan source #43 active, normal collector 39110392406 successful, deal #2114 publicly displayed with exact variation, £7.20 / merchant RRP £9, delivery costs and conservative expiry. PR #192 corrects the persisted comparison provenance; audited production correction and public disclaimer readback completed. PR #191 restored the exact AWIN script on public Home/Deals; production BODY placement verified, HTTP 404 remains externally unresolved. No account/plugin changes made.
+
+Accepted: #148 (8), #131/S1 (3), #131/S2 (5) = **16/21 points**. Carryover: #131/S3 (5), actual MasterTag delivery. #190 is contained work, not extra velocity. #132/#125 remain outside commitment. Current review: sprint-7-review.md. The earlier checkpoint below is retained as dated implementation evidence; its pending approvals are superseded.
+
+---
+
 # Sprint 7 — implementation and verification
 
 17 October 2026. [Tracker #187](https://github.com/imransinvestments-prog/Dadspace/issues/187), [PR #188](https://github.com/imransinvestments-prog/Dadspace/pull/188). Current consolidated recommendations are in [sprint-7-decisions.md](sprint-7-decisions.md).
