@@ -50,10 +50,11 @@ class OriginalContentTests(unittest.TestCase):
             self.assertEqual(generate.call_count, 3)
             self.assertIn('Invalid word count', generate.call_args_list[1].args[0])
     def test_remote_denial_is_not_retried(self):
-        with patch.object(worker, "gemini", side_effect=RuntimeError('Remote service returned HTTP 403')) as generate:
-            with self.assertRaises(RuntimeError):
-                worker.reviewed_post('brief', 'daily', [])
-            generate.assert_called_once()
+        for status in (401, 402, 403, 429):
+            with self.subTest(status=status), patch.object(worker, "gemini", side_effect=RuntimeError(f'Remote service returned HTTP {status}')) as generate:
+                with self.assertRaises(RuntimeError):
+                    worker.reviewed_post('brief', 'daily', [])
+                generate.assert_called_once()
     def test_dry_run_does_not_write(self):
         env = {"SUPABASE_URL": "https://example.com", "SUPABASE_SERVICE_KEY": "test", "GEMINI_API_KEY": "test"}
         with patch.dict(worker.os.environ, env), patch.object(worker, "due_slots", return_value=[("daily", datetime.now().date())]), patch.object(worker, "api", side_effect=[[], []]) as api, patch.object(worker, "gemini", side_effect=[draft(), {"approved": True, "reason": "ok"}]):
