@@ -1,0 +1,4353 @@
+{
+  "version": 1,
+  "release_id": "ons-may-2026-sample-20261018",
+  "captured_at": "2026-10-18T22:48:36.308037+00:00",
+  "administrative": {
+    "edition": "May 2026",
+    "publisher": "Office for National Statistics",
+    "licence": "Open Government Licence v3.0",
+    "source": "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/WD26_LAD26_CTYUA26_RGN26_CTRY26_UK_LU/FeatureServer/0",
+    "retrieved": "2026-10-05",
+    "scope": "UK council catalogue and applicable higher areas",
+    "response_sha256": "34842c1df3c933d53be838149e51143b93114709b2a251caa0a560d4d56dce7d"
+  },
+  "postal": {
+    "source": "https://postcodes.io/docs/licences/",
+    "scope": "28 GB sample postcodes only; no NI geocodes",
+    "licence": "OS OpenData terms for GB postcode data",
+    "attribution": [
+      "Contains Ordnance Survey data © Crown copyright and database right 2025.",
+      "Contains Royal Mail data © Royal Mail copyright and database right 2025.",
+      "Contains National Statistics data © Crown copyright and database right 2025.",
+      "Contains NRS data © Crown copyright and database right 2025."
+    ]
+  },
+  "areas": [
+    {
+      "code": "E06000001",
+      "name": "Hartlepool",
+      "kind": "council"
+    },
+    {
+      "code": "E06000002",
+      "name": "Middlesbrough",
+      "kind": "council"
+    },
+    {
+      "code": "E06000003",
+      "name": "Redcar and Cleveland",
+      "kind": "council"
+    },
+    {
+      "code": "E06000004",
+      "name": "Stockton-on-Tees",
+      "kind": "council"
+    },
+    {
+      "code": "E06000005",
+      "name": "Darlington",
+      "kind": "council"
+    },
+    {
+      "code": "E06000006",
+      "name": "Halton",
+      "kind": "council"
+    },
+    {
+      "code": "E06000007",
+      "name": "Warrington",
+      "kind": "council"
+    },
+    {
+      "code": "E06000008",
+      "name": "Blackburn with Darwen",
+      "kind": "council"
+    },
+    {
+      "code": "E06000009",
+      "name": "Blackpool",
+      "kind": "council"
+    },
+    {
+      "code": "E06000010",
+      "name": "Kingston upon Hull, City of",
+      "kind": "council"
+    },
+    {
+      "code": "E06000011",
+      "name": "East Riding of Yorkshire",
+      "kind": "council"
+    },
+    {
+      "code": "E06000012",
+      "name": "North East Lincolnshire",
+      "kind": "council"
+    },
+    {
+      "code": "E06000013",
+      "name": "North Lincolnshire",
+      "kind": "council"
+    },
+    {
+      "code": "E06000014",
+      "name": "York",
+      "kind": "council"
+    },
+    {
+      "code": "E06000015",
+      "name": "Derby",
+      "kind": "council"
+    },
+    {
+      "code": "E06000016",
+      "name": "Leicester",
+      "kind": "council"
+    },
+    {
+      "code": "E06000017",
+      "name": "Rutland",
+      "kind": "council"
+    },
+    {
+      "code": "E06000018",
+      "name": "Nottingham",
+      "kind": "council"
+    },
+    {
+      "code": "E06000019",
+      "name": "Herefordshire, County of",
+      "kind": "council"
+    },
+    {
+      "code": "E06000020",
+      "name": "Telford and Wrekin",
+      "kind": "council"
+    },
+    {
+      "code": "E06000021",
+      "name": "Stoke-on-Trent",
+      "kind": "council"
+    },
+    {
+      "code": "E06000022",
+      "name": "Bath and North East Somerset",
+      "kind": "council"
+    },
+    {
+      "code": "E06000023",
+      "name": "Bristol, City of",
+      "kind": "council"
+    },
+    {
+      "code": "E06000024",
+      "name": "North Somerset",
+      "kind": "council"
+    },
+    {
+      "code": "E06000025",
+      "name": "South Gloucestershire",
+      "kind": "council"
+    },
+    {
+      "code": "E06000026",
+      "name": "Plymouth",
+      "kind": "council"
+    },
+    {
+      "code": "E06000027",
+      "name": "Torbay",
+      "kind": "council"
+    },
+    {
+      "code": "E06000030",
+      "name": "Swindon",
+      "kind": "council"
+    },
+    {
+      "code": "E06000031",
+      "name": "Peterborough",
+      "kind": "council"
+    },
+    {
+      "code": "E06000032",
+      "name": "Luton",
+      "kind": "council"
+    },
+    {
+      "code": "E06000033",
+      "name": "Southend-on-Sea",
+      "kind": "council"
+    },
+    {
+      "code": "E06000034",
+      "name": "Thurrock",
+      "kind": "council"
+    },
+    {
+      "code": "E06000035",
+      "name": "Medway",
+      "kind": "council"
+    },
+    {
+      "code": "E06000036",
+      "name": "Bracknell Forest",
+      "kind": "council"
+    },
+    {
+      "code": "E06000037",
+      "name": "West Berkshire",
+      "kind": "council"
+    },
+    {
+      "code": "E06000038",
+      "name": "Reading",
+      "kind": "council"
+    },
+    {
+      "code": "E06000039",
+      "name": "Slough",
+      "kind": "council"
+    },
+    {
+      "code": "E06000040",
+      "name": "Windsor and Maidenhead",
+      "kind": "council"
+    },
+    {
+      "code": "E06000041",
+      "name": "Wokingham",
+      "kind": "council"
+    },
+    {
+      "code": "E06000042",
+      "name": "Milton Keynes",
+      "kind": "council"
+    },
+    {
+      "code": "E06000043",
+      "name": "Brighton and Hove",
+      "kind": "council"
+    },
+    {
+      "code": "E06000044",
+      "name": "Portsmouth",
+      "kind": "council"
+    },
+    {
+      "code": "E06000045",
+      "name": "Southampton",
+      "kind": "council"
+    },
+    {
+      "code": "E06000046",
+      "name": "Isle of Wight",
+      "kind": "council"
+    },
+    {
+      "code": "E06000047",
+      "name": "County Durham",
+      "kind": "council"
+    },
+    {
+      "code": "E06000049",
+      "name": "Cheshire East",
+      "kind": "council"
+    },
+    {
+      "code": "E06000050",
+      "name": "Cheshire West and Chester",
+      "kind": "council"
+    },
+    {
+      "code": "E06000051",
+      "name": "Shropshire",
+      "kind": "council"
+    },
+    {
+      "code": "E06000052",
+      "name": "Cornwall",
+      "kind": "council"
+    },
+    {
+      "code": "E06000053",
+      "name": "Isles of Scilly",
+      "kind": "council"
+    },
+    {
+      "code": "E06000054",
+      "name": "Wiltshire",
+      "kind": "council"
+    },
+    {
+      "code": "E06000055",
+      "name": "Bedford",
+      "kind": "council"
+    },
+    {
+      "code": "E06000056",
+      "name": "Central Bedfordshire",
+      "kind": "council"
+    },
+    {
+      "code": "E06000057",
+      "name": "Northumberland",
+      "kind": "council"
+    },
+    {
+      "code": "E06000058",
+      "name": "Bournemouth, Christchurch and Poole",
+      "kind": "council"
+    },
+    {
+      "code": "E06000059",
+      "name": "Dorset",
+      "kind": "council"
+    },
+    {
+      "code": "E06000060",
+      "name": "Buckinghamshire",
+      "kind": "council"
+    },
+    {
+      "code": "E06000061",
+      "name": "North Northamptonshire",
+      "kind": "council"
+    },
+    {
+      "code": "E06000062",
+      "name": "West Northamptonshire",
+      "kind": "council"
+    },
+    {
+      "code": "E06000063",
+      "name": "Cumberland",
+      "kind": "council"
+    },
+    {
+      "code": "E06000064",
+      "name": "Westmorland and Furness",
+      "kind": "council"
+    },
+    {
+      "code": "E06000065",
+      "name": "North Yorkshire",
+      "kind": "council"
+    },
+    {
+      "code": "E06000066",
+      "name": "Somerset",
+      "kind": "council"
+    },
+    {
+      "code": "E07000008",
+      "name": "Cambridge",
+      "kind": "council"
+    },
+    {
+      "code": "E07000009",
+      "name": "East Cambridgeshire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000010",
+      "name": "Fenland",
+      "kind": "council"
+    },
+    {
+      "code": "E07000011",
+      "name": "Huntingdonshire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000012",
+      "name": "South Cambridgeshire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000032",
+      "name": "Amber Valley",
+      "kind": "council"
+    },
+    {
+      "code": "E07000033",
+      "name": "Bolsover",
+      "kind": "council"
+    },
+    {
+      "code": "E07000034",
+      "name": "Chesterfield",
+      "kind": "council"
+    },
+    {
+      "code": "E07000035",
+      "name": "Derbyshire Dales",
+      "kind": "council"
+    },
+    {
+      "code": "E07000036",
+      "name": "Erewash",
+      "kind": "council"
+    },
+    {
+      "code": "E07000037",
+      "name": "High Peak",
+      "kind": "council"
+    },
+    {
+      "code": "E07000038",
+      "name": "North East Derbyshire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000039",
+      "name": "South Derbyshire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000040",
+      "name": "East Devon",
+      "kind": "council"
+    },
+    {
+      "code": "E07000041",
+      "name": "Exeter",
+      "kind": "council"
+    },
+    {
+      "code": "E07000042",
+      "name": "Mid Devon",
+      "kind": "council"
+    },
+    {
+      "code": "E07000043",
+      "name": "North Devon",
+      "kind": "council"
+    },
+    {
+      "code": "E07000044",
+      "name": "South Hams",
+      "kind": "council"
+    },
+    {
+      "code": "E07000045",
+      "name": "Teignbridge",
+      "kind": "council"
+    },
+    {
+      "code": "E07000046",
+      "name": "Torridge",
+      "kind": "council"
+    },
+    {
+      "code": "E07000047",
+      "name": "West Devon",
+      "kind": "council"
+    },
+    {
+      "code": "E07000061",
+      "name": "Eastbourne",
+      "kind": "council"
+    },
+    {
+      "code": "E07000062",
+      "name": "Hastings",
+      "kind": "council"
+    },
+    {
+      "code": "E07000063",
+      "name": "Lewes",
+      "kind": "council"
+    },
+    {
+      "code": "E07000064",
+      "name": "Rother",
+      "kind": "council"
+    },
+    {
+      "code": "E07000065",
+      "name": "Wealden",
+      "kind": "council"
+    },
+    {
+      "code": "E07000066",
+      "name": "Basildon",
+      "kind": "council"
+    },
+    {
+      "code": "E07000067",
+      "name": "Braintree",
+      "kind": "council"
+    },
+    {
+      "code": "E07000068",
+      "name": "Brentwood",
+      "kind": "council"
+    },
+    {
+      "code": "E07000069",
+      "name": "Castle Point",
+      "kind": "council"
+    },
+    {
+      "code": "E07000070",
+      "name": "Chelmsford",
+      "kind": "council"
+    },
+    {
+      "code": "E07000071",
+      "name": "Colchester",
+      "kind": "council"
+    },
+    {
+      "code": "E07000072",
+      "name": "Epping Forest",
+      "kind": "council"
+    },
+    {
+      "code": "E07000073",
+      "name": "Harlow",
+      "kind": "council"
+    },
+    {
+      "code": "E07000074",
+      "name": "Maldon",
+      "kind": "council"
+    },
+    {
+      "code": "E07000075",
+      "name": "Rochford",
+      "kind": "council"
+    },
+    {
+      "code": "E07000076",
+      "name": "Tendring",
+      "kind": "council"
+    },
+    {
+      "code": "E07000077",
+      "name": "Uttlesford",
+      "kind": "council"
+    },
+    {
+      "code": "E07000078",
+      "name": "Cheltenham",
+      "kind": "council"
+    },
+    {
+      "code": "E07000079",
+      "name": "Cotswold",
+      "kind": "council"
+    },
+    {
+      "code": "E07000080",
+      "name": "Forest of Dean",
+      "kind": "council"
+    },
+    {
+      "code": "E07000081",
+      "name": "Gloucester",
+      "kind": "council"
+    },
+    {
+      "code": "E07000082",
+      "name": "Stroud",
+      "kind": "council"
+    },
+    {
+      "code": "E07000083",
+      "name": "Tewkesbury",
+      "kind": "council"
+    },
+    {
+      "code": "E07000084",
+      "name": "Basingstoke and Deane",
+      "kind": "council"
+    },
+    {
+      "code": "E07000085",
+      "name": "East Hampshire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000086",
+      "name": "Eastleigh",
+      "kind": "council"
+    },
+    {
+      "code": "E07000087",
+      "name": "Fareham",
+      "kind": "council"
+    },
+    {
+      "code": "E07000088",
+      "name": "Gosport",
+      "kind": "council"
+    },
+    {
+      "code": "E07000089",
+      "name": "Hart",
+      "kind": "council"
+    },
+    {
+      "code": "E07000090",
+      "name": "Havant",
+      "kind": "council"
+    },
+    {
+      "code": "E07000091",
+      "name": "New Forest",
+      "kind": "council"
+    },
+    {
+      "code": "E07000092",
+      "name": "Rushmoor",
+      "kind": "council"
+    },
+    {
+      "code": "E07000093",
+      "name": "Test Valley",
+      "kind": "council"
+    },
+    {
+      "code": "E07000094",
+      "name": "Winchester",
+      "kind": "council"
+    },
+    {
+      "code": "E07000095",
+      "name": "Broxbourne",
+      "kind": "council"
+    },
+    {
+      "code": "E07000096",
+      "name": "Dacorum",
+      "kind": "council"
+    },
+    {
+      "code": "E07000098",
+      "name": "Hertsmere",
+      "kind": "council"
+    },
+    {
+      "code": "E07000099",
+      "name": "North Hertfordshire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000102",
+      "name": "Three Rivers",
+      "kind": "council"
+    },
+    {
+      "code": "E07000103",
+      "name": "Watford",
+      "kind": "council"
+    },
+    {
+      "code": "E07000105",
+      "name": "Ashford",
+      "kind": "council"
+    },
+    {
+      "code": "E07000106",
+      "name": "Canterbury",
+      "kind": "council"
+    },
+    {
+      "code": "E07000107",
+      "name": "Dartford",
+      "kind": "council"
+    },
+    {
+      "code": "E07000108",
+      "name": "Dover",
+      "kind": "council"
+    },
+    {
+      "code": "E07000109",
+      "name": "Gravesham",
+      "kind": "council"
+    },
+    {
+      "code": "E07000110",
+      "name": "Maidstone",
+      "kind": "council"
+    },
+    {
+      "code": "E07000111",
+      "name": "Sevenoaks",
+      "kind": "council"
+    },
+    {
+      "code": "E07000112",
+      "name": "Folkestone and Hythe",
+      "kind": "council"
+    },
+    {
+      "code": "E07000113",
+      "name": "Swale",
+      "kind": "council"
+    },
+    {
+      "code": "E07000114",
+      "name": "Thanet",
+      "kind": "council"
+    },
+    {
+      "code": "E07000115",
+      "name": "Tonbridge and Malling",
+      "kind": "council"
+    },
+    {
+      "code": "E07000116",
+      "name": "Tunbridge Wells",
+      "kind": "council"
+    },
+    {
+      "code": "E07000117",
+      "name": "Burnley",
+      "kind": "council"
+    },
+    {
+      "code": "E07000118",
+      "name": "Chorley",
+      "kind": "council"
+    },
+    {
+      "code": "E07000119",
+      "name": "Fylde",
+      "kind": "council"
+    },
+    {
+      "code": "E07000120",
+      "name": "Hyndburn",
+      "kind": "council"
+    },
+    {
+      "code": "E07000121",
+      "name": "Lancaster",
+      "kind": "council"
+    },
+    {
+      "code": "E07000122",
+      "name": "Pendle",
+      "kind": "council"
+    },
+    {
+      "code": "E07000123",
+      "name": "Preston",
+      "kind": "council"
+    },
+    {
+      "code": "E07000124",
+      "name": "Ribble Valley",
+      "kind": "council"
+    },
+    {
+      "code": "E07000125",
+      "name": "Rossendale",
+      "kind": "council"
+    },
+    {
+      "code": "E07000126",
+      "name": "South Ribble",
+      "kind": "council"
+    },
+    {
+      "code": "E07000127",
+      "name": "West Lancashire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000128",
+      "name": "Wyre",
+      "kind": "council"
+    },
+    {
+      "code": "E07000129",
+      "name": "Blaby",
+      "kind": "council"
+    },
+    {
+      "code": "E07000130",
+      "name": "Charnwood",
+      "kind": "council"
+    },
+    {
+      "code": "E07000131",
+      "name": "Harborough",
+      "kind": "council"
+    },
+    {
+      "code": "E07000132",
+      "name": "Hinckley and Bosworth",
+      "kind": "council"
+    },
+    {
+      "code": "E07000133",
+      "name": "Melton",
+      "kind": "council"
+    },
+    {
+      "code": "E07000134",
+      "name": "North West Leicestershire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000135",
+      "name": "Oadby and Wigston",
+      "kind": "council"
+    },
+    {
+      "code": "E07000136",
+      "name": "Boston",
+      "kind": "council"
+    },
+    {
+      "code": "E07000137",
+      "name": "East Lindsey",
+      "kind": "council"
+    },
+    {
+      "code": "E07000138",
+      "name": "Lincoln",
+      "kind": "council"
+    },
+    {
+      "code": "E07000139",
+      "name": "North Kesteven",
+      "kind": "council"
+    },
+    {
+      "code": "E07000140",
+      "name": "South Holland",
+      "kind": "council"
+    },
+    {
+      "code": "E07000141",
+      "name": "South Kesteven",
+      "kind": "council"
+    },
+    {
+      "code": "E07000142",
+      "name": "West Lindsey",
+      "kind": "council"
+    },
+    {
+      "code": "E07000143",
+      "name": "Breckland",
+      "kind": "council"
+    },
+    {
+      "code": "E07000144",
+      "name": "Broadland",
+      "kind": "council"
+    },
+    {
+      "code": "E07000145",
+      "name": "Great Yarmouth",
+      "kind": "council"
+    },
+    {
+      "code": "E07000146",
+      "name": "King's Lynn and West Norfolk",
+      "kind": "council"
+    },
+    {
+      "code": "E07000147",
+      "name": "North Norfolk",
+      "kind": "council"
+    },
+    {
+      "code": "E07000148",
+      "name": "Norwich",
+      "kind": "council"
+    },
+    {
+      "code": "E07000149",
+      "name": "South Norfolk",
+      "kind": "council"
+    },
+    {
+      "code": "E07000170",
+      "name": "Ashfield",
+      "kind": "council"
+    },
+    {
+      "code": "E07000171",
+      "name": "Bassetlaw",
+      "kind": "council"
+    },
+    {
+      "code": "E07000172",
+      "name": "Broxtowe",
+      "kind": "council"
+    },
+    {
+      "code": "E07000173",
+      "name": "Gedling",
+      "kind": "council"
+    },
+    {
+      "code": "E07000174",
+      "name": "Mansfield",
+      "kind": "council"
+    },
+    {
+      "code": "E07000175",
+      "name": "Newark and Sherwood",
+      "kind": "council"
+    },
+    {
+      "code": "E07000176",
+      "name": "Rushcliffe",
+      "kind": "council"
+    },
+    {
+      "code": "E07000177",
+      "name": "Cherwell",
+      "kind": "council"
+    },
+    {
+      "code": "E07000178",
+      "name": "Oxford",
+      "kind": "council"
+    },
+    {
+      "code": "E07000179",
+      "name": "South Oxfordshire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000180",
+      "name": "Vale of White Horse",
+      "kind": "council"
+    },
+    {
+      "code": "E07000181",
+      "name": "West Oxfordshire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000192",
+      "name": "Cannock Chase",
+      "kind": "council"
+    },
+    {
+      "code": "E07000193",
+      "name": "East Staffordshire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000194",
+      "name": "Lichfield",
+      "kind": "council"
+    },
+    {
+      "code": "E07000195",
+      "name": "Newcastle-under-Lyme",
+      "kind": "council"
+    },
+    {
+      "code": "E07000196",
+      "name": "South Staffordshire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000197",
+      "name": "Stafford",
+      "kind": "council"
+    },
+    {
+      "code": "E07000198",
+      "name": "Staffordshire Moorlands",
+      "kind": "council"
+    },
+    {
+      "code": "E07000199",
+      "name": "Tamworth",
+      "kind": "council"
+    },
+    {
+      "code": "E07000200",
+      "name": "Babergh",
+      "kind": "council"
+    },
+    {
+      "code": "E07000202",
+      "name": "Ipswich",
+      "kind": "council"
+    },
+    {
+      "code": "E07000203",
+      "name": "Mid Suffolk",
+      "kind": "council"
+    },
+    {
+      "code": "E07000207",
+      "name": "Elmbridge",
+      "kind": "council"
+    },
+    {
+      "code": "E07000208",
+      "name": "Epsom and Ewell",
+      "kind": "council"
+    },
+    {
+      "code": "E07000209",
+      "name": "Guildford",
+      "kind": "council"
+    },
+    {
+      "code": "E07000210",
+      "name": "Mole Valley",
+      "kind": "council"
+    },
+    {
+      "code": "E07000211",
+      "name": "Reigate and Banstead",
+      "kind": "council"
+    },
+    {
+      "code": "E07000212",
+      "name": "Runnymede",
+      "kind": "council"
+    },
+    {
+      "code": "E07000213",
+      "name": "Spelthorne",
+      "kind": "council"
+    },
+    {
+      "code": "E07000214",
+      "name": "Surrey Heath",
+      "kind": "council"
+    },
+    {
+      "code": "E07000215",
+      "name": "Tandridge",
+      "kind": "council"
+    },
+    {
+      "code": "E07000216",
+      "name": "Waverley",
+      "kind": "council"
+    },
+    {
+      "code": "E07000217",
+      "name": "Woking",
+      "kind": "council"
+    },
+    {
+      "code": "E07000218",
+      "name": "North Warwickshire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000219",
+      "name": "Nuneaton and Bedworth",
+      "kind": "council"
+    },
+    {
+      "code": "E07000220",
+      "name": "Rugby",
+      "kind": "council"
+    },
+    {
+      "code": "E07000221",
+      "name": "Stratford-on-Avon",
+      "kind": "council"
+    },
+    {
+      "code": "E07000222",
+      "name": "Warwick",
+      "kind": "council"
+    },
+    {
+      "code": "E07000223",
+      "name": "Adur",
+      "kind": "council"
+    },
+    {
+      "code": "E07000224",
+      "name": "Arun",
+      "kind": "council"
+    },
+    {
+      "code": "E07000225",
+      "name": "Chichester",
+      "kind": "council"
+    },
+    {
+      "code": "E07000226",
+      "name": "Crawley",
+      "kind": "council"
+    },
+    {
+      "code": "E07000227",
+      "name": "Horsham",
+      "kind": "council"
+    },
+    {
+      "code": "E07000228",
+      "name": "Mid Sussex",
+      "kind": "council"
+    },
+    {
+      "code": "E07000229",
+      "name": "Worthing",
+      "kind": "council"
+    },
+    {
+      "code": "E07000234",
+      "name": "Bromsgrove",
+      "kind": "council"
+    },
+    {
+      "code": "E07000235",
+      "name": "Malvern Hills",
+      "kind": "council"
+    },
+    {
+      "code": "E07000236",
+      "name": "Redditch",
+      "kind": "council"
+    },
+    {
+      "code": "E07000237",
+      "name": "Worcester",
+      "kind": "council"
+    },
+    {
+      "code": "E07000238",
+      "name": "Wychavon",
+      "kind": "council"
+    },
+    {
+      "code": "E07000239",
+      "name": "Wyre Forest",
+      "kind": "council"
+    },
+    {
+      "code": "E07000240",
+      "name": "St Albans",
+      "kind": "council"
+    },
+    {
+      "code": "E07000241",
+      "name": "Welwyn Hatfield",
+      "kind": "council"
+    },
+    {
+      "code": "E07000242",
+      "name": "East Hertfordshire",
+      "kind": "council"
+    },
+    {
+      "code": "E07000243",
+      "name": "Stevenage",
+      "kind": "council"
+    },
+    {
+      "code": "E07000244",
+      "name": "East Suffolk",
+      "kind": "council"
+    },
+    {
+      "code": "E07000245",
+      "name": "West Suffolk",
+      "kind": "council"
+    },
+    {
+      "code": "E08000001",
+      "name": "Bolton",
+      "kind": "council"
+    },
+    {
+      "code": "E08000002",
+      "name": "Bury",
+      "kind": "council"
+    },
+    {
+      "code": "E08000003",
+      "name": "Manchester",
+      "kind": "council"
+    },
+    {
+      "code": "E08000004",
+      "name": "Oldham",
+      "kind": "council"
+    },
+    {
+      "code": "E08000005",
+      "name": "Rochdale",
+      "kind": "council"
+    },
+    {
+      "code": "E08000006",
+      "name": "Salford",
+      "kind": "council"
+    },
+    {
+      "code": "E08000007",
+      "name": "Stockport",
+      "kind": "council"
+    },
+    {
+      "code": "E08000008",
+      "name": "Tameside",
+      "kind": "council"
+    },
+    {
+      "code": "E08000009",
+      "name": "Trafford",
+      "kind": "council"
+    },
+    {
+      "code": "E08000010",
+      "name": "Wigan",
+      "kind": "council"
+    },
+    {
+      "code": "E08000011",
+      "name": "Knowsley",
+      "kind": "council"
+    },
+    {
+      "code": "E08000012",
+      "name": "Liverpool",
+      "kind": "council"
+    },
+    {
+      "code": "E08000013",
+      "name": "St. Helens",
+      "kind": "council"
+    },
+    {
+      "code": "E08000014",
+      "name": "Sefton",
+      "kind": "council"
+    },
+    {
+      "code": "E08000015",
+      "name": "Wirral",
+      "kind": "council"
+    },
+    {
+      "code": "E08000017",
+      "name": "Doncaster",
+      "kind": "council"
+    },
+    {
+      "code": "E08000018",
+      "name": "Rotherham",
+      "kind": "council"
+    },
+    {
+      "code": "E08000021",
+      "name": "Newcastle upon Tyne",
+      "kind": "council"
+    },
+    {
+      "code": "E08000022",
+      "name": "North Tyneside",
+      "kind": "council"
+    },
+    {
+      "code": "E08000023",
+      "name": "South Tyneside",
+      "kind": "council"
+    },
+    {
+      "code": "E08000024",
+      "name": "Sunderland",
+      "kind": "council"
+    },
+    {
+      "code": "E08000025",
+      "name": "Birmingham",
+      "kind": "council"
+    },
+    {
+      "code": "E08000026",
+      "name": "Coventry",
+      "kind": "council"
+    },
+    {
+      "code": "E08000027",
+      "name": "Dudley",
+      "kind": "council"
+    },
+    {
+      "code": "E08000028",
+      "name": "Sandwell",
+      "kind": "council"
+    },
+    {
+      "code": "E08000029",
+      "name": "Solihull",
+      "kind": "council"
+    },
+    {
+      "code": "E08000030",
+      "name": "Walsall",
+      "kind": "council"
+    },
+    {
+      "code": "E08000031",
+      "name": "Wolverhampton",
+      "kind": "council"
+    },
+    {
+      "code": "E08000032",
+      "name": "Bradford",
+      "kind": "council"
+    },
+    {
+      "code": "E08000033",
+      "name": "Calderdale",
+      "kind": "council"
+    },
+    {
+      "code": "E08000034",
+      "name": "Kirklees",
+      "kind": "council"
+    },
+    {
+      "code": "E08000035",
+      "name": "Leeds",
+      "kind": "council"
+    },
+    {
+      "code": "E08000036",
+      "name": "Wakefield",
+      "kind": "council"
+    },
+    {
+      "code": "E08000037",
+      "name": "Gateshead",
+      "kind": "council"
+    },
+    {
+      "code": "E08000038",
+      "name": "Barnsley",
+      "kind": "council"
+    },
+    {
+      "code": "E08000039",
+      "name": "Sheffield",
+      "kind": "council"
+    },
+    {
+      "code": "E09000001",
+      "name": "City of London",
+      "kind": "council"
+    },
+    {
+      "code": "E09000002",
+      "name": "Barking and Dagenham",
+      "kind": "council"
+    },
+    {
+      "code": "E09000003",
+      "name": "Barnet",
+      "kind": "council"
+    },
+    {
+      "code": "E09000004",
+      "name": "Bexley",
+      "kind": "council"
+    },
+    {
+      "code": "E09000005",
+      "name": "Brent",
+      "kind": "council"
+    },
+    {
+      "code": "E09000006",
+      "name": "Bromley",
+      "kind": "council"
+    },
+    {
+      "code": "E09000007",
+      "name": "Camden",
+      "kind": "council"
+    },
+    {
+      "code": "E09000008",
+      "name": "Croydon",
+      "kind": "council"
+    },
+    {
+      "code": "E09000009",
+      "name": "Ealing",
+      "kind": "council"
+    },
+    {
+      "code": "E09000010",
+      "name": "Enfield",
+      "kind": "council"
+    },
+    {
+      "code": "E09000011",
+      "name": "Greenwich",
+      "kind": "council"
+    },
+    {
+      "code": "E09000012",
+      "name": "Hackney",
+      "kind": "council"
+    },
+    {
+      "code": "E09000013",
+      "name": "Hammersmith and Fulham",
+      "kind": "council"
+    },
+    {
+      "code": "E09000014",
+      "name": "Haringey",
+      "kind": "council"
+    },
+    {
+      "code": "E09000015",
+      "name": "Harrow",
+      "kind": "council"
+    },
+    {
+      "code": "E09000016",
+      "name": "Havering",
+      "kind": "council"
+    },
+    {
+      "code": "E09000017",
+      "name": "Hillingdon",
+      "kind": "council"
+    },
+    {
+      "code": "E09000018",
+      "name": "Hounslow",
+      "kind": "council"
+    },
+    {
+      "code": "E09000019",
+      "name": "Islington",
+      "kind": "council"
+    },
+    {
+      "code": "E09000020",
+      "name": "Kensington and Chelsea",
+      "kind": "council"
+    },
+    {
+      "code": "E09000021",
+      "name": "Kingston upon Thames",
+      "kind": "council"
+    },
+    {
+      "code": "E09000022",
+      "name": "Lambeth",
+      "kind": "council"
+    },
+    {
+      "code": "E09000023",
+      "name": "Lewisham",
+      "kind": "council"
+    },
+    {
+      "code": "E09000024",
+      "name": "Merton",
+      "kind": "council"
+    },
+    {
+      "code": "E09000025",
+      "name": "Newham",
+      "kind": "council"
+    },
+    {
+      "code": "E09000026",
+      "name": "Redbridge",
+      "kind": "council"
+    },
+    {
+      "code": "E09000027",
+      "name": "Richmond upon Thames",
+      "kind": "council"
+    },
+    {
+      "code": "E09000028",
+      "name": "Southwark",
+      "kind": "council"
+    },
+    {
+      "code": "E09000029",
+      "name": "Sutton",
+      "kind": "council"
+    },
+    {
+      "code": "E09000030",
+      "name": "Tower Hamlets",
+      "kind": "council"
+    },
+    {
+      "code": "E09000031",
+      "name": "Waltham Forest",
+      "kind": "council"
+    },
+    {
+      "code": "E09000032",
+      "name": "Wandsworth",
+      "kind": "council"
+    },
+    {
+      "code": "E09000033",
+      "name": "Westminster",
+      "kind": "council"
+    },
+    {
+      "code": "E10000003",
+      "name": "Cambridgeshire",
+      "kind": "county"
+    },
+    {
+      "code": "E10000007",
+      "name": "Derbyshire",
+      "kind": "county"
+    },
+    {
+      "code": "E10000008",
+      "name": "Devon",
+      "kind": "county"
+    },
+    {
+      "code": "E10000011",
+      "name": "East Sussex",
+      "kind": "county"
+    },
+    {
+      "code": "E10000012",
+      "name": "Essex",
+      "kind": "county"
+    },
+    {
+      "code": "E10000013",
+      "name": "Gloucestershire",
+      "kind": "county"
+    },
+    {
+      "code": "E10000014",
+      "name": "Hampshire",
+      "kind": "county"
+    },
+    {
+      "code": "E10000015",
+      "name": "Hertfordshire",
+      "kind": "county"
+    },
+    {
+      "code": "E10000016",
+      "name": "Kent",
+      "kind": "county"
+    },
+    {
+      "code": "E10000017",
+      "name": "Lancashire",
+      "kind": "county"
+    },
+    {
+      "code": "E10000018",
+      "name": "Leicestershire",
+      "kind": "county"
+    },
+    {
+      "code": "E10000019",
+      "name": "Lincolnshire",
+      "kind": "county"
+    },
+    {
+      "code": "E10000020",
+      "name": "Norfolk",
+      "kind": "county"
+    },
+    {
+      "code": "E10000024",
+      "name": "Nottinghamshire",
+      "kind": "county"
+    },
+    {
+      "code": "E10000025",
+      "name": "Oxfordshire",
+      "kind": "county"
+    },
+    {
+      "code": "E10000028",
+      "name": "Staffordshire",
+      "kind": "county"
+    },
+    {
+      "code": "E10000029",
+      "name": "Suffolk",
+      "kind": "county"
+    },
+    {
+      "code": "E10000030",
+      "name": "Surrey",
+      "kind": "county"
+    },
+    {
+      "code": "E10000031",
+      "name": "Warwickshire",
+      "kind": "county"
+    },
+    {
+      "code": "E10000032",
+      "name": "West Sussex",
+      "kind": "county"
+    },
+    {
+      "code": "E10000034",
+      "name": "Worcestershire",
+      "kind": "county"
+    },
+    {
+      "code": "E12000001",
+      "name": "North East",
+      "kind": "region"
+    },
+    {
+      "code": "E12000002",
+      "name": "North West",
+      "kind": "region"
+    },
+    {
+      "code": "E12000003",
+      "name": "Yorkshire and The Humber",
+      "kind": "region"
+    },
+    {
+      "code": "E12000004",
+      "name": "East Midlands",
+      "kind": "region"
+    },
+    {
+      "code": "E12000005",
+      "name": "West Midlands",
+      "kind": "region"
+    },
+    {
+      "code": "E12000006",
+      "name": "East of England",
+      "kind": "region"
+    },
+    {
+      "code": "E12000007",
+      "name": "London",
+      "kind": "region"
+    },
+    {
+      "code": "E12000008",
+      "name": "South East",
+      "kind": "region"
+    },
+    {
+      "code": "E12000009",
+      "name": "South West",
+      "kind": "region"
+    },
+    {
+      "code": "E92000001",
+      "name": "England",
+      "kind": "nation"
+    },
+    {
+      "code": "N09000001",
+      "name": "Antrim and Newtownabbey",
+      "kind": "council"
+    },
+    {
+      "code": "N09000002",
+      "name": "Armagh City, Banbridge and Craigavon",
+      "kind": "council"
+    },
+    {
+      "code": "N09000003",
+      "name": "Belfast",
+      "kind": "council"
+    },
+    {
+      "code": "N09000004",
+      "name": "Causeway Coast and Glens",
+      "kind": "council"
+    },
+    {
+      "code": "N09000005",
+      "name": "Derry City and Strabane",
+      "kind": "council"
+    },
+    {
+      "code": "N09000006",
+      "name": "Fermanagh and Omagh",
+      "kind": "council"
+    },
+    {
+      "code": "N09000007",
+      "name": "Lisburn and Castlereagh",
+      "kind": "council"
+    },
+    {
+      "code": "N09000008",
+      "name": "Mid and East Antrim",
+      "kind": "council"
+    },
+    {
+      "code": "N09000009",
+      "name": "Mid Ulster",
+      "kind": "council"
+    },
+    {
+      "code": "N09000010",
+      "name": "Newry, Mourne and Down",
+      "kind": "council"
+    },
+    {
+      "code": "N09000011",
+      "name": "Ards and North Down",
+      "kind": "council"
+    },
+    {
+      "code": "N92000002",
+      "name": "Northern Ireland",
+      "kind": "nation"
+    },
+    {
+      "code": "S12000005",
+      "name": "Clackmannanshire",
+      "kind": "council"
+    },
+    {
+      "code": "S12000006",
+      "name": "Dumfries and Galloway",
+      "kind": "council"
+    },
+    {
+      "code": "S12000008",
+      "name": "East Ayrshire",
+      "kind": "council"
+    },
+    {
+      "code": "S12000010",
+      "name": "East Lothian",
+      "kind": "council"
+    },
+    {
+      "code": "S12000011",
+      "name": "East Renfrewshire",
+      "kind": "council"
+    },
+    {
+      "code": "S12000013",
+      "name": "Na h-Eileanan Siar",
+      "kind": "council"
+    },
+    {
+      "code": "S12000014",
+      "name": "Falkirk",
+      "kind": "council"
+    },
+    {
+      "code": "S12000017",
+      "name": "Highland",
+      "kind": "council"
+    },
+    {
+      "code": "S12000018",
+      "name": "Inverclyde",
+      "kind": "council"
+    },
+    {
+      "code": "S12000019",
+      "name": "Midlothian",
+      "kind": "council"
+    },
+    {
+      "code": "S12000020",
+      "name": "Moray",
+      "kind": "council"
+    },
+    {
+      "code": "S12000021",
+      "name": "North Ayrshire",
+      "kind": "council"
+    },
+    {
+      "code": "S12000023",
+      "name": "Orkney Islands",
+      "kind": "council"
+    },
+    {
+      "code": "S12000026",
+      "name": "Scottish Borders",
+      "kind": "council"
+    },
+    {
+      "code": "S12000027",
+      "name": "Shetland Islands",
+      "kind": "council"
+    },
+    {
+      "code": "S12000028",
+      "name": "South Ayrshire",
+      "kind": "council"
+    },
+    {
+      "code": "S12000029",
+      "name": "South Lanarkshire",
+      "kind": "council"
+    },
+    {
+      "code": "S12000030",
+      "name": "Stirling",
+      "kind": "council"
+    },
+    {
+      "code": "S12000033",
+      "name": "Aberdeen City",
+      "kind": "council"
+    },
+    {
+      "code": "S12000034",
+      "name": "Aberdeenshire",
+      "kind": "council"
+    },
+    {
+      "code": "S12000035",
+      "name": "Argyll and Bute",
+      "kind": "council"
+    },
+    {
+      "code": "S12000036",
+      "name": "City of Edinburgh",
+      "kind": "council"
+    },
+    {
+      "code": "S12000038",
+      "name": "Renfrewshire",
+      "kind": "council"
+    },
+    {
+      "code": "S12000039",
+      "name": "West Dunbartonshire",
+      "kind": "council"
+    },
+    {
+      "code": "S12000040",
+      "name": "West Lothian",
+      "kind": "council"
+    },
+    {
+      "code": "S12000041",
+      "name": "Angus",
+      "kind": "council"
+    },
+    {
+      "code": "S12000042",
+      "name": "Dundee City",
+      "kind": "council"
+    },
+    {
+      "code": "S12000045",
+      "name": "East Dunbartonshire",
+      "kind": "council"
+    },
+    {
+      "code": "S12000047",
+      "name": "Fife",
+      "kind": "council"
+    },
+    {
+      "code": "S12000048",
+      "name": "Perth and Kinross",
+      "kind": "council"
+    },
+    {
+      "code": "S12000049",
+      "name": "Glasgow City",
+      "kind": "council"
+    },
+    {
+      "code": "S12000050",
+      "name": "North Lanarkshire",
+      "kind": "council"
+    },
+    {
+      "code": "S92000003",
+      "name": "Scotland",
+      "kind": "nation"
+    },
+    {
+      "code": "W06000001",
+      "name": "Isle of Anglesey",
+      "kind": "council"
+    },
+    {
+      "code": "W06000002",
+      "name": "Gwynedd",
+      "kind": "council"
+    },
+    {
+      "code": "W06000003",
+      "name": "Conwy",
+      "kind": "council"
+    },
+    {
+      "code": "W06000004",
+      "name": "Denbighshire",
+      "kind": "council"
+    },
+    {
+      "code": "W06000005",
+      "name": "Flintshire",
+      "kind": "council"
+    },
+    {
+      "code": "W06000006",
+      "name": "Wrexham",
+      "kind": "council"
+    },
+    {
+      "code": "W06000008",
+      "name": "Ceredigion",
+      "kind": "council"
+    },
+    {
+      "code": "W06000009",
+      "name": "Pembrokeshire",
+      "kind": "council"
+    },
+    {
+      "code": "W06000010",
+      "name": "Carmarthenshire",
+      "kind": "council"
+    },
+    {
+      "code": "W06000011",
+      "name": "Swansea",
+      "kind": "council"
+    },
+    {
+      "code": "W06000012",
+      "name": "Neath Port Talbot",
+      "kind": "council"
+    },
+    {
+      "code": "W06000013",
+      "name": "Bridgend",
+      "kind": "council"
+    },
+    {
+      "code": "W06000014",
+      "name": "Vale of Glamorgan",
+      "kind": "council"
+    },
+    {
+      "code": "W06000015",
+      "name": "Cardiff",
+      "kind": "council"
+    },
+    {
+      "code": "W06000016",
+      "name": "Rhondda Cynon Taf",
+      "kind": "council"
+    },
+    {
+      "code": "W06000018",
+      "name": "Caerphilly",
+      "kind": "council"
+    },
+    {
+      "code": "W06000019",
+      "name": "Blaenau Gwent",
+      "kind": "council"
+    },
+    {
+      "code": "W06000020",
+      "name": "Torfaen",
+      "kind": "council"
+    },
+    {
+      "code": "W06000021",
+      "name": "Monmouthshire",
+      "kind": "council"
+    },
+    {
+      "code": "W06000022",
+      "name": "Newport",
+      "kind": "council"
+    },
+    {
+      "code": "W06000023",
+      "name": "Powys",
+      "kind": "council"
+    },
+    {
+      "code": "W06000024",
+      "name": "Merthyr Tydfil",
+      "kind": "council"
+    },
+    {
+      "code": "W92000004",
+      "name": "Wales",
+      "kind": "nation"
+    }
+  ],
+  "relationships": [
+    {
+      "child": "E06000001",
+      "parent": "E12000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000002",
+      "parent": "E12000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000003",
+      "parent": "E12000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000004",
+      "parent": "E12000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000005",
+      "parent": "E12000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000006",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000007",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000008",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000009",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000010",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000011",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000012",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000013",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000014",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000015",
+      "parent": "E12000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000016",
+      "parent": "E12000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000017",
+      "parent": "E12000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000018",
+      "parent": "E12000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000019",
+      "parent": "E12000005",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000020",
+      "parent": "E12000005",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000021",
+      "parent": "E12000005",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000022",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000023",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000024",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000025",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000026",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000027",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000030",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000031",
+      "parent": "E12000006",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000032",
+      "parent": "E12000006",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000033",
+      "parent": "E12000006",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000034",
+      "parent": "E12000006",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000035",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000036",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000037",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000038",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000039",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000040",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000041",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000042",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000043",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000044",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000045",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000046",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000047",
+      "parent": "E12000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000049",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000050",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000051",
+      "parent": "E12000005",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000052",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000053",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000054",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000055",
+      "parent": "E12000006",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000056",
+      "parent": "E12000006",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000057",
+      "parent": "E12000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000058",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000059",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000060",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000061",
+      "parent": "E12000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000062",
+      "parent": "E12000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000063",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000064",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000065",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E06000066",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000008",
+      "parent": "E10000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000009",
+      "parent": "E10000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000010",
+      "parent": "E10000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000011",
+      "parent": "E10000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000012",
+      "parent": "E10000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000032",
+      "parent": "E10000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000033",
+      "parent": "E10000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000034",
+      "parent": "E10000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000035",
+      "parent": "E10000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000036",
+      "parent": "E10000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000037",
+      "parent": "E10000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000038",
+      "parent": "E10000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000039",
+      "parent": "E10000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000040",
+      "parent": "E10000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000041",
+      "parent": "E10000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000042",
+      "parent": "E10000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000043",
+      "parent": "E10000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000044",
+      "parent": "E10000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000045",
+      "parent": "E10000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000046",
+      "parent": "E10000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000047",
+      "parent": "E10000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000061",
+      "parent": "E10000011",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000062",
+      "parent": "E10000011",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000063",
+      "parent": "E10000011",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000064",
+      "parent": "E10000011",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000065",
+      "parent": "E10000011",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000066",
+      "parent": "E10000012",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000067",
+      "parent": "E10000012",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000068",
+      "parent": "E10000012",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000069",
+      "parent": "E10000012",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000070",
+      "parent": "E10000012",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000071",
+      "parent": "E10000012",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000072",
+      "parent": "E10000012",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000073",
+      "parent": "E10000012",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000074",
+      "parent": "E10000012",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000075",
+      "parent": "E10000012",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000076",
+      "parent": "E10000012",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000077",
+      "parent": "E10000012",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000078",
+      "parent": "E10000013",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000079",
+      "parent": "E10000013",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000080",
+      "parent": "E10000013",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000081",
+      "parent": "E10000013",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000082",
+      "parent": "E10000013",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000083",
+      "parent": "E10000013",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000084",
+      "parent": "E10000014",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000085",
+      "parent": "E10000014",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000086",
+      "parent": "E10000014",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000087",
+      "parent": "E10000014",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000088",
+      "parent": "E10000014",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000089",
+      "parent": "E10000014",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000090",
+      "parent": "E10000014",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000091",
+      "parent": "E10000014",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000092",
+      "parent": "E10000014",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000093",
+      "parent": "E10000014",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000094",
+      "parent": "E10000014",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000095",
+      "parent": "E10000015",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000096",
+      "parent": "E10000015",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000098",
+      "parent": "E10000015",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000099",
+      "parent": "E10000015",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000102",
+      "parent": "E10000015",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000103",
+      "parent": "E10000015",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000105",
+      "parent": "E10000016",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000106",
+      "parent": "E10000016",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000107",
+      "parent": "E10000016",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000108",
+      "parent": "E10000016",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000109",
+      "parent": "E10000016",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000110",
+      "parent": "E10000016",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000111",
+      "parent": "E10000016",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000112",
+      "parent": "E10000016",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000113",
+      "parent": "E10000016",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000114",
+      "parent": "E10000016",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000115",
+      "parent": "E10000016",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000116",
+      "parent": "E10000016",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000117",
+      "parent": "E10000017",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000118",
+      "parent": "E10000017",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000119",
+      "parent": "E10000017",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000120",
+      "parent": "E10000017",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000121",
+      "parent": "E10000017",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000122",
+      "parent": "E10000017",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000123",
+      "parent": "E10000017",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000124",
+      "parent": "E10000017",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000125",
+      "parent": "E10000017",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000126",
+      "parent": "E10000017",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000127",
+      "parent": "E10000017",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000128",
+      "parent": "E10000017",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000129",
+      "parent": "E10000018",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000130",
+      "parent": "E10000018",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000131",
+      "parent": "E10000018",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000132",
+      "parent": "E10000018",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000133",
+      "parent": "E10000018",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000134",
+      "parent": "E10000018",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000135",
+      "parent": "E10000018",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000136",
+      "parent": "E10000019",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000137",
+      "parent": "E10000019",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000138",
+      "parent": "E10000019",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000139",
+      "parent": "E10000019",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000140",
+      "parent": "E10000019",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000141",
+      "parent": "E10000019",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000142",
+      "parent": "E10000019",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000143",
+      "parent": "E10000020",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000144",
+      "parent": "E10000020",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000145",
+      "parent": "E10000020",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000146",
+      "parent": "E10000020",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000147",
+      "parent": "E10000020",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000148",
+      "parent": "E10000020",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000149",
+      "parent": "E10000020",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000170",
+      "parent": "E10000024",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000171",
+      "parent": "E10000024",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000172",
+      "parent": "E10000024",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000173",
+      "parent": "E10000024",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000174",
+      "parent": "E10000024",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000175",
+      "parent": "E10000024",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000176",
+      "parent": "E10000024",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000177",
+      "parent": "E10000025",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000178",
+      "parent": "E10000025",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000179",
+      "parent": "E10000025",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000180",
+      "parent": "E10000025",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000181",
+      "parent": "E10000025",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000192",
+      "parent": "E10000028",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000193",
+      "parent": "E10000028",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000194",
+      "parent": "E10000028",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000195",
+      "parent": "E10000028",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000196",
+      "parent": "E10000028",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000197",
+      "parent": "E10000028",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000198",
+      "parent": "E10000028",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000199",
+      "parent": "E10000028",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000200",
+      "parent": "E10000029",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000202",
+      "parent": "E10000029",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000203",
+      "parent": "E10000029",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000207",
+      "parent": "E10000030",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000208",
+      "parent": "E10000030",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000209",
+      "parent": "E10000030",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000210",
+      "parent": "E10000030",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000211",
+      "parent": "E10000030",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000212",
+      "parent": "E10000030",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000213",
+      "parent": "E10000030",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000214",
+      "parent": "E10000030",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000215",
+      "parent": "E10000030",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000216",
+      "parent": "E10000030",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000217",
+      "parent": "E10000030",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000218",
+      "parent": "E10000031",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000219",
+      "parent": "E10000031",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000220",
+      "parent": "E10000031",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000221",
+      "parent": "E10000031",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000222",
+      "parent": "E10000031",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000223",
+      "parent": "E10000032",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000224",
+      "parent": "E10000032",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000225",
+      "parent": "E10000032",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000226",
+      "parent": "E10000032",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000227",
+      "parent": "E10000032",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000228",
+      "parent": "E10000032",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000229",
+      "parent": "E10000032",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000234",
+      "parent": "E10000034",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000235",
+      "parent": "E10000034",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000236",
+      "parent": "E10000034",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000237",
+      "parent": "E10000034",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000238",
+      "parent": "E10000034",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000239",
+      "parent": "E10000034",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000240",
+      "parent": "E10000015",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000241",
+      "parent": "E10000015",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000242",
+      "parent": "E10000015",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000243",
+      "parent": "E10000015",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000244",
+      "parent": "E10000029",
+      "kind": "administrative"
+    },
+    {
+      "child": "E07000245",
+      "parent": "E10000029",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000001",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000002",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000003",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000004",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000005",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000006",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000007",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000008",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000009",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000010",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000011",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000012",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000013",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000014",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000015",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000017",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000018",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000021",
+      "parent": "E12000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000022",
+      "parent": "E12000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000023",
+      "parent": "E12000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000024",
+      "parent": "E12000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000025",
+      "parent": "E12000005",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000026",
+      "parent": "E12000005",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000027",
+      "parent": "E12000005",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000028",
+      "parent": "E12000005",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000029",
+      "parent": "E12000005",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000030",
+      "parent": "E12000005",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000031",
+      "parent": "E12000005",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000032",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000033",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000034",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000035",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000036",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000037",
+      "parent": "E12000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000038",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E08000039",
+      "parent": "E12000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000001",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000002",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000003",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000004",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000005",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000006",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000007",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000008",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000009",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000010",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000011",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000012",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000013",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000014",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000015",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000016",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000017",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000018",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000019",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000020",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000021",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000022",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000023",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000024",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000025",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000026",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000027",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000028",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000029",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000030",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000031",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000032",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E09000033",
+      "parent": "E12000007",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000003",
+      "parent": "E12000006",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000007",
+      "parent": "E12000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000008",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000011",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000012",
+      "parent": "E12000006",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000013",
+      "parent": "E12000009",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000014",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000015",
+      "parent": "E12000006",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000016",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000017",
+      "parent": "E12000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000018",
+      "parent": "E12000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000019",
+      "parent": "E12000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000020",
+      "parent": "E12000006",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000024",
+      "parent": "E12000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000025",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000028",
+      "parent": "E12000005",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000029",
+      "parent": "E12000006",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000030",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000031",
+      "parent": "E12000005",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000032",
+      "parent": "E12000008",
+      "kind": "administrative"
+    },
+    {
+      "child": "E10000034",
+      "parent": "E12000005",
+      "kind": "administrative"
+    },
+    {
+      "child": "E12000001",
+      "parent": "E92000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E12000002",
+      "parent": "E92000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E12000003",
+      "parent": "E92000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E12000004",
+      "parent": "E92000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E12000005",
+      "parent": "E92000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E12000006",
+      "parent": "E92000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E12000007",
+      "parent": "E92000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E12000008",
+      "parent": "E92000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "E12000009",
+      "parent": "E92000001",
+      "kind": "administrative"
+    },
+    {
+      "child": "N09000001",
+      "parent": "N92000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "N09000002",
+      "parent": "N92000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "N09000003",
+      "parent": "N92000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "N09000004",
+      "parent": "N92000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "N09000005",
+      "parent": "N92000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "N09000006",
+      "parent": "N92000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "N09000007",
+      "parent": "N92000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "N09000008",
+      "parent": "N92000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "N09000009",
+      "parent": "N92000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "N09000010",
+      "parent": "N92000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "N09000011",
+      "parent": "N92000002",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000005",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000006",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000008",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000010",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000011",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000013",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000014",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000017",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000018",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000019",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000020",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000021",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000023",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000026",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000027",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000028",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000029",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000030",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000033",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000034",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000035",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000036",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000038",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000039",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000040",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000041",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000042",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000045",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000047",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000048",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000049",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "S12000050",
+      "parent": "S92000003",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000001",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000002",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000003",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000004",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000005",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000006",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000008",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000009",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000010",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000011",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000012",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000013",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000014",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000015",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000016",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000018",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000019",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000020",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000021",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000022",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000023",
+      "parent": "W92000004",
+      "kind": "administrative"
+    },
+    {
+      "child": "W06000024",
+      "parent": "W92000004",
+      "kind": "administrative"
+    }
+  ],
+  "postcodes": [
+    {
+      "postcode": "W3 9LN",
+      "latitude": 51.508924,
+      "longitude": -0.275866,
+      "council_code": "E09000009",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "SW1A 1AA",
+      "latitude": 51.50101,
+      "longitude": -0.141563,
+      "council_code": "E09000033",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "M2 5DB",
+      "latitude": 53.47929,
+      "longitude": -2.244554,
+      "council_code": "E08000003",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "200508",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "NE1 4LP",
+      "latitude": 54.98022,
+      "longitude": -1.618869,
+      "council_code": "E08000021",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "DH1 3LE",
+      "latitude": 54.768122,
+      "longitude": -1.571884,
+      "council_code": "E06000047",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "199507",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "LS1 3AD",
+      "latitude": 53.79998,
+      "longitude": -1.549729,
+      "council_code": "E08000035",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "S1 2HH",
+      "latitude": 53.38041,
+      "longitude": -1.469915,
+      "council_code": "E08000039",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "200408",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "NG1 2LH",
+      "latitude": 52.952916,
+      "longitude": -1.149777,
+      "council_code": "E06000018",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "199109",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "LE1 5DB",
+      "latitude": 52.634234,
+      "longitude": -1.135836,
+      "council_code": "E06000016",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "B1 1BB",
+      "latitude": 52.480144,
+      "longitude": -1.90289,
+      "council_code": "E08000025",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198410",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "CV1 5RR",
+      "latitude": 52.407106,
+      "longitude": -1.507605,
+      "council_code": "E08000026",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "CB2 1TN",
+      "latitude": 52.205118,
+      "longitude": 0.116208,
+      "council_code": "E07000008",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": "E10000003",
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "NR2 1NH",
+      "latitude": 52.628599,
+      "longitude": 1.291638,
+      "council_code": "E07000148",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": "E10000020",
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "OX1 2JD",
+      "latitude": 51.758043,
+      "longitude": -1.261992,
+      "council_code": "E07000178",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": "E10000025",
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "BN1 1EE",
+      "latitude": 50.821987,
+      "longitude": -0.138209,
+      "council_code": "E06000043",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "BS1 5TR",
+      "latitude": 51.452605,
+      "longitude": -2.60207,
+      "council_code": "E06000023",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "PL1 2AA",
+      "latitude": 50.369569,
+      "longitude": -4.143034,
+      "council_code": "E06000026",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "TR1 2NE",
+      "latitude": 50.262964,
+      "longitude": -5.050532,
+      "council_code": "E06000052",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "202512",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "LA22 9BU",
+      "latitude": 54.431634,
+      "longitude": -2.961994,
+      "council_code": "E06000064",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "SY8 1AS",
+      "latitude": 52.367228,
+      "longitude": -2.720292,
+      "council_code": "E06000051",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "PO30 1TY",
+      "latitude": 50.700598,
+      "longitude": -1.292354,
+      "council_code": "E06000046",
+      "nation_code": "E92000001",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "KW15 1NY",
+      "latitude": 58.981464,
+      "longitude": -2.956813,
+      "council_code": "S12000023",
+      "nation_code": "S92000003",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "199305",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "HS1 2BW",
+      "latitude": 58.208995,
+      "longitude": -6.378719,
+      "council_code": "S12000013",
+      "nation_code": "S92000003",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "202309",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "EH1 1YZ",
+      "latitude": 55.950328,
+      "longitude": -3.193018,
+      "council_code": "S12000036",
+      "nation_code": "S92000003",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "200608",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "G1 2FF",
+      "latitude": 55.863846,
+      "longitude": -4.251378,
+      "council_code": "S12000049",
+      "nation_code": "S92000003",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "199906",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "CF10 1EP",
+      "latitude": 51.475764,
+      "longitude": -3.179217,
+      "council_code": "W06000015",
+      "nation_code": "W92000004",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "199906",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "LL57 2DG",
+      "latitude": 53.22921,
+      "longitude": -4.129444,
+      "council_code": "W06000002",
+      "nation_code": "W92000004",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    },
+    {
+      "postcode": "CH4 8SG",
+      "latitude": 53.17821,
+      "longitude": -2.926902,
+      "council_code": "W06000005",
+      "nation_code": "W92000004",
+      "region_code": null,
+      "county_code": null,
+      "introduced": "198001",
+      "terminated": null,
+      "coordinate_method": "Postcodes.io postcode representative point",
+      "source": "https://api.postcodes.io/postcodes",
+      "observed_at": "2026-10-18T22:48:36.308037+00:00"
+    }
+  ]
+}
