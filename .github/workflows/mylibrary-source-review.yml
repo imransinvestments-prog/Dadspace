@@ -11,6 +11,7 @@ on:
       - 'tests/test_classforkids_calendar.py'
       - 'tests/test_activity_dates.py'
       - 'tests/test_mylibrary_calendar.py'
+      - 'tests/test_mylibrary_review_scope.py'
       - 'tests/test_library_portal.py'
       - 'tests/fixtures/mylibrary-*'
       - 'tests/fixtures/library-portal-*'
@@ -35,6 +36,7 @@ jobs:
       - run: python -m unittest discover -s tests -p test_activity_dates.py -v
       - run: python -m unittest discover -s tests -p test_classforkids_calendar.py -v
       - run: python -m unittest discover -s tests -p test_mylibrary_calendar.py -v
+      - run: python -m unittest discover -s tests -p test_mylibrary_review_scope.py -v
       - run: python -m unittest discover -s tests -p test_library_portal.py -v
       - run: python -m unittest discover -s tests -p test_ds10_human_review.py -v
   live-read-only:
@@ -43,15 +45,27 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - run: pip install -r requirements-browser.txt
       - run: playwright install --with-deps chromium
-      - run: python scripts/validate_mylibrary_sources.py
+      - name: Validate the affected adapter family without broad source qualification
+        shell: bash
+        run: |
+          args=()
+          if [ "$EVENT_NAME" = pull_request ] && git diff --quiet "$BASE_SHA" "$HEAD_SHA" -- library_portal.py events_worker.py; then
+            args+=(--family mylibrary_calendar)
+          fi
+          python scripts/validate_mylibrary_sources.py "${args[@]}"
         env:
           DRY_RUN: 'true'
           FETCH_ENGINE: browser
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:

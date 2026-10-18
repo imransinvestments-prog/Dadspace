@@ -52,6 +52,10 @@ jobs:
         run: python events_worker.py --self-test
       - name: Activity ingestion regressions
         run: python -m unittest discover -s tests -p test_activity_ingestion.py -v
+      - name: Collection evidence regressions
+        run: python -m unittest discover -s tests -p 'test_collection_*.py' -v
+      - name: Bounded programme renewal regressions
+        run: python -m unittest discover -s tests -p test_activity_renewal.py -v
       - name: Published activity date regressions
         run: python -m unittest discover -s tests -p test_activity_dates.py -v
       - name: ClassForKids calendar regressions
@@ -97,6 +101,7 @@ jobs:
           EXTRACTION_CACHE_DIR: .extraction-cache
           WORKER_NAME: "events-activities"
           USAGE_REPORT_PATH: usage-report.json
+          COLLECTION_EVIDENCE_PATH: collection-evidence.jsonl
           SHADOW_CAPTURE_DIR: ${{ (inputs.dry_run || 'true') == 'false' && 'shadow-input' || '' }}
           CATEGORIES: "activities"
           FETCH_ENGINE: "browser"
@@ -127,6 +132,13 @@ jobs:
           name: activities-usage-${{ github.run_id }}-${{ github.run_attempt }}
           path: usage-report.json
           if-no-files-found: warn
+      - name: Upload append-only collection evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: activities-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: collection-evidence.jsonl
+          if-no-files-found: error
       - name: Save committed extraction results
         if: ${{ success() && vars.EXTRACTION_PER_PAGE == 'true' && (inputs.dry_run || 'true') == 'false' }}
         uses: actions/cache/save@v5

@@ -1,0 +1,49 @@
+{
+  "fixture": "tests/fixtures/activity-repeat-cardiff.json",
+  "source_url": "https://cardiffhubs.co.uk/events/",
+  "baseline": {
+    "title": "Story and Rhyme Time",
+    "listing_type": "activity",
+    "venue_name": "Canton Library",
+    "location": "Canton Library",
+    "event_url": "https://cardiffhubs.co.uk/hub-events/story-and-rhyme-time/",
+    "source_url": "https://cardiffhubs.co.uk/events/",
+    "start_date": null
+  },
+  "method": "Real repository SQL functions and trigger in isolated PostgreSQL-compatible PGlite; mutations are synthetic scenarios, not claims about source changes",
+  "cases": [
+    {
+      "case": "repeat_import",
+      "rows": 1,
+      "same_id": true,
+      "same_identity": true,
+      "same_content": true
+    },
+    {
+      "case": "changed_schedule",
+      "rows": 1,
+      "same_id": true,
+      "same_identity": true,
+      "content_changed": true
+    },
+    {
+      "case": "renamed_programme_same_url",
+      "rows": 2,
+      "finding": "title-based identity creates a second row; requires reviewed continuity evidence"
+    },
+    {
+      "case": "moved_programme",
+      "rows": 2,
+      "finding": "distinct venue preserved; old row is not retired automatically"
+    },
+    {
+      "case": "distinct_same_title_same_venue_sessions",
+      "rows": 1,
+      "finding": "current identity merges distinct session candidates; no production repair performed"
+    },
+    {
+      "case": "distinct_named_programmes_same_venue",
+      "rows": 2
+    }
+  ]
+}

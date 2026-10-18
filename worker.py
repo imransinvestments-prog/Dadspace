@@ -1363,6 +1363,10 @@ def main():
     processed = 0
     expired_note = "not run"
 
+    from collection_evidence import CollectionEvidence, public_view_readback
+    evidence = CollectionEvidence(sources, dry_run=DRY_RUN,
+        path=os.environ.get('COLLECTION_EVIDENCE_PATH'))
+
     try:
         for number, source in enumerate(sources, start=1):
             elapsed_minutes = (time.monotonic() - start_time) / 60
@@ -1383,6 +1387,8 @@ def main():
             try:
                 status, rows, new_hash, message, stats = process_source(source, extract, today)
             except BudgetExhausted as exc:
+                evidence.source(source, 'deferred_budget', {}, [],
+                    write_state='not_attempted', health_state='not_attempted')
                 source_usage.append({'source_id': source['id'], 'source': source['name'],
                     'status': 'deferred_budget', 'accepted': 0, 'usage': {k: v - usage_before.get(k, 0)
                         for k, v in getattr(extract, 'metrics', {}).items()}})
@@ -1390,6 +1396,8 @@ def main():
                 stopped_early = True
                 break
             except FatalError as exc:
+                evidence.source(source, 'fatal', {}, [],
+                    write_state='unknown', health_state='not_attempted')
                 source_usage.append({'source_id': source['id'], 'source': source['name'],
                     'status': 'fatal', 'accepted': 0, 'usage': {k: v - usage_before.get(k, 0)
                         for k, v in getattr(extract, 'metrics', {}).items()}})
@@ -1400,8 +1408,11 @@ def main():
                     "failed_unexpected", [], None, f"{type(exc).__name__}: {exc}", {},
                 )
 
+            write_state = 'dry_run' if DRY_RUN else 'not_attempted'
+            candidate_rows = rows
             if status == "ok" and rows and not DRY_RUN:
                 save_error = save_events(db, rows)
+                write_state = 'unknown_partial' if save_error else 'succeeded'
                 if save_error:
                     status = "failed_save"
                     message = f"could not save events ({save_error})"
@@ -1440,19 +1451,31 @@ def main():
             else:
                 update.update({"fail_count": 0, "last_error": None})
 
+            health_state = 'dry_run' if DRY_RUN else 'not_attempted'
             if not DRY_RUN:
                 try:
                     response = db.table("sources").update(update).eq("id", source["id"]).execute()
+                    health_state = ('succeeded' if isinstance(response.data, list)
+                        and any(row.get('id') == source['id'] for row in response.data)
+                        else 'unconfirmed')
                     # Confirm the update actually affected this source before
                     # admitting results to the reusable cache (RLS can return []).
                     persisted = (status in ('ok', 'ok_zero') and isinstance(response.data, list)
                                  and any(row.get('id') == source['id'] for row in response.data))
                     finish_result_cache(extract, source['id'], persisted)
                 except Exception as exc:
+                    health_state = 'failed'
                     finish_result_cache(extract, source['id'], False)
                     print(f"      warning: could not update this source's status ({type(exc).__name__}: {exc})")
             else:
                 finish_result_cache(extract, source['id'], False)
+
+            readback = None
+            if (evidence.path and not DRY_RUN and write_state == 'succeeded'
+                    and 'activities' in CATEGORY_FILTER):
+                readback = public_view_readback(db, source['id'], candidate_rows)
+            evidence.source(source, status, stats, candidate_rows,
+                write_state=write_state, health_state=health_state, readback=readback)
 
             time.sleep(PAUSE_SECONDS)
 
@@ -1468,6 +1491,7 @@ def main():
                 expired_note = f"clean-up failed ({type(exc).__name__}: {exc})"
     finally:
         total_minutes = (time.monotonic() - start_time) / 60
+        evidence_summary = evidence.finish(stopped_early=stopped_early, fatal=fatal is not None)
         report_path = os.environ.get('USAGE_REPORT_PATH')
         if report_path:
             from pathlib import Path
@@ -1475,7 +1499,8 @@ def main():
                 'worker': os.environ.get('WORKER_NAME', 'events'), 'dry_run': DRY_RUN,
                 'settings': getattr(extract, 'settings', {}), 'sources': source_usage,
                 'metrics': dict(getattr(extract, 'metrics', {})), 'validation': run_stats,
-                'stopped_early': stopped_early, 'fatal': fatal is not None}
+                'stopped_early': stopped_early, 'fatal': fatal is not None,
+                'collection_evidence': evidence_summary}
             try:
                 Path(report_path).write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
             except OSError as exc:

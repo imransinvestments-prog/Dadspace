@@ -223,6 +223,12 @@ def collect(source, today, fetch, robots, *, max_requests=80, max_seconds=300, f
     started=time.monotonic(); cache={}; hashes=[]
     stats=stats if stats is not None else {}
     stats.update(calendar_requests=0,gemini_logical_calls=0)
+    coverage = {'adapter': 'mylibrary_calendar', 'complete': False,
+                'scope': 'bounded_detail_snapshot', 'window_start': today.isoformat(),
+                'checked_urls': [], 'included_urls': [], 'withheld': [],
+                'renewal': 'accepted_rows_only', 'unseen': 'retain_without_refresh',
+                'cancellation': 'omit_cancelled_occurrence_no_automatic_withdrawal'}
+    stats['item_coverage'] = coverage
     def get(url, calendar=False):
         url=public_url(url,origin)
         if url in cache: return cache[url]
@@ -235,6 +241,7 @@ def collect(source, today, fetch, robots, *, max_requests=80, max_seconds=300, f
         page=(fetch_ics if calendar else fetch)(url)
         if isinstance(page,str): page=Page(page)
         cache[url]=page
+        coverage['checked_urls'].append(url)
         hashes.append((url,page.html))
         return page
     root=get(origin)
@@ -256,6 +263,7 @@ def collect(source, today, fetch, robots, *, max_requests=80, max_seconds=300, f
         item=parse_detail(get(url).html,url,reference_date=today)
         series_checked=False
         if not item['family_evidence']:
+            coverage['withheld'].append({'url': url, 'reason': 'missing_family_evidence'})
             stats['missing_family_evidence']=stats.get('missing_family_evidence',0)+1; continue
         if (item['listing_type']=='unknown' and item['series_url']
                 and REGULAR_PROGRAMME.search(item['title'])
@@ -267,26 +275,35 @@ def collect(source, today, fetch, robots, *, max_requests=80, max_seconds=300, f
                 item['occurrence_dates']+=published
                 series_checked=True
         if item['listing_type']=='unknown':
+            coverage['withheld'].append({'url': url, 'reason': 'classification_unresolved'})
             stats['classification_unresolved']=stats.get('classification_unresolved',0)+1; continue
         if item['cancelled'] or item['unavailable']:
             reason='cancelled' if item['cancelled'] else 'unavailable'
+            coverage['withheld'].append({'url': url, 'reason': reason})
             stats[reason]=stats.get(reason,0)+1; continue
         if fetch_ics and item['ics_url']:
             occurrence=parse_ics(get(item['ics_url'],True).html)
-            if occurrence['cancelled']: continue
+            if occurrence['cancelled']:
+                coverage['withheld'].append({'url': url, 'reason': 'ics_cancelled'})
+                continue
             if occurrence['date']!=item['start_date'] or occurrence['time_text']!=item['time_text']:
                 raise CalendarError('HTML/ICS occurrence conflict')
         if item['listing_type']=='activity' and item['series_url'] and not series_checked:
             item['occurrence_dates']+=series_dates(get(item['series_url']).html,item['series_url'],item,first_date=today.isoformat(),last_date=cutoff,fetch_detail=get,reference_date=today)
         item['occurrence_dates']=sorted({d for d in item['occurrence_dates'] if today.isoformat()<=d<=cutoff})
-        if not item['occurrence_dates']: continue
+        if not item['occurrence_dates']:
+            coverage['withheld'].append({'url': url, 'reason': 'no_occurrence_in_window'})
+            continue
         item['description']+=' '+(item['booking_text'] or '')
         if item['listing_type']=='activity':
             item['schedule_text']='Published dates: '+', '.join(item['occurrence_dates'])+'; '+item['time_text']
             # Do not shorten a date list into a continuous weekly promise.
             if len(item['schedule_text'])>300: raise CalendarError('Published schedule exceeds storage limit; review series window')
         items.append(item)
+        coverage['included_urls'].append(url)
     stats['calendar_documents']=len(cache)
+    coverage['complete'] = True
+    coverage['window_end'] = cutoff
     digest=hashlib.sha256(json.dumps(sorted(hashes),ensure_ascii=False).encode()).hexdigest()
     return items,digest,stats
 

@@ -1,0 +1,70 @@
+▲ Next.js 16.3.7 (webpack)
+✓ Running next.config.ts took 50ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 6.7s
+  Running TypeScript ...
+  Finished TypeScript in 5.5s ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/15) ...
+  Generating static pages using 15 workers (3/15) 
+  Generating static pages using 15 workers (7/15) 
+  Generating static pages using 15 workers (11/15) 
+✓ Generating static pages using 15 workers (15/15) in 554ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ƒ /
+├ ○ /_not-found
+├ ƒ /activities
+├ ƒ /activities/[slug]
+├ ƒ /api/activities
+├ ƒ /api/events
+├ ƒ /api/home
+├ ƒ /api/home/deals
+├ ƒ /api/home/local-places
+├ ƒ /api/home/nearby-week
+├ ƒ /api/location
+├ ƒ /api/region
+├ ƒ /api/venues
+├ ƒ /api/venues/[id]/photo
+├ ƒ /auth/callback
+├ ○ /auth/error
+├ ○ /auth/forgot-password
+├ ƒ /auth/login
+├ ƒ /auth/sign-up
+├ ○ /auth/sign-up-success
+├ ƒ /auth/update-password
+├ ƒ /deals
+├ ƒ /events
+├ ƒ /events/[slug]
+├ ○ /forum
+├ ○ /llms.txt
+├ ○ /manifest.webmanifest
+├ ƒ /news
+├ ƒ /ops
+├ ƒ /ops/deals
+├ ƒ /ops/decision
+├ ƒ /ops/editorial
+├ ƒ /ops/review
+├ ƒ /ops/reviews
+├ ƒ /ops/reviews/[id]
+├ ƒ /ops/sprint-5
+├ ƒ /originals
+├ ƒ /originals/[slug]
+├ ƒ /places/[area]/[category]
+├ ƒ /profile
+├ ○ /robots.txt
+├ ƒ /sitemap.xml
+├ ƒ /sitemaps/core.xml
+├ ƒ /sitemaps/venues/[shard]
+├ ƒ /venues
+└ ƒ /venues/[slug]
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
