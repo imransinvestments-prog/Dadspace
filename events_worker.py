@@ -9,7 +9,6 @@ without adding an extra Gemini call.
 from __future__ import annotations
 
 import datetime as dt
-import difflib
 import hashlib
 import json
 import os
@@ -52,8 +51,6 @@ STREET_ADDRESS = re.compile(
 _ALLOWED_AUDIENCES = {"children", "families", "general", "adults", "unknown"}
 
 _VENUE_DB = None
-_VENUE_CACHE: dict[tuple[str, str], str | None] = {}
-_POSTCODE_CACHE: dict[str, tuple[float | None, float | None]] = {}
 
 
 def _normalise_words(value: str | None) -> str:
@@ -160,119 +157,23 @@ def _venue_client():
     return _VENUE_DB
 
 
-def _postcode_coords(postcode: str | None) -> tuple[float | None, float | None]:
-    pc = _normalise_postcode(postcode)
-    if not pc:
-        return None, None
-    if pc in _POSTCODE_CACHE:
-        return _POSTCODE_CACHE[pc]
-    try:
-        response = requests.get(
-            "https://api.postcodes.io/postcodes/" + pc.replace(" ", "%20"),
-            timeout=10,
-            headers={"User-Agent": base.USER_AGENT},
-        )
-        payload = response.json() if response.ok else {}
-        result = payload.get("result") or {}
-        coords = (result.get("latitude"), result.get("longitude"))
-    except Exception:
-        coords = (None, None)
-    _POSTCODE_CACHE[pc] = coords
-    return coords
-
-
-def _mark_possible_venue_match(db, venue_id: str, extracted_name: str, page_url: str):
-    if base.DRY_RUN:
-        return
-    reason = f"Possible source match: {extracted_name} ({page_url})"[:500]
-    try:
-        db.table("venues").update({"review_reason": reason}).eq("id", venue_id).execute()
-    except Exception as exc:
-        print(f"      venue review flag warning: {type(exc).__name__}: {exc}")
-
-
 def _resolve_venue(item: dict, page_url: str) -> str | None:
-    """Match source-extracted venue fields. Never guesses missing address data."""
+    """Use bounded canonical evidence; retain listings when location is unknown."""
+    from canonical_venue import resolve
     name = base.clean_str(item.get("venue_name"), 300)
     postcode = _normalise_postcode(base.clean_str(item.get("postcode"), 20))
-    address = base.clean_str(item.get("venue_address"), 500)
-    if not name:
+    if not name or not postcode:
         return None
-
-    cache_key = (_normalise_words(name), postcode)
-    if cache_key in _VENUE_CACHE:
-        return _VENUE_CACHE[cache_key]
-
     db = _venue_client()
     if db is None:
-        _VENUE_CACHE[cache_key] = None
         return None
-
     try:
-        candidates = []
-        if postcode:
-            result = db.table("venues").select("id,venue_name,postcode").ilike("postcode", postcode).limit(20).execute()
-            candidates = result.data or []
-
-        norm_name = _normalise_words(name)
-        exact = next((v for v in candidates if _normalise_words(v.get("venue_name")) == norm_name), None)
-        if exact:
-            venue_id = str(exact["id"])
-            _VENUE_CACHE[cache_key] = venue_id
-            return venue_id
-
-        if candidates:
-            ranked = sorted(
-                (
-                    difflib.SequenceMatcher(None, norm_name, _normalise_words(v.get("venue_name"))).ratio(),
-                    v,
-                )
-                for v in candidates
-            )
-            score, best = ranked[-1]
-            if score >= 0.55:
-                _mark_possible_venue_match(db, str(best["id"]), name, page_url)
-                _VENUE_CACHE[cache_key] = None
-                return None
-
-        # Schools may be valid activity locations, but are not automatically added
-        # to the public family-venue directory.
-        if SCHOOL.search(name):
-            _VENUE_CACHE[cache_key] = None
-            return None
-
-        has_real_address = bool(postcode or (address and STREET_ADDRESS.search(address)))
-        if not has_real_address:
-            _VENUE_CACHE[cache_key] = None
-            return None
-
-        if base.DRY_RUN:
-            _VENUE_CACHE[cache_key] = None
-            return None
-
-        lat, lon = _postcode_coords(postcode)
-        source_hash = hashlib.sha1(f"{page_url}|{norm_name}|{postcode}".encode()).hexdigest()[:12]
-        row = {
-            "venue_name": name,
-            "address": address,
-            "postcode": postcode or None,
-            "latitude": lat,
-            "longitude": lon,
-            "source": "Dadspace event discovery",
-            "source_url": f"{page_url}#dadspace-discovered-{source_hash}",
-            "discovered_source_url": page_url,
-            "discovered_at": dt.datetime.now(dt.timezone.utc).isoformat(),
-            "discovery_status": "discovered",
-            "public_visible": False,
-            "review_reason": "New venue discovered from an event/activity source",
-        }
-        inserted = db.table("venues").insert(row).execute().data or []
-        venue_id = str(inserted[0]["id"]) if inserted else None
-        _VENUE_CACHE[cache_key] = venue_id
+        venue_id, reason = resolve(db, name, postcode)
+        if venue_id is None:
+            print(f"      venue unresolved: {reason}")
         return venue_id
     except Exception as exc:
         print(f"      venue match warning: {type(exc).__name__}: {exc}")
-        _VENUE_CACHE[cache_key] = None
         return None
 
 
@@ -551,6 +452,19 @@ def clean_events(raw_events, source, page_url, method, today, stats=None):
 
 
 def process_source(source, extract, today):
+    if source.get('source_adapter')=='hounslow_programme':
+        from hounslow_programmes import collect
+        stats={}
+        try:
+            raw,new_hash,stats=collect(source,today,base.fetch_html_requests,base.robots_allows,stats)
+            rows=clean_events(raw,source,source['url'],'hounslow_programme',today,stats)
+            stats['item_coverage']={'adapter':'hounslow_programme','complete':True,
+                'scope':'reviewed_detail','checked_urls':[source['url']],
+                'included_urls':[r['event_url'] for r in rows],
+                'renewal':'accepted_rows_only','unseen':'retain_without_refresh'}
+            return ('ok' if rows else 'ok_zero'),rows,new_hash,f'Hounslow: {len(rows)} reviewed programmes; zero model calls',stats
+        except Exception as exc:
+            return base.classify_fetch_error(str(exc)),[],None,str(exc),stats
     if source.get('source_adapter')=='classforkids_calendar':
         from classforkids_calendar import collect
         stats={}

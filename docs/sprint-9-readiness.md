@@ -1,5 +1,5 @@
 ## Sprint 9 readiness and delivery plan — 18 October 2026
-**Scope approved by owner; readiness reviewed; delivery planned, not started.** This section supersedes older proposed-scope/status text below. No scheduled acceptance window is declared.
+**Readiness snapshot before delivery started on 18 October 2026. Current execution: docs/sprint-9-plan.md and tracker #197.** This section supersedes older proposed-scope/status text below. No scheduled acceptance window is declared.
 
 ### Capacity and goal
 Improve Activities identity, canonical places and maintenance without mixing delivered work with elapsed observation. **19 new delivery points is a ceiling, not measured velocity:** #198 5 provisional, #40 8 (S1 5/S2 3), #104 3, #133 3. Existing #125/#132/#129 total 9 unaccepted observation points remain separate. No stretch work or promise of 28 accepted points.

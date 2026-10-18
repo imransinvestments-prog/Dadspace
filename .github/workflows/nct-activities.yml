@@ -1,8 +1,9 @@
 name: Collect NCT activities
 on:
-  push:
-    branches: [main]
-    paths: ["nct_activity_loader.py"]
+  pull_request:
+    paths: ['nct_activity_loader.py', 'tests/test_nct_refresh.py', '.github/workflows/nct-activities.yml']
+  schedule:
+    - cron: '0 6 * * 1'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -12,11 +13,27 @@ on:
         options: ["true", "false"]
         default: "true"
       limit:
-        description: "Maximum branch pages to process (0 = all)"
+        description: "Maximum reviewed branches (0 = reviewed allowlist only)"
         required: false
         default: "0"
+permissions:
+  contents: read
+concurrency:
+  group: nct-reviewed-refresh
+  cancel-in-progress: false
 jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -p test_nct_refresh.py -v
   collect:
+    needs: checks
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && vars.NCT_REFRESH_ENABLED == 'true')
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -31,5 +48,13 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-          DRY_RUN: ${{ github.event_name == 'push' && 'false' || inputs.dry_run || 'true' }}
+          DRY_RUN: ${{ github.event_name == 'schedule' && 'false' || inputs.dry_run || 'true' }}
+          NCT_REFRESH_ENABLED: ${{ vars.NCT_REFRESH_ENABLED || 'false' }}
+          COLLECTION_EVIDENCE_PATH: review/nct-refresh/run.jsonl
           LIMIT: ${{ inputs.limit || '0' }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nct-refresh-evidence
+          path: review/nct-refresh/
+          retention-days: 30

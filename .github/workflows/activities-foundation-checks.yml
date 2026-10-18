@@ -5,6 +5,9 @@ on:
       - 'worker.py'
       - 'collection_evidence.py'
       - 'mylibrary_calendar.py'
+      - 'events_worker.py'
+      - 'canonical_venue.py'
+      - 'tests/test_canonical_venue.py'
       - 'activity_eligibility.py'
       - 'scripts/replay-activity-identity.mjs'
       - 'scripts/rehearse-provider-identity.mjs'
@@ -35,6 +38,7 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s tests -p 'test_collection_*.py' -v
       - run: python -m unittest discover -s tests -p test_activity_ingestion.py -v
+      - run: python -m unittest discover -s tests -p test_canonical_venue.py -v
       - run: python -m unittest discover -s tests -p test_activity_renewal.py -v
       - run: python -m unittest discover -s tests -p test_activity_eligibility.py -v
       - run: python -m unittest discover -s tests -p test_activity_identity_qualification.py -v

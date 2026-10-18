@@ -1,0 +1,434 @@
+{
+  "checked_on": "2026-10-18",
+  "dry_run": true,
+  "database_writes": 0,
+  "model_calls": 0,
+  "candidate_keys_equal": true,
+  "candidate_rows": 24,
+  "distinct_actionable_opportunities": "not_certified",
+  "source_activation": false,
+  "passes": [
+    [
+      {
+        "kind": "start",
+        "at": "2026-10-18T18:41:47.382776+00:00",
+        "run": {
+          "run_id": null,
+          "attempt": null,
+          "sha": null,
+          "event": null
+        },
+        "dry_run": true,
+        "expected_source_ids": [
+          "https://www.nct.org.uk/local-activities-meet-ups/twickenham-hounslow-and-district"
+        ]
+      },
+      {
+        "kind": "source",
+        "at": "2026-10-18T18:41:53.327776+00:00",
+        "source_id": "https://www.nct.org.uk/local-activities-meet-ups/twickenham-hounslow-and-district",
+        "status": "ok",
+        "extracted": 24,
+        "validated": 24,
+        "rejected": 0,
+        "merged_duplicates": 0,
+        "accounting_complete": true,
+        "write_state": "dry_run",
+        "health_state": "dry_run",
+        "saved_count": null,
+        "unchanged": false,
+        "deferred": false,
+        "failed": false,
+        "suspicious_zero": false,
+        "coverage": {
+          "scope": "reviewed_branch_30_day_window",
+          "complete": true,
+          "url": "https://www.nct.org.uk/local-activities-meet-ups/twickenham-hounslow-and-district",
+          "window_start": "2026-10-18",
+          "window_end": "2026-11-17",
+          "renewal": "accepted_rows_only",
+          "unseen": "retain_without_refresh"
+        },
+        "public_readback": {
+          "state": "not_checked"
+        },
+        "candidate_keys": [
+          "0c1d8450c7394f7a34e7b37142d8bc4442ac075f",
+          "1314bbccafecfcae76dbbbc4979e69dd688bb36c",
+          "1892505cda51b26837ba29932420e9aa95876899",
+          "3623c341a03ed8f69c801741d30bb02c7300d4ee",
+          "385c545839287c4ec876cef0a907496842f35e4b",
+          "4978a57cd3bfd06ed997d402afeb9f11e9518bfe",
+          "56ad9157bac9546117427a42c6af6ccf2fff2cc3",
+          "58184cc8c60db14a3daabbb975c8c865edf51d52",
+          "6d6af99ee267f894f24ded6fe81ef6beea1c686f",
+          "73a709ef822acd551c8e67e452d487faacbf1067",
+          "904826fc7c672b6016308c0ecd2c586fcc6980d6",
+          "9c6b23157e0f9f51e6fb6d97b26f9e52b181773b",
+          "9ea08a54637bec6bfeb951d81b88d959ed48e348",
+          "aa2216c880d56d0ff3f49795e5c93da6f97d2c9e",
+          "b00f418b1ca1154822a0fbcfb12a171b2a48fbea",
+          "b97c17f363f681a9cee82ffc43c8cab58657b04d",
+          "c5358252b00899ee6d518196e320154d2aaac8be",
+          "c72278b692cfa5d379560623ad1ce31edbda05f2",
+          "d3157ee8d14edb0dbc3637f9e98deadb7c1172e4",
+          "e5b9aeb51d5f0b223cc4020ce2c0954cc4ada555",
+          "edf601dad24bb003d6117cb8e2f5ffedbec0b608",
+          "f02136f725825fee1e6afcaa19ae154d2a1cc145",
+          "fd38bcf83e04a9fd36247e528a56a13b609f4b03",
+          "fd454895c7f7eea159d6121e00feb7987b66fb22"
+        ]
+      },
+      {
+        "kind": "finish",
+        "at": "2026-10-18T18:41:53.327776+00:00",
+        "run": {
+          "run_id": null,
+          "attempt": null,
+          "sha": null,
+          "event": null
+        },
+        "expected_sources": 1,
+        "recorded_sources": 1,
+        "not_processed_source_ids": [],
+        "stopped_early": false,
+        "fatal": false,
+        "all_sources_checked": true,
+        "empty_selection": false,
+        "all_sources_succeeded": true
+      }
+    ],
+    [
+      {
+        "kind": "start",
+        "at": "2026-10-18T18:42:23.957351+00:00",
+        "run": {
+          "run_id": null,
+          "attempt": null,
+          "sha": null,
+          "event": null
+        },
+        "dry_run": true,
+        "expected_source_ids": [
+          "https://www.nct.org.uk/local-activities-meet-ups/twickenham-hounslow-and-district"
+        ]
+      },
+      {
+        "kind": "source",
+        "at": "2026-10-18T18:42:28.868711+00:00",
+        "source_id": "https://www.nct.org.uk/local-activities-meet-ups/twickenham-hounslow-and-district",
+        "status": "ok",
+        "extracted": 24,
+        "validated": 24,
+        "rejected": 0,
+        "merged_duplicates": 0,
+        "accounting_complete": true,
+        "write_state": "dry_run",
+        "health_state": "dry_run",
+        "saved_count": null,
+        "unchanged": false,
+        "deferred": false,
+        "failed": false,
+        "suspicious_zero": false,
+        "coverage": {
+          "scope": "reviewed_branch_30_day_window",
+          "complete": true,
+          "url": "https://www.nct.org.uk/local-activities-meet-ups/twickenham-hounslow-and-district",
+          "window_start": "2026-10-18",
+          "window_end": "2026-11-17",
+          "renewal": "accepted_rows_only",
+          "unseen": "retain_without_refresh"
+        },
+        "public_readback": {
+          "state": "not_checked"
+        },
+        "candidate_keys": [
+          "0c1d8450c7394f7a34e7b37142d8bc4442ac075f",
+          "1314bbccafecfcae76dbbbc4979e69dd688bb36c",
+          "1892505cda51b26837ba29932420e9aa95876899",
+          "3623c341a03ed8f69c801741d30bb02c7300d4ee",
+          "385c545839287c4ec876cef0a907496842f35e4b",
+          "4978a57cd3bfd06ed997d402afeb9f11e9518bfe",
+          "56ad9157bac9546117427a42c6af6ccf2fff2cc3",
+          "58184cc8c60db14a3daabbb975c8c865edf51d52",
+          "6d6af99ee267f894f24ded6fe81ef6beea1c686f",
+          "73a709ef822acd551c8e67e452d487faacbf1067",
+          "904826fc7c672b6016308c0ecd2c586fcc6980d6",
+          "9c6b23157e0f9f51e6fb6d97b26f9e52b181773b",
+          "9ea08a54637bec6bfeb951d81b88d959ed48e348",
+          "aa2216c880d56d0ff3f49795e5c93da6f97d2c9e",
+          "b00f418b1ca1154822a0fbcfb12a171b2a48fbea",
+          "b97c17f363f681a9cee82ffc43c8cab58657b04d",
+          "c5358252b00899ee6d518196e320154d2aaac8be",
+          "c72278b692cfa5d379560623ad1ce31edbda05f2",
+          "d3157ee8d14edb0dbc3637f9e98deadb7c1172e4",
+          "e5b9aeb51d5f0b223cc4020ce2c0954cc4ada555",
+          "edf601dad24bb003d6117cb8e2f5ffedbec0b608",
+          "f02136f725825fee1e6afcaa19ae154d2a1cc145",
+          "fd38bcf83e04a9fd36247e528a56a13b609f4b03",
+          "fd454895c7f7eea159d6121e00feb7987b66fb22"
+        ]
+      },
+      {
+        "kind": "finish",
+        "at": "2026-10-18T18:42:28.874811+00:00",
+        "run": {
+          "run_id": null,
+          "attempt": null,
+          "sha": null,
+          "event": null
+        },
+        "expected_sources": 1,
+        "recorded_sources": 1,
+        "not_processed_source_ids": [],
+        "stopped_early": false,
+        "fatal": false,
+        "all_sources_checked": true,
+        "empty_selection": false,
+        "all_sources_succeeded": true
+      }
+    ]
+  ],
+  "prior_failures": [
+    {
+      "file": "qualification.jsonl",
+      "records": [
+        {
+          "kind": "start",
+          "at": "2026-10-18T18:38:25.054317+00:00",
+          "run": {
+            "run_id": null,
+            "attempt": null,
+            "sha": null,
+            "event": null
+          },
+          "dry_run": true,
+          "expected_source_ids": [
+            "https://www.nct.org.uk/local-activities-meet-ups/twickenham-hounslow-and-district"
+          ]
+        },
+        {
+          "kind": "source",
+          "at": "2026-10-18T18:38:25.418231+00:00",
+          "source_id": "https://www.nct.org.uk/local-activities-meet-ups/twickenham-hounslow-and-district",
+          "status": "failed_refresh",
+          "extracted": null,
+          "validated": null,
+          "rejected": null,
+          "merged_duplicates": 0,
+          "accounting_complete": false,
+          "write_state": "not_attempted",
+          "health_state": "failed",
+          "saved_count": null,
+          "unchanged": false,
+          "deferred": false,
+          "failed": true,
+          "suspicious_zero": false,
+          "coverage": "unknown",
+          "public_readback": {
+            "state": "not_checked"
+          },
+          "candidate_keys": []
+        },
+        {
+          "kind": "finish",
+          "at": "2026-10-18T18:38:25.420405+00:00",
+          "run": {
+            "run_id": null,
+            "attempt": null,
+            "sha": null,
+            "event": null
+          },
+          "expected_sources": 1,
+          "recorded_sources": 1,
+          "not_processed_source_ids": [],
+          "stopped_early": false,
+          "fatal": true,
+          "all_sources_checked": true,
+          "empty_selection": false,
+          "all_sources_succeeded": false
+        }
+      ]
+    },
+    {
+      "file": "qualification-explicit-year.jsonl",
+      "records": [
+        {
+          "kind": "start",
+          "at": "2026-10-18T18:39:25.825594+00:00",
+          "run": {
+            "run_id": null,
+            "attempt": null,
+            "sha": null,
+            "event": null
+          },
+          "dry_run": true,
+          "expected_source_ids": [
+            "https://www.nct.org.uk/local-activities-meet-ups/twickenham-hounslow-and-district"
+          ]
+        },
+        {
+          "kind": "source",
+          "at": "2026-10-18T18:39:33.888450+00:00",
+          "source_id": "https://www.nct.org.uk/local-activities-meet-ups/twickenham-hounslow-and-district",
+          "status": "failed_refresh",
+          "extracted": null,
+          "validated": null,
+          "rejected": null,
+          "merged_duplicates": 0,
+          "accounting_complete": false,
+          "write_state": "not_attempted",
+          "health_state": "failed",
+          "saved_count": null,
+          "unchanged": false,
+          "deferred": false,
+          "failed": true,
+          "suspicious_zero": false,
+          "coverage": "unknown",
+          "public_readback": {
+            "state": "not_checked"
+          },
+          "candidate_keys": []
+        },
+        {
+          "kind": "finish",
+          "at": "2026-10-18T18:39:33.899910+00:00",
+          "run": {
+            "run_id": null,
+            "attempt": null,
+            "sha": null,
+            "event": null
+          },
+          "expected_sources": 1,
+          "recorded_sources": 1,
+          "not_processed_source_ids": [],
+          "stopped_early": false,
+          "fatal": true,
+          "all_sources_checked": true,
+          "empty_selection": false,
+          "all_sources_succeeded": false
+        }
+      ]
+    },
+    {
+      "file": "qualification-window.jsonl",
+      "records": [
+        {
+          "kind": "start",
+          "at": "2026-10-18T18:40:14.818023+00:00",
+          "run": {
+            "run_id": null,
+            "attempt": null,
+            "sha": null,
+            "event": null
+          },
+          "dry_run": true,
+          "expected_source_ids": [
+            "https://www.nct.org.uk/local-activities-meet-ups/twickenham-hounslow-and-district"
+          ]
+        },
+        {
+          "kind": "source",
+          "at": "2026-10-18T18:40:18.575893+00:00",
+          "source_id": "https://www.nct.org.uk/local-activities-meet-ups/twickenham-hounslow-and-district",
+          "status": "failed_refresh",
+          "extracted": null,
+          "validated": null,
+          "rejected": null,
+          "merged_duplicates": 0,
+          "accounting_complete": false,
+          "write_state": "not_attempted",
+          "health_state": "failed",
+          "saved_count": null,
+          "unchanged": false,
+          "deferred": false,
+          "failed": true,
+          "suspicious_zero": false,
+          "coverage": "unknown",
+          "public_readback": {
+            "state": "not_checked"
+          },
+          "candidate_keys": []
+        },
+        {
+          "kind": "finish",
+          "at": "2026-10-18T18:40:18.577328+00:00",
+          "run": {
+            "run_id": null,
+            "attempt": null,
+            "sha": null,
+            "event": null
+          },
+          "expected_sources": 1,
+          "recorded_sources": 1,
+          "not_processed_source_ids": [],
+          "stopped_early": false,
+          "fatal": true,
+          "all_sources_checked": true,
+          "empty_selection": false,
+          "all_sources_succeeded": false
+        }
+      ]
+    },
+    {
+      "file": "qualification-published-pagination.jsonl",
+      "records": [
+        {
+          "kind": "start",
+          "at": "2026-10-18T18:40:56.383477+00:00",
+          "run": {
+            "run_id": null,
+            "attempt": null,
+            "sha": null,
+            "event": null
+          },
+          "dry_run": true,
+          "expected_source_ids": [
+            "https://www.nct.org.uk/local-activities-meet-ups/twickenham-hounslow-and-district"
+          ]
+        },
+        {
+          "kind": "source",
+          "at": "2026-10-18T18:41:00.211347+00:00",
+          "source_id": "https://www.nct.org.uk/local-activities-meet-ups/twickenham-hounslow-and-district",
+          "status": "failed_refresh",
+          "extracted": null,
+          "validated": null,
+          "rejected": null,
+          "merged_duplicates": 0,
+          "accounting_complete": false,
+          "write_state": "not_attempted",
+          "health_state": "failed",
+          "saved_count": null,
+          "unchanged": false,
+          "deferred": false,
+          "failed": true,
+          "suspicious_zero": false,
+          "coverage": "unknown",
+          "public_readback": {
+            "state": "not_checked"
+          },
+          "candidate_keys": []
+        },
+        {
+          "kind": "finish",
+          "at": "2026-10-18T18:41:00.212581+00:00",
+          "run": {
+            "run_id": null,
+            "attempt": null,
+            "sha": null,
+            "event": null
+          },
+          "expected_sources": 1,
+          "recorded_sources": 1,
+          "not_processed_source_ids": [],
+          "stopped_early": false,
+          "fatal": true,
+          "all_sources_checked": true,
+          "empty_selection": false,
+          "all_sources_succeeded": false
+        }
+      ]
+    }
+  ]
+}
