@@ -1,5 +1,9 @@
 # Sprint 10 verification
 
+## Released 19 October 2026
+
+Owner approved review decisions and production release. PR #208 merged as `5b0a5258d8dbfc2e5e929b74d2c347d6166699b1`; Vercel production deployment passed. All five final-head checks were green at `ee13ab207c88e09bc945e687839c7001310173eb`, including real PostgreSQL 17. Live homepage/discovery routes and W3 lookup returned 200; anonymous geography access redirected to login with no reference exposed; the existing owner session rendered the full protected geography page. The release follow-up corrects approval/status labels only. Database migration/seed remains unapplied in production. Individual manual content/permission/persistence checks remain separately evidenced; approval is not fabricated test execution. The historical pre-release verification below remains intact.
+
 Development branch `dev/geographic-coverage`; production untouched. Scope and acceptance: #202–#205. Owner browser/content acceptance is pending, so zero points are accepted and tickets remain open.
 
 | Check | Evidence |
