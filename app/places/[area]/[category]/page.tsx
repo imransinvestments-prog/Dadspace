@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { discoveryArea, discoveryCategory, publicVenuePage } from "@/lib/venue-discovery"
+import { discoveryArea, discoveryCategory, publicVenuePage, discoveryPageApproved } from "@/lib/venue-discovery"
 import { browsePage } from "@/lib/venue-slug"
 import { pageMetadata } from "@/lib/seo"
 import { VenueCard } from "@/components/venues/venue-card"
@@ -20,7 +20,8 @@ async function context({ params, searchParams }: Props) {
 }
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { area, category, page, result, path, filtered } = await context(props)
-  return pageMetadata(`${category.name} in ${area.name}${page > 1 ? ` – page ${page}` : ""}`, path, `Browse ${category.name.toLowerCase()} in ${area.name}, with addresses and available visitor information for your next family visit.`, {image: category.image, noIndex: result.total < 3 || filtered})
+  const approved=await discoveryPageApproved(area.slug,category.slug)
+  return pageMetadata(`${category.name} in ${area.name}${page > 1 ? ` – page ${page}` : ""}`, path, `Browse ${category.name.toLowerCase()} in ${area.name}, with addresses and available visitor information for your next family visit.`, {image: category.image, noIndex: !approved || result.total < 3 || filtered})
 }
 export default async function AreaCategoryPage(props: Props) {
   const { area, category, page, result, path } = await context(props)

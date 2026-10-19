@@ -502,6 +502,7 @@ def self_test():
 # RUN LOG (one row per run in the pipeline_runs table)
 # ----------------------------------------------------------------------
 def log_run(stats, worker="news", dry_run=None):
+    from run_context import github_run_context
     skipped = sum(v for k, v in stats.items() if k.startswith("skipped_"))
     row = {
         "worker": worker,
@@ -511,6 +512,7 @@ def log_run(stats, worker="news", dry_run=None):
         "gemini_calls": TOKENS["calls"],
         "articles_scored": stats["scored"],
         "skipped_prefilter": skipped,
+        "details": github_run_context(),
     }
     try:
         sb("POST", "pipeline_runs", json_body=row,

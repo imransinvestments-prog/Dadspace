@@ -1262,6 +1262,7 @@ def self_test():
 # Run log (one row per run in the pipeline_runs table, same as news_worker.py)
 # ----------------------------------------------------------------------------
 def log_run(db, gemini_metrics):
+    from run_context import github_run_context
     worker = (os.environ.get("WORKER_NAME") or "").strip()
     if not worker:
         worker = "events-" + ("-".join(CATEGORY_FILTER) if CATEGORY_FILTER else "all")
@@ -1272,6 +1273,7 @@ def log_run(db, gemini_metrics):
         "output_tokens": gemini_metrics.get("output_tokens", 0),
         # API attempts include retries and timeouts, since those can still be billed.
         "gemini_calls": gemini_metrics.get("api_attempts", 0),
+        "details": github_run_context(),
     }
     try:
         db.table("pipeline_runs").insert(row).execute()

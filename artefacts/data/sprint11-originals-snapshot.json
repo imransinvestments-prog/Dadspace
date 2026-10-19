@@ -1,0 +1,56 @@
+{
+  "captured_at": "2026-10-19T00:14:56.564Z",
+  "method": "Read-only production projection; no mutation",
+  "rows": [
+    {
+      "slug": "weekly-2026-10-09",
+      "cadence": "weekly",
+      "published_at": "2026-10-10 10:14:41.28844+00"
+    },
+    {
+      "slug": "daily-2026-10-10",
+      "cadence": "daily",
+      "published_at": "2026-10-10 10:16:57.503224+00"
+    },
+    {
+      "slug": "daily-2026-10-12",
+      "cadence": "daily",
+      "published_at": "2026-10-12 06:46:58.053276+00"
+    },
+    {
+      "slug": "daily-2026-10-13",
+      "cadence": "daily",
+      "published_at": "2026-10-13 18:36:58.893894+00"
+    },
+    {
+      "slug": "daily-2026-10-14",
+      "cadence": "daily",
+      "published_at": "2026-10-14 06:49:56.944955+00"
+    },
+    {
+      "slug": "daily-2026-10-15",
+      "cadence": "daily",
+      "published_at": "2026-10-15 16:11:59.657135+00"
+    },
+    {
+      "slug": "daily-2026-10-16",
+      "cadence": "daily",
+      "published_at": "2026-10-16 11:19:10.254345+00"
+    },
+    {
+      "slug": "weekly-2026-10-16",
+      "cadence": "weekly",
+      "published_at": "2026-10-16 11:19:44.804247+00"
+    },
+    {
+      "slug": "daily-2026-10-17",
+      "cadence": "daily",
+      "published_at": "2026-10-17 10:39:30.078429+00"
+    },
+    {
+      "slug": "daily-2026-10-18",
+      "cadence": "daily",
+      "published_at": "2026-10-18 10:20:23.56691+00"
+    }
+  ]
+}

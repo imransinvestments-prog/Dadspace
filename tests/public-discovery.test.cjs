@@ -26,7 +26,7 @@ test('public reads exclude hidden adult gaming, retain a family casino name and 
   const records=[{id:'visible',venue_name:'Grand Casino',public_visible:true},{id:'hidden',venue_name:'Reels Casino Slots',public_visible:false}]
   const calls=[];let error=null,configured=true
   const db={from:()=>{let filters=[];return {select(columns,options){calls.push({columns,options});return this},eq(k,v){filters.push([k,v]);return this},order(){return this},range(a,b){calls.push({range:[a,b]});return Promise.resolve({data:error?null:records.filter(r=>filters.every(([k,v])=>r[k]===v)),error,count:1})},maybeSingle(){return Promise.resolve({data:records.find(r=>filters.every(([k,v])=>r[k]===v))??null,error})}}}}
-  const {module:m}=load('lib/venue-discovery.ts',{'server-only':{},react:{cache:f=>f},'./supabase':{getSupabase:()=>configured?db:null},'./venues':{toVenue:r=>({id:r.id,name:r.venue_name})}})
+  const {module:m}=load('lib/venue-discovery.ts',{'server-only':{},react:{cache:f=>f},'./supabase':{getSupabase:()=>configured?db:null},'./venues':{toVenue:r=>({id:r.id,name:r.venue_name})},'node:crypto':require('node:crypto'),'./discovery-publication':load('lib/discovery-publication.ts',{}).module})
   const page=await m.publicVenuePage();assert.deepEqual(Array.from(page.venues,v=>v.id),['visible']);assert.deepEqual(calls.at(-1).range,[0,23])
   assert.equal(page.venues[0].name,'Grand Casino');assert.equal((await m.publicVenueById('visible')).name,'Grand Casino')
   assert.equal(await m.publicVenueById('hidden'),null)

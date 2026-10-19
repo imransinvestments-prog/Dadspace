@@ -1,7 +1,7 @@
 name: Guarded operations review checks
 on:
   pull_request:
-    paths: ['app/ops/**', 'lib/operations/**', 'tests/operations-review*', 'scripts/operations-review.sql', 'supabase/migrations/*operations_review*', '.github/workflows/operations-review-checks.yml']
+    paths: ['app/ops/**', 'lib/operations/**', 'tests/operations-review*', 'scripts/operations-review.sql', 'supabase/migrations/*operations_review*', 'supabase/migrations/*sprint11_visitor_facts*', '.github/workflows/operations-review-checks.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -27,5 +27,7 @@ jobs:
       - run: psql -v ON_ERROR_STOP=1 -f tests/operations-review-fixture.sql
       - run: psql -v ON_ERROR_STOP=1 -f scripts/operations-review.sql
       - run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261017102447_operations_review_edit_reject.sql
+      - run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261019002054_sprint11_visitor_facts.sql
       - run: psql -v ON_ERROR_STOP=1 -f tests/operations-review-transactions.sql
       - run: psql -v ON_ERROR_STOP=1 -f tests/operations-review-edit-transactions.sql
+      - run: psql -v ON_ERROR_STOP=1 -f tests/operations-review-visitor-facts.sql

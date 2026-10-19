@@ -23,6 +23,7 @@ function harness({ allowed = 'allowed', reviewer = true, changed = false, token 
     './news-sample': news,
     './originals-checks': originals,
     './deal-check-labels': dealChecks,
+    './venue-check-labels': load('lib/operations/venue-check-labels.ts'),
     './review-tasks': tasks, '@/lib/supabase/server': { createClient: async () => ({ auth: { getUser: async () => ({ data: { user: { id: uid } } }) } }) },
     './review-material': { getReviewMaterial: async () => ({ available: true, label: 'Live news', notice: 'Not a frozen sample', rows: [{ id: 'record-1', title: 'Article', fields: { summary: 'Actual evidence' } }] }), materialFingerprint: () => materialChanged ? 'changed' : 'snapshot-hash' },
   }, { process: { env: { DADSPACE_REVIEWER_USER_IDS: reviewer ? uid : '', DADSPACE_REVIEW_GITHUB_TOKEN: token } },

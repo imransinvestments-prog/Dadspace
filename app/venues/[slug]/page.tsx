@@ -10,6 +10,7 @@ import { venueSchema } from "@/components/venues/venues-json-ld"
 import { JsonLd } from "@/components/seo/json-ld"
 import { directionsUrl } from "@/components/venues/venue-spotlight"
 import { VenueAccess } from "@/components/venues/venue-access"
+import { venueVisitorInfo } from "@/lib/venue-visitor-info"
 export const dynamic = "force-dynamic"
 type Props = {params: Promise<{slug: string}>}
 async function venueFor(props: Props) {
@@ -28,6 +29,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 export default async function VenueDetail(props: Props) {
   const v = await venueFor(props), url = `${siteUrl}/venues/${venueSlug(v)}`
+  const evidence=await venueVisitorInfo(v.id)
   return <div className="flex flex-col gap-6">
     <nav aria-label="Breadcrumb"><Link href="/">Home</Link> / <Link href="/venues">Places</Link> / {v.name}</nav>
     <JsonLd data={{"@context":"https://schema.org","@graph":[{...venueSchema(v),"@id":`${url}#venue`,url},{"@type":"BreadcrumbList",itemListElement:[{"@type":"ListItem",position:1,name:"Home",item:siteUrl},{"@type":"ListItem",position:2,name:"Places",item:`${siteUrl}/venues`},{"@type":"ListItem",position:3,name:v.name,item:url}]}]}}/>
@@ -39,6 +41,7 @@ export default async function VenueDetail(props: Props) {
       <div><dt className="font-semibold">Entry</dt><dd>{v.is_free === true ? "Listed as free entry; check conditions with the venue" : v.price_text || "Check prices with the venue"}</dd></div>
       {!!v.facilities.length && <div><dt className="font-semibold">Listed facilities</dt><dd>{v.facilities.map(f => FACILITY_LABELS[f] ?? f.replace(/_/g," ")).join(", ")}</dd></div>}
     </dl><div className="mt-4"><VenueAccess venue={v} /></div><div className="mt-6 flex flex-wrap gap-4">{v.website_url && <a className="font-semibold underline" href={v.website_url} target="_blank" rel="noopener noreferrer">Venue website</a>}<a className="font-semibold underline" href={directionsUrl(v)} target="_blank" rel="noopener noreferrer">Directions</a></div></section></div>
+    {evidence ? <p className="text-sm">Reviewed correction: {evidence.reviewed_fields.map(f=>({opening_hours:'opening times',fee:'entry charges',access:'access',website:'website'})[f] || f).join(', ')}. Checked {new Date(evidence.checked_at).toLocaleDateString('en-GB',{timeZone:'Europe/London'})}. <a className="underline" href={evidence.source_url} target="_blank" rel="noopener noreferrer">Review source</a></p> : <p className="text-sm text-muted-foreground">A current source check date for visitor information is not recorded.</p>}
     <p className="max-w-2xl text-sm text-muted-foreground">Visitor information may change. Confirm opening times, accessibility, suitability for your children and any charges with the venue before travelling. A directory listing does not imply independently verified child suitability.</p>
   </div>
 }

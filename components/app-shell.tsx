@@ -69,10 +69,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       <main id="main" className="pb-28 lg:pb-12 lg:pl-64">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 pt-4 lg:px-10 lg:pt-10">
+          {children}
           <div className="lg:hidden">
             <InstallPrompt variant="banner" />
           </div>
-          {children}
         </div>
       </main>
 

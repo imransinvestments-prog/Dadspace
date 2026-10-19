@@ -51,6 +51,14 @@ function actions(identity, result={data:null,error:{message:'private error'}}) {
   const module=load('app/ops/decision/actions.ts', {'next/cache':{revalidatePath:()=>{}}, '@/lib/supabase':{getSupabase:()=>{calls++;return db}}, '@/lib/operations/reviewer':{reviewIdentity:async()=>identity}, '@/lib/operations/review-token':token, '@/lib/operations/review-edit':edits}, {DADSPACE_SUPABASE_SERVICE_ROLE_KEY:secret})
   return {module,requests,calls:()=>calls}
 }
+
+test('a preview deployment cannot apply signed production data decisions',async()=>{
+ let calls=0
+ const module=load('app/ops/decision/actions.ts', {'next/cache':{revalidatePath:()=>{}},'@/lib/supabase':{getSupabase:()=>{calls++;return {}}},'@/lib/operations/reviewer':{reviewIdentity:async()=>({id:owner,reviewer:true})},'@/lib/operations/review-token':token,'@/lib/operations/review-edit':edits},{VERCEL_ENV:'preview',DADSPACE_SUPABASE_SERVICE_ROLE_KEY:secret})
+ const form=new FormData();form.set('token',token.signReview(token.reviewIntent('hide',owner,null,'Verified source evidence and access'),owner,fingerprint,secret));form.set('confirm','apply')
+ const result=await module.applyDecision({},form)
+ assert.match(result.message,/preview is read-only/);assert.equal(calls,0)
+})
 function previewForm(){ const form=new FormData();form.set('record',owner);form.set('action','approve');form.set('target','');form.set('reason','Verified identity, access and evidence');form.set('evidence','reviewed');return form }
 test('unauthorised and read-only requests cannot write; unsigned and changed-actor requests fail before RPC', async () => {
   const absent=actions(null)

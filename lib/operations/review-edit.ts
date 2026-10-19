@@ -1,9 +1,9 @@
 import "server-only"
 
-export const EDIT_FIELDS = ["venue_name", "category", "address", "postcode", "latitude", "longitude", "website", "access"] as const
+export const EDIT_FIELDS = ["venue_name", "category", "address", "postcode", "latitude", "longitude", "website", "access", "opening_hours", "fee"] as const
 export type EditField = typeof EDIT_FIELDS[number]
 export type EditPatch = { changes: Partial<Record<EditField, string | number | null>>; source_url: string }
-const limits = { venue_name: 200, category: 100, address: 500, postcode: 20, website: 2048, access: 100 }
+const limits = { venue_name: 200, category: 100, address: 500, postcode: 20, website: 2048, access: 100, opening_hours: 1000, fee: 500 }
 export function publicEvidenceUrl(value: unknown): value is string {
   if (typeof value !== "string" || value.length > 2048 || /[\s\\]/.test(value)) return false
   try { const u = new URL(value); return u.protocol === "https:" && !!u.hostname && !u.username && !u.password && (!u.port || u.port === "443") }

@@ -1,0 +1,176 @@
+{
+  "captured_at": "2026-10-19T00:14:59.475Z",
+  "method": "Read-only production projection; no mutation",
+  "rows": [
+    {
+      "table_name": "original_content_attempts",
+      "column_name": "id",
+      "data_type": "uuid"
+    },
+    {
+      "table_name": "original_content_attempts",
+      "column_name": "run_id",
+      "data_type": "text"
+    },
+    {
+      "table_name": "original_content_attempts",
+      "column_name": "cadence",
+      "data_type": "text"
+    },
+    {
+      "table_name": "original_content_attempts",
+      "column_name": "slot_date",
+      "data_type": "date"
+    },
+    {
+      "table_name": "original_content_attempts",
+      "column_name": "dry_run",
+      "data_type": "boolean"
+    },
+    {
+      "table_name": "original_content_attempts",
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone"
+    },
+    {
+      "table_name": "original_content_attempts",
+      "column_name": "stage",
+      "data_type": "text"
+    },
+    {
+      "table_name": "original_content_attempts",
+      "column_name": "attempt",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "original_content_attempts",
+      "column_name": "draft",
+      "data_type": "jsonb"
+    },
+    {
+      "table_name": "original_content_attempts",
+      "column_name": "detail",
+      "data_type": "text"
+    },
+    {
+      "table_name": "original_content_attempts",
+      "column_name": "model_calls",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "original_content_attempts",
+      "column_name": "input_tokens",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "original_content_attempts",
+      "column_name": "output_tokens",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "original_posts",
+      "column_name": "slug",
+      "data_type": "text"
+    },
+    {
+      "table_name": "original_posts",
+      "column_name": "cadence",
+      "data_type": "text"
+    },
+    {
+      "table_name": "original_posts",
+      "column_name": "slot_date",
+      "data_type": "date"
+    },
+    {
+      "table_name": "original_posts",
+      "column_name": "title",
+      "data_type": "text"
+    },
+    {
+      "table_name": "original_posts",
+      "column_name": "summary",
+      "data_type": "text"
+    },
+    {
+      "table_name": "original_posts",
+      "column_name": "sections",
+      "data_type": "jsonb"
+    },
+    {
+      "table_name": "original_posts",
+      "column_name": "topic",
+      "data_type": "text"
+    },
+    {
+      "table_name": "original_posts",
+      "column_name": "model",
+      "data_type": "text"
+    },
+    {
+      "table_name": "original_posts",
+      "column_name": "published_at",
+      "data_type": "timestamp with time zone"
+    },
+    {
+      "table_name": "original_posts",
+      "column_name": "ops_hidden",
+      "data_type": "boolean"
+    },
+    {
+      "table_name": "pipeline_runs",
+      "column_name": "id",
+      "data_type": "bigint"
+    },
+    {
+      "table_name": "pipeline_runs",
+      "column_name": "worker",
+      "data_type": "text"
+    },
+    {
+      "table_name": "pipeline_runs",
+      "column_name": "ran_at",
+      "data_type": "timestamp with time zone"
+    },
+    {
+      "table_name": "pipeline_runs",
+      "column_name": "dry_run",
+      "data_type": "boolean"
+    },
+    {
+      "table_name": "pipeline_runs",
+      "column_name": "input_tokens",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "pipeline_runs",
+      "column_name": "output_tokens",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "pipeline_runs",
+      "column_name": "gemini_calls",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "pipeline_runs",
+      "column_name": "articles_scored",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "pipeline_runs",
+      "column_name": "skipped_prefilter",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "pipeline_runs",
+      "column_name": "prefilter_skips",
+      "data_type": "integer"
+    },
+    {
+      "table_name": "pipeline_runs",
+      "column_name": "details",
+      "data_type": "jsonb"
+    }
+  ]
+}

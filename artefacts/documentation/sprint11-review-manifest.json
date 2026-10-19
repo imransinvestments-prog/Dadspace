@@ -1,0 +1,86 @@
+{
+  "prepared_date": "2026-10-19",
+  "scope": "Current local evidence after read-only scheduled-run refresh and engineering verification. Not proof of factual acceptance or live deployment. Supersedes initial pack manifest; changed captures are not represented as unchanged.",
+  "files": [
+    {
+      "path": "artefacts/data/sprint11-api-performance.json",
+      "sha256": "08d178675ab42aa90e53d4f4bac06c52d4caf514a773f0b82981d279baee616c",
+      "bytes": 27729
+    },
+    {
+      "path": "artefacts/data/sprint11-area-candidates.json",
+      "sha256": "d80e66a5f794885f6d07a871f53f4f2bdad16456abd01e946bbe2d3d4a087f38",
+      "bytes": 70143
+    },
+    {
+      "path": "artefacts/data/sprint11-libraries-snapshot.json",
+      "sha256": "3920bdc64e0d2c59884fb2fb74f4f52dc014281595e2ce25cd11682ed16ed7b0",
+      "bytes": 94849
+    },
+    {
+      "path": "artefacts/data/sprint11-library-provenance.json",
+      "sha256": "43bece54ef50b3df2e86e413fe4480b05a165120e7387d12264f63cca4fe9587",
+      "bytes": 22757
+    },
+    {
+      "path": "artefacts/data/sprint11-library-review.json",
+      "sha256": "b3796ecd6124058a0b3ebd30eee4741b60099cdb664de477b73d60b200e6075e",
+      "bytes": 319999
+    },
+    {
+      "path": "artefacts/data/sprint11-originals-snapshot.json",
+      "sha256": "0bc618180da841b480063494c5998d635f30042176e6565a71b2df33a301119d",
+      "bytes": 1396
+    },
+    {
+      "path": "artefacts/data/sprint11-performance.json",
+      "sha256": "8cf9e3737317bd8a67921565cd23e737923bdb1c0840b686e0c135e6867197c4",
+      "bytes": 56148
+    },
+    {
+      "path": "artefacts/data/sprint11-run-readback.json",
+      "sha256": "e5ead0dc86839bd3ee99221924ef929add99312c7c94cf78145a4e4a0f274ed1",
+      "bytes": 37817
+    },
+    {
+      "path": "artefacts/data/sprint11-schedule-ledger.json",
+      "sha256": "f814862be51c9de72b873173cc34be726175f7a00c0f47fa937feca2a11964f6",
+      "bytes": 11073
+    },
+    {
+      "path": "artefacts/data/sprint11-scheduled-runs.json",
+      "sha256": "8c9462b038a576dd52c0340ffe6ed72a62d8d79fb7a45ab1174312ecb9fdac9e",
+      "bytes": 22961
+    },
+    {
+      "path": "artefacts/data/sprint11-schema-snapshot.json",
+      "sha256": "978f411fef0f7c4882efb315ffc7c5e99e2da7342443259824427e3b91da7e92",
+      "bytes": 4112
+    },
+    {
+      "path": "artefacts/data/sprint11-venue-labels.json",
+      "sha256": "f188ea02d019b869bccda50af31cad81d402f4430209c45370ba00506283878e",
+      "bytes": 10144
+    },
+    {
+      "path": "artefacts/data/sprint11-venues-snapshot.json",
+      "sha256": "c311ff89f20b971057f5217d98c8bdee96d4d27a5af9d4190d9f588dc00bfe57",
+      "bytes": 43041
+    },
+    {
+      "path": "artefacts/data/sprint5-review-pack.json",
+      "sha256": "d20df2f8570b487f0a89e2692b920f312b37fb5476ed78023f94aed438638817",
+      "bytes": 310733
+    },
+    {
+      "path": "plans/sprint-11-delivery.md",
+      "sha256": "19241483c77189e6f6cedb6b7c58bd70c259cc780beb0bde429341a5cc47833e",
+      "bytes": 5601
+    },
+    {
+      "path": "app/ops/sprint-11/page.tsx",
+      "sha256": "9688cc483c43990c36af934967ff90ccfc1af84c1e981301af3ff0728d0edc4c",
+      "bytes": 12375
+    }
+  ]
+}

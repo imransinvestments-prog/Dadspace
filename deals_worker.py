@@ -797,6 +797,7 @@ def build_details(all_deals, source_results, started, status="ok", error=None):
 
 
 def log_run(skipped_prefilter, details):
+    from run_context import github_run_context
     if DRY_RUN:
         log("DRY RUN: pipeline run details are in the local review files; no DB log written.")
         return
@@ -807,7 +808,7 @@ def log_run(skipped_prefilter, details):
             "input_tokens": STATS["tokens_in"], "output_tokens": STATS["tokens_out"],
             "gemini_calls": STATS["gemini_calls"],
             "articles_scored": STATS["gemini_candidates"],
-            "skipped_prefilter": skipped_prefilter, "details": details,
+            "skipped_prefilter": skipped_prefilter, "details": {**details, **github_run_context()},
         }, headers={"Prefer": "return=minimal"})
         log(f"Run logged to pipeline_runs (total tokens: {details['total_tokens']}).")
     except Exception as ex:  # noqa: BLE001
