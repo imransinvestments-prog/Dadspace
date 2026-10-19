@@ -2,9 +2,9 @@
 
 Prepared 19 October 2026. Status: **draft for review; acceptance pending**.
 
-This pack describes local work on `dev/sprint-11-reliability`, tracker [#211](https://github.com/imransinvestments-prog/Dadspace/issues/211). It is based on frozen repository evidence, not a live GitHub or production audit. Engineering verification has now been run: 189 Node tests passed; 282 Python tests ran with 11 optional skips; TypeScript and the production webpack build passed. Hosted preview and factual acceptance are tracked separately below. The local build used webpack because this worktree shares node_modules outside the Turbopack filesystem root.
+This pack describes local work on `dev/sprint-11-reliability`, tracker [#211](https://github.com/imransinvestments-prog/Dadspace/issues/211). It is based on frozen repository evidence, not a live GitHub or production audit. Engineering verification has now been run: 189 Node tests passed; 284 Python tests ran with 11 optional skips; TypeScript and the production webpack build passed. Hosted preview and factual acceptance are tracked separately below. The local build used webpack because this worktree shares node_modules outside the Turbopack filesystem root.
 
-Start with the [step-by-step completion guide](sprint-11-completion-guide.md). The protected review workspace is `/ops/sprint-11` on the eventual preview; no verified preview URL is recorded here.
+Start with the [step-by-step completion guide](sprint-11-completion-guide.md). The protected review workspace is `/ops/sprint-11` on the hosted preview; [verified sign-in preview](https://dadspace-git-dev-sprint-11-reliability-imransinvestments-6859.vercel.app/ops/sprint-11) is now available. Anonymous redirect and actual signed-in owner rendering were checked.
 
 Engineering detail and preview results: [verification report](sprint-11-verification.md).
 
@@ -23,6 +23,8 @@ Engineering detail and preview results: [verification report](sprint-11-verifica
 | #125 — 3 points | London-time expected-slot ledger, runs/configuration metadata and explicit attribution gaps | Seven-day eligible cross-feed evidence with every expected slot accounted for, source/publication linkage and three successful scheduled Activities collections | Seven-day acceptance unmet |
 
 Ticket links: [#34](https://github.com/imransinvestments-prog/Dadspace/issues/34), [#92](https://github.com/imransinvestments-prog/Dadspace/issues/92), [#139](https://github.com/imransinvestments-prog/Dadspace/issues/139), [#141](https://github.com/imransinvestments-prog/Dadspace/issues/141), [#132](https://github.com/imransinvestments-prog/Dadspace/issues/132), [#129](https://github.com/imransinvestments-prog/Dadspace/issues/129), [#125](https://github.com/imransinvestments-prog/Dadspace/issues/125).
+
+Latest scheduled run has actual failures: expired Matalan terms review in Deals and nine upstream Google RSS 503s in News. See the [operational findings](../artefacts/data/sprint11-operational-findings.json). These require retained recovery evidence; successful code checks do not resolve them.
 
 ## Review decisions to record
 
@@ -60,8 +62,8 @@ All links are relative to this pack. The [SHA-256 manifest](../artefacts/documen
 | Manifest source files exist and hashes recorded | Checked during pack generation | Manifest |
 | TypeScript, build, Node and Python regressions | Passed locally; see linked verification report for final counts | Dated output and exact reviewed commit |
 | Guarded visitor-fact transactions and access | Disposable PGlite transactions passed, including field-specific evidence | Real PostgreSQL CI and browser readback pending |
-| Hosted preview, signed-in/anonymous browser checks | Not verified | Preview URL/SHA, screenshots and findings |
-| Mobile LCP improvement | Not verified | Comparable preview measurements |
+| Hosted preview, signed-in/anonymous browser checks | Passed for measured dev SHA | Verification report; hosted CI remains queued |
+| Preview lab/API comparison | 24 lab runs and 120 API samples captured | API budgets pass; mobile lab LCP remains above 2.5 seconds; no field pass |
 | Factual venue/library acceptance | Pending | Completed per-record rubric/source review |
 | Scheduled observation | Incomplete in frozen evidence | Updated attributed ledger and publication readback |
 

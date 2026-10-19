@@ -2,7 +2,7 @@ import copy,datetime as dt
 import sys,unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
-from sprint11_schedule_ledger import expected_slots,build_ledger,HOURS
+from sprint11_schedule_ledger import expected_slots,build_ledger,HOURS,runtime_fingerprint,REQUIRED_RUNTIME,config_hash
 UTC=dt.timezone.utc
 class ScheduleTests(unittest.TestCase):
  def fixture(self,start=dt.date(2026,10,18),days=1):
@@ -16,6 +16,22 @@ class ScheduleTests(unittest.TestCase):
      proofs.append({'workflow':workflow,'expected_at':slot.isoformat(),'run_id':run_id,'run_attempt':1,'head_sha':'a'*40,'evidence_url':f'https://example.org/retained/{run_id}','reviewed_by':'owner','reviewed_at':finished.isoformat()})
   return raw,{'version':1,'assignments':proofs}
  def build(self,raw,proof=None,**kwargs):return build_ledger(raw,proof,hash_fn=lambda sha,w:'same',**kwargs)
+ def test_transitive_runtime_changes_invalidate_configuration(self):
+  workflow='daily-workers.yml';objects={p:'a'*40 for p in REQUIRED_RUNTIME[workflow]}
+  original=runtime_fingerprint(workflow,objects)
+  self.assertIsNotNone(original)
+  for path in ['.github/workflows/collect-activities.yml','events_worker.py','worker.py','requirements-browser.txt','news_geography.json']:
+   changed={**objects,path:'b'*40}
+   with self.subTest(path=path):self.assertNotEqual(runtime_fingerprint(workflow,changed),original)
+  self.assertNotEqual(runtime_fingerprint(workflow,{**objects,'new_dynamic_adapter.py':'c'*40}),original)
+  missing=dict(objects);missing.pop('events_worker.py')
+  self.assertIsNone(runtime_fingerprint(workflow,missing))
+  self.assertIsNone(config_hash('nonexistent-sprint11-object','daily-workers.yml'))
+ def test_originals_worker_and_maintenance_changes_invalidate(self):
+  workflow='original-content.yml';objects={p:'a'*40 for p in REQUIRED_RUNTIME[workflow]}
+  original=runtime_fingerprint(workflow,objects)
+  for path in ['original_content_worker.py','scripts/maintenance-run.py']:
+   self.assertNotEqual(runtime_fingerprint(workflow,{**objects,path:'b'*40}),original)
  def test_london_slots_preserve_wall_time_across_clock_change(self):
   before=expected_slots(dt.date(2026,10,24),(7,19));after=expected_slots(dt.date(2026,10,25),(7,19))
   self.assertEqual([s.hour for s in before],[6,18]);self.assertEqual([s.hour for s in after],[7,19]);self.assertEqual((after[0]-before[0]).total_seconds(),25*3600)

@@ -1,6 +1,6 @@
 # Sprint 11 — step-by-step completion guide
 
-Use with the [review pack](sprint-11-review-pack.md). All boxes start unchecked because this document records remaining steps, not retrospective completion.
+Use with the [review pack](sprint-11-review-pack.md). Engineering and browser verification results are recorded in the [current verification report](sprint-11-verification.md). The hosted [review preview](https://dadspace-git-dev-sprint-11-reliability-imransinvestments-6859.vercel.app/ops/sprint-11) is live and signed-in owner rendering has been checked. Unchecked boxes below retain the full acceptance sequence; they are not a claim that verified engineering work is still unattempted.
 
 ## 1. Freeze the review version — engineer
 
@@ -53,7 +53,7 @@ python -m unittest discover -s tests -p "test_*.py"
 
 - [ ] Check all applicable repository CI workflows, including guarded operations PostgreSQL 17 transaction tests in `.github/workflows/operations-review-checks.yml`. Record skips and environment limitations explicitly.
 - [ ] Test actual visitor-fact edit permissions, accepted/rejected edits, stale fingerprints, repeat application and hidden/unknown records.
-- [ ] Create the draft PR and hosted preview; record URL and exact deployed SHA. Check required hosted checks.
+- [x] Create the draft PR and hosted preview; record URL and exact deployed SHA. [PR #212](https://github.com/imransinvestments-prog/Dadspace/pull/212) and signed-in preview verified. Hosted GitHub checks remain queued and are not counted as passes.
 - [ ] Anonymous `/ops/sprint-11` redirects to sign-in without leaking evidence; authorised owner sees the pack; unauthorised users cannot read or mutate records.
 - [ ] Owner tests mobile layout, keyboard navigation, location selection, deep pagination, venue details and useful unknown visitor information. Log each defect and verify its fix.
 
@@ -80,6 +80,7 @@ python scripts/sprint11_schedule_ledger.py
 
 These scripts update local snapshot files. They do not by themselves prove worker/source/publication linkage. Inspect their current anchor and configuration assumptions before relying on the output.
 
+- [ ] Resolve the latest observed failure first: Deals has an expired Matalan terms review; News had nine upstream Google RSS 503 responses. See the retained operational findings in the verification report. Do not renew review dates without current terms evidence or replace a source silently.
 - [ ] For each expected Europe/London slot retain trigger occurrence, run ID/attempt/SHA, configuration eligibility, parent/child/source linkage, completion and public readback. Distinguish missing, late, skipped, failed, unknown and future-not-due.
 - [ ] Apply accepted warning boundaries: dispatch 60 minutes, completion four hours, source check 36 hours. Successful jobs cannot fill multiple slots. Keep DST handling correct across 25 October.
 - [ ] #125: establish all seven eligible days across feeds and three successful normal scheduled Activities collections. Reconcile every slot; date passage alone is insufficient.

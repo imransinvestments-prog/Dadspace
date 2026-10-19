@@ -18,9 +18,33 @@ def timestamp(value):
 def expected_slots(day,hours):
  return [dt.datetime.combine(day,dt.time(hour,17),ZONE).astimezone(dt.timezone.utc) for hour in hours]
 
+# Conservative repository runtime boundary: all reusable workflows, root Python
+# modules/configuration and Python maintenance scripts. Extra changes may invalidate
+# eligibility; no child or dynamically imported local worker may silently escape it.
+REQUIRED_RUNTIME={
+ 'daily-workers.yml':{'.github/workflows/daily-workers.yml','.github/workflows/news.yml','.github/workflows/venue-reference.yml','.github/workflows/collect-civic.yml','.github/workflows/collect-activities.yml','.github/workflows/deals_collect.yml','worker.py','events_worker.py','news_worker.py','news_worker_locality.py','deals_worker.py','deals_worker_db.py','venue_reference_loader_v2.py','requirements.txt','requirements-browser.txt','news_geography.json'},
+ 'original-content.yml':{'.github/workflows/original-content.yml','original_content_worker.py','scripts/maintenance-run.py'},
+}
+
+def runtime_fingerprint(workflow,objects):
+ """Git blob IDs bind content and paths. Missing mandatory objects are unknown."""
+ if workflow not in REQUIRED_RUNTIME or not REQUIRED_RUNTIME[workflow].issubset(objects):return None
+ selected={path:oid for path,oid in objects.items() if
+  path.startswith('.github/workflows/') or
+  (path.startswith('scripts/') and path.endswith('.py')) or
+  ('/' not in path and (path.endswith(('.py','.json')) or path.startswith('requirements')))}
+ if not selected or any(len(oid)!=40 or any(c not in '0123456789abcdef' for c in oid) for oid in selected.values()):return None
+ return hashlib.sha256(json.dumps({'workflow':workflow,'objects':selected},sort_keys=True,separators=(',',':')).encode()).hexdigest()
+
 def config_hash(sha,workflow):
- try:return hashlib.sha256(subprocess.check_output(['git','show',f'{sha}:.github/workflows/{workflow}'],cwd=ROOT)).hexdigest()
- except subprocess.CalledProcessError:return None
+ try:
+  tree=subprocess.check_output(['git','ls-tree','-r',sha],cwd=ROOT,stderr=subprocess.DEVNULL).decode()
+  objects={}
+  for line in tree.splitlines():
+   metadata,path=line.split('\t',1);_mode,kind,oid=metadata.split()
+   if kind=='blob':objects[path]=oid
+  return runtime_fingerprint(workflow,objects)
+ except (subprocess.CalledProcessError,ValueError,UnicodeDecodeError):return None
 
 def reviewed_assignments(evidence,raw,slots,cutoff):
  """Reject the complete input on malformed, conflicting or reused evidence; never partially trust it."""
