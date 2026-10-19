@@ -1,5 +1,11 @@
 # Sprint 10 — geography development review
 
+## Current release status — 19 October 2026
+
+Owner accepted all review-pack decisions and then explicitly authorised production release. PR #208 merged as `5b0a5258d8dbfc2e5e929b74d2c347d6166699b1`; Vercel production deployment succeeded. Live `/ops/geography` was verified in the existing signed-in owner session, showing the reference, sample table and licence gates. Anonymous requests receive 307 to login without reference data. Homepage, Places, Activities, Events and W3 postcode lookup passed live readback. The follow-up release record updates the page's proposal labels to approved/released, without changing reference data or public selectors.
+
+Approved: reference structure, initial 30-case scope, NI data withholding, quarterly manual checking, evidence-led future targets and staged database rollout. NI commercial data rights remain unresolved; numeric national quality targets are not invented. No production geography schema/seed import, source activation or postcode lookup cutover occurred. Manual content/browser checks are retained below and are not asserted individually completed by the owner's general decision approval. #206 remains post-release observation; #207 remains national expansion. Earlier development-only and pending-review text below is preserved as the original review pack, superseded by this release status.
+
 Tracker: [#202](https://github.com/imransinvestments-prog/Dadspace/issues/202). Stories: reference #203 (5), test pack #204 (5), coverage workspace/review #205 (5). **15 provisional delivery points; zero accepted so far.** This is a separate sprint from #197. Engineering is staged on `dev/geographic-coverage`; stop for owner testing before merge or production. Estimates describe relative effort and uncertainty, not an optimal velocity or fixed completion date.
 
 ## What you can review
