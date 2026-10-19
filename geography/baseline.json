@@ -1,0 +1,1988 @@
+{
+  "version": 1,
+  "observed_at": "2026-10-18T22:52:16.835502+00:00",
+  "base_url": "https://www.dad-space.co.uk",
+  "environment": "specified remote origin",
+  "test_pack_sha256": "e644062981faf604b8971f508b79ab6a3e17fcfac6b5c65bc3d06aaa73ed1bb3",
+  "reference_release": "ons-may-2026-sample-20261018",
+  "database_writes": 0,
+  "model_calls": 0,
+  "source_changes": 0,
+  "observations": [
+    {
+      "case_id": "geo-01",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=W3+9LN",
+      "observed_at": "2026-10-18T22:51:39.625571+00:00",
+      "centre": {
+        "lat": 51.51,
+        "lng": -0.28
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-01",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=51.51&lng=-0.28&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:42.339878+00:00",
+      "centre": {
+        "lat": 51.51,
+        "lng": -0.28
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 1031,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-01",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=51.51&lng=-0.28&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:45.131291+00:00",
+      "centre": {
+        "lat": 51.51,
+        "lng": -0.28
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 28,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-01",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=51.51&lng=-0.28&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:46.454076+00:00",
+      "centre": {
+        "lat": 51.51,
+        "lng": -0.28
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 1,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-02",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=SW1A+1AA",
+      "observed_at": "2026-10-18T22:51:39.519364+00:00",
+      "centre": {
+        "lat": 51.5,
+        "lng": -0.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-02",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=51.5&lng=-0.14&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:42.320592+00:00",
+      "centre": {
+        "lat": 51.5,
+        "lng": -0.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 2157,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-02",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=51.5&lng=-0.14&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:45.131291+00:00",
+      "centre": {
+        "lat": 51.5,
+        "lng": -0.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 78,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-02",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=51.5&lng=-0.14&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:46.154099+00:00",
+      "centre": {
+        "lat": 51.5,
+        "lng": -0.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 11,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-03",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=M2+5DB",
+      "observed_at": "2026-10-18T22:51:46.563895+00:00",
+      "centre": {
+        "lat": 53.48,
+        "lng": -2.24
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-03",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=53.48&lng=-2.24&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:47.889821+00:00",
+      "centre": {
+        "lat": 53.48,
+        "lng": -2.24
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 568,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-03",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=53.48&lng=-2.24&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:48.883821+00:00",
+      "centre": {
+        "lat": 53.48,
+        "lng": -2.24
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 62,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-03",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=53.48&lng=-2.24&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:49.583383+00:00",
+      "centre": {
+        "lat": 53.48,
+        "lng": -2.24
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 20,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-04",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=NE1+4LP",
+      "observed_at": "2026-10-18T22:51:46.767044+00:00",
+      "centre": {
+        "lat": 54.98,
+        "lng": -1.62
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-04",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=54.98&lng=-1.62&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:47.891828+00:00",
+      "centre": {
+        "lat": 54.98,
+        "lng": -1.62
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 423,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-04",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=54.98&lng=-1.62&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:48.869900+00:00",
+      "centre": {
+        "lat": 54.98,
+        "lng": -1.62
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-04",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=54.98&lng=-1.62&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:49.515559+00:00",
+      "centre": {
+        "lat": 54.98,
+        "lng": -1.62
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-05",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=DH1+3LE",
+      "observed_at": "2026-10-18T22:51:49.874338+00:00",
+      "centre": {
+        "lat": 54.77,
+        "lng": -1.57
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-05",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=54.77&lng=-1.57&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:50.584995+00:00",
+      "centre": {
+        "lat": 54.77,
+        "lng": -1.57
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 175,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-05",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=54.77&lng=-1.57&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:51.427540+00:00",
+      "centre": {
+        "lat": 54.77,
+        "lng": -1.57
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-05",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=54.77&lng=-1.57&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:52.476865+00:00",
+      "centre": {
+        "lat": 54.77,
+        "lng": -1.57
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-06",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=LS1+3AD",
+      "observed_at": "2026-10-18T22:51:49.924585+00:00",
+      "centre": {
+        "lat": 53.8,
+        "lng": -1.55
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-06",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=53.8&lng=-1.55&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:50.612174+00:00",
+      "centre": {
+        "lat": 53.8,
+        "lng": -1.55
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 293,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-06",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=53.8&lng=-1.55&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:51.434740+00:00",
+      "centre": {
+        "lat": 53.8,
+        "lng": -1.55
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-06",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=53.8&lng=-1.55&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:52.482736+00:00",
+      "centre": {
+        "lat": 53.8,
+        "lng": -1.55
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-07",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=S1+2HH",
+      "observed_at": "2026-10-18T22:51:52.672779+00:00",
+      "centre": {
+        "lat": 53.38,
+        "lng": -1.47
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-07",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=53.38&lng=-1.47&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:53.383509+00:00",
+      "centre": {
+        "lat": 53.38,
+        "lng": -1.47
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 284,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-07",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=53.38&lng=-1.47&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:54.175316+00:00",
+      "centre": {
+        "lat": 53.38,
+        "lng": -1.47
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 1,
+      "reported_total": 1,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-07",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=53.38&lng=-1.47&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:54.717595+00:00",
+      "centre": {
+        "lat": 53.38,
+        "lng": -1.47
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-08",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=NG1+2LH",
+      "observed_at": "2026-10-18T22:51:52.787865+00:00",
+      "centre": {
+        "lat": 52.95,
+        "lng": -1.15
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-08",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=52.95&lng=-1.15&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:53.411614+00:00",
+      "centre": {
+        "lat": 52.95,
+        "lng": -1.15
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 397,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-08",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=52.95&lng=-1.15&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:54.203243+00:00",
+      "centre": {
+        "lat": 52.95,
+        "lng": -1.15
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-08",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=52.95&lng=-1.15&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:54.717595+00:00",
+      "centre": {
+        "lat": 52.95,
+        "lng": -1.15
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-09",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=LE1+5DB",
+      "observed_at": "2026-10-18T22:51:55.015476+00:00",
+      "centre": {
+        "lat": 52.63,
+        "lng": -1.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-09",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=52.63&lng=-1.14&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:55.720183+00:00",
+      "centre": {
+        "lat": 52.63,
+        "lng": -1.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 429,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-09",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=52.63&lng=-1.14&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:56.621803+00:00",
+      "centre": {
+        "lat": 52.63,
+        "lng": -1.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-09",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=52.63&lng=-1.14&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:57.218068+00:00",
+      "centre": {
+        "lat": 52.63,
+        "lng": -1.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-10",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=B1+1BB",
+      "observed_at": "2026-10-18T22:51:55.015476+00:00",
+      "centre": {
+        "lat": 52.48,
+        "lng": -1.9
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-10",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=52.48&lng=-1.9&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:55.716966+00:00",
+      "centre": {
+        "lat": 52.48,
+        "lng": -1.9
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 509,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-10",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=52.48&lng=-1.9&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:56.621803+00:00",
+      "centre": {
+        "lat": 52.48,
+        "lng": -1.9
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 7,
+      "reported_total": 7,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-10",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=52.48&lng=-1.9&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:57.267032+00:00",
+      "centre": {
+        "lat": 52.48,
+        "lng": -1.9
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 10,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-11",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=CV1+5RR",
+      "observed_at": "2026-10-18T22:51:57.515269+00:00",
+      "centre": {
+        "lat": 52.41,
+        "lng": -1.51
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-11",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=52.41&lng=-1.51&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:58.418361+00:00",
+      "centre": {
+        "lat": 52.41,
+        "lng": -1.51
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 186,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-11",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=52.41&lng=-1.51&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:59.197202+00:00",
+      "centre": {
+        "lat": 52.41,
+        "lng": -1.51
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-11",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=52.41&lng=-1.51&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:59.820963+00:00",
+      "centre": {
+        "lat": 52.41,
+        "lng": -1.51
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-12",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=CB2+1TN",
+      "observed_at": "2026-10-18T22:51:57.453110+00:00",
+      "centre": {
+        "lat": 52.21,
+        "lng": 0.12
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-12",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=52.21&lng=0.12&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:58.418361+00:00",
+      "centre": {
+        "lat": 52.21,
+        "lng": 0.12
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 298,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-12",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=52.21&lng=0.12&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:59.215237+00:00",
+      "centre": {
+        "lat": 52.21,
+        "lng": 0.12
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 6,
+      "reported_total": 6,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-12",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=52.21&lng=0.12&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:51:59.820963+00:00",
+      "centre": {
+        "lat": 52.21,
+        "lng": 0.12
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 4,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-13",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=NR2+1NH",
+      "observed_at": "2026-10-18T22:52:00.178652+00:00",
+      "centre": {
+        "lat": 52.63,
+        "lng": 1.29
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-13",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=52.63&lng=1.29&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:00.820894+00:00",
+      "centre": {
+        "lat": 52.63,
+        "lng": 1.29
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 296,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-13",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=52.63&lng=1.29&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:01.578488+00:00",
+      "centre": {
+        "lat": 52.63,
+        "lng": 1.29
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-13",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=52.63&lng=1.29&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:02.113438+00:00",
+      "centre": {
+        "lat": 52.63,
+        "lng": 1.29
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-14",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=OX1+2JD",
+      "observed_at": "2026-10-18T22:52:00.095795+00:00",
+      "centre": {
+        "lat": 51.76,
+        "lng": -1.26
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-14",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=51.76&lng=-1.26&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:00.841057+00:00",
+      "centre": {
+        "lat": 51.76,
+        "lng": -1.26
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 241,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-14",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=51.76&lng=-1.26&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:01.541140+00:00",
+      "centre": {
+        "lat": 51.76,
+        "lng": -1.26
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 24,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-14",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=51.76&lng=-1.26&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:02.094182+00:00",
+      "centre": {
+        "lat": 51.76,
+        "lng": -1.26
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-15",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=BN1+1EE",
+      "observed_at": "2026-10-18T22:52:02.498067+00:00",
+      "centre": {
+        "lat": 50.82,
+        "lng": -0.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-15",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=50.82&lng=-0.14&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:03.415179+00:00",
+      "centre": {
+        "lat": 50.82,
+        "lng": -0.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 139,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-15",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=50.82&lng=-0.14&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:03.952695+00:00",
+      "centre": {
+        "lat": 50.82,
+        "lng": -0.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-15",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=50.82&lng=-0.14&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:04.418025+00:00",
+      "centre": {
+        "lat": 50.82,
+        "lng": -0.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-16",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=BS1+5TR",
+      "observed_at": "2026-10-18T22:52:02.343353+00:00",
+      "centre": {
+        "lat": 51.45,
+        "lng": -2.6
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-16",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=51.45&lng=-2.6&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:03.108890+00:00",
+      "centre": {
+        "lat": 51.45,
+        "lng": -2.6
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 417,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-16",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=51.45&lng=-2.6&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:03.848815+00:00",
+      "centre": {
+        "lat": 51.45,
+        "lng": -2.6
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-16",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=51.45&lng=-2.6&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:04.418025+00:00",
+      "centre": {
+        "lat": 51.45,
+        "lng": -2.6
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-17",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=PL1+2AA",
+      "observed_at": "2026-10-18T22:52:04.673114+00:00",
+      "centre": {
+        "lat": 50.37,
+        "lng": -4.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-17",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=50.37&lng=-4.14&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:05.193947+00:00",
+      "centre": {
+        "lat": 50.37,
+        "lng": -4.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 272,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-17",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=50.37&lng=-4.14&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:05.786287+00:00",
+      "centre": {
+        "lat": 50.37,
+        "lng": -4.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 4,
+      "reported_total": 4,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-17",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=50.37&lng=-4.14&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:06.402916+00:00",
+      "centre": {
+        "lat": 50.37,
+        "lng": -4.14
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-18",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=TR1+2NE",
+      "observed_at": "2026-10-18T22:52:04.719456+00:00",
+      "centre": {
+        "lat": 50.26,
+        "lng": -5.05
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-18",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=50.26&lng=-5.05&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:05.287062+00:00",
+      "centre": {
+        "lat": 50.26,
+        "lng": -5.05
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 66,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-18",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=50.26&lng=-5.05&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:05.786287+00:00",
+      "centre": {
+        "lat": 50.26,
+        "lng": -5.05
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-18",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=50.26&lng=-5.05&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:06.517487+00:00",
+      "centre": {
+        "lat": 50.26,
+        "lng": -5.05
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-19",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=LA22+9BU",
+      "observed_at": "2026-10-18T22:52:06.717922+00:00",
+      "centre": {
+        "lat": 54.43,
+        "lng": -2.96
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-19",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=54.43&lng=-2.96&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:07.274969+00:00",
+      "centre": {
+        "lat": 54.43,
+        "lng": -2.96
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 40,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-19",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=54.43&lng=-2.96&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:08.008631+00:00",
+      "centre": {
+        "lat": 54.43,
+        "lng": -2.96
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-19",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=54.43&lng=-2.96&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:08.586782+00:00",
+      "centre": {
+        "lat": 54.43,
+        "lng": -2.96
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-20",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=SY8+1AS",
+      "observed_at": "2026-10-18T22:52:06.968559+00:00",
+      "centre": {
+        "lat": 52.37,
+        "lng": -2.72
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-20",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=52.37&lng=-2.72&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:07.446596+00:00",
+      "centre": {
+        "lat": 52.37,
+        "lng": -2.72
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 23,
+      "reported_total": 23,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-20",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=52.37&lng=-2.72&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:08.002297+00:00",
+      "centre": {
+        "lat": 52.37,
+        "lng": -2.72
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-20",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=52.37&lng=-2.72&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:08.466587+00:00",
+      "centre": {
+        "lat": 52.37,
+        "lng": -2.72
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-21",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=PO30+1TY",
+      "observed_at": "2026-10-18T22:52:08.768099+00:00",
+      "centre": {
+        "lat": 50.7,
+        "lng": -1.29
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-21",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=50.7&lng=-1.29&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:09.510648+00:00",
+      "centre": {
+        "lat": 50.7,
+        "lng": -1.29
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 90,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-21",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=50.7&lng=-1.29&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:10.216688+00:00",
+      "centre": {
+        "lat": 50.7,
+        "lng": -1.29
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-21",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=50.7&lng=-1.29&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:10.855372+00:00",
+      "centre": {
+        "lat": 50.7,
+        "lng": -1.29
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-22",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=KW15+1NY",
+      "observed_at": "2026-10-18T22:52:08.811652+00:00",
+      "centre": {
+        "lat": 58.98,
+        "lng": -2.96
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-22",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=58.98&lng=-2.96&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:09.502792+00:00",
+      "centre": {
+        "lat": 58.98,
+        "lng": -2.96
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 19,
+      "reported_total": 19,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-22",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=58.98&lng=-2.96&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:10.251429+00:00",
+      "centre": {
+        "lat": 58.98,
+        "lng": -2.96
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-22",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=58.98&lng=-2.96&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:10.869624+00:00",
+      "centre": {
+        "lat": 58.98,
+        "lng": -2.96
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-23",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=HS1+2BW",
+      "observed_at": "2026-10-18T22:52:11.154879+00:00",
+      "centre": {
+        "lat": 58.21,
+        "lng": -6.38
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-23",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=58.21&lng=-6.38&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:11.654042+00:00",
+      "centre": {
+        "lat": 58.21,
+        "lng": -6.38
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 30,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-23",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=58.21&lng=-6.38&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:12.042986+00:00",
+      "centre": {
+        "lat": 58.21,
+        "lng": -6.38
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-23",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=58.21&lng=-6.38&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:12.565744+00:00",
+      "centre": {
+        "lat": 58.21,
+        "lng": -6.38
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-24",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=EH1+1YZ",
+      "observed_at": "2026-10-18T22:52:11.126498+00:00",
+      "centre": {
+        "lat": 55.95,
+        "lng": -3.19
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-24",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=55.95&lng=-3.19&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:11.650209+00:00",
+      "centre": {
+        "lat": 55.95,
+        "lng": -3.19
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 372,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-24",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=55.95&lng=-3.19&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:12.319663+00:00",
+      "centre": {
+        "lat": 55.95,
+        "lng": -3.19
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 1,
+      "reported_total": 1,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-24",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=55.95&lng=-3.19&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:12.788308+00:00",
+      "centre": {
+        "lat": 55.95,
+        "lng": -3.19
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 1,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-25",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=G1+2FF",
+      "observed_at": "2026-10-18T22:52:12.767128+00:00",
+      "centre": {
+        "lat": 55.86,
+        "lng": -4.25
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-25",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=55.86&lng=-4.25&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:13.216673+00:00",
+      "centre": {
+        "lat": 55.86,
+        "lng": -4.25
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 772,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-25",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=55.86&lng=-4.25&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:13.968199+00:00",
+      "centre": {
+        "lat": 55.86,
+        "lng": -4.25
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-25",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=55.86&lng=-4.25&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:14.521466+00:00",
+      "centre": {
+        "lat": 55.86,
+        "lng": -4.25
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-26",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=CF10+1EP",
+      "observed_at": "2026-10-18T22:52:12.996510+00:00",
+      "centre": {
+        "lat": 51.48,
+        "lng": -3.18
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-26",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=51.48&lng=-3.18&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:13.439669+00:00",
+      "centre": {
+        "lat": 51.48,
+        "lng": -3.18
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 261,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-26",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=51.48&lng=-3.18&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:13.975191+00:00",
+      "centre": {
+        "lat": 51.48,
+        "lng": -3.18
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-26",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=51.48&lng=-3.18&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:14.493788+00:00",
+      "centre": {
+        "lat": 51.48,
+        "lng": -3.18
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-27",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=LL57+2DG",
+      "observed_at": "2026-10-18T22:52:14.779711+00:00",
+      "centre": {
+        "lat": 53.23,
+        "lng": -4.13
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-27",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=53.23&lng=-4.13&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:15.320678+00:00",
+      "centre": {
+        "lat": 53.23,
+        "lng": -4.13
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 78,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-27",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=53.23&lng=-4.13&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:15.933255+00:00",
+      "centre": {
+        "lat": 53.23,
+        "lng": -4.13
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": 0,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-27",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=53.23&lng=-4.13&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:16.452559+00:00",
+      "centre": {
+        "lat": 53.23,
+        "lng": -4.13
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-28",
+      "feature": "location",
+      "http_status": 200,
+      "request_path": "/api/location?q=CH4+8SG",
+      "observed_at": "2026-10-18T22:52:14.737398+00:00",
+      "centre": {
+        "lat": 53.18,
+        "lng": -2.93
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "passed",
+      "count": 1,
+      "completeness": "lookup_only"
+    },
+    {
+      "case_id": "geo-28",
+      "feature": "venues",
+      "http_status": 200,
+      "request_path": "/api/venues?lat=53.18&lng=-2.93&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:15.232174+00:00",
+      "centre": {
+        "lat": 53.18,
+        "lng": -2.93
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 24,
+      "reported_total": 182,
+      "completeness": "first_page"
+    },
+    {
+      "case_id": "geo-28",
+      "feature": "activities",
+      "http_status": 200,
+      "request_path": "/api/activities?lat=53.18&lng=-2.93&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:15.933255+00:00",
+      "centre": {
+        "lat": 53.18,
+        "lng": -2.93
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_nonempty",
+      "count": 1,
+      "reported_total": 1,
+      "completeness": "endpoint_result"
+    },
+    {
+      "case_id": "geo-28",
+      "feature": "events",
+      "http_status": 200,
+      "request_path": "/api/events?lat=53.18&lng=-2.93&radiusKm=10&scope=local",
+      "observed_at": "2026-10-18T22:52:16.452559+00:00",
+      "centre": {
+        "lat": 53.18,
+        "lng": -2.93
+      },
+      "radius_km": 10,
+      "eligibility": "Existing public selector; age 0\u20135 suitability and source freshness not independently reviewed",
+      "status": "observed_empty",
+      "count": 0,
+      "reported_total": null,
+      "completeness": "not_established"
+    },
+    {
+      "case_id": "geo-29",
+      "feature": "location",
+      "status": "blocked_licence",
+      "count": null,
+      "completeness": "not_tested",
+      "reason": "NI postcode geocodes withheld pending authorised commercial data basis"
+    },
+    {
+      "case_id": "geo-29",
+      "feature": "venues",
+      "status": "blocked_licence",
+      "count": null,
+      "completeness": "not_tested",
+      "reason": "NI postcode geocodes withheld pending authorised commercial data basis"
+    },
+    {
+      "case_id": "geo-29",
+      "feature": "activities",
+      "status": "blocked_licence",
+      "count": null,
+      "completeness": "not_tested",
+      "reason": "NI postcode geocodes withheld pending authorised commercial data basis"
+    },
+    {
+      "case_id": "geo-29",
+      "feature": "events",
+      "status": "blocked_licence",
+      "count": null,
+      "completeness": "not_tested",
+      "reason": "NI postcode geocodes withheld pending authorised commercial data basis"
+    },
+    {
+      "case_id": "geo-30",
+      "feature": "location",
+      "status": "blocked_licence",
+      "count": null,
+      "completeness": "not_tested",
+      "reason": "NI postcode geocodes withheld pending authorised commercial data basis"
+    },
+    {
+      "case_id": "geo-30",
+      "feature": "venues",
+      "status": "blocked_licence",
+      "count": null,
+      "completeness": "not_tested",
+      "reason": "NI postcode geocodes withheld pending authorised commercial data basis"
+    },
+    {
+      "case_id": "geo-30",
+      "feature": "activities",
+      "status": "blocked_licence",
+      "count": null,
+      "completeness": "not_tested",
+      "reason": "NI postcode geocodes withheld pending authorised commercial data basis"
+    },
+    {
+      "case_id": "geo-30",
+      "feature": "events",
+      "status": "blocked_licence",
+      "count": null,
+      "completeness": "not_tested",
+      "reason": "NI postcode geocodes withheld pending authorised commercial data basis"
+    }
+  ],
+  "national_features": [
+    {
+      "feature": "deals",
+      "status": "observed_nonempty",
+      "http_status": 200,
+      "count": 3,
+      "scope": "National selector; not credited as council-specific coverage",
+      "completeness": "homepage_sample",
+      "request_path": "/api/home/deals"
+    },
+    {
+      "feature": "originals",
+      "status": "manual_review",
+      "http_status": null,
+      "count": null,
+      "scope": "National selector; not credited as council-specific coverage",
+      "completeness": "not_tested",
+      "request_path": "/originals"
+    },
+    {
+      "feature": "news",
+      "status": "manual_review",
+      "http_status": null,
+      "count": null,
+      "scope": "National selector; not credited as council-specific coverage",
+      "completeness": "not_tested",
+      "request_path": "/news"
+    }
+  ],
+  "limitations": [
+    "Point samples are not council inventories or national coverage certification.",
+    "Age, actionability, freshness and source completeness require content review.",
+    "News locality and Originals content remain manual browser checks; no inferred pass.",
+    "A current API success is not historical or scheduled observation acceptance."
+  ]
+}

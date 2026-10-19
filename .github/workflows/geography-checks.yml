@@ -1,0 +1,65 @@
+name: Geography development gates
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'geography/**'
+      - 'lib/geography.ts'
+      - 'app/ops/geography/**'
+      - 'app/ops/page.tsx'
+      - 'scripts/*geography*'
+      - 'tests/*geography*'
+      - 'supabase/migrations/*uk_geography_reference.sql'
+      - '.github/workflows/geography-checks.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: disposable-geography-only
+          POSTGRES_DB: geography_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: pnpm/action-setup@v4
+      - run: pnpm install --frozen-lockfile
+      - run: pip install requests
+      - run: python -m unittest discover -s tests -p 'test_geography*.py' -v
+      - run: node --test tests/geography-database.test.mjs tests/geography-features.test.cjs
+      - run: python scripts/geography_catalogue.py
+      - run: node scripts/build-geography-dev-db.mjs
+      - name: Verify actual PostgreSQL permissions and retained history
+        run: python scripts/check_geography_postgres.py
+        env:
+          GEOGRAPHY_TEST_DATABASE: disposable
+          PGHOST: localhost
+          PGPORT: '5432'
+          PGDATABASE: geography_test
+          PGUSER: postgres
+          PGPASSWORD: disposable-geography-only
+      - run: npx --no-install tsc --noEmit
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: geography-development-evidence
+          path: |
+            review/geography-dev-db-status.json
+            review/geography-seed.sql
+          if-no-files-found: error

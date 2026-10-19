@@ -31,6 +31,9 @@ class MatalanTests(unittest.TestCase):
         clock = patch.object(m, "datetime", wraps=datetime)
         clock.start().now.return_value = datetime(2026, 10, 17, tzinfo=timezone.utc)
         self.addCleanup(clock.stop)
+        pipeline_clock = patch.object(worker, "now_utc", return_value=datetime(2026, 10, 17, tzinfo=timezone.utc))
+        pipeline_clock.start()
+        self.addCleanup(pipeline_clock.stop)
 
     def test_exact_identity_prices_and_independent_stock(self):
         v, ld = fixture()
@@ -79,6 +82,9 @@ class MatalanTests(unittest.TestCase):
             self.assertEqual(d["was_price"],9)
             self.assertIn("£11.19",d["description"])
             self.assertEqual(verify_offer(d),(None,"source-page:merchant-advertised"))
+            cutoff = datetime.fromisoformat(m.VALID_UNTIL.replace("Z", "+00:00"))
+            with patch.object(worker, "now_utc", return_value=cutoff):
+                self.assertEqual(worker.validate_deal(d), "expired")
             d["price"]=7
             self.assertEqual(verify_offer(d)[0],"matalan_evidence_changed")
 

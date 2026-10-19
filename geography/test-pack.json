@@ -1,0 +1,601 @@
+{
+  "version": 1,
+  "captured_at": "2026-10-18T22:48:36.308037+00:00",
+  "scope": "30 deliberate scenarios, not a statistical national coverage sample",
+  "cases": [
+    {
+      "id": "geo-01",
+      "postcode": "W3 9LN",
+      "label": "Acton pilot",
+      "tag": "pilot",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Ealing",
+      "expected_council_code": "E09000009",
+      "expected_region": "London",
+      "latitude": 51.508924,
+      "longitude": -0.275866
+    },
+    {
+      "id": "geo-02",
+      "postcode": "SW1A 1AA",
+      "label": "Central London",
+      "tag": "urban",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Westminster",
+      "expected_council_code": "E09000033",
+      "expected_region": "London",
+      "latitude": 51.50101,
+      "longitude": -0.141563
+    },
+    {
+      "id": "geo-03",
+      "postcode": "M2 5DB",
+      "label": "Manchester",
+      "tag": "urban",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Manchester",
+      "expected_council_code": "E08000003",
+      "expected_region": "North West",
+      "latitude": 53.47929,
+      "longitude": -2.244554
+    },
+    {
+      "id": "geo-04",
+      "postcode": "NE1 4LP",
+      "label": "Newcastle",
+      "tag": "urban",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Newcastle upon Tyne",
+      "expected_council_code": "E08000021",
+      "expected_region": "North East",
+      "latitude": 54.98022,
+      "longitude": -1.618869
+    },
+    {
+      "id": "geo-05",
+      "postcode": "DH1 3LE",
+      "label": "Durham",
+      "tag": "town",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "County Durham",
+      "expected_council_code": "E06000047",
+      "expected_region": "North East",
+      "latitude": 54.768122,
+      "longitude": -1.571884
+    },
+    {
+      "id": "geo-06",
+      "postcode": "LS1 3AD",
+      "label": "Leeds",
+      "tag": "urban",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Leeds",
+      "expected_council_code": "E08000035",
+      "expected_region": "Yorkshire and The Humber",
+      "latitude": 53.79998,
+      "longitude": -1.549729
+    },
+    {
+      "id": "geo-07",
+      "postcode": "S1 2HH",
+      "label": "Sheffield",
+      "tag": "urban",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Sheffield",
+      "expected_council_code": "E08000039",
+      "expected_region": "Yorkshire and The Humber",
+      "latitude": 53.38041,
+      "longitude": -1.469915
+    },
+    {
+      "id": "geo-08",
+      "postcode": "NG1 2LH",
+      "label": "Nottingham",
+      "tag": "urban",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Nottingham",
+      "expected_council_code": "E06000018",
+      "expected_region": "East Midlands",
+      "latitude": 52.952916,
+      "longitude": -1.149777
+    },
+    {
+      "id": "geo-09",
+      "postcode": "LE1 5DB",
+      "label": "Leicester",
+      "tag": "urban",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Leicester",
+      "expected_council_code": "E06000016",
+      "expected_region": "East Midlands",
+      "latitude": 52.634234,
+      "longitude": -1.135836
+    },
+    {
+      "id": "geo-10",
+      "postcode": "B1 1BB",
+      "label": "Birmingham",
+      "tag": "urban",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Birmingham",
+      "expected_council_code": "E08000025",
+      "expected_region": "West Midlands",
+      "latitude": 52.480144,
+      "longitude": -1.90289
+    },
+    {
+      "id": "geo-11",
+      "postcode": "CV1 5RR",
+      "label": "Coventry",
+      "tag": "urban",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Coventry",
+      "expected_council_code": "E08000026",
+      "expected_region": "West Midlands",
+      "latitude": 52.407106,
+      "longitude": -1.507605
+    },
+    {
+      "id": "geo-12",
+      "postcode": "CB2 1TN",
+      "label": "Cambridge",
+      "tag": "town",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Cambridge",
+      "expected_council_code": "E07000008",
+      "expected_region": "East of England",
+      "latitude": 52.205118,
+      "longitude": 0.116208
+    },
+    {
+      "id": "geo-13",
+      "postcode": "NR2 1NH",
+      "label": "Norwich",
+      "tag": "town",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Norwich",
+      "expected_council_code": "E07000148",
+      "expected_region": "East of England",
+      "latitude": 52.628599,
+      "longitude": 1.291638
+    },
+    {
+      "id": "geo-14",
+      "postcode": "OX1 2JD",
+      "label": "Oxford",
+      "tag": "town",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Oxford",
+      "expected_council_code": "E07000178",
+      "expected_region": "South East",
+      "latitude": 51.758043,
+      "longitude": -1.261992
+    },
+    {
+      "id": "geo-15",
+      "postcode": "BN1 1EE",
+      "label": "Brighton",
+      "tag": "coastal",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Brighton and Hove",
+      "expected_council_code": "E06000043",
+      "expected_region": "South East",
+      "latitude": 50.821987,
+      "longitude": -0.138209
+    },
+    {
+      "id": "geo-16",
+      "postcode": "BS1 5TR",
+      "label": "Bristol",
+      "tag": "urban",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Bristol, City of",
+      "expected_council_code": "E06000023",
+      "expected_region": "South West",
+      "latitude": 51.452605,
+      "longitude": -2.60207
+    },
+    {
+      "id": "geo-17",
+      "postcode": "PL1 2AA",
+      "label": "Plymouth",
+      "tag": "coastal",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Plymouth",
+      "expected_council_code": "E06000026",
+      "expected_region": "South West",
+      "latitude": 50.369569,
+      "longitude": -4.143034
+    },
+    {
+      "id": "geo-18",
+      "postcode": "TR1 2NE",
+      "label": "Truro",
+      "tag": "town",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Cornwall",
+      "expected_council_code": "E06000052",
+      "expected_region": "South West",
+      "latitude": 50.262964,
+      "longitude": -5.050532
+    },
+    {
+      "id": "geo-19",
+      "postcode": "LA22 9BU",
+      "label": "Ambleside",
+      "tag": "rural_destination",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Westmorland and Furness",
+      "expected_council_code": "E06000064",
+      "expected_region": "North West",
+      "latitude": 54.431634,
+      "longitude": -2.961994
+    },
+    {
+      "id": "geo-20",
+      "postcode": "SY8 1AS",
+      "label": "Ludlow",
+      "tag": "rural_destination",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Shropshire",
+      "expected_council_code": "E06000051",
+      "expected_region": "West Midlands",
+      "latitude": 52.367228,
+      "longitude": -2.720292
+    },
+    {
+      "id": "geo-21",
+      "postcode": "PO30 1TY",
+      "label": "Isle of Wight",
+      "tag": "island",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "England",
+      "expected_council": "Isle of Wight",
+      "expected_council_code": "E06000046",
+      "expected_region": "South East",
+      "latitude": 50.700598,
+      "longitude": -1.292354
+    },
+    {
+      "id": "geo-22",
+      "postcode": "KW15 1NY",
+      "label": "Orkney",
+      "tag": "island",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "Scotland",
+      "expected_council": "Orkney Islands",
+      "expected_council_code": "S12000023",
+      "expected_region": null,
+      "latitude": 58.981464,
+      "longitude": -2.956813
+    },
+    {
+      "id": "geo-23",
+      "postcode": "HS1 2BW",
+      "label": "Western Isles",
+      "tag": "island",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "Scotland",
+      "expected_council": "Na h-Eileanan Siar",
+      "expected_council_code": "S12000013",
+      "expected_region": null,
+      "latitude": 58.208995,
+      "longitude": -6.378719
+    },
+    {
+      "id": "geo-24",
+      "postcode": "EH1 1YZ",
+      "label": "Edinburgh",
+      "tag": "urban",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "Scotland",
+      "expected_council": "City of Edinburgh",
+      "expected_council_code": "S12000036",
+      "expected_region": null,
+      "latitude": 55.950328,
+      "longitude": -3.193018
+    },
+    {
+      "id": "geo-25",
+      "postcode": "G1 2FF",
+      "label": "Glasgow",
+      "tag": "urban",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "Scotland",
+      "expected_council": "Glasgow City",
+      "expected_council_code": "S12000049",
+      "expected_region": null,
+      "latitude": 55.863846,
+      "longitude": -4.251378
+    },
+    {
+      "id": "geo-26",
+      "postcode": "CF10 1EP",
+      "label": "Cardiff",
+      "tag": "urban",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "Wales",
+      "expected_council": "Cardiff",
+      "expected_council_code": "W06000015",
+      "expected_region": null,
+      "latitude": 51.475764,
+      "longitude": -3.179217
+    },
+    {
+      "id": "geo-27",
+      "postcode": "LL57 2DG",
+      "label": "Bangor",
+      "tag": "town",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "Wales",
+      "expected_council": "Gwynedd",
+      "expected_council_code": "W06000002",
+      "expected_region": null,
+      "latitude": 53.22921,
+      "longitude": -4.129444
+    },
+    {
+      "id": "geo-28",
+      "postcode": "CH4 8SG",
+      "label": "England/Wales border vicinity",
+      "tag": "boundary_vicinity",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "reference_verified",
+      "expected_nation": "Wales",
+      "expected_council": "Flintshire",
+      "expected_council_code": "W06000005",
+      "expected_region": null,
+      "latitude": 53.17821,
+      "longitude": -2.926902
+    },
+    {
+      "id": "geo-29",
+      "postcode": "BT1 5GS",
+      "label": "Belfast",
+      "tag": "licence_blocked",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "blocked_licence",
+      "expected_nation": "Northern Ireland",
+      "reason": "NI postcode geocodes withheld pending authorised commercial data basis"
+    },
+    {
+      "id": "geo-30",
+      "postcode": "BT48 7NN",
+      "label": "Derry",
+      "tag": "licence_blocked",
+      "radius_km": 10,
+      "ages": [
+        0,
+        5
+      ],
+      "expected_behaviour": "Nearby eligible content or honest empty state; request failure is unavailable",
+      "state": "blocked_licence",
+      "expected_nation": "Northern Ireland",
+      "reason": "NI postcode geocodes withheld pending authorised commercial data basis"
+    }
+  ],
+  "negative_cases": [
+    {
+      "id": "invalid",
+      "input": "NOT A POSTCODE",
+      "expected": "Reject or no match; never invent coordinates"
+    },
+    {
+      "id": "terminated",
+      "input": "fixture-only terminated postcode",
+      "expected": "Reference retains termination; current lookup must not silently use as live"
+    },
+    {
+      "id": "permission_denied",
+      "input": null,
+      "expected": "Manual location selection remains available"
+    },
+    {
+      "id": "no_location",
+      "input": null,
+      "expected": "National content; no inherited visitor location"
+    },
+    {
+      "id": "lookup_outage",
+      "input": "W3 9LN",
+      "expected": "Unavailable, not empty content"
+    },
+    {
+      "id": "radius_boundary",
+      "input": "synthetic points at 9.999 and 10.001 km",
+      "expected": "Inside included, outside excluded independent of council boundary"
+    }
+  ]
+}
