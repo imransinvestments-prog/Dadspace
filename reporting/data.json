@@ -1,25 +1,235 @@
 {
-  "generated_at": "2026-10-18T08:08:58.983Z",
+  "generated_at": "2026-10-19T12:49:01.711Z",
   "timezone": "Europe/London",
   "repository": "imransinvestments-prog/Dadspace",
-  "scope": "All 190 repository issues/PRs across two pages. Counts include hierarchy, not unique deliverables. Board-only draft cards/status fields unavailable.",
+  "scope": "All 211 repository issues/PRs across three pages; includes hierarchy, not unique deliverables. Board-only draft cards/status fields unavailable.",
   "counts": {
-    "open_issues": 46,
-    "open_prs": 3,
-    "completed_issues": 39,
-    "merged_prs": 92,
+    "open_issues": 44,
+    "open_prs": 4,
+    "completed_issues": 53,
+    "merged_prs": 100,
     "closed_without_completion": 10
   },
   "items": [
     {
-      "number": 190,
-      "title": "Qualify and integrate Matalan school-uniform deals for #131",
-      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/190",
+      "number": 211,
+      "title": "Sprint 11 — remaining Deals, Places and Originals acceptance",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/211",
       "state": "open",
       "kind": "Issue",
       "completion": "open",
+      "feature": "Programme and pilot readiness",
+      "updated_at": "2026-10-19T00:14:02Z"
+    },
+    {
+      "number": 210,
+      "title": "Record Sprint 10 approval and production release",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/210",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-19T00:10:43Z"
+    },
+    {
+      "number": 209,
+      "title": "[Bug] Matalan pipeline fixture depends on the wall clock after its review cutoff",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/209",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-19T00:10:27Z"
+    },
+    {
+      "number": 208,
+      "title": "Sprint 10: UK geography reference and coverage review",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/208",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-19T00:07:22Z"
+    },
+    {
+      "number": 207,
+      "title": "[Backlog] Expand geography sampling and qualify a licensed national postcode import",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/207",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Geography reference and coverage",
+      "updated_at": "2026-10-19T00:06:54Z"
+    },
+    {
+      "number": 206,
+      "title": "[Observation] Verify geography reference freshness and coverage changes after release",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/206",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Geography reference and coverage",
+      "updated_at": "2026-10-19T00:10:28Z"
+    },
+    {
+      "number": 205,
+      "title": "[Sprint 10] Deliver the geography coverage workspace and owner review pack",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/205",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-19T00:10:22Z"
+    },
+    {
+      "number": 204,
+      "title": "[Sprint 10] Build a reproducible UK postcode and feature test pack",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/204",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-19T00:10:20Z"
+    },
+    {
+      "number": 203,
+      "title": "[Sprint 10] Version the UK area and postcode reference catalogue",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/203",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-19T00:10:18Z"
+    },
+    {
+      "number": 202,
+      "title": "Sprint 10 — UK geography reference, coverage baseline and postcode testing",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/202",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-19T00:10:24Z"
+    },
+    {
+      "number": 201,
+      "title": "Sprint 9: audited session identity, canonical matching and source safety gates",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/201",
+      "state": "open",
+      "kind": "PR",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-18T22:13:08Z"
+    },
+    {
+      "number": 200,
+      "title": "Record Sprint 8 closure and preserve live acceptance evidence",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/200",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-18T17:18:15Z"
+    },
+    {
+      "number": 199,
+      "title": "Activities reliability: source evidence, bounded renewal and pilot diagnostics",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/199",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-18T17:13:53Z"
+    },
+    {
+      "number": 198,
+      "title": "Activities identity follow-up: preserve reviewed programme continuity and distinct session identities",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/198",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-18T22:01:00Z"
+    },
+    {
+      "number": 197,
+      "title": "Sprint 9 — approved scope, readiness and delivery plan",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/197",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "Activities and source coverage",
+      "updated_at": "2026-10-18T22:00:58Z"
+    },
+    {
+      "number": 196,
+      "title": "Sprint 8 — Activities reliability foundation (18/18 completed)",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/196",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-18T17:18:17Z"
+    },
+    {
+      "number": 195,
+      "title": "[Reliability] Independent cloud alert for overdue Originals publication",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/195",
+      "state": "open",
+      "kind": "Issue",
+      "completion": "open",
+      "feature": "News and Originals",
+      "updated_at": "2026-10-18T16:40:15Z"
+    },
+    {
+      "number": 194,
+      "title": "Verify Originals uncertain-write recovery and document #129 closure gates",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/194",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-18T09:25:48Z"
+    },
+    {
+      "number": 193,
+      "title": "Record successful MasterTag delivery and resolve Sprint 7 carryover",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/193",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-18T08:39:00Z"
+    },
+    {
+      "number": 192,
+      "title": "Keep Matalan RRP comparisons explicitly merchant-advertised",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/192",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-18T08:15:50Z"
+    },
+    {
+      "number": 191,
+      "title": "Restore owner-confirmed AWIN Publisher MasterTag on public offer pages",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/pull/191",
+      "state": "closed",
+      "kind": "PR",
+      "completion": "merged",
+      "feature": "Historical delivery",
+      "updated_at": "2026-10-18T08:12:13Z"
+    },
+    {
+      "number": 190,
+      "title": "Qualify and integrate Matalan school-uniform deals for #131",
+      "url": "https://github.com/imransinvestments-prog/Dadspace/issues/190",
+      "state": "closed",
+      "kind": "Issue",
+      "completion": "completed",
       "feature": "Deals",
-      "updated_at": "2026-10-17T22:47:47Z"
+      "updated_at": "2026-10-18T08:17:18Z"
     },
     {
       "number": 189,
@@ -45,11 +255,11 @@
       "number": 187,
       "title": "Sprint 7 — Useful Deals and safe maintenance (21 points; scheduled evidence tracked separately)",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/187",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Deals",
-      "updated_at": "2026-10-17T22:49:38Z"
+      "updated_at": "2026-10-18T10:30:25Z"
     },
     {
       "number": 186,
@@ -85,41 +295,41 @@
       "number": 183,
       "title": "Activities reliability: programme identity and session regression evidence",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/183",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Activities and source coverage",
-      "updated_at": "2026-10-17T15:31:19Z"
+      "updated_at": "2026-10-18T17:17:45Z"
     },
     {
       "number": 182,
       "title": "Activities reliability: reproducible pilot eligibility and location evidence",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/182",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Activities and source coverage",
-      "updated_at": "2026-10-17T15:31:17Z"
+      "updated_at": "2026-10-18T17:17:48Z"
     },
     {
       "number": 181,
       "title": "Activities reliability: bounded programme renewal and disappearance handling",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/181",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Activities and source coverage",
-      "updated_at": "2026-10-17T15:31:17Z"
+      "updated_at": "2026-10-18T17:17:47Z"
     },
     {
       "number": 180,
       "title": "Activities reliability: per-source run evidence and public readback",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/180",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Activities and source coverage",
-      "updated_at": "2026-10-17T15:31:16Z"
+      "updated_at": "2026-10-18T17:17:43Z"
     },
     {
       "number": 179,
@@ -435,11 +645,11 @@
       "number": 148,
       "title": "[Feature] Deliver deals taxonomy, evidence and merchant maintenance queues",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/148",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Deals",
-      "updated_at": "2026-10-17T22:49:40Z"
+      "updated_at": "2026-10-18T08:17:17Z"
     },
     {
       "number": 147,
@@ -579,7 +789,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Activities and source coverage",
-      "updated_at": "2026-10-16T16:08:35Z"
+      "updated_at": "2026-10-18T22:38:19Z"
     },
     {
       "number": 133,
@@ -589,7 +799,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Activities and source coverage",
-      "updated_at": "2026-10-16T16:08:37Z"
+      "updated_at": "2026-10-18T19:22:46Z"
     },
     {
       "number": 132,
@@ -599,17 +809,17 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Deals",
-      "updated_at": "2026-10-17T20:49:23Z"
+      "updated_at": "2026-10-18T16:40:14Z"
     },
     {
       "number": 131,
       "title": "[Feature] Qualify priority deal supply and canonical taxonomy gaps",
       "url": "https://github.com/imransinvestments-prog/Dadspace/issues/131",
-      "state": "open",
+      "state": "closed",
       "kind": "Issue",
-      "completion": "open",
+      "completion": "completed",
       "feature": "Deals",
-      "updated_at": "2026-10-17T22:49:39Z"
+      "updated_at": "2026-10-18T08:38:09Z"
     },
     {
       "number": 130,
@@ -629,7 +839,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "News and Originals",
-      "updated_at": "2026-10-17T20:36:03Z"
+      "updated_at": "2026-10-18T16:40:13Z"
     },
     {
       "number": 128,
@@ -669,7 +879,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Operations and feed reliability",
-      "updated_at": "2026-10-16T16:08:54Z"
+      "updated_at": "2026-10-18T16:40:12Z"
     },
     {
       "number": 124,
@@ -879,7 +1089,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Operations and feed reliability",
-      "updated_at": "2026-10-16T16:09:25Z"
+      "updated_at": "2026-10-18T21:55:30Z"
     },
     {
       "number": 103,
@@ -1219,7 +1429,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Operations and feed reliability",
-      "updated_at": "2026-10-17T15:33:48Z"
+      "updated_at": "2026-10-18T08:17:17Z"
     },
     {
       "number": 69,
@@ -1439,7 +1649,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Deals",
-      "updated_at": "2026-10-17T15:33:51Z"
+      "updated_at": "2026-10-18T08:38:10Z"
     },
     {
       "number": 47,
@@ -1519,7 +1729,7 @@
       "kind": "Issue",
       "completion": "open",
       "feature": "Places and local discovery",
-      "updated_at": "2026-10-16T16:10:17Z"
+      "updated_at": "2026-10-18T19:22:44Z"
     },
     {
       "number": 39,
@@ -1914,37 +2124,37 @@
   ],
   "usage": {
     "civic": {
-      "attempts": 10,
-      "prompt": 67144,
-      "output": 53790,
-      "thinking": 38801,
-      "total": 120934,
-      "cache_hits": 29,
-      "extracted": 62,
-      "kept": 58,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "attempts": 8,
+      "prompt": 51207,
+      "output": 44670,
+      "thinking": 28878,
+      "total": 95877,
+      "cache_hits": 31,
+      "extracted": 52,
+      "kept": 46,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     "activities": {
       "attempts": 2,
-      "prompt": 13622,
-      "output": 14880,
-      "thinking": 8368,
-      "total": 28502,
+      "prompt": 12473,
+      "output": 29594,
+      "thinking": 16195,
+      "total": 42067,
       "cache_hits": 5,
-      "extracted": 20,
-      "kept": 5,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
+      "extracted": 38,
+      "kept": 11,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172410"
     },
     "news": {
-      "attempts": 2,
-      "prompt": 6245,
-      "output": 1147,
-      "thinking": 505,
-      "total": 7392,
-      "kept": 3,
-      "scored": 5,
+      "attempts": 3,
+      "prompt": 8515,
+      "output": 5991,
+      "thinking": 3549,
+      "total": 14506,
+      "kept": 4,
+      "scored": 13,
       "source_failures": 0,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498096193"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172754"
     },
     "deals": {
       "attempts": 0,
@@ -1953,11 +2163,11 @@
       "thinking": 0,
       "total": 0,
       "saved": 120,
-      "eligible_offers": 17,
-      "groups": 7,
-      "providers": 9,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095903",
-      "scope": "17 October evening, predates approved Natural Baby Shower activation/readback; not current all-source inventory."
+      "eligible_offers": 19,
+      "groups": 8,
+      "providers": 11,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172380",
+      "scope": "18 October evening eligible selector snapshot; human acceptance and future freshness are separate."
     }
   },
   "source_run_evidence": [
@@ -1965,37 +2175,37 @@
       "source": "Kids Days Out - Buckinghamshire",
       "worker": "civic",
       "status": "OK_ZERO",
-      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=277730, content_chars=17238, jsonld_events=0, eventish_rows=11, title=50 best things to do in Buckinghamshire with children - Kids Days Out; gemini: attempts=1, prompt_tokens=6938, output_tokens=1764, total_tokens=8702 (10.8s)",
-      "extracted": 0,
+      "detail": "OK_ZERO - 1 extracted, 0 kept; diagnostics: html_chars=277728, content_chars=17236, jsonld_events=0, eventish_rows=11, title=50 best things to do in Buckinghamshire with children - Kids Days Out; rejected: missing_activity_schedule=1; gemini: attempts=1, prompt_tokens=6938, output_tokens=3490, total_tokens=10428 (15.6s)",
+      "extracted": 1,
       "kept": 0,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "The Bucks Guide - Events",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.5s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.6s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "BuckinghamshireLive - Family & Kids",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.8s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Buckinghamshire Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.3s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.1s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Cambridgeshire County Council",
@@ -2004,34 +2214,34 @@
       "detail": "UNCHANGED - Page unchanged since last run (0.7s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Essex County Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.7s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Oxfordshire County Council",
       "worker": "civic",
       "status": "OK",
-      "detail": "OK - 30 extracted, 30 kept; gemini: attempts=1, prompt_tokens=9447, output_tokens=14860, total_tokens=24307 (57.1s)",
-      "extracted": 30,
-      "kept": 30,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "detail": "OK - 16 extracted, 16 kept; gemini: attempts=1, prompt_tokens=9475, output_tokens=11648, total_tokens=21123 (44.0s)",
+      "extracted": 16,
+      "kept": 16,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Manchester City Council",
       "worker": "civic",
       "status": "SKIPPED_ROBOTS",
-      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.7s)",
+      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.6s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Norfolk County Council",
@@ -2040,160 +2250,160 @@
       "detail": "FAILED_403 - http_403: https://norfolk.gov.uk/libraryonline (0.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Haringey Council",
       "worker": "civic",
-      "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.6s)",
-      "extracted": null,
-      "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "status": "OK",
+      "detail": "OK - 1 extracted, 1 kept; gemini: attempts=1, prompt_tokens=3056, output_tokens=1563, total_tokens=4619 (7.7s)",
+      "extracted": 1,
+      "kept": 1,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Redbridge Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.6s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.8s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Lewisham Council",
       "worker": "civic",
-      "status": "OK_ZERO",
-      "detail": "OK_ZERO - 1 extracted, 0 kept; diagnostics: html_chars=170692, content_chars=4779, jsonld_events=0, eventish_rows=3, title=Lewisham Council - What's on; rejected: event_finished=1; gemini: attempts=1, prompt_tokens=2891, output_tokens=3482, total_tokens=6373 (17.7s)",
-      "extracted": 1,
-      "kept": 0,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (0.7s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Ealing Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.5s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.1s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Coventry City Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.7s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Sheffield City Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.8s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Newcastle City Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.5s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Salford City Council",
       "worker": "civic",
-      "status": "OK",
-      "detail": "OK - 4 extracted, 3 kept; rejected: missing_activity_schedule=1; gemini: attempts=1, prompt_tokens=5006, output_tokens=3474, total_tokens=8480 (17.0s)",
-      "extracted": 4,
-      "kept": 3,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.1s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Dartmoor National Park",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.dartmoor.gov.uk/enjoy-dartmoor/events (0.5s)",
+      "detail": "FAILED_403 - http_403: https://www.dartmoor.gov.uk/enjoy-dartmoor/events (0.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Exmoor National Park",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.exmoor-nationalpark.gov.uk/enjoying/events (0.3s)",
+      "detail": "FAILED_403 - http_403: https://www.exmoor-nationalpark.gov.uk/enjoying/events (0.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "North York Moors National Park",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.northyorkmoors.org.uk/visiting/whats-on (0.4s)",
+      "detail": "FAILED_403 - http_403: https://www.northyorkmoors.org.uk/visiting/whats-on (0.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Peak District National Park",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.peakdistrict.gov.uk/visiting/whats-on (0.4s)",
+      "detail": "FAILED_403 - http_403: https://www.peakdistrict.gov.uk/visiting/whats-on (0.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "South Downs National Park",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (2.4s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.9s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "The Broads Authority",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.6s)",
+      "detail": "UNCHANGED - Page unchanged since last run (5.5s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Northumberland National Park",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.9s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.6s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Sherwood Forest (RSPB)",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.visitsherwood.co.uk/events/ (1.4s)",
+      "detail": "FAILED_403 - http_403: https://www.visitsherwood.co.uk/events/ (1.1s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Yorkshire Dales National Park",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.yorkshiredales.org.uk/whats-on/ (1.2s)",
+      "detail": "FAILED_403 - http_403: https://www.yorkshiredales.org.uk/whats-on/ (0.8s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Camden Council",
@@ -2202,88 +2412,88 @@
       "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Southwark Council",
       "worker": "civic",
       "status": "OK",
-      "detail": "OK - 2 extracted, 2 kept; gemini: attempts=1, prompt_tokens=2767, output_tokens=3553, total_tokens=6320 (17.1s)",
-      "extracted": 2,
-      "kept": 2,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "detail": "OK - 4 extracted, 4 kept; gemini: attempts=1, prompt_tokens=2732, output_tokens=4011, total_tokens=6743 (17.4s)",
+      "extracted": 4,
+      "kept": 4,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Cadw",
       "worker": "civic",
-      "status": "OK_ZERO",
-      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=53670, content_chars=2309, jsonld_events=0, eventish_rows=1, title=What's On | Cadw; gemini: attempts=1, prompt_tokens=2109, output_tokens=196, total_tokens=2305 (3.7s)",
-      "extracted": 0,
-      "kept": 0,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Loch Lomond & The Trossachs National Park",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.5s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Historic Environment Scotland",
       "worker": "civic",
-      "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (2.2s)",
-      "extracted": null,
-      "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "status": "OK",
+      "detail": "OK - 7 extracted, 3 kept; rejected: no_date=4; gemini: attempts=1, prompt_tokens=4521, output_tokens=4999, total_tokens=9520 (20.1s)",
+      "extracted": 7,
+      "kept": 3,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Discover Northern Ireland",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.8s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "English Heritage",
       "worker": "civic",
-      "status": "OK",
-      "detail": "OK - 3 extracted, 2 kept; rejected: no_date=1; gemini: attempts=1, prompt_tokens=13608, output_tokens=5446, total_tokens=19054 (23.8s)",
-      "extracted": 3,
-      "kept": 2,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "status": "UNCHANGED",
+      "detail": "UNCHANGED - Page unchanged since last run (0.4s)",
+      "extracted": null,
+      "kept": null,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "The Wildlife Trusts",
       "worker": "civic",
       "status": "SKIPPED_ROBOTS",
-      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.4s)",
+      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "French Brothers (Windsor steamboat)",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.1s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Kempton Steam Museum",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.9s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.7s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "London Transport Museum Depot (Acton)",
@@ -2292,52 +2502,52 @@
       "detail": "FAILED_403 - http_403: https://www.ltmuseum.co.uk/whats-on (0.1s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Lancashire County Council",
       "worker": "civic",
       "status": "SKIPPED_ROBOTS",
-      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.9s)",
+      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.6s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "East Sussex County Council",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.escis.org.uk/explore/?type=event&sort=order-by-date (0.3s)",
+      "detail": "FAILED_403 - http_403: https://www.escis.org.uk/explore/?type=event&sort=order-by-date (0.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Hampshire County Council",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.hants.gov.uk/thingstodo/events (0.3s)",
+      "detail": "FAILED_403 - http_403: https://www.hants.gov.uk/thingstodo/events (0.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Kent County Council",
       "worker": "civic",
       "status": "OK",
-      "detail": "OK - 13 extracted, 13 kept; gemini: attempts=1, prompt_tokens=7160, output_tokens=13169, total_tokens=20329 (52.1s)",
-      "extracted": 13,
-      "kept": 13,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "detail": "OK - 14 extracted, 14 kept; gemini: attempts=1, prompt_tokens=7166, output_tokens=10354, total_tokens=17520 (41.3s)",
+      "extracted": 14,
+      "kept": 14,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "How Are You Peterborough?",
       "worker": "civic",
       "status": "OK",
-      "detail": "OK - 9 extracted, 8 kept; rejected: event_finished=1; gemini: attempts=1, prompt_tokens=13547, output_tokens=6387, total_tokens=19934 (42.8s)",
+      "detail": "OK - 9 extracted, 8 kept; rejected: event_finished=1; gemini: attempts=1, prompt_tokens=13648, output_tokens=6782, total_tokens=20430 (45.9s)",
       "extracted": 9,
       "kept": 8,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "How Are You Fenland?",
@@ -2346,178 +2556,178 @@
       "detail": "UNCHANGED - Page unchanged since last run (0.6s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "How Are You Hunts?",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (3.1s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.5s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "How Are You East Cambs?",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (2.7s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.4s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "How Are You South Cambs?",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.5s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "How Are You Cambridge?",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.8s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.5s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Pembrokeshire Coast National Park",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (5.9s)",
+      "detail": "UNCHANGED - Page unchanged since last run (5.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Tower Hamlets Council",
       "worker": "civic",
       "status": "FAILED_NO_CONTENT",
-      "detail": "FAILED_NO_CONTENT - Page had almost no readable content (it may need the browser workflow) (2.7s)",
+      "detail": "FAILED_NO_CONTENT - Page had almost no readable content (it may need the browser workflow) (1.9s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Liverpool City Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.8s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.6s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Lake District National Park",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (2.2s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.5s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Eryri (Snowdonia) National Park",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (4.4s)",
+      "detail": "UNCHANGED - Page unchanged since last run (3.1s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Bannau Brycheiniog (Brecon Beacons)",
       "worker": "civic",
       "status": "OK_ZERO",
-      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=436610, content_chars=6669, jsonld_events=0, eventish_rows=10, title=Events - Bannau Brycheiniog; gemini: attempts=1, prompt_tokens=3671, output_tokens=1459, total_tokens=5130 (11.9s)",
+      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=436610, content_chars=6669, jsonld_events=0, eventish_rows=10, title=Events - Bannau Brycheiniog; gemini: attempts=1, prompt_tokens=3671, output_tokens=1823, total_tokens=5494 (12.3s)",
       "extracted": 0,
       "kept": 0,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Cairngorms National Park",
       "worker": "civic",
       "status": "FAILED_404",
-      "detail": "FAILED_404 - http_404: https://cairngorms.co.uk/discover-explore/events (1.5s)",
+      "detail": "FAILED_404 - http_404: https://cairngorms.co.uk/discover-explore/events (1.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Woodland Trust",
       "worker": "civic",
       "status": "FAILED_404",
-      "detail": "FAILED_404 - http_404: https://www.woodlandtrust.org.uk/visiting-woods/events/ (1.3s)",
+      "detail": "FAILED_404 - http_404: https://www.woodlandtrust.org.uk/visiting-woods/events/ (0.9s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "ClassForKids (London)",
       "worker": "activities",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (10.5s)",
+      "detail": "UNCHANGED - Page unchanged since last run (8.4s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172410"
     },
     {
       "source": "ClassForKids (Manchester)",
       "worker": "activities",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (6.5s)",
+      "detail": "UNCHANGED - Page unchanged since last run (5.9s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172410"
     },
     {
       "source": "ClassForKids (Birmingham)",
       "worker": "activities",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (6.0s)",
+      "detail": "UNCHANGED - Page unchanged since last run (6.7s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172410"
     },
     {
       "source": "Hoop (London)",
       "worker": "activities",
       "status": "OK",
-      "detail": "OK - 9 extracted, 3 kept; rejected: missing_activity_url=6; gemini: attempts=1, prompt_tokens=6267, output_tokens=6764, total_tokens=13031 (30.0s)",
-      "extracted": 9,
-      "kept": 3,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
+      "detail": "OK - 23 extracted, 9 kept; rejected: missing_activity_location=8, missing_activity_url=5; merged duplicates=1; gemini: attempts=1, prompt_tokens=5850, output_tokens=17474, total_tokens=23324 (67.0s)",
+      "extracted": 23,
+      "kept": 9,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172410"
     },
     {
       "source": "Hoop (Greater Manchester)",
       "worker": "activities",
       "status": "OK",
-      "detail": "OK - 11 extracted, 2 kept; rejected: missing_activity_url=9; gemini: attempts=1, prompt_tokens=7355, output_tokens=8116, total_tokens=15471 (34.9s)",
-      "extracted": 11,
+      "detail": "OK - 15 extracted, 2 kept; rejected: activity_schedule_requires_review=1, missing_activity_url=11, teen_or_adult_only=1; gemini: attempts=1, prompt_tokens=6623, output_tokens=12120, total_tokens=18743 (46.4s)",
+      "extracted": 15,
       "kept": 2,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172410"
     },
     {
       "source": "Ni 4 Kids",
       "worker": "activities",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (4.2s)",
+      "detail": "UNCHANGED - Page unchanged since last run (4.0s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172410"
     },
     {
       "source": "Hertfordshire County Council",
       "worker": "activities",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (5.2s)",
+      "detail": "UNCHANGED - Page unchanged since last run (4.9s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172410"
     }
   ],
   "source_matrix": [
@@ -4852,37 +5062,37 @@
       "source": "Kids Days Out - Buckinghamshire",
       "worker": "civic",
       "status": "OK_ZERO",
-      "detail": "OK_ZERO - 0 extracted, 0 kept; diagnostics: html_chars=277730, content_chars=17238, jsonld_events=0, eventish_rows=11, title=50 best things to do in Buckinghamshire with children - Kids Days Out; gemini: attempts=1, prompt_tokens=6938, output_tokens=1764, total_tokens=8702 (10.8s)",
-      "extracted": 0,
+      "detail": "OK_ZERO - 1 extracted, 0 kept; diagnostics: html_chars=277728, content_chars=17236, jsonld_events=0, eventish_rows=11, title=50 best things to do in Buckinghamshire with children - Kids Days Out; rejected: missing_activity_schedule=1; gemini: attempts=1, prompt_tokens=6938, output_tokens=3490, total_tokens=10428 (15.6s)",
+      "extracted": 1,
       "kept": 0,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "The Bucks Guide - Events",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.5s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.6s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "BuckinghamshireLive - Family & Kids",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (0.8s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.3s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Buckinghamshire Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.3s)",
+      "detail": "UNCHANGED - Page unchanged since last run (1.1s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Cambridgeshire County Council",
@@ -4891,25 +5101,25 @@
       "detail": "UNCHANGED - Page unchanged since last run (0.7s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Essex County Council",
       "worker": "civic",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (1.0s)",
+      "detail": "UNCHANGED - Page unchanged since last run (0.7s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Oxfordshire County Council",
       "worker": "civic",
       "status": "OK",
-      "detail": "OK - 30 extracted, 30 kept; gemini: attempts=1, prompt_tokens=9447, output_tokens=14860, total_tokens=24307 (57.1s)",
-      "extracted": 30,
-      "kept": 30,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "detail": "OK - 16 extracted, 16 kept; gemini: attempts=1, prompt_tokens=9475, output_tokens=11648, total_tokens=21123 (44.0s)",
+      "extracted": 16,
+      "kept": 16,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Norfolk County Council",
@@ -4918,124 +5128,1570 @@
       "detail": "FAILED_403 - http_403: https://norfolk.gov.uk/libraryonline (0.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Lancashire County Council",
       "worker": "civic",
       "status": "SKIPPED_ROBOTS",
-      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.9s)",
+      "detail": "SKIPPED_ROBOTS - robots.txt does not allow this page (0.6s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "East Sussex County Council",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.escis.org.uk/explore/?type=event&sort=order-by-date (0.3s)",
+      "detail": "FAILED_403 - http_403: https://www.escis.org.uk/explore/?type=event&sort=order-by-date (0.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Hampshire County Council",
       "worker": "civic",
       "status": "FAILED_403",
-      "detail": "FAILED_403 - http_403: https://www.hants.gov.uk/thingstodo/events (0.3s)",
+      "detail": "FAILED_403 - http_403: https://www.hants.gov.uk/thingstodo/events (0.2s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Kent County Council",
       "worker": "civic",
       "status": "OK",
-      "detail": "OK - 13 extracted, 13 kept; gemini: attempts=1, prompt_tokens=7160, output_tokens=13169, total_tokens=20329 (52.1s)",
-      "extracted": 13,
-      "kept": 13,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095823"
+      "detail": "OK - 14 extracted, 14 kept; gemini: attempts=1, prompt_tokens=7166, output_tokens=10354, total_tokens=17520 (41.3s)",
+      "extracted": 14,
+      "kept": 14,
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172388"
     },
     {
       "source": "Hertfordshire County Council",
       "worker": "activities",
       "status": "UNCHANGED",
-      "detail": "UNCHANGED - Page unchanged since last run (5.2s)",
+      "detail": "UNCHANGED - Page unchanged since last run (4.9s)",
       "extracted": null,
       "kept": null,
-      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39067495389/job/117498095958"
+      "evidence": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39164718975/job/117785172410"
     }
   ],
-  "county_limit": "County-named source outcomes only, not verified item geography or public coverage. Full UK county boundary universe and geocoded publication/quality/freshness joins unavailable. Regional/national routes remain unmapped.",
-  "report_date": "2026-10-18",
-  "previous_success_at": "2026-10-17T08:52:38.603Z",
-  "repository_head": "afb57cdd90c7b0fa148ccfeae8ab398299ea4090",
-  "usage_scope": "Latest visible scheduled run: 17 October evening. Civic, activities, news and deals only; thinking included in output. Not daily/project-wide/billing totals. Later manual approved car-seat route evidence reported separately.",
+  "county_limit": "Frozen 30-scenario geography pack now available (28 GB postcode samples, two withheld NI scenarios). Point samples/first pages are not county inventories or national coverage certification. No accepted age/freshness/source-quality percentage is inferred.",
+  "report_date": "2026-10-19",
+  "previous_success_at": "2026-10-18T08:08:58.983Z",
+  "repository_head": "eeb004c6d9ed1dfacfb6a335767a917a428659ff",
+  "usage_scope": "Latest visible scheduled run: 18 October evening. Civic, activities, news and deals only; thinking included in output. Not calendar-day/project-wide/billing totals.",
   "scheduler": {
-    "latest_visible_run": "2026-10-17T20:37:24Z",
-    "latest_run_id": 39067495389,
+    "latest_visible_run": "2026-10-18T20:44:57Z",
+    "latest_run_id": 39164718975,
     "conclusion": "success",
-    "status": "No 18 October morning scheduled worker/Originals run visible at check time. Collector late-warning acceptance #124 is complete; actual shared seven-day acceptance #125 remains open. Sunday has no 07:30 brief task; email fallback generated this report."
+    "status": "No 19 October morning scheduled worker/Originals run visible in retrieved latest schedule listing. #124 warning acceptance complete; actual shared observation #125 remains open. Brief generation ran after its 07:30 target; #157/#158 remain open."
   },
   "source_matrix_scope": "Source access/registry matrix dated 10–11 October, carried forward as historical context; no new probes or approvals.",
   "latest_jobs": [
     {
-      "id": 117498075505,
+      "id": 117785149326,
       "name": "gate",
       "conclusion": "success"
     },
     {
-      "id": 117498095822,
+      "id": 117785172266,
       "name": "venue_reference / sync",
       "conclusion": "success"
     },
     {
-      "id": 117498095823,
-      "name": "civic / collect",
-      "conclusion": "success"
-    },
-    {
-      "id": 117498095903,
+      "id": 117785172380,
       "name": "deals / collect",
       "conclusion": "success"
     },
     {
-      "id": 117498095958,
+      "id": 117785172388,
+      "name": "civic / collect",
+      "conclusion": "success"
+    },
+    {
+      "id": 117785172410,
       "name": "activities / collect",
       "conclusion": "success"
     },
     {
-      "id": 117498096193,
+      "id": 117785172754,
       "name": "news / news",
       "conclusion": "success"
     },
     {
-      "id": 117498096613,
-      "name": "news / checks",
-      "conclusion": "skipped"
-    },
-    {
-      "id": 117498097027,
+      "id": 117785173511,
       "name": "civic / usage-review",
       "conclusion": "skipped"
     },
     {
-      "id": 117498097277,
+      "id": 117785173536,
+      "name": "news / checks",
+      "conclusion": "skipped"
+    },
+    {
+      "id": 117785173706,
       "name": "civic / review-safety",
       "conclusion": "skipped"
     }
   ],
   "delivery_updates": {
-    "deals": "Approved Natural Baby Shower source #42 active; later normal manual collection 39070828554 fetched/verified one offer and live car-seat readback recorded in #131/#187. Matalan candidate/route #190 unapproved; no activation inferred from merged #188. Third priority category and MasterTag remain open.",
-    "news": "News quality #126/#127 completed; reuse accepted reviews. #129/#146/#147 remain carryover for scheduled/controlled maintenance evidence; permission approval is not paid action approval.",
-    "discovery": "Mobile sprint, nursery/library correction, guarded venue decisions, canonical duplicates and structured-data safeguards completed. Activities refinement #180–#183 remains open.",
-    "brief_delivery": "#157/#158 remain open; no scheduler/platform selection made."
+    "sprint11": "#211: owner requested remaining #48/#113/#115 work in dev/sprint-11-reliability with one review pack; no merge/production changes in this sprint. 32 provisional points include observation/human/external work, not a time promise.",
+    "deals": "#131/#148/#190 and Sprint7 completed; MasterTag delivery verified. #132/#125 real scheduled observation remains. Latest scheduled selector 19 offers/8 groups/11 providers.",
+    "activities": "Sprint8 #196 completed; #180–#183 foundations delivered. Sprint9 #197/#198/PR201 remains open for audited identity, canonical and source-safety follow-through.",
+    "geography": "Sprint10 #202–#205 completed; sample workspace released. #206 observation and #207 national/NI data expansion remain open.",
+    "originals": "Latest visible schedule is 18 October 11:04 UTC; publish job skipped already published daily-2026-10-18. Post-release daily/Friday/09:17 retry evidence remains #129; cloud alert #195 separate."
   },
   "evidence_limitations": [
-    "Latest scheduled collection is 17 October evening; no 18 October morning run visible.",
-    "Successful civic job includes 13 failed routes and 3 robots exclusions.",
-    "Historical 10–11 October registry; county geocoded public-quality coverage, fresh private production recount and complete billing unavailable.",
-    "Scheduled deals counters predate separately approved live car-seat route; do not call that category absent now.",
-    "Sprint/permission/release approval does not prove observation or unapproved source acceptance."
-  ]
+    "No 19 October morning scheduled run visible in retrieved listing; job success is not dispatch timeliness.",
+    "Civic job success contains 13 route failures and three robots exclusions.",
+    "Geography baseline is frozen/pre-release, point sampled, partial pagination; quality/freshness not independently certified.",
+    "Production reference migration/import unapplied; NI samples withheld pending authorised data basis.",
+    "No fresh private database recount or complete billing totals; historical source matrix dated 10–11 October."
+  ],
+  "geography": {
+    "reference_release": "ons-may-2026-sample-20261018",
+    "reference_counts": {
+      "council": 361,
+      "county": 21,
+      "region": 9,
+      "nation": 4
+    },
+    "baseline_observed_at": "2026-10-18T22:52:16.835502+00:00",
+    "test_pack_sha256": "e644062981faf604b8971f508b79ab6a3e17fcfac6b5c65bc3d06aaa73ed1bb3",
+    "release_sha": "5b0a5258d8dbfc2e5e929b74d2c347d6166699b1",
+    "release_status": "Protected geography workspace released; production reference migration/import remains unapplied; no public runtime cutover.",
+    "scope": "30 deliberate scenarios, not a statistical national coverage sample",
+    "rows": [
+      {
+        "case_id": "geo-01",
+        "postcode": "W3 9LN",
+        "label": "Acton pilot",
+        "council": "Ealing",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:39.625571+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 1031,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:42.339878+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 28,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:45.131291+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_nonempty",
+            "count": 1,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:46.454076+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-02",
+        "postcode": "SW1A 1AA",
+        "label": "Central London",
+        "council": "Westminster",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:39.519364+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 2157,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:42.320592+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 78,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:45.131291+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_nonempty",
+            "count": 11,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:46.154099+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-03",
+        "postcode": "M2 5DB",
+        "label": "Manchester",
+        "council": "Manchester",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:46.563895+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 568,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:47.889821+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 62,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:48.883821+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_nonempty",
+            "count": 20,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:49.583383+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-04",
+        "postcode": "NE1 4LP",
+        "label": "Newcastle",
+        "council": "Newcastle upon Tyne",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:46.767044+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 423,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:47.891828+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:48.869900+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:49.515559+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-05",
+        "postcode": "DH1 3LE",
+        "label": "Durham",
+        "council": "County Durham",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:49.874338+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 175,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:50.584995+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:51.427540+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:52.476865+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-06",
+        "postcode": "LS1 3AD",
+        "label": "Leeds",
+        "council": "Leeds",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:49.924585+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 293,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:50.612174+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:51.434740+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:52.482736+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-07",
+        "postcode": "S1 2HH",
+        "label": "Sheffield",
+        "council": "Sheffield",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:52.672779+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 284,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:53.383509+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_nonempty",
+            "count": 1,
+            "reported_total": 1,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:54.175316+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:54.717595+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-08",
+        "postcode": "NG1 2LH",
+        "label": "Nottingham",
+        "council": "Nottingham",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:52.787865+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 397,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:53.411614+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:54.203243+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:54.717595+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-09",
+        "postcode": "LE1 5DB",
+        "label": "Leicester",
+        "council": "Leicester",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:55.015476+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 429,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:55.720183+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:56.621803+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:57.218068+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-10",
+        "postcode": "B1 1BB",
+        "label": "Birmingham",
+        "council": "Birmingham",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:55.015476+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 509,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:55.716966+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_nonempty",
+            "count": 7,
+            "reported_total": 7,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:56.621803+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_nonempty",
+            "count": 10,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:57.267032+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-11",
+        "postcode": "CV1 5RR",
+        "label": "Coventry",
+        "council": "Coventry",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:57.515269+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 186,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:58.418361+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:59.197202+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:59.820963+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-12",
+        "postcode": "CB2 1TN",
+        "label": "Cambridge",
+        "council": "Cambridge",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": "E10000003",
+        "county_name": "Cambridgeshire",
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:57.453110+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 298,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:58.418361+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_nonempty",
+            "count": 6,
+            "reported_total": 6,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:59.215237+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_nonempty",
+            "count": 4,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:51:59.820963+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-13",
+        "postcode": "NR2 1NH",
+        "label": "Norwich",
+        "council": "Norwich",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": "E10000020",
+        "county_name": "Norfolk",
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:00.178652+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 296,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:00.820894+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:01.578488+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:02.113438+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-14",
+        "postcode": "OX1 2JD",
+        "label": "Oxford",
+        "council": "Oxford",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": "E10000025",
+        "county_name": "Oxfordshire",
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:00.095795+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 241,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:00.841057+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 24,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:01.541140+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:02.094182+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-15",
+        "postcode": "BN1 1EE",
+        "label": "Brighton",
+        "council": "Brighton and Hove",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:02.498067+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 139,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:03.415179+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:03.952695+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:04.418025+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-16",
+        "postcode": "BS1 5TR",
+        "label": "Bristol",
+        "council": "Bristol, City of",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:02.343353+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 417,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:03.108890+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:03.848815+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:04.418025+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-17",
+        "postcode": "PL1 2AA",
+        "label": "Plymouth",
+        "council": "Plymouth",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:04.673114+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 272,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:05.193947+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_nonempty",
+            "count": 4,
+            "reported_total": 4,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:05.786287+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:06.402916+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-18",
+        "postcode": "TR1 2NE",
+        "label": "Truro",
+        "council": "Cornwall",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:04.719456+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 66,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:05.287062+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:05.786287+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:06.517487+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-19",
+        "postcode": "LA22 9BU",
+        "label": "Ambleside",
+        "council": "Westmorland and Furness",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:06.717922+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 40,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:07.274969+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:08.008631+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:08.586782+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-20",
+        "postcode": "SY8 1AS",
+        "label": "Ludlow",
+        "council": "Shropshire",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:06.968559+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 23,
+            "reported_total": 23,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:07.446596+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:08.002297+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:08.466587+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-21",
+        "postcode": "PO30 1TY",
+        "label": "Isle of Wight",
+        "council": "Isle of Wight",
+        "nation": "England",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:08.768099+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 90,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:09.510648+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:10.216688+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:10.855372+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-22",
+        "postcode": "KW15 1NY",
+        "label": "Orkney",
+        "council": "Orkney Islands",
+        "nation": "Scotland",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:08.811652+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 19,
+            "reported_total": 19,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:09.502792+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:10.251429+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:10.869624+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-23",
+        "postcode": "HS1 2BW",
+        "label": "Western Isles",
+        "council": "Na h-Eileanan Siar",
+        "nation": "Scotland",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:11.154879+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 30,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:11.654042+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:12.042986+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:12.565744+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-24",
+        "postcode": "EH1 1YZ",
+        "label": "Edinburgh",
+        "council": "City of Edinburgh",
+        "nation": "Scotland",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:11.126498+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 372,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:11.650209+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_nonempty",
+            "count": 1,
+            "reported_total": 1,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:12.319663+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_nonempty",
+            "count": 1,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:12.788308+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-25",
+        "postcode": "G1 2FF",
+        "label": "Glasgow",
+        "council": "Glasgow City",
+        "nation": "Scotland",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:12.767128+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 772,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:13.216673+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:13.968199+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:14.521466+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-26",
+        "postcode": "CF10 1EP",
+        "label": "Cardiff",
+        "council": "Cardiff",
+        "nation": "Wales",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:12.996510+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 261,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:13.439669+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:13.975191+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:14.493788+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-27",
+        "postcode": "LL57 2DG",
+        "label": "Bangor",
+        "council": "Gwynedd",
+        "nation": "Wales",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:14.779711+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 78,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:15.320678+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": 0,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:15.933255+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:16.452559+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-28",
+        "postcode": "CH4 8SG",
+        "label": "England/Wales border vicinity",
+        "council": "Flintshire",
+        "nation": "Wales",
+        "reference_state": "reference_verified",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "passed",
+            "count": 1,
+            "completeness": "lookup_only",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:14.737398+00:00"
+          },
+          {
+            "feature": "venues",
+            "status": "observed_nonempty",
+            "count": 24,
+            "reported_total": 182,
+            "completeness": "first_page",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:15.232174+00:00"
+          },
+          {
+            "feature": "activities",
+            "status": "observed_nonempty",
+            "count": 1,
+            "reported_total": 1,
+            "completeness": "endpoint_result",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:15.933255+00:00"
+          },
+          {
+            "feature": "events",
+            "status": "observed_empty",
+            "count": 0,
+            "reported_total": null,
+            "completeness": "not_established",
+            "http_status": 200,
+            "observed_at": "2026-10-18T22:52:16.452559+00:00"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-29",
+        "postcode": "BT1 5GS",
+        "label": "Belfast",
+        "nation": "Northern Ireland",
+        "reference_state": "blocked_licence",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "blocked_licence",
+            "count": null,
+            "completeness": "not_tested"
+          },
+          {
+            "feature": "venues",
+            "status": "blocked_licence",
+            "count": null,
+            "completeness": "not_tested"
+          },
+          {
+            "feature": "activities",
+            "status": "blocked_licence",
+            "count": null,
+            "completeness": "not_tested"
+          },
+          {
+            "feature": "events",
+            "status": "blocked_licence",
+            "count": null,
+            "completeness": "not_tested"
+          }
+        ]
+      },
+      {
+        "case_id": "geo-30",
+        "postcode": "BT48 7NN",
+        "label": "Derry",
+        "nation": "Northern Ireland",
+        "reference_state": "blocked_licence",
+        "county_code": null,
+        "county_name": null,
+        "observations": [
+          {
+            "feature": "location",
+            "status": "blocked_licence",
+            "count": null,
+            "completeness": "not_tested"
+          },
+          {
+            "feature": "venues",
+            "status": "blocked_licence",
+            "count": null,
+            "completeness": "not_tested"
+          },
+          {
+            "feature": "activities",
+            "status": "blocked_licence",
+            "count": null,
+            "completeness": "not_tested"
+          },
+          {
+            "feature": "events",
+            "status": "blocked_licence",
+            "count": null,
+            "completeness": "not_tested"
+          }
+        ]
+      }
+    ],
+    "national_features": [
+      {
+        "feature": "deals",
+        "status": "observed_nonempty",
+        "http_status": 200,
+        "count": 3,
+        "scope": "National selector; not credited as council-specific coverage",
+        "completeness": "homepage_sample",
+        "request_path": "/api/home/deals"
+      },
+      {
+        "feature": "originals",
+        "status": "manual_review",
+        "http_status": null,
+        "count": null,
+        "scope": "National selector; not credited as council-specific coverage",
+        "completeness": "not_tested",
+        "request_path": "/originals"
+      },
+      {
+        "feature": "news",
+        "status": "manual_review",
+        "http_status": null,
+        "count": null,
+        "scope": "National selector; not credited as council-specific coverage",
+        "completeness": "not_tested",
+        "request_path": "/news"
+      }
+    ],
+    "limitations": [
+      "Point samples are not council inventories or national coverage certification.",
+      "Age, actionability, freshness and source completeness require content review.",
+      "News locality and Originals content remain manual browser checks; no inferred pass.",
+      "A current API success is not historical or scheduled observation acceptance."
+    ],
+    "summary": {
+      "gb_lookup_pass": 28,
+      "gb_venue_nonempty": 28,
+      "gb_activity_nonempty": 10,
+      "gb_event_nonempty": 6,
+      "ni_withheld": 2
+    },
+    "post_release_observation": "Open #206; frozen baseline predates release, not two-cycle post-release evidence."
+  }
 }
