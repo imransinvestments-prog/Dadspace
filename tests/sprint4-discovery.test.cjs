@@ -55,6 +55,18 @@ test('missing server credential does not silently fall back to an RLS-empty anon
  let created=0;const s=load('lib/supabase.ts',{'server-only':{},'@supabase/supabase-js':{createClient(){created++;return{}}}},{NEXT_PUBLIC_DADSPACE_SUPABASE_URL:'https://example.supabase.co',NEXT_PUBLIC_DADSPACE_SUPABASE_ANON_KEY:'public-test'})
  assert.equal(s.getSupabase(),null);assert.equal(created,0)
 })
+test('a gateway token rejection is retried once; other failures and unrepeatable bodies are not',async()=>{
+ const s=load('lib/supabase.ts',{'server-only':{},'@supabase/supabase-js':{createClient(){return{}}}})
+ const rejected=(how)=>new Response(how==='body'?JSON.stringify({code:'PGRST303',message:'JWT claims validation failed'}):'{}',{status:401,headers:how==='header'?{'proxy-status':'PostgREST; error=PGRST303'}:{}})
+ const run=async(responses,init)=>{let calls=0,pauses=0;const f=s.withTokenRetry(async()=>responses[Math.min(calls++,responses.length-1)](),async()=>{pauses++});const r=await f('https://example.supabase.co/rest/v1/venues',init);return{status:r.status,calls,pauses}}
+ const ok=()=>new Response('[]',{status:200})
+ assert.deepEqual(await run([()=>rejected('body'),ok]),{status:200,calls:2,pauses:1})
+ assert.deepEqual(await run([()=>rejected('header'),ok],{method:'POST',body:'{"p_lat":51.5}'}),{status:200,calls:2,pauses:1})
+ assert.deepEqual(await run([()=>rejected('body')]),{status:401,calls:2,pauses:1})
+ assert.deepEqual(await run([()=>new Response(JSON.stringify({code:'PGRST301'}),{status:401}),ok]),{status:401,calls:1,pauses:0})
+ assert.deepEqual(await run([()=>new Response('{}',{status:500}),ok]),{status:500,calls:1,pauses:0})
+ assert.deepEqual(await run([()=>rejected('body'),ok],{method:'POST',body:new Uint8Array([1])}),{status:401,calls:1,pauses:0})
+})
 test('news and deals distinguish absent evidence and transport/query failures from genuine empty supply',async()=>{
  for(const mode of ['empty','null','error','throw']){
   const q={};for(const k of ['select','eq','like','gte','order','range','or'])q[k]=()=>q
