@@ -1,8 +1,8 @@
 {
-  "date": "2026-10-19",
-  "generated_at": "2026-10-19T12:49:01.711Z",
+  "date": "2026-10-21",
+  "generated_at": "2026-10-21T14:05:21.785Z",
   "status": "success",
-  "snapshot": "reporting/snapshots/2026-10-19/",
-  "previous_success_at": "2026-10-18T08:08:58.983Z",
-  "limitations": "Late brief generation; no 19 October morning scheduled run visible in retrieved listing. Geography is frozen/pre-release point sampling, not county/public-quality certification; production reference import unapplied. Full billing unavailable."
+  "snapshot": "reporting/snapshots/2026-10-21/",
+  "previous_success_at": "2026-10-19T12:49:01.711Z",
+  "limitations": "Late generation/email; current Deals job failed on expired Matalan terms review. Partial supply not recovery. Geography remains frozen point samples; public-quality census/full billing unavailable."
 }
