@@ -21,12 +21,12 @@ export async function GET(request: Request) {
     if (error || !Array.isArray(counts)) throw new Error("Category lookup failed")
     const categories = counts.filter((c: {key: string; count: number}) => c.key && Number(c.count) > 0)
     const groups: Venue[][] = []
-    // Bound concurrent calls while using the directory's existing indexed nearby query.
+    // Bound concurrent calls. nearby_venue_rows searches outward from the point
+    // instead of ranking every venue in the country for each category.
     for (let start = 0; start < categories.length; start += 4) {
       const batch = await Promise.all(categories.slice(start, start + 4).map(async (category: {key: string}) => {
-        const { data, error } = await db.rpc("nearby_venue_page", {
-          p_lat: point.lat, p_lng: point.lng, p_query: "", p_category: category.key,
-          p_free: false, p_indoor: false, p_outdoor: false, p_offset: 0, p_limit: 6,
+        const { data, error } = await db.rpc("nearby_venue_rows", {
+          p_lat: point.lat, p_lng: point.lng, p_category: category.key, p_limit: 6,
         })
         if (error || !data || !Array.isArray(data.rows)) throw new Error("Nearby lookup failed")
         return data.rows.map((row: Record<string, unknown>) => toVenue(row))

@@ -1,9 +1,9 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),ts=require('typescript')
 function load(file,deps={},env={}){const m={exports:{}};const code=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;vm.runInNewContext(code,{module:m,exports:m.exports,URL,Response,Request,AbortSignal,Date,Number,Set,Map,process:{env},require:n=>n in deps?deps[n]:require(n)});return m.exports}
 const cache={cache:f=>f},seo={siteUrl:'https://www.dad-space.co.uk',siteName:'Dadspace'}
-function dbRows(records,mode='ok'){return{from(){let filters=[];return{select(){return this},eq(k,v){filters.push([k,v]);return this},is(k,v){filters.push([k,v]);return this},order(){return this},limit(){return this},range(){if(mode==='throw')throw Error('transport');return Promise.resolve({data:mode==='null'?null:records.filter(r=>filters.every(([k,v])=>(r[k]??null)===v)),error:mode==='error'?{}:null,count:records.length})},maybeSingle(){return Promise.resolve({data:records.find(r=>filters.every(([k,v])=>(r[k]??null)===v))||null,error:mode==='error'?{}:null})}}}}}
+function dbRows(records,mode='ok'){return{from(){let filters=[];return{select(){return this},eq(k,v){filters.push([k,v]);return this},is(k,v){filters.push([k,v]);return this},order(){return this},limit(){return this},range(){if(mode==='throw')throw Error('transport');return Promise.resolve({data:mode==='null'?null:records.filter(r=>filters.every(([k,v])=>(r[k]??null)===v)),error:mode==='error'?{}:null,count:records.length})},maybeSingle(){return Promise.resolve({data:records.find(r=>filters.every(([k,v])=>(r[k]??null)===v))||null,error:mode==='error'?{}:null})},then(resolve,reject){return Promise.resolve({data:null,error:mode==='error'?{}:null,count:records.filter(r=>filters.every(([k,v])=>(r[k]??null)===v)).length}).then(resolve,reject)}}}}}
 const mapping={toVenue:r=>({id:r.id,name:r.venue_name})}
-function venues(db){return load('lib/venue-discovery.ts',{'server-only':{},react:cache,'./supabase':{getSupabase:()=>db},'./venues':mapping})}
+function venues(db){return load('lib/venue-discovery.ts',{'server-only':{},react:cache,'next/cache':{unstable_cache:f=>f},'./supabase':{getSupabase:()=>db},'./venues':mapping})}
 test('reviewed aliases resolve only to a public survivor; cycles, private targets and unrelated shared names stay separate',async()=>{
  const rows=[{id:'old',venue_name:'Same name',public_visible:false,merged_into:'canonical'},{id:'canonical',venue_name:'Canonical name',public_visible:true},{id:'distinct',venue_name:'Same name',public_visible:true},{id:'cycle',merged_into:'cycle',public_visible:false}]
  const v=venues(dbRows(rows));assert.equal((await v.publicVenueDestination('old')).id,'canonical');assert.equal((await v.publicVenueDestination('distinct')).id,'distinct');assert.equal(await v.publicVenueDestination('cycle'),null)
@@ -14,8 +14,16 @@ test('venue directory distinguishes configuration, transport, query and missing-
  for(const db of [null,dbRows([],'throw'),dbRows([],'error'),dbRows([],'null')])assert.equal((await venues(db).publicVenuePage()).loadFailed,true)
  assert.equal((await venues(dbRows([])).publicVenuePage()).loadFailed,false)
  const db=dbRows([{id:'one',venue_name:'One',public_visible:true}]);assert.equal((await venues(db).publicVenuePage()).loadFailed,false)
- const q={from(){const b={select(){return b},eq(){return b},order(){return b},range:async()=>({data:[],count:25,error:null})};return b}}
+ const q={from(){const b={select(){return b},eq(){return b},order(){return b},range:async()=>({data:[],count:25,error:null}),then:(resolve,reject)=>Promise.resolve({data:null,count:25,error:null}).then(resolve,reject)};return b}}
  assert.equal((await venues(q).publicVenuePage()).loadFailed,true)
+})
+test('directory paging trusts the fresh read over a recent total that has drifted',async()=>{
+ const paged=(rows,total)=>({from(){const b={select(){return b},eq(){return b},order(){return b},range:async(a,z)=>({data:rows.slice(a,z+1),error:null}),then:(resolve,reject)=>Promise.resolve({data:null,count:total,error:null}).then(resolve,reject)};return b}})
+ const rows=Array.from({length:30},(_,i)=>({id:'v'+i,venue_name:'V'+String(i).padStart(2,'0'),public_visible:true}))
+ let p=await venues(paged(rows,30)).publicVenuePage();assert.equal(p.venues.length,24);assert.equal(p.hasMore,true);assert.equal(p.total,30)
+ p=await venues(paged(rows.slice(0,27),30)).publicVenuePage({page:2});assert.equal(p.loadFailed,false);assert.equal(p.venues.length,3);assert.equal(p.hasMore,false);assert.equal(p.total,27)
+ p=await venues(paged(rows,10)).publicVenuePage();assert.equal(p.hasMore,true);assert.equal(p.total,25)
+ p=await venues(paged(rows.slice(0,24),30)).publicVenuePage({page:2});assert.equal(p.loadFailed,true)
 })
 test('withdrawn event detail is absent and its source cannot become a public event',async()=>{
  const dependencies={'server-only':{},'./supabase':{getSupabase:()=>dbRows([{id:'withdrawn',listing_type:'event',withdrawn_at:'2026-10-17'}])},'./dates':{},'./distance':{},'./listing-distance':{},'./event-meta':{},'./discovery-radius':{}}
@@ -47,6 +55,18 @@ test('missing server credential does not silently fall back to an RLS-empty anon
  let created=0;const s=load('lib/supabase.ts',{'server-only':{},'@supabase/supabase-js':{createClient(){created++;return{}}}},{NEXT_PUBLIC_DADSPACE_SUPABASE_URL:'https://example.supabase.co',NEXT_PUBLIC_DADSPACE_SUPABASE_ANON_KEY:'public-test'})
  assert.equal(s.getSupabase(),null);assert.equal(created,0)
 })
+test('a gateway token rejection is retried once; other failures and unrepeatable bodies are not',async()=>{
+ const s=load('lib/supabase.ts',{'server-only':{},'@supabase/supabase-js':{createClient(){return{}}}})
+ const rejected=(how)=>new Response(how==='body'?JSON.stringify({code:'PGRST303',message:'JWT claims validation failed'}):'{}',{status:401,headers:how==='header'?{'proxy-status':'PostgREST; error=PGRST303'}:{}})
+ const run=async(responses,init)=>{let calls=0,pauses=0;const f=s.withTokenRetry(async()=>responses[Math.min(calls++,responses.length-1)](),async()=>{pauses++});const r=await f('https://example.supabase.co/rest/v1/venues',init);return{status:r.status,calls,pauses}}
+ const ok=()=>new Response('[]',{status:200})
+ assert.deepEqual(await run([()=>rejected('body'),ok]),{status:200,calls:2,pauses:1})
+ assert.deepEqual(await run([()=>rejected('header'),ok],{method:'POST',body:'{"p_lat":51.5}'}),{status:200,calls:2,pauses:1})
+ assert.deepEqual(await run([()=>rejected('body')]),{status:401,calls:2,pauses:1})
+ assert.deepEqual(await run([()=>new Response(JSON.stringify({code:'PGRST301'}),{status:401}),ok]),{status:401,calls:1,pauses:0})
+ assert.deepEqual(await run([()=>new Response('{}',{status:500}),ok]),{status:500,calls:1,pauses:0})
+ assert.deepEqual(await run([()=>rejected('body'),ok],{method:'POST',body:new Uint8Array([1])}),{status:401,calls:1,pauses:0})
+})
 test('news and deals distinguish absent evidence and transport/query failures from genuine empty supply',async()=>{
  for(const mode of ['empty','null','error','throw']){
   const q={};for(const k of ['select','eq','like','gte','order','range','or'])q[k]=()=>q
@@ -67,7 +87,7 @@ test('merged detail URLs redirect temporarily and rollback restores the original
 })
 test('fresh public directory reads reflect revocation without dropping independent venues',async()=>{
  const rows=[{id:'revoked',venue_name:'A',public_visible:true},{id:'distinct',venue_name:'B',public_visible:true}]
- const db={from(){const b={select(){return b},eq(){return b},order(){return b},range:async()=>{const eligible=rows.filter(r=>r.public_visible);return{data:eligible,count:eligible.length,error:null}}};return b}}
+ const db={from(){const b={select(){return b},eq(){return b},order(){return b},range:async()=>{const eligible=rows.filter(r=>r.public_visible);return{data:eligible,count:eligible.length,error:null}},then:(resolve,reject)=>Promise.resolve({data:null,count:rows.filter(r=>r.public_visible).length,error:null}).then(resolve,reject)};return b}}
  const v=venues(db);assert.equal((await v.publicVenuePage()).venues.length,2);rows[0].public_visible=false
  const fresh=await v.publicVenuePage();assert.equal(fresh.loadFailed,false);assert.equal(fresh.venues.length,1);assert.equal(fresh.venues[0].id,'distinct')
 })
