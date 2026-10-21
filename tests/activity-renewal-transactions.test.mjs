@@ -12,7 +12,7 @@ test('real source freshness trigger does not renew unseen rows on revalidated or
       create table collected_events(id text primary key,source_id text,listing_type text,last_seen_at timestamptz);
       insert into sources values('source','2026-10-10','same','2026-10-10',null,0);
       insert into collected_events values('covered','source','activity','2026-10-10'),('unseen','source','activity','2026-10-10');`)
-    await db.exec(fs.readFileSync('supabase/migrations/20261001_activity_last_seen_refresh.sql','utf8'))
+    await db.exec(fs.readFileSync('supabase/migrations/20261001221249_activity_last_seen_refresh.sql','utf8'))
     await db.exec(fs.readFileSync('supabase/migrations/20261008202338_activity_freshness_only_after_unchanged_success.sql','utf8'))
     // The MyLibrary adapter emits ok and new last_success, even for equal hashes.
     await db.exec(`update collected_events set last_seen_at='2026-10-11' where id='covered';
