@@ -96,3 +96,24 @@ test('activity initial and pagination loading copy renders readable ellipses',()
   tree=render({categories:[]})
   assert(button(tree,'Loading…'));assert(!text(tree).includes('â'))
 })
+
+test('12+ returns teen fixtures; Under 5 (the pilot 0-5 band) and unknown ages keep non-overlapping events out (#101)',()=>{
+  const events=[
+    {id:'teen',title:'Teen coding club',age_range:'12-16',start_date:'2026-10-17'},
+    {id:'teens',title:'Youth climbing',age_range:'Teens',start_date:'2026-10-17'},
+    {id:'mixed',title:'Family fun day for kids and teens',age_range:'4-16',start_date:'2026-10-17'},
+    {id:'toddler',title:'Rhyme time',age_range:'0-5',start_date:'2026-10-17'},
+    {id:'unknown',title:'Craft afternoon',age_range:null,start_date:'2026-10-17'},
+  ]
+  const render=component('components/events/events-explorer.tsx',{
+    '@/components/location-provider':{useLocation:()=>({coords:{lat:51,lng:0},browseAll:false})},'@/hooks/use-directory-page':{useDirectoryPage:()=>({pages:[{events}],loading:false,error:''})},
+    'lucide-react':{},'@/components/event-card':{EventCard:'EventCard'},'@/lib/dates':{addDays:()=> '2026-10-23'},
+    '@/lib/event-meta':{EVENT_CATEGORIES:[],eventCategory:()=> 'story',isFreeEvent:()=>false},
+    '@/lib/discovery-radius':{DEFAULT_RADIUS_KM:10},'@/components/discovery-radius-controls':{DiscoveryRadiusControls:'RadiusControls',LocalCoverageGap:'CoverageGap'},'@/lib/utils':{cn:()=>''},
+  })
+  const props={events:[],today:'2026-10-16',saturday:'2026-10-17',sunday:'2026-10-18'}
+  const shown=tree=>nodes(tree).filter(n=>n.type==='EventCard').map(n=>n.props.event.id)
+  let tree=render(props);assert.deepEqual(shown(tree),['teen','teens','mixed','toddler','unknown'])
+  button(tree,'12+').props.onClick();tree=render(props);assert.deepEqual(shown(tree),['teen','teens','mixed'])
+  button(tree,'Under 5').props.onClick();tree=render(props);assert.deepEqual(shown(tree),['mixed','toddler'])
+})
