@@ -64,7 +64,15 @@ FARM_LABEL, FARM_WEIGHT = "Farm", 5
 # Owner decision 22 Oct 2026 (#92/#235): archives, record offices and local-history centres listed as
 # libraries are not family libraries; names containing "Library" are kept even if they also hold archives.
 NON_FAMILY_LIBRARY = re.compile(r"archive|record office|local (history|studies) cent(re|er)|history centre", re.I)
+# Owner decision 22 Oct 2026 (#243): specialist libraries (institutes, colleges, hospitals, societies and
+# the like) are left out too. A public library's "Local Studies" collection does not count as specialist.
+SPECIALIST_LIBRARY = re.compile(
+    r"institut|universit|(college|school|academy)(?!\s+(road|lane|street|avenue|hill|green|way|park))|"
+    r"hospital|medical|\bnhs\b|\blaw\b|legal|chambers|society|research|(?<!local )studies|theolog|seminary",
+    re.I)
 NON_FAMILY_LIBRARY_TAGS = ("research", "academic", "private")
+# Owner decision 22 Oct 2026 (#243): Northern Ireland is left out for now (no ONS-coded OSM boundaries).
+EXCLUDED_COUNCIL_PREFIXES = ("N",)
 GENERIC_NAMES = {"playground", "play area", "childrens playground", "children s playground", "play park",
                  "park", "library", "museum", "nature reserve", "kids play area", "toddler play area"}
 
@@ -165,6 +173,7 @@ def spots_from_overpass(data: dict) -> tuple[bool, list[dict]]:
             continue
         if tags.get("amenity") == "library" and (
                 tags.get("library") in NON_FAMILY_LIBRARY_TAGS
+                or SPECIALIST_LIBRARY.search(name)
                 or (NON_FAMILY_LIBRARY.search(name) and not re.search(r"\blibrary\b", name, re.I))):
             continue
         kind = classify(tags)
@@ -625,6 +634,7 @@ def run(db, *, dry_run: bool, councils_per_run: int = 10, council: str | None = 
         release_id: str | None = None, out_dir: str = "review/council-discovery") -> dict:
     if councils is None:
         release_id, councils = load_councils(db)
+    councils = [c for c in councils if not c["code"].startswith(EXCLUDED_COUNCIL_PREFIXES)]
     if council:
         selected = [c for c in councils if c["code"] == council]
     elif db is not None:

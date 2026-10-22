@@ -6,12 +6,15 @@ Owner request, 22 October 2026: make sure there are enough places for every UK p
 
 ## What it does, per council
 
-1. **Councils** come from `geography_areas` (`kind = 'council'`) in the latest `geography_releases` row: 361 councils in the ONS May 2026 release.
+1. **Councils** come from `geography_areas` (`kind = 'council'`) in the latest `geography_releases` row: 361 councils in the ONS May 2026 release. The 11 Northern Ireland councils (`N…` codes) are excluded for now (owner decision, 22 Oct, #243), which leaves 350.
 2. **Places** come from OpenStreetMap via Overpass. The query is scoped to the council's boundary using `ref:gss`, the ONS code. It covers named playgrounds, parks, nature reserves, water parks, indoor play, museums, zoos and petting farms, aquariums, theme parks and libraries. It drops:
    - unnamed and generic names ("Playground");
    - private or disused places;
    - libraries tagged `library=research|academic|private`;
-   - archives, record offices and local-history centres listed as libraries. This follows the 22 Oct #92 decision: names that contain "Library" are kept even if they also hold archives.
+   - archives, record offices and local-history centres listed as libraries. This follows the 22 Oct #92 decision: names that contain "Library" are kept even if they also hold archives;
+   - specialist libraries (owner decision, 22 Oct, #243): institutes, universities, colleges, schools, academies, hospitals and medical, law and chambers, societies, research, theology, and subject "Studies" libraries.
+     - A public library's "Local Studies" centre is kept.
+     - Street names are kept too ("School Lane Library").
 3. **Ranking** is deterministic. It weighs category, Wikidata notability, website and opening hours, and facility evidence (`changing_table`, `toilets`, `wheelchair`, `baby_feeding`), plus size for parks and nature reserves. Each council keeps its top 10, at most 3 per category, and ties break on the OSM id.
 4. **New only.** A place is skipped when `venues` already holds the same OSM element (in `source_url` or `discovered_source_url`). It is also skipped when a similar-named venue (ratio 0.75 or more) sits inside its outline, or when the shared `choose_match` rules in `venue_reference_worker.py` find it:
    - same name and postcode;
@@ -36,7 +39,7 @@ Owner request, 22 October 2026: make sure there are enough places for every UK p
 - **Hidden venues** (not in dry runs): `public_visible = false`, `discovery_status = 'discovered'`, `licence = 'ODbL'`. The review reason names the council, the unverified notes, any inferred postcode, any neighbouring-council postcode and any possible duplicate.
   - They wait in `/ops/review`; this path never publishes, and it never updates existing venues.
   - The draft notes, OSM tags, postcode source and checks are kept in `venue_sources.source_payload` (`source_name = 'osm-council-discovery'`), not in venue columns, so nothing unverified becomes a venue fact.
-- **Run log:** `venue_council_discovery_runs`. Each run takes the next councils without a successful run in the last 180 days (`COUNCIL_DISCOVERY_REFRESH_DAYS`). At 10 per run and two scheduled runs a day, every council is **queried** within about 18 days. Being queried does not mean a council has good coverage. A GB council whose boundary was not found is retried after 7 days; Northern Ireland waits the full refresh period.
+- **Run log:** `venue_council_discovery_runs`. Each run takes the next councils without a successful run in the last 180 days (`COUNCIL_DISCOVERY_REFRESH_DAYS`). At 10 per run and two scheduled runs a day, all 350 GB councils are **queried** within about 18 days. Being queried does not mean a council has good coverage. A council whose boundary was not found is retried after 7 days.
 
 ## Why OpenStreetMap, not Google Places
 
@@ -62,10 +65,10 @@ Google's terms limit storing Places content beyond the place ID, and caching Goo
 
 Push-triggered dry runs never call the LLM.
 
-## Owner decisions still open
+## Owner decisions (22 Oct 2026, #243)
 
-- **Northern Ireland:** the 11 councils return `no_boundary`. On 22 Oct 2026 no OSM administrative boundary carried an `N09…` `ref:gss` code. NI needs a name-based or alternative boundary source before it is covered.
-- **Non-archive specialist libraries:** whether institute, college or hospital libraries (e.g. "Library for Iranian Studies") should be excluded is not covered by #92. They are currently kept for review.
+- **Northern Ireland is excluded for now.** No OSM administrative boundary carried an `N09…` `ref:gss` code, so NI would need a name-based or alternative boundary source. To include it later, remove `"N"` from `EXCLUDED_COUNCIL_PREFIXES`; the NI postcode-licence handling is already in place.
+- **Specialist libraries are left out** (see step 2 above).
 
 ## Known limits
 

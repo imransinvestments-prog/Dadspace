@@ -90,8 +90,23 @@ class OverpassParsingTests(unittest.TestCase):
         names = set(by_name(spots()))
         self.assertNotIn('Borough Archives', names)  # archive listed as a library (#92)
         self.assertNotIn('Example Research Library', names)  # library=research tag
-        self.assertIn('Hanwell Library and Local Studies Centre', names)  # says "Library": kept
-        self.assertIn('Library for Iranian Studies', names)  # not an archive; a reviewer decides
+        self.assertIn('Hanwell Library and Local Studies Centre', names)  # public library: kept
+        self.assertNotIn('Library for Iranian Studies', names)  # specialist library (#243)
+
+    def test_specialist_libraries_are_left_out_but_public_ones_stay(self):
+        def kept(name):
+            data = {'elements': [{'type': 'area', 'id': 1},
+                                 {'type': 'node', 'id': 9, 'lat': 51.5, 'lon': -0.3,
+                                  'tags': {'amenity': 'library', 'name': name}}]}
+            return bool(cd.spots_from_overpass(data)[1])
+        for name in ('Bishopsgate Institute Library', 'Royal College of Nursing Library', 'Hospital Library',
+                     'Linnean Society Library', 'Library for Iranian Studies', 'Inner Temple Law Library'):
+            with self.subTest(name=name):
+                self.assertFalse(kept(name))
+        for name in ('Ealing Central Library', 'Hammersmith Library and Local Studies Centre',
+                     'School Lane Community Library', 'College Road Library'):  # named after streets
+            with self.subTest(name=name):
+                self.assertTrue(kept(name))
 
     def test_missing_boundary_is_reported(self):
         self.assertFalse(cd.spots_from_overpass(NO_AREA)[0])
@@ -348,6 +363,18 @@ class DatabaseTests(TempDirTest):
         provenance = next(p for table, _, p in db.calls if table == 'venue_sources')
         self.assertEqual(provenance[0]['source_payload']['draft']['claims_status'], 'unverified')
         self.assertIn('postcode_source', provenance[0]['source_payload'])
+
+    def test_northern_ireland_is_left_out(self):
+        belfast = {'code': 'N09000003', 'name': 'Belfast'}
+        with patch.object(cd, 'fetch_overpass', return_value=SAMPLE) as fetch, \
+                patch.object(cd, 'resolve_postcodes', side_effect=keep_postcodes):
+            summary = cd.run(None, dry_run=True, llm=False, venue_rows=[], councils=[belfast, EALING],
+                             out_dir=self.out)
+            single = cd.run(None, dry_run=True, llm=False, venue_rows=[], councils=[belfast, EALING],
+                            council='N09000003', out_dir=self.out)
+        self.assertEqual([c['code'] for c in summary['councils']], ['E09000009'])
+        self.assertEqual(single['councils'], [])
+        self.assertNotIn(('N09000003',), [call.args for call in fetch.call_args_list])
 
     def test_dry_run_writes_nothing(self):
         db = FakeDB()
