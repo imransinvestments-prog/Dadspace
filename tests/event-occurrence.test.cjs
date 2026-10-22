@@ -50,15 +50,62 @@ test('same listing URL cannot erase distinct times, date spans or programmes', (
 })
 test('Home preserves different programmes after shared occurrence matching', async () => {
   const events = ['Football Camp', 'Tennis Camp'].map((title, i) => ({ ...rows[0], id:String(i), title, distance_miles:1 }))
-  const route = load('app/api/home/nearby-week/route.ts', {
-    'next/server': { NextResponse: Response }, '@/lib/supabase': {getSupabase:()=>null},
-    '@/lib/distance': {parsePoint:()=>({lat:51,lng:0})},
-    '@/lib/events': {fetchUpcomingEvents:async()=>({events,loadFailed:false,isSample:false})},
-    '@/lib/listing-distance': {}, '@/lib/dates': {londonToday:()=> '2026-10-16',weekday:()=>5,addDays:()=> '2026-10-19'},
-    '@/lib/home-selection': {},
-  })
+  const route = nearbyWeek({ '@/lib/events': {fetchUpcomingEvents:async()=>({events,loadFailed:false,isSample:false})} })
   const response = await route.GET({nextUrl:new URL('https://example.test?lat=51&lng=0')})
   assert.equal((await response.json()).events.length, 2)
+})
+function nearbyWeek(overrides) {
+  return load('app/api/home/nearby-week/route.ts', {
+    'next/server': { NextResponse: Response },
+    '@/lib/distance': {parsePoint:()=>({lat:51,lng:0})},
+    '@/lib/events': {fetchUpcomingEvents:async()=>({events:[],loadFailed:false,isSample:false})},
+    // Flat-earth stand-in: one degree of latitude is treated as 69 miles.
+    '@/lib/geo': {distanceKm:(a,b)=>Math.hypot(a.lat-b.lat,a.lng-b.lng)*111.045,kmToMiles:km=>km*0.621371},
+    '@/lib/dates': {londonToday:()=> '2026-10-16',weekday:()=>5,addDays:()=> '2026-10-19'},
+    '@/lib/home-nearby': {weekActivityPoints:async()=>[]},
+    ...overrides,
+  })
+}
+test('Home activity count measures cached activity points against each visitor', async () => {
+  let calls = 0
+  const points = [{id:'near',lat:51.1,lng:0},{id:'edge',lat:51.4,lng:0},{id:'far',lat:52,lng:0}]
+  const route = nearbyWeek({ '@/lib/home-nearby': {weekActivityPoints:async()=>{calls++;return points}} })
+  const count = async (lat) => (await (await route.GET({nextUrl:new URL(`https://example.test?lat=${lat}&lng=0`)})).json()).activityCount
+  assert.equal(await count(51), 2)
+  assert.equal(await count(52), 1)
+  assert.equal(calls, 2)
+  const failing = nearbyWeek({ '@/lib/home-nearby': {weekActivityPoints:async()=>{throw new Error('Activities unavailable')}} })
+  const body = await (await failing.GET({nextUrl:new URL('https://example.test?lat=51&lng=0')})).json()
+  assert.equal(body.activityCount, null, 'an unavailable count is not reported as zero')
+})
+test('week activity points keep unlinked activities and never cache a failed read', async () => {
+  let configured = false, located
+  const rows = [
+    {id:'linked',venue_id:'v1',location:'Library',postcode:null,source_id:'s',start_date:'2026-10-14',end_date:null,recurrence:null},
+    {id:'unlinked',venue_id:null,location:'Church hall, Hanwell',postcode:'W7 1AA',source_id:'s',start_date:null,end_date:null,recurrence:'recurring'},
+    {id:'next-month',venue_id:null,location:'Park',postcode:null,source_id:'s',start_date:'2026-11-20',end_date:null,recurrence:null},
+  ]
+  const db = {from:()=>{const q={select:()=>q,order:()=>q,range:async()=>({data:rows,error:null})};return q}}
+  const mod = load('lib/home-nearby.ts', {
+    'server-only': {}, 'next/cache': {unstable_cache:f=>f},
+    './supabase': {getSupabase:()=>configured?db:null},
+    './listing-distance': {listingPoints:async active=>{located=active.map(r=>r.id);return new Map(active.map((r,i)=>[r.id,{lat:51+i,lng:0}]))}},
+    './home-selection': load('lib/home-selection.ts', {}),
+  })
+  await assert.rejects(mod.weekActivityPoints('2026-10-12','2026-10-18'), /unavailable/)
+  configured = true
+  const points = await mod.weekActivityPoints('2026-10-12','2026-10-18')
+  const failedVenues = {from:()=>{const q={select:()=>q,eq:()=>q,in:async()=>({data:null,error:{message:'timeout'}})};return q}}
+  const distance = venuesDb => load('lib/listing-distance.ts', {
+    'server-only': {}, './supabase': {getSupabase:()=>venuesDb},
+    './geo': {geocodeLocations:async()=>new Map(),locationKey:r=>r.location,distanceKm:()=>0,kmToMiles:km=>km},
+  })
+  await assert.rejects(distance(failedVenues).listingPoints(rows.slice(0,1),{requireVenues:true}), /Venue coordinates unavailable/,
+    'a cached caller must not store a failed venue read as fewer nearby activities')
+  assert.equal((await distance(failedVenues).listingPoints(rows.slice(0,1))).size, 0, 'uncached listings keep the geocoding fallback')
+  // Copy out of the sandbox realm so prototypes match for deep equality.
+  assert.deepEqual(Array.from(located), ['linked','unlinked'], 'only this week, with or without a venue link')
+  assert.deepEqual(JSON.parse(JSON.stringify(points)), [{id:'linked',lat:51,lng:0},{id:'unlinked',lat:52,lng:0}])
 })
 test('public read path collapses a repeated import replay and retains all source rows', async () => {
   // Replay the existing stable source IDs twice; no collector or live writes.
