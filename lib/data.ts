@@ -1,14 +1,9 @@
 import "server-only"
 import { getMonthlyNews } from "./news-monthly"
-import { selectNewsCards } from "./home-selection"
-import { getDeals } from "./deals"
 import { getSupabase } from "./supabase"
+import { FORUM_ENABLED } from "./launch"
 import { londonHour, londonToday, upcomingWeekend, formatEventDate } from "./dates"
-import { distanceKm, geocodeLocations, kmToMiles, locationKey, type Point } from "./geo"
-import type { Article, DadEvent, ForumThread, HomeData } from "./types"
-
-const EVENT_COLUMNS =
-  "id,title,description,start_date,end_date,time_text,location,event_url,cost_text,age_range,family_relevance,source_url"
+import type { ForumThread, HomeData } from "./types"
 
 function greetingFor(hour: number) {
   if (hour < 5) return "Up with the baby, Dad?"
@@ -16,128 +11,6 @@ function greetingFor(hour: number) {
   if (hour < 17) return "Afternoon, Dad."
   if (hour < 21) return "Evening, Dad."
   return "Night shift, Dad?"
-}
-
-const NEARBY_RADIUS_MILES = 30
-const HOME_EVENT_COUNT = 3
-
-type EventsResult = HomeData["events"]
-
-function locationBucket(event: DadEvent) {
-  const parts = (event.location ?? "")
-    .split(",")
-    .map((part) => part.trim().toLowerCase())
-    .filter(Boolean)
-  return parts[parts.length - 1] || String(event.id)
-}
-
-function pickLocationMix(events: DadEvent[], count = HOME_EVENT_COUNT) {
-  const selected: DadEvent[] = []
-  const seen = new Set<string>()
-
-  for (const event of events) {
-    const bucket = locationBucket(event)
-    if (seen.has(bucket)) continue
-    selected.push(event)
-    seen.add(bucket)
-    if (selected.length === count) return selected
-  }
-
-  for (const event of events) {
-    if (selected.some((item) => item.id === event.id)) continue
-    selected.push(event)
-    if (selected.length === count) break
-  }
-
-  return selected
-}
-
-async function getNearbyEvents(user: Point, saturday: string, sunday: string, today: string): Promise<EventsResult | null> {
-  const db = getSupabase()
-  if (!db) return null
-
-  const { data, error } = await db
-    .from("upcoming_events")
-    .select(`${EVENT_COLUMNS},source_id`)
-    .gte("end_date", today)
-    .order("start_date", { ascending: true })
-    .limit(500)
-  if (error || !data?.length) return null
-
-  const rows = data as DadEvent[]
-  const places = await geocodeLocations(rows)
-  const located = rows
-    .map((event) => {
-      const point = places.get(locationKey(event))
-      return point ? { ...event, distance_miles: Math.round(kmToMiles(distanceKm(user, point)) * 10) / 10 } : null
-    })
-    .filter((e): e is DadEvent & { distance_miles: number } => e !== null)
-  if (!located.length) return null
-
-  const byDistance = (a: DadEvent, b: DadEvent) =>
-    (a.distance_miles ?? 0) - (b.distance_miles ?? 0) || (b.family_relevance ?? 0) - (a.family_relevance ?? 0)
-  const nearby = located.filter((e) => e.distance_miles <= NEARBY_RADIUS_MILES)
-  const base = { isSample: false, radiusMiles: NEARBY_RADIUS_MILES, loadFailed: false }
-
-  const isThisWeekend = (e: DadEvent) => e.start_date <= sunday && (e.end_date ?? e.start_date) >= saturday
-  if (nearby.some(isThisWeekend)) {
-    // Nearby weekend events come first; any spare slots go to the next-closest weekend events beyond the radius.
-    const weekend = located.filter(isThisWeekend).sort(byDistance)
-    return { ...base, items: weekend.slice(0, HOME_EVENT_COUNT), isWeekend: true, nearby: "weekend" }
-  }
-  if (nearby.length) {
-    const soon = [...nearby].sort((a, b) => a.start_date.localeCompare(b.start_date) || byDistance(a, b))
-    return { ...base, items: soon.slice(0, HOME_EVENT_COUNT), isWeekend: false, nearby: "soon" }
-  }
-  return { ...base, items: located.sort(byDistance).slice(0, HOME_EVENT_COUNT), isWeekend: false, nearby: "nearest" }
-}
-
-async function getWeekendEvents(saturday: string, sunday: string, today: string): Promise<EventsResult> {
-  const base = { nearby: null, radiusMiles: NEARBY_RADIUS_MILES }
-  const unavailable = { ...base, items: [], isSample: false, isWeekend: true, loadFailed: true }
-  const db = getSupabase()
-  if (!db) return unavailable
-  try {
-    const weekend = await db
-      .from("upcoming_events")
-      .select(EVENT_COLUMNS)
-      .lte("start_date", sunday)
-      .gte("end_date", saturday)
-      .order("family_relevance", { ascending: false })
-      .order("start_date", { ascending: true })
-      .limit(30)
-    if (weekend.error || !Array.isArray(weekend.data)) return unavailable
-    if (weekend.data?.length) {
-      return {
-        ...base,
-        items: pickLocationMix(weekend.data as DadEvent[]),
-        isSample: false,
-        isWeekend: true,
-        loadFailed: false,
-      }
-    }
-
-    const upcoming = await db
-      .from("upcoming_events")
-      .select(EVENT_COLUMNS)
-      .gte("end_date", today)
-      .order("start_date", { ascending: true })
-      .order("family_relevance", { ascending: false })
-      .limit(30)
-    if (upcoming.error || !Array.isArray(upcoming.data)) return unavailable
-    if (upcoming.data?.length) {
-      return {
-        ...base,
-        items: pickLocationMix(upcoming.data as DadEvent[]),
-        isSample: false,
-        isWeekend: false,
-        loadFailed: false,
-      }
-    }
-  } catch {
-    return unavailable
-  }
-  return { ...base, items: [], isSample: false, isWeekend: true, loadFailed: false }
 }
 
 function commentCount(value: unknown): number {
@@ -148,6 +21,8 @@ function commentCount(value: unknown): number {
 }
 
 async function getTrendingThreads() {
+  // The section is hidden until launch, so skip the query rather than discard its rows.
+  if (!FORUM_ENABLED) return { items: [], isSample: false }
   const db = getSupabase()
   if (db) {
     const { data, error } = await db.from("forum_threads").select("*").limit(50)
@@ -168,58 +43,17 @@ async function getTrendingThreads() {
   return { items: [], isSample: false }
 }
 
-async function getLatestArticles(): Promise<HomeData["articles"]> {
-  const db = getSupabase()
-  const unavailable = { items: [], isSample: false, loadFailed: true }
-  if (!db) return unavailable
-  try {
-    const { data, error } = await db.from("feed_items")
-      .select("id,title,url,source_name,category,published_at,summary,why_it_matters,relevance")
-      .order("published_at", { ascending: false, nullsFirst: false }).order("id", { ascending: false }).limit(300)
-    if (error || !Array.isArray(data)) return unavailable
-    const items = selectNewsCards((data ?? []).map(row => ({
-      id: String(row.id), title: row.title, source: row.source_name, url: row.url,
-      category: row.category, published_at: row.published_at, relevance: row.relevance,
-      summary: row.summary, why_it_matters: row.why_it_matters,
-    })))
-    return { items, isSample: false, loadFailed: false }
-  } catch {
-    return unavailable
-  }
-}
-
-async function getEvents(user: Point | null, saturday: string, sunday: string, today: string) {
-  if (user) {
-    try {
-      const nearby = await getNearbyEvents(user, saturday, sunday, today)
-      if (nearby) return nearby
-    } catch {
-      // Fall through to the unsorted list if geocoding is unavailable.
-    }
-  }
-  return getWeekendEvents(saturday, sunday, today)
-}
-
-export async function getHomeData(user: Point | null = null): Promise<HomeData> {
-  const today = londonToday()
-  const { saturday, sunday, sleeps } = upcomingWeekend(today)
-
-  const [events, threads, articles, deals, monthlyNews] = await Promise.all([
-    getEvents(user, saturday, sunday, today),
-    getTrendingThreads(),
-    getLatestArticles(),
-    getDeals(),
-    getMonthlyNews(),
-  ])
+// Deals, places and nearby listings load through their own sources, so this only
+// assembles the sections the dashboard renders from it.
+export async function getHomeData(): Promise<HomeData> {
+  const { saturday, sunday, sleeps } = upcomingWeekend(londonToday())
+  const [threads, monthlyNews] = await Promise.all([getTrendingThreads(), getMonthlyNews()])
 
   return {
     greeting: greetingFor(londonHour()),
     sleepsToWeekend: sleeps,
     weekendLabel: formatEventDate(saturday, sunday),
-    events,
     threads,
-    articles,
     monthlyNews,
-    deal: { items: deals.items[0] ?? null, isSample: false, loadFailed: deals.loadFailed },
   }
 }

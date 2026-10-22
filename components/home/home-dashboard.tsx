@@ -1,6 +1,3 @@
-"use client"
-
-import useSWR from "swr"
 import Link from "next/link"
 import { HeroGreeting } from "./hero-greeting"
 import { DadJoke } from "./dad-joke"
@@ -9,24 +6,13 @@ import { TrendingThreads } from "./trending-threads"
 import { NewsHeadlines } from "./news-headlines"
 import { NearbyWeek } from "./nearby-week"
 import { HomeDeals } from "./home-deals"
-import { useLocation } from "@/components/location-provider"
 import type { HomeData } from "@/lib/types"
 import { FORUM_ENABLED } from "@/lib/launch"
 import type { Venue } from "@/lib/venue-meta"
 import type { LiveDeal } from "@/lib/deals-selection"
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json() as Promise<HomeData>)
-
-export function HomeDashboard({ initial, publicPlaces = [], initialDeals = [], children }: { initial: HomeData; publicPlaces?: Venue[]; initialDeals?: LiveDeal[]; children?: React.ReactNode }) {
-  const { coords } = useLocation()
-  const key = coords ? `/api/home?lat=${coords.lat}&lng=${coords.lng}` : "/api/home"
-  const { data = initial } = useSWR(key, fetcher, {
-    fallbackData: initial,
-    keepPreviousData: false,
-    refreshInterval: 60_000,
-    revalidateOnFocus: true,
-  })
-
+// Server-rendered: the sections that refresh or follow the user's location are client components.
+export function HomeDashboard({ data, publicPlaces = [], initialDeals = [], children }: { data: HomeData; publicPlaces?: Venue[]; initialDeals?: LiveDeal[]; children?: React.ReactNode }) {
 
   return (
     <div className="flex flex-col gap-5 sm:gap-8">
