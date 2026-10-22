@@ -55,9 +55,15 @@ def parse(value):
     return dt.datetime.fromisoformat(value.replace("Z", "+00:00")) if value else None
 
 
+def is_slot_run(run):
+    """GitHub's schedule, or the Supabase timer's on-time dispatch (named "timer slot ...", #124)."""
+    return run.get("event") == "schedule" or (
+        run.get("event") == "workflow_dispatch" and "timer slot" in (run.get("display_title") or ""))
+
+
 def ledger(slots, runs, jobs_for, now):
-    """runs: scheduled runs of one workflow. jobs_for(run) -> list of job dicts."""
-    runs = sorted(runs, key=lambda r: r["created_at"])
+    """runs: slot runs of one workflow. jobs_for(run) -> list of job dicts."""
+    runs = sorted((r for r in runs if is_slot_run(r)), key=lambda r: r["created_at"])
     rows, used = [], set()
     for i, slot in enumerate(slots):
         until = slots[i + 1] if i + 1 < len(slots) else now
@@ -73,6 +79,7 @@ def ledger(slots, runs, jobs_for, now):
         state = ("FAILED" if run.get("conclusion") not in (None, "success") else
                  "LATE" if delay > DISPATCH_MINUTES else "OK")
         rows.append({"slot": slot.isoformat(), "state": state, "run_id": run["id"], "dispatch_delay_min": delay,
+                     "via": "timer" if run["event"] == "workflow_dispatch" else "github schedule",
                      "completed_min": round((finished - slot).total_seconds() / 60) if finished else None,
                      "conclusion": run.get("conclusion"), "failed_jobs": failed, "url": run["html_url"]})
     return rows
@@ -97,7 +104,7 @@ def main():
     report = {"generated_at": now.isoformat(), "days": args.days,
               "thresholds_min": {"dispatch": DISPATCH_MINUTES, "completion": COMPLETION_MINUTES}, "workflows": {}}
     for workflow, rules in schedules().items():
-        runs = github(f"/actions/workflows/{workflow}/runs?event=schedule&per_page=100&created=>={start.date().isoformat()}")["workflow_runs"]
+        runs = github(f"/actions/workflows/{workflow}/runs?branch=main&per_page=100&created=>={start.date().isoformat()}")["workflow_runs"]
         jobs = lambda run: github(f"/actions/runs/{run['id']}/jobs?per_page=100")["jobs"] if run.get("conclusion") not in (None, "success") else []
         rows = ledger(expected_slots(rules, start, now), runs, jobs, now)
         report["workflows"][workflow] = rows
@@ -107,7 +114,7 @@ def main():
               (f" | median dispatch delay {sorted(delays)[len(delays) // 2]} min" if delays else ""))
         for r in rows:
             local = parse(r["slot"]).astimezone(ZoneInfo("Europe/London")).strftime("%a %d %b %H:%M")
-            extra = (f"+{r['dispatch_delay_min']}m dispatch" + (f", done +{r['completed_min']}m" if r.get("completed_min") is not None else "")
+            extra = (f"+{r['dispatch_delay_min']}m dispatch via {r['via']}" + (f", done +{r['completed_min']}m" if r.get("completed_min") is not None else "")
                      + (f", failed: {', '.join(r['failed_jobs'])}" if r.get("failed_jobs") else "")) if "run_id" in r else ""
             print(f"  {local}  {r['state']:<8} {extra}")
     if args.json:

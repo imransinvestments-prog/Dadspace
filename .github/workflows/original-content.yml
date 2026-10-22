@@ -1,5 +1,6 @@
 name: Dadspace original content
-run-name: Originals ${{ github.event_name }} ${{ inputs.maintenance_request || '' }}
+# Timer runs are named so the slot ledger and Operations count them as scheduled slots.
+run-name: Originals ${{ github.event_name }} ${{ inputs.maintenance_request || '' }}${{ inputs.timer_slot && format('timer slot {0}', inputs.timer_slot) || '' }}
 on:
   schedule:
     - cron: '17 7,9 * * *'
@@ -20,6 +21,10 @@ on:
         default: ''
       maintenance_request:
         description: Optional Operations audit request UUID
+        default: ''
+      # A late GitHub-scheduled duplicate is harmless here: the worker skips a slot already published.
+      timer_slot:
+        description: Set by the Supabase timer (#124); leave blank for a manual run
         default: ''
   push:
     branches: [main]
