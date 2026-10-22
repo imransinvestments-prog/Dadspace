@@ -1,0 +1,84 @@
+# Council discovery
+
+Owner request, 22 October 2026: make sure there are enough places for every UK postcode by finding the top 10 dad-and-kid-friendly weekend spots in each council, keeping only places that are not already in `venues`, output as a strict JSON array, as part of the venue worker.
+
+`venue_council_discovery.py` does this. It runs from the venue reference loader (`venue_reference_loader_v2.py`) once its source is activated, or on its own for one council. The result is a **candidate queue for review**. The ranking measures how notable and well documented a place is in OpenStreetMap, not how good it is for families, so public copy must not call these places "top" or "best".
+
+## What it does, per council
+
+1. **Councils** come from `geography_areas` (`kind = 'council'`) in the latest `geography_releases` row: 361 councils in the ONS May 2026 release. The 11 Northern Ireland councils (`N…` codes) are excluded for now (owner decision, 22 Oct, #243), which leaves 350.
+2. **Places** come from OpenStreetMap via Overpass. The query is scoped to the council's boundary using `ref:gss`, the ONS code. It covers named playgrounds, parks, nature reserves, water parks, indoor play, museums, zoos and petting farms, aquariums, theme parks and libraries. It drops:
+   - unnamed and generic names ("Playground");
+   - private or disused places;
+   - libraries tagged `library=research|academic|private`;
+   - archives, record offices and local-history centres listed as libraries. This follows the 22 Oct #92 decision: names that contain "Library" are kept even if they also hold archives;
+   - specialist libraries (owner decision, 22 Oct, #243): institutes, universities, colleges, schools, academies, hospitals and medical, law and chambers, societies, research, theology, and subject "Studies" libraries.
+     - A public library's "Local Studies" centre is kept.
+     - Street names are kept too ("School Lane Library").
+3. **Ranking** is deterministic. It weighs category, Wikidata notability, website and opening hours, and facility evidence (`changing_table`, `toilets`, `wheelchair`, `baby_feeding`), plus size for parks and nature reserves. Each council keeps its top 10, at most 3 per category, and ties break on the OSM id.
+4. **New only.** A place is skipped when `venues` already holds the same OSM element (in `source_url` or `discovered_source_url`). It is also skipped when a similar-named venue (ratio 0.75 or more) sits inside its outline, or when the shared `choose_match` rules in `venue_reference_worker.py` find it:
+   - same name and postcode;
+   - same postcode and a similar name;
+   - within 80 m and a similar name.
+
+   The check runs twice: before the postcode is known, and again with the resolved postcode, so the postcode rules can fire. Places that are near (within 150 m or inside the outline) and only partly similar are kept as **possible duplicates**: they are inserted hidden, with the possible match named in the review reason. Duplicates within a run are skipped.
+5. **Postcodes** come from OSM `addr:postcode`, or from postcodes.io as the nearest postcode (`postcode_source = reverse_nearest`).
+   - **Inferred postcodes are never stored on the venue.** They stay in the JSON and the provenance payload as a reviewer hint, and the review reason says so.
+   - A **point** whose postcode is in a neighbouring council is kept and flagged (`council_check = postcode_other_council`).
+   - An **outline** (park, reserve) whose postcode is in a neighbouring council only crosses the boundary, and the neighbour's own run returns it. In the 22 Oct Ealing run this was Gunnersbury Park, Minet Country Park and others, so it is left to that council (`other_council` count).
+   - Northern Ireland skips postcode geography, per the Sprint 10 licence decision.
+6. **Notes.** One structured LLM call per council (`VENUE_DISCOVERY_*` provider settings, Gemini by default) drafts a 2-sentence dad-focused description and typical peak busy times **from the OSM tags only**. A draft is discarded (`note_rejected`) when it:
+   - mentions a facility (baby changing, toilets, café, step-free access, parking, feeding room), an age band (toddlers, under-5s) or a price ("free", admission) without the matching tag;
+   - vouches for the place ("safe", "vetted", "verified", "best", awards).
+
+   Busy times are a general pattern for that kind of place, not measured data. Both notes are always `claims_status: "unverified"`. If the LLM fails or its budget runs out, the places are still kept with empty notes.
+
+## Outputs
+
+- **JSON array:** `review/council-discovery/<run-id>.json`, uploaded as the `council-discovery-<run>` workflow artifact. Each item has `name`, `category`, `address`, `description` and `peak_busy_times`, plus the council, `postcode` and `postcode_source`, coordinates, OSM id and URL, `claims_status`, `evidence_tags`, `rank`, `possible_duplicate_of`, `council_check` and `note_rejected`.
+- **Hidden venues** (not in dry runs): `public_visible = false`, `discovery_status = 'discovered'`, `licence = 'ODbL'`. The review reason names the council, the unverified notes, any inferred postcode, any neighbouring-council postcode and any possible duplicate.
+  - They wait in `/ops/review`; this path never publishes, and it never updates existing venues.
+  - The draft notes, OSM tags, postcode source and checks are kept in `venue_sources.source_payload` (`source_name = 'osm-council-discovery'`), not in venue columns, so nothing unverified becomes a venue fact.
+- **Run log:** `venue_council_discovery_runs`. Each run takes the next councils without a successful run in the last 180 days (`COUNCIL_DISCOVERY_REFRESH_DAYS`). At 10 per run and two scheduled runs a day, all 350 GB councils are **queried** within about 18 days. Being queried does not mean a council has good coverage. A council whose boundary was not found is retried after 7 days.
+
+## Why OpenStreetMap, not Google Places
+
+Google's terms limit storing Places content beyond the place ID, and caching Google data is an owner terms decision (PRODUCT.md). OSM data is ODbL, so it can be stored with attribution ("© OpenStreetMap contributors"), and it already backs about 54,000 existing venues. Using Google here would need an owner terms review first.
+
+## Activating it (owner steps)
+
+1. Apply migration `20261022210000_venue_council_discovery_runs.sql`.
+2. Try one council as a dry run: Actions → *Sync venue reference data* → `council = E09000009`, `dry_run = true`. Check the JSON artifact.
+3. Add the source row:
+
+   ```sql
+   insert into sources (name, source_role, active) values ('OpenStreetMap council discovery', 'venue_reference', true);
+   ```
+
+   The scheduled loader then runs 10 councils each time and inserts hidden candidates.
+4. Optional repository variables:
+   - `COUNCIL_DISCOVERY_PER_RUN`
+   - `COUNCIL_DISCOVERY_MAX_LLM_CALLS`
+   - `COUNCIL_DISCOVERY_TOKEN_BUDGET`
+   - `VENUE_DISCOVERY_LLM_PROVIDER` / `VENUE_DISCOVERY_LLM_MODEL`
+   - `OVERPASS_URL` (a hosted Overpass instance if the public one rate-limits)
+
+Push-triggered dry runs never call the LLM.
+
+## Owner decisions (22 Oct 2026, #243)
+
+- **Northern Ireland is excluded for now.** No OSM administrative boundary carried an `N09…` `ref:gss` code, so NI would need a name-based or alternative boundary source. To include it later, remove `"N"` from `EXCLUDED_COUNCIL_PREFIXES`; the NI postcode-licence handling is already in place.
+- **Specialist libraries are left out** (see step 2 above).
+
+## Known limits
+
+- Places tagged in OSM as something else (for example a museum tagged as a park) keep their OSM category.
+- Busy times are typical patterns, not observations. They must never reach a public field without being rewritten and checked.
+
+## Checks
+
+- `tests/test_venue_council_discovery.py` runs in `places-data-checks.yml`.
+- Real-data dry runs on 22 Oct 2026, without the LLM:
+  - Ealing, Cornwall, Cardiff and Highland each returned 10 spots, and Belfast returned `no_boundary`.
+  - After review fixes, Ealing returned 10 in-council places, with 4 boundary-crossing outlines left to their own councils.
+  - Checked against live `venues`, the Ealing results match the OSM-sourced Transport Museum Depot and Pitzhanger Manor and the library-dataset Acton Town Hall Library, all of which a live run skips as existing.

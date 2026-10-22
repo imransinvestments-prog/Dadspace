@@ -144,5 +144,9 @@ def main():
     active={x['name'] for x in (db.table('sources').select('name').eq('source_role','venue_reference').eq('active',True).execute().data or [])};out={'dry_run':DRY_RUN}
     if 'Sport England Active Places' in active:out['active_places']=run_active(db,bypc)
     if 'Public Library Open Data' in active:out['libraries']=run_libraries(db,bypc,bysource)
+    # Council discovery inserts hidden candidates only; see docs/council-discovery.md.
+    if 'OpenStreetMap council discovery' in active:
+        from venue_council_discovery import run as discover_councils
+        out['council_discovery']=discover_councils(db,dry_run=DRY_RUN,councils_per_run=int(os.getenv('COUNCILS_PER_RUN','10') or 10),llm=os.getenv('COUNCIL_DISCOVERY_LLM','true').lower()=='true',max_llm_calls=int(os.getenv('COUNCIL_DISCOVERY_MAX_LLM_CALLS','0') or 0))
     print(out)
 if __name__=='__main__':main()

@@ -39,6 +39,8 @@ The scheduled entry point is loader v2, not `venue_reference_worker.py`. The old
 
 Loader v2 reads active reference source names from `sources`, matches existing venues using postcode/name evidence, fills missing fields and records `venue_sources` provenance. Uncertain fuzzy matches set a review reason.
 
+Council discovery (`venue_council_discovery.py`, source `OpenStreetMap council discovery`) adds the top 10 new family places per council from OpenStreetMap as hidden discovered venues with unverified AI notes; see [council discovery](council-discovery.md).
+
 Active Places enriches matched venues and does not insert unmatched records. New reference libraries are upserted with `discovery_status='verified'` and `public_visible=true`. Its counter label `hidden_or_existing` is misleading for these new rows. Event/activity discovery instead creates hidden records pending review.
 
 ## Source metadata
