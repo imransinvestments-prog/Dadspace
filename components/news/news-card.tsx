@@ -62,7 +62,7 @@ export function NewsCard({ item, variant = "tile", priority = false }: { item: N
   const tldr = item.why_it_matters && (
     <div
       className={cn(
-        "flex items-start gap-2 rounded-md border-l-4 border-highlight px-3 py-2 text-sm leading-relaxed",
+        "flex items-start gap-2 rounded-lg px-3 py-2 text-sm leading-relaxed",
         isHero ? "bg-navy/60 text-navy-foreground backdrop-blur-sm" : "bg-muted/60 text-foreground",
       )}
     >

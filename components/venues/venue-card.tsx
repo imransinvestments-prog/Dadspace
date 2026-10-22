@@ -102,7 +102,7 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
             {venue.phone && (
               <a
                 href={`tel:${venue.phone.replace(/\s+/g, "")}`}
-                className="flex size-9 items-center justify-center rounded-full text-foreground transition hover:bg-muted"
+                className="flex size-11 items-center justify-center rounded-full text-foreground transition hover:bg-muted"
               >
                 <Phone className="size-4" aria-hidden />
                 <span className="sr-only">Call {venue.name}</span>
@@ -113,7 +113,7 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
                 href={venue.website_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex size-9 items-center justify-center rounded-full text-foreground transition hover:bg-muted"
+                className="flex size-11 items-center justify-center rounded-full text-foreground transition hover:bg-muted"
               >
                 <Globe className="size-4" aria-hidden />
                 <span className="sr-only">Website for {venue.name}</span>
@@ -123,7 +123,7 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
               href={directionsUrl(venue)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 rounded-full bg-navy px-3 py-2 text-xs font-bold text-navy-foreground transition hover:bg-primary hover:text-primary-foreground dark:bg-muted dark:text-foreground dark:hover:bg-primary dark:hover:text-primary-foreground"
+              className="flex min-h-11 items-center gap-1.5 rounded-full bg-navy px-4 text-xs font-bold text-navy-foreground transition hover:bg-primary hover:text-primary-foreground dark:bg-muted dark:text-foreground dark:hover:bg-primary dark:hover:text-primary-foreground"
             >
               <Navigation className="size-3.5" aria-hidden />
               Directions
