@@ -25,6 +25,7 @@ export default async function OperationsPage() {
       <h1 className="mt-2 text-3xl font-bold sm:text-4xl">Operations</h1>
       <p className="mt-3 max-w-2xl">Collection status, evidence and the work that needs attention.</p>
       <Link href="/ops/sprint-5" className="mt-4 inline-block font-semibold underline">Sprint 5: consolidated review pack</Link>
+      <Link href="/ops/sprint-11" className="mt-4 block font-semibold underline">Sprint 11: Places, Deals and Originals review</Link>
       <Link href="/ops/geography" className="mt-4 block font-semibold underline">Sprint 10: UK geography and coverage review</Link>
       <div className="mt-5 flex flex-wrap gap-3 text-sm"><span className="rounded-full border border-current px-3 py-1">Read-only</span><span className="rounded-full border border-current px-3 py-1">W3 · 10 km · Ages 0–5</span></div>
     </header>

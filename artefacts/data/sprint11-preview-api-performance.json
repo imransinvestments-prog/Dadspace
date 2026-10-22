@@ -1,0 +1,1142 @@
+{
+  "captured_at": "2026-10-19T16:09:37.742983+00:00",
+  "origin": "https://dadspace-git-dev-sprint-11-reliability-imransinvestments-6859.vercel.app",
+  "deployed_sha": "d67f269882096192488138e7c0e9cf2246b96ea0",
+  "method": "20 sequential requests per case in one requests.Session; first transport-cold, remaining connection-reused. Server/database cache state is unknown. Wall-clock response plus JSON decoding; decoded UTF-8 JSON bytes. No user identity/cookies.",
+  "cases": [
+    {
+      "case": "national-first",
+      "url": "https://dadspace-git-dev-sprint-11-reliability-imransinvestments-6859.vercel.app/api/venues",
+      "samples": [
+        {
+          "sample": 1,
+          "status": 200,
+          "elapsed_ms": 420.67,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 2,
+          "status": 200,
+          "elapsed_ms": 325.74,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 3,
+          "status": 200,
+          "elapsed_ms": 300.65,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 4,
+          "status": 200,
+          "elapsed_ms": 299.95,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 5,
+          "status": 200,
+          "elapsed_ms": 307.69,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 6,
+          "status": 200,
+          "elapsed_ms": 370.12,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 7,
+          "status": 200,
+          "elapsed_ms": 297.37,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 8,
+          "status": 200,
+          "elapsed_ms": 360.35,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 9,
+          "status": 200,
+          "elapsed_ms": 294.01,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 10,
+          "status": 200,
+          "elapsed_ms": 285.32,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 11,
+          "status": 200,
+          "elapsed_ms": 282.51,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 12,
+          "status": 200,
+          "elapsed_ms": 292.17,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 13,
+          "status": 200,
+          "elapsed_ms": 300.88,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 14,
+          "status": 200,
+          "elapsed_ms": 286.44,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 15,
+          "status": 200,
+          "elapsed_ms": 308.21,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 16,
+          "status": 200,
+          "elapsed_ms": 288.81,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 17,
+          "status": 200,
+          "elapsed_ms": 285.58,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 18,
+          "status": 200,
+          "elapsed_ms": 272.94,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 19,
+          "status": 200,
+          "elapsed_ms": 288.11,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 20,
+          "status": 200,
+          "elapsed_ms": 297.2,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        }
+      ],
+      "p95_ms": 370.12,
+      "maximum_json_bytes": 17056,
+      "passed": true
+    },
+    {
+      "case": "national-deep",
+      "url": "https://dadspace-git-dev-sprint-11-reliability-imransinvestments-6859.vercel.app/api/venues?offset=240",
+      "samples": [
+        {
+          "sample": 1,
+          "status": 200,
+          "elapsed_ms": 523.02,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 2,
+          "status": 200,
+          "elapsed_ms": 344.07,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 3,
+          "status": 200,
+          "elapsed_ms": 269.11,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 4,
+          "status": 200,
+          "elapsed_ms": 374.48,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 5,
+          "status": 200,
+          "elapsed_ms": 290.63,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 6,
+          "status": 200,
+          "elapsed_ms": 272.6,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 7,
+          "status": 200,
+          "elapsed_ms": 289.03,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 8,
+          "status": 200,
+          "elapsed_ms": 296.06,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 9,
+          "status": 200,
+          "elapsed_ms": 285.36,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 10,
+          "status": 200,
+          "elapsed_ms": 299.21,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 11,
+          "status": 200,
+          "elapsed_ms": 504.0,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 12,
+          "status": 200,
+          "elapsed_ms": 299.14,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 13,
+          "status": 200,
+          "elapsed_ms": 302.4,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 14,
+          "status": 200,
+          "elapsed_ms": 348.86,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 15,
+          "status": 200,
+          "elapsed_ms": 266.89,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 16,
+          "status": 200,
+          "elapsed_ms": 248.91,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 17,
+          "status": 200,
+          "elapsed_ms": 307.23,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 18,
+          "status": 200,
+          "elapsed_ms": 257.66,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 19,
+          "status": 200,
+          "elapsed_ms": 263.06,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 20,
+          "status": 200,
+          "elapsed_ms": 275.63,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        }
+      ],
+      "p95_ms": 504.0,
+      "maximum_json_bytes": 16892,
+      "passed": true
+    },
+    {
+      "case": "pilot-first",
+      "url": "https://dadspace-git-dev-sprint-11-reliability-imransinvestments-6859.vercel.app/api/venues?lat=51.508924&lng=-0.275866",
+      "samples": [
+        {
+          "sample": 1,
+          "status": 200,
+          "elapsed_ms": 398.69,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 2,
+          "status": 200,
+          "elapsed_ms": 346.85,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 3,
+          "status": 200,
+          "elapsed_ms": 331.68,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 4,
+          "status": 200,
+          "elapsed_ms": 369.0,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 5,
+          "status": 200,
+          "elapsed_ms": 336.24,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 6,
+          "status": 200,
+          "elapsed_ms": 336.74,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 7,
+          "status": 200,
+          "elapsed_ms": 520.89,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 8,
+          "status": 200,
+          "elapsed_ms": 475.54,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 9,
+          "status": 200,
+          "elapsed_ms": 337.35,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 10,
+          "status": 200,
+          "elapsed_ms": 498.15,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 11,
+          "status": 200,
+          "elapsed_ms": 402.32,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 12,
+          "status": 200,
+          "elapsed_ms": 359.41,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 13,
+          "status": 200,
+          "elapsed_ms": 337.41,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 14,
+          "status": 200,
+          "elapsed_ms": 575.14,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 15,
+          "status": 200,
+          "elapsed_ms": 650.04,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 16,
+          "status": 200,
+          "elapsed_ms": 467.77,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 17,
+          "status": 200,
+          "elapsed_ms": 1254.4,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 18,
+          "status": 200,
+          "elapsed_ms": 435.84,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 19,
+          "status": 200,
+          "elapsed_ms": 460.93,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 20,
+          "status": 200,
+          "elapsed_ms": 442.3,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        }
+      ],
+      "p95_ms": 650.04,
+      "maximum_json_bytes": 16747,
+      "passed": true
+    },
+    {
+      "case": "pilot-deep",
+      "url": "https://dadspace-git-dev-sprint-11-reliability-imransinvestments-6859.vercel.app/api/venues?lat=51.508924&lng=-0.275866&offset=48",
+      "samples": [
+        {
+          "sample": 1,
+          "status": 200,
+          "elapsed_ms": 550.11,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 2,
+          "status": 200,
+          "elapsed_ms": 487.81,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 3,
+          "status": 200,
+          "elapsed_ms": 564.19,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 4,
+          "status": 200,
+          "elapsed_ms": 395.6,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 5,
+          "status": 200,
+          "elapsed_ms": 372.46,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 6,
+          "status": 200,
+          "elapsed_ms": 348.81,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 7,
+          "status": 200,
+          "elapsed_ms": 407.74,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 8,
+          "status": 200,
+          "elapsed_ms": 428.52,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 9,
+          "status": 200,
+          "elapsed_ms": 380.16,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 10,
+          "status": 200,
+          "elapsed_ms": 370.99,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 11,
+          "status": 200,
+          "elapsed_ms": 366.11,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 12,
+          "status": 200,
+          "elapsed_ms": 334.37,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 13,
+          "status": 200,
+          "elapsed_ms": 364.98,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 14,
+          "status": 200,
+          "elapsed_ms": 339.06,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 15,
+          "status": 200,
+          "elapsed_ms": 360.28,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 16,
+          "status": 200,
+          "elapsed_ms": 417.29,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 17,
+          "status": 200,
+          "elapsed_ms": 530.37,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 18,
+          "status": 200,
+          "elapsed_ms": 614.06,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 19,
+          "status": 200,
+          "elapsed_ms": 512.63,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 20,
+          "status": 200,
+          "elapsed_ms": 468.34,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        }
+      ],
+      "p95_ms": 564.19,
+      "maximum_json_bytes": 16544,
+      "passed": true
+    },
+    {
+      "case": "pilot-filter",
+      "url": "https://dadspace-git-dev-sprint-11-reliability-imransinvestments-6859.vercel.app/api/venues?lat=51.508924&lng=-0.275866&category=library&free=true",
+      "samples": [
+        {
+          "sample": 1,
+          "status": 200,
+          "elapsed_ms": 291.42,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 2,
+          "status": 200,
+          "elapsed_ms": 254.93,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 3,
+          "status": 200,
+          "elapsed_ms": 310.82,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 4,
+          "status": 200,
+          "elapsed_ms": 352.35,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 5,
+          "status": 200,
+          "elapsed_ms": 719.53,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 6,
+          "status": 200,
+          "elapsed_ms": 242.12,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 7,
+          "status": 200,
+          "elapsed_ms": 327.87,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 8,
+          "status": 200,
+          "elapsed_ms": 308.1,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 9,
+          "status": 200,
+          "elapsed_ms": 278.0,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 10,
+          "status": 200,
+          "elapsed_ms": 232.61,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 11,
+          "status": 200,
+          "elapsed_ms": 416.17,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 12,
+          "status": 200,
+          "elapsed_ms": 302.05,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 13,
+          "status": 200,
+          "elapsed_ms": 246.73,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 14,
+          "status": 200,
+          "elapsed_ms": 250.18,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 15,
+          "status": 200,
+          "elapsed_ms": 245.16,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 16,
+          "status": 200,
+          "elapsed_ms": 240.13,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 17,
+          "status": 200,
+          "elapsed_ms": 304.09,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 18,
+          "status": 200,
+          "elapsed_ms": 266.84,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 19,
+          "status": 200,
+          "elapsed_ms": 285.73,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 20,
+          "status": 200,
+          "elapsed_ms": 238.88,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        }
+      ],
+      "p95_ms": 416.17,
+      "maximum_json_bytes": 39,
+      "passed": true
+    },
+    {
+      "case": "pilot-search",
+      "url": "https://dadspace-git-dev-sprint-11-reliability-imransinvestments-6859.vercel.app/api/venues?lat=51.508924&lng=-0.275866&q=library",
+      "samples": [
+        {
+          "sample": 1,
+          "status": 200,
+          "elapsed_ms": 460.1,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 2,
+          "status": 200,
+          "elapsed_ms": 452.55,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 3,
+          "status": 200,
+          "elapsed_ms": 417.95,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 4,
+          "status": 200,
+          "elapsed_ms": 418.0,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 5,
+          "status": 200,
+          "elapsed_ms": 466.35,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 6,
+          "status": 200,
+          "elapsed_ms": 392.23,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 7,
+          "status": 200,
+          "elapsed_ms": 397.82,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 8,
+          "status": 200,
+          "elapsed_ms": 501.15,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 9,
+          "status": 200,
+          "elapsed_ms": 403.14,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 10,
+          "status": 200,
+          "elapsed_ms": 480.91,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 11,
+          "status": 200,
+          "elapsed_ms": 753.33,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 12,
+          "status": 200,
+          "elapsed_ms": 471.23,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 13,
+          "status": 200,
+          "elapsed_ms": 899.37,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 14,
+          "status": 200,
+          "elapsed_ms": 1106.72,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 15,
+          "status": 200,
+          "elapsed_ms": 667.59,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 16,
+          "status": 200,
+          "elapsed_ms": 675.27,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 17,
+          "status": 200,
+          "elapsed_ms": 573.08,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 18,
+          "status": 200,
+          "elapsed_ms": 484.17,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 19,
+          "status": 200,
+          "elapsed_ms": 418.17,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 20,
+          "status": 200,
+          "elapsed_ms": 407.48,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        }
+      ],
+      "p95_ms": 899.37,
+      "maximum_json_bytes": 18324,
+      "passed": true
+    }
+  ]
+}

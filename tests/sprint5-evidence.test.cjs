@@ -42,7 +42,7 @@ test('frozen samples retain exact distinct membership and snapshots; automation 
   assert.equal(pack.activities.coverage.linked_within_10km,16)
   assert.equal(pack.deals.stored_count,198)
 })
-function material(access){return load('lib/operations/review-material.ts',{'server-only':{},'@/lib/supabase':{getSupabase:()=>{throw Error('must not read live DB for frozen cohorts')}},'@/lib/deals':{getDeals:()=>{throw Error('must not read live Deals')}},'./session':{operationsAccess:async()=>access},'./processes':{OPERATIONS_PROCESSES:[]},'./review-tasks':{reviewTask:id=>[34,130,136].includes(id)},'./news-sample':{NEWS_SAMPLE:{rows:[]}}})}
+function material(access){return load('lib/operations/review-material.ts',{'server-only':{},'@/lib/supabase':{getSupabase:()=>{throw Error('must not read live DB for frozen cohorts')}},'@/lib/deals':{getDeals:()=>{throw Error('must not read live Deals')}},'./sprint11-venues':load('lib/operations/sprint11-venues.ts'),'./session':{operationsAccess:async()=>access},'./processes':{OPERATIONS_PROCESSES:[]},'./review-tasks':{reviewTask:id=>[34,130,136].includes(id)},'./news-sample':{NEWS_SAMPLE:{rows:[]}}})}
 test('fixed review cohorts require operator access, survive missing live DB, and have stable page boundaries',async()=>{
   await assert.rejects(material('denied').getReviewMaterial(34),/denied/)
   const m=material('allowed')

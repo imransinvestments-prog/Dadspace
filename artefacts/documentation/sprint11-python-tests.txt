@@ -1,0 +1,97 @@
+Awin validation: configuration_missing; 0 source-listed offers. 
+Awin validation: http_401; 0 source-listed offers. 
+Awin validation: incomplete; 0 source-listed offers. 
+Awin validation: empty; 0 source-listed offers. 
+Awin source activation confirmed. Collection still applies all relevance/value gates.
+Awin validation: ok; 1 source-listed offers. 
+Read-only check complete; no source or deals changed.
+{"details_reviewed": 16, "session_proposals": 16, "issues": [{"title": "Storytime at Huntingdon Library", "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=ARDeAFTyRxc&camcommunitychannel=6-4", "reason": "Missing branch address/postcode or published age band; proposal retained for review"}, {"title": "Storytime on Saturdays at Cherry Hinton Library", "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=c5pKbxS6MWI&camcommunitychannel=6-4", "reason": "Fortnightly dates need verification against the linked organiser listings; no dated occurrences generated."}, {"title": "Storytime", "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=sYeyt5peVQk&camcommunitychannel=6-4", "reason": "Fortnightly dates need confirmation at the library; no dated occurrences generated."}, {"title": "Storytime", "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=sYeyt5peVQk&camcommunitychannel=6-4", "reason": "Missing branch address/postcode or published age band; proposal retained for review"}, {"title": "Storytime on Mondays at Cambridge Central Library", "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=3NW1KkTYDS0&camcommunitychannel=6-4", "reason": "Age field says 1 - 5 years; published description says 18 months to 5 years. Resolve before application."}, {"title": "Storytime on Sundays at Cambridge Central Library", "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=L0-EFfqXKMM&camcommunitychannel=6-4", "reason": "Age field says 0 - 5 years; published description says 18 months to 5 years. Resolve before application."}], "combined_distinct_proposals": 201, "live_writes": 0}
+{"details_reviewed": 16, "session_proposals": 16, "issues": [{"title": "Storytime at Huntingdon Library", "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=ARDeAFTyRxc&camcommunitychannel=6-4", "reason": "Missing branch address/postcode or published age band; proposal retained for review"}, {"title": "Storytime on Saturdays at Cherry Hinton Library", "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=c5pKbxS6MWI&camcommunitychannel=6-4", "reason": "Fortnightly dates need verification against the linked organiser listings; no dated occurrences generated."}, {"title": "Storytime", "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=sYeyt5peVQk&camcommunitychannel=6-4", "reason": "Fortnightly dates need confirmation at the library; no dated occurrences generated."}, {"title": "Storytime", "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=sYeyt5peVQk&camcommunitychannel=6-4", "reason": "Missing branch address/postcode or published age band; proposal retained for review"}, {"title": "Storytime on Mondays at Cambridge Central Library", "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=3NW1KkTYDS0&camcommunitychannel=6-4", "reason": "Age field says 1 - 5 years; published description says 18 months to 5 years. Resolve before application."}, {"title": "Storytime on Sundays at Cambridge Central Library", "url": "https://info.cambridgeshire.gov.uk/kb5/cambridgeshire/directory/service.page?id=L0-EFfqXKMM&camcommunitychannel=6-4", "reason": "Age field says 0 - 5 years; published description says 18 months to 5 years. Resolve before application."}], "combined_distinct_proposals": 201, "live_writes": 0}
+Gemini controls: {}
+Today (UK): 2026-10-19. Categories: activities. Fetch engine: requests. Sources to process: 4. Dry run: False. Model: gemini-3.6-flash. Run budget: 45.0 min. Gemini timeout: 60s.
+[1/4] a: FAILED_SAVE - could not save events (partial save failure) (0.0s)
+[2/4] b: OK -  (0.0s)
+Stopping before marking source complete: bounded stop
+
+=== Summary ===
+Ran for 0.0 min. Sources processed: 2/4 (stopped early on a run budget)
+Saved/updated events: 1
+Sources: failed_save=1, ok=1
+Events: detail_cache_hits=0, structured_events=0, cache_hits=0, extracted=2, kept=2, invalid=0, no_date=0, event_finished=0, event_too_far_in_future=0, low_relevance=0, not_parent_activity=0, missing_family_evidence=0, low_confidence=0, duplicates=0
+Gemini usage: api_attempts=0, input_chars_sent=0, prompt_tokens=0, output_tokens=0 (of which thinking: 0), total_tokens=0
+Unknown-usage attempts: 0
+Expired events: clean-up switched off (EXPIRED_RETENTION_DAYS is negative)
+DRY RUN: pipeline run details are in the local review files; no DB log written.
+........................................................................................................................sssssssssssC:\Python315\Lib\tempfile.py:538: ResourceWarning: Implicitly cleaning up <HTTPError 403: 'private'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+C:\Python315\Lib\tempfile.py:538: ResourceWarning: Implicitly cleaning up <HTTPError 403: 'denied'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+.................................C:\Python315\Lib\tempfile.py:538: ResourceWarning: Implicitly cleaning up <HTTPError 429: 'private reason'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+C:\Python315\Lib\tempfile.py:538: ResourceWarning: Implicitly cleaning up <HTTPError 400: 'secret-body'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+C:\Python315\Lib\tempfile.py:538: ResourceWarning: Implicitly cleaning up <HTTPError 401: 'secret-body'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+C:\Python315\Lib\tempfile.py:538: ResourceWarning: Implicitly cleaning up <HTTPError 402: 'secret-body'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+.......C:\Python315\Lib\tempfile.py:538: ResourceWarning: Implicitly cleaning up <HTTPError 403: 'secret-body'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+.................................................................................................................
+----------------------------------------------------------------------
+Ran 284 tests in 1.910s
+
+OK (skipped=11)
+Gemini controls: {}
+Today (UK): 2026-10-19. Categories: all categories. Fetch engine: requests. Sources to process: 1. Dry run: False. Model: gemini-3.6-flash. Run budget: 45.0 min. Gemini timeout: 60s.
+[1/1] Museum: OK -  (0.0s)
+
+=== Summary ===
+Ran for 0.0 min. Sources processed: 1/1
+Saved/updated events: 1
+Sources: ok=1
+Events: detail_cache_hits=0, structured_events=0, cache_hits=0, extracted=0, kept=0, invalid=0, no_date=0, event_finished=0, event_too_far_in_future=0, low_relevance=0, not_parent_activity=0, missing_family_evidence=0, low_confidence=0, duplicates=0
+Gemini usage: api_attempts=0, input_chars_sent=0, prompt_tokens=0, output_tokens=0 (of which thinking: 0), total_tokens=0
+Unknown-usage attempts: 0
+Expired events: 0 event(s) removed (ended more than 30 days ago)
+Gemini controls: {}
+Today (UK): 2026-10-19. Categories: all categories. Fetch engine: requests. Sources to process: 1. Dry run: False. Model: gemini-3.6-flash. Run budget: 45.0 min. Gemini timeout: 60s.
+[1/1] Museum: OK -  (0.0s)
+
+=== Summary ===
+Ran for 0.0 min. Sources processed: 1/1
+Saved/updated events: 1
+Sources: ok=1
+Events: detail_cache_hits=0, structured_events=0, cache_hits=0, extracted=0, kept=0, invalid=0, no_date=0, event_finished=0, event_too_far_in_future=0, low_relevance=0, not_parent_activity=0, missing_family_evidence=0, low_confidence=0, duplicates=0
+Gemini usage: api_attempts=0, input_chars_sent=0, prompt_tokens=0, output_tokens=0 (of which thinking: 0), total_tokens=0
+Unknown-usage attempts: 0
+Expired events: 0 event(s) removed (ended more than 30 days ago)
+Gemini controls: {}
+Today (UK): 2026-10-19. Categories: all categories. Fetch engine: requests. Sources to process: 1. Dry run: False. Model: gemini-3.6-flash. Run budget: 45.0 min. Gemini timeout: 60s.
+[1/1] Museum: FAILED_SAVE - could not save events (write failed) (0.0s)
+
+=== Summary ===
+Ran for 0.0 min. Sources processed: 1/1
+Saved/updated events: 0
+Sources: failed_save=1
+Events: detail_cache_hits=0, structured_events=0, cache_hits=0, extracted=0, kept=0, invalid=0, no_date=0, event_finished=0, event_too_far_in_future=0, low_relevance=0, not_parent_activity=0, missing_family_evidence=0, low_confidence=0, duplicates=0
+Gemini usage: api_attempts=0, input_chars_sent=0, prompt_tokens=0, output_tokens=0 (of which thinking: 0), total_tokens=0
+Unknown-usage attempts: 0
+Expired events: 0 event(s) removed (ended more than 30 days ago)
+Gemini controls: {}
+Today (UK): 2026-10-19. Categories: all categories. Fetch engine: requests. Sources to process: 1. Dry run: True. Model: gemini-3.6-flash. Run budget: 45.0 min. Gemini timeout: 60s.
+[1/1] Museum: OK -  (0.0s)
+      would save: 2026-10-15 | Family day | Museum
+
+=== Summary ===
+Ran for 0.0 min. Sources processed: 1/1
+Saved/updated events: 1 (dry run - nothing was saved)
+Sources: ok=1
+Events: detail_cache_hits=0, structured_events=0, cache_hits=0, extracted=0, kept=0, invalid=0, no_date=0, event_finished=0, event_too_far_in_future=0, low_relevance=0, not_parent_activity=0, missing_family_evidence=0, low_confidence=0, duplicates=0
+Gemini usage: api_attempts=0, input_chars_sent=0, prompt_tokens=0, output_tokens=0 (of which thinking: 0), total_tokens=0
+Unknown-usage attempts: 0
+Expired events: 0 event(s) would be removed (ended more than 30 days ago)
+Validated daily 2026-10-19; dry run, nothing published
+Published daily 2026-10-19
+Already published daily 2026-10-19; skipped
+Already published daily 2026-10-19; skipped
+Shadow capture unavailable: OSError

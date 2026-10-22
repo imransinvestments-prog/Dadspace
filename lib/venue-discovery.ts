@@ -4,12 +4,16 @@ import { unstable_cache } from "next/cache"
 import { getSupabase } from "./supabase"
 import { toVenue } from "./venues"
 import type { Venue } from "./venue-meta"
+import { createHash } from "node:crypto"
+import { DISCOVERY_APPROVALS, discoveryPublicationReady } from "./discovery-publication"
 
 // Explicit projection: never send internal notes, review evidence or imported JSON to clients.
 export const VENUE_PUBLIC_COLUMNS = "id,venue_name,venue_label,category,address,address_line_1,address_line_2,town_city,postcode,country,nearby_settlement,latitude,longitude,website,fee,opening_hours,access,image_url,image_source_url,image_attribution,image_license,image_license_url,image_title,image_credit"
 export type VenuePage = { venues: Venue[]; total: number; hasMore: boolean; loadFailed: boolean }
 export const PILOT_AREAS = [
   { slug: "hounslow", name: "Hounslow", intro: "Browse Hounslow libraries for your next family visit. Check the library's own website for current opening times and children's sessions." },
+  { slug: "ealing", name: "Ealing", intro: "Find Ealing libraries for your next family visit. Opening times and children's sessions change, so check the library's own website before you go." },
+  { slug: "brent", name: "Brent", intro: "Explore Brent libraries close to home. Compare addresses here, then confirm today's opening times and children's sessions on the library's own website." },
   { slug: "manchester", name: "Manchester", intro: "Explore Manchester museums and libraries. Compare addresses and available visitor information before planning a day with the kids." },
   { slug: "london", name: "London", intro: "Find London museums, libraries and indoor play venues. London covers a large area: check the address and journey before choosing your next stop." },
 ] as const
@@ -68,11 +72,28 @@ export const publicVenueById = cache(async (id: string): Promise<Venue | null> =
 })
 
 export async function approvedDiscoveryPages() {
-  const combinations = PILOT_AREAS.flatMap(area => DISCOVERY_CATEGORIES.map(category => ({ area, category })))
+  const combinations = PILOT_AREAS.flatMap(area => DISCOVERY_CATEGORIES.filter(category => DISCOVERY_APPROVALS.some(a=>a.area===area.slug && a.category===category.slug)).map(category => ({ area, category })))
   const results = await Promise.all(combinations.map(async pair => ({ ...pair, result: await publicVenuePage({ town: pair.area.name, category: pair.category.raw }) })))
   // No synthetic pages to fill a coverage quota. Below-threshold supply stays unindexed.
-  return results.filter(p => !p.result.loadFailed && p.result.total >= 3)
+  const checked=await Promise.all(results.map(async p=>({...p, approved: await discoveryPageApproved(p.area.slug,p.category.slug)})))
+  return checked.filter(p=>p.approved)
 }
+
+export const discoveryPageApproved=cache(async (areaSlug: string, categorySlug: string) => {
+ const area=discoveryArea(areaSlug), category=discoveryCategory(categorySlug)
+ if (!area || !category || !DISCOVERY_APPROVALS.some(a=>a.area===areaSlug && a.category===categorySlug)) return false
+ // Bounded complete cohort: large areas require a separate publication design.
+ const rows: {id:string;fingerprint:string}[]=[]
+ let total=0
+ for (let page=1;page<=5;page++) {
+  const result=await publicVenuePage({town:area.name,category:category.raw,page})
+  if (result.loadFailed || result.total>120 || (page>1 && total!==result.total)) return false
+  total=result.total
+  rows.push(...result.venues.map(v=>({id:v.id,fingerprint:createHash('sha256').update(JSON.stringify(v)).digest('hex')})))
+  if (!result.hasMore) return discoveryPublicationReady(areaSlug,categorySlug,rows,total,false)
+ }
+ return false
+})
 
 // Follow only explicit reviewed aliases. Never infer identity from names/postcodes.
 export const publicVenueDestination = cache(async (id: string): Promise<Venue | null> => {

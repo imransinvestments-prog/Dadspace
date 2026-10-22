@@ -1,4 +1,5 @@
 import "server-only"
+import { SPRINT11_VENUE_ROWS } from "./sprint11-venues"
 import sprint5Pack from "@/artefacts/data/sprint5-review-pack.json"
 // Owner, 22 Oct 2026: the 25 still-unreviewed venues of the frozen 17 Oct sample are replaced by a
 // fresh draw of 25; the 25 already reviewed stay on record in #34.
@@ -40,6 +41,7 @@ function slice(rows: MaterialRow[], page: number, label: string, notice: string)
 }
 export async function getReviewMaterial(id: number, page = 1): Promise<ReviewMaterial> {
   if (!reviewTask(id) || !Number.isSafeInteger(page) || page < 1 || page > 9999 || await operationsAccess() !== "allowed") throw new Error("Review access denied")
+  if (id === 34) return slice(SPRINT11_VENUE_ROWS,page,"Fixed 50-venue pilot sample","Original cohort preserved with a dated current projection. Score each criterion explicitly; changed evidence requires review. A saved decision does not apply corrections or close the 48/50 quality and zero-hidden-leakage gates.")
   if ([34, 130, 136].includes(id)) {
     const pack = id === 34 ? venueSample : id === 130 ? sprint5Pack.deals : sprint5Pack.activities
     return slice(pack.rows as MaterialRow[], page, id === 34 ? "Replacement 25-venue sample (22 Oct)" : id === 130 ? "Fixed published Deals pool" : "Fixed 100-activity diagnostic sample", `Frozen ${pack.captured_at}. ${pack.method} Human quality scores are not inferred. This is a saved snapshot; verify changed or time-sensitive facts before publication acceptance.`)

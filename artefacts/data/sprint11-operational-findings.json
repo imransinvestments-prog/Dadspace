@@ -1,0 +1,33 @@
+{
+  "captured_at": "2026-10-19T16:13:31.034406+00:00",
+  "production_writes_by_review": 0,
+  "run_id": 39258943242,
+  "run_url": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39258943242",
+  "run_conclusion": "failure",
+  "feeds": [
+    {
+      "feed": "Deals",
+      "job_id": 118081300032,
+      "job_conclusion": "failure",
+      "finding": "Matalan reviewed school-uniform pilot returned review_expired; campaign needs fresh terms review. Worker reported 120 saved deals, which is not a count of accepted displayed offers.",
+      "evidence_url": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39258943242/job/118081300032",
+      "next_action": "Review current Matalan campaign terms and an exact bounded proposal before any renewal/change. Preserve expired review and failed scheduled attempt; do not extend dates or treat partial population as scheduled success."
+    },
+    {
+      "feed": "News",
+      "job_id": 118081300879,
+      "job_conclusion": "failure",
+      "finding": "Nine Google News RSS source requests returned HTTP 503. Log reports four saved articles and two shown stories; partial yield is not all-source reliability.",
+      "evidence_url": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39258943242/job/118081300879",
+      "next_action": "Retain the failed source outcomes and check the next normal scheduled source evidence for recovery. Source substitution/activation is a separate scoped decision."
+    },
+    {
+      "feed": "Activities",
+      "job_id": 118081299762,
+      "job_conclusion": "success",
+      "finding": "Parent job succeeded; source-level artifact, freshness and public readback must be reconciled before it counts toward three scheduled successes.",
+      "evidence_url": "https://github.com/imransinvestments-prog/Dadspace/actions/runs/39258943242/job/118081299762",
+      "next_action": "Inspect retained append-only collection evidence and publication membership, including failed/zero/deferred sources."
+    }
+  ]
+}

@@ -1,0 +1,2022 @@
+{
+  "captured_at": "2026-10-19T12:48:47.730Z",
+  "state": "All candidate cohorts unapproved; count alone is not validation. Current Hounslow/Manchester/London routes remain browseable; Ealing/Brent are in-pilot alternatives, not published routes.",
+  "rows": [
+    {
+      "town_city": "Brent",
+      "category": "library",
+      "total": 13,
+      "rows": [
+        {
+          "id": "72c18d86-44ba-4c44-a45b-3f570d2665bc",
+          "name": "Barham Community Library",
+          "latitude": 51.552133,
+          "postcode": "HA0 2HB",
+          "longitude": -0.311225,
+          "fingerprint": "2fd05f5a46e08c6805c627d615e1b277"
+        },
+        {
+          "id": "5669a545-1cd3-45f8-b85f-15f9bfb146ed",
+          "name": "Cricklewood",
+          "latitude": 51.556861,
+          "postcode": "NW2 6UY",
+          "longitude": -0.227371,
+          "fingerprint": "77c8ffb98bdd51b2399b84fc68f2bcce"
+        },
+        {
+          "id": "58efff60-7b3d-43a3-864a-f37183494140",
+          "name": "Ealing Road",
+          "latitude": 51.549256,
+          "postcode": "HA0 4BA",
+          "longitude": -0.297462,
+          "fingerprint": "30303bb934af7923696448a116ff93fb"
+        },
+        {
+          "id": "d9ac08eb-fce4-47f9-9f3f-dc145f1334f7",
+          "name": "Harlesden",
+          "latitude": 51.538097,
+          "postcode": "NW10 8SE",
+          "longitude": -0.249942,
+          "fingerprint": "b95d821b427ecd4db7cf8e7699be4b87"
+        },
+        {
+          "id": "2ac6bc35-e7aa-4210-8181-09800dfe52b4",
+          "name": "Kensal Rise",
+          "latitude": 51.533799,
+          "postcode": "NW10 5JA",
+          "longitude": -0.227099,
+          "fingerprint": "ea87c90e9bdf72b42a790a39f21db037"
+        },
+        {
+          "id": "e47c6fe9-388f-47ca-b990-7f64a8d0ca86",
+          "name": "Kilburn",
+          "latitude": 51.53553,
+          "postcode": "NW6 6NN",
+          "longitude": -0.205504,
+          "fingerprint": "38f273ab7a3d515420fc7d46202ed43b"
+        },
+        {
+          "id": "0907deea-57e0-4080-bb7b-faebba832259",
+          "name": "Kingsbury",
+          "latitude": 51.586022,
+          "postcode": "NW9 9HE",
+          "longitude": -0.276451,
+          "fingerprint": "b8bff23b30e127763a27fcfe8da3c382"
+        },
+        {
+          "id": "58d2485e-c544-4c40-9445-ef8771d75456",
+          "name": "Neasden",
+          "latitude": 51.5598,
+          "postcode": "NW10 1QJ",
+          "longitude": -0.251489,
+          "fingerprint": "42e4de255f8a100c4ed2068f86b7c64e"
+        },
+        {
+          "id": "274c6b09-8908-4902-8689-787cfe81499a",
+          "name": "Preston Community Library",
+          "latitude": 51.570193,
+          "postcode": "HA9 8PL",
+          "longitude": -0.295742,
+          "fingerprint": "59815332d6294c9841b6da7a7c3fee22"
+        },
+        {
+          "id": "f2c36fe9-01fb-4827-8bed-2b5d0cafa13a",
+          "name": "Tokyngton",
+          "latitude": 51.548233,
+          "postcode": "HA9 6JE",
+          "longitude": -0.271755,
+          "fingerprint": "5816ef77df53809125f12e7f3592be74"
+        },
+        {
+          "id": "addac262-2cf3-44a9-bbac-cbe0eee34023",
+          "name": "Town Hall",
+          "latitude": 51.566527,
+          "postcode": "HA9 9HU",
+          "longitude": -0.273999,
+          "fingerprint": "6e9c51e9f684a7daf9c05d1386d1df5b"
+        },
+        {
+          "id": "0bc9e74f-bbd8-4528-a9fa-d0f9309fb7ff",
+          "name": "Wembley",
+          "latitude": 51.559041,
+          "postcode": "HA9 0FJ",
+          "longitude": -0.281683,
+          "fingerprint": "75dec2f12ef1081f59b735033cdaf371"
+        },
+        {
+          "id": "b9370331-384f-476b-9015-a9ff0bf5d196",
+          "name": "Willesden Green",
+          "latitude": 51.54665,
+          "postcode": "NW10 2SF",
+          "longitude": -0.228922,
+          "fingerprint": "9d3c95da367486a23a98beb872079305"
+        }
+      ]
+    },
+    {
+      "town_city": "Ealing",
+      "category": "library",
+      "total": 14,
+      "rows": [
+        {
+          "id": "71602638-e704-46d2-9094-4baabaff9bc0",
+          "name": "Acton Town Hall Library",
+          "latitude": 51.506405,
+          "postcode": "W3 6NE",
+          "longitude": -0.267915,
+          "fingerprint": "18c878ad132e941df43d91a3423c8110"
+        },
+        {
+          "id": "9abb964e-c2a8-4bc5-806e-35b1e52f6ff8",
+          "name": "Ealing Central Library",
+          "latitude": 51.512522,
+          "postcode": "W5 5JY",
+          "longitude": -0.303164,
+          "fingerprint": "e0d734d92f9cea4efdb6e304d2342050"
+        },
+        {
+          "id": "159f4d13-7b3c-4b0f-ae08-b8552426e447",
+          "name": "Greenford Library",
+          "latitude": 51.52981,
+          "postcode": "UB6 9LG",
+          "longitude": -0.355258,
+          "fingerprint": "5f6d4428090e3cabae017277123ef81d"
+        },
+        {
+          "id": "598be285-56c4-44df-8e85-4ef613266ad2",
+          "name": "Hanwell Library",
+          "latitude": 51.510226,
+          "postcode": "W7 3HL",
+          "longitude": -0.335493,
+          "fingerprint": "a2896d10fede792fc94ce8b23dd2a0b6"
+        },
+        {
+          "id": "1a26a5cd-5386-4599-9336-6c11c6614719",
+          "name": "Jubilee Gardens Library",
+          "latitude": 51.521097,
+          "postcode": "UB1 2TJ",
+          "longitude": -0.368739,
+          "fingerprint": "0fa91f8e5a2f159cc92bfd518bb35b09"
+        },
+        {
+          "id": "6822f48f-7ef3-46ac-9eb4-d8ac6cf99341",
+          "name": "Northfields Library",
+          "latitude": 51.498266,
+          "postcode": "W5 4UA",
+          "longitude": -0.313533,
+          "fingerprint": "8549759765ba57097da03f2932a27d01"
+        },
+        {
+          "id": "2d400e9a-1b6c-4773-8dfc-370eb3ebc146",
+          "name": "Northolt Leisure Centre Library",
+          "latitude": 51.549107,
+          "postcode": "UB5 4AB",
+          "longitude": -0.369296,
+          "fingerprint": "3a9ab369ab33fef3b9baa89ef1839828"
+        },
+        {
+          "id": "aac29acf-5ac3-4108-bd09-7e140ecf9c24",
+          "name": "Northolt Library",
+          "latitude": 51.539262,
+          "postcode": "UB5 5AS",
+          "longitude": -0.386454,
+          "fingerprint": "41b661caa83d50f6b4f0bf121cc701b1"
+        },
+        {
+          "id": "7879d63c-b571-43f7-b2d6-5555785b814c",
+          "name": "Perivale Library",
+          "latitude": 51.539933,
+          "postcode": "UB6 7NT",
+          "longitude": -0.323933,
+          "fingerprint": "28be20606355aafc7046577dacc654e8"
+        },
+        {
+          "id": "07db8f9d-b885-42ba-af06-c7156ecb0f73",
+          "name": "Pitshanger Library",
+          "latitude": 51.525727,
+          "postcode": "W5 1RH",
+          "longitude": -0.314696,
+          "fingerprint": "e0153fd398abe6dfdd084d34df262684"
+        },
+        {
+          "id": "c36bb1d3-e5f5-4a16-b907-cf2d460b3b2c",
+          "name": "Southall Library (Dominion Centre & Library)",
+          "latitude": 51.502484,
+          "postcode": "UB2 4BQ",
+          "longitude": -0.381796,
+          "fingerprint": "046552c41acefde40818142f2a1e42d2"
+        },
+        {
+          "id": "ecee5509-dc62-4ffc-a105-f814bd8cbd84",
+          "name": "St. Bernard's Hospital Library",
+          "latitude": 51.506667,
+          "postcode": "UB1 3EU",
+          "longitude": -0.349737,
+          "fingerprint": "5c349723fbb58a65dc6288f90193e652"
+        },
+        {
+          "id": "77b877e8-1cfb-477e-893d-5755db81b82f",
+          "name": "West Ealing Library",
+          "latitude": 51.508706,
+          "postcode": "W13 9BT",
+          "longitude": -0.324835,
+          "fingerprint": "1df27ca05eb164dc5fdfb9ed0759101b"
+        },
+        {
+          "id": "ce2de619-a79c-4805-a86c-008a8fd386a8",
+          "name": "Wood End Library",
+          "latitude": 51.552661,
+          "postcode": "UB6 0EE",
+          "longitude": -0.348253,
+          "fingerprint": "a9e550b2250ebf935b687bc150d85410"
+        }
+      ]
+    },
+    {
+      "town_city": "Hounslow",
+      "category": "library",
+      "total": 11,
+      "rows": [
+        {
+          "id": "b24dc02b-0cee-4b5c-a659-f6b666ab39bb",
+          "name": "Beavers Library",
+          "latitude": 51.469452,
+          "postcode": "TW4 7NW",
+          "longitude": -0.396678,
+          "fingerprint": "6e1cb76e2d34a50f8eb9090eae8a07e8"
+        },
+        {
+          "id": "88b40645-cd1d-4a6e-980d-1840530e715f",
+          "name": "Bedfont Library",
+          "latitude": 51.452056,
+          "postcode": "TW14 8DB",
+          "longitude": -0.434233,
+          "fingerprint": "3fbc09ae8c979294ba143c31d236c754"
+        },
+        {
+          "id": "742a67df-4614-4d09-af33-92ac2b852fc9",
+          "name": "Brentford Library",
+          "latitude": 51.486763,
+          "postcode": "TW8 8DW",
+          "longitude": -0.308412,
+          "fingerprint": "c7710f00ef8b2123a51e22e1eb346ab4"
+        },
+        {
+          "id": "57c339b0-035f-4feb-ada8-bd9d3d290a31",
+          "name": "Chiswick Library",
+          "latitude": 51.491691,
+          "postcode": "W4 2AB",
+          "longitude": -0.261111,
+          "fingerprint": "5b851f00c09e9d7ab979a1dad08e06cc"
+        },
+        {
+          "id": "6831f8f0-faf2-4869-ac78-2c8cc32caf3b",
+          "name": "Cranford Library",
+          "latitude": 51.478001,
+          "postcode": "TW5 9TL",
+          "longitude": -0.405724,
+          "fingerprint": "0a667ff7afa6601dbfbcdd3251e60efd"
+        },
+        {
+          "id": "90b06421-5f71-4d5c-8a7d-7bb9b9cfce1d",
+          "name": "Feltham Library",
+          "latitude": 51.446367,
+          "postcode": "TW13 4GU",
+          "longitude": -0.411086,
+          "fingerprint": "eb57e0c830733ad6bad3f7e0f54af80f"
+        },
+        {
+          "id": "654cc5d3-daf2-46ca-bd63-d1e88e5f8c19",
+          "name": "Hanworth Library",
+          "latitude": 51.441285,
+          "postcode": "TW13 5EG",
+          "longitude": -0.390585,
+          "fingerprint": "94cc85b58021c492f23f21e408e4daaa"
+        },
+        {
+          "id": "6a6ab9ab-e8fd-4906-96d3-26bfa375669e",
+          "name": "Heston Library",
+          "latitude": 51.485877,
+          "postcode": "TW5 0LW",
+          "longitude": -0.375427,
+          "fingerprint": "9c75dce62b6d9fb36cd2c0088c0624c8"
+        },
+        {
+          "id": "44edbcfa-3c4b-42dc-82ba-fd973dab751a",
+          "name": "Hounslow Library",
+          "latitude": 51.468168,
+          "postcode": "TW3 3EB",
+          "longitude": -0.367496,
+          "fingerprint": "d28b4f21fbb9b8c1f2de1daead61e5ad"
+        },
+        {
+          "id": "9e568eea-248b-46f8-a6e0-86c4b6772c63",
+          "name": "Isleworth Library",
+          "latitude": 51.466649,
+          "postcode": "TW7 7EU",
+          "longitude": -0.330507,
+          "fingerprint": "c126da782cff095b8ba44c880b7d7793"
+        },
+        {
+          "id": "3c0b8ec1-0251-4398-b2bc-1a72c4a4ded3",
+          "name": "Osterley Library",
+          "latitude": 51.48236,
+          "postcode": "TW7 4NB",
+          "longitude": -0.346452,
+          "fingerprint": "960ba83308fa20d75e2f096284b2c389"
+        }
+      ]
+    },
+    {
+      "town_city": "London",
+      "category": "Indoor / soft play centre",
+      "total": 28,
+      "rows": [
+        {
+          "id": "ac4a9114-ea1c-428e-9a0c-221060a7723e",
+          "name": "Clip Theare",
+          "latitude": 51.4030236,
+          "postcode": "BR1 1DJ",
+          "longitude": 0.0162977,
+          "fingerprint": "02a5aa9339ceaf8c1e1a11dcbd7c14a2"
+        },
+        {
+          "id": "c40d4963-1533-40e2-ae22-d46cd7ed2041",
+          "name": "Clowntown",
+          "latitude": 51.6080814,
+          "postcode": "N12 0SH",
+          "longitude": -0.1545066,
+          "fingerprint": "bcd379b0dae60c18ad40fdaee464c8b4"
+        },
+        {
+          "id": "4aad9e27-7966-42ab-80ac-ab59d4c5c097",
+          "name": "Cookie's Island",
+          "latitude": 51.5168421,
+          "postcode": "E6 7ER",
+          "longitude": 0.082493,
+          "fingerprint": "7b62520051b5d9956f505f82f7e41f2f"
+        },
+        {
+          "id": "845390c0-31f1-4e27-8b59-4c3886398eed",
+          "name": "Crafts and Play",
+          "latitude": 51.4640142,
+          "postcode": "SW14 7PR",
+          "longitude": -0.2712413,
+          "fingerprint": "92f0f7b4dbbd34c30e7bfb9ba80eb928"
+        },
+        {
+          "id": "326777e3-1482-4fdf-a31d-75f4d7ea275c",
+          "name": "Discovery Planet",
+          "latitude": 51.49551,
+          "postcode": "SE16 7LL",
+          "longitude": -0.0471473,
+          "fingerprint": "af951e6387a9ae46e479c1a936f083bc"
+        },
+        {
+          "id": "97529e4d-16fa-4753-82ee-cea7c7d32714",
+          "name": "Finnegan's World",
+          "latitude": 51.5101687,
+          "postcode": "W13 9HE",
+          "longitude": -0.3234373,
+          "fingerprint": "569a414a1e8547886d4de89094a67d12"
+        },
+        {
+          "id": "dee725cd-4749-4923-9b2f-72bbce6fb94b",
+          "name": "Flip Out Hounslow",
+          "latitude": 51.4694424,
+          "postcode": "TW3 1EY",
+          "longitude": -0.3618844,
+          "fingerprint": "6629e553f6bca7684765ff460cdfbae9"
+        },
+        {
+          "id": "d79905fa-19a0-43c1-a2de-95498d712e45",
+          "name": "Gambado",
+          "latitude": 51.474187,
+          "postcode": "SW6 2PY",
+          "longitude": -0.1835258,
+          "fingerprint": "c0bb801045ac03e1bc87e96e8d91a5e3"
+        },
+        {
+          "id": "f0291990-ca3e-4b97-b504-e8f795b5f011",
+          "name": "Hiland Play",
+          "latitude": 51.5345301,
+          "postcode": "E6 1HW",
+          "longitude": 0.0519272,
+          "fingerprint": "e8105454d3429a7187f80c6fe987093a"
+        },
+        {
+          "id": "47c0e1fd-d006-4590-85f1-e61f52489e6c",
+          "name": "Inflata Nation",
+          "latitude": 51.5909626,
+          "postcode": "NW9 6TH",
+          "longitude": -0.2584255,
+          "fingerprint": "d3d43edb3404f25d53b5401912663d5e"
+        },
+        {
+          "id": "6bcea9af-fc27-4fa6-b1e4-202d626e245a",
+          "name": "Jungle VIP",
+          "latitude": 51.4706899,
+          "postcode": "TW3 1EE",
+          "longitude": -0.3630718,
+          "fingerprint": "e5c8ac79cafeab77c90104fd661a9396"
+        },
+        {
+          "id": "9c45b9b3-0e3a-4a8d-bb10-b50d6b614538",
+          "name": "Kidspace Romford",
+          "latitude": 51.5746374,
+          "postcode": "RM1 1TA",
+          "longitude": 0.1793634,
+          "fingerprint": "1d0f9c327b02dd2599681cd7dc8df643"
+        },
+        {
+          "id": "6329fcd8-9a6c-43e1-ae72-2c75dfff74bc",
+          "name": "Krazy Kidz Fun Forest",
+          "latitude": 51.6311005,
+          "postcode": "E4 7EQ",
+          "longitude": 0.0038184,
+          "fingerprint": "9478a10192449f2eb555aa5c2f9c5018"
+        },
+        {
+          "id": "02ed3634-df48-4220-9632-2984283ca231",
+          "name": "N.M.A's Playground",
+          "latitude": 51.4483209,
+          "postcode": "SE6 4AR",
+          "longitude": -0.0172716,
+          "fingerprint": "85833b1a6f819f49834220bff58ded05"
+        },
+        {
+          "id": "a3e3b989-716d-426a-928e-55610004859d",
+          "name": "Oxygen ActivePlay",
+          "latitude": 51.5035825,
+          "postcode": "SE10 0DX",
+          "longitude": 0.0039334,
+          "fingerprint": "b50c3860ca6bd030fac51043b529a985"
+        },
+        {
+          "id": "9543c29e-5707-41c5-bb20-f3f430a29e0d",
+          "name": "Partyman World of Play",
+          "latitude": 51.575153,
+          "postcode": "CM13 3JB",
+          "longitude": 0.279849,
+          "fingerprint": "68ac350c967dcdbe11ed24b3a78edc5f"
+        },
+        {
+          "id": "be31e90f-686a-4fe6-b376-b9e69bd19dc6",
+          "name": "Partyman World of Play",
+          "latitude": 51.5582304,
+          "postcode": "HA0 3HF",
+          "longitude": -0.3164302,
+          "fingerprint": "9483ab7a7320af618b6ee322a0913585"
+        },
+        {
+          "id": "af94996a-6e44-4a37-8ec2-625a30b77860",
+          "name": "Rainbow Centre",
+          "latitude": 51.6149813,
+          "postcode": "N11 1PP",
+          "longitude": -0.1407429,
+          "fingerprint": "b04dda725aa0b5aad166df59a9fc6c19"
+        },
+        {
+          "id": "7a2afd81-446e-4a5a-b4c0-07e8788d5735",
+          "name": "Red Stairs Soft Play",
+          "latitude": 51.6549889,
+          "postcode": "EN5 4JP",
+          "longitude": -0.2019927,
+          "fingerprint": "df3fbacd00ea3a26b5c1421877be51bb"
+        },
+        {
+          "id": "77ae74b7-8bc9-4b33-a150-a3dffc312e6d",
+          "name": "Toby's Adventure Club",
+          "latitude": 51.4363569,
+          "postcode": "SW16 1DA",
+          "longitude": -0.1280641,
+          "fingerprint": "6a4920703ea602834f78a7e10067ec58"
+        },
+        {
+          "id": "a3e41bcf-0dcb-4d33-8a9a-94c1605c55a1",
+          "name": "Tot’s Play Room",
+          "latitude": 51.4366299,
+          "postcode": "SE9 4TU",
+          "longitude": 0.0456378,
+          "fingerprint": "49c92ada59c8131e03babcbe4ff7c8c9"
+        },
+        {
+          "id": "1f1ca948-644d-44d3-ae96-5cf5051b621c",
+          "name": "Tots in London",
+          "latitude": 51.4747831,
+          "postcode": "SE8 4PJ",
+          "longitude": -0.0261971,
+          "fingerprint": "ee52b65077b75658ee60389d7698c7d0"
+        },
+        {
+          "id": "5bcd0aa9-8cd0-4ee9-988c-42cb0cd40fea",
+          "name": "Tribe Time",
+          "latitude": 51.4456843,
+          "postcode": "SW18 4DY",
+          "longitude": -0.1891883,
+          "fingerprint": "06f81f8c8d054f95eb8ad50b7eeb1b91"
+        },
+        {
+          "id": "bb8ec390-80e3-40f0-b675-e0b3c88c9f12",
+          "name": "Wacky Warehouse",
+          "latitude": 51.5330086,
+          "postcode": "UB6 8TE",
+          "longitude": -0.3231993,
+          "fingerprint": "e1f1c7d885ccc09cef1d09082e00c6db"
+        },
+        {
+          "id": "8ea10563-8526-4707-9e4d-e4e7eb5b591c",
+          "name": "Unnamed indoor / soft play centre (way/511270283)",
+          "latitude": 51.5912583,
+          "postcode": "N10 2DP",
+          "longitude": -0.1380919,
+          "fingerprint": "6a2a35e68b59687ef6671dea6c94149f"
+        },
+        {
+          "id": "cf6fc9c5-49d2-4a72-830f-4b07f1ff1afc",
+          "name": "Unnamed indoor / soft play centre (node/11183455927)",
+          "latitude": 51.612869,
+          "postcode": "N12 0GA",
+          "longitude": -0.1765474,
+          "fingerprint": "ecdfa6f1dc72160b7e68042573456fd0"
+        },
+        {
+          "id": "d03ca76f-9ad0-4983-9742-de2e9468589a",
+          "name": "Unnamed indoor / soft play centre (node/11967824002)",
+          "latitude": 51.6229987,
+          "postcode": "NW7 1QU",
+          "longitude": -0.230217,
+          "fingerprint": "e8814e9a11628e9591e5fc11cc25fdc2"
+        },
+        {
+          "id": "e6f650bc-aa09-4a48-8356-7c80616fe383",
+          "name": "Unnamed indoor / soft play centre (node/12206490548)",
+          "latitude": 51.470056,
+          "postcode": "TW6 1AP",
+          "longitude": -0.4478285,
+          "fingerprint": "ebbd4a860fce09f0711161a684e1a69b"
+        }
+      ]
+    },
+    {
+      "town_city": "London",
+      "category": "Museum",
+      "total": 272,
+      "rows": [
+        {
+          "id": "39197fb6-17ef-4bd9-95c5-51a0260d0216",
+          "name": "18 STAFFORD TERRACE",
+          "latitude": 51.500426,
+          "postcode": "W8 7BH",
+          "longitude": -0.196914,
+          "fingerprint": "1bc591d45b7a066b2f9880080b572702"
+        },
+        {
+          "id": "06eb7239-7d1d-4571-83cb-c48dd7b9b67c",
+          "name": "2 WILLOW ROAD",
+          "latitude": 51.557193,
+          "postcode": "NW3 1TH",
+          "longitude": -0.169394,
+          "fingerprint": "5305b237420894001cbd4697b8e8237f"
+        },
+        {
+          "id": "0acd8eee-4c5e-4e07-8509-b2ed2491639a",
+          "name": "575 WANDSWORTH ROAD",
+          "latitude": 51.469433,
+          "postcode": "SW8 3JD",
+          "longitude": -0.140798,
+          "fingerprint": "18b14b8dabec39eb6dabe01d9bdfe3fc"
+        },
+        {
+          "id": "62325f32-b28f-4c60-89de-377047905c54",
+          "name": "ALEXANDER FLEMING LABORATORY MUSEUM",
+          "latitude": 51.517125,
+          "postcode": "W2 1NY",
+          "longitude": -0.174187,
+          "fingerprint": "a804cf0f70e7cb4b9ddf2181d070a3e7"
+        },
+        {
+          "id": "260445f2-2fbf-4e51-b6e8-294de630acfa",
+          "name": "ALL HALLOWS BY THE TOWER (UNDERCROFT MUSEUM)",
+          "latitude": 51.509453,
+          "postcode": "EC3R 5BJ",
+          "longitude": -0.079496,
+          "fingerprint": "1270c24844168f2f427a326960be1096"
+        },
+        {
+          "id": "0794818f-467e-439a-b20e-15fefc2f7836",
+          "name": "Anaesthesia Heritage Centre",
+          "latitude": 51.5194312,
+          "postcode": "W1B 1PY",
+          "longitude": -0.1450659,
+          "fingerprint": "5ec46d61555689fdf8b6de3d3f040853"
+        },
+        {
+          "id": "6a069633-ecd6-4c5e-9d3b-b8090386edb9",
+          "name": "ANTIQUE BREADBOARD MUSEUM",
+          "latitude": 51.460573,
+          "postcode": "SW15 6AX",
+          "longitude": -0.21764,
+          "fingerprint": "3b3a9bd0b613de9a93a0422073ff7458"
+        },
+        {
+          "id": "c2f4ad22-066e-4cc4-a8f2-ca41d97fecef",
+          "name": "Apsley House",
+          "latitude": 51.5034878,
+          "postcode": "W1J 7NT",
+          "longitude": -0.1517124,
+          "fingerprint": "17011468c62140ceeb443d9380a532e5"
+        },
+        {
+          "id": "1b38a147-1385-44ea-bf8d-c9ae2fa2a83f",
+          "name": "Arsenal Museum",
+          "latitude": 51.5566742,
+          "postcode": "N5 1BU",
+          "longitude": -0.1081434,
+          "fingerprint": "ea2b05ed536d42df0791d5b742471a96"
+        },
+        {
+          "id": "17463c59-3c89-42c8-9d68-401ddc5b533c",
+          "name": "Bank of England",
+          "latitude": 51.5141974,
+          "postcode": "EC2R 8AH",
+          "longitude": -0.0876796,
+          "fingerprint": "900031667c59f58c120bd496e08f4951"
+        },
+        {
+          "id": "b9b1bd35-1b1a-4612-ab68-d5436c2df21b",
+          "name": "BANQUETING HOUSE WHITEHALL",
+          "latitude": 51.504115,
+          "postcode": "SW1A 2ER",
+          "longitude": -0.12586,
+          "fingerprint": "7cb9a06ca49ffe1c81f233fc3d6f7211"
+        },
+        {
+          "id": "90a70a34-0b60-487e-86bc-69d62aef3312",
+          "name": "BATTLE OF BRITAIN BUNKER",
+          "latitude": 51.542562,
+          "postcode": "UB10 0RN",
+          "longitude": -0.463295,
+          "fingerprint": "fee7cbd9999fb5b950d4bbc9b24d8cb6"
+        },
+        {
+          "id": "2509b654-e035-414b-9dd6-ebe5a697d646",
+          "name": "BEN URI GALLERY",
+          "latitude": 51.537426,
+          "postcode": "NW8 0RH",
+          "longitude": -0.185487,
+          "fingerprint": "13f90d3ec5b2d7543c96a86ac0ce50c6"
+        },
+        {
+          "id": "b44c3a9b-4a01-4671-af35-fe78f56c6d1d",
+          "name": "Benjamin Franklin House",
+          "latitude": 51.5076508,
+          "postcode": "WC2N 5NF",
+          "longitude": -0.1248919,
+          "fingerprint": "d1271eaddf8d0f5a7e2bcde889a80feb"
+        },
+        {
+          "id": "b4678f7e-163b-4893-ad81-1030eef4e521",
+          "name": "BERKSHIRE & WESTMINSTER DRAGOONS MUSEUM",
+          "latitude": 51.468047,
+          "postcode": "SW3 4RY",
+          "longitude": -0.210107,
+          "fingerprint": "74804ab388cdc577c54389fe9a66d42a"
+        },
+        {
+          "id": "964f1477-9444-4120-adb7-faf000aaee85",
+          "name": "Black Cultural Archive",
+          "latitude": 51.4605112,
+          "postcode": "SW2 1JS",
+          "longitude": -0.1146653,
+          "fingerprint": "9fa7dba87db11d465afd4e743418a399"
+        },
+        {
+          "id": "ac914e74-04c3-4aeb-8c8d-3acfc302b946",
+          "name": "Borough Museum",
+          "latitude": 51.4864692,
+          "postcode": "SE18 1JL",
+          "longitude": 0.0960664,
+          "fingerprint": "66282727670ed9c4e91a9f7eea5110ac"
+        },
+        {
+          "id": "c6ce7083-6331-46c5-895e-cde77ba2d4f1",
+          "name": "BOROUGH ROAD GALLERY",
+          "latitude": 51.49841,
+          "postcode": "SE1 0AA",
+          "longitude": -0.10163,
+          "fingerprint": "d82d01692f5d1208933af678973ea2cf"
+        },
+        {
+          "id": "00d6d32d-c97c-4971-8971-0a45ecf1da94",
+          "name": "Bow Street Police Museum",
+          "latitude": 51.5134897,
+          "postcode": "WC2E 7AW",
+          "longitude": -0.1217257,
+          "fingerprint": "026411f59d87bfd3ebbb0acde1ab4be4"
+        },
+        {
+          "id": "31273046-3276-4e19-906c-7b85d6566a2d",
+          "name": "Brent Museum",
+          "latitude": 51.5467447,
+          "postcode": "NW10 2SF",
+          "longitude": -0.2289943,
+          "fingerprint": "6ab33434cb075fe68cf78925d5e0b6af"
+        },
+        {
+          "id": "8f6d65d9-845b-47e3-b512-c0328e71e9f1",
+          "name": "British Library Exhibition Space",
+          "latitude": 51.5295982,
+          "postcode": "NW1 2SX",
+          "longitude": -0.1281295,
+          "fingerprint": "107fbc8e9a4ecf04f0077e09be7df8f9"
+        },
+        {
+          "id": "09967393-cb28-499c-94a7-74286035d906",
+          "name": "British Museum",
+          "latitude": 51.5193124,
+          "postcode": "WC1B 3DG",
+          "longitude": -0.1268767,
+          "fingerprint": "84487207ec559c95ba7a11e914ebaa08"
+        },
+        {
+          "id": "23c91ba5-0362-4540-a32f-008b6fdb04aa",
+          "name": "British Optical Association Museum",
+          "latitude": 51.5078919,
+          "postcode": "WC2N 5NG",
+          "longitude": -0.1253919,
+          "fingerprint": "12378148173747ecb4eb9c7452584a0c"
+        },
+        {
+          "id": "52f98214-5982-47ad-85f8-47185c47bb4b",
+          "name": "British Red Cross Museum",
+          "latitude": 51.5192384,
+          "postcode": "EC2Y 9AL",
+          "longitude": -0.0885236,
+          "fingerprint": "78fe3119bcbeeebb952fe88b91225821"
+        },
+        {
+          "id": "e919b78c-34bd-45e6-a4eb-7f51d59761e5",
+          "name": "BRITISH VINTAGE WIRELESS AND TELEVISION MUSEUM",
+          "latitude": 51.433143,
+          "postcode": "SE21 8DS",
+          "longitude": -0.092898,
+          "fingerprint": "e710d555faabc0260245b31049c5a6df"
+        },
+        {
+          "id": "dfece15a-bebd-432a-8ac0-211ec0e702ec",
+          "name": "Bruce Castle Museum",
+          "latitude": 51.5990984,
+          "postcode": "N17 8NU",
+          "longitude": -0.0753665,
+          "fingerprint": "6a3424c501608b104f208f37e4b9772e"
+        },
+        {
+          "id": "e5958e29-80ba-4e8b-a5a5-ada69ac257ae",
+          "name": "Brunel Museum",
+          "latitude": 51.5016418,
+          "postcode": "SE16 4LF",
+          "longitude": -0.0528634,
+          "fingerprint": "371ceaee266c4dc1fe2d1c515000ab5e"
+        },
+        {
+          "id": "c5f8fc8d-5016-46de-949b-e78bce6b95c9",
+          "name": "BUCKINGHAM PALACE",
+          "latitude": 51.50101,
+          "postcode": "SW1A 1AA",
+          "longitude": -0.141563,
+          "fingerprint": "1b880cd72b4e9e6e967355bdec5ebe7d"
+        },
+        {
+          "id": "ebe7e4f9-0d68-441a-a75e-7ea27d72166b",
+          "name": "Burgh House and Hampstead Museum",
+          "latitude": 51.5582035,
+          "postcode": "NW3 1LT",
+          "longitude": -0.175082,
+          "fingerprint": "be9145ab4bedc6a41750533e5c0124ab"
+        },
+        {
+          "id": "f8066359-7164-4a52-b7a0-f81c13d709a9",
+          "name": "Camera Museum",
+          "latitude": 51.5176925,
+          "postcode": "WC1A 1LY",
+          "longitude": -0.1252125,
+          "fingerprint": "1d8322f42fe2f7f2150830a4e0f9c78f"
+        },
+        {
+          "id": "179f1ba2-748f-4865-a752-b7e665f912f8",
+          "name": "Carlyle's House",
+          "latitude": 51.4841139,
+          "postcode": "SW3 5HL",
+          "longitude": -0.1697922,
+          "fingerprint": "a4f59028396a045f102724f8cb3b5bb4"
+        },
+        {
+          "id": "c8051fc0-d63c-4351-b214-1c859746460d",
+          "name": "CENTRAL SAINT MARTINS MUSEUM AND STUDY COLLECTION",
+          "latitude": 51.536505,
+          "postcode": "N1C 4AA",
+          "longitude": -0.124659,
+          "fingerprint": "9867584f321b3ffc42b4381af2347d96"
+        },
+        {
+          "id": "489d80de-b1d8-48bb-b023-a7bc01ee4253",
+          "name": "Charles Dickens Museum",
+          "latitude": 51.5235936,
+          "postcode": "WC1N 2LX",
+          "longitude": -0.1163232,
+          "fingerprint": "c38fa4e1a5226c7fa745b37d5a951a96"
+        },
+        {
+          "id": "abc7791b-ee56-4ef2-b054-b57f6d78f5e2",
+          "name": "CHARLTON ATHLETIC MUSEUM",
+          "latitude": 51.486688,
+          "postcode": "SE7 8BL",
+          "longitude": 0.035873,
+          "fingerprint": "6691202c96abe9390ccbdc89e59908bf"
+        },
+        {
+          "id": "d90b703d-959e-4d01-b4a2-bb8c97067d71",
+          "name": "CHARLTON HOUSE",
+          "latitude": 51.480478,
+          "postcode": "SE7 8RE",
+          "longitude": 0.03718,
+          "fingerprint": "31badc5ec4db59f0488c148f6fdce8ac"
+        },
+        {
+          "id": "ff2adac8-01cf-49d6-ae94-f70dc3fcc9e8",
+          "name": "CHARTERED INSURANCE INSTITUTE MUSEUM",
+          "latitude": 51.516612,
+          "postcode": "EC2V 7HY",
+          "longitude": -0.092225,
+          "fingerprint": "f58ddb8f9f65db822dd73a3fd3a1e17c"
+        },
+        {
+          "id": "3b6d02bc-4073-43ed-8161-9d0e98205c5d",
+          "name": "Chelsea FC Museum and Stadium Tours",
+          "latitude": 51.4827811,
+          "postcode": "SW6 1HS",
+          "longitude": -0.1912853,
+          "fingerprint": "5d8f107b547cb14d9da8b0da8eca9d54"
+        },
+        {
+          "id": "60f622f6-5fd2-4933-acef-991c5c39cfc2",
+          "name": "CHELSEA PENSIONERS MUSEUM",
+          "latitude": 51.48687,
+          "postcode": "SW3 4SR",
+          "longitude": -0.159116,
+          "fingerprint": "0cd82dfa21c764d486af34342f31bfc4"
+        },
+        {
+          "id": "c8c84b89-e560-4932-a189-7c44e56a7c07",
+          "name": "Chelsea Space",
+          "latitude": 51.4901511,
+          "postcode": "SW1P 4RJ",
+          "longitude": -0.1293639,
+          "fingerprint": "fe24c6ea1e47387e41512c1c3d67eb3a"
+        },
+        {
+          "id": "dd1a034d-8c5e-4853-80d1-5f6d8b453094",
+          "name": "CHELSEA STADIUM TOUR AND MUSEUM",
+          "latitude": 51.48112,
+          "postcode": "SW6 1HS",
+          "longitude": -0.1903,
+          "fingerprint": "855146684f2254b4699f2f3bf1fa294d"
+        },
+        {
+          "id": "ea8149d2-a68f-427b-b68f-ea0a9c416ae0",
+          "name": "Chiswick House",
+          "latitude": 51.4837475,
+          "postcode": "W4 2RP",
+          "longitude": -0.2585917,
+          "fingerprint": "15e0c30a56e14013f4a086918f934502"
+        },
+        {
+          "id": "664af67c-58e7-4b6d-ae62-c4926856b56d",
+          "name": "Churchill War Rooms",
+          "latitude": 51.5022091,
+          "postcode": "SW1A 2AQ",
+          "longitude": -0.1292513,
+          "fingerprint": "a721515387ceb25cbbfdb9a34b181998"
+        },
+        {
+          "id": "a4d06424-223d-4cc5-bd11-d2210b0ab7d1",
+          "name": "Clapham South Deep Level Shelter",
+          "latitude": 51.4517331,
+          "postcode": "SW12 9DX",
+          "longitude": -0.1479847,
+          "fingerprint": "271f3a1b839e592ef365d68a88bef58a"
+        },
+        {
+          "id": "c9c38af0-79cf-4c6a-ae63-451d8cf05911",
+          "name": "Clink Prison Museum",
+          "latitude": 51.5069716,
+          "postcode": "SE1 9DG",
+          "longitude": -0.0918979,
+          "fingerprint": "705cfb8a73273e27c5d6e4de0dc18da0"
+        },
+        {
+          "id": "16b5bce8-5a81-43a8-80ab-dcabd7ca169d",
+          "name": "CLOCKWORKS MUSEUM",
+          "latitude": 51.43275,
+          "postcode": "SE27 0JW",
+          "longitude": -0.10433,
+          "fingerprint": "e1489128c6093936e1b9fafe01892d4e"
+        },
+        {
+          "id": "e52b7a05-629a-403f-8b22-500d8e9a7bdd",
+          "name": "COURTAULD GALLERY",
+          "latitude": 51.510734,
+          "postcode": "WC2R 0RN",
+          "longitude": -0.116912,
+          "fingerprint": "4ed6dd6463521c95266ac30d7ea8ad23"
+        },
+        {
+          "id": "a982f221-5394-4ee3-b017-872a1f47c85c",
+          "name": "Crick Exhibition",
+          "latitude": 51.531669,
+          "postcode": "NW1 1AT",
+          "longitude": -0.1279676,
+          "fingerprint": "e71b1a96eb0eee03b82deb8df3e5ada2"
+        },
+        {
+          "id": "52e588aa-960e-4658-865e-c776ce01af75",
+          "name": "Crossness Pumping Station",
+          "latitude": 51.5090877,
+          "postcode": "SE2 9AQ",
+          "longitude": 0.1383871,
+          "fingerprint": "00c07b22c6d115dc876ec5157281e682"
+        },
+        {
+          "id": "366a3e6f-9269-4bdc-b489-ab985cebc281",
+          "name": "CROSSNESS PUMPING STATION",
+          "latitude": 51.480401,
+          "postcode": "SE18 2RS",
+          "longitude": 0.081464,
+          "fingerprint": "72eaed6c106cad4397151adf40139318"
+        },
+        {
+          "id": "ffc34783-3b28-42dd-b180-1852141a93e9",
+          "name": "Crystal Palace High Level Station Entry",
+          "latitude": 51.4219922,
+          "postcode": "SE19 1LG",
+          "longitude": -0.0769726,
+          "fingerprint": "b7cabd5a166f2c8ca729bea904c72c16"
+        },
+        {
+          "id": "c57159ab-6471-4860-a709-f5ce0df6116a",
+          "name": "Crystal Palace Museum",
+          "latitude": 51.419718,
+          "postcode": "SE19 2BA",
+          "longitude": -0.0766168,
+          "fingerprint": "07fb7d56fcc3005cc4a0039eb7dd4185"
+        },
+        {
+          "id": "1a011ef7-0320-4aac-b1b6-54afc0b0b25a",
+          "name": "CULTURE HOUSE",
+          "latitude": 51.505024,
+          "postcode": "W12 8LL",
+          "longitude": -0.225474,
+          "fingerprint": "4cd3b5757891fdfc714aa7cbaf05bb82"
+        },
+        {
+          "id": "8830d631-6293-4a49-a985-80184704ac8a",
+          "name": "Cutty Sark",
+          "latitude": 51.4828577,
+          "postcode": "SE10 9HT",
+          "longitude": -0.0095692,
+          "fingerprint": "240eab5e6c57b70cbe3b8e69bf27d0f4"
+        },
+        {
+          "id": "c3eff2f4-b935-41bb-b682-14c11e5c9c06",
+          "name": "Dairy Wing",
+          "latitude": 51.5721472,
+          "postcode": "IG1 4UX",
+          "longitude": 0.0660958,
+          "fingerprint": "eb6048a4579c9859a0b31c52e425684e"
+        },
+        {
+          "id": "fdd87754-cee5-4818-a187-7150633390d9",
+          "name": "Dennis Severs' House",
+          "latitude": 51.520943,
+          "postcode": "E1 6BX",
+          "longitude": -0.0777904,
+          "fingerprint": "5424dbda87d58532d83833a9204062d4"
+        },
+        {
+          "id": "c1b25e0b-a850-4c15-b01a-8596bf1ffcd9",
+          "name": "Design Museum",
+          "latitude": 51.4998875,
+          "postcode": "W8 6AG",
+          "longitude": -0.2001738,
+          "fingerprint": "314c9be260f7997d829861f8938e70f1"
+        },
+        {
+          "id": "c90d0aa2-dd7c-47e8-8ba4-f4bb8df02f66",
+          "name": "Dorich House Museum",
+          "latitude": 51.4333464,
+          "postcode": "SW15 3RN",
+          "longitude": -0.2630286,
+          "fingerprint": "e2c0953cfe1a96dd18c5d770cb8d6c58"
+        },
+        {
+          "id": "8da2e820-2a10-4f0b-b861-58c213a014d8",
+          "name": "Dr Johnson's House",
+          "latitude": 51.5149094,
+          "postcode": "EC4A 3DE",
+          "longitude": -0.1081661,
+          "fingerprint": "7bf497f523e2f1d5030758e3e50393b5"
+        },
+        {
+          "id": "e8c614e0-a67d-4937-8d6d-6654393fd0b9",
+          "name": "Dugdale Centre Museum",
+          "latitude": 51.6504326,
+          "postcode": "EN2 6EL",
+          "longitude": -0.0804069,
+          "fingerprint": "cdd76d84cf534eef09d4b6d76c00bedd"
+        },
+        {
+          "id": "8f078953-c71c-4da2-a4d2-9e57b1186745",
+          "name": "DULWICH PICTURE GALLERY",
+          "latitude": 51.446319,
+          "postcode": "SE21 7AD",
+          "longitude": -0.086406,
+          "fingerprint": "555d3413a1a8b14a8f80d999d797a608"
+        },
+        {
+          "id": "15f9b9b3-e4d8-4477-8d8c-95dbcfb661cb",
+          "name": "Elephant West",
+          "latitude": 51.5123508,
+          "postcode": "W12 7RH",
+          "longitude": -0.2246447,
+          "fingerprint": "2d52854a0b8ad176b54ad60ff0cda16e"
+        },
+        {
+          "id": "233b9796-272b-4325-94db-522b3f351d3d",
+          "name": "ELIZABETH GARRETT ANDERSON GALLERY",
+          "latitude": 51.528237,
+          "postcode": "NW1 2AY",
+          "longitude": -0.129623,
+          "fingerprint": "748894fe4d2ef8a3b4136e17e06e6888"
+        },
+        {
+          "id": "5be5203c-79f7-4473-8c0b-2ab86dbf9eb2",
+          "name": "ELTHAM PALACE",
+          "latitude": 51.448212,
+          "postcode": "SE9 5QE",
+          "longitude": 0.049517,
+          "fingerprint": "33ad74c038812ecd2d49376c9a06ee50"
+        },
+        {
+          "id": "124527f5-2aa5-4c94-a9f6-b60b73d8f2db",
+          "name": "EMERY WALKER'S HOUSE",
+          "latitude": 51.489823,
+          "postcode": "W6 9TS",
+          "longitude": -0.242491,
+          "fingerprint": "0596ae50024d49fd8183045e5c196981"
+        },
+        {
+          "id": "83a11717-a10b-4365-a5d8-b055e7062980",
+          "name": "Faraday Museum",
+          "latitude": 51.5097024,
+          "postcode": "W1X 4BS",
+          "longitude": -0.1422791,
+          "fingerprint": "27252d0fffbde07c8ed82dce40eb1074"
+        },
+        {
+          "id": "b7d4c941-ca9c-48a2-bc1f-d5a4789024e8",
+          "name": "Fashion and Textile Museum",
+          "latitude": 51.501187,
+          "postcode": "SE1 3XF",
+          "longitude": -0.0816655,
+          "fingerprint": "ace74e3815948430aa607f83ee8d1510"
+        },
+        {
+          "id": "6c54b2d0-91cd-402c-b980-5e557e19dc56",
+          "name": "Fenton House",
+          "latitude": 51.5588821,
+          "postcode": "NW3 6SP",
+          "longitude": -0.1796818,
+          "fingerprint": "883db2802e21feeb6d9a915e45d08308"
+        },
+        {
+          "id": "5db69cbb-29aa-4d72-ba58-13fa868337f7",
+          "name": "Fitzroy House",
+          "latitude": 51.5225232,
+          "postcode": "W1T 6DS",
+          "longitude": -0.1391153,
+          "fingerprint": "27db6d4a0e21f3989540778f3c004838"
+        },
+        {
+          "id": "5080e3f1-628e-474a-9f2c-10f663338233",
+          "name": "Ford Heritage Centre",
+          "latitude": 51.5209131,
+          "postcode": "RM9 6SA",
+          "longitude": 0.1508832,
+          "fingerprint": "425efa27ad15baab7a93759d552ecfc5"
+        },
+        {
+          "id": "c4cbc648-702e-4dbc-92f7-2857ab1ae27e",
+          "name": "Forty Hall Museum",
+          "latitude": 51.6696411,
+          "postcode": "EN1 4UW",
+          "longitude": -0.0682465,
+          "fingerprint": "a0061c690e0f6cdcca8f82094edf4abf"
+        },
+        {
+          "id": "6f654c97-0337-41ff-8cec-90faa9e6aed7",
+          "name": "Foundling Museum",
+          "latitude": 51.5252145,
+          "postcode": "WC1N 1AZ",
+          "longitude": -0.1216728,
+          "fingerprint": "01c0c1a4c3984b4ea070cad597b220f9"
+        },
+        {
+          "id": "a3fdf508-364f-4ad4-81b3-e207f896e087",
+          "name": "FREDDIE FOX MUSEUM",
+          "latitude": 51.506543,
+          "postcode": "SW1A 1ES",
+          "longitude": -0.138844,
+          "fingerprint": "8d00c7e032f65f33b68d200cf560f2c8"
+        },
+        {
+          "id": "e2cb4515-ffdc-4c95-a01e-55e2c0beaa95",
+          "name": "Freud Museum London",
+          "latitude": 51.5483111,
+          "postcode": "NW3 5SX",
+          "longitude": -0.1773927,
+          "fingerprint": "d93bd6cd95134e4d235bfa27772de0e5"
+        },
+        {
+          "id": "bcf7ac4e-8cc2-43eb-b8af-4085c9b08f98",
+          "name": "Fulham Palace",
+          "latitude": 51.4705417,
+          "postcode": "SW6 6EA",
+          "longitude": -0.2156544,
+          "fingerprint": "159222cda3e053a231d0795d999eef22"
+        },
+        {
+          "id": "ed685e4d-0ea5-40b0-a6f4-b7ab36883b80",
+          "name": "Fusiliers London Volunteer Museum",
+          "latitude": 51.4395832,
+          "postcode": "SW17 7BQ",
+          "longitude": -0.1553643,
+          "fingerprint": "5f00a7af27052d9fc669631bdfcf65b7"
+        },
+        {
+          "id": "c40621cf-3955-4934-b114-5195ff4ba031",
+          "name": "Fusiliers Museum",
+          "latitude": 51.5082243,
+          "postcode": "EC3N 4DR",
+          "longitude": -0.0752577,
+          "fingerprint": "fed3f7232657fb8c682f699e2245ad40"
+        },
+        {
+          "id": "47555f01-f501-4998-ab73-0ebbcab8e3c5",
+          "name": "Garden Museum",
+          "latitude": 51.4948952,
+          "postcode": "SE1 7LB",
+          "longitude": -0.1199749,
+          "fingerprint": "2c85bb465d963513fba232edcb9166fc"
+        },
+        {
+          "id": "63f1feb9-bafd-43fd-b9fe-366d223c1e46",
+          "name": "GILBERT AND GEORGE CENTRE",
+          "latitude": 51.51906,
+          "postcode": "E1 5LJ",
+          "longitude": -0.070371,
+          "fingerprint": "737280aa00ede57a169527ae5878df68"
+        },
+        {
+          "id": "c45843cf-cebf-459e-884f-da91a75e2999",
+          "name": "GOLDEN HINDE II",
+          "latitude": 51.506984,
+          "postcode": "SE1 9DG",
+          "longitude": -0.091892,
+          "fingerprint": "4d5c51ed685b0a9879100447d5225f53"
+        },
+        {
+          "id": "f25283b5-0a0b-43e1-a5e4-bf475077dd35",
+          "name": "Gordon Museum",
+          "latitude": 51.5035633,
+          "postcode": "SE1 1UL",
+          "longitude": -0.0895713,
+          "fingerprint": "961fcb7223f86413878893b8a2d62ff5"
+        },
+        {
+          "id": "6ea0788d-b128-478a-b18c-fef628390c2f",
+          "name": "Grant Museum of Zoology",
+          "latitude": 51.523732,
+          "postcode": "WC1E 6DE",
+          "longitude": -0.1342662,
+          "fingerprint": "9a2636d6fbbae0dc149ac154aa09d361"
+        },
+        {
+          "id": "737f0f3f-cd2d-47db-9e23-74407a550ddc",
+          "name": "GRANT MUSEUM OF ZOOLOGY & COMPARATIVE ANATOMY",
+          "latitude": 51.524774,
+          "postcode": "WC1E 6BT",
+          "longitude": -0.133401,
+          "fingerprint": "f9ac24149a61e2fd2bd8fda6dbcc7f4a"
+        },
+        {
+          "id": "24e5bd8a-b5e2-4fb4-9b4b-8a8b3c41b0a2",
+          "name": "GREEK ORTHODOX CATHEDRAL TREASURY MUSEUM",
+          "latitude": 51.512513,
+          "postcode": "W2 4LQ",
+          "longitude": -0.191777,
+          "fingerprint": "6e27b77d3af86b7d51e4a766e137fb3f"
+        },
+        {
+          "id": "8748deab-876b-4b4a-9ee3-305d3b4c37bd",
+          "name": "GUILDHALL ART GALLERY",
+          "latitude": 51.515285,
+          "postcode": "EC2V 5AE",
+          "longitude": -0.091905,
+          "fingerprint": "60c6a3cf33c04f69e94191e4ae0085ac"
+        },
+        {
+          "id": "e4bdc487-a7c9-4924-87b3-11eb10a3d2e9",
+          "name": "Gunnersbury Park Museum",
+          "latitude": 51.499542,
+          "postcode": "W3 8LQ",
+          "longitude": -0.2864332,
+          "fingerprint": "826c0ccec22cd2ea81450ea51973db19"
+        },
+        {
+          "id": "2d6fde86-9bfd-49dc-bd95-84296be9caf3",
+          "name": "GUYS MINI MUSEUM",
+          "latitude": 51.504643,
+          "postcode": "SE1 9RT",
+          "longitude": -0.088964,
+          "fingerprint": "38e533a038b293f4f16b2469d7cbe124"
+        },
+        {
+          "id": "ffa0df6d-85cc-4f96-a36d-68dc03bf4b85",
+          "name": "Hackney Museum",
+          "latitude": 51.544491,
+          "postcode": "E8 1GQ",
+          "longitude": -0.0559105,
+          "fingerprint": "edbfcc64f06ac326c6116e347b7d5b19"
+        },
+        {
+          "id": "2cc0d250-4016-4abe-b833-c9cad27bb49a",
+          "name": "Handel & Hendrix",
+          "latitude": 51.5129421,
+          "postcode": "W1K 4HB",
+          "longitude": -0.1458842,
+          "fingerprint": "cbea17895b10c355b334364e2dc3d00b"
+        },
+        {
+          "id": "72547f3f-fbcf-4275-b5e1-da48dfe524dc",
+          "name": "Hangar 1",
+          "latitude": 51.5972817,
+          "postcode": "NW9 5RH",
+          "longitude": -0.2401418,
+          "fingerprint": "69532c2652ab8e75c490b0b42c897279"
+        },
+        {
+          "id": "351b6825-ea73-466b-878f-d9c8a90e574e",
+          "name": "Highgate School Museum",
+          "latitude": 51.5722859,
+          "postcode": "N6 5EB",
+          "longitude": -0.1487534,
+          "fingerprint": "79a43d0f63c55136e89cc0e414705782"
+        },
+        {
+          "id": "2798b929-3729-4d4c-9ee5-9a2bfa3f8c1e",
+          "name": "HMS BELFAST",
+          "latitude": 51.50605,
+          "postcode": "SE1 2JH",
+          "longitude": -0.081455,
+          "fingerprint": "04714dc74e2fb74024556d7bfc411ea8"
+        },
+        {
+          "id": "5242852e-cf3d-469c-a1bd-d1cac5ae95b4",
+          "name": "Hogarth's House",
+          "latitude": 51.4869114,
+          "postcode": "W4 2QN",
+          "longitude": -0.2552378,
+          "fingerprint": "65ace727378c132bd5e6e7360685b521"
+        },
+        {
+          "id": "565cea16-242e-4619-aaed-3da773dabab8",
+          "name": "Honourable Artillery Company Museum",
+          "latitude": 51.5230155,
+          "postcode": "EC1Y 2BQ",
+          "longitude": -0.0883966,
+          "fingerprint": "aca2555af11d7f2db8fbc7cc5ea7818e"
+        },
+        {
+          "id": "567312ed-b113-4b39-9975-59bf4fec2cce",
+          "name": "Horniman Museum",
+          "latitude": 51.4410289,
+          "postcode": "SE23 3PQ",
+          "longitude": -0.0609895,
+          "fingerprint": "09580f2216cb54810139bbe10f9110c7"
+        },
+        {
+          "id": "81a0155b-f3f0-4eb7-864e-3274edb7819a",
+          "name": "Horniman Museum and Gardens",
+          "latitude": 51.4421929,
+          "postcode": "SE23 3PQ",
+          "longitude": -0.0616866,
+          "fingerprint": "6adfb125c7d6aa3b6c3ef2863599cfd0"
+        },
+        {
+          "id": "5a534077-9605-4c80-9de6-0ac7db2e0f72",
+          "name": "HOUSE OF DREAMS",
+          "latitude": 51.460261,
+          "postcode": "SE22 8RG",
+          "longitude": -0.079446,
+          "fingerprint": "f7ce1e7b9b4b324d9f7810aa331153cd"
+        },
+        {
+          "id": "43584f11-ac5c-435e-87f0-8ebb6c6e16a6",
+          "name": "HOUSE OF ILLUSTRATION",
+          "latitude": 51.53647911,
+          "postcode": "N1C 4BH",
+          "longitude": -0.124485,
+          "fingerprint": "dd8d643865549d92a9b41d89f9d6c482"
+        },
+        {
+          "id": "af7532b7-6b86-47d7-84bb-01dd24909703",
+          "name": "Household Cavalry Museum",
+          "latitude": 51.5050096,
+          "postcode": "SW1A 2AX",
+          "longitude": -0.1272472,
+          "fingerprint": "7f2c2f79f8dedddc88a4dae750ca6892"
+        },
+        {
+          "id": "b4f6a50c-b539-4c4a-a96f-b6dd0459c156",
+          "name": "Hunterian Museum",
+          "latitude": 51.5152831,
+          "postcode": "WC2A 3PE",
+          "longitude": -0.1158701,
+          "fingerprint": "9dd38b489a40158fb11faff863e45a97"
+        },
+        {
+          "id": "f4af4a28-1fc5-43d5-889f-bfa004fda14e",
+          "name": "Imperial War Museum London",
+          "latitude": 51.4958006,
+          "postcode": "SE1 6HZ",
+          "longitude": -0.1085907,
+          "fingerprint": "c12ccfd24accd97717ae4049ea06c963"
+        },
+        {
+          "id": "57760771-afe4-40d5-b6ff-d2cb5c15b4ba",
+          "name": "International Heritage Centre",
+          "latitude": 51.4676358,
+          "postcode": "SE5 8BQ",
+          "longitude": -0.0885088,
+          "fingerprint": "1c7d3c0063f26501df4c07f28d2df95f"
+        },
+        {
+          "id": "a31375bd-a7a3-4465-acbd-7b3a16aa69c3",
+          "name": "Islington Museum",
+          "latitude": 51.5264897,
+          "postcode": "EC1V 4NB",
+          "longitude": -0.1045003,
+          "fingerprint": "591d070ff73d8d4aa3c58b0e3b6b9ed6"
+        },
+        {
+          "id": "a1ac20d3-2d8c-4925-88b7-eee4e310e501",
+          "name": "ISOKON GALLERY",
+          "latitude": 51.551986,
+          "postcode": "NW3 2XD",
+          "longitude": -0.162085,
+          "fingerprint": "b9eca3442e0d636fb9490cd01e4c1eb9"
+        },
+        {
+          "id": "80b9e938-4cfa-47cd-976b-14ef98682f10",
+          "name": "IVEAGH BEQUEST KENWOOD",
+          "latitude": 51.571328,
+          "postcode": "NW3 7JR",
+          "longitude": -0.1676,
+          "fingerprint": "51fddfef54c15c28b3c2529082a4d497"
+        },
+        {
+          "id": "8058011d-2a0b-4a72-ac49-36ccd6059800",
+          "name": "Jack the Ripper Museum",
+          "latitude": 51.5107835,
+          "postcode": "E1 8JG",
+          "longitude": -0.0679105,
+          "fingerprint": "cc2a5d6fefb5456892751f44c63bc289"
+        },
+        {
+          "id": "0e559b1c-a01e-4926-9cd0-29e45c342918",
+          "name": "Jewish Museum",
+          "latitude": 51.5512,
+          "postcode": "NW3 6ET",
+          "longitude": -0.18478,
+          "fingerprint": "6ab187d28bde32712e1432f399b8cd00"
+        },
+        {
+          "id": "d23427c4-1170-40e8-bdb5-8ee5362ddb15",
+          "name": "KEATS HOUSE",
+          "latitude": 51.555484,
+          "postcode": "NW3 2RR",
+          "longitude": -0.168208,
+          "fingerprint": "4a037eb4ad5f14569ba4870dee9d12ac"
+        },
+        {
+          "id": "11eff7d4-fbfc-45bb-b1e6-c3d030a5cd39",
+          "name": "KELMSCOTT HOUSE",
+          "latitude": 51.490606,
+          "postcode": "W6 9TA",
+          "longitude": -0.236541,
+          "fingerprint": "75eccbeb433b4fac23c679141948a264"
+        },
+        {
+          "id": "becbbf2c-d04f-4629-99ac-48a008a707aa",
+          "name": "KENNEL CLUB DOG ART GALLERY",
+          "latitude": 51.506403,
+          "postcode": "W1J 8AB",
+          "longitude": -0.144225,
+          "fingerprint": "dd98e121b01733afe613958c052efec1"
+        },
+        {
+          "id": "ca985867-8a7c-4412-b34e-d0476153f596",
+          "name": "KENSINGTON PALACE",
+          "latitude": 51.504963,
+          "postcode": "W8 4PX",
+          "longitude": -0.188463,
+          "fingerprint": "2e092827d1a9393b9f8c6538ea783a5c"
+        },
+        {
+          "id": "f0f0f7d0-b3ce-466a-b064-1614941175da",
+          "name": "KEW PALACE",
+          "latitude": 51.483651,
+          "postcode": "TW9 3AB",
+          "longitude": -0.289724,
+          "fingerprint": "014a67654efe505a6393aa1dd627ea10"
+        },
+        {
+          "id": "c4a4f39d-bd50-4fb4-af78-043978defae2",
+          "name": "Kirkaldy Testing Museum",
+          "latitude": 51.505966,
+          "postcode": "SE1 0JF",
+          "longitude": -0.1015441,
+          "fingerprint": "82e502a63392bdfda7d1e88cd5f3acbf"
+        },
+        {
+          "id": "48a97ca7-3b36-47a6-99b5-89978b7bf84d",
+          "name": "KURDISH MUSEUM LIBRARY AND ARCHIVE",
+          "latitude": 51.492874,
+          "postcode": "W6 9LP",
+          "longitude": -0.236736,
+          "fingerprint": "d4aaf6c3764f994bbac902ab16be6115"
+        },
+        {
+          "id": "ae845603-c045-4aa6-8f6d-501da129daa6",
+          "name": "Leighton House Museum",
+          "latitude": 51.4986134,
+          "postcode": "W14 8LZ",
+          "longitude": -0.2030775,
+          "fingerprint": "baf65539b4167645552f74769b6c1491"
+        },
+        {
+          "id": "9def772f-5d01-4e5c-8ea8-876381e34aeb",
+          "name": "Lightroom",
+          "latitude": 51.5374302,
+          "postcode": "N1C 4DY",
+          "longitude": -0.1260074,
+          "fingerprint": "854a046f50af4a101ac51a6c36f2c1bc"
+        },
+        {
+          "id": "caf5082e-3a7e-4aa0-9271-997d7c25b931",
+          "name": "London Canal Museum",
+          "latitude": 51.5342186,
+          "postcode": "N1 9RT",
+          "longitude": -0.120207,
+          "fingerprint": "d90db1fa8370cd08a00767c0d4ef55fe"
+        },
+        {
+          "id": "077729eb-0c6f-4eb3-8e72-155ce6ee1250",
+          "name": "London Fire Brigade Pop-up Museum",
+          "latitude": 51.4925872,
+          "postcode": "SE1 7AG",
+          "longitude": -0.1197737,
+          "fingerprint": "bd5de41850ca19602ef17b84b75ab061"
+        },
+        {
+          "id": "533adbce-d106-4a4a-828f-f0dec20d3e86",
+          "name": "LONDON MITHRAEUM",
+          "latitude": 51.512461,
+          "postcode": "EC4N 8AA",
+          "longitude": -0.090603,
+          "fingerprint": "12fa4bdb3ac89f36b504b957416a2345"
+        },
+        {
+          "id": "b970d1f5-52a8-48fb-8237-efab2a84c396",
+          "name": "London Museum Docklands",
+          "latitude": 51.5075942,
+          "postcode": "E14 4AL",
+          "longitude": -0.0238722,
+          "fingerprint": "bf97b0f08d77eb1e26d24acba1986b27"
+        },
+        {
+          "id": "a578af26-01fb-4219-88ff-a672126febc5",
+          "name": "London Museum of Water and Steam",
+          "latitude": 51.4889858,
+          "postcode": "TW8 0EN",
+          "longitude": -0.2904058,
+          "fingerprint": "f55d655dfc20f380a155e6ae68390a3d"
+        }
+      ]
+    },
+    {
+      "town_city": "Manchester",
+      "category": "Indoor / soft play centre",
+      "total": 1,
+      "rows": [
+        {
+          "id": "8cbd3ee8-30a5-4fbd-b3f4-e1d5d79b7a58",
+          "name": "Wacky Warehouse",
+          "latitude": 53.4107063,
+          "postcode": "M20 5PG",
+          "longitude": -2.2187216,
+          "fingerprint": "74ff3252fe4761cdd916d87b9fbe07af"
+        }
+      ]
+    },
+    {
+      "town_city": "Manchester",
+      "category": "library",
+      "total": 28,
+      "rows": [
+        {
+          "id": "3aeef7d0-b516-4a92-8cf2-2fe6b1065bb4",
+          "name": "Abraham Moss Library",
+          "latitude": 53.5118007,
+          "postcode": "M8 5UF",
+          "longitude": -2.2358898,
+          "fingerprint": "f6b8d06c5b4db562e4098620ddf127c9"
+        },
+        {
+          "id": "07e28344-dea7-4e16-bf5d-66afc0114ecb",
+          "name": "Arcadia library & Leisure Centre",
+          "latitude": 53.4461811,
+          "postcode": "M19 3BP",
+          "longitude": -2.1920177,
+          "fingerprint": "539eaedb0bb89088d38029948a40c870"
+        },
+        {
+          "id": "0cb38897-26af-467e-a993-c8d57b082021",
+          "name": "Avenue Library & Learning Centre",
+          "latitude": 53.5325468,
+          "postcode": "M9 6HW",
+          "longitude": -2.2076426,
+          "fingerprint": "9ccc62c90cfa0386980b5daa7e8fff6b"
+        },
+        {
+          "id": "40177d3e-46da-49ed-8503-5a1a264564c7",
+          "name": "Barlow Moor Community Library",
+          "latitude": 53.4233813,
+          "postcode": "M21 7NN",
+          "longitude": -2.2629413,
+          "fingerprint": "d37d564e15cde53fc8bb3f3f0c668e9f"
+        },
+        {
+          "id": "0c16f479-8a3d-40d3-9ed2-d6776c67b348",
+          "name": "Beswick Library",
+          "latitude": 53.4779631,
+          "postcode": "M11 3DS",
+          "longitude": -2.1965976,
+          "fingerprint": "f5b01d30de65fe47060cceaa216dbccd"
+        },
+        {
+          "id": "60e5491e-d6b9-4186-917b-7671a5b8c857",
+          "name": "Brooklands Library",
+          "latitude": 53.4024548,
+          "postcode": "M23 9BP",
+          "longitude": -2.2959115,
+          "fingerprint": "7020c5668656f7656bc997af6f2d97a0"
+        },
+        {
+          "id": "2e7310bc-9198-425b-822e-c0b18249649a",
+          "name": "Burnage Library, Activity & Information Hub",
+          "latitude": 53.4298995,
+          "postcode": "M19 1EW",
+          "longitude": -2.2007155,
+          "fingerprint": "946d2ff6df86b3acc2fddfd57aae573e"
+        },
+        {
+          "id": "230b07e3-efb7-434a-8e7a-d30deba9f8d2",
+          "name": "Central Library",
+          "latitude": 53.4779599,
+          "postcode": "M2 5PD",
+          "longitude": -2.2445919,
+          "fingerprint": "5f2be8f4b9ecd546b6f2ec731693dbfb"
+        },
+        {
+          "id": "67ee0e7e-7a56-462d-9c28-999e8d29b322",
+          "name": "Chorlton Library",
+          "latitude": 53.4446526,
+          "postcode": "M21 9PN",
+          "longitude": -2.2788266,
+          "fingerprint": "4f4b54d89ca71031384d31b858c1ebcc"
+        },
+        {
+          "id": "47576da6-4a5e-440e-a965-d9801708876f",
+          "name": "Clayton Library",
+          "latitude": 53.484898,
+          "postcode": "M11 4NE",
+          "longitude": -2.180346,
+          "fingerprint": "495874c740dfe945f83d814637fad159"
+        },
+        {
+          "id": "81acd28f-5bb8-4ebb-93de-d1c1ac8abf7f",
+          "name": "Crumpsall & Cheetham Library",
+          "latitude": 53.51146,
+          "postcode": "M8 9JN",
+          "longitude": -2.244317,
+          "fingerprint": "3f962a6a7179390b455f300c425518bf"
+        },
+        {
+          "id": "b562b130-6f71-4e7f-972e-c8f0cbc2a129",
+          "name": "Didsbury Library",
+          "latitude": 53.418201,
+          "postcode": "M20 2DN",
+          "longitude": -2.2323182,
+          "fingerprint": "6432a75ceb35567919779abedea511ee"
+        },
+        {
+          "id": "38cc840d-a86b-46e0-bab6-9b0cb810a60d",
+          "name": "Fallowfield Community Library",
+          "latitude": 53.446398,
+          "postcode": "M14 7FB",
+          "longitude": -2.2384472,
+          "fingerprint": "407f85d0b6038b555d7ea787ba97f3aa"
+        },
+        {
+          "id": "195f43c0-2818-4df7-bf01-07ad83da7e37",
+          "name": "Forum Library Wythenshawe",
+          "latitude": 53.3795872,
+          "postcode": "M22 5RX",
+          "longitude": -2.264491,
+          "fingerprint": "8cbef55c38fb025e40be758e02a65993"
+        },
+        {
+          "id": "d3c6a9d3-7bd4-4a5b-91f9-5bb6a44c1663",
+          "name": "Gorton Library",
+          "latitude": 53.46292,
+          "postcode": "M18 8HE",
+          "longitude": -2.174332,
+          "fingerprint": "b753beafe5de5843d833184ecd4ca191"
+        },
+        {
+          "id": "95174e54-0e14-4a0a-8417-8f21eec5cce7",
+          "name": "Higher Blackley Library",
+          "latitude": 53.533761,
+          "postcode": "M9 0RA",
+          "longitude": -2.222255,
+          "fingerprint": "0c26407209666f14421c548acae1cf26"
+        },
+        {
+          "id": "0a86938a-5825-49f7-97bf-552229cb4492",
+          "name": "Hulme High Street Library",
+          "latitude": 53.4606581,
+          "postcode": "M15 5NN",
+          "longitude": -2.2475257,
+          "fingerprint": "c4f22140ca4c5a50907eedcd0c1711e0"
+        },
+        {
+          "id": "f7b6830e-a83a-4a50-a08d-7f83bfc14483",
+          "name": "Hulme Library",
+          "latitude": 53.466947,
+          "postcode": "M15 5FQ",
+          "longitude": -2.250647,
+          "fingerprint": "db8c61a3eb350ff4e715f14838d815bd"
+        },
+        {
+          "id": "e12ffff8-e5d4-4e3c-90cd-3dcc429e5238",
+          "name": "Levenshulme Library",
+          "latitude": 53.445024,
+          "postcode": "M19 3QE",
+          "longitude": -2.186998,
+          "fingerprint": "b6b1667c98dbf30e4670c139b8c35e1c"
+        },
+        {
+          "id": "73015e68-e32a-42f7-ab20-9412ad6be4b4",
+          "name": "Longsight Library & Learning Centre",
+          "latitude": 53.4581488,
+          "postcode": "M12 4NE",
+          "longitude": -2.2015719,
+          "fingerprint": "6fab1d59157b5df8dd7abcf3d3843fc5"
+        },
+        {
+          "id": "8a6084c7-5957-4f00-a0ea-6fbd6850ee33",
+          "name": "Miles Platting Community Library",
+          "latitude": 53.489649,
+          "postcode": "M40 8EE",
+          "longitude": -2.2142903,
+          "fingerprint": "bb1e9624581834c8642416c70474b324"
+        },
+        {
+          "id": "10183b57-71b6-42b7-92bd-ce27cc7a045e",
+          "name": "Moss Side Powerhouse Library",
+          "latitude": 53.4576163,
+          "postcode": "M14 4SL",
+          "longitude": -2.2417199,
+          "fingerprint": "de43987743457a807ded0c3e43bfdfe7"
+        },
+        {
+          "id": "2883cad4-8441-4fb0-98c8-748a645ce37c",
+          "name": "New Moston Community Library",
+          "latitude": 53.5168637,
+          "postcode": "M40 3PJ",
+          "longitude": -2.168034,
+          "fingerprint": "3079a4c23b040815f7760797d3b43727"
+        },
+        {
+          "id": "4dccdd92-0cfd-4ed4-ad3a-408b7fc5d85e",
+          "name": "Newton Heath Library",
+          "latitude": 53.5015211,
+          "postcode": "M40 2JB",
+          "longitude": -2.1829179,
+          "fingerprint": "924e44b1514a1c57e9be824e6cbcbc52"
+        },
+        {
+          "id": "53d3c9bc-5a51-4fd4-9b19-4a4b5aa8973c",
+          "name": "North City Library",
+          "latitude": 53.514026,
+          "postcode": "M9 4AF",
+          "longitude": -2.2124423,
+          "fingerprint": "f4a3f8851c110f954e3410c3c1708a6d"
+        },
+        {
+          "id": "71988fd2-4e98-4809-886c-1d86e848b855",
+          "name": "Northenden Community Library",
+          "latitude": 53.4069079,
+          "postcode": "M22 4WL",
+          "longitude": -2.2646442,
+          "fingerprint": "ce46fb653e7473ac4ee0d60437bc9e05"
+        },
+        {
+          "id": "f964c65b-f32c-4c36-9b96-2388002ed15d",
+          "name": "Rack House",
+          "latitude": 53.409691,
+          "postcode": "M23 0BT",
+          "longitude": -2.278636,
+          "fingerprint": "10ca2d0464169782222e8b41c9c93fbc"
+        },
+        {
+          "id": "7219fdff-5a30-4918-b0de-5c7e0dcaf47f",
+          "name": "Withington Library",
+          "latitude": 53.4356768,
+          "postcode": "M20 3BN",
+          "longitude": -2.226844,
+          "fingerprint": "3fb41caee4a30f0e1677fcb90e53094b"
+        }
+      ]
+    },
+    {
+      "town_city": "Manchester",
+      "category": "Museum",
+      "total": 30,
+      "rows": [
+        {
+          "id": "559b0bb5-d358-48be-b004-10810f30577d",
+          "name": "ASTLEY GREEN COLLIERY MUSEUM",
+          "latitude": 53.49503,
+          "postcode": "M29 7JB",
+          "longitude": -2.448665,
+          "fingerprint": "bd78ed96e6d22bda62610b3521237593"
+        },
+        {
+          "id": "a8610d2d-c76c-49ec-bed0-cd2768708d82",
+          "name": "CHETHAMS LIBRARY",
+          "latitude": 53.486061,
+          "postcode": "M3 1SB",
+          "longitude": -2.243372,
+          "fingerprint": "86230d9912cef8a316d39188b42b8503"
+        },
+        {
+          "id": "a1b2ae2e-1deb-45d9-b6c2-07c6ed40e0a3",
+          "name": "Clayton Hall",
+          "latitude": 53.4836651,
+          "postcode": "M11 4WH",
+          "longitude": -2.1801528,
+          "fingerprint": "691aed49e28ec7055f69421627e71b66"
+        },
+        {
+          "id": "80ff9dc3-7ddf-4c33-b16d-e45803a196a5",
+          "name": "CLAYTON HALL LIVING HISTORY MUSEUM",
+          "latitude": 53.48371,
+          "postcode": "M11 4RU",
+          "longitude": -2.180174,
+          "fingerprint": "6400affdc9f43a3b1482ed2b5011feab"
+        },
+        {
+          "id": "6a130c2c-4cf2-411c-ba87-df911f6edb25",
+          "name": "Didsbury Parsonage Trust",
+          "latitude": 53.4105928,
+          "postcode": "M20 2RQ",
+          "longitude": -2.2317281,
+          "fingerprint": "a647045986f1bfd62bb90e910c921176"
+        },
+        {
+          "id": "a8335b6b-5c80-4253-9519-8e28633b1047",
+          "name": "Elizabeth Gaskell's House",
+          "latitude": 53.4635586,
+          "postcode": "M13 9LW",
+          "longitude": -2.2212337,
+          "fingerprint": "eadedbb6784e53c7083a839fcdbf6e8b"
+        },
+        {
+          "id": "fcc358bf-ff99-4dd6-9b5e-da1d4e6fad4c",
+          "name": "Greater Manchester Police Museum & Archives",
+          "latitude": 53.4824013,
+          "postcode": "M1 1ET",
+          "longitude": -2.2323944,
+          "fingerprint": "833256b50e9d19769df27956b55e37a3"
+        },
+        {
+          "id": "3c673b2b-dd14-4a2e-9ae6-92e65b990dc7",
+          "name": "HEATON HALL",
+          "latitude": 53.53679,
+          "postcode": "M25 5SW",
+          "longitude": -2.26278,
+          "fingerprint": "a4791dc8d60dc341982b1e31a4bf7d8e"
+        },
+        {
+          "id": "1b522439-3e55-45f9-a35a-1f4bc2786a53",
+          "name": "Heaton Park Tramway",
+          "latitude": 53.5322015,
+          "postcode": "M25 2SW",
+          "longitude": -2.2495401,
+          "fingerprint": "645b311c4a2b706ded4bc8b738eb768f"
+        },
+        {
+          "id": "5e6985c1-f342-4069-856b-62f606b25c1b",
+          "name": "HOUSE OF WISDOM EXHIBITION",
+          "latitude": 53.448905,
+          "postcode": "M16 8BP",
+          "longitude": -2.264363,
+          "fingerprint": "1c1f94602888f8edc9d505aa3cdc6931"
+        },
+        {
+          "id": "1902a1b9-fca4-4613-86de-4bbb44fb7eb0",
+          "name": "Imperial War Museum North",
+          "latitude": 53.4697469,
+          "postcode": "M17 1TZ",
+          "longitude": -2.2990801,
+          "fingerprint": "bd7ce0e4b0d43c4fded664a74b6ee147"
+        },
+        {
+          "id": "09825d2f-8aac-4a89-a7a8-b3b950887917",
+          "name": "International Anthony Burgess Foundation",
+          "latitude": 53.472434,
+          "postcode": "M1 5BY",
+          "longitude": -2.243351,
+          "fingerprint": "0c2600bea6a9e1ce0244bab4aa701137"
+        },
+        {
+          "id": "64e1eba4-e92f-41db-9b8f-a993009c1caf",
+          "name": "LANCASHIRE COUNTY CRICKET CLUB MUSEUM",
+          "latitude": 53.457237,
+          "postcode": "M16 0PX",
+          "longitude": -2.287351,
+          "fingerprint": "5eb80eee5e9c9aac9f43cb5c20035e65"
+        },
+        {
+          "id": "f13c0073-914a-4960-9de0-2ebdba9b9764",
+          "name": "Lancashire Mining Museum",
+          "latitude": 53.4951327,
+          "postcode": "M29 7JB",
+          "longitude": -2.4466813,
+          "fingerprint": "e7344261f6bed3f0be30109263c617f4"
+        },
+        {
+          "id": "c34925ff-ece2-4cb3-81b7-13e9765328d7",
+          "name": "MANCHESTER ART GALLERY",
+          "latitude": 53.478865,
+          "postcode": "M2 3JL",
+          "longitude": -2.241448,
+          "fingerprint": "0432fec9869abe661cf06552468bdf08"
+        },
+        {
+          "id": "0051ced0-e579-4182-99c6-6f484a50ad3b",
+          "name": "Manchester Jewish Museum",
+          "latitude": 53.4957173,
+          "postcode": "M8 8LW",
+          "longitude": -2.2381287,
+          "fingerprint": "90e31ffeafeac1b5083d1898e08d531f"
+        },
+        {
+          "id": "35b32ae5-46e2-4485-ac68-11d222665bee",
+          "name": "MANCHESTER MASONIC MUSEUM",
+          "latitude": 53.480986,
+          "postcode": "M3 3BT",
+          "longitude": -2.25029,
+          "fingerprint": "9a2bed0d6435e5f778b1cc3f498b0557"
+        },
+        {
+          "id": "1f904c43-14a2-46ae-8e98-60cddb840591",
+          "name": "MANCHESTER METROPOLITAN UNIVERSITY SPECIAL COLLECTIONS",
+          "latitude": 53.470933,
+          "postcode": "M15 6BH",
+          "longitude": -2.239113,
+          "fingerprint": "c8dd1d6e9886f3032e47ab14fecc3544"
+        },
+        {
+          "id": "cffb5d75-a045-456e-94a9-5ef977afef88",
+          "name": "MANCHESTER UNITED FC MUSEUM & TOUR CENTRE",
+          "latitude": 53.462576,
+          "postcode": "M16 0RA",
+          "longitude": -2.291032,
+          "fingerprint": "0e6fd0e6900ca982f4fc19032e07ba43"
+        },
+        {
+          "id": "fa219508-33ea-4f92-b885-350e4e27505f",
+          "name": "Museum of Transport Greater Manchester",
+          "latitude": 53.5029214,
+          "postcode": "M8 8UW",
+          "longitude": -2.2332993,
+          "fingerprint": "7743cff852c462c877ffba685ad49ebe"
+        },
+        {
+          "id": "0469a083-83e8-4ab8-a7a3-edecda39c61c",
+          "name": "National Football Museum",
+          "latitude": 53.4857564,
+          "postcode": "M4 3BG",
+          "longitude": -2.2422724,
+          "fingerprint": "c7abb67e3947300a1324e40f35f5eba1"
+        },
+        {
+          "id": "3e42bd4e-a9d4-4505-b366-d44e5ba82720",
+          "name": "PANKHURST MUSEUM",
+          "latitude": 53.463172,
+          "postcode": "M13 9WP",
+          "longitude": -2.227367,
+          "fingerprint": "1a61f3e33569387cd6e675ee2d8395d5"
+        },
+        {
+          "id": "8b96bd1f-5ff5-4bee-9299-3d4148f362a5",
+          "name": "People's History Museum",
+          "latitude": 53.481348,
+          "postcode": "M3 3ER",
+          "longitude": -2.2531435,
+          "fingerprint": "bcb4c8dcf3173e5ffd796fbf04a680b2"
+        },
+        {
+          "id": "a2f9f814-7a75-4db8-916f-dc25db035a70",
+          "name": "Platt Hall",
+          "latitude": 53.4504833,
+          "postcode": "M14 6HQ",
+          "longitude": -2.2222967,
+          "fingerprint": "d1cb43b70fc99b51c4766becbc55ded4"
+        },
+        {
+          "id": "13acab68-b729-4539-8165-690de0f2e532",
+          "name": "PUMP HOUSE: PEOPLES HISTORY MUSEUM",
+          "latitude": 53.481357,
+          "postcode": "M3 3ER",
+          "longitude": -2.253381,
+          "fingerprint": "e540c95c6b97dea80e40a8e7499039ff"
+        },
+        {
+          "id": "4c7bb050-d2ad-4c97-aa4e-c6820dfffe1c",
+          "name": "RNCM Collection of Historic Musical Instruments",
+          "latitude": 53.468584,
+          "postcode": "M13 9RD",
+          "longitude": -2.2363722,
+          "fingerprint": "caf761a6124c5b1454680e98a544fa8e"
+        },
+        {
+          "id": "d2435f81-f069-436b-a28c-a5df2f836eb7",
+          "name": "Science and Industry Museum",
+          "latitude": 53.4772588,
+          "postcode": "M3 4FP",
+          "longitude": -2.2547008,
+          "fingerprint": "ff34d4512f80720234380bde2090faa5"
+        },
+        {
+          "id": "8bff4c4a-4cff-4f58-a492-7fd193c6ea15",
+          "name": "Special Collections Museum",
+          "latitude": 53.4725578,
+          "postcode": "M1 5QA",
+          "longitude": -2.2399852,
+          "fingerprint": "8513efb30ab11508be239f2d659dc4b3"
+        },
+        {
+          "id": "e1a5dd9e-68a6-4e25-b845-eb5a2af194b6",
+          "name": "The Manchester Museum",
+          "latitude": 53.4664071,
+          "postcode": "M13 9PL",
+          "longitude": -2.2342428,
+          "fingerprint": "e5b8121614c663fef47684554287c276"
+        },
+        {
+          "id": "a845e5e0-4717-45be-bc1c-e94020cce0aa",
+          "name": "WHITWORTH ART GALLERY, UNIVERSITY OF MANCHESTER",
+          "latitude": 53.460319,
+          "postcode": "M15 6ER",
+          "longitude": -2.229325,
+          "fingerprint": "edcaa6daecbe5798836e271f9863776f"
+        }
+      ]
+    }
+  ]
+}

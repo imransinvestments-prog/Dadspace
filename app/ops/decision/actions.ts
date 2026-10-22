@@ -35,6 +35,7 @@ export async function previewDecision(_state: ReviewState, form: FormData): Prom
   } catch { return { message: "Review service is unavailable. No change made." } }
 }
 export async function applyDecision(_state: ReviewState, form: FormData): Promise<ReviewState> {
+  if (process.env.VERCEL_ENV === "preview") return { message: "This preview is read-only. Production data decisions cannot be applied from a development deployment." }
   const identity = await reviewIdentity()
   if (!identity?.reviewer) return { message: "Reviewer access is required. No change made." }
   const secret = process.env.DADSPACE_SUPABASE_SERVICE_ROLE_KEY

@@ -1,4 +1,5 @@
 import "server-only"
+import { validVenueChecks, type VenueChecks } from "./venue-check-labels"
 import { validDealChecks, type DealChecks } from "./deal-check-labels"
 import { operationsAccess } from "./session"
 import { createClient } from "@/lib/supabase/server"
@@ -49,9 +50,10 @@ export async function getTaskReview(id: number) {
   }
   throw new Error("Review history is too large; inspect the GitHub task")
 }
-export async function recordTaskReview(id: number, decision: string, notes: string, evidence: string, version: string, material?: { rowId: string; fingerprint: string; page: number; checks?: NewsChecks; editorialChecks?: OriginalsChecks; dealChecks?: DealChecks }) {
+export async function recordTaskReview(id: number, decision: string, notes: string, evidence: string, version: string, material?: { rowId: string; fingerprint: string; page: number; checks?: NewsChecks; editorialChecks?: OriginalsChecks; dealChecks?: DealChecks; venueChecks?: VenueChecks }) {
   if (!reviewTask(id) || !(REVIEW_DECISIONS as readonly string[]).includes(decision) || !notes.trim() || notes.length > 6000 || evidence.length > 2000) throw new Error("Invalid review")
   if (!await reviewWriteAccess()) throw new Error("Reviewer access required")
+  if (material?.venueChecks && (id !== 34 || !validVenueChecks(material.venueChecks))) throw new Error("Invalid venue quality checks")
   if (material?.checks && (id !== 126 || !validNewsChecks(material.checks))) throw new Error("Invalid news quality checks")
   if (material?.editorialChecks && (id !== 128 || !validOriginalsChecks(material.editorialChecks))) throw new Error("Invalid Originals editorial checks")
   if (material?.dealChecks && (id !== 130 || !validDealChecks(material.dealChecks))) throw new Error("Invalid deal quality checks")
@@ -65,6 +67,7 @@ export async function recordTaskReview(id: number, decision: string, notes: stri
     if (id === 126 && material.checks) snapshot = `\n\nNews quality checks: ${JSON.stringify(material.checks)}${snapshot}`
     if (id === 128 && material.editorialChecks) snapshot = `\n\nOriginals editorial checks: ${JSON.stringify(material.editorialChecks)}${snapshot}`
     if (id === 130 && material.dealChecks) snapshot = `\n\nDeal quality checks: ${JSON.stringify(material.dealChecks)}${snapshot}`
+    if (id === 34 && material.venueChecks) snapshot = `\n\nVenue quality checks: ${JSON.stringify(material.venueChecks)}${snapshot}`
     if (snapshot.length > 40000) throw new Error("Record too large for a review comment")
   }
   const current = await getTaskReview(id)

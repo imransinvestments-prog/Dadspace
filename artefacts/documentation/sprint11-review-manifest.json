@@ -1,0 +1,138 @@
+{
+  "prepared_date": "2026-10-19",
+  "scope": "Current review evidence and critical source; normalized LF hashes are stable across Git checkouts. Supersedes preparation manifest after refreshed captures. No human acceptance or scheduled success inferred.",
+  "files": [
+    {
+      "path": "artefacts/data/sprint11-api-performance.json",
+      "sha256": "e0bad5759f9950477d7c3cee411ded532218cc5a2ca0e32ea1f4679d04524e09",
+      "bytes": 26587,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-area-candidates.json",
+      "sha256": "d80e66a5f794885f6d07a871f53f4f2bdad16456abd01e946bbe2d3d4a087f38",
+      "bytes": 70143,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-libraries-snapshot.json",
+      "sha256": "3920bdc64e0d2c59884fb2fb74f4f52dc014281595e2ce25cd11682ed16ed7b0",
+      "bytes": 94849,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-library-provenance.json",
+      "sha256": "110b67cbdd9bdb07aa8a8f5231be0dfd3a2fbfd3a4c78830a8c7f5d12efefe73",
+      "bytes": 22017,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-library-review.json",
+      "sha256": "ad44b930e6501d91bc0129d5c7f4cd12b61ecb460f2eb0618dc5e5d8d6ca611a",
+      "bytes": 312146,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-operational-findings.json",
+      "sha256": "e4d0896d1ff868007d33614e8599542677e2791491bbba824d20e82a8b505533",
+      "bytes": 2028,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-originals-snapshot.json",
+      "sha256": "0bc618180da841b480063494c5998d635f30042176e6565a71b2df33a301119d",
+      "bytes": 1396,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-performance.json",
+      "sha256": "8cf9e3737317bd8a67921565cd23e737923bdb1c0840b686e0c135e6867197c4",
+      "bytes": 56148,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-preview-api-performance.json",
+      "sha256": "160c34d992b1ebe58bc0e1cda82577d44e63bf00294d46e0b1b7ee8ca93a5683",
+      "bytes": 26956,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-preview-performance.json",
+      "sha256": "0a5140140be5e90bc30f506802ee302385c4df0dc2e40de361d3a37f2f856a53",
+      "bytes": 58891,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-run-readback.json",
+      "sha256": "e5ead0dc86839bd3ee99221924ef929add99312c7c94cf78145a4e4a0f274ed1",
+      "bytes": 37817,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-schedule-ledger.json",
+      "sha256": "2ebfffb9870a1483a0bb60021625873e869df40be6a67f3737f6aee287d81a3a",
+      "bytes": 10780,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-scheduled-runs.json",
+      "sha256": "bd0b0c4428cad477d0af89de39b89b536a02e2236a3d0a4f52f7763370c2d17a",
+      "bytes": 22366,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-schema-snapshot.json",
+      "sha256": "978f411fef0f7c4882efb315ffc7c5e99e2da7342443259824427e3b91da7e92",
+      "bytes": 4112,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-venue-labels.json",
+      "sha256": "f188ea02d019b869bccda50af31cad81d402f4430209c45370ba00506283878e",
+      "bytes": 10144,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint11-venues-snapshot.json",
+      "sha256": "c311ff89f20b971057f5217d98c8bdee96d4d27a5af9d4190d9f588dc00bfe57",
+      "bytes": 43041,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/data/sprint5-review-pack.json",
+      "sha256": "e74e423e2c58403e73b75d840c4454f779308b48d1a514a004b48fcc6a007557",
+      "bytes": 304402,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "plans/sprint-11-delivery.md",
+      "sha256": "19241483c77189e6f6cedb6b7c58bd70c259cc780beb0bde429341a5cc47833e",
+      "bytes": 5601,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "app/ops/sprint-11/page.tsx",
+      "sha256": "2c2f6ee810313da525dc251583495714ca732b7b986ff492b63c013fc849b44a",
+      "bytes": 15340,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "scripts/sprint11_schedule_ledger.py",
+      "sha256": "56cc49c918a8c1199703f371140c0f3b419d04e143d2c09ad665b2bca286b1fc",
+      "bytes": 8751,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "supabase/migrations/20261019002054_sprint11_visitor_facts.sql",
+      "sha256": "1d8b0d12e81c4b815480d36f547dd3ca7106550c471fbc00498993390302c353",
+      "bytes": 11883,
+      "encoding": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "artefacts/documentation/sprint11-preview-lighthouse-reports.zip",
+      "sha256": "7120f3e1f817e7d030e4240b3aae8d3446f246807aaecd70c1b51ccc326d14f8",
+      "bytes": 10272059,
+      "encoding": "binary"
+    }
+  ]
+}

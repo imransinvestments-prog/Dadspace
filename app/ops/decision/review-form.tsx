@@ -1,7 +1,7 @@
 "use client"
 import { useActionState, useState } from "react"
 import { previewDecision, applyDecision, type ReviewState } from "./actions"
-const fields = [{key:"venue_name",label:"Name"},{key:"category",label:"Category"},{key:"address",label:"Address"},{key:"postcode",label:"Postcode"},{key:"latitude",label:"Latitude"},{key:"longitude",label:"Longitude"},{key:"website",label:"Website"},{key:"access",label:"Access"}]
+const fields = [{key:"venue_name",label:"Name"},{key:"category",label:"Category"},{key:"address",label:"Address"},{key:"postcode",label:"Postcode"},{key:"latitude",label:"Latitude"},{key:"longitude",label:"Longitude"},{key:"website",label:"Website"},{key:"access",label:"Access"},{key:"opening_hours",label:"Opening times"},{key:"fee",label:"Entry and fees"}]
 
 export default function ReviewForm({ record, listing, rollback, reviewer, targets, current = {} }: { record: string; listing: boolean; rollback: boolean; reviewer: boolean; targets: { id: string; venue_name: string; postcode: string | null }[]; current?: Record<string,string | number | null> }) {
   const [action,setAction] = useState(rollback ? "rollback" : listing ? "link" : "approve")

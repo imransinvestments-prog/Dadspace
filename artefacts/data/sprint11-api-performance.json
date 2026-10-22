@@ -1,0 +1,1142 @@
+{
+  "captured_at": "2026-10-19T00:28:19.378087+00:00",
+  "origin": "https://www.dad-space.co.uk",
+  "deployed_sha": "eeb004c6d9ed1dfacfb6a335767a917a428659ff",
+  "method": "20 sequential requests per case in one requests.Session; first transport-cold, remaining connection-reused. Server/database cache state is unknown. Wall-clock response plus JSON decoding; decoded UTF-8 JSON bytes. No user identity/cookies.",
+  "cases": [
+    {
+      "case": "national-first",
+      "url": "https://www.dad-space.co.uk/api/venues",
+      "samples": [
+        {
+          "sample": 1,
+          "status": 200,
+          "elapsed_ms": 441.38,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 2,
+          "status": 200,
+          "elapsed_ms": 348.34,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 3,
+          "status": 200,
+          "elapsed_ms": 329.73,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 4,
+          "status": 200,
+          "elapsed_ms": 731.13,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 5,
+          "status": 200,
+          "elapsed_ms": 379.67,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 6,
+          "status": 200,
+          "elapsed_ms": 327.47,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 7,
+          "status": 200,
+          "elapsed_ms": 376.12,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 8,
+          "status": 200,
+          "elapsed_ms": 445.18,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 9,
+          "status": 200,
+          "elapsed_ms": 308.9,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 10,
+          "status": 200,
+          "elapsed_ms": 327.64,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 11,
+          "status": 200,
+          "elapsed_ms": 367.79,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 12,
+          "status": 200,
+          "elapsed_ms": 449.16,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 13,
+          "status": 200,
+          "elapsed_ms": 313.28,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 14,
+          "status": 200,
+          "elapsed_ms": 293.4,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 15,
+          "status": 200,
+          "elapsed_ms": 309.19,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 16,
+          "status": 200,
+          "elapsed_ms": 312.03,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 17,
+          "status": 200,
+          "elapsed_ms": 298.54,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 18,
+          "status": 200,
+          "elapsed_ms": 292.07,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 19,
+          "status": 200,
+          "elapsed_ms": 352.29,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 20,
+          "status": 200,
+          "elapsed_ms": 328.95,
+          "json_bytes": 17056,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        }
+      ],
+      "p95_ms": 449.16,
+      "maximum_json_bytes": 17056,
+      "passed": true
+    },
+    {
+      "case": "national-deep",
+      "url": "https://www.dad-space.co.uk/api/venues?offset=240",
+      "samples": [
+        {
+          "sample": 1,
+          "status": 200,
+          "elapsed_ms": 426.91,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 2,
+          "status": 200,
+          "elapsed_ms": 331.61,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 3,
+          "status": 200,
+          "elapsed_ms": 294.69,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 4,
+          "status": 200,
+          "elapsed_ms": 321.22,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 5,
+          "status": 200,
+          "elapsed_ms": 324.68,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 6,
+          "status": 200,
+          "elapsed_ms": 321.15,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 7,
+          "status": 200,
+          "elapsed_ms": 327.02,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 8,
+          "status": 200,
+          "elapsed_ms": 294.33,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 9,
+          "status": 200,
+          "elapsed_ms": 314.44,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 10,
+          "status": 200,
+          "elapsed_ms": 295.52,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 11,
+          "status": 200,
+          "elapsed_ms": 365.85,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 12,
+          "status": 200,
+          "elapsed_ms": 310.35,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 13,
+          "status": 200,
+          "elapsed_ms": 332.89,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 14,
+          "status": 200,
+          "elapsed_ms": 509.07,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 15,
+          "status": 200,
+          "elapsed_ms": 340.3,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 16,
+          "status": 200,
+          "elapsed_ms": 408.35,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 17,
+          "status": 200,
+          "elapsed_ms": 741.07,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 18,
+          "status": 200,
+          "elapsed_ms": 340.71,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 19,
+          "status": 200,
+          "elapsed_ms": 416.42,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        },
+        {
+          "sample": 20,
+          "status": 200,
+          "elapsed_ms": 289.24,
+          "json_bytes": 16892,
+          "returned": 24,
+          "total": 55918,
+          "valid": true
+        }
+      ],
+      "p95_ms": 509.07,
+      "maximum_json_bytes": 16892,
+      "passed": true
+    },
+    {
+      "case": "pilot-first",
+      "url": "https://www.dad-space.co.uk/api/venues?lat=51.508924&lng=-0.275866",
+      "samples": [
+        {
+          "sample": 1,
+          "status": 200,
+          "elapsed_ms": 483.54,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 2,
+          "status": 200,
+          "elapsed_ms": 550.65,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 3,
+          "status": 200,
+          "elapsed_ms": 508.5,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 4,
+          "status": 200,
+          "elapsed_ms": 424.82,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 5,
+          "status": 200,
+          "elapsed_ms": 468.28,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 6,
+          "status": 200,
+          "elapsed_ms": 484.12,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 7,
+          "status": 200,
+          "elapsed_ms": 456.43,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 8,
+          "status": 200,
+          "elapsed_ms": 481.03,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 9,
+          "status": 200,
+          "elapsed_ms": 372.45,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 10,
+          "status": 200,
+          "elapsed_ms": 381.14,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 11,
+          "status": 200,
+          "elapsed_ms": 358.64,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 12,
+          "status": 200,
+          "elapsed_ms": 345.8,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 13,
+          "status": 200,
+          "elapsed_ms": 363.55,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 14,
+          "status": 200,
+          "elapsed_ms": 354.14,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 15,
+          "status": 200,
+          "elapsed_ms": 406.12,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 16,
+          "status": 200,
+          "elapsed_ms": 346.06,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 17,
+          "status": 200,
+          "elapsed_ms": 377.07,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 18,
+          "status": 200,
+          "elapsed_ms": 388.59,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 19,
+          "status": 200,
+          "elapsed_ms": 353.89,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 20,
+          "status": 200,
+          "elapsed_ms": 390.88,
+          "json_bytes": 16747,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        }
+      ],
+      "p95_ms": 508.5,
+      "maximum_json_bytes": 16747,
+      "passed": true
+    },
+    {
+      "case": "pilot-deep",
+      "url": "https://www.dad-space.co.uk/api/venues?lat=51.508924&lng=-0.275866&offset=48",
+      "samples": [
+        {
+          "sample": 1,
+          "status": 200,
+          "elapsed_ms": 437.76,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 2,
+          "status": 200,
+          "elapsed_ms": 356.02,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 3,
+          "status": 200,
+          "elapsed_ms": 371.42,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 4,
+          "status": 200,
+          "elapsed_ms": 343.51,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 5,
+          "status": 200,
+          "elapsed_ms": 360.62,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 6,
+          "status": 200,
+          "elapsed_ms": 372.93,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 7,
+          "status": 200,
+          "elapsed_ms": 433.61,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 8,
+          "status": 200,
+          "elapsed_ms": 620.78,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 9,
+          "status": 200,
+          "elapsed_ms": 351.64,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 10,
+          "status": 200,
+          "elapsed_ms": 352.78,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 11,
+          "status": 200,
+          "elapsed_ms": 341.85,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 12,
+          "status": 200,
+          "elapsed_ms": 368.15,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 13,
+          "status": 200,
+          "elapsed_ms": 358.16,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 14,
+          "status": 200,
+          "elapsed_ms": 518.62,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 15,
+          "status": 200,
+          "elapsed_ms": 389.84,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 16,
+          "status": 200,
+          "elapsed_ms": 432.35,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 17,
+          "status": 200,
+          "elapsed_ms": 352.66,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 18,
+          "status": 200,
+          "elapsed_ms": 361.11,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 19,
+          "status": 200,
+          "elapsed_ms": 359.73,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        },
+        {
+          "sample": 20,
+          "status": 200,
+          "elapsed_ms": 371.85,
+          "json_bytes": 16544,
+          "returned": 24,
+          "total": 1031,
+          "valid": true
+        }
+      ],
+      "p95_ms": 518.62,
+      "maximum_json_bytes": 16544,
+      "passed": true
+    },
+    {
+      "case": "pilot-filter",
+      "url": "https://www.dad-space.co.uk/api/venues?lat=51.508924&lng=-0.275866&category=library&free=true",
+      "samples": [
+        {
+          "sample": 1,
+          "status": 200,
+          "elapsed_ms": 261.3,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 2,
+          "status": 200,
+          "elapsed_ms": 227.39,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 3,
+          "status": 200,
+          "elapsed_ms": 542.48,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 4,
+          "status": 200,
+          "elapsed_ms": 261.64,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 5,
+          "status": 200,
+          "elapsed_ms": 271.76,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 6,
+          "status": 200,
+          "elapsed_ms": 249.12,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 7,
+          "status": 200,
+          "elapsed_ms": 237.87,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 8,
+          "status": 200,
+          "elapsed_ms": 270.15,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 9,
+          "status": 200,
+          "elapsed_ms": 249.47,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 10,
+          "status": 200,
+          "elapsed_ms": 230.51,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 11,
+          "status": 200,
+          "elapsed_ms": 237.46,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 12,
+          "status": 200,
+          "elapsed_ms": 233.24,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 13,
+          "status": 200,
+          "elapsed_ms": 259.05,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 14,
+          "status": 200,
+          "elapsed_ms": 291.61,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 15,
+          "status": 200,
+          "elapsed_ms": 285.47,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 16,
+          "status": 200,
+          "elapsed_ms": 292.38,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 17,
+          "status": 200,
+          "elapsed_ms": 424.13,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 18,
+          "status": 200,
+          "elapsed_ms": 410.05,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 19,
+          "status": 200,
+          "elapsed_ms": 458.37,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        },
+        {
+          "sample": 20,
+          "status": 200,
+          "elapsed_ms": 296.12,
+          "json_bytes": 39,
+          "returned": 0,
+          "total": 0,
+          "valid": true
+        }
+      ],
+      "p95_ms": 458.37,
+      "maximum_json_bytes": 39,
+      "passed": true
+    },
+    {
+      "case": "pilot-search",
+      "url": "https://www.dad-space.co.uk/api/venues?lat=51.508924&lng=-0.275866&q=library",
+      "samples": [
+        {
+          "sample": 1,
+          "status": 200,
+          "elapsed_ms": 708.29,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 2,
+          "status": 200,
+          "elapsed_ms": 455.18,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 3,
+          "status": 200,
+          "elapsed_ms": 528.92,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 4,
+          "status": 200,
+          "elapsed_ms": 604.55,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 5,
+          "status": 200,
+          "elapsed_ms": 501.65,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 6,
+          "status": 200,
+          "elapsed_ms": 458.48,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 7,
+          "status": 200,
+          "elapsed_ms": 471.98,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 8,
+          "status": 200,
+          "elapsed_ms": 456.36,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 9,
+          "status": 200,
+          "elapsed_ms": 424.68,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 10,
+          "status": 200,
+          "elapsed_ms": 564.02,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 11,
+          "status": 200,
+          "elapsed_ms": 554.63,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 12,
+          "status": 200,
+          "elapsed_ms": 405.49,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 13,
+          "status": 200,
+          "elapsed_ms": 460.4,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 14,
+          "status": 200,
+          "elapsed_ms": 516.37,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 15,
+          "status": 200,
+          "elapsed_ms": 651.68,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 16,
+          "status": 200,
+          "elapsed_ms": 474.94,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 17,
+          "status": 200,
+          "elapsed_ms": 412.55,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 18,
+          "status": 200,
+          "elapsed_ms": 511.85,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 19,
+          "status": 200,
+          "elapsed_ms": 467.91,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        },
+        {
+          "sample": 20,
+          "status": 200,
+          "elapsed_ms": 405.8,
+          "json_bytes": 18324,
+          "returned": 24,
+          "total": 75,
+          "valid": true
+        }
+      ],
+      "p95_ms": 651.68,
+      "maximum_json_bytes": 18324,
+      "passed": true
+    }
+  ]
+}
