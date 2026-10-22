@@ -80,6 +80,8 @@
   --radius-xl: calc(var(--radius) + 0.5rem);
   --font-sans: var(--font-jakarta), system-ui, sans-serif;
   --font-heading: var(--font-bricolage), system-ui, sans-serif;
+  /* Mobile header height (border included); sticky filter bars sit directly below it. */
+  --spacing-header: 3.75rem;
 }
 
 @layer base {

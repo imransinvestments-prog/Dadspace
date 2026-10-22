@@ -140,7 +140,7 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
       {coords && <DiscoveryRadiusControls radiusKm={radiusKm} scope={scope} onRadius={setRadiusKm} onScope={setScope} />}
       {feed.loading && <p role="status">Finding nearby events…</p>}
       {feed.error && <p role="alert">{feed.error} <button onClick={feed.retry} className="underline">Retry</button></p>}
-      <div className="sticky top-[69px] z-20 -mx-4 flex flex-col gap-3 border-b border-border/60 bg-background/85 px-4 py-3 backdrop-blur-md lg:top-0 lg:mx-0 lg:px-0">
+      <div className="sticky top-header z-20 -mx-4 flex flex-col gap-3 border-b border-border/60 bg-background/85 px-4 py-3 backdrop-blur-md lg:top-0 lg:mx-0 lg:px-0">
         <div className="flex flex-col gap-3 md:flex-row md:items-center">
           <label className="relative flex-1">
             <span className="sr-only">Search events</span>

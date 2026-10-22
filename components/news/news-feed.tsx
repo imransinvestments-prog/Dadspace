@@ -125,7 +125,7 @@ export function NewsFeed({ initialItems, initialCategory = "all" }: { initialIte
         </p>
       </header>
 
-      <div className="sticky top-[69px] z-20 -mx-4 flex items-center gap-2 border-b border-border/60 bg-background/80 px-4 py-3 backdrop-blur-md lg:top-0 lg:mx-0 lg:rounded-b-xl lg:px-0">
+      <div className="sticky top-header z-20 -mx-4 flex items-center gap-2 border-b border-border/60 bg-background/80 px-4 py-3 backdrop-blur-md lg:top-0 lg:mx-0 lg:rounded-b-xl lg:px-0">
         <div className="flex shrink-0 items-center gap-1 rounded-full border bg-card p-1">
           <label htmlFor="news-region" className="sr-only">
             Region
