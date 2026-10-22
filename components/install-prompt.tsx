@@ -12,6 +12,18 @@ export function InstallPrompt({ variant }: { variant: "card" | "banner" }) {
   const [deferred, setDeferred] = useState<BeforeInstallPromptEvent | null>(null)
   const [isIos, setIsIos] = useState(false)
   const [dismissed, setDismissed] = useState(true)
+  // The banner sits above the page content and Chrome offers installation seconds after load,
+  // so showing it straight away made it the mobile LCP (~9s) and shifted the page. Waiting for
+  // the first tap or key press keeps it out of the loading metrics; the sidebar card is unaffected.
+  const [engaged, setEngaged] = useState(variant !== "banner")
+
+  useEffect(() => {
+    if (engaged) return
+    const engage = () => setEngaged(true)
+    const events = ["pointerdown", "keydown"] as const
+    for (const type of events) window.addEventListener(type, engage, { once: true, passive: true })
+    return () => { for (const type of events) window.removeEventListener(type, engage) }
+  }, [engaged])
 
   useEffect(() => {
     const standalone =
@@ -35,7 +47,7 @@ export function InstallPrompt({ variant }: { variant: "card" | "banner" }) {
     }
   }, [])
 
-  if (dismissed || (!deferred && !isIos)) return null
+  if (dismissed || !engaged || (!deferred && !isIos)) return null
 
   const dismiss = () => {
     sessionStorage.setItem("ds-install-dismissed", "1")
