@@ -7,16 +7,11 @@ Owner request, 22 October 2026: make sure there are enough places for every UK p
 ## What it does, per council
 
 1. **Councils** come from `geography_areas` (`kind = 'council'`) in the latest `geography_releases` row: 361 councils in the ONS May 2026 release. The 11 Northern Ireland councils (`N…` codes) are excluded for now (owner decision, 22 Oct, #243), which leaves 350.
-2. **Places** come from OpenStreetMap via Overpass. The query is scoped to the council's boundary using `ref:gss`, the ONS code. It covers named playgrounds, parks, nature reserves, water parks, indoor play, museums, zoos and petting farms, aquariums, theme parks and libraries. It drops:
-   - unnamed and generic names ("Playground");
-   - private or disused places;
-   - libraries tagged `library=research|academic|private`;
-   - archives, record offices and local-history centres listed as libraries. This follows the 22 Oct #92 decision: names that contain "Library" are kept even if they also hold archives;
-   - specialist libraries (owner decision, 22 Oct, #243): institutes, universities, colleges, schools, academies, hospitals and medical, law and chambers, societies, research, theology, and subject "Studies" libraries.
-     - A public library's "Local Studies" centre is kept.
-     - Street names are kept too ("School Lane Library").
+2. **Places** come from OpenStreetMap via Overpass. The query is scoped to the council's boundary using `ref:gss`, the ONS code. It covers named playgrounds, parks, nature reserves, water parks, indoor play, museums, zoos and petting farms, aquariums and theme parks. It drops unnamed and generic names ("Playground") and private or disused places.
+
+   **Libraries are not discovered here** (owner decision, 23 Oct, #243): the Public Library Open Data reference source already covers them, and they rarely change.
 3. **Ranking** is deterministic. It weighs category, Wikidata notability, website and opening hours, and facility evidence (`changing_table`, `toilets`, `wheelchair`, `baby_feeding`), plus size for parks and nature reserves. Each council keeps its top 10, at most 3 per category, and ties break on the OSM id.
-4. **New only.** A place is skipped when `venues` already holds the same OSM element (in `source_url` or `discovered_source_url`). It is also skipped when a similar-named venue (ratio 0.75 or more) sits inside its outline, or when the shared `choose_match` rules in `venue_reference_worker.py` find it:
+4. **New only.** A place is skipped when `venues` already holds the same OSM element (in `source_url` or `discovered_source_url`). Existing venues are loaded in pages ordered by `id`. Every candidate's OSM URL is also checked directly against `venues`, so a stored place can't come back as new even if the bulk load misses a row; that happened with Hanwell Zoo in the first dry run, 22 Oct. A place is also skipped when a similar-named venue (ratio 0.75 or more) sits inside its outline, or when the shared `choose_match` rules in `venue_reference_worker.py` find it:
    - same name and postcode;
    - same postcode and a similar name;
    - within 80 m and a similar name.
@@ -52,7 +47,9 @@ Google's terms limit storing Places content beyond the place ID, and caching Goo
 3. Add the source row:
 
    ```sql
-   insert into sources (name, source_role, active) values ('OpenStreetMap council discovery', 'venue_reference', true);
+   insert into sources (name, url, category, kind, source_role, source_adapter, active)
+   values ('OpenStreetMap council discovery', 'https://www.openstreetmap.org/',
+           'venue_reference', 'event_listing', 'venue_reference', 'osm_council_discovery', true);
    ```
 
    The scheduled loader then runs 10 councils each time and inserts hidden candidates.
@@ -68,7 +65,7 @@ Push-triggered dry runs never call the LLM.
 ## Owner decisions (22 Oct 2026, #243)
 
 - **Northern Ireland is excluded for now.** No OSM administrative boundary carried an `N09…` `ref:gss` code, so NI would need a name-based or alternative boundary source. To include it later, remove `"N"` from `EXCLUDED_COUNCIL_PREFIXES`; the NI postcode-licence handling is already in place.
-- **Specialist libraries are left out** (see step 2 above).
+- **Libraries are not discovered** (23 Oct). The library reference source covers them (see step 2 above).
 
 ## Known limits
 
@@ -81,4 +78,5 @@ Push-triggered dry runs never call the LLM.
 - Real-data dry runs on 22 Oct 2026, without the LLM:
   - Ealing, Cornwall, Cardiff and Highland each returned 10 spots, and Belfast returned `no_boundary`.
   - After review fixes, Ealing returned 10 in-council places, with 4 boundary-crossing outlines left to their own councils.
-  - Checked against live `venues`, the Ealing results match the OSM-sourced Transport Museum Depot and Pitzhanger Manor and the library-dataset Acton Town Hall Library, all of which a live run skips as existing.
+  - Checked against live `venues`, the Ealing results match the OSM-sourced Transport Museum Depot and Pitzhanger Manor, which a live run skips as existing.
+  - The first workflow dry run (22 Oct) offered Hanwell Zoo, which was already stored as `way/221351281`. The venue load paged without a fixed order and could skip rows. That is fixed by ordered paging plus the direct OSM URL check.

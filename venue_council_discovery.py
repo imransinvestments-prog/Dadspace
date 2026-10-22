@@ -57,20 +57,11 @@ CATEGORY_RULES = [
     ("leisure", "indoor_play", "Indoor / soft play centre", 4),
     ("leisure", "park", "Park", 4),
     ("leisure", "nature_reserve", "Nature reserve", 3),
-    ("amenity", "library", "library", 3),
     ("leisure", "playground", "Children’s playground", 2),
 ]
+# Libraries are not discovered here (owner decision 23 Oct 2026, #243): the Public Library Open Data
+# reference source already covers them and they rarely change.
 FARM_LABEL, FARM_WEIGHT = "Farm", 5
-# Owner decision 22 Oct 2026 (#92/#235): archives, record offices and local-history centres listed as
-# libraries are not family libraries; names containing "Library" are kept even if they also hold archives.
-NON_FAMILY_LIBRARY = re.compile(r"archive|record office|local (history|studies) cent(re|er)|history centre", re.I)
-# Owner decision 22 Oct 2026 (#243): specialist libraries (institutes, colleges, hospitals, societies and
-# the like) are left out too. A public library's "Local Studies" collection does not count as specialist.
-SPECIALIST_LIBRARY = re.compile(
-    r"institut|universit|(college|school|academy)(?!\s+(road|lane|street|avenue|hill|green|way|park))|"
-    r"hospital|medical|\bnhs\b|\blaw\b|legal|chambers|society|research|(?<!local )studies|theolog|seminary",
-    re.I)
-NON_FAMILY_LIBRARY_TAGS = ("research", "academic", "private")
 # Owner decision 22 Oct 2026 (#243): Northern Ireland is left out for now (no ONS-coded OSM boundaries).
 EXCLUDED_COUNCIL_PREFIXES = ("N",)
 GENERIC_NAMES = {"playground", "play area", "childrens playground", "children s playground", "play park",
@@ -103,7 +94,6 @@ area["ref:gss"="{code}"]["boundary"="administrative"]->.a;
 (
   nwr["leisure"~"^(playground|park|nature_reserve|water_park|indoor_play)$"]["name"](area.a);
   nwr["tourism"~"^(museum|zoo|aquarium|theme_park)$"]["name"](area.a);
-  nwr["amenity"="library"]["name"](area.a);
 );
 out tags center bb;"""
 
@@ -170,11 +160,6 @@ def spots_from_overpass(data: dict) -> tuple[bool, list[dict]]:
         if not name or norm_name(name) in GENERIC_NAMES:
             continue
         if tags.get("access") in ("private", "no") or tags.get("disused") == "yes":
-            continue
-        if tags.get("amenity") == "library" and (
-                tags.get("library") in NON_FAMILY_LIBRARY_TAGS
-                or SPECIALIST_LIBRARY.search(name)
-                or (NON_FAMILY_LIBRARY.search(name) and not re.search(r"\blibrary\b", name, re.I))):
             continue
         kind = classify(tags)
         if not kind:
@@ -509,8 +494,10 @@ def provenance_row(venue_id: str, record: dict, spot: dict) -> dict:
 def load_venue_rows(db) -> list[dict]:
     rows, start = [], 0
     while True:
+        # Paging needs a fixed order: unordered pages can overlap or skip rows, and a skipped
+        # row lets an existing venue (e.g. Hanwell Zoo, 22 Oct dry run) through as "new".
         part = (db.table("venues").select("id,venue_name,postcode,latitude,longitude,source_url,discovered_source_url")
-                .range(start, start + 999).execute().data or [])
+                .order("id").range(start, start + 999).execute().data or [])
         rows.extend(part)
         if len(part) < 1000:
             return rows
@@ -580,8 +567,19 @@ def select_new(spots: list[dict], index: VenueIndex) -> tuple[list[dict], dict, 
     return picked, possible_for, stats
 
 
+def stored_osm_urls(db, urls: list[str]) -> set[str]:
+    """Direct lookup of OSM URLs already in venues, independent of the bulk-loaded index."""
+    if not urls:
+        return set()
+    found = set()
+    for column in ("source_url", "discovered_source_url"):
+        rows = db.table("venues").select(column).in_(column, urls).execute().data or []
+        found.update(r[column] for r in rows if r.get(column))
+    return found
+
+
 def discover_council(council: dict, index: VenueIndex, generator, fetch=None,
-                     resolve=None) -> tuple[dict, list[tuple[dict, dict]]]:
+                     resolve=None, known=None) -> tuple[dict, list[tuple[dict, dict]]]:
     fetch, resolve = fetch or fetch_overpass, resolve or resolve_postcodes  # looked up per call
     stats = {"code": council["code"], "name": council["name"], "status": "ok", "candidates": 0, "new": 0,
              "existing": 0, "possible": 0}
@@ -592,6 +590,11 @@ def discover_council(council: dict, index: VenueIndex, generator, fetch=None,
     stats["candidates"] = len(spots)
     picked, possible_for, counts = select_new(spots, index)
     stats.update(counts)
+    if known is not None:
+        # Second, direct check by OSM URL so an existing place can never be offered as new.
+        stored = known([osm_url(s) for s in picked])
+        stats["existing"] += sum(osm_url(s) in stored for s in picked)
+        picked = [s for s in picked if osm_url(s) not in stored]
     resolved = []
     for spot in resolve(picked, council["code"]):
         # Overpass area filters return outlines that only cross into the council (a park over the
@@ -646,13 +649,14 @@ def run(db, *, dry_run: bool, councils_per_run: int = 10, council: str | None = 
     run_id = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     records, summary = [], {"dry_run": dry_run, "run_id": run_id, "councils": []}
     pause = float(os.environ.get("OVERPASS_PAUSE_SECONDS", "5") or 0)
+    known = (lambda urls: stored_osm_urls(db, urls)) if db is not None else None
     for i, c in enumerate(selected):
         if i:
             time.sleep(pause)
         use = generator if not max_llm_calls or llm_calls < max_llm_calls else None
         try:
             try:
-                stats, found = discover_council(c, index, use)
+                stats, found = discover_council(c, index, use, known=known)
             except Exception as exc:
                 # FatalLLMError subclasses RuntimeError, so the LLM stop is checked first:
                 # stop drafting notes for the rest of the run but keep this council's places.
@@ -660,7 +664,7 @@ def run(db, *, dry_run: bool, councils_per_run: int = 10, council: str | None = 
                     raise
                 print(f"LLM stopped at {c['code']}: {type(exc).__name__}", file=sys.stderr)
                 generator = use = None
-                stats, found = discover_council(c, index, None)
+                stats, found = discover_council(c, index, None, known=known)
         except (requests.RequestException, RuntimeError, ValueError) as exc:
             stats, found = {"code": c["code"], "name": c["name"], "status": "failed",
                             "error": type(exc).__name__}, []
