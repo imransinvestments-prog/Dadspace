@@ -31,7 +31,8 @@ def fnum(v):
 def load_venues(db):
     rows=[];start=0
     while True:
-        part=db.table('venues').select('id,venue_name,postcode,address,town_city,latitude,longitude,website,operator,source_url,country').range(start,start+999).execute().data or []
+        # Fixed order: unordered pages can skip rows, and a skipped venue would be re-inserted as new.
+        part=db.table('venues').select('id,venue_name,postcode,address,town_city,latitude,longitude,website,operator,source_url,country').order('id').range(start,start+999).execute().data or []
         rows.extend(part)
         if len(part)<1000:break
         start+=1000

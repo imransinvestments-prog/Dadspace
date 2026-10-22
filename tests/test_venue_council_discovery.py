@@ -86,27 +86,10 @@ class OverpassParsingTests(unittest.TestCase):
         self.assertNotIn('Private Gardens', names)  # access=private
         self.assertNotIn(107, [s['osm_id'] for s in found])  # unnamed
 
-    def test_library_exclusions_follow_the_archive_decision(self):
-        names = set(by_name(spots()))
-        self.assertNotIn('Borough Archives', names)  # archive listed as a library (#92)
-        self.assertNotIn('Example Research Library', names)  # library=research tag
-        self.assertIn('Hanwell Library and Local Studies Centre', names)  # public library: kept
-        self.assertNotIn('Library for Iranian Studies', names)  # specialist library (#243)
-
-    def test_specialist_libraries_are_left_out_but_public_ones_stay(self):
-        def kept(name):
-            data = {'elements': [{'type': 'area', 'id': 1},
-                                 {'type': 'node', 'id': 9, 'lat': 51.5, 'lon': -0.3,
-                                  'tags': {'amenity': 'library', 'name': name}}]}
-            return bool(cd.spots_from_overpass(data)[1])
-        for name in ('Bishopsgate Institute Library', 'Royal College of Nursing Library', 'Hospital Library',
-                     'Linnean Society Library', 'Library for Iranian Studies', 'Inner Temple Law Library'):
-            with self.subTest(name=name):
-                self.assertFalse(kept(name))
-        for name in ('Ealing Central Library', 'Hammersmith Library and Local Studies Centre',
-                     'School Lane Community Library', 'College Road Library'):  # named after streets
-            with self.subTest(name=name):
-                self.assertTrue(kept(name))
+    def test_libraries_are_never_discovered(self):
+        # Owner decision 23 Oct 2026 (#243): the library reference source already covers them.
+        self.assertFalse([s for s in spots() if s['tags'].get('amenity') == 'library'])
+        self.assertNotIn('library', cd.overpass_query('E09000009'))
 
     def test_missing_boundary_is_reported(self):
         self.assertFalse(cd.spots_from_overpass(NO_AREA)[0])
@@ -159,11 +142,40 @@ class DedupTests(unittest.TestCase):
         self.assertEqual(cd.match_existing(park, index)[0], 'existing')
 
     def test_near_miss_is_flagged_not_dropped(self):
-        library = self.found['West Ealing Community Library']
-        index = cd.VenueIndex([{'id': 'v4', 'venue_name': 'West Ealing Library', 'postcode': 'W13 9BT',
-                                'latitude': library['lat'] + 0.001, 'longitude': library['lng']}])
-        outcome, venue = cd.match_existing(library, index)
+        museum = self.found['Pitzhanger Manor House and Gallery']
+        index = cd.VenueIndex([{'id': 'v4', 'venue_name': 'Pitzhanger Manor', 'postcode': 'W5 5XX',
+                                'latitude': museum['lat'] + 0.001, 'longitude': museum['lng']}])  # ~110 m
+        outcome, venue = cd.match_existing(museum, index)
         self.assertEqual((outcome, venue['id']), ('possible', 'v4'))
+
+    def test_direct_database_check_catches_what_the_index_missed(self):
+        # 22 Oct dry run: Hanwell Zoo (way/221351281) was stored but offered as new.
+        zoo_url = 'https://www.openstreetmap.org/way/4251186'  # Walpole Park in the fixture
+        asked = []
+
+        def known(urls):
+            asked.extend(urls)
+            return {zoo_url}
+        stats, records = cd.discover_council(EALING, cd.VenueIndex([]), None, fetch=lambda code: SAMPLE,
+                                             resolve=keep_postcodes, known=known)
+        self.assertIn(zoo_url, asked)
+        self.assertNotIn(zoo_url, [r['source_url'] for r, _ in records])
+        self.assertGreaterEqual(stats['existing'], 1)
+
+    def test_venue_load_pages_in_a_fixed_order(self):
+        pages = [[{'id': str(i)} for i in range(1000)], [{'id': 'last'}]]
+        db = FakeDB({'venues': lambda q: pages[len([c for c in db.calls if c[0] == 'venues']) - 1]})
+        self.assertEqual(len(cd.load_venue_rows(db)), 1001)
+        for _, filters, _ in db.calls:
+            self.assertIn(('order', ('id',), {}), filters)
+
+    def test_stored_osm_urls_checks_both_url_columns(self):
+        url = 'https://www.openstreetmap.org/way/221351281'
+        db = FakeDB({'venues': lambda q: [{'source_url': url}] if q.filters[1][1][0] == 'source_url' else []})
+        self.assertEqual(cd.stored_osm_urls(db, [url]), {url})
+        self.assertEqual([f[1][0] for _, f, _ in db.calls for f in f if f[0] == 'in_'],
+                         ['source_url', 'discovered_source_url'])
+        self.assertEqual(cd.stored_osm_urls(db, []), set())
 
     def test_unrelated_neighbour_is_new(self):
         park = self.found['Walpole Park']
