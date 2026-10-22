@@ -22,7 +22,7 @@ export function SectionHeader({
         </h2>
         {isSample && <SampleBadge />}
       </div>
-      <Link href={href} className="inline-flex shrink-0 items-center gap-1 rounded-full py-2 text-sm font-semibold text-accent hover:underline">
+      <Link href={href} className="inline-flex shrink-0 items-center gap-1 rounded-full py-2 text-sm font-semibold text-accent-ink hover:underline">
         {linkLabel}
         <ArrowRight className="size-4" aria-hidden />
       </Link>

@@ -95,7 +95,7 @@ export function VenueCard({ venue, distance, index = 0 }: { venue: Venue; distan
         <VenueAccess venue={venue} />
         <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t pt-3">
           <div className="flex flex-wrap gap-1.5 text-xs font-semibold">
-            {venue.age_range && <span className="rounded-full bg-accent/15 px-2.5 py-1 text-accent">Ages {venue.age_range}</span>}
+            {venue.age_range && <span className="rounded-full bg-accent/15 px-2.5 py-1 text-accent-ink">Ages {venue.age_range}</span>}
             {where && <span className="rounded-full bg-muted px-2.5 py-1 text-muted-foreground">{where}</span>}
           </div>
           <div className="flex items-center gap-1">

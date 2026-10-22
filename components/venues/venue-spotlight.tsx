@@ -48,7 +48,7 @@ export function VenueSpotlight({ venue, distance, rolling, onReroll, onClose }: 
 
       <div className="flex flex-col gap-4 p-5 md:p-7">
         <div className="flex items-start justify-between gap-3">
-          <p className="text-sm font-bold tracking-wide text-primary uppercase">{categoryLabel(venue.category)}</p>
+          <p className="text-sm font-bold tracking-wide text-primary-ink uppercase">{categoryLabel(venue.category)}</p>
           <button
             type="button"
             onClick={onClose}
@@ -76,7 +76,7 @@ export function VenueSpotlight({ venue, distance, rolling, onReroll, onClose }: 
               {formatMiles(distance)} away (straight-line)
             </span>
           )}
-          {venue.is_free && <span className="font-semibold text-accent">Free entry</span>}
+          {venue.is_free && <span className="font-semibold text-accent-ink">Free entry</span>}
         </div>
 
         {venue.description && <p className="line-clamp-3 leading-relaxed text-pretty text-muted-foreground">{venue.description}</p>}

@@ -33,7 +33,7 @@ export default async function ProfilePage({ searchParams }: { searchParams: Prom
   return (
     <section className="animate-rise flex flex-col gap-6">
       <header className="flex flex-col gap-2">
-        <p className="text-sm font-semibold tracking-wide text-accent uppercase">Your profile</p>
+        <p className="text-sm font-semibold tracking-wide text-accent-ink uppercase">Your profile</p>
         <h1 className="font-heading text-4xl font-extrabold tracking-tight text-balance">Alright, {displayName || "Dad"}?</h1>
         <p className="text-muted-foreground">Member since {joined}</p>
       </header>
@@ -59,7 +59,7 @@ export default async function ProfilePage({ searchParams }: { searchParams: Prom
             </div>
           </dl>
           {!viaGoogle && (
-            <a href="/auth/update-password" className="text-sm font-semibold text-primary underline-offset-4 hover:underline">
+            <a href="/auth/update-password" className="text-sm font-semibold text-primary-ink underline-offset-4 hover:underline">
               Change password
             </a>
           )}

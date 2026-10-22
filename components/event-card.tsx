@@ -52,7 +52,7 @@ export function EventCard({ event, index = 0, showCategory = false }: { event: D
       </div>
       <div className="flex flex-1 flex-col gap-3 p-4">
         {showCategory && (
-          <p className="text-xs font-bold tracking-wide text-primary uppercase">{categoryLabel(eventCategory(event))}</p>
+          <p className="text-xs font-bold tracking-wide text-primary-ink uppercase">{categoryLabel(eventCategory(event))}</p>
         )}
         <h3 className="font-heading text-lg leading-snug font-bold text-pretty">{event.title}</h3>
         {showCategory && event.description && (
@@ -77,7 +77,7 @@ export function EventCard({ event, index = 0, showCategory = false }: { event: D
           </li>
         </ul>
         {event.age_range && (
-          <p className="mt-auto w-fit rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">Ages {event.age_range}</p>
+          <p className="mt-auto w-fit rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent-ink">Ages {event.age_range}</p>
         )}
         {endDate !== event.start_date && <span className="sr-only">Runs until {formatEventDate(endDate)}</span>}
       </div>

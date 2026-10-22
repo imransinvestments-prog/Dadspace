@@ -43,7 +43,7 @@ export function LoginForm({ next, notice }: { next: string; notice?: string }) {
       <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate={false}>
         <Field id="email" name="email" type="email" label="Email" autoComplete="email" required placeholder="you@example.com" />
         <Field id="password" name="password" type="password" label="Password" autoComplete="current-password" required />
-        <Link href="/auth/forgot-password" className="-mt-1 self-end text-sm font-semibold text-primary underline-offset-4 hover:underline">
+        <Link href="/auth/forgot-password" className="-mt-1 self-end text-sm font-semibold text-primary-ink underline-offset-4 hover:underline">
           Forgot your password?
         </Link>
         {error && <FormMessage>{error}</FormMessage>}
@@ -53,7 +53,7 @@ export function LoginForm({ next, notice }: { next: string; notice?: string }) {
       </form>
       <p className="text-center text-sm text-muted-foreground">
         New here?{" "}
-        <Link href={signUpHref} className="font-semibold text-primary underline-offset-4 hover:underline">
+        <Link href={signUpHref} className="font-semibold text-primary-ink underline-offset-4 hover:underline">
           Create an account
         </Link>
       </p>

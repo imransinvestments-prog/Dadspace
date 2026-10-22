@@ -29,7 +29,7 @@ export function AuthLayout({
       </div>
       <div className="flex flex-col gap-6 p-6 sm:p-10">
         <header className="flex flex-col gap-2">
-          <p className="text-sm font-semibold tracking-wide text-accent uppercase">{eyebrow}</p>
+          <p className="text-sm font-semibold tracking-wide text-accent-ink uppercase">{eyebrow}</p>
           <h1 className="font-heading text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">{title}</h1>
           <p className="leading-relaxed text-pretty text-muted-foreground">{intro}</p>
         </header>
