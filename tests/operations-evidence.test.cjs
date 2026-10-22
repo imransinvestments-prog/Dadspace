@@ -95,10 +95,12 @@ test('unnamed hidden venues remain reviewable without invalidating the queue', a
   assert.equal(result.value.total, 2)
   assert.equal(result.value.rows[0].title, 'Unnamed venue — identity evidence missing')
   assert.equal(result.value.rows[1].title, 'Library')
-  // Arcades decided by evidence never queue; arcades hidden by the 22 Oct rule wait for the owner.
+  // Arcades decided by evidence never queue; arcades hidden by the 22 Oct rule wait for the owner;
+  // prison libraries hidden as not open to the public are decided and never queue.
   const filters = fixture.queries.find(q => q.table === 'venues').filters.filter(f => f[0] === 'or').map(f => f[1])
   assert.deepEqual(filters, ['category.neq."Amusement arcade",adult_only.is.null',
-    'review_reason.is.null,review_reason.not.ilike."*2026-10-22 owner rule: amusement arcades*"'])
+    'review_reason.is.null,review_reason.not.ilike."*2026-10-22 owner rule: amusement arcades*"',
+    'review_reason.is.null,review_reason.not.ilike."*Owner decision 2026-10-22: not open to the public*"'])
   const labelled = database('allowed', () => ({ data: [{ id: 'p', venue_name: null, venue_label: 'Church Lane Playground' }], count: 1, error: null }))
   assert.equal((await labelled.module.getReviewQueue('venues')).result.value.rows[0].title, 'Church Lane Playground (derived label; no source name)')
   const invalid = database('allowed', () => ({ data: [{ id: 'broken', venue_name: 42 }], count: 1, error: null }))

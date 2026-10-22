@@ -77,9 +77,11 @@ export async function getReviewQueue(kind?: string | string[], page?: string | s
   let query = venue ? db.from("venues").select("id,venue_name,venue_label,address,postcode,source,source_url,discovered_source_url,discovered_at,discovery_status", { count: "exact" }).eq("public_visible", false)
     // Owner, 22 Oct 2026: arcades the evidence already decided (adult_only set) never need review, and
     // arcades hidden by that day's rule stay out of the queue until the owner works through them;
-    // removing the second filter then shows exactly the undecided arcades.
+    // removing the second filter then shows exactly the undecided arcades. Prison and YOI libraries
+    // hidden as not open to the public (#92) are decided, so they never queue either.
     .or('category.neq."Amusement arcade",adult_only.is.null')
-    .or('review_reason.is.null,review_reason.not.ilike."*2026-10-22 owner rule: amusement arcades*"').order("discovered_at", { ascending: false, nullsFirst: false }) :
+    .or('review_reason.is.null,review_reason.not.ilike."*2026-10-22 owner rule: amusement arcades*"')
+    .or('review_reason.is.null,review_reason.not.ilike."*Owner decision 2026-10-22: not open to the public*"').order("discovered_at", { ascending: false, nullsFirst: false }) :
     db.from("collected_events").select("id,title,venue_name,venue_address,postcode,source_url,event_url,last_verified_at,listing_type,age_range,start_date,end_date,recurrence,schedule_text", { count: "exact" }).is("venue_id", null).is("withdrawn_at", null).eq("listing_type", selection.kind === "activities" ? "activity" : "event").order("last_verified_at", { ascending: false, nullsFirst: false })
   query = query.order("id").range((selection.page - 1) * PAGE_SIZE, selection.page * PAGE_SIZE - 1).abortSignal(AbortSignal.timeout(10_000))
   const result = await read(query, response => {
