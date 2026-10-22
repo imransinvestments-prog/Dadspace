@@ -194,18 +194,16 @@ function seasonConflict(event: DadEvent) {
   return false
 }
 
-function teenOnly(event: DadEvent) {
-  const ages = (event.age_range ?? "").toLowerCase()
-  const context = `${event.title} ${ages}`.toLowerCase()
-  if (/\bteen(?:ager|agers|s)?\b/.test(context)) return true
-  if (/\badults?\s+only\b/.test(context)) return true
-  return false
+// Only explicit adults-only listings are dropped (#101). Mentioning teens is not a reason to hide a
+// family event: age filters (12+, under-5, the pilot's 0-5) decide by the listing's actual ages.
+function adultsOnly(event: DadEvent) {
+  return /\badults?\s+only\b/i.test(`${event.title} ${event.age_range ?? ""}`)
 }
 
 /** Hide obviously bad legacy rows without changing Supabase. */
-function qualityForDisplay(events: DadEvent[]): DadEvent[] {
+export function qualityForDisplay(events: DadEvent[]): DadEvent[] {
   return events
-    .filter((event) => !!event.start_date && !seasonConflict(event) && !teenOnly(event))
+    .filter((event) => !!event.start_date && !seasonConflict(event) && !adultsOnly(event))
     .map((event) => (suspiciousTime(event) ? { ...event, time_text: null } : event))
 }
 
