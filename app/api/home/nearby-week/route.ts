@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getSupabase } from "@/lib/supabase"
 import { parsePoint } from "@/lib/distance"
 import { fetchUpcomingEvents } from "@/lib/events"
-import { withDistances } from "@/lib/listing-distance"
+import { distanceKm, kmToMiles } from "@/lib/geo"
 import { londonToday, weekday, addDays } from "@/lib/dates"
-import { activeThisWeek } from "@/lib/home-selection"
+import { weekActivityPoints } from "@/lib/home-nearby"
 export const dynamic = "force-dynamic"
 export const maxDuration = 60
 export async function GET(request: NextRequest) {
@@ -21,19 +20,8 @@ export async function GET(request: NextRequest) {
         return true
       }).slice(0,2)
     }),
-    (async () => {
-      const db = getSupabase()
-      if (!db) throw new Error("Activities unavailable")
-      const rows: {id:string;location:string|null;postcode:string|null;venue_id:string|null;source_id:string|null;start_date:string|null;end_date:string|null;recurrence:string|null}[] = []
-      for(let offset=0;;offset+=500) {
-        const {data,error} = await db.from("current_activities").select("id,location,postcode,venue_id,source_id,start_date,end_date,recurrence").order("id").range(offset,offset+499)
-        if(error || !Array.isArray(data)) throw new Error("Activities unavailable")
-        rows.push(...(data ?? []))
-        if((data?.length ?? 0)<500) break
-      }
-      const located = await withDistances(rows.filter(row => activeThisWeek(row,weekStart,weekEnd)),point)
-      return new Set(located.filter(row => row.distance_miles != null && row.distance_miles <= 30).map(row => row.id)).size
-    })()
+    weekActivityPoints(weekStart,weekEnd).then(points =>
+      new Set(points.filter(row => kmToMiles(distanceKm(point,row)) <= 30).map(row => row.id)).size),
   ])
   return NextResponse.json({events:eventsResult.status === "fulfilled" ? eventsResult.value : [],eventsUnavailable:eventsResult.status === "rejected",activityCount:countResult.status === "fulfilled" ? countResult.value : null,weekStart,weekEnd,radiusMiles:30}, {headers:{"Cache-Control":"private, no-store"}})
 }
