@@ -1,12 +1,14 @@
-import { Loader2 } from "lucide-react"
+import { CircleAlert, CircleCheck, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export function Field({
   label,
   hint,
   id,
+  errorId,
   ...input
-}: React.InputHTMLAttributes<HTMLInputElement> & { id: string; label: string; hint?: string }) {
+}: React.InputHTMLAttributes<HTMLInputElement> & { id: string; label: string; hint?: string; errorId?: string }) {
+  const describedBy = [hint && `${id}-hint`, input["aria-invalid"] && errorId].filter(Boolean).join(" ")
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="text-sm font-semibold">
@@ -14,8 +16,8 @@ export function Field({
       </label>
       <input
         id={id}
-        aria-describedby={hint ? `${id}-hint` : undefined}
-        className="h-12 rounded-xl border bg-background px-4 text-base outline-none transition placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-ring/40"
+        aria-describedby={describedBy || undefined}
+        className="h-12 rounded-xl border bg-background px-4 text-base outline-none transition placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-ring/40 aria-invalid:border-destructive"
         {...input}
       />
       {hint && (
@@ -40,16 +42,19 @@ export function SubmitButton({ pending, children, pendingLabel }: { pending: boo
   )
 }
 
-export function FormMessage({ tone = "error", children }: { tone?: "error" | "success"; children: React.ReactNode }) {
+export function FormMessage({ tone = "error", id, children }: { tone?: "error" | "success"; id?: string; children: React.ReactNode }) {
+  const Icon = tone === "error" ? CircleAlert : CircleCheck
   return (
     <p
+      id={id}
       role={tone === "error" ? "alert" : "status"}
       className={cn(
-        "rounded-xl border px-4 py-3 text-sm leading-relaxed",
-        tone === "error" ? "border-accent/50 bg-accent/10" : "border-primary/40 bg-primary/10",
+        "flex items-start gap-2 rounded-xl border px-4 py-3 text-sm leading-relaxed",
+        tone === "error" ? "border-destructive/50 bg-destructive/10" : "border-primary/40 bg-primary/10",
       )}
     >
-      {children}
+      <Icon className={cn("mt-0.5 size-4 shrink-0", tone === "error" ? "text-destructive" : "text-primary-ink")} aria-hidden />
+      <span>{children}</span>
     </p>
   )
 }

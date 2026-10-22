@@ -36,6 +36,7 @@
   --navy-foreground: #f5f6fa;
   --muted: #e9ecf4;
   --muted-foreground: #56627f;
+  --destructive: #b42318;
   --border: #dde2ee;
   --ring: #ff7a1a;
   --radius: 1.25rem;
@@ -58,6 +59,7 @@
   --navy-foreground: #f5f6fa;
   --muted: #1b2c5a;
   --muted-foreground: #a4afcc;
+  --destructive: #ff8a7a;
   --border: #22346a;
   --ring: #ff7a1a;
 }
@@ -79,6 +81,7 @@
   --color-navy-foreground: var(--navy-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
   --color-border: var(--border);
   --color-ring: var(--ring);
   --radius-sm: calc(var(--radius) - 0.5rem);
