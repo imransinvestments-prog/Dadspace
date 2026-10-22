@@ -11,6 +11,7 @@ import { GoogleButton } from "./google-button"
 export function SignUpForm({ next }: { next: string }) {
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
+  const [invalidField, setInvalidField] = useState<"password" | "confirmPassword" | null>(null)
   const [pending, setPending] = useState(false)
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -21,15 +22,18 @@ export function SignUpForm({ next }: { next: string }) {
 
     if (password.length < 8) {
       setError("Your password needs at least 8 characters.")
+      setInvalidField("password")
       return
     }
     if (password !== String(form.get("confirmPassword"))) {
       setError("Those two passwords don't match.")
+      setInvalidField("confirmPassword")
       return
     }
 
     setPending(true)
     setError(null)
+    setInvalidField(null)
     const { data, error } = await createClient().auth.signUp({
       email: String(form.get("email")).trim(),
       password,
@@ -72,9 +76,9 @@ export function SignUpForm({ next }: { next: string }) {
           hint="This is what other dads see. You can change it later."
         />
         <Field id="email" name="email" type="email" label="Email" autoComplete="email" required placeholder="you@example.com" />
-        <Field id="password" name="password" type="password" label="Password" autoComplete="new-password" required minLength={8} hint="At least 8 characters." />
-        <Field id="confirmPassword" name="confirmPassword" type="password" label="Confirm password" autoComplete="new-password" required minLength={8} />
-        {error && <FormMessage>{error}</FormMessage>}
+        <Field id="password" name="password" aria-invalid={invalidField === "password" || undefined} errorId="form-error" type="password" label="Password" autoComplete="new-password" required minLength={8} hint="At least 8 characters." />
+        <Field id="confirmPassword" name="confirmPassword" aria-invalid={invalidField === "confirmPassword" || undefined} errorId="form-error" type="password" label="Confirm password" autoComplete="new-password" required minLength={8} />
+        {error && <FormMessage id="form-error">{error}</FormMessage>}
         <SubmitButton pending={pending} pendingLabel="Creating account…">
           Create account
         </SubmitButton>

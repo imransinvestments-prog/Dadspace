@@ -8,6 +8,7 @@ import { Field, FormMessage, SubmitButton, authErrorMessage } from "./form-parts
 export function UpdatePasswordForm() {
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
+  const [invalidField, setInvalidField] = useState<"password" | "confirmPassword" | null>(null)
   const [pending, setPending] = useState(false)
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -17,15 +18,18 @@ export function UpdatePasswordForm() {
 
     if (password.length < 8) {
       setError("Your password needs at least 8 characters.")
+      setInvalidField("password")
       return
     }
     if (password !== String(form.get("confirmPassword"))) {
       setError("Those two passwords don't match.")
+      setInvalidField("confirmPassword")
       return
     }
 
     setPending(true)
     setError(null)
+    setInvalidField(null)
     const { error } = await createClient().auth.updateUser({ password })
     if (error) {
       console.error("Update password error:", error.code ?? error.message)
@@ -39,9 +43,9 @@ export function UpdatePasswordForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <Field id="password" name="password" type="password" label="New password" autoComplete="new-password" required minLength={8} hint="At least 8 characters." />
-      <Field id="confirmPassword" name="confirmPassword" type="password" label="Confirm new password" autoComplete="new-password" required minLength={8} />
-      {error && <FormMessage>{error}</FormMessage>}
+      <Field id="password" name="password" aria-invalid={invalidField === "password" || undefined} errorId="form-error" type="password" label="New password" autoComplete="new-password" required minLength={8} hint="At least 8 characters." />
+      <Field id="confirmPassword" name="confirmPassword" aria-invalid={invalidField === "confirmPassword" || undefined} errorId="form-error" type="password" label="Confirm new password" autoComplete="new-password" required minLength={8} />
+      {error && <FormMessage id="form-error">{error}</FormMessage>}
       <SubmitButton pending={pending} pendingLabel="Saving…">
         Save new password
       </SubmitButton>
