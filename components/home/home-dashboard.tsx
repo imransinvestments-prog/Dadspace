@@ -6,6 +6,8 @@ import { TrendingThreads } from "./trending-threads"
 import { NewsHeadlines } from "./news-headlines"
 import { NearbyWeek } from "./nearby-week"
 import { HomeDeals } from "./home-deals"
+import { WeatherCard } from "./weather-card"
+import { weatherConfigured } from "@/lib/weather"
 import type { HomeData } from "@/lib/types"
 import { FORUM_ENABLED } from "@/lib/launch"
 import type { Venue } from "@/lib/venue-meta"
@@ -28,6 +30,8 @@ export function HomeDashboard({ data, publicPlaces = [], initialDeals = [], chil
         <HeroGreeting greeting={data.greeting} sleeps={data.sleepsToWeekend} weekendLabel={data.weekendLabel} />
         <DadJoke />
       </div>
+      {/* Decided on the server so an unconfigured card never appears and then collapses. */}
+      {weatherConfigured() && <WeatherCard />}
       {children}
       <LocalPlaces publicPlaces={publicPlaces}/>
       <div className="border-t pt-8"><NewsHeadlines monthlyNews={data.monthlyNews} /></div>
