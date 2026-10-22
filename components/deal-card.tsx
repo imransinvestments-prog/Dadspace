@@ -15,12 +15,12 @@ export function DealCard({ deal }: { deal: LiveDeal }) {
         </div>
       ) : null}
       <div className="flex flex-col gap-3 p-5">
-        <p className="text-xs font-semibold text-cyan-400">{deal.display_group} · {deal.retailer ?? "See source for retailer"}</p>
+        <p className="text-xs font-semibold text-accent-ink">{deal.display_group} · {deal.retailer ?? "See source for retailer"}</p>
         <h3 className="text-lg font-bold leading-snug">{dealDisplayTitle(deal.title)}</h3>
-        {advertised && <p className="text-xs font-semibold text-orange-400">Merchant-advertised sale</p>}
-        {benefit ? <p className="font-bold text-orange-400">{benefit}</p> : (
+        {advertised && <p className="text-xs font-semibold text-primary-ink">Merchant-advertised sale</p>}
+        {benefit ? <p className="font-bold text-primary-ink">{benefit}</p> : (
           <p className="text-sm">
-            <strong className="text-2xl text-orange-400">{gbp.format(Number(deal.price))}</strong>
+            <strong className="text-2xl text-primary-ink">{gbp.format(Number(deal.price))}</strong>
             {advertised
               ? <> · Merchant comparison price {gbp.format(Number(deal.was_price))}</>
               : <> · {Math.round(Number(deal.discount_pct))}% below source comparison ({gbp.format(Number(deal.was_price))})</>}
@@ -39,8 +39,8 @@ export function DealCard({ deal }: { deal: LiveDeal }) {
           {" "}Check the final price, delivery, eligibility and availability before buying.
         </p>
         <a href={deal.link} target="_blank" rel="nofollow sponsored noopener noreferrer"
-          className="inline-flex w-fit items-center gap-2 rounded-full bg-orange-500 px-4 py-2.5 text-sm font-bold text-slate-950 hover:bg-orange-400">
-          View offer and terms <ExternalLink className="h-4 w-4" />
+          className="inline-flex w-fit items-center gap-2 rounded-full min-h-11 bg-primary px-4 py-2.5 text-sm font-bold text-primary-foreground hover:bg-primary/90">
+          View offer and terms <ExternalLink className="h-4 w-4" aria-hidden />
         </a>
         <p className="text-xs text-muted-foreground">We may earn a commission through some links. This does not affect ranking.</p>
       </div>

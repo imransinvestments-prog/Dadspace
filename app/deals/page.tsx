@@ -22,9 +22,9 @@ export default async function DealsPage({ searchParams }: { searchParams: Promis
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <AwinPublisherTag />
-      <section className="mb-8 rounded-3xl border border-white/10 bg-card/70 p-6 sm:p-8">
-        <div className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-cyan-400">
-          <Tag className="h-4 w-4" />
+      <section className="mb-8 rounded-3xl border bg-card/70 p-6 sm:p-8">
+        <div className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-accent-ink">
+          <Tag className="h-4 w-4" aria-hidden />
           Family bargains
         </div>
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Deals worth a dad look</h1>
@@ -38,18 +38,18 @@ export default async function DealsPage({ searchParams }: { searchParams: Promis
           const active = label === (group ?? "All offers")
           return <Link key={label} href={label === "All offers" ? "/deals" : `/deals?group=${encodeURIComponent(label)}`}
             aria-current={active ? "page" : undefined}
-            className={`rounded-full border px-4 py-2 text-sm ${active ? "bg-orange-500 text-slate-950" : "bg-card"}`}>
+            className={`inline-flex min-h-11 items-center rounded-full border px-4 text-sm ${active ? "border-primary bg-primary font-semibold text-primary-foreground" : "bg-card hover:bg-muted"}`}>
             {label}
           </Link>
         })}
       </nav>
 
       {loadFailed ? (
-        <div className="rounded-2xl border border-white/10 bg-card p-6 text-muted-foreground">
+        <div className="rounded-2xl border bg-card p-6 text-muted-foreground">
           We couldn&apos;t load deals just now. Please try again shortly.
         </div>
       ) : deals.length === 0 ? (
-        <div className="rounded-2xl border border-white/10 bg-card p-6 text-muted-foreground">
+        <div className="rounded-2xl border bg-card p-6 text-muted-foreground">
           {group ? `No ${group.toLowerCase()} offers meet our quality checks right now.` : "No offers meet our quality checks right now."} Check back soon.
         </div>
       ) : (
