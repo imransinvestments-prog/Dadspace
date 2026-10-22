@@ -1,0 +1,68 @@
+{
+  "production_writes": 0,
+  "production_schema_changes": 0,
+  "scope": "Local PGlite prototype; legacy repository trigger plus explicit opt-in guard. Not a deployable migration or concurrent-writer certification.",
+  "fixture": "tests/fixtures/library-portal-records.json",
+  "cases": [
+    {
+      "case": "forward_inverse_exact_row",
+      "pass": true
+    },
+    {
+      "case": "adoption_retains_listing_id",
+      "pass": true
+    },
+    {
+      "case": "rename_preserves_id_and_legacy_dedupe",
+      "pass": true
+    },
+    {
+      "case": "content_changes_without_identity_change",
+      "pass": true
+    },
+    {
+      "case": "real_distinct_occurrences_one_session",
+      "pass": true
+    },
+    {
+      "case": "synthetic_same_title_same_venue_distinct_sessions",
+      "pass": true
+    },
+    {
+      "case": "qualified_source_missing_ids_rejected",
+      "pass": true
+    },
+    {
+      "case": "conflicting_dedupe_cannot_merge_sessions",
+      "pass": true
+    },
+    {
+      "case": "unqualified_source_cannot_claim_namespace",
+      "pass": true
+    },
+    {
+      "case": "session_reassignment_rejected",
+      "pass": true
+    },
+    {
+      "case": "place_change_requires_review",
+      "pass": true
+    },
+    {
+      "case": "retirement_requires_review",
+      "pass": true
+    },
+    {
+      "case": "changed_or_added_rows_block_inverse",
+      "pass": true
+    },
+    {
+      "case": "retained_review_history",
+      "pass": true
+    },
+    {
+      "case": "non_enrolled_collectors_unchanged",
+      "pass": true
+    }
+  ]
+}

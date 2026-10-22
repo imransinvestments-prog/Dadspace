@@ -14,6 +14,7 @@ from gemini_usage import BudgetExhausted
 class CollectionWorkerTests(unittest.TestCase):
     def test_partial_save_and_budget_stop_do_not_mark_sources_fresh(self):
         sources = [{'id': key, 'name': key, 'last_hash': 'old'} for key in ('a', 'b', 'c', 'd')]
+        sources.insert(0, {'id':'dedicated-nct','name':'NCT','source_adapter':'nct_dedicated'})
         db = Mock()
         db.table.return_value.select.return_value.eq.return_value.in_.return_value.execute.return_value.data = sources
         # CATEGORY_FILTER uses in_ before source selection.

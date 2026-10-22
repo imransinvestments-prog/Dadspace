@@ -5,10 +5,22 @@ on:
       - 'worker.py'
       - 'collection_evidence.py'
       - 'mylibrary_calendar.py'
+      - 'events_worker.py'
+      - 'canonical_venue.py'
+      - 'tests/test_canonical_venue.py'
+      - 'provider_session_identity.py'
+      - 'tests/test_provider_session_identity.py'
+      - 'tests/fixtures/provider-session-worker-rows.json'
       - 'activity_eligibility.py'
       - 'scripts/replay-activity-identity.mjs'
+      - 'scripts/rehearse-provider-identity.mjs'
+      - 'scripts/qualify_activity_identity.py'
       - 'scripts/build-activity-eligibility.py'
       - 'tests/activity-identity-replay.test.mjs'
+      - 'tests/provider-identity-rehearsal.test.mjs'
+      - 'tests/test_activity_identity_qualification.py'
+      - 'tests/fixtures/library-portal-records.json'
+      - 'artefacts/data/sprint9-provider-identity.json'
       - 'tests/activity-renewal-transactions.test.mjs'
       - 'tests/test_collection_*.py'
       - 'tests/test_activity_renewal.py'
@@ -29,8 +41,11 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s tests -p 'test_collection_*.py' -v
       - run: python -m unittest discover -s tests -p test_activity_ingestion.py -v
+      - run: python -m unittest discover -s tests -p test_canonical_venue.py -v
+      - run: python -m unittest discover -s tests -p test_provider_session_identity.py -v
       - run: python -m unittest discover -s tests -p test_activity_renewal.py -v
       - run: python -m unittest discover -s tests -p test_activity_eligibility.py -v
+      - run: python -m unittest discover -s tests -p test_activity_identity_qualification.py -v
       - run: python -m unittest discover -s tests -p test_mylibrary_calendar.py -v
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
@@ -38,7 +53,7 @@ jobs:
           node-version: '24'
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: node --test tests/activity-identity-replay.test.mjs tests/activity-renewal-transactions.test.mjs
+      - run: node --test tests/activity-identity-replay.test.mjs tests/provider-identity-rehearsal.test.mjs tests/activity-renewal-transactions.test.mjs
       - run: pnpm exec tsc --noEmit
       - run: pnpm build
         env:

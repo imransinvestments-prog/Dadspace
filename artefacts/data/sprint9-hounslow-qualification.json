@@ -1,0 +1,82 @@
+{
+  "dry_run": true,
+  "model_calls": 0,
+  "database_writes": 0,
+  "source_activation": false,
+  "results": [
+    {
+      "pass": 1,
+      "status": "ok",
+      "hash": "48e64d862f2a7e1c11a5864efe69738b2057b7c6e8ec5305cf6cf44669b5ea6c",
+      "kept": 1,
+      "info": "Hounslow: 1 reviewed programmes; zero model calls",
+      "rows": [
+        {
+          "source_id": "00000000-0000-0000-0000-000000000001",
+          "title": "Storytime at Chiswick Community Hub and Library",
+          "description": "Storytime at Chiswick Community Hub and Library. Booking required.",
+          "listing_type": "activity",
+          "is_holiday_camp": false,
+          "category": "libraries",
+          "start_date": null,
+          "end_date": null,
+          "schedule_text": "Every Tuesday morning (Term-time only); from 11am to 11.30am; no school holidays: 20/07/2026\u201307/09/2026; 26/10/2026\u201302/11/2026; 21/12/2026\u201304/01/2027",
+          "time_text": "from 11am to 11.30am",
+          "location": "Chiswick Library",
+          "venue_name": "Chiswick Library",
+          "venue_address": "Chiswick Library Location Chiswick Community hub and library Duke\u2019s Avenue Chiswick W4 2AB",
+          "postcode": "W4 2AB",
+          "venue_id": null,
+          "event_url": "https://hounslowconnect.com/services/storytime-at-chiswick-community-hub-and-library",
+          "cost_text": "Free",
+          "age_range": "0\u20135 years",
+          "recurrence": "recurring",
+          "family_relevance": 5,
+          "confidence": 0.98,
+          "source_url": "https://hounslowconnect.com/services/storytime-at-chiswick-community-hub-and-library",
+          "extraction_method": "hounslow_programme",
+          "dedupe_key": "c216448a24f3bb82a2da3da9e96d20b60a65201f",
+          "last_verified_at": "2026-10-18T18:46:11.541167+00:00",
+          "last_seen_at": "2026-10-18T18:46:11.541167+00:00"
+        }
+      ]
+    },
+    {
+      "pass": 2,
+      "status": "ok",
+      "hash": "48e64d862f2a7e1c11a5864efe69738b2057b7c6e8ec5305cf6cf44669b5ea6c",
+      "kept": 1,
+      "info": "Hounslow: 1 reviewed programmes; zero model calls",
+      "rows": [
+        {
+          "source_id": "00000000-0000-0000-0000-000000000001",
+          "title": "Storytime at Chiswick Community Hub and Library",
+          "description": "Storytime at Chiswick Community Hub and Library. Booking required.",
+          "listing_type": "activity",
+          "is_holiday_camp": false,
+          "category": "libraries",
+          "start_date": null,
+          "end_date": null,
+          "schedule_text": "Every Tuesday morning (Term-time only); from 11am to 11.30am; no school holidays: 20/07/2026\u201307/09/2026; 26/10/2026\u201302/11/2026; 21/12/2026\u201304/01/2027",
+          "time_text": "from 11am to 11.30am",
+          "location": "Chiswick Library",
+          "venue_name": "Chiswick Library",
+          "venue_address": "Chiswick Library Location Chiswick Community hub and library Duke\u2019s Avenue Chiswick W4 2AB",
+          "postcode": "W4 2AB",
+          "venue_id": null,
+          "event_url": "https://hounslowconnect.com/services/storytime-at-chiswick-community-hub-and-library",
+          "cost_text": "Free",
+          "age_range": "0\u20135 years",
+          "recurrence": "recurring",
+          "family_relevance": 5,
+          "confidence": 0.98,
+          "source_url": "https://hounslowconnect.com/services/storytime-at-chiswick-community-hub-and-library",
+          "extraction_method": "hounslow_programme",
+          "dedupe_key": "c216448a24f3bb82a2da3da9e96d20b60a65201f",
+          "last_verified_at": "2026-10-18T18:46:12.715804+00:00",
+          "last_seen_at": "2026-10-18T18:46:12.715804+00:00"
+        }
+      ]
+    }
+  ]
+}

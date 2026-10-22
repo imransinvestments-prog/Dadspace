@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-18T21:51:42.819746+00:00",
+  "model_calls": 0,
+  "database_writes": 0,
+  "production_enrolment": false,
+  "scope": "One NCT programme candidate, not permission to adopt existing rows",
+  "results": [
+    {
+      "published_booking_url": "https://www.eventbrite.co.uk/e/nct-alf-king-baby-cafe-tickets-1997432427159",
+      "provider_series_url": "https://www.eventbrite.co.uk/e/nct-alf-king-baby-cafe-tickets-1997432305796",
+      "start_date": "2026-10-19T10:00:00+01:00",
+      "end_date": "2026-10-19T11:30:00+01:00",
+      "offered_occurrence_urls": [
+        "https://www.eventbrite.co.uk/e/nct-alf-king-baby-cafe-tickets-1997432427159"
+      ],
+      "name": "NCT Alf King Baby Caf\u00e9",
+      "place": "Alf King Family Hub West"
+    },
+    {
+      "published_booking_url": "https://www.eventbrite.co.uk/e/nct-alf-king-baby-cafe-tickets-1997432428162",
+      "provider_series_url": "https://www.eventbrite.co.uk/e/nct-alf-king-baby-cafe-tickets-1997432305796",
+      "start_date": "2026-10-26T10:00:00Z",
+      "end_date": "2026-10-26T11:30:00Z",
+      "offered_occurrence_urls": [
+        "https://www.eventbrite.co.uk/e/nct-alf-king-baby-cafe-tickets-1997432428162"
+      ],
+      "name": "NCT Alf King Baby Caf\u00e9",
+      "place": "Alf King Family Hub West"
+    }
+  ]
+}

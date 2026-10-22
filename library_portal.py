@@ -88,8 +88,19 @@ def collect_portal(source,today,fetch,robots,stats):
     if starts[-1].date()<=cutoff: raise CalendarError('Portal index does not cover full collection window')
     stats.update(collection_window_days=days,portal_records=len(records))
     groups={}
+    from provider_session_identity import ADAPTER, scope, metadata
+    provider_mode=source.get('source_adapter')==ADAPTER
+    namespace,selected_sessions=scope(url) if provider_mode else (None,None)
+    provider_occurrence_ids=set()
     def reject(reason): stats[reason]=stats.get(reason,0)+1
     for record,start in zip(records,starts):
+        if provider_mode and record.get('series_id') not in selected_sessions:
+            reject('outside_reviewed_session_scope'); continue
+        if provider_mode:
+            occurrence_id=record.get('event_id')
+            if type(occurrence_id) is not int or occurrence_id<=0 or occurrence_id in provider_occurrence_ids:
+                raise CalendarError('Duplicate or contradictory provider occurrence identity')
+            provider_occurrence_ids.add(occurrence_id)
         if not today<=start.date()<=cutoff: reject('outside_window'); continue
         if record.get('is_private') is not False or record.get('is_published') is not True: reject('not_public');continue
         if record.get('is_cancelled') or record.get('is_fully_booked'): reject('cancelled_or_full');continue
@@ -118,16 +129,21 @@ def collect_portal(source,today,fetch,robots,stats):
         requirements=BeautifulSoup(record.get('requirements') or '','html.parser').get_text(' ',strip=True)
         booking='Booking required' if record.get('requires_booking') else 'No booking required'
         time_text=start.strftime('%I:%M %p').lstrip('0')+' - '+end.strftime('%I:%M %p').lstrip('0')
-        key=(title.casefold(),venue.casefold(),kind,record['event_id'] if kind=='event' else '')
+        if provider_mode and kind!='activity': raise CalendarError('Reviewed session no longer has regular activity evidence')
+        key=(namespace,str(record['series_id'])) if provider_mode else (title.casefold(),venue.casefold(),kind,record['event_id'] if kind=='event' else '')
         item=groups.setdefault(key,dict(title=title,description=description+' '+requirements+' '+booking,
             listing_type=kind,family_evidence='Public programme description',audience='families',family_relevance=5,confidence=.99,
             venue_name=venue,location=venue,event_url=target,age_range=age,cost_text=cost,
             start_date=start.date().isoformat(),end_date=end.date().isoformat(),time_text=time_text,
             recurrence=recurrence or 'Named regular programme series',category='story_rhyme' if re.search('rhyme|story',title,re.I) else None,
             occurrence_dates=[],schedule_text=None,occurrence_times=[],conditions=set()))
+        if provider_mode:
+            item.setdefault('provider_occurrences',[]).append({'id':record['event_id'],'url':target,
+                'date':start.date().isoformat(),'time':time_text})
+            item.update(provider_namespace=namespace,provider_session_id=str(record['series_id']))
         item['occurrence_dates'].append(start.date().isoformat())
         item['occurrence_times'].append((start.date().isoformat(),time_text))
-        item['conditions'].add((age,cost,requirements,booking))
+        item['conditions'].add((age,cost,requirements,booking,venue,record.get('location_id')))
         reject('accepted_occurrences')
     items=[]
     for item in groups.values():
@@ -135,6 +151,7 @@ def collect_portal(source,today,fetch,robots,stats):
         times=sorted(set(item.pop('occurrence_times')))
         if len(conditions)>1:
             reject('programme_conditions_require_review'); continue
+        if provider_mode: item.update(metadata(namespace,item['provider_session_id'],item['provider_occurrences']))
         item['occurrence_dates']=sorted(set(item['occurrence_dates']))
         if item['listing_type']=='activity':
             if len({clock for _,clock in times})==1:

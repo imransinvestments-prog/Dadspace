@@ -1,0 +1,86 @@
+[
+  {
+    "provider_namespace": "ealing.events.mylibrary.digital",
+    "provider_session_id": "264038",
+    "provider_occurrences": [
+      {
+        "id": 264081,
+        "url": "https://ealing.events.mylibrary.digital/event?id=264081",
+        "date": "2026-10-12",
+        "time": "11:00 AM - 11:30 AM"
+      },
+      {
+        "id": 264082,
+        "url": "https://ealing.events.mylibrary.digital/event?id=264082",
+        "date": "2026-10-19",
+        "time": "11:00 AM - 11:30 AM"
+      }
+    ],
+    "source_id": "10000000-0000-0000-0000-000000000001",
+    "title": "Same published session title",
+    "description": "Rhymetime for babies and toddlers come along and sing with us  No booking required",
+    "listing_type": "activity",
+    "is_holiday_camp": false,
+    "category": null,
+    "start_date": "2026-10-12",
+    "end_date": "2026-10-19",
+    "schedule_text": "Published dates: 2026-10-12, 2026-10-19; 11:00 AM - 11:30 AM",
+    "time_text": "11:00 AM - 11:30 AM",
+    "location": "Reviewed test library",
+    "venue_name": "Reviewed test library",
+    "venue_address": null,
+    "postcode": null,
+    "venue_id": null,
+    "event_url": "https://ealing.events.mylibrary.digital/event?id=264081",
+    "cost_text": "FREE",
+    "age_range": "Up to 5",
+    "recurrence": "recurring",
+    "family_relevance": 5,
+    "confidence": 0.99,
+    "source_url": "https://libraries.ealing.gov.uk/events",
+    "extraction_method": "library_portal_sessions_v1",
+    "dedupe_key": "326e7ad262dc6e86f9f3955d05e1cfc0a86c43cc"
+  },
+  {
+    "provider_namespace": "ealing.events.mylibrary.digital",
+    "provider_session_id": "319285",
+    "provider_occurrences": [
+      {
+        "id": 319317,
+        "url": "https://ealing.events.mylibrary.digital/event?id=319317",
+        "date": "2026-10-12",
+        "time": "10:00 AM - 11:00 AM"
+      },
+      {
+        "id": 319318,
+        "url": "https://ealing.events.mylibrary.digital/event?id=319318",
+        "date": "2026-10-19",
+        "time": "10:00 AM - 11:00 AM"
+      }
+    ],
+    "source_id": "10000000-0000-0000-0000-000000000001",
+    "title": "Same published session title",
+    "description": "Come at join Ms Debbie at Southall Library for an hour of stories, nursery rhymes and colouring.  No booking required",
+    "listing_type": "activity",
+    "is_holiday_camp": false,
+    "category": null,
+    "start_date": "2026-10-12",
+    "end_date": "2026-10-19",
+    "schedule_text": "Published dates: 2026-10-12, 2026-10-19; 10:00 AM - 11:00 AM",
+    "time_text": "10:00 AM - 11:00 AM",
+    "location": "Reviewed test library",
+    "venue_name": "Reviewed test library",
+    "venue_address": null,
+    "postcode": null,
+    "venue_id": null,
+    "event_url": "https://ealing.events.mylibrary.digital/event?id=319317",
+    "cost_text": "FREE",
+    "age_range": null,
+    "recurrence": "recurring",
+    "family_relevance": 5,
+    "confidence": 0.99,
+    "source_url": "https://libraries.ealing.gov.uk/events",
+    "extraction_method": "library_portal_sessions_v1",
+    "dedupe_key": "3340151f6615a62d696736dea4265337ede653cb"
+  }
+]

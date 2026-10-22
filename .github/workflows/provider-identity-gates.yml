@@ -1,0 +1,46 @@
+name: Provider identity engineering gates
+on:
+  pull_request:
+    paths: ['provider_session_identity.py', 'library_portal.py', 'events_worker.py', 'scripts/*provider*', 'tests/*provider*', 'tests/fixtures/provider-session-*', 'supabase/migrations/*provider_session_identity.sql', '.github/workflows/provider-identity-gates.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: fixture-only
+        ports: ['5432:5432']
+        options: --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: postgres
+      PGPASSWORD: fixture-only
+      PGDATABASE: postgres
+      IDENTITY_TEST_DATABASE: disposable
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -p test_provider_session_identity.py -v
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: node --test tests/provider-session-integration.test.mjs
+      - run: python scripts/check_provider_identity_postgres.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: provider-identity-engineering-evidence
+          path: review/provider-identity-gates/
+          retention-days: 30

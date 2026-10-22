@@ -1,0 +1,28 @@
+name: Hounslow programme qualification
+on:
+  pull_request:
+    paths: ['hounslow_programmes.py', 'events_worker.py', 'tests/test_hounslow_programmes.py', 'scripts/qualify_hounslow_programme.py', '.github/workflows/hounslow-qualification.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -p 'test_hounslow_programmes.py' -v
+      - run: python scripts/qualify_hounslow_programme.py
+        env:
+          DRY_RUN: 'true'
+          ENABLE_PAID_AI: 'false'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hounslow-normal-worker-qualification
+          path: review/hounslow-qualification/
+          retention-days: 14

@@ -16,6 +16,8 @@ on:
       - 'tests/fixtures/mylibrary-*'
       - 'tests/fixtures/library-portal-*'
       - 'scripts/validate_mylibrary_sources.py'
+      - 'scripts/diagnose_library_access.py'
+      - 'tests/test_library_access_diagnostics.py'
       - 'scripts/validate_ds10_human_review.py'
       - 'tests/test_ds10_human_review.py'
       - '.github/workflows/mylibrary-source-review.yml'
@@ -38,6 +40,7 @@ jobs:
       - run: python -m unittest discover -s tests -p test_mylibrary_calendar.py -v
       - run: python -m unittest discover -s tests -p test_mylibrary_review_scope.py -v
       - run: python -m unittest discover -s tests -p test_library_portal.py -v
+      - run: python -m unittest discover -s tests -p test_library_access_diagnostics.py -v
       - run: python -m unittest discover -s tests -p test_ds10_human_review.py -v
   live-read-only:
     needs: regressions
@@ -66,6 +69,9 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      - name: Diagnose denied portal access without retrying collection
+        if: failure()
+        run: python scripts/diagnose_library_access.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
