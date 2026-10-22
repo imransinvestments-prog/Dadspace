@@ -12,6 +12,8 @@ export const VENUE_PUBLIC_COLUMNS = "id,venue_name,venue_label,category,address,
 export type VenuePage = { venues: Venue[]; total: number; hasMore: boolean; loadFailed: boolean }
 export const PILOT_AREAS = [
   { slug: "hounslow", name: "Hounslow", intro: "Browse Hounslow libraries for your next family visit. Check the library's own website for current opening times and children's sessions." },
+  { slug: "ealing", name: "Ealing", intro: "Find Ealing libraries for your next family visit. Opening times and children's sessions change, so check the library's own website before you go." },
+  { slug: "brent", name: "Brent", intro: "Explore Brent libraries close to home. Compare addresses here, then confirm today's opening times and children's sessions on the library's own website." },
   { slug: "manchester", name: "Manchester", intro: "Explore Manchester museums and libraries. Compare addresses and available visitor information before planning a day with the kids." },
   { slug: "london", name: "London", intro: "Find London museums, libraries and indoor play venues. London covers a large area: check the address and journey before choosing your next stop." },
 ] as const
