@@ -29,6 +29,8 @@ import time
 import traceback
 from calendar import timegm
 from datetime import datetime, timedelta, timezone
+
+from run_context import run_details
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 import feedparser
@@ -501,8 +503,25 @@ def self_test():
 # ----------------------------------------------------------------------
 # RUN LOG (one row per run in the pipeline_runs table)
 # ----------------------------------------------------------------------
-def log_run(stats, worker="news", dry_run=None):
+def news_failure_reasons(stats):
+    """Why a run is not a success; the same rules decide the exit code."""
+    if stats is None:
+        return ["run summary missing"]
+    reasons = []
+    if stats.get("fatal_error"):
+        reasons.append("unexpected error")
+    if stats.get("batches_failed"):
+        reasons.append(f"{stats['batches_failed']} scoring batch(es) failed")
+    if stats.get("sources_failed"):
+        reasons.append(f"{stats['sources_failed']} feed(s) failed")
+    if not stats.get("sources_ok"):
+        reasons.append("no feed succeeded")
+    return reasons
+
+
+def log_run(stats, worker="news", dry_run=None, failing_feeds=(), fatal=None, extra_reasons=(), extra=None):
     skipped = sum(v for k, v in stats.items() if k.startswith("skipped_"))
+    reasons = news_failure_reasons(stats) + list(extra_reasons)
     row = {
         "worker": worker,
         "dry_run": DRY_RUN if dry_run is None else dry_run,
@@ -511,6 +530,10 @@ def log_run(stats, worker="news", dry_run=None):
         "gemini_calls": TOKENS["calls"],
         "articles_scored": stats["scored"],
         "skipped_prefilter": skipped,
+        # Without this a failed scheduled run cannot be explained without job logs.
+        "details": run_details("failed" if reasons else "ok", reasons, failing_feeds,
+                               stats={k: v for k, v in stats.items() if isinstance(v, (int, float))},
+                               fatal=fatal, **(extra or {})),
     }
     try:
         sb("POST", "pipeline_runs", json_body=row,
@@ -531,6 +554,7 @@ def run():
              "skipped_blocked_word": 0, "skipped_no_family_word": 0,
              "skipped_near_duplicate": 0}
     failed_sources = []
+    fatal = None
     kept_lines, rejected_lines = [], []
     per_source = {}  # feed name -> [scored, kept]
     skipped_lines = []  # what the free pre-filter removed (shown in dry run)
@@ -697,8 +721,9 @@ def run():
         if not DRY_RUN and not os.environ.get("NEWS_SOURCE_ID"):
             delete_old()
 
-    except Exception:
+    except Exception as exc:
         stats["fatal_error"] = 1
+        fatal = f"{type(exc).__name__}: {str(exc)[:300]}"
         print("UNEXPECTED ERROR:")
         traceback.print_exc()
     finally:
@@ -741,7 +766,7 @@ def run():
                 print("    - " + f)
         print(f"  minutes: {(time.time() - START) / 60:.1f}")
         print("=" * 60)
-        log_run(stats)
+        log_run(stats, failing_feeds=failed_sources, fatal=fatal)
 
 
 if __name__ == "__main__":

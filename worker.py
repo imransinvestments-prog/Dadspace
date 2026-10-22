@@ -37,6 +37,7 @@ This version just makes sure that report can no longer fail either.
 
 import datetime as dt
 from gemini_usage import BudgetExhausted
+from run_context import run_details
 
 import hashlib
 import inspect
@@ -1261,7 +1262,28 @@ def self_test():
 # ----------------------------------------------------------------------------
 # Run log (one row per run in the pipeline_runs table, same as news_worker.py)
 # ----------------------------------------------------------------------------
-def log_run(db, gemini_metrics):
+HEALTHY_STATUSES = ("ok", "ok_zero", "unchanged")
+# Respecting robots.txt is a source decision, not an outage.
+EXCLUDED_STATUSES = ("skipped_robots",)
+
+
+def run_evidence(source_usage, totals, *, configured, processed, stopped_early, fatal, zero_event_sources, run_stats):
+    """pipeline_runs.details for one run: what failed and why, without needing job logs."""
+    failed = [f"{u['source']}: {u['status']}" + (f": {u['message']}" if u.get('message') else "")
+              for u in source_usage if u['status'] not in HEALTHY_STATUSES + EXCLUDED_STATUSES]
+    reasons = []
+    if fatal is not None:
+        reasons.append(f"fatal: {type(fatal).__name__}: {str(fatal)[:200]}")
+    if failed:
+        reasons.append(f"{len(failed)} source(s) failed")
+    status = "failed" if fatal is not None else "degraded" if failed else "ok"
+    return run_details(status, reasons, failed, source_totals=dict(totals), configured=configured,
+        processed=processed, stopped_early=stopped_early, validation=dict(run_stats),
+        robots_excluded=[u['source'] for u in source_usage if u['status'] in EXCLUDED_STATUSES][:25],
+        zero_event_sources=list(zero_event_sources)[:25])
+
+
+def log_run(db, gemini_metrics, details=None):
     worker = (os.environ.get("WORKER_NAME") or "").strip()
     if not worker:
         worker = "events-" + ("-".join(CATEGORY_FILTER) if CATEGORY_FILTER else "all")
@@ -1273,6 +1295,8 @@ def log_run(db, gemini_metrics):
         # API attempts include retries and timeouts, since those can still be billed.
         "gemini_calls": gemini_metrics.get("api_attempts", 0),
     }
+    if details is not None:
+        row["details"] = details
     try:
         db.table("pipeline_runs").insert(row).execute()
         print(f"Run logged to pipeline_runs as '{worker}'.")
@@ -1422,7 +1446,8 @@ def main():
             source_usage.append({'source_id': source['id'], 'source': source['name'],
                 'status': status, 'accepted': len(rows), 'seconds': round(elapsed, 3),
                 'validation': stats, 'usage': {k: v - usage_before.get(k, 0)
-                    for k, v in getattr(extract, 'metrics', {}).items()}})
+                    for k, v in getattr(extract, 'metrics', {}).items()},
+                **({} if status in HEALTHY_STATUSES else {'message': str(message)[:160]})})
             processed += 1
             totals[status] = totals.get(status, 0) + 1
             for key in run_stats:
@@ -1525,7 +1550,9 @@ def main():
         )
         print(f"Unknown-usage attempts: {gemini_metrics.get('unknown_usage_attempts', 0)}")
         print(f"Expired events: {expired_note}")
-        log_run(db, gemini_metrics)
+        log_run(db, gemini_metrics, run_evidence(source_usage, totals, configured=len(sources),
+            processed=processed, stopped_early=stopped_early, fatal=fatal,
+            zero_event_sources=zero_event_sources, run_stats=run_stats))
         close = getattr(extract, "close", None)
         if close:
             close()

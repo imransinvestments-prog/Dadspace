@@ -37,6 +37,7 @@ from email.utils import parsedate_to_datetime
 import requests
 from deals_quality import VERSION, canonical_link, prices, value_reason, family_benefit
 from deals_verification import verify_kept
+from run_context import github_run
 
 # ---------------------------------------------------------------- SETTINGS
 def _env_bool(name, default):
@@ -793,6 +794,7 @@ def build_details(all_deals, source_results, started, status="ok", error=None):
         "kept_by_group": by_group, "rejected_by_reason": rej,
         "sources": [{"name": r["name"], "status": r["status"], "items": r["items"]}
                     for r in source_results],
+        "github": github_run(),
     }
 
 

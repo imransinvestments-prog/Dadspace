@@ -72,3 +72,31 @@ jobs:
       sample_size: "40"
     secrets: inherit
 
+  # Expected-slot evidence for #124/#125: dispatch delay, completion and missed slots
+  # for every scheduled workflow, recorded on each run whatever the feeds' outcome.
+  # Diagnostic only: it must never turn a good feed run into a failed one.
+  schedule_ledger:
+    needs: [news, venue_reference, civic, activities, deals]
+    if: always()
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Record scheduled slot ledger
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python scripts/schedule-ledger.py --days 7 --json schedule-ledger.json | tee ledger.txt
+          { echo '### Scheduled slot ledger (7 days, Europe/London)'; echo '```'; cat ledger.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: schedule-ledger
+          path: schedule-ledger.json
+          retention-days: 30
+

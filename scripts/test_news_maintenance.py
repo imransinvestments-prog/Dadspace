@@ -42,4 +42,24 @@ class NewsMaintenanceTests(unittest.TestCase):
             def fake():locality._run_stats=stats
             with patch.object(core,"run",side_effect=fake),patch.object(core,"DRY_RUN",False):
                 self.assertEqual(locality.run(),1)
+    def test_run_row_explains_a_failure_without_job_logs(self):
+        stats={"sources_ok":3,"sources_failed":2,"scored":4,"batches_failed":0}
+        feeds=["Google News: parenting: HTTP Error 503","Google News: money: HTTP Error 503"]
+        with patch.dict(core.os.environ,{"GITHUB_RUN_ID":"39258943242","GITHUB_EVENT_NAME":"schedule"}),patch.object(core,"sb") as sb,contextlib.redirect_stdout(io.StringIO()):
+            locality._review.clear()
+            core.log_run(stats,failing_feeds=feeds)
+        details=sb.call_args.kwargs["json_body"]["details"]
+        self.assertEqual(details["status"],"failed")
+        self.assertEqual(details["reasons"],["2 feed(s) failed"])
+        self.assertEqual(details["failed_sources"],feeds)
+        self.assertEqual(details["github"]["run_id"],"39258943242")
+        self.assertEqual(details["stats"]["scored"],4)
+        self.assertEqual(details["locality"],{"classified":0,"warnings":0})
+        # The exit code follows the recorded status, so the two can never disagree.
+        def fake():locality._run_stats=stats
+        with patch.object(core,"run",side_effect=fake),contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(locality.run(),1)
+        with patch.object(core,"sb") as sb,contextlib.redirect_stdout(io.StringIO()):
+            core.log_run({"sources_ok":5,"scored":0})
+        self.assertEqual(sb.call_args.kwargs["json_body"]["details"]["status"],"ok")
 if __name__=="__main__":unittest.main()
