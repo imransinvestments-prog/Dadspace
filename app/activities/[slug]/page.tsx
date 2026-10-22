@@ -75,7 +75,7 @@ export default async function ActivityDetailPage({ params }: PageProps) {
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
 
-      <Link href="/activities" className="inline-flex w-fit items-center gap-2 text-sm font-bold text-primary hover:underline">
+      <Link href="/activities" className="inline-flex w-fit items-center gap-2 text-sm font-bold text-primary-ink hover:underline">
         <ArrowLeft className="size-4" aria-hidden />
         Back to all activities
       </Link>
@@ -83,7 +83,7 @@ export default async function ActivityDetailPage({ params }: PageProps) {
       <article className="rounded-2xl border bg-card p-6 md:p-9">
         <div className="flex flex-col gap-6">
           <div>
-            <p className="text-sm font-bold uppercase tracking-wide text-primary">{label(activity.category)}</p>
+            <p className="text-sm font-bold uppercase tracking-wide text-primary-ink">{label(activity.category)}</p>
             <h1 className="mt-2 font-heading text-3xl font-extrabold tracking-tight md:text-4xl">{activity.title}</h1>
             <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">{description}</p>
           </div>
@@ -136,7 +136,7 @@ export default async function ActivityDetailPage({ params }: PageProps) {
       {similar.length > 0 && (
         <section className="flex flex-col gap-5" aria-labelledby="similar-activities">
           <div>
-            <p className="text-sm font-bold uppercase tracking-wide text-primary">More regular activities</p>
+            <p className="text-sm font-bold uppercase tracking-wide text-primary-ink">More regular activities</p>
             <h2 id="similar-activities" className="font-heading text-2xl font-extrabold md:text-3xl">You might also like</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

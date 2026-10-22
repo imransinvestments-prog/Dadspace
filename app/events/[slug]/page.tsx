@@ -51,7 +51,7 @@ export default async function EventDetailPage({ params }: PageProps) {
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
 
-      <Link href="/events" className="inline-flex w-fit items-center gap-2 text-sm font-bold text-primary hover:underline">
+      <Link href="/events" className="inline-flex w-fit items-center gap-2 text-sm font-bold text-primary-ink hover:underline">
         <ArrowLeft className="size-4" aria-hidden />
         Back to all events
       </Link>
@@ -79,7 +79,7 @@ export default async function EventDetailPage({ params }: PageProps) {
 
           <div className="flex flex-col gap-6 p-6 md:p-9">
             <div className="flex flex-col gap-3">
-              <p className="text-sm font-bold tracking-wide text-primary uppercase">{category}</p>
+              <p className="text-sm font-bold tracking-wide text-primary-ink uppercase">{category}</p>
               <h1 className="font-heading text-3xl font-extrabold tracking-tight text-balance md:text-4xl">{event.title}</h1>
               <p className="leading-relaxed text-muted-foreground">{description}</p>
             </div>
@@ -132,7 +132,7 @@ export default async function EventDetailPage({ params }: PageProps) {
       {similar.length > 0 && (
         <section className="flex flex-col gap-5" aria-labelledby="similar-events">
           <div>
-            <p className="text-sm font-bold tracking-wide text-primary uppercase">Keep planning</p>
+            <p className="text-sm font-bold tracking-wide text-primary-ink uppercase">Keep planning</p>
             <h2 id="similar-events" className="font-heading text-2xl font-extrabold md:text-3xl">
               {ended ? "Similar upcoming events" : "You might also like"}
             </h2>

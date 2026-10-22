@@ -19,7 +19,7 @@ export function HomeDashboard({ data, publicPlaces = [], initialDeals = [], chil
   return (
     <div className="flex flex-col gap-5 sm:gap-8">
       <header className="flex flex-col gap-3">
-        <p className="text-xs font-bold tracking-wider text-accent uppercase">Your weekend starts here</p>
+        <p className="text-xs font-bold tracking-wider text-accent-ink uppercase">Your weekend starts here</p>
         <h1 className="font-heading text-2xl leading-tight font-extrabold tracking-tight text-balance sm:text-4xl xl:text-5xl">Family days out for UK dads</h1>
         <p className="text-base text-muted-foreground sm:text-lg">Days out, news and deals for UK dads.</p>
       </header>

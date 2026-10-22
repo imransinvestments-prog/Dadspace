@@ -81,7 +81,7 @@ export function SignUpForm({ next }: { next: string }) {
       </form>
       <p className="text-center text-sm text-muted-foreground">
         Already one of us?{" "}
-        <Link href={loginHref} className="font-semibold text-primary underline-offset-4 hover:underline">
+        <Link href={loginHref} className="font-semibold text-primary-ink underline-offset-4 hover:underline">
           Log in
         </Link>
       </p>

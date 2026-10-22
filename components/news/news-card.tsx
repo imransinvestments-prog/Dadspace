@@ -26,7 +26,7 @@ export function NewsCard({ item, variant = "tile", priority = false }: { item: N
         <span
           className={cn(
             "rounded-full px-2.5 py-1 text-xs font-bold tracking-wide uppercase",
-            isHero ? "bg-primary text-primary-foreground" : "bg-primary/15 text-primary",
+            isHero ? "bg-primary text-primary-foreground" : "bg-primary/15 text-primary-ink",
           )}
         >
           {category}
@@ -36,7 +36,7 @@ export function NewsCard({ item, variant = "tile", priority = false }: { item: N
         <span
           className={cn(
             "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold",
-            isHero ? "bg-navy/60 text-navy-foreground backdrop-blur-sm" : "bg-accent/15 text-accent",
+            isHero ? "bg-navy/60 text-navy-foreground backdrop-blur-sm" : "bg-accent/15 text-accent-ink",
           )}
         >
           <MapPin className="size-3" aria-hidden="true" />

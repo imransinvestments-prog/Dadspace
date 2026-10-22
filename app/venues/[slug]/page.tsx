@@ -33,7 +33,7 @@ export default async function VenueDetail(props: Props) {
   return <div className="flex flex-col gap-6">
     <nav aria-label="Breadcrumb"><Link href="/">Home</Link> / <Link href="/venues">Places</Link> / {v.name}</nav>
     <JsonLd data={{"@context":"https://schema.org","@graph":[{...venueSchema(v),"@id":`${url}#venue`,url},{"@type":"BreadcrumbList",itemListElement:[{"@type":"ListItem",position:1,name:"Home",item:siteUrl},{"@type":"ListItem",position:2,name:"Places",item:`${siteUrl}/venues`},{"@type":"ListItem",position:3,name:v.name,item:url}]}]}}/>
-    <header><p className="text-sm font-semibold text-accent">{categoryLabel(v.category)}</p><h1 className="mt-2 font-heading text-4xl font-bold">{v.name}</h1>{v.town && <p className="mt-2 text-muted-foreground">{v.town}</p>}</header>
+    <header><p className="text-sm font-semibold text-accent-ink">{categoryLabel(v.category)}</p><h1 className="mt-2 font-heading text-4xl font-bold">{v.name}</h1>{v.town && <p className="mt-2 text-muted-foreground">{v.town}</p>}</header>
     <div className="grid gap-6 md:grid-cols-2"><div className="relative aspect-[16/10] overflow-hidden rounded-xl"><VenuePhoto venue={v} sizes="(min-width: 768px) 480px, calc(100vw - 32px)" /></div>
     <section aria-label="Visitor information" className="rounded-xl border bg-card p-6"><dl className="space-y-4">
       <div><dt className="font-semibold">Address</dt><dd>{[v.address,v.town,v.postcode].filter(Boolean).join(", ") || "Not supplied"}</dd></div>

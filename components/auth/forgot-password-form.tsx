@@ -37,7 +37,7 @@ export function ForgotPasswordForm() {
         <FormMessage tone="success">
           If that email has a Dadspace account, a reset link is on its way. It can take a minute or two, so check your spam folder too.
         </FormMessage>
-        <Link href="/auth/login" className="text-sm font-semibold text-primary underline-offset-4 hover:underline">
+        <Link href="/auth/login" className="text-sm font-semibold text-primary-ink underline-offset-4 hover:underline">
           Back to log in
         </Link>
       </div>
@@ -51,7 +51,7 @@ export function ForgotPasswordForm() {
       <SubmitButton pending={pending} pendingLabel="Sending…">
         Send reset link
       </SubmitButton>
-      <Link href="/auth/login" className="text-center text-sm font-semibold text-primary underline-offset-4 hover:underline">
+      <Link href="/auth/login" className="text-center text-sm font-semibold text-primary-ink underline-offset-4 hover:underline">
         Remembered it? Log in
       </Link>
     </form>

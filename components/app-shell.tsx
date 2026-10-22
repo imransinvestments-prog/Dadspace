@@ -91,7 +91,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   aria-current={active ? "page" : undefined}
                   className={cn(
                     "flex h-16 flex-col items-center justify-center gap-1 text-xs font-semibold transition",
-                    active ? "text-primary" : "text-muted-foreground",
+                    active ? "text-primary-ink" : "text-muted-foreground",
                   )}
                 >
                   <span className={cn("flex h-8 w-full max-w-14 items-center justify-center rounded-full transition", active && "bg-primary/15")}>
@@ -102,7 +102,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </li>
             )
           })}
-          <li className="min-w-0 flex-1"><button ref={moreButton} type="button" aria-expanded={moreOpen} aria-controls="mobile-more-navigation" onClick={() => setMoreOpen(value => !value)} className={cn('flex h-16 w-full flex-col items-center justify-center gap-1 text-xs font-semibold',NAV_ITEMS.some(item => !item.mobile && isActive(pathname,item.href)) ? 'text-primary' : 'text-muted-foreground')}><span className="flex h-8 items-center"><MoreHorizontal className="size-5" aria-hidden /></span>More</button></li>
+          <li className="min-w-0 flex-1"><button ref={moreButton} type="button" aria-expanded={moreOpen} aria-controls="mobile-more-navigation" onClick={() => setMoreOpen(value => !value)} className={cn('flex h-16 w-full flex-col items-center justify-center gap-1 text-xs font-semibold',NAV_ITEMS.some(item => !item.mobile && isActive(pathname,item.href)) ? 'text-primary-ink' : 'text-muted-foreground')}><span className="flex h-8 items-center"><MoreHorizontal className="size-5" aria-hidden /></span>More</button></li>
         </ul>
       </nav>
     </div>

@@ -23,10 +23,10 @@ export default async function OriginalsPage({ searchParams }: { searchParams: Pr
     </nav>
     {unavailable ? <div role="status" className="rounded-2xl border bg-card p-6"><p>Ideas are temporarily unavailable.</p><Link href={cadence ? `/originals?type=${cadence}` : "/originals"} className="mt-3 inline-block underline">Try again</Link></div> : !posts.length ? <p className="rounded-2xl border bg-card p-6">Fresh ideas are on their way. Check back soon.</p> : <div className="grid gap-5 md:grid-cols-2">
       {posts.map(post => <article key={post.slug} className="flex flex-col rounded-3xl border bg-card p-6 sm:p-8">
-        <p className="text-sm font-semibold text-accent">{post.cadence === "daily" ? "Daily tip" : "Weekend guide"} · <time dateTime={post.published_at}>{originalDate(post.published_at)}</time></p>
+        <p className="text-sm font-semibold text-accent-ink">{post.cadence === "daily" ? "Daily tip" : "Weekend guide"} · <time dateTime={post.published_at}>{originalDate(post.published_at)}</time></p>
         <h2 className="mt-3 font-heading text-2xl font-bold"><Link href={`/originals/${post.slug}`} className="hover:underline">{post.title}</Link></h2>
         <p className="mt-3 text-muted-foreground">{post.summary}</p>
-        <Link href={`/originals/${post.slug}`} className="mt-auto pt-6 font-semibold text-accent">Read {post.cadence === "daily" ? "the tip" : "the guide"}<span className="sr-only">: {post.title}</span> →</Link>
+        <Link href={`/originals/${post.slug}`} className="mt-auto pt-6 font-semibold text-accent-ink">Read {post.cadence === "daily" ? "the tip" : "the guide"}<span className="sr-only">: {post.title}</span> →</Link>
       </article>)}
     </div>}
     <p className="text-sm text-muted-foreground">Original content created for Dadspace with AI assistance. Practical inspiration for families; choose what suits your children.</p>

@@ -199,7 +199,7 @@ export function EventsExplorer({ events, today, saturday, sunday }: Props) {
         </span>
         {matches.length > 0 && <span>Showing {Math.min(visibleCount, matches.length)}</span>}
         {filtered && (
-          <button type="button" onClick={clear} className="flex items-center gap-1 font-semibold text-primary hover:underline">
+          <button type="button" onClick={clear} className="flex items-center gap-1 font-semibold text-primary-ink hover:underline">
             <X className="size-3.5" aria-hidden />
             Clear filters
           </button>

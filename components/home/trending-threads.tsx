@@ -16,7 +16,7 @@ export function TrendingThreads({ threads }: { threads: HomeData["threads"] }) {
             <li key={thread.id} className="border-b last:border-b-0">
               <Link href="/forum" className="flex items-center gap-4 p-4 transition hover:bg-muted">
                 <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-                  {thread.category && <span className="text-xs font-bold tracking-wide text-accent uppercase">{thread.category}</span>}
+                  {thread.category && <span className="text-xs font-bold tracking-wide text-accent-ink uppercase">{thread.category}</span>}
                   <p className="leading-snug font-semibold text-pretty">{thread.title}</p>
                   {thread.author && <p className="text-xs text-muted-foreground">by {thread.author}</p>}
                 </div>

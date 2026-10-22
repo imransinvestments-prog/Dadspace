@@ -25,8 +25,11 @@
   --card-foreground: #12203f;
   --primary: #ff7a1a;
   --primary-foreground: #12203f;
+  /* Brand colours as text: the bright fills fall below 4.5:1 on light surfaces. */
+  --primary-ink: #a84500;
   --accent: #0fa3a3;
-  --accent-foreground: #ffffff;
+  --accent-foreground: #12203f;
+  --accent-ink: #086b6b;
   --highlight: #ffc94a;
   --highlight-foreground: #12203f;
   --navy: #12203f;
@@ -45,8 +48,10 @@
   --card-foreground: #f5f6fa;
   --primary: #ff7a1a;
   --primary-foreground: #12203f;
+  --primary-ink: #ff7a1a;
   --accent: #2cc4c0;
   --accent-foreground: #0b1530;
+  --accent-ink: #2cc4c0;
   --highlight: #ffc94a;
   --highlight-foreground: #12203f;
   --navy: #070f24;
@@ -64,8 +69,10 @@
   --color-card-foreground: var(--card-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-ink: var(--primary-ink);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-ink: var(--accent-ink);
   --color-highlight: var(--highlight);
   --color-highlight-foreground: var(--highlight-foreground);
   --color-navy: var(--navy);

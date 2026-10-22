@@ -110,7 +110,7 @@ export function NewsFeed({ initialItems, initialCategory = "all" }: { initialIte
   return (
     <div className="flex flex-col gap-6">
       <header className="flex flex-col gap-2">
-        <p className="flex items-center gap-2 text-sm font-bold tracking-wide text-primary uppercase">
+        <p className="flex items-center gap-2 text-sm font-bold tracking-wide text-primary-ink uppercase">
           <Newspaper className="size-4" aria-hidden="true" />
           The dad briefing
         </p>
