@@ -71,11 +71,22 @@ test('news and deals distinguish absent evidence and transport/query failures fr
  for(const mode of ['empty','null','error','throw']){
   const q={};for(const k of ['select','eq','like','gte','order','range','or'])q[k]=()=>q
   q.then=(resolve,reject)=>Promise.resolve().then(()=>{if(mode==='throw')throw Error('transport');return{data:mode==='null'?null:[],error:mode==='error'?{}:null}}).then(resolve,reject);q.limit=()=>q
-  const db={from:()=>q};const deals=load('lib/deals.ts',{'server-only':{},react:cache,'./supabase':{getSupabase:()=>db},'./deals-selection':{selectDeals:r=>r}})
+  const db={from:()=>q};const deals=load('lib/deals.ts',{'server-only':{},react:cache,'next/cache':{unstable_cache:f=>f},'./supabase':{getSupabase:()=>db},'./deals-selection':{selectDeals:r=>r,eligibleDeal:()=>true}})
   assert.equal((await deals.getDeals()).loadFailed,mode!=='empty',mode)
   const news=load('lib/news.ts',{'@supabase/supabase-js':{createClient:()=>db},'./news-geography':{}},{NEXT_PUBLIC_DADSPACE_SUPABASE_URL:'https://example.supabase.co',NEXT_PUBLIC_DADSPACE_SUPABASE_ANON_KEY:'public-test'})
   const run=()=>news.fetchNews({region:'all',category:'all',page:0});if(mode==='empty')assert.equal((await run()).length,0);else await assert.rejects(run())
  }
+})
+test('shared deals cache never stores failures and still hides offers that lapse inside the window',async()=>{
+ // Mirrors unstable_cache: resolved values are reused, rejections are not stored.
+ const memo=f=>{let hit;return async(...a)=>{if(hit)return hit.v;const v=await f(...a);hit={v};return v}}
+ let reads=0,fail=true,expired=new Set()
+ const q={};for(const k of ['select','eq','like','gte','order','limit'])q[k]=()=>q
+ q.then=(resolve,reject)=>Promise.resolve().then(()=>{reads++;return fail?{data:null,error:{}}:{data:[{id:1,taxonomy:{display_group:'Baby'}},{id:2,taxonomy:{display_group:'Toys'}}],error:null}}).then(resolve,reject)
+ const deals=load('lib/deals.ts',{'server-only':{},react:cache,'next/cache':{unstable_cache:memo},'./supabase':{getSupabase:()=>({from:()=>q})},'./deals-selection':{selectDeals:r=>r,eligibleDeal:d=>!expired.has(d.id)}})
+ assert.equal((await deals.getDeals()).loadFailed,true)
+ fail=false;const first=await deals.getDeals();assert.equal(first.loadFailed,false);assert.deepEqual(first.items.map(d=>d.id),[1,2]);assert.equal(reads,2,'failure was retried, not cached')
+ expired.add(1);const later=await deals.getDeals();assert.deepEqual(later.items.map(d=>d.id),[2]);assert.equal(reads,2,'served from the shared cache')
 })
 test('merged detail URLs redirect temporarily and rollback restores the original URL',async()=>{
  const sourceId='12345678-1234-1234-1234-123456789abc', targetId='12345678-1234-1234-1234-123456789def'
