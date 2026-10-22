@@ -145,7 +145,7 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
       </header>
 
       <div className="flex flex-wrap items-center gap-3">
-        <button type="button" onClick={()=>setBrowseNational(!browseNational)} className="font-semibold underline">{coords?'Browse all UK places':'Return to nearby places'}</button>
+        <button type="button" onClick={()=>setBrowseNational(!browseNational)} className="min-h-11 font-semibold underline">{coords?'Browse all UK places':'Return to nearby places'}</button>
         {!coords && <p className="text-sm text-muted-foreground">Browsing all UK places. Results are not limited by distance.</p>}
       </div>
       {coords && <DiscoveryRadiusControls radiusKm={radiusKm} scope={scope} onRadius={setRadiusKm} onScope={setScope} includeOnline={false} />}
@@ -192,7 +192,7 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
               aria-pressed={toggles.has(t.key)}
               onClick={() => toggle(t.key)}
               className={cn(
-                "rounded-full border px-3.5 py-1.5 text-sm font-bold transition",
+                "min-h-11 rounded-full border px-4 text-sm font-bold transition",
                 toggles.has(t.key) ? "border-accent bg-accent text-accent-foreground" : "bg-card text-foreground hover:bg-muted",
               )}
             >
@@ -203,7 +203,7 @@ export function VenuesDirectory({ venues, initialTotal, initialHasMore, initialP
             <button
               type="button"
               onClick={clear}
-              className="flex items-center gap-1 rounded-full px-2 py-1.5 text-sm font-semibold text-muted-foreground hover:text-foreground"
+              className="flex min-h-11 items-center gap-1 rounded-full px-3 text-sm font-semibold text-muted-foreground hover:text-foreground"
             >
               <X className="size-3.5" aria-hidden />
               Clear

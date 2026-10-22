@@ -140,11 +140,17 @@
   padding-bottom: env(safe-area-inset-bottom);
 }
 
+/* Reduced motion keeps state feedback: entrances become a short fade and loading
+   spinners still turn; movement and other animations stop. */
 @media (prefers-reduced-motion: reduce) {
-  *,
+  *:not(.animate-spin),
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+  .animate-rise,
+  .animate-fade {
+    animation: fade 0.2s ease-out both !important;
   }
 }

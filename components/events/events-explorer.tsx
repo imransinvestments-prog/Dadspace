@@ -33,7 +33,7 @@ const AGES: { key: Age; label: string }[] = [
 
 const chip = (active: boolean) =>
   cn(
-    "flex shrink-0 items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm font-semibold transition",
+    "flex min-h-11 shrink-0 items-center gap-1.5 rounded-full border px-4 text-sm font-semibold transition",
     active
       ? "border-navy bg-navy text-navy-foreground dark:border-primary dark:bg-primary dark:text-primary-foreground"
       : "bg-card text-foreground hover:bg-muted",
