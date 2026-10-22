@@ -57,11 +57,26 @@ test('manual runs do not satisfy scheduled freshness and older successes remain 
   assert.equal(state.lastSuccess, '2026-10-13T07:00:00Z')
   assert.equal(health.feedHealth([{ run: { ...run, event: 'workflow_dispatch' }, jobs: old.jobs }], 'deals / collect').missed, true)
 })
+test('the Supabase timer run is the slot evidence; a skipped late duplicate does not hide it', () => {
+  const timer = { run: { ...run, id: 3, event: 'workflow_dispatch', conclusion: 'success', display_title: 'Dadspace workers timer slot 2026-10-23T07:17', created_at: '2026-10-23T06:18:00Z', updated_at: '2026-10-23T06:30:00Z' },
+    jobs: [{ name: 'deals / collect', status: 'completed', conclusion: 'success', completed_at: '2026-10-23T06:30:00Z' }] }
+  const lateDuplicate = { run: { ...run, id: 4, conclusion: 'success', created_at: '2026-10-23T11:40:00Z', updated_at: '2026-10-23T11:41:00Z' },
+    jobs: [{ name: 'deals / collect', status: 'completed', conclusion: 'skipped' }] }
+  const now = new Date('2026-10-23T12:00:00Z')
+  assert.equal(health.isSlotRun(timer.run), true)
+  assert.equal(health.isSlotRun({ ...timer.run, display_title: 'Dadspace workers' }), false, 'an ordinary manual run is not slot evidence')
+  const state = health.feedHealth([lateDuplicate, timer], 'deals / collect', now)
+  assert.equal(state.status, 'Job passed')
+  assert.equal(state.lastSuccess, '2026-10-23T06:30:00Z')
+  const slot = health.scheduledSlotHealth([lateDuplicate, timer], 'deals / collect', now)
+  assert.equal(slot.delayMinutes, 1)
+  assert.equal(slot.signal, 'Job passed; verify useful supply')
+})
 
 function dashboard(authResult, fetcher = async () => { throw new Error('should not fetch') }) {
   const client = { auth: { getUser: async () => authResult } }
   const session = load('lib/operations/session.ts', { 'server-only': {}, '@/lib/supabase/server': { createClient: async () => client }, './access': access }, { process: { env: { NEXT_PUBLIC_DADSPACE_SUPABASE_URL: 'https://example.supabase.co', NEXT_PUBLIC_DADSPACE_SUPABASE_ANON_KEY: 'public', DADSPACE_OPERATOR_USER_IDS: owner } } })
-  return load('lib/operations/dashboard.ts', { 'server-only': {}, 'next/cache': { unstable_cache: fn => fn }, '@/lib/supabase/server': { createClient: async () => client }, './access': access, './session': session },
+  return load('lib/operations/dashboard.ts', { 'server-only': {}, 'next/cache': { unstable_cache: fn => fn }, '@/lib/supabase/server': { createClient: async () => client }, './access': access, './session': session, './health': health },
     { process: { env: { NEXT_PUBLIC_DADSPACE_SUPABASE_URL: 'https://example.supabase.co', NEXT_PUBLIC_DADSPACE_SUPABASE_ANON_KEY: 'public', DADSPACE_OPERATOR_USER_IDS: owner } }, fetch: fetcher })
 }
 test('server gate rejects unauthenticated users and ignores user-editable admin claims before fetching', async () => {

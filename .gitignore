@@ -11,3 +11,4 @@ review/
 usage-report.json
 shadow-input/
 shadow-results/
+.claude/settings.local.json

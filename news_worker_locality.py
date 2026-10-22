@@ -229,7 +229,7 @@ def gemini_score_with_geo(batch):
             print("NEWS GEOGRAPHY " + json.dumps(review, ensure_ascii=False))
     if len(seen) != len(batch):
         _review.append({"stage": "self-test" if _self_testing else "collection",
-                        "warning": "missing/duplicate/out-of-range article results",
+                        "warning": MISSING_RESULTS,
                         "expected": len(batch), "received": len(seen)})
     return results
 
@@ -241,13 +241,19 @@ def save_items_with_geo(rows):
     return _original_save_items(rows)
 
 
-def log_run_with_geo(stats, worker="news", dry_run=None):
+MISSING_RESULTS = "missing/duplicate/out-of-range article results"
+
+
+def log_run_with_geo(stats, worker="news", dry_run=None, **evidence):
     global _run_stats
     _run_stats = stats.copy()
     classified = [r for r in _review if r.get("normalised", {}).get("geo_scope")]
     unknown = sum(bool(r.get("warning")) for r in _review)
     print(f"Locality review: {len(classified)} classified; {unknown} warnings/unclassified")
-    _original_log_run(stats, worker=worker, dry_run=dry_run)
+    missing = any(row.get("warning") == MISSING_RESULTS for row in _review)
+    _original_log_run(stats, worker=worker, dry_run=dry_run,
+                      extra_reasons=[MISSING_RESULTS] if missing else [],
+                      extra={"locality": {"classified": len(classified), "warnings": unknown}}, **evidence)
 
 
 def write_review():
@@ -305,9 +311,12 @@ def run():
     _review.clear()
     _geo_by_article.clear()
     core.run()
-    # The core logs a failed batch but returns normally. Make this review gate visible.
-    missing_results = any(row.get("warning") == "missing/duplicate/out-of-range article results" for row in _review)
-    if (_run_stats is None or _run_stats.get("fatal_error") or _run_stats.get("batches_failed") or _run_stats.get("sources_failed") or missing_results or not _run_stats.get("sources_ok")):
+    # The core logs a failed batch but returns normally. Make this review gate visible,
+    # using the same rules that wrote the run's pipeline_runs status.
+    missing_results = any(row.get("warning") == MISSING_RESULTS for row in _review)
+    reasons = core.news_failure_reasons(_run_stats) + ([MISSING_RESULTS] if missing_results else [])
+    if reasons:
+        print("News run failed: " + "; ".join(reasons))
         return 1
     if not _run_stats.get("scored"):
         print("No new articles scored; inspect the self-test sample for classification evidence.")

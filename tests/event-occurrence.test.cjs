@@ -124,3 +124,14 @@ test('public read path collapses a repeated import replay and retains all source
     previous=ids(result.events)
   }
 })
+test('events mentioning teens stay listed; only explicit adults-only events are hidden (#101)', () => {
+  const feed = load('lib/events.ts', dependencies)
+  const event = (id, title, age_range = null) => ({ id, title, age_range, start_date: '2026-10-24', end_date: null, time_text: null, location: 'Ealing', description: null })
+  const kept = Array.from(feed.qualityForDisplay([
+    event('mixed', 'Family fun day for kids and teens', '4-16'),
+    event('teen', 'Teen coding club', '12-16'),
+    event('under5', 'Toddler rhyme time', '0-5'),
+    event('adult', 'Comedy night - adults only', '18+'),
+  ]), e => e.id)
+  assert.deepEqual(kept, ['mixed', 'teen', 'under5'])
+})

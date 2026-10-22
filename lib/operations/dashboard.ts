@@ -1,7 +1,7 @@
 import "server-only"
 import { unstable_cache } from "next/cache"
 import { operationsAccess } from "./session"
-import type { Run, Job, Observation } from "./health"
+import { isSlotRun, type Run, type Job, type Observation } from "./health"
 
 const API = "https://api.github.com/repos/imransinvestments-prog/Dadspace"
 async function github<T>(path: string): Promise<T> {
@@ -14,9 +14,10 @@ async function github<T>(path: string): Promise<T> {
 }
 
 async function scheduledRuns(workflow: string, limit: number) {
-  const data = await github<{ workflow_runs: Run[] }>(`/actions/workflows/${workflow}/runs?branch=main&event=schedule&per_page=${limit}`)
+  // No event filter: timer slots arrive as workflow_dispatch runs (#124); isSlotRun keeps only slot runs.
+  const data = await github<{ workflow_runs: Run[] }>(`/actions/workflows/${workflow}/runs?branch=main&per_page=${Math.min(limit * 8, 50)}`)
   if (!Array.isArray(data.workflow_runs)) throw new Error("Invalid workflow evidence")
-  return data.workflow_runs.filter(run => run.event === "schedule" && Number.isSafeInteger(run.id)).slice(0, limit)
+  return data.workflow_runs.filter(run => isSlotRun(run) && Number.isSafeInteger(run.id)).slice(0, limit)
 }
 
 async function jobs(run: Run): Promise<Observation> {

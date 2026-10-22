@@ -37,6 +37,7 @@ from email.utils import parsedate_to_datetime
 import requests
 from deals_quality import VERSION, canonical_link, prices, value_reason, family_benefit
 from deals_verification import verify_kept
+from run_context import github_run
 
 # ---------------------------------------------------------------- SETTINGS
 def _env_bool(name, default):
@@ -793,11 +794,11 @@ def build_details(all_deals, source_results, started, status="ok", error=None):
         "kept_by_group": by_group, "rejected_by_reason": rej,
         "sources": [{"name": r["name"], "status": r["status"], "items": r["items"]}
                     for r in source_results],
+        "github": github_run(),
     }
 
 
 def log_run(skipped_prefilter, details):
-    from run_context import github_run_context
     if DRY_RUN:
         log("DRY RUN: pipeline run details are in the local review files; no DB log written.")
         return
@@ -808,7 +809,7 @@ def log_run(skipped_prefilter, details):
             "input_tokens": STATS["tokens_in"], "output_tokens": STATS["tokens_out"],
             "gemini_calls": STATS["gemini_calls"],
             "articles_scored": STATS["gemini_candidates"],
-            "skipped_prefilter": skipped_prefilter, "details": {**details, **github_run_context()},
+            "skipped_prefilter": skipped_prefilter, "details": details,
         }, headers={"Prefer": "return=minimal"})
         log(f"Run logged to pipeline_runs (total tokens: {details['total_tokens']}).")
     except Exception as ex:  # noqa: BLE001

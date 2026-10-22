@@ -1,12 +1,27 @@
-"""Small, non-secret GitHub identity envelope for durable worker evidence."""
-import os,re
-def github_run_context(environ=None):
- env=os.environ if environ is None else environ
- def value(key,pattern):
-  raw=env.get(key,'')
-  return raw if isinstance(raw,str) and re.fullmatch(pattern,raw) else None
- return {'github_run_id':value('GITHUB_RUN_ID',r'[0-9]{1,20}'),
-         'github_run_attempt':value('GITHUB_RUN_ATTEMPT',r'[0-9]{1,6}'),
-         'github_sha':value('GITHUB_SHA',r'[a-f0-9]{40}'),
-         'github_event':value('GITHUB_EVENT_NAME',r'[a-z_]{1,40}'),
-         'github_repository':value('GITHUB_REPOSITORY',r'[A-Za-z0-9_.-]{1,100}/[A-Za-z0-9_.-]{1,100}')}
+"""Shared run evidence for pipeline_runs.details.
+
+Job logs need authentication even on a public repository, so a failed scheduled
+run must be explainable from the database row alone: which GitHub run wrote it,
+what the worker concluded and why. Keys match collection_evidence.py.
+"""
+import datetime as dt
+import os
+
+MAX_LISTED = 25
+
+
+def github_run():
+    return {key: os.environ.get(name) for key, name in (
+        ('run_id', 'GITHUB_RUN_ID'), ('attempt', 'GITHUB_RUN_ATTEMPT'),
+        ('sha', 'GITHUB_SHA'), ('event', 'GITHUB_EVENT_NAME'),
+        ('workflow', 'GITHUB_WORKFLOW'), ('job', 'GITHUB_JOB'))}
+
+
+def run_details(status, reasons=(), failed=(), **extra):
+    """status is ok, degraded or failed; reasons say why it is not ok."""
+    if status not in ("ok", "degraded", "failed"):
+        raise ValueError(f"unknown run status {status!r}")
+    failed = [str(item)[:200] for item in failed]
+    return {"status": status, "reasons": list(reasons), "failed_sources": failed[:MAX_LISTED],
+            "failed_source_count": len(failed), "github": github_run(),
+            "logged_at": dt.datetime.now(dt.timezone.utc).isoformat(), **extra}

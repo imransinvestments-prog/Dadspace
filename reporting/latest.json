@@ -1,8 +1,8 @@
 {
-  "date": "2026-10-21",
-  "generated_at": "2026-10-21T14:05:21.785Z",
+  "date": "2026-10-22",
+  "generated_at": "2026-10-22T10:13:14.722Z",
   "status": "success",
-  "snapshot": "reporting/snapshots/2026-10-21/",
-  "previous_success_at": "2026-10-19T12:49:01.711Z",
-  "limitations": "Late generation/email; current Deals job failed on expired Matalan terms review. Partial supply not recovery. Geography remains frozen point samples; public-quality census/full billing unavailable."
+  "snapshot": "reporting/snapshots/2026-10-22/",
+  "previous_success_at": "2026-10-21T14:05:21.785Z",
+  "limitations": "Late generation; no22October morning run visible. Latest Deals run failed on expired Matalan terms. Merged performance changes are not fresh performance/coverage certification. Geography frozen; full billing unavailable."
 }

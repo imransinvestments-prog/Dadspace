@@ -1,6 +1,9 @@
 import "server-only"
 import { SPRINT11_VENUE_ROWS } from "./sprint11-venues"
 import sprint5Pack from "@/artefacts/data/sprint5-review-pack.json"
+// Owner, 22 Oct 2026: the 25 still-unreviewed venues of the frozen 17 Oct sample are replaced by a
+// fresh draw of 25; the 25 already reviewed stay on record in #34.
+import venueSample from "@/artefacts/data/venue-review-sample-2026-10-22.json"
 import newsCorrections from "@/artefacts/data/sprint5-news-corrections.json"
 import newsApplied from "@/artefacts/data/sprint5-news-final-readback.json"
 import { createHash } from "node:crypto"
@@ -40,8 +43,8 @@ export async function getReviewMaterial(id: number, page = 1): Promise<ReviewMat
   if (!reviewTask(id) || !Number.isSafeInteger(page) || page < 1 || page > 9999 || await operationsAccess() !== "allowed") throw new Error("Review access denied")
   if (id === 34) return slice(SPRINT11_VENUE_ROWS,page,"Fixed 50-venue pilot sample","Original cohort preserved with a dated current projection. Score each criterion explicitly; changed evidence requires review. A saved decision does not apply corrections or close the 48/50 quality and zero-hidden-leakage gates.")
   if ([34, 130, 136].includes(id)) {
-    const pack = id === 34 ? sprint5Pack.venues : id === 130 ? sprint5Pack.deals : sprint5Pack.activities
-    return slice(pack.rows as MaterialRow[], page, id === 34 ? "Fixed 50-venue pilot sample" : id === 130 ? "Fixed published Deals pool" : "Fixed 100-activity diagnostic sample", `Frozen ${pack.captured_at}. ${pack.method} Human quality scores are not inferred. This is a saved snapshot; verify changed or time-sensitive facts before publication acceptance.`)
+    const pack = id === 34 ? venueSample : id === 130 ? sprint5Pack.deals : sprint5Pack.activities
+    return slice(pack.rows as MaterialRow[], page, id === 34 ? "Replacement 25-venue sample (22 Oct)" : id === 130 ? "Fixed published Deals pool" : "Fixed 100-activity diagnostic sample", `Frozen ${pack.captured_at}. ${pack.method} Human quality scores are not inferred. This is a saved snapshot; verify changed or time-sensitive facts before publication acceptance.`)
   }
   if (id === 127) return slice(newsCorrections.rows.map(row=>({ ...row, fields:{...row.fields,status:row.id==="909"?"Verified no-op; existing targeting retained":"Applied and verified — 17 October 2026",production_readback:newsApplied.rows.find(actual=>String(actual.id)===row.id)??null} })) as MaterialRow[], page, "News correction readback — 20 records", "All 19 approved geography changes are applied and verified; Monmouthshire is a verified no-op. The original 50-row review is retained. The final three source-backed mappings are owner-approved and production-verified; original proposals remain historical evidence. Nationwide corrections preserve each existing nation.")
   if (id === 126) return slice(NEWS_SAMPLE.rows, page, "Fixed 50-article quality sample", `Frozen on ${NEWS_SAMPLE.frozen_on} from ${NEWS_SAMPLE.pool_count} published articles, covering categories and geographic scopes. New articles do not change this sample. Your two previously reviewed records are retained. Review usefulness for the intended area, attribution and working links; local does not mean irrelevant.`)
