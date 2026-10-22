@@ -1,6 +1,12 @@
 export type Run = {
   id: number; event: string; status: string; conclusion: string | null
-  created_at: string; updated_at: string; html_url: string
+  created_at: string; updated_at: string; html_url: string; display_title?: string
+}
+
+/** A slot is run either by GitHub's schedule or, on time, by the Supabase timer (#124),
+ * whose dispatches are named "timer slot …". Other manual runs are not slot evidence. */
+export function isSlotRun(run: Run) {
+  return run.event === "schedule" || (run.event === "workflow_dispatch" && /\btimer slot\b/.test(run.display_title ?? ""))
 }
 
 /** Slot-based warning, separate from job status and source/publication success.
@@ -16,7 +22,7 @@ export function scheduledSlotHealth(observations: Observation[] | null, key: str
   }
   const expectedAt = slot.toISOString()
   if (observations === null) return { expectedAt, signal: "Evidence unavailable", delayMinutes: null }
-  const latest = observations.filter(o => o.run.event === "schedule" && Date.parse(o.run.created_at) >= slot.getTime() && Date.parse(o.run.created_at) <= now.getTime())
+  const latest = observations.filter(o => isSlotRun(o.run) && Date.parse(o.run.created_at) >= slot.getTime() && Date.parse(o.run.created_at) <= now.getTime())
     .sort((a,b) => Date.parse(a.run.created_at) - Date.parse(b.run.created_at))[0]
   const elapsed = (now.getTime() - slot.getTime()) / 60000
   if (!latest) return { expectedAt, signal: elapsed > dispatchMinutes ? "Missing scheduled dispatch" : "Within dispatch allowance", delayMinutes: null }
@@ -41,9 +47,10 @@ export const FEEDS = [
 ]
 
 export function feedHealth(observations: Observation[], key: string, now = new Date()) {
-  const runs = observations.filter(item => item.run.event === "schedule")
+  const runs = observations.filter(item => isSlotRun(item.run))
     .sort((a, b) => Date.parse(b.run.created_at) - Date.parse(a.run.created_at))
-  const latest = runs[0]
+  // A late scheduled duplicate that the gate skipped must not hide the timer's real run.
+  const latest = runs.find(item => item.jobs?.find(job => job.name === key)?.conclusion !== "skipped") ?? runs[0]
   const latestJob = latest?.jobs?.find(job => job.name === key)
   const successful = runs.find(item => item.jobs?.some(job => job.name === key && job.conclusion === "success"))
   const successfulJob = successful?.jobs?.find(job => job.name === key && job.conclusion === "success")

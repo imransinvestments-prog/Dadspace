@@ -41,7 +41,7 @@ Built and merged, but switched off until a key exists.
 | B. External cron service | A service such as cron-job.org calls the same GitHub API. | Quick, but a third party holds the token. |
 | C. Accept the lateness | Relax #124's 60-minute dispatch target. | No work, but the evidence and brief stay late; Originals keeps missing 07:17. |
 
-**If you choose A:**
+**Decided 22 Oct: option A.** Built in #226; the setup runbook is [scheduled-dispatch-timer.md](./scheduled-dispatch-timer.md). The original outline, for reference:
 1. GitHub → Settings → Developer settings → Fine-grained tokens → create a token with repository access to **Dadspace only** and the permission **Actions: Read and write**. Expiry: 90 days.
 2. Reply `Decision: option A` on #124. I'll prepare a migration that installs `pg_cron`/`pg_net`, a Vault secret placeholder and the slot schedule, plus the ledger check. You paste the token into Vault yourself (Supabase → Project → Vault → New secret); I never see it.
 3. While both triggers exist, a late GitHub run would queue behind the timer's run (the concurrency group queues; it doesn't cancel). The migration therefore adds a "slot already ran" check, and once the timer has been proven for a week we remove the GitHub `schedule:` triggers.

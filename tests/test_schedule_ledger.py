@@ -15,9 +15,9 @@ def at(text):
     return dt.datetime.fromisoformat(text).replace(tzinfo=UTC)
 
 
-def run(run_id, created, conclusion="success", updated=None):
+def run(run_id, created, conclusion="success", updated=None, event="schedule", title="Dadspace workers"):
     return {"id": run_id, "created_at": created, "updated_at": updated or created, "status": "completed",
-            "conclusion": conclusion, "html_url": f"https://github.com/runs/{run_id}"}
+            "conclusion": conclusion, "html_url": f"https://github.com/runs/{run_id}", "event": event, "display_title": title}
 
 
 class ScheduleLedgerTests(unittest.TestCase):
@@ -45,6 +45,15 @@ class ScheduleLedgerTests(unittest.TestCase):
         # A late run belongs to the slot it followed, not to an earlier missed one.
         self.assertEqual((rows[1]["run_id"], rows[1]["dispatch_delay_min"], rows[1]["completed_min"]), (1, 211, 213))
         self.assertEqual((rows[2]["dispatch_delay_min"], rows[2]["failed_jobs"]), (23, ["deals / collect"]))
+
+    def test_timer_dispatch_fills_the_slot_and_late_or_manual_runs_do_not(self):
+        runs = [run(10, "2026-10-23T06:18:00Z", event="workflow_dispatch", title="Dadspace workers timer slot 2026-10-23T07:17"),
+                run(11, "2026-10-23T09:00:00Z", event="workflow_dispatch", title="Dadspace workers"),  # someone's manual run
+                run(12, "2026-10-23T11:40:00Z")]  # GitHub's late scheduled duplicate
+        rows = ledger.ledger([at("2026-10-23T06:17")], runs, lambda r: [], now=at("2026-10-23T12:00"))
+        self.assertEqual((rows[0]["state"], rows[0]["run_id"], rows[0]["via"], rows[0]["dispatch_delay_min"]), ("OK", 10, "timer", 1))
+        manual_only = ledger.ledger([at("2026-10-23T06:17")], [runs[1]], lambda r: [], now=at("2026-10-23T12:00"))
+        self.assertEqual(manual_only[0]["state"], "MISSING", "a manual run is not evidence for a scheduled slot")
 
     def test_on_time_run_is_ok(self):
         rows = ledger.ledger([at("2026-10-22T06:17")], [run(3, "2026-10-22T06:40:00Z")], lambda r: [], now=at("2026-10-22T09:00"))
