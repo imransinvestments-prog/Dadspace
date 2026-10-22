@@ -1,5 +1,3 @@
-import type { LiveDeal } from "./deals-selection"
-
 export type DadEvent = {
   id: string
   title: string
@@ -50,9 +48,6 @@ export type DadActivity = {
   last_seen_at?: string | null
 }
 
-/** How the Home events were picked when the user's location is known. */
-export type NearbyScope = "weekend" | "soon" | "nearest"
-
 export type ForumThread = {
   id: string
   title: string
@@ -91,9 +86,5 @@ export type HomeData = {
   greeting: string
   sleepsToWeekend: number
   weekendLabel: string
-  events: Sourced<DadEvent[]> & { isWeekend: boolean; nearby: NearbyScope | null; radiusMiles: number; loadFailed: boolean }
   threads: Sourced<ForumThread[]>
-  /** `pool[i]` holds the newest articles for the category shown in card `i`, newest first. */
-  articles: Sourced<Article[]> & { pool?: Article[][]; loadFailed: boolean }
-  deal: Sourced<LiveDeal | null> & { loadFailed: boolean }
 }

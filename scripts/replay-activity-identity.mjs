@@ -12,7 +12,7 @@ export async function replayIdentity() {
       cost_text text, age_range text, recurrence text, listing_type text,
       schedule_text text, category text, venue_name text, venue_address text,
       postcode text, venue_id uuid, withdrawn_at timestamptz);`)
-    await db.exec(fs.readFileSync('supabase/migrations/20261002_stable_event_identity_trigger.sql', 'utf8'))
+    await db.exec(fs.readFileSync('supabase/migrations/20261002132743_stable_event_identity_trigger.sql', 'utf8'))
     const withdrawal = fs.readFileSync('supabase/migrations/20261012121658_ds10_reversible_listing_withdrawal.sql','utf8')
     await db.exec(withdrawal.slice(withdrawal.indexOf('CREATE OR REPLACE FUNCTION public.dadspace_set_event_identity()')))
     const recorded = JSON.parse(fs.readFileSync('tests/fixtures/activity-repeat-cardiff.json','utf8'))

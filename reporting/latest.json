@@ -1,8 +1,8 @@
 {
-  "date": "2026-10-18",
-  "generated_at": "2026-10-18T08:08:58.983Z",
+  "date": "2026-10-21",
+  "generated_at": "2026-10-21T14:05:21.785Z",
   "status": "success",
-  "snapshot": "reporting/snapshots/2026-10-18/",
-  "previous_success_at": "2026-10-17T08:52:38.603Z",
-  "limitations": "No 18 October morning collector run visible; county/public quality joins and full billing unavailable. Scheduled Deals counters predate later approved live car-seat route."
+  "snapshot": "reporting/snapshots/2026-10-21/",
+  "previous_success_at": "2026-10-19T12:49:01.711Z",
+  "limitations": "Late generation/email; current Deals job failed on expired Matalan terms review. Partial supply not recovery. Geography remains frozen point samples; public-quality census/full billing unavailable."
 }

@@ -187,7 +187,10 @@ function resolveBySource(entries: { key: string; source: string; candidates: Can
   return resolved
 }
 
-let memo: { signature: string; at: number; result: Promise<Map<string, Point>> } | null = null
+// Several listing sets (events, activities, filtered pages) are geocoded per instance;
+// a single slot made them evict each other on every request.
+const MEMO_SLOTS = 8
+const memo = new Map<string, { at: number; result: Promise<Map<string, Point>> }>()
 
 /** Geocodes event venues without touching the database; results live in the Next.js cache. */
 export function geocodeLocations(items: Locatable[], strict = false): Promise<Map<string, Point>> {
@@ -198,7 +201,13 @@ export function geocodeLocations(items: Locatable[], strict = false): Promise<Ma
     unique.set(key, { key, source: item.source_id ?? "", location: item.location.trim() })
   }
   const signature = `${strict}|${[...unique.keys()].sort().join("\n")}`
-  if (memo && memo.signature === signature && Date.now() - memo.at < MEMO_TTL_MS) return memo.result
+  const hit = memo.get(signature)
+  if (hit && Date.now() - hit.at < MEMO_TTL_MS) {
+    // Re-insert so eviction drops the least recently used set.
+    memo.delete(signature)
+    memo.set(signature, hit)
+    return hit.result
+  }
 
   const osmBudget = { left: MAX_OSM_LOOKUPS }
   const result = mapWithLimit([...unique.values()], 6, async (entry) => {
@@ -209,9 +218,12 @@ export function geocodeLocations(items: Locatable[], strict = false): Promise<Ma
     }
   }).then((entries) => resolveBySource(entries, strict))
 
-  memo = { signature, at: Date.now(), result }
+  memo.delete(signature)
+  memo.set(signature, { at: Date.now(), result })
+  // Map iteration is insertion-ordered, so the first key is the least recently used.
+  if (memo.size > MEMO_SLOTS) memo.delete(memo.keys().next().value!)
   result.catch(() => {
-    memo = null
+    if (memo.get(signature)?.result === result) memo.delete(signature)
   })
   return result
 }

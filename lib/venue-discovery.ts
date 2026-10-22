@@ -1,5 +1,6 @@
 import "server-only"
 import { cache } from "react"
+import { unstable_cache } from "next/cache"
 import { getSupabase } from "./supabase"
 import { toVenue } from "./venues"
 import type { Venue } from "./venue-meta"
@@ -24,18 +25,36 @@ export function discoveryArea(slug: string) { return PILOT_AREAS.find(a => a.slu
 export function discoveryCategory(slug: string) { return DISCOVERY_CATEGORIES.find(c => c.slug === slug) }
 const empty = (loadFailed: boolean): VenuePage => ({ venues: [], total: 0, hasMore: false, loadFailed })
 
+// An exact count scans every visible venue, so the display total is shared for
+// five minutes. Rows and hasMore always come from a fresh read, so revocation
+// still takes effect immediately. Failures throw and are never cached.
+const readPublicTotal = unstable_cache(async (town?: string, category?: string): Promise<number> => {
+  const db = getSupabase()
+  if (!db) throw new Error("Venue information is temporarily unavailable")
+  let query = db.from("venues").select("id", { count: "exact", head: true }).eq("public_visible", true)
+  if (town) query = query.eq("town_city", town)
+  if (category) query = query.eq("category", category)
+  const { count, error } = await query
+  if (error || !Number.isSafeInteger(count) || count! < 0) throw new Error("Venue total unavailable")
+  return count!
+}, ["public-venue-total-v1"], { revalidate: 300 })
+
 const readPublicPage = cache(async (page: number, town?: string, category?: string): Promise<VenuePage> => {
   try {
   const db = getSupabase()
   if (!db) return empty(true)
   const offset = (page - 1) * 24
-  let query = db.from("venues").select(VENUE_PUBLIC_COLUMNS, { count: "exact" }).eq("public_visible", true)
+  let query = db.from("venues").select(VENUE_PUBLIC_COLUMNS).eq("public_visible", true)
   if (town) query = query.eq("town_city", town)
   if (category) query = query.eq("category", category)
-  const { data, error, count } = await query.order("venue_name").order("id").range(offset, offset + 23)
-  if (error || !Array.isArray(data) || !Number.isSafeInteger(count) || count! < 0 || data.length != Math.min(24, Math.max(0,count! - offset))) return empty(true)
-  const venues = (data ?? []).map(toVenue).filter((v): v is Venue => v !== null)
-  return { venues, total: count ?? 0, hasMore: offset + (data?.length ?? 0) < (count ?? 0), loadFailed: false }
+  // One row beyond the page proves whether another page exists without a fresh count.
+  const [{ data, error }, recentTotal] = await Promise.all([query.order("venue_name").order("id").range(offset, offset + 24), readPublicTotal(town, category)])
+  if (error || !Array.isArray(data)) return empty(true)
+  const hasMore = data.length > 24, rows = data.slice(0, 24)
+  // An empty page that the recent total says should hold venues is a failed read, not empty supply.
+  if (!rows.length && recentTotal > offset) return empty(true)
+  const venues = rows.map(toVenue).filter((v): v is Venue => v !== null)
+  return { venues, total: hasMore ? Math.max(recentTotal, offset + rows.length + 1) : offset + rows.length, hasMore, loadFailed: false }
   } catch { return empty(true) }
 })
 export function publicVenuePage({page = 1, town, category}: {page?: number; town?: string; category?: string} = {}) {

@@ -25,7 +25,7 @@ flowchart LR
 ## Application boundaries
 
 - `lib/events.ts`, `lib/activities.ts` and `lib/venues.ts` implement listing reads and filtering. Location helpers support distance ordering.
-- `lib/data.ts` assembles homepage data, including `upcoming_events` and `feed_items`. Some homepage sections have sample fallbacks; the top deal is still sample content in this baseline.
+- `lib/data.ts` assembles the server-rendered homepage sections: greeting, weekend countdown, monthly news counts and, once the forum launches, trending threads. Deals, local places and nearby events/activities load separately through `/api/home/*`.
 - `app/deals/page.tsx` reads up to 60 rows from `deals` where status is live and revalidates every 900 seconds.
 - `lib/news.ts` reads the public `feed_items` view with an anon key, returning summaries and metadata rather than full article text.
 - `lib/supabase.ts` is server-only and uses the service role key when configured, falling back to the public anon key. Its listing callers select data. A service role read bypasses RLS, so application filters remain necessary.

@@ -25,9 +25,9 @@ test('retired indoor/outdoor URLs cannot activate unsupported RPC filters',async
 test('public reads exclude hidden adult gaming, retain a family casino name and fail honestly',async()=>{
   const records=[{id:'visible',venue_name:'Grand Casino',public_visible:true},{id:'hidden',venue_name:'Reels Casino Slots',public_visible:false}]
   const calls=[];let error=null,configured=true
-  const db={from:()=>{let filters=[];return {select(columns,options){calls.push({columns,options});return this},eq(k,v){filters.push([k,v]);return this},order(){return this},range(a,b){calls.push({range:[a,b]});return Promise.resolve({data:error?null:records.filter(r=>filters.every(([k,v])=>r[k]===v)),error,count:1})},maybeSingle(){return Promise.resolve({data:records.find(r=>filters.every(([k,v])=>r[k]===v))??null,error})}}}}
-  const {module:m}=load('lib/venue-discovery.ts',{'server-only':{},react:{cache:f=>f},'./supabase':{getSupabase:()=>configured?db:null},'./venues':{toVenue:r=>({id:r.id,name:r.venue_name})},'node:crypto':require('node:crypto'),'./discovery-publication':load('lib/discovery-publication.ts',{}).module})
-  const page=await m.publicVenuePage();assert.deepEqual(Array.from(page.venues,v=>v.id),['visible']);assert.deepEqual(calls.at(-1).range,[0,23])
+  const db={from:()=>{let filters=[];return {select(columns,options){calls.push({columns,options});return this},eq(k,v){filters.push([k,v]);return this},order(){return this},range(a,b){calls.push({range:[a,b]});return Promise.resolve({data:error?null:records.filter(r=>filters.every(([k,v])=>r[k]===v)),error,count:1})},maybeSingle(){return Promise.resolve({data:records.find(r=>filters.every(([k,v])=>r[k]===v))??null,error})},then(resolve,reject){return Promise.resolve({data:null,error,count:records.filter(r=>filters.every(([k,v])=>r[k]===v)).length}).then(resolve,reject)}}}}
+  const {module:m}=load('lib/venue-discovery.ts',{'server-only':{},react:{cache:f=>f},'next/cache':{unstable_cache:f=>f},'./supabase':{getSupabase:()=>configured?db:null},'./venues':{toVenue:r=>({id:r.id,name:r.venue_name})},'node:crypto':require('node:crypto'),'./discovery-publication':load('lib/discovery-publication.ts',{}).module})
+  const page=await m.publicVenuePage();assert.deepEqual(Array.from(page.venues,v=>v.id),['visible']);assert.deepEqual(calls.find(c=>c.range).range,[0,24])
   assert.equal(page.venues[0].name,'Grand Casino');assert.equal((await m.publicVenueById('visible')).name,'Grand Casino')
   assert.equal(await m.publicVenueById('hidden'),null)
   records[0].public_visible=false
@@ -64,40 +64,16 @@ test('location remains optional before selection and after denied geolocation',a
   nodes(tree).find(n=>n.type==='button'&&n.props['aria-controls']==='location-search-form').props.onClick()
   tree=render();assert.equal(nodes(tree).find(n=>n.type==='input').props.value,'Hounslow')
 })
-test('news homepage prefers actionable relevance, never pads with weak stories',()=>{
-  const {module:m}=load('lib/home-selection.ts',{})
-  const rows=[{id:'weak',category:'money',relevance:3},{id:'strong',category:'parenting',relevance:5},{id:'safety',category:'safety',relevance:4}]
-  assert.deepEqual(Array.from(m.selectNewsCards(rows),r=>r.id),['strong','safety'])
-})
-
-test('home feed separates empty and filtered supply from query and transport failures',async()=>{
-  let configured=true,mode='empty',eventMode='empty',eventCalls=0
-  const article={id:1,title:'Recall for parents',url:'https://publisher.example/recall',source_name:'Publisher',category:'safety',relevance:5,published_at:'2026-10-08'}
-  const db={from:table=>{const q={};for(const method of ['select','gte','lte','order'])q[method]=()=>q
-    q.limit=async()=>{
-      if(table==='upcoming_events'){
-        eventCalls++
-        if(eventMode==='throw')throw new Error('event transport failure')
-        if(eventMode==='error' || (eventMode==='upcoming-error' && eventCalls===2))return {data:null,error:{message:'events offline'}}
-      }
-      if(table==='feed_items' && mode==='throw')throw new Error('network failure')
-      return {data:table==='feed_items' && ['strong','weak'].includes(mode)?[{...article,relevance:mode==='weak'?3:5}]:[],error:table==='feed_items' && mode==='error'?{message:'offline'}:null}
-    };return q}}
-  const selection=load('lib/home-selection.ts',{}).module
-  const {module:m}=load('lib/data.ts',{'server-only':{},'./home-selection':selection,'./news-monthly':{getMonthlyNews:async()=>({month:'October 2026',counts:null})},'./deals':{getDeals:async()=>({items:[],loadFailed:false})},'./supabase':{getSupabase:()=>configured?db:null},'./dates':{londonHour:()=>12,londonToday:()=> '2026-10-08',upcomingWeekend:()=>({saturday:'2026-10-10',sunday:'2026-10-11',sleeps:2}),formatEventDate:()=> '10–11 October'},'./geo':{}})
-  for(const next of ['empty','weak','error','throw','strong']){
-    mode=next;const {articles}=await m.getHomeData()
-    assert.equal(articles.loadFailed,['error','throw'].includes(mode),next)
-    assert.equal(articles.items.length,mode==='strong'?1:0,next)
-    assert.equal(articles.isSample,false)
-    if(mode==='strong'){assert.equal(articles.items[0].source,'Publisher');assert.equal(articles.items[0].url,article.url)}
-  }
-  mode='strong'
-  for(const next of ['empty','error','upcoming-error','throw']){
-    eventMode=next;eventCalls=0;const data=await m.getHomeData()
-    assert.equal(data.events.loadFailed,next!=='empty',next)
-    assert.equal(data.events.items.length,0)
-    assert.equal(data.articles.items.length,1,'events failure does not drop news')
-  }
-  configured=false;const missing=await m.getHomeData();assert.equal(missing.articles.loadFailed,true);assert.equal(missing.events.loadFailed,true)
+test('home data only queries the sections the dashboard renders',async()=>{
+  const tables=[]
+  const db={from:table=>{tables.push(table);const q={select:()=>q,limit:async()=>({data:[{id:1,title:'Nap tips',comments:[1,2]},{id:2,title:'Kit',comments:'5'}],error:null})};return q}}
+  const homeData=forum=>load('lib/data.ts',{'server-only':{},'./launch':{FORUM_ENABLED:forum},'./news-monthly':{getMonthlyNews:async()=>({month:'October 2026',counts:{safety:3}})},'./supabase':{getSupabase:()=>db},'./dates':{londonHour:()=>12,londonToday:()=> '2026-10-08',upcomingWeekend:()=>({saturday:'2026-10-10',sunday:'2026-10-11',sleeps:2}),formatEventDate:()=> '10–11 October'}}).module
+  const data=await homeData(false).getHomeData()
+  assert.deepEqual(tables,[],'no table reads while the forum is hidden')
+  assert.deepEqual(Object.keys(data).sort(),['greeting','monthlyNews','sleepsToWeekend','threads','weekendLabel'])
+  assert.equal(data.greeting,'Afternoon, Dad.');assert.equal(data.weekendLabel,'10–11 October');assert.equal(data.monthlyNews.counts.safety,3)
+  assert.equal(data.threads.items.length,0)
+  const live=await homeData(true).getHomeData()
+  assert.deepEqual(tables,['forum_threads'])
+  assert.deepEqual(Array.from(live.threads.items,t=>t.id),['2','1'])
 })
