@@ -28,7 +28,7 @@ export default async function DecisionPage({ searchParams }: { searchParams: Pro
     if (!db) throw new Error("Unavailable")
     const table = rollback ? "operations_review_audit" : listing ? "collected_events" : "venues"
     const projection = rollback ? "id,action,reason,created_at,reverted_by" : listing ? "id,title,venue_name,venue_address,postcode,listing_type,start_date,end_date,recurrence,schedule_text,age_range,source_url,event_url,venue_id,withdrawn_at" :
-      "id,venue_name,category,address,postcode,latitude,longitude,website,access,source_url,public_visible,discovery_status,merged_into"
+      "id,venue_name,venue_label,category,address,postcode,latitude,longitude,website,access,source_url,public_visible,discovery_status,merged_into"
     const read = await db.from(table).select(projection).eq("id", record).abortSignal(AbortSignal.timeout(10_000)).maybeSingle()
     if (read.error || !read.data) throw new Error("Unavailable")
     const row = read.data as unknown as Record<string, unknown>
@@ -43,7 +43,7 @@ export default async function DecisionPage({ searchParams }: { searchParams: Pro
       if (!targetError) targets = candidates.data as typeof targets
     }
     const history = await db.from("operations_review_audit").select("id,actor_id,action,reason,created_at,reverted_by").eq("record_id", record).order("created_at", { ascending: false }).order("id").limit(20).abortSignal(AbortSignal.timeout(10_000))
-    const title = rollback ? `Rollback: ${String(row.action)}` : listing ? String(row.title) : typeof row.venue_name === "string" && row.venue_name.trim() ? row.venue_name : "Unnamed venue — identity evidence missing"
+    const title = rollback ? `Rollback: ${String(row.action)}` : listing ? String(row.title) : typeof row.venue_name === "string" && row.venue_name.trim() ? row.venue_name : typeof row.venue_label === "string" && row.venue_label.trim() ? `${row.venue_label} (derived label; no source name)` : "Unnamed venue — identity evidence missing"
     const url = evidenceUrl(row.source_url)
     const detail = evidenceUrl(row.event_url)
     return <div className="space-y-6">

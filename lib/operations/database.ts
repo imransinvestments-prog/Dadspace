@@ -74,7 +74,7 @@ export async function getReviewQueue(kind?: string | string[], page?: string | s
   const db = client()
   if (!db) return { access: "allowed" as const, ...selection, result: unavailable }
   const venue = selection.kind === "venues"
-  let query = venue ? db.from("venues").select("id,venue_name,address,postcode,source,source_url,discovered_source_url,discovered_at,discovery_status", { count: "exact" }).eq("public_visible", false).order("discovered_at", { ascending: false, nullsFirst: false }) :
+  let query = venue ? db.from("venues").select("id,venue_name,venue_label,address,postcode,source,source_url,discovered_source_url,discovered_at,discovery_status", { count: "exact" }).eq("public_visible", false).order("discovered_at", { ascending: false, nullsFirst: false }) :
     db.from("collected_events").select("id,title,venue_name,venue_address,postcode,source_url,event_url,last_verified_at,listing_type,age_range,start_date,end_date,recurrence,schedule_text", { count: "exact" }).is("venue_id", null).is("withdrawn_at", null).eq("listing_type", selection.kind === "activities" ? "activity" : "event").order("last_verified_at", { ascending: false, nullsFirst: false })
   query = query.order("id").range((selection.page - 1) * PAGE_SIZE, selection.page * PAGE_SIZE - 1).abortSignal(AbortSignal.timeout(10_000))
   const result = await read(query, response => {
@@ -83,7 +83,10 @@ export async function getReviewQueue(kind?: string | string[], page?: string | s
     if (records.length !== Math.min(PAGE_SIZE, Math.max(0, all - (selection.page - 1) * PAGE_SIZE))) throw new Error("Incomplete queue")
     return { total: all, rows: records.map((row): ReviewRow => {
       if (typeof row.id !== "string" || (venue ? row.venue_name !== null && typeof row.venue_name !== "string" : typeof row.title !== "string")) throw new Error("Invalid candidate")
-      return { id: row.id, title: venue ? text(row.venue_name)?.trim() || "Unnamed venue — identity evidence missing" : String(row.title), postcode: text(row.postcode), venue: text(row.venue_name), address: text(venue ? row.address : row.venue_address),
+      // An unnamed place shows its derived display label (e.g. "Church Lane Playground"), marked as
+      // derived; `venue` keeps the raw source name as identity evidence.
+      const label = text(row.venue_label)?.trim()
+      return { id: row.id, title: venue ? text(row.venue_name)?.trim() || (label ? `${label} (derived label; no source name)` : "Unnamed venue — identity evidence missing") : String(row.title), postcode: text(row.postcode), venue: text(row.venue_name), address: text(venue ? row.address : row.venue_address),
         source: text(row.source), sourceUrl: text(row.source_url), detailUrl: text(venue ? row.discovered_source_url : row.event_url), observed: text(venue ? row.discovered_at : row.last_verified_at),
         status: text(venue ? row.discovery_status : row.listing_type), age: text(row.age_range), start: text(row.start_date), end: text(row.end_date), recurrence: text(row.recurrence), schedule: text(row.schedule_text) }
     }) }
