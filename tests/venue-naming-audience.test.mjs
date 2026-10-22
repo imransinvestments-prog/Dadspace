@@ -13,6 +13,7 @@ const schema = `
     return new; end $$;
   create trigger venues_preserve_operations_review before update on public.venues for each row execute function public.preserve_review();`
 const migration = fs.readFileSync('supabase/migrations/20261022170000_venue_adult_only.sql', 'utf8')
+const guard = fs.readFileSync('supabase/migrations/20261022190000_arcade_publication_guard.sql', 'utf8')
 const arcades = fs.readFileSync('supabase/arcade-audience-2026-10-22.sql', 'utf8')
 const playgrounds = fs.readFileSync('supabase/unnamed-playground-labels-2026-10-22.sql', 'utf8')
 const review = JSON.parse(fs.readFileSync('artefacts/data/venue-publication-review-2026-10-14.json', 'utf8')).decisions
@@ -22,6 +23,8 @@ async function database() {
   const db = new PGlite()
   await db.exec(schema)
   await db.exec(migration)
+  await db.exec('create role anon; create role authenticated; create role service_role;')
+  await db.exec(guard)
   return db
 }
 
@@ -31,6 +34,8 @@ test('arcades are listed only when confirmed family-friendly; reviewed decisions
     // Production state before the change: hidden decisions were reviewed, the rest public and unreviewed.
     // One adult-flagged arcade escaped the 14 Oct hide (it matched exact names only) and is still public.
     const escaped = review.find(d => d.decision === 'hide').source_url
+    // These rows existed before the publication guard, so seed them with it paused.
+    await db.exec('alter table public.venues disable trigger venues_arcade_publication_guard')
     for (const d of review) {
       const hidden = d.decision.startsWith('hide') && d.source_url !== escaped
       // PGlite rejects null text parameters, so empty strings stand in for NULL here.
@@ -39,6 +44,7 @@ test('arcades are listed only when confirmed family-friendly; reviewed decisions
         [d.venue_name ?? '', d.source_url, !hidden, hidden ? d.reason : '', hidden ? '2026-10-14T20:00:00Z' : ''])
     }
     await db.query("insert into public.venues(venue_name, category, source_url, public_visible) values ('Church Lane Playground', 'Children’s playground', 'x', true)")
+    await db.exec('alter table public.venues enable trigger venues_arcade_publication_guard')
     await db.exec(arcades)
     const count = async sql => (await db.query(sql)).rows[0].n
     const families = review.filter(d => d.decision === 'retain-family').length
@@ -60,7 +66,8 @@ test('arcades are listed only when confirmed family-friendly; reviewed decisions
     // Every flag records its evidence.
     assert.equal(await count("select count(*)::int n from public.venues where category = 'Amusement arcade' and adult_only_evidence is null"), 0)
     // The documented rollback restores the publication rule's hides only.
-    const rollback = arcades.split('-- Rollback of the publication rule only')[1].split('\n').slice(1).map(l => l.replace(/^-- ?/, '')).join('\n')
+    // Skip the two-line heading; the rest is the commented rollback SQL.
+    const rollback = arcades.split('-- Rollback of the publication rule only')[1].split('\n').slice(2).map(l => l.replace(/^-- ?/, '')).join('\n')
     await db.exec(rollback)
     assert.equal(await count("select count(*)::int n from public.venues where category = 'Amusement arcade' and public_visible"),
       review.filter(d => !d.decision.startsWith('hide')).length + 1, 'the escaped adult arcade returns too: rollback undoes this change only')
@@ -98,5 +105,28 @@ test('unnamed playgrounds get "<road> Playground" or "Playground near <town>"; n
     await db.exec(rollback)
     const restored = (await db.query("select count(*)::int n from public.venues where venue_label ~ '^Unnamed children’s playground \\(way/[0-9]+\\)$' and notes = 'Name missing in source.'")).rows[0].n
     assert.equal(restored, evidence.length)
+  } finally { await db.close() }
+})
+
+test('arcade guard: adult never published, undecided only through owner review, decided arcades need no review', async () => {
+  const db = await database()
+  try {
+    const arcade = async (name, adult) => (await db.query(`insert into public.venues(venue_name, category, public_visible, adult_only)
+      values ($1, 'Amusement arcade', false, ${adult === null ? 'null' : adult}) returning id`, [name])).rows[0].id
+    const publish = id => db.query('update public.venues set public_visible = true where id = $1', [id])
+    const adult = await arcade('Slots', true), undecided = await arcade('Seafront Amusements', null), family = await arcade('Family Fun', false)
+    await assert.rejects(publish(adult), /Adult-only arcade cannot be published/)
+    await assert.rejects(publish(undecided), /publish it through an owner review/)
+    await publish(family) // decided by evidence: no review needed
+    // An owner review (review actions set dadspace.review_write) records the family decision.
+    await db.exec("select set_config('dadspace.review_write', 'on', false)")
+    await publish(undecided)
+    const row = (await db.query('select public_visible, adult_only, adult_only_evidence from public.venues where id = $1', [undecided])).rows[0]
+    assert.deepEqual([row.public_visible, row.adult_only], [true, false])
+    assert.match(row.adult_only_evidence, /^Owner review approved as family-friendly on \d{4}-\d{2}-\d{2}\.$/)
+    await assert.rejects(publish(adult), /Adult-only arcade cannot be published/, 'not even through review')
+    await db.exec("select set_config('dadspace.review_write', 'off', false)")
+    await assert.rejects(db.query("insert into public.venues(venue_name, category, public_visible) values ('New', 'Amusement arcade', true)"), /owner review/)
+    await db.query("insert into public.venues(venue_name, category, public_visible) values ('Park', 'Children’s playground', true)")
   } finally { await db.close() }
 })

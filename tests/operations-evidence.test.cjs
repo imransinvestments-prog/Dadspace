@@ -46,6 +46,7 @@ function database(access, responseFor, configured = true) {
       select: (fields, options) => { record.fields = fields; record.options = options; return builder },
       eq: (field, value) => { record.filters.push(['eq', field, value]); return builder },
       is: (field, value) => { record.filters.push(['is', field, value]); return builder },
+      or: filter => { record.filters.push(['or', filter]); return builder },
       order: field => { record.orders.push(field); return builder },
       range: (first, last) => { record.range = [first, last]; return builder },
       abortSignal: () => builder,
@@ -94,6 +95,12 @@ test('unnamed hidden venues remain reviewable without invalidating the queue', a
   assert.equal(result.value.total, 2)
   assert.equal(result.value.rows[0].title, 'Unnamed venue — identity evidence missing')
   assert.equal(result.value.rows[1].title, 'Library')
+  // Arcades decided by evidence never queue; arcades hidden by the 22 Oct rule wait for the owner.
+  const filters = fixture.queries.find(q => q.table === 'venues').filters.filter(f => f[0] === 'or').map(f => f[1])
+  assert.deepEqual(filters, ['category.neq."Amusement arcade",adult_only.is.null',
+    'review_reason.is.null,review_reason.not.ilike."*2026-10-22 owner rule: amusement arcades*"'])
+  const labelled = database('allowed', () => ({ data: [{ id: 'p', venue_name: null, venue_label: 'Church Lane Playground' }], count: 1, error: null }))
+  assert.equal((await labelled.module.getReviewQueue('venues')).result.value.rows[0].title, 'Church Lane Playground (derived label; no source name)')
   const invalid = database('allowed', () => ({ data: [{ id: 'broken', venue_name: 42 }], count: 1, error: null }))
   assert.equal((await invalid.module.getReviewQueue('venues')).result.available, false)
 })
