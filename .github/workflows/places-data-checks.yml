@@ -1,7 +1,7 @@
 name: Places data accuracy checks
 on:
   pull_request:
-    paths: ['venue_country.py', 'venue_reference_loader_v2.py', 'scripts/build_places_data_review.py', 'tests/test_venue_country.py', 'artefacts/data/places-data*', 'artefacts/data/library-*', '.github/workflows/places-data-checks.yml']
+    paths: ['venue_country.py', 'venue_reference_loader_v2.py', 'venue_council_discovery.py', 'venue_reference_worker.py', 'scripts/build_places_data_review.py', 'tests/test_venue_country.py', 'tests/test_venue_council_discovery.py', 'tests/fixtures/council-discovery/**', 'artefacts/data/places-data*', 'artefacts/data/library-*', '.github/workflows/places-data-checks.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -15,4 +15,5 @@ jobs:
           python-version: '3.12'
       - run: pip install requests supabase
       - run: python -m unittest discover -s tests -p test_venue_country.py -v
-      - run: python -m py_compile venue_country.py venue_reference_loader_v2.py scripts/build_places_data_review.py
+      - run: python -m unittest discover -s tests -p test_venue_council_discovery.py -v
+      - run: python -m py_compile venue_country.py venue_reference_loader_v2.py venue_council_discovery.py scripts/build_places_data_review.py
