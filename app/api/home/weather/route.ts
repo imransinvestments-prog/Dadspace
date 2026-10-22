@@ -6,6 +6,22 @@ export const dynamic = "force-dynamic"
 // Responses depend on the visitor's location or IP, so they are never shared.
 const respond = (body: object, status = 200) => NextResponse.json(body, { status, headers: { "Cache-Control": "private, no-store" } })
 
+// A short code for why a forecast failed, safe to log and return: never the key, the
+// coordinates or the provider's own message.
+function failureReason(error: unknown) {
+  const { name = "", message = "" } = (error ?? {}) as { name?: string; message?: string }
+  const http = String(message).match(/^Met Office HTTP (\d{3})$/)
+  if (http) return `upstream_${http[1]}`
+  if (name === "TimeoutError" || name === "AbortError") return "timeout"
+  if (message === "Unexpected Met Office response" || name === "SyntaxError") return "bad_response"
+  return "error"
+}
+
+function unavailable(reason: string) {
+  console.error(`[weather] forecast unavailable: ${reason}`)
+  return respond({ status: "unavailable", reason }, 503)
+}
+
 export async function GET(request: NextRequest) {
   if (!weatherConfigured()) return respond({ status: "not_configured" })
   const params = request.nextUrl.searchParams
@@ -22,9 +38,9 @@ export async function GET(request: NextRequest) {
   }
   try {
     const days = await forecastDays(point)
-    if (!days.length) return respond({ status: "unavailable" }, 503)
+    if (!days.length) return unavailable("no_days")
     return respond({ status: "ok", approximate, area, days })
-  } catch {
-    return respond({ status: "unavailable" }, 503)
+  } catch (error) {
+    return unavailable(failureReason(error))
   }
 }
