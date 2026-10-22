@@ -71,10 +71,13 @@ select count(*) filter (where public_visible) as public_arcades,
 from public.venues where category = 'Amusement arcade';
 commit;
 
--- Rollback of the publication rule only (the flag itself is harmless to keep):
+-- Rollback of the publication rule only (the flag itself is harmless to keep). If the
+-- 20261022190000 arcade publication guard is installed, pause it for this statement:
+-- alter table public.venues disable trigger venues_arcade_publication_guard;
 -- update public.venues set public_visible = true,
 --   review_reason = nullif(trim(replace(replace(review_reason, {sql_text(RULE)}, ''), {sql_text(ADULT_RULE)}, '')), '')
 -- where category = 'Amusement arcade' and review_reason like '%2026-10-22 owner rule: amusement arcades%';
+-- alter table public.venues enable trigger venues_arcade_publication_guard;
 """
 
 
