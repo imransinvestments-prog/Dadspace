@@ -24,9 +24,12 @@ def response(provider='openai', data=DATA):
         return {'status': 'completed', 'output': [{'content': [{'type': 'output_text', 'text': text}]}],
                 'usage': {'input_tokens': 10, 'output_tokens': 5, 'total_tokens': 15,
                           'output_tokens_details': {'reasoning_tokens': 3}}}
-    if provider == 'deepseek':
+    if provider in ('deepseek', 'openrouter'):
         return {'choices': [{'finish_reason': 'stop', 'message': {'content': text}}],
                 'usage': {'prompt_tokens': 10, 'completion_tokens': 5, 'total_tokens': 15}}
+    if provider == 'anthropic':  # the shape llm_claude.request returns
+        return {'stop_reason': 'end_turn', 'text': text,
+                'usage': {'input_tokens': 10, 'output_tokens': 5, 'total_tokens': 15}}
     return {'candidates': [{'finishReason': 'STOP', 'content': {'parts': [{'text': text}]}}],
             'usageMetadata': {'promptTokenCount': 10, 'candidatesTokenCount': 2,
                               'thoughtsTokenCount': 3, 'totalTokenCount': 15}}
@@ -38,11 +41,14 @@ def response(provider='openai', data=DATA):
 class ProviderTests(unittest.TestCase):
     def setUp(self):
         self.env = patch.dict(os.environ, {'LLM_PROVIDER': 'openai', 'LLM_MODEL': 'test-model',
-            'OPENAI_API_KEY': 'secret', 'DEEPSEEK_API_KEY': 'secret', 'GEMINI_API_KEY': 'secret'}, clear=True)
+            'OPENAI_API_KEY': 'secret', 'DEEPSEEK_API_KEY': 'secret', 'GEMINI_API_KEY': 'secret',
+            'ANTHROPIC_API_KEY': 'secret', 'OPENROUTER_API_KEY': 'secret'}, clear=True)
         self.env.start()
         self.addCleanup(self.env.stop)
         self.post = patch('llm_provider._post').start()
         self.post.return_value = response()
+        self.claude = patch('llm_provider._claude').start()
+        self.claude.return_value = response('anthropic')
         self.sleep = patch('llm_provider.time.sleep').start()
         self.addCleanup(patch.stopall)
 
@@ -73,11 +79,17 @@ class ProviderTests(unittest.TestCase):
                 self.assertEqual(gen.generate('source', SCHEMA), DATA['items'])
                 self.assertEqual(gen.metrics['output_tokens'], 5)
                 self.assertEqual(gen.metrics['total_tokens'], 15)
-                if provider == 'deepseek':
-                    body = self.post.call_args.args[2]
+                if provider in ('deepseek', 'openrouter'):
+                    url, _, body = self.post.call_args.args[:3]
+                    self.assertEqual(url, llm.COMPATIBLE[provider])
                     self.assertEqual(body['response_format'], {'type': 'json_object'})
                     self.assertIn('JSON', body['messages'][0]['content'])
                     self.assertEqual(gen.metrics['unknown_thinking_attempts'], 1)
+                if provider == 'anthropic':
+                    model, key, prompt, schema, limit, timeout, effort = self.claude.call_args.args
+                    self.assertEqual((prompt, effort), ('source', 'medium'))
+                    self.assertFalse(schema['properties']['items']['items']['additionalProperties'])
+                    self.assertEqual(gen.metrics['unknown_thinking_attempts'], 1)  # thinking is inside output
 
     def test_minimum_thinking_wire_setting_and_openai_not_applicable(self):
         from scripts.replay_shadow import configure_minimum
@@ -194,6 +206,37 @@ class ProviderTests(unittest.TestCase):
 
 
 
+    def test_claude_truncation_and_refusal_rejected_without_retry(self):
+        os.environ['LLM_PROVIDER'] = 'anthropic'
+        for stop, error in (('max_tokens', llm.IncompleteOutputError), ('refusal', ValueError)):
+            self.claude.reset_mock()
+            self.claude.return_value = {**response('anthropic'), 'stop_reason': stop}
+            with self.assertRaises(error):
+                self.generator().generate('source', SCHEMA)
+            self.assertEqual(self.claude.call_count, 1)
+
+    def test_claude_transient_errors_use_the_bounded_retries(self):
+        os.environ.update(LLM_PROVIDER='anthropic', LLM_MAX_RETRIES='1')
+        self.claude.side_effect = [llm.TransientLLMError('HTTP 529'), response('anthropic')]
+        gen = self.generator()
+        self.assertEqual(gen.generate('source', SCHEMA), DATA['items'])
+        self.assertEqual(gen.metrics['api_attempts'], 2)
+        self.claude.side_effect = llm.TransientLLMError('HTTP 429')
+        with self.assertRaisesRegex(RuntimeError, 'after bounded retries'):
+            self.generator().generate('source', SCHEMA)
+
+    def test_claude_effort_is_validated(self):
+        os.environ.update(LLM_PROVIDER='anthropic', LLM_EFFORT='extreme')
+        with self.assertRaises(llm.FatalLLMError):
+            self.generator()
+
+    def test_only_openrouter_models_may_contain_a_slash(self):
+        os.environ.update(LLM_PROVIDER='openrouter', LLM_MODEL='meta-llama/llama-3.3-70b-instruct:free')
+        self.assertEqual(llm.selection(), ('openrouter', 'meta-llama/llama-3.3-70b-instruct:free'))
+        os.environ.update(LLM_PROVIDER='gemini', LLM_MODEL='../gemini')
+        with self.assertRaises(llm.FatalLLMError):
+            llm.selection()
+
     def test_invalid_http_json_marks_usage_unknown_without_retry(self):
         gen = self.generator()
         self.post.side_effect = ValueError('private response body')
@@ -211,6 +254,80 @@ class ProviderTests(unittest.TestCase):
                 self.generator().generate('source', SCHEMA)
             self.assertNotIn('private', str(caught.exception))
             self.assertEqual(self.post.call_count, 1)
+
+
+class FakeAnthropic:
+    """Just enough of the SDK surface for llm_claude, so CI needs no network or package."""
+    class APIStatusError(Exception):
+        def __init__(self, status_code):
+            super().__init__('private remote message')
+            self.status_code = status_code
+    class APIConnectionError(Exception):
+        pass
+    class APITimeoutError(APIConnectionError):
+        pass
+
+    def __init__(self, reply=None, error=None):
+        self.reply, self.error, self.calls = reply, error, []
+        outer = self
+        class Anthropic:
+            def __init__(self, **options):
+                outer.options = options
+                self.messages = self
+            def create(self, **kwargs):
+                outer.calls.append(kwargs)
+                if outer.error:
+                    raise outer.error
+                return outer.reply
+        self.Anthropic = Anthropic
+
+
+def message(stop='end_turn', text='{"items": []}', cache_read=0):
+    block = lambda kind, value: type('Block', (), {'type': kind, 'text': value})()
+    usage = type('Usage', (), {'input_tokens': 10, 'output_tokens': 5,
+                               'cache_creation_input_tokens': 0, 'cache_read_input_tokens': cache_read})()
+    return type('Message', (), {'stop_reason': stop, 'usage': usage,
+                                'content': [block('thinking', ''), block('text', text)]})()
+
+
+class ClaudeAdapterTests(unittest.TestCase):
+    def call(self, fake, schema=None):
+        import llm_claude
+        with patch.dict('sys.modules', {'anthropic': fake}):
+            return llm_claude.request('claude-haiku-5-5', 'secret', 'source', schema or {'type': 'object'}, 3000, 60, 'medium')
+
+    def test_request_shape_retries_off_and_usage_includes_cache(self):
+        schema = {'type': 'object', 'additionalProperties': False, 'required': ['pattern'],
+                  'properties': {'pattern': {'type': 'string', 'minLength': 1, 'pattern': '^a'},
+                                 'n': {'anyOf': [{'type': 'integer', 'minimum': 0}, {'type': 'null'}]}}}
+        fake = FakeAnthropic(reply=message(cache_read=7))
+        result = self.call(fake, schema)
+        self.assertEqual(fake.options['max_retries'], 0)
+        sent = fake.calls[0]
+        self.assertEqual((sent['model'], sent['max_tokens']), ('claude-haiku-5-5', 3000))
+        self.assertEqual(sent['output_config']['effort'], 'medium')
+        api = sent['output_config']['format']['schema']
+        self.assertIn('pattern', api['properties'])                  # a property name survives
+        self.assertNotIn('pattern', api['properties']['pattern'])    # the keyword does not
+        self.assertNotIn('minLength', api['properties']['pattern'])
+        self.assertNotIn('minimum', api['properties']['n']['anyOf'][0])
+        self.assertIn('minLength', schema['properties']['pattern'])  # caller's schema untouched
+        self.assertEqual(result, {'stop_reason': 'end_turn', 'text': '{"items": []}',
+                                  'usage': {'input_tokens': 17, 'output_tokens': 5, 'total_tokens': 22}})
+
+    def test_unknown_stop_reason_is_not_copied(self):
+        self.assertEqual(self.call(FakeAnthropic(reply=message(stop='private-new-reason')))['stop_reason'], 'unknown')
+
+    def test_errors_map_to_transient_or_fatal_without_remote_text(self):
+        for error, expected in ((FakeAnthropic.APIStatusError(429), llm.TransientLLMError),
+                                (FakeAnthropic.APIStatusError(529), llm.TransientLLMError),
+                                (FakeAnthropic.APITimeoutError(), llm.TransientLLMError),
+                                (FakeAnthropic.APIStatusError(400), llm.FatalLLMError),
+                                (FakeAnthropic.APIStatusError(401), llm.FatalLLMError)):
+            with self.subTest(error=type(error).__name__, code=getattr(error, 'status_code', None)):
+                with self.assertRaises(expected) as caught:
+                    self.call(FakeAnthropic(error=error))
+                self.assertNotIn('private', str(caught.exception))
 
 
 if __name__ == '__main__':

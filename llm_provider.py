@@ -22,6 +22,10 @@ class IncompleteOutputError(ValueError):
         self.diagnostics = diagnostics
 
 
+class TransientLLMError(RuntimeError):
+    """A rate limit, overload or transport failure from an SDK adapter; retried within bounds."""
+
+
 def response_diagnostics(provider, reply):
     """Never retain remote free text, IDs, URLs, refusals or partial content."""
     allowed = {'completed', 'incomplete', 'failed', 'cancelled', 'queued', 'in_progress',
@@ -43,7 +47,12 @@ def response_diagnostics(provider, reply):
                                         if not p.get('thought') and isinstance(p.get('text'), str))}
 
 
-KEYS = {'gemini': 'GEMINI_API_KEY', 'openai': 'OPENAI_API_KEY', 'deepseek': 'DEEPSEEK_API_KEY'}
+KEYS = {'gemini': 'GEMINI_API_KEY', 'openai': 'OPENAI_API_KEY', 'deepseek': 'DEEPSEEK_API_KEY',
+        'anthropic': 'ANTHROPIC_API_KEY', 'openrouter': 'OPENROUTER_API_KEY'}
+# OpenAI-compatible chat completions; the schema goes in the prompt and is validated on return.
+COMPATIBLE = {'deepseek': 'https://api.deepseek.com/chat/completions',
+              'openrouter': 'https://openrouter.ai/api/v1/chat/completions'}
+EFFORTS = {'low', 'medium', 'high', 'xhigh', 'max'}
 BILLING_ERRORS = {'insufficient_quota', 'credit_balance_exhausted',
                   'organization_spend_limit_exceeded', 'project_spend_limit_exceeded',
                   'organization_usage_limit_exceeded', 'billing_hard_limit_reached',
@@ -67,11 +76,13 @@ def http_category(exc):
 def selection(scope='EXTRACTION', legacy_model='gemini-3.6-flash'):
     provider = (os.getenv(scope + '_LLM_PROVIDER') or os.getenv('LLM_PROVIDER') or 'gemini').strip().lower()
     if provider not in KEYS:
-        raise FatalLLMError('LLM_PROVIDER must be gemini, openai or deepseek')
+        raise FatalLLMError('LLM_PROVIDER must be one of: ' + ', '.join(KEYS))
     model = os.getenv(scope + '_LLM_MODEL') or os.getenv('LLM_MODEL')
     if not model and provider == 'gemini':
         model = legacy_model
-    if not model or not re.fullmatch(r'[a-zA-Z0-9_.:-]+', model):
+    # OpenRouter ids are vendor/model; a slash anywhere else would change the Gemini URL path.
+    allowed = r'[a-zA-Z0-9_.:/-]+' if provider == 'openrouter' else r'[a-zA-Z0-9_.:-]+'
+    if not model or not re.fullmatch(allowed, model):
         raise FatalLLMError('Set an explicit valid LLM_MODEL for the selected provider')
     return provider, model
 
@@ -139,11 +150,15 @@ class StructuredGenerator:
         self.token_budget = integer('RUN_TOKEN_BUDGET', 0)
         self.attempt_budget = integer('RUN_MAX_ATTEMPTS', 0)
         self.output_limit = integer('MAX_OUTPUT_TOKENS', output_limit)
+        self.effort = (os.getenv('LLM_EFFORT') or 'medium').strip().lower()
+        if self.provider == 'anthropic' and self.effort not in EFFORTS:
+            raise FatalLLMError('LLM_EFFORT must be one of: ' + ', '.join(sorted(EFFORTS)))
         self.metrics = dict(api_attempts=0, input_chars_sent=0, prompt_tokens=0,
                             output_tokens=0, thinking_tokens=0, total_tokens=0,
                             unknown_usage_attempts=0, unknown_thinking_attempts=0)
         self.settings = dict(provider=self.provider, model=self.model,
                              thinking_level=(self.thinking_level or 'provider-default') if self.provider == 'gemini'
+                                 else 'adaptive, effort ' + self.effort if self.provider == 'anthropic'
                                  else ('not-applicable (non-reasoning model)' if self.model == 'gpt-4.1-mini' else 'provider-default'),
                              token_budget=self.token_budget,
                              attempt_budget=self.attempt_budget, max_output_tokens=self.output_limit,
@@ -165,8 +180,10 @@ class StructuredGenerator:
                     'text': {'format': {'type': 'json_schema', 'name': 'dadspace',
                                         'schema': normalized, 'strict': True}}}
             limit_name = 'max_output_tokens'
-        elif self.provider == 'deepseek':
-            url = 'https://api.deepseek.com/chat/completions'
+        elif self.provider == 'anthropic':
+            url, body, limit_name = None, None, None  # llm_claude builds the SDK request
+        elif self.provider in COMPATIBLE:
+            url = COMPATIBLE[self.provider]
             sent_prompt += '\nReturn JSON matching this schema: ' + json.dumps(normalized)
             body = {'model': self.model, 'messages': [{'role': 'user', 'content': sent_prompt}],
                     'response_format': {'type': 'json_object'}}
@@ -184,7 +201,7 @@ class StructuredGenerator:
                     raise FatalLLMError('Invalid GEMINI_THINKING_LEVEL')
                 body['generationConfig']['thinkingConfig'] = {'thinkingLevel': level.upper()}
             limit_name = 'maxOutputTokens'
-        if self.output_limit:
+        if self.output_limit and body is not None:
             (body['generationConfig'] if self.provider == 'gemini' else body)[limit_name] = self.output_limit
         for attempt in range(self.retries + 1):
             if self.attempt_budget and self.metrics['api_attempts'] >= self.attempt_budget:
@@ -194,7 +211,16 @@ class StructuredGenerator:
             self.metrics['api_attempts'] += 1
             self.metrics['input_chars_sent'] += len(sent_prompt)
             try:
-                reply = _post(url, self.key, body, self.timeout, self.provider == 'gemini')
+                if self.provider == 'anthropic':
+                    reply = _claude(self.model, self.key, prompt, normalized, self.output_limit, self.timeout, self.effort)
+                else:
+                    reply = _post(url, self.key, body, self.timeout, self.provider == 'gemini')
+            except TransientLLMError as exc:
+                self.metrics['unknown_usage_attempts'] += 1
+                if attempt == self.retries:
+                    raise RuntimeError(f'{self.provider} transport failed after bounded retries ({exc})') from None
+                time.sleep(min(2 ** attempt, 8))
+                continue
             except ValueError:
                 self.metrics['unknown_usage_attempts'] += 1
                 raise RuntimeError(self.provider + ' returned an invalid HTTP JSON response') from None
@@ -221,10 +247,17 @@ class StructuredGenerator:
                 if any(p.get('type') == 'refusal' for p in parts):
                     raise ValueError('OpenAI refusal rejected')
                 text = ''.join(p.get('text', '') for p in parts if p.get('type') == 'output_text')
-            elif self.provider == 'deepseek':
+            elif self.provider == 'anthropic':
+                if reply['stop_reason'] == 'refusal':
+                    raise ValueError('Claude refusal rejected')
+                if reply['stop_reason'] != 'end_turn':
+                    raise IncompleteOutputError('Claude', {'finish_reason': reply['stop_reason'],
+                                                           'partial_output_chars': len(reply['text'])})
+                text = reply['text']
+            elif self.provider in COMPATIBLE:
                 choices = reply.get('choices') or []
                 if len(choices) != 1 or choices[0].get('finish_reason') != 'stop':
-                    raise ValueError('DeepSeek incomplete output rejected')
+                    raise ValueError(self.provider + ' incomplete output rejected')
                 text = choices[0]['message'].get('content', '')
             else:
                 candidates = reply.get('candidates') or []
@@ -245,6 +278,10 @@ class StructuredGenerator:
         elif self.provider == 'openai':
             incoming, outgoing, total = 'input_tokens', 'output_tokens', 'total_tokens'
             thinking = (usage.get('output_tokens_details') or {}).get('reasoning_tokens')
+        elif self.provider == 'anthropic':
+            # Claude bills thinking inside output_tokens and reports no separate count: unknown, not zero.
+            incoming, outgoing, total = 'input_tokens', 'output_tokens', 'total_tokens'
+            thinking = None
         else:
             incoming, outgoing, total = 'prompt_tokens', 'completion_tokens', 'total_tokens'
             thinking = (usage.get('completion_tokens_details') or {}).get('reasoning_tokens')
@@ -256,6 +293,12 @@ class StructuredGenerator:
         self.metrics['output_tokens'] += int(usage.get(outgoing) or 0) + (int(thinking or 0) if self.provider == 'gemini' else 0)
         self.metrics['thinking_tokens'] += int(thinking or 0)
         self.metrics['total_tokens'] += int(usage.get(total) or 0)
+
+
+def _claude(model, key, prompt, schema, output_limit, timeout, effort):
+    # Kept out of this module so the Anthropic SDK is imported only when Claude is selected.
+    import llm_claude
+    return llm_claude.request(model, key, prompt, schema, output_limit, timeout, effort)
 
 
 def make_extractor(model, schema, timeout, fatal_error):
