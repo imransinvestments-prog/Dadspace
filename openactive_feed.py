@@ -23,6 +23,10 @@ CANCELLED = ('EventCancelled', 'EventPostponed')
 SCHEDULE_LIMIT = 300
 # A party or hire booking is a private occasion, not an opportunity families can join.
 PRIVATE_HIRE = re.compile(r'\b(?:part(?:y|ies)|private hire|hire|exclusive use)\b', re.I)
+# Some operators name each slot ('Soft Play Mon 12:00'); the schedule already says when.
+SLOT_SUFFIX = re.compile(r'\s*[-–,]?\s*\b(?:mon|tues?|wed|thu(?:rs?)?|fri|sat|sun)(?:day)?s?\b'
+                         r'(?:\s+\d{1,2}(?:[:.]?\d{2})?(?:\s*[ap]m)?(?:\s*-\s*\d{1,2}(?:[:.]\d{2})?)?)?\s*$', re.I)
+NAMED_AGES = re.compile(r'\b(\d{1,2})\s*[-–]\s*\d{1,2}\s*(?:yrs?|years?)?(?:\b|$)', re.I)
 EARLY_YEARS = re.compile(r'\b(?:soft play|play|bounce|tots?|toddlers?|bab(?:y|ies)|pre-?school|under ?5s?)\b', re.I)
 DESCRIPTION_LIMIT = 1000
 
@@ -95,6 +99,11 @@ def _price_text(prices):
     return money(low) + ('' if low == high else '–' + money(high)) + ' per session; check booking page'
 
 
+def series_name(value):
+    name = ' '.join(str(value).split())
+    return SLOT_SUFFIX.sub('', name).strip() or name
+
+
 def series_row(data, today):
     """Compact one feed item to the fields an Activity needs, or a counted skip."""
     parent = data.get('superEvent') if isinstance(data.get('superEvent'), dict) else {}
@@ -117,6 +126,10 @@ def series_row(data, today):
         return dict(row, skip='missing_name_or_place')
     if PRIVATE_HIRE.search(str(pick('name'))):
         return dict(row, skip='private_hire')
+    # Operators often publish a broad ageRange ('5–15') for a class named '11-15'.
+    named = NAMED_AGES.search(series_name(pick('name')))
+    if named and int(named[1]) >= 6:
+        return dict(row, skip='age_name_outside')
     prices = []
     for offer in pick('offers') or []:
         if not isinstance(offer, dict):
@@ -131,7 +144,7 @@ def series_row(data, today):
             pass
     labels = [a.get('prefLabel') for a in pick('activity') or [] if isinstance(a, dict) and a.get('prefLabel')]
     return dict(
-        row, name=' '.join(str(pick('name')).split()), url=url, place=' '.join(place['name'].split()),
+        row, name=series_name(pick('name')), url=url, place=' '.join(place['name'].split()),
         postcode=address.get('postalCode'),
         address=', '.join(str(address[k]).strip() for k in ('streetAddress', 'addressLocality') if address.get(k)) or None,
         minimum=age['minimum_years'], maximum=age['maximum_years'],

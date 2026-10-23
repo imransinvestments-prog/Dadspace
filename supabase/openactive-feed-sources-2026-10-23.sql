@@ -20,6 +20,6 @@ values
    'activities', 'operator', 'leisure_operator',
    'leisure-centre sessions for ages 0–5', 'England', null, 'requests',
    false,
-   'OpenActive SessionSeries/CourseInstance feeds, CC BY 4.0. Survey 23 Oct 2026: 99,244 series, 3,011 age-eligible, 70 pilot-local. Zero model calls. Inactive until owner approval.',
+   'OpenActive SessionSeries/CourseInstance feeds, CC BY 4.0. Read-only check 23 Oct 2026: 99,001 series, 2,778 with an ageRange overlapping 0–5 and a weekly schedule (44 more dropped where the class name states ages 6+), grouped into 173 activities (6 within 10 km of W3 9LN); 26 timetables too long to store go to review. Zero model calls. Inactive until owner approval.',
    'activity_listing', 'openactive_feed')
 on conflict (url) do nothing;

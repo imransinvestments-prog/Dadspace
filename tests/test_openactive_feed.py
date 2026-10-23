@@ -107,6 +107,13 @@ class SeriesTests(unittest.TestCase):
         self.assertEqual((row['minimum'], row['maximum'], row['prices']), (0, 5, [4.5]))
         self.assertEqual(row['address'], '1 High Street, Acton')
 
+    def test_slot_names_drop_their_day_and_time_so_slots_group(self):
+        for name in ('Soft Play Mon 12:00', 'Athletics 11-15 Wed 1800', 'Tennis 7-11 Thu 7-11', 'Swim Tuesdays'):
+            self.assertNotRegex(openactive_feed.series_name(name), r'(?i)mon|wed|thu|tue')
+        self.assertEqual(openactive_feed.series_name('Soft Play Mon 12:00'), 'Soft Play')
+        self.assertEqual(openactive_feed.series_name('Monday'), 'Monday')
+        self.assertEqual(openactive_feed.series_name('Sunday Funday Soft Play'), 'Sunday Funday Soft Play')
+
     def test_adult_open_and_cancelled_series_are_counted_skips(self):
         self.assertEqual(openactive_feed.series_row(series('a', age={'minValue': 18}), TODAY)['skip'], 'age_outside')
         self.assertEqual(openactive_feed.series_row(series('a', age={'minValue': 0, 'maxValue': 110}), TODAY)['skip'],
@@ -115,6 +122,10 @@ class SeriesTests(unittest.TestCase):
         self.assertEqual(openactive_feed.series_row(
             series('a', eventStatus='https://schema.org/EventCancelled'), TODAY)['skip'], 'cancelled')
         self.assertEqual(openactive_feed.series_row(series('a', name='Soft Play Party'), TODAY)['skip'], 'private_hire')
+        broad = {'minValue': 5, 'maxValue': 15}
+        self.assertEqual(openactive_feed.series_row(series('a', name='Athletics 11-15 Wed 1800', age=broad), TODAY)['skip'],
+                         'age_name_outside')
+        self.assertNotIn('skip', openactive_feed.series_row(series('a', name='Tennis 5-7', age=broad), TODAY))
 
     def test_series_with_one_name_and_centre_become_one_activity(self):
         rows = [openactive_feed.series_row(series('a'), TODAY),
