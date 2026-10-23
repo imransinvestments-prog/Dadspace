@@ -52,6 +52,21 @@ test('fixed review cohorts require operator access, survive missing live DB, and
   assert.equal(a.rows.some(r=>b.rows.some(s=>r.id===s.id)),false)
   assert.equal((await m.getReviewMaterial(34,6)).rows.length,0)
 })
+test('#34 shows the cohort as scored: 25 reviewed originals unchanged, then the 25 replacements',async()=>{
+  const venues=load('lib/operations/sprint11-venues.ts'),sample=JSON.parse(fs.readFileSync('artefacts/data/venue-review-sample-2026-10-22.json','utf8'))
+  const rows=venues.REVIEW34_ROWS,fp=row=>createHash('sha256').update(JSON.stringify(row)).digest('hex')
+  assert.equal(rows.length,50);assert.equal(new Set(rows.map(r=>r.id)).size,50)
+  assert.equal(JSON.stringify(rows.slice(0,25).map(r=>r.id).sort()),JSON.stringify([...sample.retained_original_ids].sort()))
+  for(const row of rows.slice(0,25)) assert.equal(fp(row),fp(venues.SPRINT11_VENUE_ROWS.find(r=>r.id===row.id)))
+  assert.equal(JSON.stringify(rows.slice(25)),JSON.stringify(sample.rows))
+  const m=material('allowed'),last=await m.getReviewMaterial(34,5)
+  assert.equal(last.total,50);assert.equal(last.rows.at(-1).id,sample.rows.at(-1).id)
+  const progress=load('lib/operations/venue-checks.ts',{'server-only':{},'./venue-check-labels':load('lib/operations/venue-check-labels.ts')})
+  const yes={identity:'yes',location:'yes',source:'yes',access:'yes',visitor_facts:'yes',photo_rights:'yes'}
+  const comment=(id,row)=>({id,user:{login:'imransinvestments-prog'},body:`Dadspace owner review v1\n\nDecision: Approved for stated scope\nVenue quality checks: ${JSON.stringify(yes)}\nReviewed record: ${row.id}\nSnapshot SHA-256: ${fp(row)}\n`})
+  const result=progress.venueProgress([comment(1,rows[0]),comment(2,rows[49]),comment(3,{...rows[49],title:'edited'})],rows)
+  assert.equal(result.reviewed,2);assert.equal(result.passed,2)
+})
 const dealLabels=load('lib/operations/deal-check-labels.ts')
 const dealReviews=load('lib/operations/deal-checks.ts',{'server-only':{},'./deal-check-labels':dealLabels})
 test('Deal scores bind owner and frozen fingerprint, count once and keep unknown/failed checks out of passes',()=>{

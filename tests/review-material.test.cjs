@@ -12,7 +12,7 @@ function harness({ access = 'allowed', configured = true, failed = false, data =
   vm.runInNewContext(code, { module, exports: module.exports, process: { env: configured ? { DADSPACE_SUPABASE_SERVICE_ROLE_KEY: 'test-only' } : {} }, AbortSignal,
     require: name => {
       if (name === 'server-only') return {}
-      if (name === './sprint11-venues') return { SPRINT11_VENUE_ROWS: JSON.parse(fs.readFileSync('artefacts/data/sprint5-review-pack.json','utf8')).venues.rows }
+      if (name === './sprint11-venues') return { REVIEW34_ROWS: JSON.parse(fs.readFileSync('artefacts/data/sprint5-review-pack.json','utf8')).venues.rows }
       if (name === './session') return { operationsAccess: async () => access }
       if (name === './news-sample') return { NEWS_SAMPLE: JSON.parse(fs.readFileSync('artefacts/data/news-quality-sample-2026-10-15.json', 'utf8')) }
       if (name === '@/lib/supabase') return { getSupabase: () => ({ from: table => { calls.push(['from', table]); return query } }) }
