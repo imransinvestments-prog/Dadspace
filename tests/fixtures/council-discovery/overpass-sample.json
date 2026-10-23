@@ -9,11 +9,11 @@
               "toilets": "yes", "changing_table": "yes", "addr:postcode": "W5 5EQ"}},
     {"type": "way", "id": 4251186,
      "bounds": {"minlat": 51.5075, "minlon": -0.3115, "maxlat": 51.5108, "maxlon": -0.3060},
-     "tags": {"leisure": "park", "name": "Walpole Park", "opening_hours": "07:30-dusk"}},
+     "tags": {"leisure": "nature_reserve", "name": "Horsenden Hill", "opening_hours": "07:30-dusk"}},
     {"type": "way", "id": 9185626,
      "bounds": {"minlat": 51.4940, "minlon": -0.2730, "maxlat": 51.4960, "maxlon": -0.2700},
      "tags": {"leisure": "nature_reserve", "name": "Gunnersbury Triangle Local Nature Reserve"}},
-    {"type": "node", "id": 101, "lat": 51.5201, "lon": -0.3001, "tags": {"leisure": "playground", "name": "Ash Playground"}},
+    {"type": "node", "id": 101, "lat": 51.5201, "lon": -0.3001, "tags": {"leisure": "miniature_golf", "name": "Ash Mini Golf"}},
     {"type": "node", "id": 102, "lat": 51.5202, "lon": -0.3002, "tags": {"leisure": "playground", "name": "Beech Playground"}},
     {"type": "node", "id": 103, "lat": 51.5203, "lon": -0.3003, "tags": {"leisure": "playground", "name": "Cedar Playground"}},
     {"type": "node", "id": 104, "lat": 51.5204, "lon": -0.3004, "tags": {"leisure": "playground", "name": "Damson Playground"}},
@@ -32,6 +32,17 @@
     {"type": "node", "id": 250807406, "lat": 51.5120, "lon": -0.3200,
      "tags": {"amenity": "library", "name": "West Ealing Community Library", "addr:postcode": "W13 9BA"}},
     {"type": "node", "id": 109, "lat": 51.5300, "lon": -0.3500,
-     "tags": {"tourism": "zoo", "zoo": "petting_zoo", "name": "Northolt City Farm", "toilets": "no"}}
+     "tags": {"tourism": "zoo", "zoo": "petting_zoo", "name": "Northolt City Farm", "toilets": "no"}},
+    {"type": "way", "id": 120, "bounds": {"minlat": 51.5075, "minlon": -0.3115, "maxlat": 51.5108, "maxlon": -0.306}, "tags": {"leisure": "park", "name": "Walpole Park", "opening_hours": "07:30-dusk"}},
+    {"type": "node", "id": 121, "lat": 51.511, "lon": -0.303, "tags": {"tourism": "attraction", "name": "Ealing Film Studios Tour", "website": "https://example.org/tour"}},
+    {"type": "node", "id": 122, "lat": 51.512, "lon": -0.304, "tags": {"tourism": "attraction", "attraction": "roller_coaster", "name": "Big Dipper", "website": "https://example.org/ride"}},
+    {"type": "node", "id": 123, "lat": 51.513, "lon": -0.305, "tags": {"tourism": "attraction", "name": "Old Milestone"}},
+    {"type": "node", "id": 124, "lat": 51.514, "lon": -0.306, "tags": {"historic": "castle", "name": "Example Castle", "opening_hours": "Sa-Su 10:00-16:00"}},
+    {"type": "node", "id": 125, "lat": 51.515, "lon": -0.307, "tags": {"historic": "castle", "name": "Motte Earthwork"}},
+    {"type": "node", "id": 126, "lat": 51.516, "lon": -0.308, "tags": {"amenity": "arts_centre", "name": "Questors Arts Centre"}},
+    {"type": "node", "id": 127, "lat": 51.517, "lon": -0.309, "tags": {"tourism": "attraction", "attraction": "maze", "name": "Hedge Maze"}},
+    {"type": "node", "id": 128, "lat": 51.518, "lon": -0.31, "tags": {"amenity": "planetarium", "name": "Example Planetarium"}},
+    {"type": "node", "id": 129, "lat": 51.519, "lon": -0.311, "tags": {"leisure": "high_ropes_course", "name": "Treetop Ropes"}},
+    {"type": "node", "id": 130, "lat": 51.52, "lon": -0.312, "tags": {"leisure": "trampoline_park", "name": "Bounce Ealing"}}
   ]
 }

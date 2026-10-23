@@ -62,9 +62,10 @@ class FakeDB:
 
 class FakeGenerator:
     def __init__(self, reply=None, error=None):
-        self.reply, self.error = reply, error
+        self.reply, self.error, self.prompts = reply, error, []
 
     def generate(self, prompt, schema):
+        self.prompts.append(prompt)
         if self.error:
             raise self.error
         return self.reply
@@ -81,10 +82,29 @@ class OverpassParsingTests(unittest.TestCase):
         boundary, found = cd.spots_from_overpass(SAMPLE)
         names = set(by_name(found))
         self.assertTrue(boundary)
-        self.assertIn('Walpole Park', names)
-        self.assertNotIn('Playground', names)  # generic name
+        self.assertIn('Horsenden Hill', names)
         self.assertNotIn('Private Gardens', names)  # access=private
-        self.assertNotIn(107, [s['osm_id'] for s in found])  # unnamed
+
+    def test_parks_and_playgrounds_are_never_discovered(self):
+        # Owner decision 23 Oct 2026 (#243): they rarely change, so this feed leaves them out.
+        found = spots()
+        self.assertFalse([s for s in found if s['tags'].get('leisure') in ('park', 'playground')])
+        self.assertNotIn('Walpole Park', by_name(found))
+        self.assertNotIn('playground', cd.overpass_query('E09000009'))
+        self.assertNotIn('|park|', cd.overpass_query('E09000009'))
+
+    def test_new_types_and_their_filters(self):
+        found = by_name(spots())
+        self.assertEqual({n: found[n]['category'] for n in (
+            'Ealing Film Studios Tour', 'Example Castle', 'Questors Arts Centre', 'Hedge Maze',
+            'Example Planetarium', 'Treetop Ropes', 'Bounce Ealing', 'Ash Mini Golf')}, {
+            'Ealing Film Studios Tour': 'Attraction', 'Example Castle': 'Castle',
+            'Questors Arts Centre': 'Arts centre', 'Hedge Maze': 'Maze',  # maze rule wins over attraction
+            'Example Planetarium': 'Planetarium', 'Treetop Ropes': 'Adventure / high ropes',
+            'Bounce Ealing': 'Trampoline venue', 'Ash Mini Golf': 'Mini golf'})
+        self.assertNotIn('Big Dipper', found)  # a single ride is part of another place
+        self.assertNotIn('Old Milestone', found)  # attraction with no website or Wikidata
+        self.assertNotIn('Motte Earthwork', found)  # castle with no website or opening hours
 
     def test_libraries_are_never_discovered(self):
         # Owner decision 23 Oct 2026 (#243): the library reference source already covers them.
@@ -96,9 +116,9 @@ class OverpassParsingTests(unittest.TestCase):
 
     def test_way_centre_comes_from_bounds_and_petting_zoo_is_a_farm(self):
         found = by_name(spots())
-        self.assertAlmostEqual(found['Walpole Park']['lat'], 51.50915, places=4)
+        self.assertAlmostEqual(found['Horsenden Hill']['lat'], 51.50915, places=4)
         self.assertEqual(found['Northolt City Farm']['category'], 'Farm')
-        self.assertEqual(found['Ash Playground']['category'], 'Children’s playground')
+        self.assertEqual(found['Ash Mini Golf']['category'], 'Mini golf')
 
     def test_query_scopes_to_the_council_boundary(self):
         query = cd.overpass_query('E09000009')
@@ -107,14 +127,23 @@ class OverpassParsingTests(unittest.TestCase):
 
 
 class RankingTests(unittest.TestCase):
-    def test_order_and_per_category_cap(self):
+    def test_order_and_no_cap(self):
+        # Owner decision 23 Oct 2026 (#243): every new place is kept; the rank only orders them.
         ranked = cd.rank(spots())
-        self.assertEqual([s['name'] for s in ranked[:3]],
-                         ['Pitzhanger Manor House and Gallery', 'Walpole Park', 'Northolt City Farm'])
-        self.assertEqual([s['name'] for s in ranked if s['category'] == 'Children’s playground'],
-                         ['Ash Playground', 'Beech Playground', 'Cedar Playground'])
+        self.assertEqual(ranked[0]['name'], 'Pitzhanger Manor House and Gallery')
+        self.assertEqual(len(ranked), len(spots()))
+        self.assertGreater(len(ranked), cd.NOTES_TOP_N)
         self.assertEqual([s['rank'] for s in ranked], list(range(1, len(ranked) + 1)))
-        self.assertLessEqual(len(ranked), cd.TOP_N)
+
+    def test_notes_are_drafted_for_the_top_ten_only(self):
+        generator = FakeGenerator(reply=[])
+        stats, records = discover(generator=generator)
+        self.assertGreater(len(records), cd.NOTES_TOP_N)
+        self.assertEqual(len(generator.prompts), 1)
+        top = [r['name'] for r, _ in records[:cd.NOTES_TOP_N]]
+        rest = [r['name'] for r, _ in records[cd.NOTES_TOP_N:]]
+        self.assertTrue(all(name in generator.prompts[0] for name in top))
+        self.assertFalse(any(name in generator.prompts[0] for name in rest))
 
     def test_ranking_is_reproducible(self):
         self.assertEqual([s['osm_id'] for s in cd.rank(spots())],
@@ -136,8 +165,8 @@ class DedupTests(unittest.TestCase):
         self.assertEqual(cd.match_existing(self.found['Pitzhanger Manor House and Gallery'], index)[0], 'existing')
 
     def test_close_and_similar_is_skipped(self):
-        park = self.found['Walpole Park']
-        index = cd.VenueIndex([{'id': 'v3', 'venue_name': 'Walpole Park Ealing',
+        park = self.found['Horsenden Hill']
+        index = cd.VenueIndex([{'id': 'v3', 'venue_name': 'Horsenden Hill Ealing',
                                 'latitude': park['lat'] + 0.0003, 'longitude': park['lng']}])
         self.assertEqual(cd.match_existing(park, index)[0], 'existing')
 
@@ -150,7 +179,7 @@ class DedupTests(unittest.TestCase):
 
     def test_direct_database_check_catches_what_the_index_missed(self):
         # 22 Oct dry run: Hanwell Zoo (way/221351281) was stored but offered as new.
-        zoo_url = 'https://www.openstreetmap.org/way/4251186'  # Walpole Park in the fixture
+        zoo_url = 'https://www.openstreetmap.org/way/4251186'  # Horsenden Hill in the fixture
         asked = []
 
         def known(urls):
@@ -178,14 +207,14 @@ class DedupTests(unittest.TestCase):
         self.assertEqual(cd.stored_osm_urls(db, []), set())
 
     def test_unrelated_neighbour_is_new(self):
-        park = self.found['Walpole Park']
+        park = self.found['Horsenden Hill']
         index = cd.VenueIndex([{'id': 'v5', 'venue_name': 'Walpole Sandpit Play Area',
                                 'latitude': park['lat'], 'longitude': park['lng'] + 0.004}])
         self.assertEqual(cd.match_existing(park, index), (None, None))
 
     def test_similar_name_inside_a_park_outline_is_skipped(self):
-        park = self.found['Walpole Park']  # outline about 380 m wide; the existing point is 150 m from its centre
-        index = cd.VenueIndex([{'id': 'v6', 'venue_name': 'Walpole Park', 'postcode': 'W5 5EN',
+        park = self.found['Horsenden Hill']  # outline about 380 m wide; the existing point is 150 m from its centre
+        index = cd.VenueIndex([{'id': 'v6', 'venue_name': 'Horsenden Hill', 'postcode': 'W5 5EN',
                                 'latitude': park['lat'], 'longitude': park['lng'] + 0.0022}])
         self.assertEqual(cd.match_existing(park, index)[0], 'existing')
 
@@ -217,13 +246,13 @@ class DedupTests(unittest.TestCase):
 class PostcodeTests(unittest.TestCase):
     def test_edge_of_council_spot_is_kept_and_flagged(self):
         found = by_name(spots())
-        items = [found['Walpole Park'], found['Pitzhanger Manor House and Gallery']]
+        items = [found['Horsenden Hill'], found['Pitzhanger Manor House and Gallery']]
         forward = {'W55EQ': {'postcode': 'W5 5EQ', 'admin_district': 'Ealing', 'codes': {'admin_district': 'E09000009'}}}
         reverse = [{'postcode': 'TW8 0AA', 'admin_district': 'Hounslow', 'codes': {'admin_district': 'E09000018'}}]
         with patch.object(cd, 'lookup_postcodes', return_value=forward), \
                 patch.object(cd, 'reverse_postcodes', return_value=reverse):
             kept = by_name(cd.resolve_postcodes(items, 'E09000009'))
-        park, museum = kept['Walpole Park'], kept['Pitzhanger Manor House and Gallery']
+        park, museum = kept['Horsenden Hill'], kept['Pitzhanger Manor House and Gallery']
         self.assertEqual((park['council_check'], park['postcode_source']), ('postcode_other_council', 'reverse_nearest'))
         self.assertEqual((museum['council_check'], museum['postcode_source']), ('postcode_in_council', 'osm_tag'))
 
@@ -231,18 +260,18 @@ class PostcodeTests(unittest.TestCase):
         def resolve(items, code):
             keep_postcodes(items, code)
             for s in items:
-                if s['name'] in ('Walpole Park', 'Ash Playground'):
+                if s['name'] in ('Horsenden Hill', 'Ash Mini Golf'):
                     s['council_check'] = 'postcode_other_council'
             return items
         stats, records = cd.discover_council(EALING, cd.VenueIndex([]), None, fetch=lambda code: SAMPLE,
                                              resolve=resolve)
         names = [r['name'] for r, _ in records]
-        self.assertNotIn('Walpole Park', names)  # way: belongs to the neighbouring council's run
-        self.assertIn('Ash Playground', names)  # node: genuinely inside, kept and flagged
+        self.assertNotIn('Horsenden Hill', names)  # way: belongs to the neighbouring council's run
+        self.assertIn('Ash Mini Golf', names)  # node: genuinely inside, kept and flagged
         self.assertEqual(stats['other_council'], 1)
 
     def test_inferred_postcode_is_never_stored_on_the_venue(self):
-        park = by_name(spots())['Walpole Park']
+        park = by_name(spots())['Horsenden Hill']
         reverse = [{'postcode': 'W5 5EQ', 'admin_district': 'Ealing', 'codes': {'admin_district': 'E09000009'}}]
         with patch.object(cd, 'reverse_postcodes', return_value=reverse):
             cd.resolve_postcodes([park], 'E09000009')
@@ -252,17 +281,20 @@ class PostcodeTests(unittest.TestCase):
         self.assertEqual(record['postcode'], 'W5 5EQ')
         self.assertIsNone(row['postcode'])
         self.assertNotIn('W5 5EQ', row['address'])
-        self.assertIn('nearest postcode W5 5EQ inferred, not stored', row['review_reason'])
+        # A clear-cut type is published; an inferred postcode alone doesn't need review, but any
+        # review reason still says the postcode was inferred.
+        self.assertTrue(row['public_visible'])
+        self.assertIn('nearest postcode W5 5EQ inferred, not stored', cd.review_reason(record))
 
     def test_lookup_failure_keeps_the_spot_unchecked(self):
-        park = by_name(spots())['Walpole Park']
+        park = by_name(spots())['Horsenden Hill']
         with patch.object(cd, 'lookup_postcodes', return_value={}), \
                 patch.object(cd, 'reverse_postcodes', return_value=[None]):
             kept = cd.resolve_postcodes([park], 'E09000009')
         self.assertEqual(kept[0]['council_check'], 'unavailable')
 
     def test_northern_ireland_skips_postcode_geography(self):
-        park = by_name(spots())['Walpole Park']
+        park = by_name(spots())['Horsenden Hill']
         with patch.object(cd, 'reverse_postcodes') as reverse:
             kept = cd.resolve_postcodes([park], 'N09000003')
         reverse.assert_not_called()
@@ -274,7 +306,7 @@ class NotesTests(unittest.TestCase):
         self.found = by_name(spots())
 
     def test_facility_claim_without_a_tag_is_rejected(self):
-        note = cd.check_note(self.found['Walpole Park'], {
+        note = cd.check_note(self.found['Horsenden Hill'], {
             'description': 'A big green space. Handy baby changing by the gate.', 'peak_busy_times': 'Weekends',
             'evidence_tags': ['opening_hours=07:30-dusk', 'invented=yes']})
         self.assertIsNone(note['description'])
@@ -302,7 +334,7 @@ class NotesTests(unittest.TestCase):
         self.assertIsNotNone(note['description'])
 
     def test_prompt_limits_claims_to_listed_tags(self):
-        prompt = cd.notes_prompt('Ealing', [self.found['Walpole Park']])
+        prompt = cd.notes_prompt('Ealing', [self.found['Horsenden Hill']])
         self.assertIn('ONLY if a matching tag is listed', prompt)
         self.assertIn('way/4251186', prompt)
 
@@ -360,18 +392,26 @@ class DatabaseTests(TempDirTest):
         # A GB council with a missing boundary is retried after a week; Northern Ireland waits the full refresh.
         self.assertEqual([c['code'] for c in cd.due_councils(db, councils, 10)], ['B', 'C', 'E', 'F'])
 
-    def test_inserts_are_hidden_and_name_possible_duplicates(self):
+    def test_clear_types_are_published_and_the_rest_are_hidden_for_review(self):
+        # Owner decision 23 Oct 2026 (#243).
         _, records = discover()
-        records[1][0]['possible_duplicate_of'] = {'venue_id': 'v9', 'venue_name': 'Something'}
+        farm = next(r for r, _ in records if r['name'] == 'Northolt City Farm')
+        farm['possible_duplicate_of'] = {'venue_id': 'v9', 'venue_name': 'Something'}
         db = FakeDB({'venues': lambda q: [{'source_url': row['source_url'], 'id': f'id-{i}'}
                                           for i, row in enumerate(q.payload)]})
         inserted = cd.insert_records(db, records)
-        venue_rows = next(p for table, _, p in db.calls if table == 'venues')
+        venue_rows = {row['venue_name']: row for row in next(p for table, _, p in db.calls if table == 'venues')}
         self.assertEqual(inserted, len(records))
-        self.assertTrue(all(row['public_visible'] is False for row in venue_rows))
-        self.assertTrue(all(row['discovery_status'] == 'discovered' for row in venue_rows))
-        duplicate = next(row for row in venue_rows if row['source_url'] == records[1][0]['source_url'])
-        self.assertIn('possible duplicate of Something (v9)', duplicate['review_reason'])
+        for name in ('Pitzhanger Manor House and Gallery', 'Horsenden Hill', 'Ash Mini Golf', 'Hedge Maze'):
+            row = venue_rows[name]
+            self.assertEqual((row['public_visible'], row['discovery_status'], row['review_reason']),
+                             (True, 'existing', None), name)
+        for name in ('Ealing Film Studios Tour', 'Example Castle', 'Questors Arts Centre', 'Northolt City Farm'):
+            row = venue_rows[name]
+            self.assertEqual((row['public_visible'], row['discovery_status']), (False, 'discovered'), name)
+        self.assertIn('castle type needs a check', venue_rows['Example Castle']['review_reason'])
+        self.assertIn('possible duplicate of Something (v9)', venue_rows['Northolt City Farm']['review_reason'])
+        self.assertTrue(all('description' not in row for row in venue_rows.values()))  # AI notes never published
         provenance = next(p for table, _, p in db.calls if table == 'venue_sources')
         self.assertEqual(provenance[0]['source_payload']['draft']['claims_status'], 'unverified')
         self.assertIn('postcode_source', provenance[0]['source_payload'])
