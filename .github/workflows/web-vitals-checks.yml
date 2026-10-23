@@ -1,0 +1,23 @@
+name: Web vitals recording checks
+on:
+  pull_request:
+    paths: ['lib/web-vitals.ts', 'app/api/vitals/**', 'components/web-vitals-reporter.tsx', 'app/layout.tsx', 'lib/supabase.ts', 'supabase/migrations/*web_vitals*', 'tests/web-vitals.test.cjs', '.github/workflows/web-vitals-checks.yml']
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: node --test tests/web-vitals.test.cjs
+      - run: pnpm exec tsc --noEmit
+      - run: pnpm build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'

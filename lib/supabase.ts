@@ -27,7 +27,8 @@ export function withTokenRetry(fetchImpl: typeof fetch, pause: (ms: number) => P
 /**
  * Server-only, read-only client. The tables are protected by RLS, so anon reads
  * return zero rows; a server-side service key lets the app read them without
- * changing any database policies. The app only ever calls `select`.
+ * changing any database policies. The app only ever calls `select`, except the
+ * /api/vitals beacon, which inserts validated rows into `web_vitals` only.
  */
 export function getSupabase(): SupabaseClient | null {
   const url = process.env.NEXT_PUBLIC_DADSPACE_SUPABASE_URL

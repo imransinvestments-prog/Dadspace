@@ -8,6 +8,7 @@ import { LocationProvider } from "@/components/location-provider"
 import { LaunchComingSoon } from "@/components/launch-coming-soon"
 import { COMING_SOON } from "@/lib/launch"
 import { SiteJsonLd } from "@/components/seo/json-ld"
+import { WebVitalsReporter } from "@/components/web-vitals-reporter"
 import { defaultDescription, defaultTitle, isProduction, siteName, siteUrl } from "@/lib/seo"
 import "./globals.css"
 
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </LocationProvider>}
         </ThemeProvider>
         <SpeedInsights />
+        <WebVitalsReporter />
         <Analytics />
       </body>
     </html>
