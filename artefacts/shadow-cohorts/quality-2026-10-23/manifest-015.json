@@ -1,0 +1,81 @@
+{
+  "prompt_sha256": "52440596f93806398bbf2e9cf17136d8d76f292895b9154c8e4f12a42c1e68c3",
+  "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 2756,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "ni-streamvale",
+          "evidence": "Streamvale’s Halloween Pumpkin Patch October 3 - October 31",
+          "fields": {
+            "title": "Streamvale’s Halloween Pumpkin Patch",
+            "listing_type": "event",
+            "start_date": "2026-10-03",
+            "end_date": "2026-10-31",
+            "event_url": "https://ni4kids.com/whatson/streamvales-halloween-pumpkin-patch/"
+          }
+        },
+        {
+          "id": "ni-cinemagic",
+          "evidence": "for Young People October 8 - October 31",
+          "fields": {
+            "title": "Cinemagic International Film & Television Festival for Young People",
+            "listing_type": "event",
+            "start_date": "2026-10-08",
+            "end_date": "2026-10-31"
+          }
+        },
+        {
+          "id": "ni-castle-espie",
+          "evidence": "Step into the Supernatural at WWT Castle Espie October 21 - November 1",
+          "fields": {
+            "title": "Step into the Supernatural at WWT Castle Espie",
+            "listing_type": "event",
+            "start_date": "2026-10-21",
+            "end_date": "2026-11-01"
+          }
+        },
+        {
+          "id": "ni-samhain",
+          "evidence": "Slieve Gullion All day Recurring",
+          "fields": {
+            "title": "Footsteps in the Forest Brings the Magic of Samhain to Slieve Gullion",
+            "listing_type": "event"
+          }
+        }
+      ],
+      "excluded": [
+        {
+          "id": "ni-storm-news",
+          "evidence": "Events Postponed as Storm Boelo Hits NI",
+          "reason": "News article, not an event"
+        },
+        {
+          "id": "ni-transfer-test",
+          "evidence": "Transfer Test Preparation with Columnist",
+          "reason": "News or advice article, not an event"
+        },
+        {
+          "id": "ni-storybook-news",
+          "evidence": "Local schoolchildren launch storybook",
+          "reason": "News article, not an event"
+        },
+        {
+          "id": "ni-belfast-arts",
+          "evidence": "Belfast International Arts Festival October 14 - November 8",
+          "reason": "General arts festival; no child or family evidence in the supplied text"
+        },
+        {
+          "id": "ni-spooktacular",
+          "evidence": "A Night of Spooktacular Music 8:00 pm - 10:00 pm",
+          "reason": "Evening concert; no child or family evidence in the supplied text"
+        }
+      ]
+    }
+  ]
+}

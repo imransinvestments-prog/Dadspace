@@ -53,7 +53,13 @@ test('saved source proposals and provider source text are actual dated evidence'
   const historical = await api.getReviewMaterial(135)
   assert.ok(historical.rows[0].fields.recommendation); assert.ok(historical.notice.includes('not current'))
   const provider = await api.getReviewMaterial(145)
-  assert.equal(provider.total, 4); assert.ok(provider.rows[0].fields.source_text.includes('Unity FC'))
+  assert.equal(provider.total, 15); assert.ok(provider.rows[0].fields.source_text.includes('Unity FC'))
+  const all = [...provider.rows, ...(await api.getReviewMaterial(145, 2)).rows]
+  assert.equal(all.length, 15)
+  for (const row of all) {  // every reference is grounded in the text the providers will see
+    assert.ok(Array.isArray(row.fields.expected) && Array.isArray(row.fields.excluded))
+    for (const item of [...row.fields.expected, ...row.fields.excluded]) assert.ok(row.fields.source_text.includes(item.evidence), row.id + ' ' + item.id)
+  }
 })
 test('news uses exactly 50 frozen snapshots without reading the changing live feed', async () => {
   const { api, calls } = harness({ configured: false })

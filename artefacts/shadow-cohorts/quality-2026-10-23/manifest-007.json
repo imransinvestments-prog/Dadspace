@@ -1,0 +1,119 @@
+{
+  "prompt_sha256": "42f0a1219e1c0f68e4da34367ce5f4708e128c165d359904b72d0961cfbddf88",
+  "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 6029,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "broads-magic-mischief",
+          "evidence": "Join Wilma the Witch for Halloween magic",
+          "fields": {
+            "title": "Magic & Mischief",
+            "listing_type": "event",
+            "start_date": "2026-10-23",
+            "end_date": "2026-11-01",
+            "event_url": "https://www.visitthebroads.co.uk/events/magic-mischief-23rd-october-1st-november/"
+          }
+        },
+        {
+          "id": "broads-pumpkin-patch",
+          "evidence": "Free entry to our Pumpkin Patch this October!",
+          "fields": {
+            "title": "Pumpkin Patch",
+            "listing_type": "event",
+            "start_date": "2026-10-23",
+            "end_date": "2026-10-31",
+            "event_url": "https://www.visitthebroads.co.uk/events/pumpkin-patch/"
+          }
+        },
+        {
+          "id": "broads-museum-spooky",
+          "evidence": "Dare you join our 'Tall Tales' Trail",
+          "fields": {
+            "title": "Spooky half-term fun at the Museum of the Broads",
+            "listing_type": "event",
+            "start_date": "2026-10-23",
+            "event_url": "https://www.visitthebroads.co.uk/events/spooky-half-term-fun-at-the-museum-of-the-broads/"
+          }
+        },
+        {
+          "id": "broads-kids-go-free",
+          "evidence": "Free travel for every child with a full fare-paying adult",
+          "fields": {
+            "title": "Kids Go Free October Half Term",
+            "listing_type": "event",
+            "start_date": "2026-10-24",
+            "event_url": "https://www.visitthebroads.co.uk/events/kids-go-free-october-half-term/"
+          }
+        },
+        {
+          "id": "broads-pony-pumpkin",
+          "evidence": "Pony Pumpkin Hunt at Redwings Horse Sanctuary",
+          "fields": {
+            "title": "Pony Pumpkin Hunt",
+            "listing_type": "event",
+            "start_date": "2026-10-24",
+            "event_url": "https://www.visitthebroads.co.uk/events/pony-pumpkin-hunt/"
+          }
+        }
+      ],
+      "excluded": [
+        {
+          "id": "broads-esther",
+          "evidence": "help Esther celebrate her birthday party",
+          "reason": "Ambiguous family evidence; scored as a review item"
+        },
+        {
+          "id": "broads-halloween-walk",
+          "evidence": "Join our Rangers for a spooky nature walk to Barton Boardwalk",
+          "reason": "Ambiguous family evidence (dusk ranger walk); scored as a review item"
+        },
+        {
+          "id": "broads-paddle-steamer",
+          "evidence": "An illustrated talk about the famous paddle steamer",
+          "reason": "No child or family evidence in the supplied text"
+        },
+        {
+          "id": "broads-volunteer-27",
+          "evidence": "reedham-marshes-2/",
+          "reason": "Volunteering day, not a family event"
+        },
+        {
+          "id": "broads-volunteer-29",
+          "evidence": "reedham-marshes/] ; View event",
+          "reason": "Volunteering day, not a family event"
+        },
+        {
+          "id": "broads-eel-set",
+          "evidence": "Eel Set guided walk along the River Thurne",
+          "reason": "No child or family evidence in the supplied text"
+        },
+        {
+          "id": "broads-murder-mystery",
+          "evidence": "Fully embrace Halloween and join in our Murder Mystery Halloween special event.",
+          "reason": "Adult dinner event"
+        },
+        {
+          "id": "broads-white-horse",
+          "evidence": "An evening of fun and live music at Norfolk's longest running Community pub",
+          "reason": "Adult evening at a pub"
+        },
+        {
+          "id": "broads-makers-market",
+          "evidence": "Discover our bigger Maker",
+          "reason": "No child or family evidence in the supplied text"
+        },
+        {
+          "id": "broads-antiques",
+          "evidence": "Good quality Antiques Fair, 40 dealers.",
+          "reason": "No child or family evidence in the supplied text"
+        }
+      ]
+    }
+  ]
+}

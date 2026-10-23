@@ -1,0 +1,399 @@
+{
+  "worker": "events-activities",
+  "prompt": "You extract public events from a web page for Dadspace, a UK database of things for parents, dads and families to do with children.\n\nToday's date is 2026-10-23 (UK). The page is from \"ClassForKids (London)\" (https://classforkids.io/en-GB/classes/London).\n\nReturn a JSON list of events found in the supplied content.\n\nIMPORTANT RULES:\n- Include real, specific family EVENTS and recurring family ACTIVITIES. Never invent details. Events require a date; activities may be undated.\n- Only use dates supported by the supplied content.\n- Dates must be ISO format YYYY-MM-DD. Resolve relative dates (\"this Saturday\") using today's date.\n- If the date cannot be established confidently, use null for start_date.\n- For multi-day events, provide start_date and end_date.\n- A page may contain compact table/list rows from several pagination pages. Treat each row as a candidate event and deduplicate repeated occurrences/details.\n- Some recurring council listings incorrectly expose a far-future series boundary as if it were an individual event end date (for example a 30-minute Rhymetime row starting in 2026 and apparently ending in 2030). For an obviously short recurring session, use the occurrence date as both start_date and end_date, keep the displayed session times in time_text, and set recurrence to recurring. Do not turn a short session into a multi-year event.\n- Do not return events whose dates are clearly in the past.\n- Skip council committee meetings, adult-only events, job adverts, generic service pages, and things only for sale.\n- A general attraction can be included when the page clearly presents it as an activity/day-out opportunity with a usable date.\n- The audience is fathers and other parents looking for genuine activities they can do WITH their children. Be conservative: this is a parent-activity database, not a general local events calendar.\n- Only include an event when the supplied content gives a concrete reason it belongs in a parent/family activity database.\n- family_relevance is 1-5:\n    5 = explicitly designed for children/families, or an unmistakably child/family-oriented activity (for example junior sport, Forest School, children's workshop, family trail, teddy bears' picnic, farm activity, family boat trip, steam/heritage open day with a genuine activity, hands-on museum activity).\n    4 = clearly suitable for a parent and child together, even if not exclusively child-focused; the supplied content must contain concrete evidence of that suitability.\n    3 = potentially suitable but the page gives only limited evidence; use this score only when there is still a concrete family/child/activity signal in the supplied content.\n    2 = mainly adult/general-interest and not clearly a parent-child activity.\n    1 = adult-only, unsuitable, administrative, commercial, or not a genuine activity/event.\n- Do NOT give 3 or higher merely because children are not excluded, an attraction exists, an event is local/free, or you can imagine a family enjoying it.\n- Treat these as NOT parent activities unless the content explicitly shows a child/family component: adult talks/lectures, adult education, instrument or craft classes aimed at adults, book groups, business/networking meetings, political meetings, committee meetings, religious services, remembrance/memorial events, fundraising coffee mornings, professional events, job adverts, generic attraction listings, and things for sale.\n- A general attraction may be included only when the supplied page presents a specific dated activity/day-out opportunity (for example an open day, steam day, family trail, guided activity, workshop, special tour or similar). Do not turn ordinary opening information, membership information, ticket sales or equipment hire into events.\n- Return two additional fields:\n    audience = one of: children, families, general, adults, unknown.\n    family_evidence = a short phrase copied or closely paraphrased from the supplied content explaining why a parent would do this with a child. If there is no concrete evidence, use null.\n- For family_relevance 3 or 4, family_evidence is required. For 5, it should normally be present too. Never invent evidence.\n- event_url should be the specific event link if one appears in the content (links appear as [url] after the link text).\n- recurrence is one of: one_off, recurring, seasonal, unknown.\n- confidence is 0-1: how sure you are the event details and family evidence are correct and come from the supplied content.\n- Do not use information from your general knowledge - use only the supplied content.\n\n\nEVENTS VS ACTIVITIES (classify EACH ITEM, never classify from the source category):\n- listing_type must be either event or activity.\n- activity = a regular weekly, repeating or term-time class/session/group/club. It may have no start_date.\n- event = a one-off, seasonal or special event. SCHOOL-HOLIDAY CAMPS ARE EVENTS even when they run for several days or repeat during a holiday.\n- is_holiday_camp = true only for a genuine school-holiday camp; otherwise false.\n- For an activity, copy the full published schedule into schedule_text, including weekday, clock times, term-time limits and exceptions. Preserve explicit start_date/end_date as ISO dates when the page supplies them; null only when absent. Date bounds are not proof of daily sessions.\n- Put individually published activity session dates in occurrence_dates as ISO dates; never generate dates from a recurrence or infer a missing year. Preserve gaps, cancellations and varying session times in schedule_text. Do not use footer dates, related listings or a calendar range that contradicts the programme description. Conflicting dates must be left unresolved rather than guessed.\n- For an event, start_date is mandatory and schedule_text should normally be null.\n- category must classify the ITEM itself, not the website/source. Use one concise category from: holiday_camps, sports, swimming, outdoors_nature, film_theatre, arts_crafts, museums_heritage, farms_animals, libraries, baby_toddler, family_days_out, other.\n\nVENUE FIELDS (SOURCE CONTENT ONLY):\n- venue_name, venue_address and postcode must come only from the supplied page content. Never infer, complete or guess them.\n- Keep location too for display, but do not fabricate a fuller address.\n\nQUALITY:\n- If the supplied content gives a price, ticket cost, admission charge, 'from £X', per-child cost, or says free, copy that concise information into cost_text. If no price appears, cost_text must be null; never guess.\n- Distinguish AM from PM carefully. Do not assign overnight/early-morning times unless explicitly supported.\n- Do not attach generic page dates that contradict seasonal wording.\n- Teen-only and adult-only sessions are not Dadspace family listings unless clearly parent-and-child/family.\n- A title explicitly saying teen/teenager should not be treated as a younger family activity merely because its numerical age starts at 12.\n\nCONTENT:\nKids class\nEl Recreo Spanish Online for Kids [https://El-Recreo-Spanish-Online-for-Kids.classforkids.io]\nat\nOnline\nGive your child the gift of Spanish through play, connection and culture! Our online Spanish classes for children aged 4–11 are taught by native Spanish-speaking teachers who specialise in teaching Spanish as a second language.\nWe create a fun, inclusive and engaging learning environment where children feel confident to participate, communicate and enjoy learning Spanish. Through games, songs, stories, activities and cultural experiences, children develop their language skills naturally while discovering the richness of the Spanish-speaking world and its diverse cultures.\nOur goal is simple: to make Spanish a language children love, use and connect with.\nMore info\n4 years to 12 years\nSpanish\nView schedule [https://El-Recreo-Spanish-Online-for-Kids.classforkids.io?venueName=Online]\nKids class\nCreative Writing Club [https://creative-writing-club.classforkids.io]\nat\nVirtual classroom, EC1V 2NX\nStarted in 2016 and designed for aspiring authors aged 10 -15, our Creative Writing Club is the perfect place for young minds to explore the world of writing, improve their skills, and have fun while doing it. Whether your child is already a budding writer or simply curious about crafting stories, we’ll help them grow into confident creators.\nMore info\n10 years to 15 years\nCreative writing\nView schedule [https://creative-writing-club.classforkids.io?venueName=Virtual classroom]\nKids class\nWolfpack Dance Collective [https://wolfpack-dance-collective.classforkids.io]\nat\nBorough Academy, SE1 0BU\nWolfpack Dance Collective UK, an exciting Hip Hop and Street Dance Group, Regularly performing and competing through the UK.\nHip Hop/ Street Dance Sessions Led by Industry professionals\nClasses are for aged 3-17years and are a great way to introduce Street Dance and Hip Hop Dance within a fun and safe environment.\nWe regularly work towards performances and competitions within London and throughout the UK as the opportunities allow.\nMore info\n0 months to 17 years\nBallet\nStreet Dance\nHip Hop\nOther Dance\nView schedule [https://wolfpack-dance-collective.classforkids.io?venueName=Borough Academy]\nKids class\nTeachMajor [https://teachmajor.classforkids.io]\nat\nMoreland Primary School, EC1V 8BB\nWe offer holiday camps, LAMDA and instrumental lessons\nMore info\n5 years to 16 years\nSinging\nOther Music & Drama\nView schedule [https://teachmajor.classforkids.io?venueName=Moreland Primary School]\nKids class\nPenguins Palace [https://penguins-palace.classforkids.io]\nat\n🌉 Tower Bridge, SE1 2EZ\nEach class has a maximum of 4 kids, giving every child the space and attention they need. We're a team of ASA and STA qualified swimming instructors, reshaping the world of swimming for the next generation. We take real pride in delivering high quality lessons for children and adults of all ages.\nMore info\n3 years to 18 years\nSwimming\nView schedule [https://penguins-palace.classforkids.io?venueName=🌉 Tower Bridge]\nKids class\nEl Recreo Spanish Eltham [https://el-recreo-spanish-eltham.classforkids.io]\nat\nChildren Change Colombia, WC1N 3LA\nSpanish classes for babies, children of all ages and adults in Eltham and Sidcup. Our Spanish native tutors are passionate about teaching Spanish language and culture from very young age. Sessions for beginners to intermediate/advanced. All our tutors are qualified, have experience in teaching children, DBS checked and insured.\nMore info\n2 months to 5 years\nSpanish\nView schedule [https://el-recreo-spanish-eltham.classforkids.io?venueName=Children Change Colombia]\n",
+  "schema": {
+    "$defs": {
+      "ListingSchema": {
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "listing_type": {
+            "title": "Listing Type",
+            "type": "string"
+          },
+          "is_holiday_camp": {
+            "default": false,
+            "title": "Is Holiday Camp",
+            "type": "boolean"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Category"
+          },
+          "start_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start Date"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Date"
+          },
+          "schedule_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Schedule Text"
+          },
+          "occurrence_dates": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Occurrence Dates"
+          },
+          "time_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Text"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "venue_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Venue Name"
+          },
+          "venue_address": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Venue Address"
+          },
+          "postcode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Postcode"
+          },
+          "event_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Url"
+          },
+          "cost_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cost Text"
+          },
+          "age_range": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Age Range"
+          },
+          "recurrence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recurrence"
+          },
+          "family_relevance": {
+            "title": "Family Relevance",
+            "type": "integer"
+          },
+          "confidence": {
+            "title": "Confidence",
+            "type": "number"
+          },
+          "audience": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Audience"
+          },
+          "family_evidence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Family Evidence"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "listing_type",
+          "start_date",
+          "end_date",
+          "time_text",
+          "location",
+          "event_url",
+          "cost_text",
+          "age_range",
+          "recurrence",
+          "family_relevance",
+          "confidence"
+        ],
+        "title": "ListingSchema",
+        "type": "object"
+      }
+    },
+    "items": {
+      "$ref": "#/$defs/ListingSchema"
+    },
+    "type": "array"
+  },
+  "settings": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "rebuilt_offline": true,
+    "rebuilt_on": "2026-10-23",
+    "fetch_engine": "browser"
+  },
+  "raw": [
+    {
+      "title": "El Recreo Spanish Online for Kids",
+      "listing_type": "activity",
+      "venue_name": "Online",
+      "age_range": "4 years to 12 years"
+    },
+    {
+      "title": "Creative Writing Club",
+      "listing_type": "activity",
+      "postcode": "EC1V 2NX",
+      "age_range": "10 years to 15 years"
+    },
+    {
+      "title": "Wolfpack Dance Collective",
+      "listing_type": "activity",
+      "venue_name": "Borough Academy",
+      "postcode": "SE1 0BU",
+      "age_range": "0 months to 17 years"
+    },
+    {
+      "title": "TeachMajor",
+      "listing_type": "activity",
+      "venue_name": "Moreland Primary School",
+      "postcode": "EC1V 8BB",
+      "age_range": "5 years to 16 years"
+    },
+    {
+      "title": "Penguins Palace",
+      "listing_type": "activity",
+      "postcode": "SE1 2EZ",
+      "age_range": "3 years to 18 years"
+    },
+    {
+      "title": "El Recreo Spanish Eltham",
+      "listing_type": "activity",
+      "venue_name": "Children Change Colombia",
+      "postcode": "WC1N 3LA",
+      "age_range": "2 months to 5 years"
+    }
+  ],
+  "usage": {},
+  "reference": {
+    "kind": "source-reviewed",
+    "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+    "reviewer_type": "ai",
+    "parent_prompt_sha256": "c2300f88fb2a2f81ac54b54ab212eb987cd0d6e840ae8ccfaf980ffee4b1ec65",
+    "chunk_index": 0,
+    "source_start": 0,
+    "source_end": 3619,
+    "source_chars": 3619,
+    "expected": [
+      {
+        "id": "cfk-el-recreo-online",
+        "evidence": "Give your child the gift of Spanish through play",
+        "fields": {
+          "title": "El Recreo Spanish Online for Kids",
+          "listing_type": "activity",
+          "venue_name": "Online",
+          "age_range": "4 years to 12 years"
+        }
+      },
+      {
+        "id": "cfk-creative-writing",
+        "evidence": "designed for aspiring authors aged 10 -15",
+        "fields": {
+          "title": "Creative Writing Club",
+          "listing_type": "activity",
+          "postcode": "EC1V 2NX",
+          "age_range": "10 years to 15 years"
+        }
+      },
+      {
+        "id": "cfk-wolfpack",
+        "evidence": "Wolfpack Dance Collective UK, an exciting Hip Hop",
+        "fields": {
+          "title": "Wolfpack Dance Collective",
+          "listing_type": "activity",
+          "venue_name": "Borough Academy",
+          "postcode": "SE1 0BU",
+          "age_range": "0 months to 17 years"
+        }
+      },
+      {
+        "id": "cfk-teachmajor",
+        "evidence": "We offer holiday camps, LAMDA and instrumental lessons",
+        "fields": {
+          "title": "TeachMajor",
+          "listing_type": "activity",
+          "venue_name": "Moreland Primary School",
+          "postcode": "EC1V 8BB",
+          "age_range": "5 years to 16 years"
+        }
+      },
+      {
+        "id": "cfk-penguins-tower-bridge",
+        "evidence": "Each class has a maximum of 4 kids",
+        "fields": {
+          "title": "Penguins Palace",
+          "listing_type": "activity",
+          "postcode": "SE1 2EZ",
+          "age_range": "3 years to 18 years"
+        }
+      },
+      {
+        "id": "cfk-el-recreo-eltham",
+        "evidence": "Spanish classes for babies, children of all ages and adults in Eltham and Sidcup",
+        "fields": {
+          "title": "El Recreo Spanish Eltham",
+          "listing_type": "activity",
+          "venue_name": "Children Change Colombia",
+          "postcode": "WC1N 3LA",
+          "age_range": "2 months to 5 years"
+        }
+      }
+    ],
+    "excluded": [],
+    "baseline_cost_comparable": false,
+    "selection": {
+      "kind": "selected-complete-records",
+      "original_prompt_sha256": "b76585cc53a5ec4505764dbae363ec2b34f19c605b0d4ffd5a57255e3d089fd8",
+      "original_source_chars": 24001,
+      "original_source_spans": [
+        {
+          "start": 392,
+          "end": 4011
+        }
+      ],
+      "rebuilt_offline": true,
+      "source": {
+        "id": "50950a1b-4160-4193-b11d-c6b33af64313",
+        "name": "ClassForKids (London)",
+        "url": "https://classforkids.io/en-GB/classes/London",
+        "category": "activities",
+        "nation": "England",
+        "region": "London"
+      },
+      "notes": "Class cards with age ranges and venue postcodes, including online-only classes and wider-age supply."
+    }
+  }
+}

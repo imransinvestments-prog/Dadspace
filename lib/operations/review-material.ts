@@ -13,14 +13,8 @@ import { OPERATIONS_PROCESSES } from "./processes"
 import { reviewTask } from "./review-tasks"
 import { NEWS_SAMPLE } from "./news-sample"
 import historical from "@/artefacts/data/ds10-remaining-source-review-2026-10-12.json"
-import manifest1 from "@/artefacts/shadow-cohorts/quality-2026-10-15/manifest-001.json"
-import manifest2 from "@/artefacts/shadow-cohorts/quality-2026-10-15/manifest-002.json"
-import manifest3 from "@/artefacts/shadow-cohorts/quality-2026-10-15/manifest-003.json"
-import manifest4 from "@/artefacts/shadow-cohorts/quality-2026-10-15/manifest-004.json"
-import sample1 from "@/artefacts/shadow-cohorts/quality-2026-10-15/sample-001.json"
-import sample2 from "@/artefacts/shadow-cohorts/quality-2026-10-15/sample-002.json"
-import sample3 from "@/artefacts/shadow-cohorts/quality-2026-10-15/sample-003.json"
-import sample4 from "@/artefacts/shadow-cohorts/quality-2026-10-15/sample-004.json"
+// #145 provider comparison cohort (23 Oct 2026): the four 15 Oct samples carried forward plus 11 rebuilt offline.
+import providerCohort from "@/artefacts/shadow-cohorts/quality-2026-10-23/review.json"
 
 export type MaterialRow = { id: string; title: string; fields: Record<string, unknown> }
 export type ReviewMaterial = { available: boolean; label: string; notice: string; rows: MaterialRow[]; total: number; page: number }
@@ -53,7 +47,7 @@ export async function getReviewMaterial(id: number, page = 1): Promise<ReviewMat
     { id:"activity-breadth",title:"Pilot Activities breadth",fields:{proposal:"At least 10 distinct actionable activities, three categories and two independent providers in W3 9LN /10km /ages 0–5 inclusive.",sample_limit:"The frozen 100-row diagnostic sample contains national supply and unknown ages/locations. It does not establish 100 pilot-qualified rows or final acceptance.",quality:"Existing 90% relevant/current/actionable gate remains; unknown facts cannot be scored as passes.",evidence_url:"/ops/sprint-5"}},
   ] as MaterialRow[], page, "Two unresolved quality decisions", "Fixed pilot scope, News thresholds and previous human approvals are retained. Agree or amend these two remaining choices. Freshness-target agreement is recorded separately on #124; this decision alone does not pass any feed's quality gate.")
   if (id === 135) return slice(historical.records.map(row => ({ id: row.record_id, title: row.title, fields: { checked_on: row.checked_on, status: row.status, recommendation: row.recommendation, remaining: row.remaining, links: row.links } })), page, "Retained source proposals", "Saved evidence from 12 October 2026, not current source verification. These are the remaining source proposals, not the full 201-proposal / 191-record queues. Recording a decision does not apply a database correction.")
-  if (id === 145) return slice([manifest1, manifest2, manifest3, manifest4].map((manifest, index) => ({ id: `provider-sample-${index + 1}`, title: `Provider source sample ${index + 1}`, fields: { reviewer: manifest.reviewer, candidates: manifest.chunks, source_text: [sample1, sample2, sample3, sample4][index].prompt.split("\nCONTENT:\n").at(-1) } })), page, "Saved provider source samples", "Four purposive source samples and AI-labelled expected candidates from 15 October. Provider response comparisons, billed costs and representative coverage are not supplied by this view; do not approve rollout from this source material alone.")
+  if (id === 145) return slice(providerCohort.rows as MaterialRow[], page, "Provider comparison cohort: 15 samples (23 Oct)", "AI-drafted, source-grounded references: the four 15 October samples plus 11 rebuilt offline on 23 October from public pages with the collectors' own code (no model calls). Spot-check about 10: does each expected record, field and exclusion match the source text? Only listed fields are scored. Provider results and billed costs are not shown here; do not approve a rollout from this material alone.")
   const label = id === 34 ? "Published venues" : id === 126 ? "Published news articles" : id === 128 ? "Published Originals" : id === 130 ? "Current public deals in selector order" : "Current activities"
   const notice = "Live browsing records, not a frozen #122 acceptance cohort. National/wider-age records may be included. Record-level decisions retain the displayed snapshot; they do not establish overall pilot acceptance."
   const unavailable: ReviewMaterial = { available: false, label, notice: "Data could not be loaded. This is not an empty review queue. Check the server database configuration and retry.", rows: [], total: 0, page }

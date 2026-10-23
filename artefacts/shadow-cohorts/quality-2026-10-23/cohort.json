@@ -1,0 +1,455 @@
+{
+  "reviewer_type": "ai",
+  "owner_acceptance": "pending (spot-check on /ops/reviews/145)",
+  "scope": "Bounded, balanced complete-record extracts across council-events and activities sources; not representative national coverage or full-page equivalence",
+  "baseline_cost_comparable": false,
+  "samples": [
+    {
+      "sample": 1,
+      "worker": "events-activities",
+      "source": "ClassForKids (15 Oct capture)",
+      "expected": 4,
+      "excluded": 0,
+      "prompt_chars": 8944,
+      "carried_from": "quality-2026-10-15",
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "9869b816a737a0af69187f33c8648ba1d3451a88d38e18c1720b201230e71ec6",
+        "original_source_chars": 24001,
+        "original_source_spans": [
+          {
+            "start": 12442,
+            "end": 12886
+          },
+          {
+            "start": 19301,
+            "end": 19803
+          },
+          {
+            "start": 2904,
+            "end": 3418
+          },
+          {
+            "start": 18774,
+            "end": 19301
+          }
+        ],
+        "full_original_source_coverage": false
+      }
+    },
+    {
+      "sample": 2,
+      "worker": "events-activities",
+      "source": "ClassForKids holiday camps (15 Oct capture)",
+      "expected": 3,
+      "excluded": 0,
+      "prompt_chars": 7941,
+      "carried_from": "quality-2026-10-15",
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "9869b816a737a0af69187f33c8648ba1d3451a88d38e18c1720b201230e71ec6",
+        "original_source_chars": 24001,
+        "original_source_spans": [
+          {
+            "start": 8377,
+            "end": 8711
+          },
+          {
+            "start": 8711,
+            "end": 9044
+          },
+          {
+            "start": 9044,
+            "end": 9362
+          }
+        ],
+        "full_original_source_coverage": false
+      }
+    },
+    {
+      "sample": 3,
+      "worker": "events-civic",
+      "source": "Explore Essex (15 Oct capture)",
+      "expected": 2,
+      "excluded": 1,
+      "prompt_chars": 9836,
+      "carried_from": "quality-2026-10-15",
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "5d0e9bc17a6b682fd7ed282a923c0468f9b96ecaae39c4128c034e60f8d2409c",
+        "original_source_chars": 40001,
+        "original_source_spans": [
+          {
+            "start": 695,
+            "end": 1554
+          },
+          {
+            "start": 2878,
+            "end": 3616
+          },
+          {
+            "start": 30724,
+            "end": 32014
+          }
+        ],
+        "full_original_source_coverage": false
+      }
+    },
+    {
+      "sample": 4,
+      "worker": "events-civic",
+      "source": "Cambridgeshire libraries (15 Oct capture)",
+      "expected": 2,
+      "excluded": 5,
+      "prompt_chars": 8908,
+      "carried_from": "quality-2026-10-15",
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "8642e2cd1d5c104bdb3deabc16efec240beb46632a26e49691867d6b1d0b3af9",
+        "original_source_chars": 25381,
+        "original_source_spans": [
+          {
+            "start": 751,
+            "end": 2708
+          }
+        ],
+        "full_original_source_coverage": false
+      }
+    },
+    {
+      "sample": 5,
+      "worker": "events-civic",
+      "source": "Camden Council",
+      "expected": 16,
+      "excluded": 0,
+      "prompt_chars": 10754,
+      "carried_from": null,
+      "selection": {
+        "kind": "complete-source",
+        "original_prompt_sha256": "a42ea458cd57ae06e97fcdda65619ea87e8d1bccc01712a38c0c828481a0f8af",
+        "original_source_chars": 3806,
+        "original_source_spans": [
+          {
+            "start": 0,
+            "end": 3806
+          }
+        ],
+        "rebuilt_offline": true,
+        "source": {
+          "id": "8e57d114-04db-4752-8ccd-86a3ac032369",
+          "name": "Camden Council",
+          "url": "https://www.camden.gov.uk/whats-on-this-month",
+          "category": "councils",
+          "nation": "England",
+          "region": "London"
+        },
+        "notes": "16 regular under-5 library sessions across 10 sites; venue and postcode per site. The Wednesday Storytime sits under the Kilburn pop-up heading but its venue is ambiguous, so venue is not scored."
+      }
+    },
+    {
+      "sample": 6,
+      "worker": "events-civic",
+      "source": "Kempton Steam Museum",
+      "expected": 1,
+      "excluded": 3,
+      "prompt_chars": 11378,
+      "carried_from": null,
+      "selection": {
+        "kind": "complete-source",
+        "original_prompt_sha256": "d477cea5e187c2d56ad2b031bcb5c1749f1b9f010f408b6aaad2226158e296f8",
+        "original_source_chars": 4417,
+        "original_source_spans": [
+          {
+            "start": 0,
+            "end": 4417
+          }
+        ],
+        "rebuilt_offline": true,
+        "source": {
+          "id": "b771bba1-9fdd-4604-9725-8b3f5764616a",
+          "name": "Kempton Steam Museum",
+          "url": "https://kemptonsteam.org/whats-on/steaming-weekends/",
+          "category": "niche_venues",
+          "nation": "England",
+          "region": "London"
+        },
+        "notes": "Edge case: ambiguous years in the date table, November cancelled, past dates, and a special event with no audience information. Expected: the next steaming weekend only."
+      }
+    },
+    {
+      "sample": 7,
+      "worker": "events-civic",
+      "source": "The Broads Authority",
+      "expected": 5,
+      "excluded": 10,
+      "prompt_chars": 12979,
+      "carried_from": null,
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "293aa2a229e3edc4e60baf20628c54855b956bc16cafd1fecc985900c9830fa8",
+        "original_source_chars": 16774,
+        "original_source_spans": [
+          {
+            "start": 0,
+            "end": 6029
+          }
+        ],
+        "rebuilt_offline": true,
+        "source": {
+          "id": "39361d71-4480-4706-903d-bdda3702c5f6",
+          "name": "The Broads Authority",
+          "url": "https://www.visitthebroads.co.uk/whats-on",
+          "category": "heritage_parks",
+          "nation": "England",
+          "region": "East of England"
+        },
+        "notes": "Compact listing lines mixing clear family events with adult dinners, a pub night, talks, volunteering and fairs."
+      }
+    },
+    {
+      "sample": 8,
+      "worker": "events-civic",
+      "source": "Kent County Council",
+      "expected": 15,
+      "excluded": 5,
+      "prompt_chars": 11055,
+      "carried_from": null,
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "c9722fc64efcbee37db256274edda4120369e6d35b9222591261020d463ea0ea",
+        "original_source_chars": 18059,
+        "original_source_spans": [
+          {
+            "start": 7207,
+            "end": 11270
+          }
+        ],
+        "rebuilt_offline": true,
+        "source": {
+          "id": "ed06de23-da3d-4e24-8c6c-6e74b617f117",
+          "name": "Kent County Council",
+          "url": "https://seekent.co.uk/whats-on/?type=event&search_keywords=family&sort=order-by-date",
+          "category": "councils",
+          "nation": "England",
+          "region": "South East"
+        },
+        "notes": "Family-search results: specific seasonal family events versus round-up pages, a general festival and a placeholder date range. Multi-day events show today as their listed date."
+      }
+    },
+    {
+      "sample": 9,
+      "worker": "events-civic",
+      "source": "Oxfordshire County Council",
+      "expected": 12,
+      "excluded": 4,
+      "prompt_chars": 11202,
+      "carried_from": null,
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "8dea4e6f55535d822b641590dfe427bef6902a431076a0f5ec484007e4103c28",
+        "original_source_chars": 24502,
+        "original_source_spans": [
+          {
+            "start": 4581,
+            "end": 8831
+          }
+        ],
+        "rebuilt_offline": true,
+        "source": {
+          "id": "43a48e50-eac3-435a-bd3c-5caad5d5a2da",
+          "name": "Oxfordshire County Council",
+          "url": "https://www.oxfordshire.gov.uk/events",
+          "category": "councils",
+          "nation": "England",
+          "region": "South East"
+        },
+        "notes": "Recurrence trap: Berinsfield Rhymetime appears as weekly rows with a bogus 2030 end date, so it is one activity. Rhyme times at other libraries show one date only, so classification is not scored for them; the two Didcot sessions are distinct."
+      }
+    },
+    {
+      "sample": 10,
+      "worker": "events-civic",
+      "source": "How Are You Peterborough?",
+      "expected": 5,
+      "excluded": 6,
+      "prompt_chars": 12160,
+      "carried_from": null,
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "a14b04416451cedb62842a384c4d77f9241880cbc58838530083e6b060a47a18",
+        "original_source_chars": 39985,
+        "original_source_spans": [
+          {
+            "start": 0,
+            "end": 5204
+          }
+        ],
+        "rebuilt_offline": true,
+        "source": {
+          "id": "d1c1caf6-4c3e-40f8-8234-10b51b6be5da",
+          "name": "How Are You Peterborough?",
+          "url": "https://discoverpeterborough.co.uk/events/",
+          "category": "councils",
+          "nation": "England",
+          "region": "Peterborough"
+        },
+        "notes": "Family-tagged seasonal events next to adult comedy, gigs and a mediumship evening. Theatre Explorers spans a year with no stated schedule, so classification is not scored."
+      }
+    },
+    {
+      "sample": 11,
+      "worker": "events-activities",
+      "source": "ClassForKids (London)",
+      "expected": 6,
+      "excluded": 0,
+      "prompt_chars": 10573,
+      "carried_from": null,
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "b76585cc53a5ec4505764dbae363ec2b34f19c605b0d4ffd5a57255e3d089fd8",
+        "original_source_chars": 24001,
+        "original_source_spans": [
+          {
+            "start": 392,
+            "end": 4011
+          }
+        ],
+        "rebuilt_offline": true,
+        "source": {
+          "id": "50950a1b-4160-4193-b11d-c6b33af64313",
+          "name": "ClassForKids (London)",
+          "url": "https://classforkids.io/en-GB/classes/London",
+          "category": "activities",
+          "nation": "England",
+          "region": "London"
+        },
+        "notes": "Class cards with age ranges and venue postcodes, including online-only classes and wider-age supply."
+      }
+    },
+    {
+      "sample": 12,
+      "worker": "events-activities",
+      "source": "Hoop (London)",
+      "expected": 11,
+      "excluded": 0,
+      "prompt_chars": 11062,
+      "carried_from": null,
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "47f4f38410a572fa92cf6fc7112fc934c158b2c91f61b28cfa76186c41c7ca6d",
+        "original_source_chars": 15335,
+        "original_source_spans": [
+          {
+            "start": 0,
+            "end": 4128
+          }
+        ],
+        "rebuilt_offline": true,
+        "source": {
+          "id": "2df575ca-a90a-4386-903f-ae0a1c43135e",
+          "name": "Hoop (London)",
+          "url": "https://hoop.co.uk/areas/london/",
+          "category": "activities",
+          "nation": "England",
+          "region": "London"
+        },
+        "notes": "Many timed sessions from one provider. Same-title sessions at different times or durations are distinct; several say there is no class on 23 Oct (half term), so 23 Oct is not a valid occurrence for them."
+      }
+    },
+    {
+      "sample": 13,
+      "worker": "events-activities",
+      "source": "Hoop (Greater Manchester)",
+      "expected": 4,
+      "excluded": 1,
+      "prompt_chars": 9319,
+      "carried_from": null,
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "a75245da7b9dda6bfc56ca744c63dd91720ee60e8e8ce124096f1f251b5be363",
+        "original_source_chars": 24001,
+        "original_source_spans": [
+          {
+            "start": 0,
+            "end": 2361
+          }
+        ],
+        "rebuilt_offline": true,
+        "source": {
+          "id": "8b8b950e-11d9-4b92-a83c-f9284a8fa732",
+          "name": "Hoop (Greater Manchester)",
+          "url": "https://hoop.co.uk/areas/greater-manchester/",
+          "category": "activities",
+          "nation": "England",
+          "region": "North West"
+        },
+        "notes": "Deduplication: the same weekly classes repeat on consecutive days, so one activity per class. The teen class is excluded by title."
+      }
+    },
+    {
+      "sample": 14,
+      "worker": "events-activities",
+      "source": "ClassForKids (Manchester)",
+      "expected": 4,
+      "excluded": 0,
+      "prompt_chars": 11191,
+      "carried_from": null,
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "d05a014e37dae6b3d7247689aad80f9dc1d318077230ce596250f1225d5557a0",
+        "original_source_chars": 24001,
+        "original_source_spans": [
+          {
+            "start": 408,
+            "end": 4637
+          }
+        ],
+        "rebuilt_offline": true,
+        "source": {
+          "id": "254f1361-8385-4374-8a0f-d4fbef2415e5",
+          "name": "ClassForKids (Manchester)",
+          "url": "https://classforkids.io/en-GB/classes/Manchester",
+          "category": "activities",
+          "nation": "England",
+          "region": "North West"
+        },
+        "notes": "Venue identity: one provider at three studios is three activities."
+      }
+    },
+    {
+      "sample": 15,
+      "worker": "events-activities",
+      "source": "Ni 4 Kids",
+      "expected": 4,
+      "excluded": 5,
+      "prompt_chars": 9674,
+      "carried_from": null,
+      "selection": {
+        "kind": "selected-complete-records",
+        "original_prompt_sha256": "72668478cc5427d0a6dc9079984b5b8a83021bf7f24940f04be81b87c71afd65",
+        "original_source_chars": 11805,
+        "original_source_spans": [
+          {
+            "start": 0,
+            "end": 2756
+          }
+        ],
+        "rebuilt_offline": true,
+        "source": {
+          "id": "cef3de43-3328-4087-84a8-49cf6e2dd169",
+          "name": "Ni 4 Kids",
+          "url": "https://ni4kids.com/",
+          "category": "activities",
+          "nation": "Northern Ireland",
+          "region": "National"
+        },
+        "notes": "News articles mixed into an events list, plus a general arts festival and an evening concert."
+      }
+    }
+  ],
+  "totals": {
+    "samples": 15,
+    "expected": 94,
+    "excluded": 40
+  }
+}

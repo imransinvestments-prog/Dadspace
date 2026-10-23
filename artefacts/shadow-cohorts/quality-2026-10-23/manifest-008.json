@@ -1,0 +1,177 @@
+{
+  "prompt_sha256": "8f84117215710f51799042e90078884697424e374097f33ccf455d4927d26e9f",
+  "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 4063,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "kent-spadework",
+          "evidence": "PYO Pumpkins at Spadework near West Malling",
+          "fields": {
+            "title": "PYO Pumpkins at Spadework near West Malling",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        },
+        {
+          "id": "kent-lime-tree",
+          "evidence": "Lime Tree Farm Pumpkin Patch on Romney Marsh",
+          "fields": {
+            "title": "Lime Tree Farm Pumpkin Patch on Romney Marsh",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        },
+        {
+          "id": "kent-ladysden",
+          "evidence": "Pumpkin Festival & Pumpkin Nights at Lower Ladysden Farm",
+          "fields": {
+            "title": "Pumpkin Festival & Pumpkin Nights at Lower Ladysden Farm",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        },
+        {
+          "id": "kent-port-lympne",
+          "evidence": "Autumn Adventures at Port Lympne Reserve near Hythe",
+          "fields": {
+            "title": "Autumn Adventures at Port Lympne Reserve near Hythe",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        },
+        {
+          "id": "kent-room-on-the-broom",
+          "evidence": "Room on the Broom Trail at Bedgebury",
+          "fields": {
+            "title": "Room on the Broom Trail at Bedgebury",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        },
+        {
+          "id": "kent-pumpkin-moon-maidstone",
+          "evidence": "Pumpkin Picking at Pumpkin Moon in Maidstone",
+          "fields": {
+            "title": "Pumpkin Picking at Pumpkin Moon in Maidstone",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        },
+        {
+          "id": "kent-scotney",
+          "evidence": "Halloween Half-term Trail At Scotney Castle",
+          "fields": {
+            "title": "Halloween Half-term Trail At Scotney Castle",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        },
+        {
+          "id": "kent-howletts",
+          "evidence": "Halloween & Half Term At Howletts",
+          "fields": {
+            "title": "Halloween & Half Term At Howletts",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        },
+        {
+          "id": "kent-leeds-castle",
+          "evidence": "Horrible Histories Halloween at Leeds Castle in Maidstone",
+          "fields": {
+            "title": "Horrible Histories Halloween at Leeds Castle in Maidstone",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        },
+        {
+          "id": "kent-loddington",
+          "evidence": "PYO Pumpkins at Loddington Farm near Maidstone",
+          "fields": {
+            "title": "PYO Pumpkins at Loddington Farm near Maidstone",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        },
+        {
+          "id": "kent-meopham",
+          "evidence": "Pumpkin Picking at Meopham PYO near Gravesend",
+          "fields": {
+            "title": "Pumpkin Picking at Meopham PYO near Gravesend",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        },
+        {
+          "id": "kent-milebush",
+          "evidence": "Milebush Farm PYO Pumpkin Patch, Maidstone",
+          "fields": {
+            "title": "Milebush Farm PYO Pumpkin Patch, Maidstone",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        },
+        {
+          "id": "kent-walmer",
+          "evidence": "Halloween & Half Term at Walmer Castle",
+          "fields": {
+            "title": "Halloween & Half Term at Walmer Castle",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        },
+        {
+          "id": "kent-pumpkin-moon-rainham",
+          "evidence": "Pumpkin Picking at Pumpkin Moon in Rainham",
+          "fields": {
+            "title": "Pumpkin Picking at Pumpkin Moon in Rainham",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        },
+        {
+          "id": "kent-riverhill",
+          "evidence": "Pumpkin Festival At Riverhill Himalayan Gardens",
+          "fields": {
+            "title": "Pumpkin Festival At Riverhill Himalayan Gardens",
+            "listing_type": "event",
+            "start_date": "2026-10-23"
+          }
+        }
+      ],
+      "excluded": [
+        {
+          "id": "kent-treasure-island",
+          "evidence": "January 23, 2026 2:30 pm - January 23, 2027 4:00 pm",
+          "reason": "Placeholder year-long range; no actual performance date"
+        },
+        {
+          "id": "kent-canterbury-festival",
+          "evidence": "Canterbury Festival Canterbury October 23, 2026",
+          "reason": "General arts festival; no child or family evidence in the supplied text"
+        },
+        {
+          "id": "kent-chartwell",
+          "evidence": "Events At Chartwell In Sevenoaks",
+          "reason": "Round-up or guide page, not a specific event"
+        },
+        {
+          "id": "kent-halloween-roundup",
+          "evidence": "Halloween Events In Kent 2026",
+          "reason": "Round-up or guide page, not a specific event"
+        },
+        {
+          "id": "kent-thanet-roundup",
+          "evidence": "Halloween Community Events in Thanet",
+          "reason": "Round-up or guide page, not a specific event"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,429 @@
+{
+  "worker": "events-activities",
+  "prompt": "You extract public events from a web page for Dadspace, a UK database of things for parents, dads and families to do with children.\n\nToday's date is 2026-10-23 (UK). The page is from \"Hoop (London)\" (https://hoop.co.uk/areas/london/).\n\nReturn a JSON list of events found in the supplied content.\n\nIMPORTANT RULES:\n- Include real, specific family EVENTS and recurring family ACTIVITIES. Never invent details. Events require a date; activities may be undated.\n- Only use dates supported by the supplied content.\n- Dates must be ISO format YYYY-MM-DD. Resolve relative dates (\"this Saturday\") using today's date.\n- If the date cannot be established confidently, use null for start_date.\n- For multi-day events, provide start_date and end_date.\n- A page may contain compact table/list rows from several pagination pages. Treat each row as a candidate event and deduplicate repeated occurrences/details.\n- Some recurring council listings incorrectly expose a far-future series boundary as if it were an individual event end date (for example a 30-minute Rhymetime row starting in 2026 and apparently ending in 2030). For an obviously short recurring session, use the occurrence date as both start_date and end_date, keep the displayed session times in time_text, and set recurrence to recurring. Do not turn a short session into a multi-year event.\n- Do not return events whose dates are clearly in the past.\n- Skip council committee meetings, adult-only events, job adverts, generic service pages, and things only for sale.\n- A general attraction can be included when the page clearly presents it as an activity/day-out opportunity with a usable date.\n- The audience is fathers and other parents looking for genuine activities they can do WITH their children. Be conservative: this is a parent-activity database, not a general local events calendar.\n- Only include an event when the supplied content gives a concrete reason it belongs in a parent/family activity database.\n- family_relevance is 1-5:\n    5 = explicitly designed for children/families, or an unmistakably child/family-oriented activity (for example junior sport, Forest School, children's workshop, family trail, teddy bears' picnic, farm activity, family boat trip, steam/heritage open day with a genuine activity, hands-on museum activity).\n    4 = clearly suitable for a parent and child together, even if not exclusively child-focused; the supplied content must contain concrete evidence of that suitability.\n    3 = potentially suitable but the page gives only limited evidence; use this score only when there is still a concrete family/child/activity signal in the supplied content.\n    2 = mainly adult/general-interest and not clearly a parent-child activity.\n    1 = adult-only, unsuitable, administrative, commercial, or not a genuine activity/event.\n- Do NOT give 3 or higher merely because children are not excluded, an attraction exists, an event is local/free, or you can imagine a family enjoying it.\n- Treat these as NOT parent activities unless the content explicitly shows a child/family component: adult talks/lectures, adult education, instrument or craft classes aimed at adults, book groups, business/networking meetings, political meetings, committee meetings, religious services, remembrance/memorial events, fundraising coffee mornings, professional events, job adverts, generic attraction listings, and things for sale.\n- A general attraction may be included only when the supplied page presents a specific dated activity/day-out opportunity (for example an open day, steam day, family trail, guided activity, workshop, special tour or similar). Do not turn ordinary opening information, membership information, ticket sales or equipment hire into events.\n- Return two additional fields:\n    audience = one of: children, families, general, adults, unknown.\n    family_evidence = a short phrase copied or closely paraphrased from the supplied content explaining why a parent would do this with a child. If there is no concrete evidence, use null.\n- For family_relevance 3 or 4, family_evidence is required. For 5, it should normally be present too. Never invent evidence.\n- event_url should be the specific event link if one appears in the content (links appear as [url] after the link text).\n- recurrence is one of: one_off, recurring, seasonal, unknown.\n- confidence is 0-1: how sure you are the event details and family evidence are correct and come from the supplied content.\n- Do not use information from your general knowledge - use only the supplied content.\n\n\nEVENTS VS ACTIVITIES (classify EACH ITEM, never classify from the source category):\n- listing_type must be either event or activity.\n- activity = a regular weekly, repeating or term-time class/session/group/club. It may have no start_date.\n- event = a one-off, seasonal or special event. SCHOOL-HOLIDAY CAMPS ARE EVENTS even when they run for several days or repeat during a holiday.\n- is_holiday_camp = true only for a genuine school-holiday camp; otherwise false.\n- For an activity, copy the full published schedule into schedule_text, including weekday, clock times, term-time limits and exceptions. Preserve explicit start_date/end_date as ISO dates when the page supplies them; null only when absent. Date bounds are not proof of daily sessions.\n- Put individually published activity session dates in occurrence_dates as ISO dates; never generate dates from a recurrence or infer a missing year. Preserve gaps, cancellations and varying session times in schedule_text. Do not use footer dates, related listings or a calendar range that contradicts the programme description. Conflicting dates must be left unresolved rather than guessed.\n- For an event, start_date is mandatory and schedule_text should normally be null.\n- category must classify the ITEM itself, not the website/source. Use one concise category from: holiday_camps, sports, swimming, outdoors_nature, film_theatre, arts_crafts, museums_heritage, farms_animals, libraries, baby_toddler, family_days_out, other.\n\nVENUE FIELDS (SOURCE CONTENT ONLY):\n- venue_name, venue_address and postcode must come only from the supplied page content. Never infer, complete or guess them.\n- Keep location too for display, but do not fabricate a fuller address.\n\nQUALITY:\n- If the supplied content gives a price, ticket cost, admission charge, 'from £X', per-child cost, or says free, copy that concise information into cost_text. If no price appears, cost_text must be null; never guess.\n- Distinguish AM from PM carefully. Do not assign overnight/early-morning times unless explicitly supported.\n- Do not attach generic page dates that contradict seasonal wording.\n- Teen-only and adult-only sessions are not Dadspace family listings unless clearly parent-and-child/family.\n- A title explicitly saying teen/teenager should not be treated as a younger family activity merely because its numerical age starts at 12.\n\nCONTENT:\nCOMPACT EVENT LISTINGS FROM HTML:\nPAGE: https://hoop.co.uk/areas/london/\n23 October at 15:30 Regal Ballet: Baby Ballet (18 months to 2½ years) Our youngest class introduces toddlers to ballet through music, songs, simple steps and imaginative play, building balance, coordination and listening skills. Classes last 30 minutes. Parents are welcome to stay and watch. Your first class is a FREE trial. If your child loves it, book the full term at regalballet.com. No class during half term (Fridays 23 and 30 October). Regal Ballet is a Royal Academy of Dance registered school, founded in 2007. All our teachers are professional ballet dancers, safeguarding trained and hold an Enhanced DBS check. Classes are capped at 16 children.\n23 October at 15:30 Tiny Dancers Pre-schoolers, intended as Academic Year prior starting reception. The first approach-ballet technique in a creative and imaginative style.\n23 October at 15:30 Regal Ballet: Pre-Primary Ballet (3½ to 5 years) Children learn the basic ballet positions, good posture and first steps such as skips, gallops and pliés, alongside creative dance. This class prepares them for the RAD Primary syllabus. Classes last 45 minutes. Your first class is a FREE trial. If your child loves it, book the full term at regalballet.com. No class during half term (30 October). Regal Ballet is a Royal Academy of Dance registered school, founded in 2007. All our teachers are professional ballet dancers, safeguarding trained and hold an Enhanced DBS check. Classes are capped at 16 children.\n23 October at 15:30 Big & Small For children aged 2 upwards. Older students who prefer dancing with an adult. A fun class with parents, nannies or anyone keen to join their little dancers. Baby siblings welcome to come along.\n23 October at 15:55 Regal Ballet: Pre-Primary Ballet (3½ to 5 years) Children learn the basic ballet positions, good posture and first steps such as skips, gallops and pliés, alongside creative dance. This class prepares them for the RAD Primary syllabus. Classes last 30 minutes. Your first class is a FREE trial. If your child loves it, book the full term at regalballet.com. No class during half term (Fridays 23 and 30 October). Regal Ballet is a Royal Academy of Dance registered school, founded in 2007. All our teachers are professional ballet dancers, safeguarding trained and hold an Enhanced DBS check. Classes are capped at 16 children.\n23 October at 15:55 Regal Ballet: Ballet for 2½ to 3½ years Children start dancing more independently, learning to follow instructions, take turns and move in time to music. Storytelling and character dances build confidence and musicality. Classes last 30 minutes. Your first class is a FREE trial. If your child loves it, book the full term at regalballet.com. No class during half term (Fridays 23 and 30 October). Regal Ballet is a Royal Academy of Dance registered school, founded in 2007. All our teachers are professional ballet dancers, safeguarding trained and hold an Enhanced DBS check. Classes are capped at 16 children.\n23 October at 16:00 Moving Waves Performing arts classes are inclusive, confidence-building and encourage creativity and self-expression. Offering various weekly classes in ballet, contemporary, street, tap and break dance aswell as musical theatre. Please follow the link to the Moving Waves website for more information.\n23 October at 16:00 Kids Gym Club - Official HYROX Training Club Atlas Kids Gym is a high-energy training club designed to build confident, strong, and resilient kids. Through fun, structured sessions focused on movement, coordination, and teamwork, we help children develop skills that go far beyond fitness.\n23 October at 16:00 Mini Street Music, energy and great moves! Children from reception to school Year 1.\n23 October at 16:00 Tiny Dancers Pre-schoolers, intended as Academic Year prior starting reception. The first approach-ballet technique in a creative and imaginative style.\n23 October at 16:00 Rising Stars Reception children and school year 1. A definite development from the former stage and a preparation for more demanding ballet technique.\n",
+  "schema": {
+    "$defs": {
+      "ListingSchema": {
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "listing_type": {
+            "title": "Listing Type",
+            "type": "string"
+          },
+          "is_holiday_camp": {
+            "default": false,
+            "title": "Is Holiday Camp",
+            "type": "boolean"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Category"
+          },
+          "start_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start Date"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Date"
+          },
+          "schedule_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Schedule Text"
+          },
+          "occurrence_dates": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Occurrence Dates"
+          },
+          "time_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Text"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "venue_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Venue Name"
+          },
+          "venue_address": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Venue Address"
+          },
+          "postcode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Postcode"
+          },
+          "event_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Url"
+          },
+          "cost_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cost Text"
+          },
+          "age_range": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Age Range"
+          },
+          "recurrence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recurrence"
+          },
+          "family_relevance": {
+            "title": "Family Relevance",
+            "type": "integer"
+          },
+          "confidence": {
+            "title": "Confidence",
+            "type": "number"
+          },
+          "audience": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Audience"
+          },
+          "family_evidence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Family Evidence"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "listing_type",
+          "start_date",
+          "end_date",
+          "time_text",
+          "location",
+          "event_url",
+          "cost_text",
+          "age_range",
+          "recurrence",
+          "family_relevance",
+          "confidence"
+        ],
+        "title": "ListingSchema",
+        "type": "object"
+      }
+    },
+    "items": {
+      "$ref": "#/$defs/ListingSchema"
+    },
+    "type": "array"
+  },
+  "settings": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "rebuilt_offline": true,
+    "rebuilt_on": "2026-10-23",
+    "fetch_engine": "browser"
+  },
+  "raw": [
+    {
+      "title": "Regal Ballet: Baby Ballet (18 months to 2½ years)",
+      "listing_type": "activity"
+    },
+    {
+      "title": "Tiny Dancers",
+      "listing_type": "activity"
+    },
+    {
+      "title": "Regal Ballet: Pre-Primary Ballet (3½ to 5 years)",
+      "listing_type": "activity"
+    },
+    {
+      "title": "Big & Small",
+      "listing_type": "activity"
+    },
+    {
+      "title": "Regal Ballet: Pre-Primary Ballet (3½ to 5 years)",
+      "listing_type": "activity"
+    },
+    {
+      "title": "Regal Ballet: Ballet for 2½ to 3½ years",
+      "listing_type": "activity"
+    },
+    {
+      "title": "Moving Waves",
+      "listing_type": "activity"
+    },
+    {
+      "title": "Kids Gym Club - Official HYROX Training Club",
+      "listing_type": "activity"
+    },
+    {
+      "title": "Mini Street",
+      "listing_type": "activity"
+    },
+    {
+      "title": "Tiny Dancers",
+      "listing_type": "activity"
+    },
+    {
+      "title": "Rising Stars",
+      "listing_type": "activity"
+    }
+  ],
+  "usage": {},
+  "reference": {
+    "kind": "source-reviewed",
+    "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+    "reviewer_type": "ai",
+    "parent_prompt_sha256": "b1ec5edb67ff6a3678a194b7019656e70cc403ba5db1e5393f80d1faf2858a58",
+    "chunk_index": 0,
+    "source_start": 0,
+    "source_end": 4128,
+    "source_chars": 4128,
+    "expected": [
+      {
+        "id": "hoop-baby-ballet-1530",
+        "evidence": "Regal Ballet: Baby Ballet (18 months to 2½ years)",
+        "fields": {
+          "title": "Regal Ballet: Baby Ballet (18 months to 2½ years)",
+          "listing_type": "activity"
+        }
+      },
+      {
+        "id": "hoop-tiny-dancers-1530",
+        "evidence": "23 October at 15:30 Tiny Dancers",
+        "fields": {
+          "title": "Tiny Dancers",
+          "listing_type": "activity"
+        }
+      },
+      {
+        "id": "hoop-pre-primary-1530",
+        "evidence": "23 October at 15:30 Regal Ballet: Pre-Primary Ballet",
+        "fields": {
+          "title": "Regal Ballet: Pre-Primary Ballet (3½ to 5 years)",
+          "listing_type": "activity"
+        }
+      },
+      {
+        "id": "hoop-big-small",
+        "evidence": "Big & Small For children aged 2 upwards",
+        "fields": {
+          "title": "Big & Small",
+          "listing_type": "activity"
+        }
+      },
+      {
+        "id": "hoop-pre-primary-1555",
+        "evidence": "23 October at 15:55 Regal Ballet: Pre-Primary Ballet",
+        "fields": {
+          "title": "Regal Ballet: Pre-Primary Ballet (3½ to 5 years)",
+          "listing_type": "activity"
+        }
+      },
+      {
+        "id": "hoop-ballet-2-3-1555",
+        "evidence": "23 October at 15:55 Regal Ballet: Ballet for 2½ to 3½ years",
+        "fields": {
+          "title": "Regal Ballet: Ballet for 2½ to 3½ years",
+          "listing_type": "activity"
+        }
+      },
+      {
+        "id": "hoop-moving-waves",
+        "evidence": "Moving Waves Performing arts classes",
+        "fields": {
+          "title": "Moving Waves",
+          "listing_type": "activity"
+        }
+      },
+      {
+        "id": "hoop-kids-gym",
+        "evidence": "Kids Gym Club - Official HYROX Training Club",
+        "fields": {
+          "title": "Kids Gym Club - Official HYROX Training Club",
+          "listing_type": "activity"
+        }
+      },
+      {
+        "id": "hoop-mini-street",
+        "evidence": "Mini Street Music, energy and great moves!",
+        "fields": {
+          "title": "Mini Street",
+          "listing_type": "activity"
+        }
+      },
+      {
+        "id": "hoop-tiny-dancers-1600",
+        "evidence": "23 October at 16:00 Tiny Dancers",
+        "fields": {
+          "title": "Tiny Dancers",
+          "listing_type": "activity"
+        }
+      },
+      {
+        "id": "hoop-rising-stars",
+        "evidence": "Rising Stars Reception children and school year 1",
+        "fields": {
+          "title": "Rising Stars",
+          "listing_type": "activity"
+        }
+      }
+    ],
+    "excluded": [],
+    "baseline_cost_comparable": false,
+    "selection": {
+      "kind": "selected-complete-records",
+      "original_prompt_sha256": "47f4f38410a572fa92cf6fc7112fc934c158b2c91f61b28cfa76186c41c7ca6d",
+      "original_source_chars": 15335,
+      "original_source_spans": [
+        {
+          "start": 0,
+          "end": 4128
+        }
+      ],
+      "rebuilt_offline": true,
+      "source": {
+        "id": "2df575ca-a90a-4386-903f-ae0a1c43135e",
+        "name": "Hoop (London)",
+        "url": "https://hoop.co.uk/areas/london/",
+        "category": "activities",
+        "nation": "England",
+        "region": "London"
+      },
+      "notes": "Many timed sessions from one provider. Same-title sessions at different times or durations are distinct; several say there is no class on 23 Oct (half term), so 23 Oct is not a valid occurrence for them."
+    }
+  }
+}
