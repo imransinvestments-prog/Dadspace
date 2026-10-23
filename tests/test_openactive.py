@@ -73,7 +73,8 @@ class OpenActiveTests(unittest.TestCase):
 
     def test_legacy_events_without_ids_group_by_name_and_place(self):
         event = {'type': 'Event', 'name': 'Swim lessons', 'location': NEAR, 'ageRange': {'minValue': 4, 'maxValue': 8}}
-        summary = openactive.summarise([event, dict(event), dict(event, name='HIIT', ageRange={'minValue': 0, 'maxValue': 110})])
+        items = [event, dict(event), dict(event, name='HIIT', ageRange={'minValue': 0, 'maxValue': 110})]
+        summary = openactive.summarise(map(openactive.opportunity, items))
         self.assertEqual((summary['series'], summary['pilot_eligible']), (2, 1))
 
     def test_location_needs_real_coordinates(self):
@@ -107,7 +108,7 @@ class OpenActiveTests(unittest.TestCase):
         sessions = [{'type': 'ScheduledSession', 'superEvent': series} for _ in range(3)]
         far = {'@type': 'SessionSeries', '@id': 's3', 'location': FAR, 'ageRange': {'maxValue': 4}}
         unknown = {'@type': 'SessionSeries', '@id': 's4', 'location': NEAR}
-        summary = openactive.summarise([series, *sessions, far, unknown])
+        summary = openactive.summarise(map(openactive.opportunity, [series, *sessions, far, unknown]))
         self.assertEqual((summary['series'], summary['local'], summary['pilot_eligible'],
                           summary['pilot_eligible_with_schedule'], summary['local_age_unknown']), (3, 2, 1, 1, 1))
         self.assertEqual(summary['pilot_activity_labels'], {'(no activity label)': 1})
@@ -126,6 +127,32 @@ class OpenActiveTests(unittest.TestCase):
         outcome = openactive.walk_feed('https://x.test/feed', client(responses))
         self.assertEqual((outcome['pages'], outcome['complete']), (3, True))
         self.assertEqual(outcome['items'], {1: {'name': 'new'}})
+
+    def test_walk_keeps_compact_rows_and_postcodes_place_them_later(self):
+        series = {'@type': 'SessionSeries', '@id': 's1', 'name': 'Junior gym', 'description': 'x' * 5000,
+                  'ageRange': {'minValue': 2, 'maxValue': 5}, 'location': {'address': {'postalCode': 'TW8 0HJ'}}}
+        responses = {'feed': [Response(200, {'items': [{'state': 'updated', 'id': 1, 'data': series}]})]}
+        row = openactive.walk_feed('feed', client(responses), transform=openactive.opportunity)['items']['s1']
+        self.assertNotIn('description', row)
+        self.assertEqual(row['location']['state'], 'unknown')
+        summary = openactive.summarise([row], postcodes={'TW80HJ': (51.490962, -0.284769)})
+        self.assertEqual((summary['pilot_eligible'], summary['local_via_postcode']), (1, 1))
+
+    def test_series_index_keeps_one_row_and_honours_deletes(self):
+        index = openactive.SeriesIndex()
+        dated = lambda name: {'series_id': 'swim', 'name': name}
+        index.update(1, dated('first'))
+        index.update(2, dated('second'))
+        index.update(3, {'series_id': None, 'name': 'loose'})
+        self.assertEqual(set(index.series()), {'swim', ('item', 3)})
+        self.assertEqual(index.series()['swim']['name'], 'second')
+        index.delete(1)
+        self.assertIn('swim', index.series())
+        index.delete(2)
+        index.delete(99)
+        self.assertNotIn('swim', index.series())
+        index.update(3, {'series_id': 'moved', 'name': 'loose'})
+        self.assertEqual(set(index.series()), {'moved'})
 
     def test_rpde_walk_retries_rate_limits_and_reports_partial_walks(self):
         responses = {'feed': [Response(403), Response(200, {'next': 'feed?p=2', 'items': [

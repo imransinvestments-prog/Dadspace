@@ -125,9 +125,45 @@ def feeds_to_walk(feeds):
     return series + ([] if any(f['type'] == 'SessionSeries' for f in series) else sessions)
 
 
-def walk_feed(url, client, max_pages=2000, deadline=None):
-    """Return the live RPDE items, keyed by id; later pages supersede earlier ones."""
-    live, pages, complete, error = {}, 0, False, None
+class SeriesIndex:
+    """Live RPDE state with one row per series: item ids only hold a series key.
+
+    Better's legacy feed holds ~140k dated items for a few thousand series, so keeping
+    full JSON-LD per item exhausted memory. Counts keep RPDE deletes exact.
+    """
+
+    def __init__(self):
+        self.keys, self.rows = {}, {}
+
+    def update(self, item_id, row):
+        self.delete(item_id)
+        key = row['series_id'] or ('item', item_id)
+        self.keys[item_id] = key
+        count = self.rows.get(key, (None, 0))[1]
+        self.rows[key] = (row, count + 1)
+
+    def delete(self, item_id):
+        key = self.keys.pop(item_id, None)
+        if key is None:
+            return
+        row, count = self.rows[key]
+        if count > 1:
+            self.rows[key] = (row, count - 1)
+        else:
+            del self.rows[key]
+
+    def series(self):
+        return {key: row for key, (row, _) in self.rows.items()}
+
+
+def walk_feed(url, client, max_pages=2000, deadline=None, transform=None):
+    """Return the live RPDE items; later pages supersede earlier ones.
+
+    Without `transform`, items are full data keyed by item id. With it, each item is
+    reduced on arrival and the result is one compact row per series key.
+    """
+    live = SeriesIndex() if transform else {}
+    pages, complete, error = 0, False, None
     while pages < max_pages and (deadline is None or time.monotonic() < deadline):
         try:
             page = client.get(url).json()
@@ -136,16 +172,23 @@ def walk_feed(url, client, max_pages=2000, deadline=None):
             break
         pages += 1
         for item in page.get('items', []):
+            item_id = item.get('id')
             if item.get('state') == 'updated' and item.get('data'):
-                live[item.get('id')] = item['data']
+                if transform:
+                    live.update(item_id, transform(item['data']))
+                else:
+                    live[item_id] = item['data']
+            elif transform:
+                live.delete(item_id)
             else:
-                live.pop(item.get('id'), None)
+                live.pop(item_id, None)
         following = urljoin(url, page['next']) if page.get('next') else None
         if not page.get('items') or not following or following == url:
             complete = True
             break
         url = following
-    return {'pages': pages, 'complete': complete, 'error': error, 'items': live}
+    return {'pages': pages, 'complete': complete, 'error': error,
+            'items': live.series() if transform else live}
 
 
 def _number(value):
@@ -224,15 +267,23 @@ def opportunity(data, postcodes=None):
     }
 
 
-def summarise(items, sample_size=10, postcodes=None):
+def relocate(row, postcodes):
+    """Place a row that had no feed coordinates, using a resolved postcode centroid."""
+    postcode = row['location'].get('postcode')
+    if row['location']['state'] != 'unknown' or not (postcodes or {}).get(postcode):
+        return row
+    return dict(row, location=location_evidence({'address': {'postalCode': postcode}}, postcodes))
+
+
+def summarise(opportunities, sample_size=10, postcodes=None):
+    """Summarise compact rows from `opportunity`, counting each series once."""
     rows, seen = [], set()
-    for index, data in enumerate(items):
-        row = opportunity(data, postcodes)
+    for index, row in enumerate(opportunities):
         key = row['series_id'] or ('item', index)
         if key in seen:
             continue
         seen.add(key)
-        rows.append(row)
+        rows.append(relocate(row, postcodes))
     local = [r for r in rows if r['location']['state'] == 'local']
     pilot = [r for r in local if r['age']['state'] == 'eligible']
     labels = {}
@@ -268,17 +319,17 @@ def survey_dataset(entry, client, max_pages=2000, seconds=900, postcodes=None):
         return dict(result, error='no Dataset JSON-LD')
     result.update(description)
     deadline = time.monotonic() + seconds
-    walked, items = [], []
+    walked, rows = [], []
     for feed in feeds_to_walk(description['feeds']):
-        outcome = walk_feed(feed['url'], client, max_pages, deadline)
-        items.extend(outcome.pop('items').values())
+        outcome = walk_feed(feed['url'], client, max_pages, deadline, transform=opportunity)
+        rows.extend(outcome.pop('items').values())
         walked.append(dict(feed, **outcome))
     result['walked'] = walked
     points = None
     if postcodes:
-        locations = [opportunity(data)['location'] for data in items]
-        points = postcodes.resolve({l.get('postcode') for l in locations if l['state'] == 'unknown'} - {None})
-    result['summary'] = summarise(items, postcodes=points)
+        points = postcodes.resolve({r['location'].get('postcode') for r in rows
+                                    if r['location']['state'] == 'unknown'} - {None})
+    result['summary'] = summarise(rows, postcodes=points)
     return result
 
 
