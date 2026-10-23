@@ -1,0 +1,174 @@
+{
+  "prompt_sha256": "a42ea458cd57ae06e97fcdda65619ea87e8d1bccc01712a38c0c828481a0f8af",
+  "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 3806,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "camden-town-rhyme",
+          "evidence": "Rhyme Time, (under 5s)\nWednesdays, 11am to 11.30am",
+          "fields": {
+            "title": "Rhyme Time",
+            "listing_type": "activity",
+            "venue_name": "Camden Town Library",
+            "postcode": "NW1 1BD"
+          }
+        },
+        {
+          "id": "camden-town-duplo",
+          "evidence": "Duplo Trains and building session",
+          "fields": {
+            "title": "Duplo Trains and building session",
+            "listing_type": "activity",
+            "venue_name": "Camden Town Library",
+            "postcode": "NW1 1BD"
+          }
+        },
+        {
+          "id": "highgate-rhyme",
+          "evidence": "Rhyme Time (under 3s)\nTuesdays, 10.30am to 11am",
+          "fields": {
+            "title": "Rhyme Time (under 3s)",
+            "listing_type": "activity",
+            "venue_name": "Highgate Library",
+            "postcode": "N19 5DH"
+          }
+        },
+        {
+          "id": "highgate-toy-library",
+          "evidence": "Highgate Toy Library\nThursdays, 10.00am to 11.30am",
+          "fields": {
+            "title": "Highgate Toy Library",
+            "listing_type": "activity",
+            "venue_name": "Highgate Library",
+            "postcode": "N19 5DH"
+          }
+        },
+        {
+          "id": "holborn-story-rhyme",
+          "evidence": "Storytime and Rhyme Time\nFridays, 11am to 11.30am",
+          "fields": {
+            "title": "Storytime and Rhyme Time",
+            "listing_type": "activity",
+            "venue_name": "Holborn Library",
+            "postcode": "WC1X 8PA"
+          }
+        },
+        {
+          "id": "kentish-town-rhyme",
+          "evidence": "Wednesdays (term time only – limited numbers), 10.30am to 11am",
+          "fields": {
+            "title": "Rhyme Time",
+            "listing_type": "activity",
+            "venue_name": "Kentish Town Library",
+            "postcode": "NW5 2AA"
+          }
+        },
+        {
+          "id": "kilburn-rhyme",
+          "evidence": "Kilburn Library - 12-22 Kilburn High Road, NW6 5UH\nRhyme Time\nMondays (term time only), 11am to 11.30am",
+          "fields": {
+            "title": "Rhyme Time",
+            "listing_type": "activity",
+            "venue_name": "Kilburn Library",
+            "postcode": "NW6 5UH"
+          }
+        },
+        {
+          "id": "abbey-rhyme",
+          "evidence": "hosted in the Main Hall at Abbey Community Centre",
+          "fields": {
+            "title": "Rhyme Time (under 5s)",
+            "listing_type": "activity",
+            "venue_name": "Abbey Community Centre",
+            "postcode": "NW6 4BJ"
+          }
+        },
+        {
+          "id": "kilburn-storytime",
+          "evidence": "Wednesdays, 3.30pm to 4pm with a monthly craft activity",
+          "fields": {
+            "title": "Storytime",
+            "listing_type": "activity"
+          }
+        },
+        {
+          "id": "pancras-story-crafts",
+          "evidence": "Story and Crafts for Under Fives",
+          "fields": {
+            "title": "Story and Crafts for Under Fives",
+            "listing_type": "activity",
+            "venue_name": "Pancras Square Library",
+            "postcode": "N1C 4AG"
+          }
+        },
+        {
+          "id": "pancras-rhyme",
+          "evidence": "Rhyme Time\nFridays (term time only), 11am to 11.30am",
+          "fields": {
+            "title": "Rhyme Time",
+            "listing_type": "activity",
+            "venue_name": "Pancras Square Library",
+            "postcode": "N1C 4AG"
+          }
+        },
+        {
+          "id": "queens-crescent-rhyme",
+          "evidence": "Rhyme Time\nMondays (term time only) 10.30am to 11am",
+          "fields": {
+            "title": "Rhyme Time",
+            "listing_type": "activity",
+            "venue_name": "Queens Crescent Library",
+            "postcode": "NW5 4HH"
+          }
+        },
+        {
+          "id": "queens-crescent-story",
+          "evidence": "Storytime\nTuesdays, 4pm to 5pm",
+          "fields": {
+            "title": "Storytime",
+            "listing_type": "activity",
+            "venue_name": "Queens Crescent Library",
+            "postcode": "NW5 4HH"
+          }
+        },
+        {
+          "id": "swiss-cottage-stay-play",
+          "evidence": "Stay and Play in the children’s library",
+          "fields": {
+            "title": "Stay and Play",
+            "listing_type": "activity",
+            "venue_name": "Swiss Cottage Library",
+            "postcode": "NW3 3HA"
+          }
+        },
+        {
+          "id": "swiss-cottage-rhyme",
+          "evidence": "Rhyme Time in the children’s library\nTuesdays and Fridays, 10.30am",
+          "fields": {
+            "title": "Rhyme Time",
+            "listing_type": "activity",
+            "venue_name": "Swiss Cottage Library",
+            "postcode": "NW3 3HA"
+          }
+        },
+        {
+          "id": "west-hampstead-rhyme",
+          "evidence": "Rhyme Time in the children's library\nWednesdays, 11.30am to 12pm",
+          "fields": {
+            "title": "Rhyme Time",
+            "listing_type": "activity",
+            "venue_name": "West Hampstead Library",
+            "postcode": "NW6 1AU"
+          }
+        }
+      ],
+      "excluded": []
+    }
+  ]
+}

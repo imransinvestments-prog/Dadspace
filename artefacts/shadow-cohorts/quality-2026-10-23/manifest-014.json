@@ -1,0 +1,59 @@
+{
+  "prompt_sha256": "4fb0bbdc05f427a5959c522d4b1e2ca975b3ee631b31e8598c0e038ba1f6e4af",
+  "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 4229,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "cfk-knt-waltz",
+          "evidence": "MCR Dance Studios - Waltz Studio, M3 5DW",
+          "fields": {
+            "title": "KNT Danceworks",
+            "listing_type": "activity",
+            "venue_name": "MCR Dance Studios - Waltz Studio",
+            "postcode": "M3 5DW",
+            "age_range": "11 years to 16 years"
+          }
+        },
+        {
+          "id": "cfk-knt-curve",
+          "evidence": "MCR Dance Studios - Curve Studio, M3 5DW",
+          "fields": {
+            "title": "KNT Danceworks",
+            "listing_type": "activity",
+            "venue_name": "MCR Dance Studios - Curve Studio",
+            "postcode": "M3 5DW",
+            "age_range": "5 years to 16 years"
+          }
+        },
+        {
+          "id": "cfk-knt-stomp",
+          "evidence": "MCR Dance Studios - Stomp Studio, M3 5DW",
+          "fields": {
+            "title": "KNT Danceworks",
+            "listing_type": "activity",
+            "venue_name": "MCR Dance Studios - Stomp Studio",
+            "postcode": "M3 5DW",
+            "age_range": "3 years to 12 years"
+          }
+        },
+        {
+          "id": "cfk-capoeira",
+          "evidence": "Fighting Fit Manchester, M4 4DR",
+          "fields": {
+            "title": "Tucum Capoeira Manchester",
+            "listing_type": "activity",
+            "venue_name": "Fighting Fit Manchester",
+            "postcode": "M4 4DR"
+          }
+        }
+      ],
+      "excluded": []
+    }
+  ]
+}

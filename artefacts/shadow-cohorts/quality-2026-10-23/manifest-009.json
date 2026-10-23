@@ -1,0 +1,140 @@
+{
+  "prompt_sha256": "cf75010d0b5858ae8245e135c82e87a8c491bd6ceb8ba4bdcd5c4f2144c22cd5",
+  "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 4250,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "berinsfield-rhymetime",
+          "evidence": "Berinsfield: Rhymetime | Berinsfield Library | Wednesday 7 October 2026",
+          "fields": {
+            "title": "Berinsfield: Rhymetime",
+            "listing_type": "activity",
+            "venue_name": "Berinsfield Library",
+            "event_url": "https://www.oxfordshire.gov.uk/events/libraries/berinsfield-rhymetime"
+          }
+        },
+        {
+          "id": "grove-pumpkin-hunt",
+          "evidence": "Half-term Pumpkin Treasure Hunt | Grove Library | Friday 23 October 2026",
+          "fields": {
+            "title": "Half-term Pumpkin Treasure Hunt",
+            "listing_type": "event",
+            "start_date": "2026-10-23",
+            "venue_name": "Grove Library",
+            "event_url": "https://www.oxfordshire.gov.uk/events/family-activities/half-term-pumpkin-treasure-hunt"
+          }
+        },
+        {
+          "id": "littlemore-lego",
+          "evidence": "Littlemore: Lego Play | Littlemore Library",
+          "fields": {
+            "title": "Littlemore: Lego Play",
+            "venue_name": "Littlemore Library"
+          }
+        },
+        {
+          "id": "didcot-rhymetime-0930",
+          "evidence": "Didcot: Rhymetime | Didcot Library | Friday 23 October 2026, 9.30am",
+          "fields": {
+            "title": "Didcot: Rhymetime",
+            "venue_name": "Didcot Library",
+            "event_url": "https://www.oxfordshire.gov.uk/events/libraries/didcot-rhymetime-1"
+          }
+        },
+        {
+          "id": "wallingford-rhymetime",
+          "evidence": "Wallingford Library: Rhymetime | Wallingford Library",
+          "fields": {
+            "title": "Wallingford Library: Rhymetime",
+            "venue_name": "Wallingford Library"
+          }
+        },
+        {
+          "id": "botley-rhymetime",
+          "evidence": "Botley: Rhymetime | Botley Library",
+          "fields": {
+            "title": "Botley: Rhymetime",
+            "venue_name": "Botley Library"
+          }
+        },
+        {
+          "id": "henley-storytime",
+          "evidence": "Henley: Storytime | Henley Library",
+          "fields": {
+            "title": "Henley: Storytime",
+            "venue_name": "Henley Library"
+          }
+        },
+        {
+          "id": "headington-stay-play",
+          "evidence": "Headington Library: Stay & Play | Headington Library",
+          "fields": {
+            "title": "Headington Library: Stay & Play",
+            "venue_name": "Headington Library"
+          }
+        },
+        {
+          "id": "woodstock-rhymetime",
+          "evidence": "Woodstock: Rhymetime | Woodstock Library",
+          "fields": {
+            "title": "Woodstock: Rhymetime",
+            "venue_name": "Woodstock Library"
+          }
+        },
+        {
+          "id": "didcot-rhymetime-1030",
+          "evidence": "Didcot: Rhymetime | Didcot Library | Friday 23 October 2026, 10.30am",
+          "fields": {
+            "title": "Didcot: Rhymetime",
+            "venue_name": "Didcot Library",
+            "event_url": "https://www.oxfordshire.gov.uk/events/libraries/didcot-rhymetime-2"
+          }
+        },
+        {
+          "id": "wheatley-rhymetime",
+          "evidence": "Wheatley Library: Rhymetime | Wheatley Library",
+          "fields": {
+            "title": "Wheatley Library: Rhymetime",
+            "venue_name": "Wheatley Library"
+          }
+        },
+        {
+          "id": "thame-rhymetime",
+          "evidence": "Thame Library: Rhymetime | Thame Library",
+          "fields": {
+            "title": "Thame Library: Rhymetime",
+            "venue_name": "Thame Library"
+          }
+        }
+      ],
+      "excluded": [
+        {
+          "id": "berinsfield-language-cafe",
+          "evidence": "Berinsfield: Language Cafe | Berinsfield Library | Saturday 3 October 2026",
+          "reason": "Adult language group; no child or family evidence in the supplied text"
+        },
+        {
+          "id": "kennington-board-games",
+          "evidence": "Kennington: Board Games Club | Kennington Library",
+          "reason": "No child or family evidence in the supplied text"
+        },
+        {
+          "id": "carterton-reading-group",
+          "evidence": "Carterton: Reading Group | Carterton Library",
+          "reason": "Adult reading group"
+        },
+        {
+          "id": "littlemore-friendly-friday",
+          "evidence": "Littlemore: Friendly Friday | Littlemore Library",
+          "reason": "No child or family evidence in the supplied text"
+        }
+      ]
+    }
+  ]
+}

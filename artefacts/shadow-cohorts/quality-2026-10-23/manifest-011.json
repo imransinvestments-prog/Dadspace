@@ -1,0 +1,79 @@
+{
+  "prompt_sha256": "c2300f88fb2a2f81ac54b54ab212eb987cd0d6e840ae8ccfaf980ffee4b1ec65",
+  "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 3619,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "cfk-el-recreo-online",
+          "evidence": "Give your child the gift of Spanish through play",
+          "fields": {
+            "title": "El Recreo Spanish Online for Kids",
+            "listing_type": "activity",
+            "venue_name": "Online",
+            "age_range": "4 years to 12 years"
+          }
+        },
+        {
+          "id": "cfk-creative-writing",
+          "evidence": "designed for aspiring authors aged 10 -15",
+          "fields": {
+            "title": "Creative Writing Club",
+            "listing_type": "activity",
+            "postcode": "EC1V 2NX",
+            "age_range": "10 years to 15 years"
+          }
+        },
+        {
+          "id": "cfk-wolfpack",
+          "evidence": "Wolfpack Dance Collective UK, an exciting Hip Hop",
+          "fields": {
+            "title": "Wolfpack Dance Collective",
+            "listing_type": "activity",
+            "venue_name": "Borough Academy",
+            "postcode": "SE1 0BU",
+            "age_range": "0 months to 17 years"
+          }
+        },
+        {
+          "id": "cfk-teachmajor",
+          "evidence": "We offer holiday camps, LAMDA and instrumental lessons",
+          "fields": {
+            "title": "TeachMajor",
+            "listing_type": "activity",
+            "venue_name": "Moreland Primary School",
+            "postcode": "EC1V 8BB",
+            "age_range": "5 years to 16 years"
+          }
+        },
+        {
+          "id": "cfk-penguins-tower-bridge",
+          "evidence": "Each class has a maximum of 4 kids",
+          "fields": {
+            "title": "Penguins Palace",
+            "listing_type": "activity",
+            "postcode": "SE1 2EZ",
+            "age_range": "3 years to 18 years"
+          }
+        },
+        {
+          "id": "cfk-el-recreo-eltham",
+          "evidence": "Spanish classes for babies, children of all ages and adults in Eltham and Sidcup",
+          "fields": {
+            "title": "El Recreo Spanish Eltham",
+            "listing_type": "activity",
+            "venue_name": "Children Change Colombia",
+            "postcode": "WC1N 3LA",
+            "age_range": "2 months to 5 years"
+          }
+        }
+      ],
+      "excluded": []
+    }
+  ]
+}

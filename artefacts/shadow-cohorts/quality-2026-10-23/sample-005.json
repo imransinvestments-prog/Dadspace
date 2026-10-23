@@ -1,0 +1,549 @@
+{
+  "worker": "events-civic",
+  "prompt": "You extract public events from a web page for Dadspace, a UK database of things for parents, dads and families to do with children.\n\nToday's date is 2026-10-23 (UK). The page is from \"Camden Council\" (https://www.camden.gov.uk/whats-on-this-month).\n\nReturn a JSON list of events found in the supplied content.\n\nIMPORTANT RULES:\n- Include real, specific family EVENTS and recurring family ACTIVITIES. Never invent details. Events require a date; activities may be undated.\n- Only use dates supported by the supplied content.\n- Dates must be ISO format YYYY-MM-DD. Resolve relative dates (\"this Saturday\") using today's date.\n- If the date cannot be established confidently, use null for start_date.\n- For multi-day events, provide start_date and end_date.\n- A page may contain compact table/list rows from several pagination pages. Treat each row as a candidate event and deduplicate repeated occurrences/details.\n- Some recurring council listings incorrectly expose a far-future series boundary as if it were an individual event end date (for example a 30-minute Rhymetime row starting in 2026 and apparently ending in 2030). For an obviously short recurring session, use the occurrence date as both start_date and end_date, keep the displayed session times in time_text, and set recurrence to recurring. Do not turn a short session into a multi-year event.\n- Do not return events whose dates are clearly in the past.\n- Skip council committee meetings, adult-only events, job adverts, generic service pages, and things only for sale.\n- A general attraction can be included when the page clearly presents it as an activity/day-out opportunity with a usable date.\n- The audience is fathers and other parents looking for genuine activities they can do WITH their children. Be conservative: this is a parent-activity database, not a general local events calendar.\n- Only include an event when the supplied content gives a concrete reason it belongs in a parent/family activity database.\n- family_relevance is 1-5:\n    5 = explicitly designed for children/families, or an unmistakably child/family-oriented activity (for example junior sport, Forest School, children's workshop, family trail, teddy bears' picnic, farm activity, family boat trip, steam/heritage open day with a genuine activity, hands-on museum activity).\n    4 = clearly suitable for a parent and child together, even if not exclusively child-focused; the supplied content must contain concrete evidence of that suitability.\n    3 = potentially suitable but the page gives only limited evidence; use this score only when there is still a concrete family/child/activity signal in the supplied content.\n    2 = mainly adult/general-interest and not clearly a parent-child activity.\n    1 = adult-only, unsuitable, administrative, commercial, or not a genuine activity/event.\n- Do NOT give 3 or higher merely because children are not excluded, an attraction exists, an event is local/free, or you can imagine a family enjoying it.\n- Treat these as NOT parent activities unless the content explicitly shows a child/family component: adult talks/lectures, adult education, instrument or craft classes aimed at adults, book groups, business/networking meetings, political meetings, committee meetings, religious services, remembrance/memorial events, fundraising coffee mornings, professional events, job adverts, generic attraction listings, and things for sale.\n- A general attraction may be included only when the supplied page presents a specific dated activity/day-out opportunity (for example an open day, steam day, family trail, guided activity, workshop, special tour or similar). Do not turn ordinary opening information, membership information, ticket sales or equipment hire into events.\n- Return two additional fields:\n    audience = one of: children, families, general, adults, unknown.\n    family_evidence = a short phrase copied or closely paraphrased from the supplied content explaining why a parent would do this with a child. If there is no concrete evidence, use null.\n- For family_relevance 3 or 4, family_evidence is required. For 5, it should normally be present too. Never invent evidence.\n- event_url should be the specific event link if one appears in the content (links appear as [url] after the link text).\n- recurrence is one of: one_off, recurring, seasonal, unknown.\n- confidence is 0-1: how sure you are the event details and family evidence are correct and come from the supplied content.\n- Do not use information from your general knowledge - use only the supplied content.\n\n\nEVENTS VS ACTIVITIES (classify EACH ITEM, never classify from the source category):\n- listing_type must be either event or activity.\n- activity = a regular weekly, repeating or term-time class/session/group/club. It may have no start_date.\n- event = a one-off, seasonal or special event. SCHOOL-HOLIDAY CAMPS ARE EVENTS even when they run for several days or repeat during a holiday.\n- is_holiday_camp = true only for a genuine school-holiday camp; otherwise false.\n- For an activity, copy the full published schedule into schedule_text, including weekday, clock times, term-time limits and exceptions. Preserve explicit start_date/end_date as ISO dates when the page supplies them; null only when absent. Date bounds are not proof of daily sessions.\n- Put individually published activity session dates in occurrence_dates as ISO dates; never generate dates from a recurrence or infer a missing year. Preserve gaps, cancellations and varying session times in schedule_text. Do not use footer dates, related listings or a calendar range that contradicts the programme description. Conflicting dates must be left unresolved rather than guessed.\n- For an event, start_date is mandatory and schedule_text should normally be null.\n- category must classify the ITEM itself, not the website/source. Use one concise category from: holiday_camps, sports, swimming, outdoors_nature, film_theatre, arts_crafts, museums_heritage, farms_animals, libraries, baby_toddler, family_days_out, other.\n\nVENUE FIELDS (SOURCE CONTENT ONLY):\n- venue_name, venue_address and postcode must come only from the supplied page content. Never infer, complete or guess them.\n- Keep location too for display, but do not fabricate a fuller address.\n\nQUALITY:\n- If the supplied content gives a price, ticket cost, admission charge, 'from £X', per-child cost, or says free, copy that concise information into cost_text. If no price appears, cost_text must be null; never guess.\n- Distinguish AM from PM carefully. Do not assign overnight/early-morning times unless explicitly supported.\n- Do not attach generic page dates that contradict seasonal wording.\n- Teen-only and adult-only sessions are not Dadspace family listings unless clearly parent-and-child/family.\n- A title explicitly saying teen/teenager should not be treated as a younger family activity merely because its numerical age starts at 12.\n\nCONTENT:\nCOMPACT EVENT LISTINGS FROM HTML:\nPAGE: https://www.camden.gov.uk/whats-on-this-month\nFind your local Camden library | LINKS: Find your local Camden library [https://www.camden.gov.uk/library-information]\n\nVISIBLE PAGE TEXT:\nPAGE: https://www.camden.gov.uk/whats-on-this-month\nWhat's on this month - Camden Council\nSkip to main content [https://www.camden.gov.uk/whats-on-this-month#maincontent]\nCookies on CAMDEN.GOV.UK\nWe use some essential cookies to make this website work.\nWe'd like to set additional cookies so we can understand how you\nuse the website and make improvements.\nAccept analytics cookies\nReject analytics cookies\nHow we use cookies [https://www.camden.gov.uk/cookies/]\nYou've accepted additional cookies. You can\nchange your cookie settings [https://www.camden.gov.uk/cookies/]\nat any time.\nHide cookie message\nYou've rejected additional cookies. You can\nchange your cookie settings [https://www.camden.gov.uk/cookies/]\nat any time.\nHide cookie message\nCamden.gov.uk [https://www.camden.gov.uk/home]\nbeta\nThis is the improved Camden website.\nTell us what you think [https://www.camden.gov.uk/en/camden-council-website-improvements]\n.\nWhat's on this month\nWe have a range of different events happening across our libraries each month.\nActivities this month [https://www.calameo.com/read/007331249eea640536dde]\nThe 11-page guide has a page for each library: Camden Town, Highgate, Holborn, Kentish Town, Kilburn, Queens Crescent, Pancras Square, Swiss Cottage, West Hampstead and the Local Studies and Archives Centre.\nSearch for events taking place in Camden libraries [https://camden.spydus.co.uk/cgi-bin/spydus.exe/ENQ/WPAC/EVSESENQ?QRY=EVSCFLG%3A0%20%2B%20EVSEDTE%3A%22%3E%3D%20TODAY%22&QRYTEXT=All%20events&SORTS=ESD.SDTE%5DESD.STIM&SEARCH_FORM=%2Fcgi-bin%2Fspydus.exe%2FMSGTRN%2FWPAC%2FEVENTS%3FHOMEPRMS%3DEVSESPARAMS&FORM_DESC=Events]\nActivities for under 5s\nAll our libraries offer the following free activities for under 5s.\nCamden Town Library - 218 Eversholt Street NW1 1BD\nRhyme Time, (under 5s)\nWednesdays, 11am to 11.30am\nDuplo Trains and building session\nThursdays (term time only), 11am to 12pm\nHighgate Library Chester Road N19 5DH\nRhyme Time (under 3s)\nTuesdays, 10.30am to 11am\nHighgate Toy Library\nThursdays, 10.00am to 11.30am\nHolborn Library - 32 - 38 Theobalds Road, WC1X 8PA\nStorytime and Rhyme Time\nFridays, 11am to 11.30am\nKentish Town Library - 262 - 266 Kentish Town Road, NW5 2AA\nRhyme Time\nWednesdays (term time only – limited numbers), 10.30am to 11am\nKilburn Library - 12-22 Kilburn High Road, NW6 5UH\nRhyme Time\nMondays (term time only), 11am to 11.30am\nKilburn Library pop-up - Abbey Community Centre, 172 Belsize Road, Kilburn, London NW6 4BJ\nRhyme Time (under 5s) - hosted in the Main Hall at Abbey Community Centre, working with the Abbey Community Centre’s Stay and Play session\nMondays (term time only), 11am to 11.30am\nStorytime\nWednesdays, 3.30pm to 4pm with a monthly craft activity\nPancras Square Library - 5 Pancras Square, N1C 4AG\nStory and Crafts for Under Fives\nEvery third Monday of the month (term time only), 11am to midday\nRhyme Time\nFridays (term time only), 11am to 11.30am\nQueens Crescent Library - 165 Queens Crescent, NW5 4HH\nRhyme Time\nMondays (term time only) 10.30am to 11am\nStorytime\nTuesdays, 4pm to 5pm\nSwiss Cottage Library - 88 Avenue Road, NW3 3HA\nStay and Play in the children’s library\nWednesdays, 10.30am to 11am\nRhyme Time in the children’s library\nTuesdays and Fridays, 10.30am\nWest Hampstead Library - Dennington Park Road NW6 1AU\nRhyme Time in the children's library\nWednesdays, 11.30am to 12pm\nFind out more about\nactivities for under 5s and support for parents. [https://families.camden.gov.uk/age-3-to-5/things-to-do/fun-for-all-activity-group/]\nRelated pages\nLibrary news [https://www.camden.gov.uk/library-news]\n",
+  "schema": {
+    "$defs": {
+      "ListingSchema": {
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "listing_type": {
+            "title": "Listing Type",
+            "type": "string"
+          },
+          "is_holiday_camp": {
+            "default": false,
+            "title": "Is Holiday Camp",
+            "type": "boolean"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Category"
+          },
+          "start_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start Date"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Date"
+          },
+          "schedule_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Schedule Text"
+          },
+          "occurrence_dates": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Occurrence Dates"
+          },
+          "time_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Text"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "venue_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Venue Name"
+          },
+          "venue_address": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Venue Address"
+          },
+          "postcode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Postcode"
+          },
+          "event_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Url"
+          },
+          "cost_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cost Text"
+          },
+          "age_range": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Age Range"
+          },
+          "recurrence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recurrence"
+          },
+          "family_relevance": {
+            "title": "Family Relevance",
+            "type": "integer"
+          },
+          "confidence": {
+            "title": "Confidence",
+            "type": "number"
+          },
+          "audience": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Audience"
+          },
+          "family_evidence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Family Evidence"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "listing_type",
+          "start_date",
+          "end_date",
+          "time_text",
+          "location",
+          "event_url",
+          "cost_text",
+          "age_range",
+          "recurrence",
+          "family_relevance",
+          "confidence"
+        ],
+        "title": "ListingSchema",
+        "type": "object"
+      }
+    },
+    "items": {
+      "$ref": "#/$defs/ListingSchema"
+    },
+    "type": "array"
+  },
+  "settings": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "rebuilt_offline": true,
+    "rebuilt_on": "2026-10-23",
+    "fetch_engine": "requests"
+  },
+  "raw": [
+    {
+      "title": "Rhyme Time",
+      "listing_type": "activity",
+      "venue_name": "Camden Town Library",
+      "postcode": "NW1 1BD"
+    },
+    {
+      "title": "Duplo Trains and building session",
+      "listing_type": "activity",
+      "venue_name": "Camden Town Library",
+      "postcode": "NW1 1BD"
+    },
+    {
+      "title": "Rhyme Time (under 3s)",
+      "listing_type": "activity",
+      "venue_name": "Highgate Library",
+      "postcode": "N19 5DH"
+    },
+    {
+      "title": "Highgate Toy Library",
+      "listing_type": "activity",
+      "venue_name": "Highgate Library",
+      "postcode": "N19 5DH"
+    },
+    {
+      "title": "Storytime and Rhyme Time",
+      "listing_type": "activity",
+      "venue_name": "Holborn Library",
+      "postcode": "WC1X 8PA"
+    },
+    {
+      "title": "Rhyme Time",
+      "listing_type": "activity",
+      "venue_name": "Kentish Town Library",
+      "postcode": "NW5 2AA"
+    },
+    {
+      "title": "Rhyme Time",
+      "listing_type": "activity",
+      "venue_name": "Kilburn Library",
+      "postcode": "NW6 5UH"
+    },
+    {
+      "title": "Rhyme Time (under 5s)",
+      "listing_type": "activity",
+      "venue_name": "Abbey Community Centre",
+      "postcode": "NW6 4BJ"
+    },
+    {
+      "title": "Storytime",
+      "listing_type": "activity"
+    },
+    {
+      "title": "Story and Crafts for Under Fives",
+      "listing_type": "activity",
+      "venue_name": "Pancras Square Library",
+      "postcode": "N1C 4AG"
+    },
+    {
+      "title": "Rhyme Time",
+      "listing_type": "activity",
+      "venue_name": "Pancras Square Library",
+      "postcode": "N1C 4AG"
+    },
+    {
+      "title": "Rhyme Time",
+      "listing_type": "activity",
+      "venue_name": "Queens Crescent Library",
+      "postcode": "NW5 4HH"
+    },
+    {
+      "title": "Storytime",
+      "listing_type": "activity",
+      "venue_name": "Queens Crescent Library",
+      "postcode": "NW5 4HH"
+    },
+    {
+      "title": "Stay and Play",
+      "listing_type": "activity",
+      "venue_name": "Swiss Cottage Library",
+      "postcode": "NW3 3HA"
+    },
+    {
+      "title": "Rhyme Time",
+      "listing_type": "activity",
+      "venue_name": "Swiss Cottage Library",
+      "postcode": "NW3 3HA"
+    },
+    {
+      "title": "Rhyme Time",
+      "listing_type": "activity",
+      "venue_name": "West Hampstead Library",
+      "postcode": "NW6 1AU"
+    }
+  ],
+  "usage": {},
+  "reference": {
+    "kind": "source-reviewed",
+    "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+    "reviewer_type": "ai",
+    "parent_prompt_sha256": "a42ea458cd57ae06e97fcdda65619ea87e8d1bccc01712a38c0c828481a0f8af",
+    "chunk_index": 0,
+    "source_start": 0,
+    "source_end": 3806,
+    "source_chars": 3806,
+    "expected": [
+      {
+        "id": "camden-town-rhyme",
+        "evidence": "Rhyme Time, (under 5s)\nWednesdays, 11am to 11.30am",
+        "fields": {
+          "title": "Rhyme Time",
+          "listing_type": "activity",
+          "venue_name": "Camden Town Library",
+          "postcode": "NW1 1BD"
+        }
+      },
+      {
+        "id": "camden-town-duplo",
+        "evidence": "Duplo Trains and building session",
+        "fields": {
+          "title": "Duplo Trains and building session",
+          "listing_type": "activity",
+          "venue_name": "Camden Town Library",
+          "postcode": "NW1 1BD"
+        }
+      },
+      {
+        "id": "highgate-rhyme",
+        "evidence": "Rhyme Time (under 3s)\nTuesdays, 10.30am to 11am",
+        "fields": {
+          "title": "Rhyme Time (under 3s)",
+          "listing_type": "activity",
+          "venue_name": "Highgate Library",
+          "postcode": "N19 5DH"
+        }
+      },
+      {
+        "id": "highgate-toy-library",
+        "evidence": "Highgate Toy Library\nThursdays, 10.00am to 11.30am",
+        "fields": {
+          "title": "Highgate Toy Library",
+          "listing_type": "activity",
+          "venue_name": "Highgate Library",
+          "postcode": "N19 5DH"
+        }
+      },
+      {
+        "id": "holborn-story-rhyme",
+        "evidence": "Storytime and Rhyme Time\nFridays, 11am to 11.30am",
+        "fields": {
+          "title": "Storytime and Rhyme Time",
+          "listing_type": "activity",
+          "venue_name": "Holborn Library",
+          "postcode": "WC1X 8PA"
+        }
+      },
+      {
+        "id": "kentish-town-rhyme",
+        "evidence": "Wednesdays (term time only – limited numbers), 10.30am to 11am",
+        "fields": {
+          "title": "Rhyme Time",
+          "listing_type": "activity",
+          "venue_name": "Kentish Town Library",
+          "postcode": "NW5 2AA"
+        }
+      },
+      {
+        "id": "kilburn-rhyme",
+        "evidence": "Kilburn Library - 12-22 Kilburn High Road, NW6 5UH\nRhyme Time\nMondays (term time only), 11am to 11.30am",
+        "fields": {
+          "title": "Rhyme Time",
+          "listing_type": "activity",
+          "venue_name": "Kilburn Library",
+          "postcode": "NW6 5UH"
+        }
+      },
+      {
+        "id": "abbey-rhyme",
+        "evidence": "hosted in the Main Hall at Abbey Community Centre",
+        "fields": {
+          "title": "Rhyme Time (under 5s)",
+          "listing_type": "activity",
+          "venue_name": "Abbey Community Centre",
+          "postcode": "NW6 4BJ"
+        }
+      },
+      {
+        "id": "kilburn-storytime",
+        "evidence": "Wednesdays, 3.30pm to 4pm with a monthly craft activity",
+        "fields": {
+          "title": "Storytime",
+          "listing_type": "activity"
+        }
+      },
+      {
+        "id": "pancras-story-crafts",
+        "evidence": "Story and Crafts for Under Fives",
+        "fields": {
+          "title": "Story and Crafts for Under Fives",
+          "listing_type": "activity",
+          "venue_name": "Pancras Square Library",
+          "postcode": "N1C 4AG"
+        }
+      },
+      {
+        "id": "pancras-rhyme",
+        "evidence": "Rhyme Time\nFridays (term time only), 11am to 11.30am",
+        "fields": {
+          "title": "Rhyme Time",
+          "listing_type": "activity",
+          "venue_name": "Pancras Square Library",
+          "postcode": "N1C 4AG"
+        }
+      },
+      {
+        "id": "queens-crescent-rhyme",
+        "evidence": "Rhyme Time\nMondays (term time only) 10.30am to 11am",
+        "fields": {
+          "title": "Rhyme Time",
+          "listing_type": "activity",
+          "venue_name": "Queens Crescent Library",
+          "postcode": "NW5 4HH"
+        }
+      },
+      {
+        "id": "queens-crescent-story",
+        "evidence": "Storytime\nTuesdays, 4pm to 5pm",
+        "fields": {
+          "title": "Storytime",
+          "listing_type": "activity",
+          "venue_name": "Queens Crescent Library",
+          "postcode": "NW5 4HH"
+        }
+      },
+      {
+        "id": "swiss-cottage-stay-play",
+        "evidence": "Stay and Play in the children’s library",
+        "fields": {
+          "title": "Stay and Play",
+          "listing_type": "activity",
+          "venue_name": "Swiss Cottage Library",
+          "postcode": "NW3 3HA"
+        }
+      },
+      {
+        "id": "swiss-cottage-rhyme",
+        "evidence": "Rhyme Time in the children’s library\nTuesdays and Fridays, 10.30am",
+        "fields": {
+          "title": "Rhyme Time",
+          "listing_type": "activity",
+          "venue_name": "Swiss Cottage Library",
+          "postcode": "NW3 3HA"
+        }
+      },
+      {
+        "id": "west-hampstead-rhyme",
+        "evidence": "Rhyme Time in the children's library\nWednesdays, 11.30am to 12pm",
+        "fields": {
+          "title": "Rhyme Time",
+          "listing_type": "activity",
+          "venue_name": "West Hampstead Library",
+          "postcode": "NW6 1AU"
+        }
+      }
+    ],
+    "excluded": [],
+    "baseline_cost_comparable": false,
+    "selection": {
+      "kind": "complete-source",
+      "original_prompt_sha256": "a42ea458cd57ae06e97fcdda65619ea87e8d1bccc01712a38c0c828481a0f8af",
+      "original_source_chars": 3806,
+      "original_source_spans": [
+        {
+          "start": 0,
+          "end": 3806
+        }
+      ],
+      "rebuilt_offline": true,
+      "source": {
+        "id": "8e57d114-04db-4752-8ccd-86a3ac032369",
+        "name": "Camden Council",
+        "url": "https://www.camden.gov.uk/whats-on-this-month",
+        "category": "councils",
+        "nation": "England",
+        "region": "London"
+      },
+      "notes": "16 regular under-5 library sessions across 10 sites; venue and postcode per site. The Wednesday Storytime sits under the Kilburn pop-up heading but its venue is ambiguous, so venue is not scored."
+    }
+  }
+}

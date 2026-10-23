@@ -1,0 +1,54 @@
+{
+  "prompt_sha256": "825f19a1aa2ff2ab78130695832012ed4e629b36c65d493ce609e6c6c249b2f8",
+  "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 2361,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "hoop-mini-novas",
+          "evidence": "Mini novas martial arts classes Martial arts for children age 3 to 6 years",
+          "fields": {
+            "title": "Mini novas martial arts classes",
+            "listing_type": "activity"
+          }
+        },
+        {
+          "id": "hoop-junior-novas",
+          "evidence": "Junior Novas martial arts classes Martial arts classes for children age 7-12",
+          "fields": {
+            "title": "Junior Novas martial arts classes",
+            "listing_type": "activity"
+          }
+        },
+        {
+          "id": "hoop-little-kickers",
+          "evidence": "Little Kickers classes introduce football to boys and girls aged 18 months to 8 years",
+          "fields": {
+            "title": "Little Kickers Football Classes",
+            "listing_type": "activity"
+          }
+        },
+        {
+          "id": "hoop-knt-dance",
+          "evidence": "KNT Dance School - for kids and adults of all ages and skill level",
+          "fields": {
+            "title": "KNT Dance School",
+            "listing_type": "activity"
+          }
+        }
+      ],
+      "excluded": [
+        {
+          "id": "hoop-teen-novas",
+          "evidence": "Novas teen martial arts classes",
+          "reason": "Teen-only class (title says teen)"
+        }
+      ]
+    }
+  ]
+}

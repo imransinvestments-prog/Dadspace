@@ -1,0 +1,99 @@
+{
+  "prompt_sha256": "284268248bf95d476006e3758839e1758365aaad018e65b6c865c6cc88da2003",
+  "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 5204,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "pboro-thomas",
+          "evidence": "Thomas Branch Line Weekends Date: Feb 14 - Nov 1, 2026",
+          "fields": {
+            "title": "Thomas Branch Line Weekends",
+            "listing_type": "event",
+            "start_date": "2026-02-14",
+            "end_date": "2026-11-01",
+            "venue_name": "Nene Valley Railway Wansford Station"
+          }
+        },
+        {
+          "id": "pboro-mary-queen",
+          "evidence": "Mary Queen of Scots: The Exhibition Date: Sep 21 - Nov 15, 2026",
+          "fields": {
+            "title": "Mary Queen of Scots: The Exhibition",
+            "listing_type": "event",
+            "start_date": "2026-09-21",
+            "end_date": "2026-11-15",
+            "venue_name": "Peterborough Cathedral"
+          }
+        },
+        {
+          "id": "pboro-burghley-trail",
+          "evidence": "The Burghley Halloween Trail Date: Oct 17 - Nov 1, 2026",
+          "fields": {
+            "title": "The Burghley Halloween Trail",
+            "listing_type": "event",
+            "start_date": "2026-10-17",
+            "end_date": "2026-11-01",
+            "venue_name": "Burghley House"
+          }
+        },
+        {
+          "id": "pboro-halloween-circus",
+          "evidence": "Halloween Circus Date: Oct 21 - Nov 1, 2026",
+          "fields": {
+            "title": "Halloween Circus",
+            "listing_type": "event",
+            "start_date": "2026-10-21",
+            "end_date": "2026-11-01",
+            "venue_name": "Peterborough Embankment"
+          }
+        },
+        {
+          "id": "pboro-theatre-explorers",
+          "evidence": "Theatre Explorers Date: Oct 22, 2026 - Aug 19, 2027",
+          "fields": {
+            "title": "Theatre Explorers",
+            "venue_name": "Key Theatre"
+          }
+        }
+      ],
+      "excluded": [
+        {
+          "id": "pboro-theatre-tours",
+          "evidence": "Behind the Scenes – New Theatre Tours Date:",
+          "reason": "No child or family evidence in the supplied text (not family-tagged)"
+        },
+        {
+          "id": "pboro-girl-next-door",
+          "evidence": "Peterborough Playgoers: The Girl Next Door Date:",
+          "reason": "No child or family evidence in the supplied text (not family-tagged)"
+        },
+        {
+          "id": "pboro-illegal-eagles",
+          "evidence": "The Illegal Eagles Date:",
+          "reason": "Live music tribute show; no child or family evidence in the supplied text"
+        },
+        {
+          "id": "pboro-flo-joan",
+          "evidence": "Flo & Joan – With Feeling Date:",
+          "reason": "Comedy show; no child or family evidence in the supplied text"
+        },
+        {
+          "id": "pboro-mediumship",
+          "evidence": "An Evening of Mediumship with Nicola Ghigi Date:",
+          "reason": "Adult evening talk"
+        },
+        {
+          "id": "pboro-stewart-lee",
+          "evidence": "Stewart Lee vs The Man-Wulf Date:",
+          "reason": "Comedy show; no child or family evidence in the supplied text"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "prompt_sha256": "d477cea5e187c2d56ad2b031bcb5c1749f1b9f010f408b6aaad2226158e296f8",
+  "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 4417,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "kempton-december-steaming",
+          "evidence": "29th, 30th & 31st December with LMWS & Routemaster bus",
+          "fields": {
+            "title": "Steaming weekend",
+            "listing_type": "event",
+            "start_date": "2026-12-29",
+            "end_date": "2026-12-31",
+            "venue_name": "Kempton Steam Museum"
+          }
+        }
+      ],
+      "excluded": [
+        {
+          "id": "kempton-hoaxwind",
+          "evidence": "Hoaxwind – Night at the Museum II",
+          "reason": "Special non-steaming event; no audience or family evidence in the supplied text"
+        },
+        {
+          "id": "kempton-november",
+          "evidence": "November Steaming is cancelled",
+          "reason": "Cancelled"
+        },
+        {
+          "id": "kempton-october",
+          "evidence": "October | 17th & 18th",
+          "reason": "Past date (before 23 Oct 2026)"
+        }
+      ]
+    }
+  ]
+}

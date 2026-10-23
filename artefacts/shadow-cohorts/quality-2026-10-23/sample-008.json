@@ -1,0 +1,533 @@
+{
+  "worker": "events-civic",
+  "prompt": "You extract public events from a web page for Dadspace, a UK database of things for parents, dads and families to do with children.\n\nToday's date is 2026-10-23 (UK). The page is from \"Kent County Council\" (https://seekent.co.uk/whats-on/?type=event&search_keywords=family&sort=order-by-date).\n\nReturn a JSON list of events found in the supplied content.\n\nIMPORTANT RULES:\n- Include real, specific family EVENTS and recurring family ACTIVITIES. Never invent details. Events require a date; activities may be undated.\n- Only use dates supported by the supplied content.\n- Dates must be ISO format YYYY-MM-DD. Resolve relative dates (\"this Saturday\") using today's date.\n- If the date cannot be established confidently, use null for start_date.\n- For multi-day events, provide start_date and end_date.\n- A page may contain compact table/list rows from several pagination pages. Treat each row as a candidate event and deduplicate repeated occurrences/details.\n- Some recurring council listings incorrectly expose a far-future series boundary as if it were an individual event end date (for example a 30-minute Rhymetime row starting in 2026 and apparently ending in 2030). For an obviously short recurring session, use the occurrence date as both start_date and end_date, keep the displayed session times in time_text, and set recurrence to recurring. Do not turn a short session into a multi-year event.\n- Do not return events whose dates are clearly in the past.\n- Skip council committee meetings, adult-only events, job adverts, generic service pages, and things only for sale.\n- A general attraction can be included when the page clearly presents it as an activity/day-out opportunity with a usable date.\n- The audience is fathers and other parents looking for genuine activities they can do WITH their children. Be conservative: this is a parent-activity database, not a general local events calendar.\n- Only include an event when the supplied content gives a concrete reason it belongs in a parent/family activity database.\n- family_relevance is 1-5:\n    5 = explicitly designed for children/families, or an unmistakably child/family-oriented activity (for example junior sport, Forest School, children's workshop, family trail, teddy bears' picnic, farm activity, family boat trip, steam/heritage open day with a genuine activity, hands-on museum activity).\n    4 = clearly suitable for a parent and child together, even if not exclusively child-focused; the supplied content must contain concrete evidence of that suitability.\n    3 = potentially suitable but the page gives only limited evidence; use this score only when there is still a concrete family/child/activity signal in the supplied content.\n    2 = mainly adult/general-interest and not clearly a parent-child activity.\n    1 = adult-only, unsuitable, administrative, commercial, or not a genuine activity/event.\n- Do NOT give 3 or higher merely because children are not excluded, an attraction exists, an event is local/free, or you can imagine a family enjoying it.\n- Treat these as NOT parent activities unless the content explicitly shows a child/family component: adult talks/lectures, adult education, instrument or craft classes aimed at adults, book groups, business/networking meetings, political meetings, committee meetings, religious services, remembrance/memorial events, fundraising coffee mornings, professional events, job adverts, generic attraction listings, and things for sale.\n- A general attraction may be included only when the supplied page presents a specific dated activity/day-out opportunity (for example an open day, steam day, family trail, guided activity, workshop, special tour or similar). Do not turn ordinary opening information, membership information, ticket sales or equipment hire into events.\n- Return two additional fields:\n    audience = one of: children, families, general, adults, unknown.\n    family_evidence = a short phrase copied or closely paraphrased from the supplied content explaining why a parent would do this with a child. If there is no concrete evidence, use null.\n- For family_relevance 3 or 4, family_evidence is required. For 5, it should normally be present too. Never invent evidence.\n- event_url should be the specific event link if one appears in the content (links appear as [url] after the link text).\n- recurrence is one of: one_off, recurring, seasonal, unknown.\n- confidence is 0-1: how sure you are the event details and family evidence are correct and come from the supplied content.\n- Do not use information from your general knowledge - use only the supplied content.\n\n\nEVENTS VS ACTIVITIES (classify EACH ITEM, never classify from the source category):\n- listing_type must be either event or activity.\n- activity = a regular weekly, repeating or term-time class/session/group/club. It may have no start_date.\n- event = a one-off, seasonal or special event. SCHOOL-HOLIDAY CAMPS ARE EVENTS even when they run for several days or repeat during a holiday.\n- is_holiday_camp = true only for a genuine school-holiday camp; otherwise false.\n- For an activity, copy the full published schedule into schedule_text, including weekday, clock times, term-time limits and exceptions. Preserve explicit start_date/end_date as ISO dates when the page supplies them; null only when absent. Date bounds are not proof of daily sessions.\n- Put individually published activity session dates in occurrence_dates as ISO dates; never generate dates from a recurrence or infer a missing year. Preserve gaps, cancellations and varying session times in schedule_text. Do not use footer dates, related listings or a calendar range that contradicts the programme description. Conflicting dates must be left unresolved rather than guessed.\n- For an event, start_date is mandatory and schedule_text should normally be null.\n- category must classify the ITEM itself, not the website/source. Use one concise category from: holiday_camps, sports, swimming, outdoors_nature, film_theatre, arts_crafts, museums_heritage, farms_animals, libraries, baby_toddler, family_days_out, other.\n\nVENUE FIELDS (SOURCE CONTENT ONLY):\n- venue_name, venue_address and postcode must come only from the supplied page content. Never infer, complete or guess them.\n- Keep location too for display, but do not fabricate a fuller address.\n\nQUALITY:\n- If the supplied content gives a price, ticket cost, admission charge, 'from £X', per-child cost, or says free, copy that concise information into cost_text. If no price appears, cost_text must be null; never guess.\n- Distinguish AM from PM carefully. Do not assign overnight/early-morning times unless explicitly supported.\n- Do not attach generic page dates that contradict seasonal wording.\n- Teen-only and adult-only sessions are not Dadspace family listings unless clearly parent-and-child/family.\n- A title explicitly saying teen/teenager should not be treated as a younger family activity merely because its numerical age starts at 12.\n\nCONTENT:\nTreasure Island at Blue Town Heritage Centre in Sheerness Sheerness January 23, 2026 2:30 pm - January 23, 2027 4:00 pm [https://seekent.co.uk/listing/treasure-island-blue-town-heritage-centre-sheerness-2027/]\nBlue Town Heritage Centre [https://seekent.co.uk/listing/blue-town-heritage-centre/]\nQuick view\nBookmark\nCanterbury Festival Canterbury October 23, 2026 12:00 am - 11:00 pm [https://seekent.co.uk/listing/canterbury-festival/]\nPYO Pumpkins at Spadework near West Malling Tonbridge October 23, 2026 9:00 am - 5:00 pm [https://seekent.co.uk/listing/pyo-pumpkins-at-spadework-in-tonbridge/]\nLime Tree Farm Pumpkin Patch on Romney Marsh Romney Marsh October 23, 2026 9:00 am - 5:00 pm [https://seekent.co.uk/listing/lime-tree-farm-pumpkin-patch-in-romney-marsh/]\nPumpkin Festival & Pumpkin Nights at Lower Ladysden Farm Tunbridge Wells October 23, 2026 9:00 am - 5:00 pm [https://seekent.co.uk/listing/pumpkin-festival-at-lower-ladysden-farm-in-tunbridge-wells/]\nAutumn Adventures at Port Lympne Reserve near Hythe Hythe October 23, 2026 9:30 am - 5:00 pm [https://seekent.co.uk/listing/autumn-adventures-port-lympne-reserve-hythe/]\nPort Lympne Reserve [https://seekent.co.uk/listing/port-lympne-reserve/]\nQuick view\nBookmark\nRoom on the Broom Trail at Bedgebury Tunbridge Wells October 23, 2026 9:30 am - 4:30 pm [https://seekent.co.uk/listing/halloween-room-on-the-broom-trail-bedgebury/]\nBedgebury National Pinetum and Forest [https://seekent.co.uk/listing/bedgebury-national-pinetum-and-forest/]\nQuick view\nBookmark\nPumpkin Picking at Pumpkin Moon in Maidstone Maidstone October 23, 2026 10:00 am - 4:00 pm [https://seekent.co.uk/listing/pumpkin-moon-maidstone/]\nHalloween Half-term Trail At Scotney Castle Tunbridge Wells October 23, 2026 10:00 am - 4:00 pm [https://seekent.co.uk/listing/halloween-half-term-trail-at-scotney-castle-in-tunbridge-wells/]\nEvents At Chartwell In Sevenoaks Sevenoaks October 23, 2026 10:00 am - 5:00 pm [https://seekent.co.uk/listing/events-at-chartwell-in-sevenoaks/]\nHalloween & Half Term At Howletts Canterbury October 23, 2026 10:00 am - 5:00 pm [https://seekent.co.uk/listing/halloween-half-term-at-howletts-in-canterbury/]\nHowletts Wild Animal Park [https://seekent.co.uk/listing/howletts-wild-animal-park-things-to-do-in-kent/]\nQuick view\nBookmark\nHorrible Histories Halloween at Leeds Castle in Maidstone Maidstone October 23, 2026 10:00 am - 5:00 pm [https://seekent.co.uk/listing/horrible-histories-halloween-leeds-castle-maidstone/]\nLeeds Castle [https://seekent.co.uk/listing/maidstone-leeds-castle/]\nQuick view\nBookmark\nHalloween Events In Kent 2026 Kent October 23, 2026 10:00 am - 9:00 pm [https://seekent.co.uk/listing/halloween-events-in-kent/]\nPYO Pumpkins at Loddington Farm near Maidstone Maidstone October 23, 2026 10:00 am - 4:00 pm [https://seekent.co.uk/listing/pyo-pumpkins-at-loddington-farm-in-maidstone/]\nPumpkin Picking at Meopham PYO near Gravesend Gravesend October 23, 2026 10:00 am - 4:00 pm [https://seekent.co.uk/listing/meopham-pyo-pumpkin-in-gravesend/]\nHalloween Community Events in Thanet October 23, 2026 10:00 am - 5:00 pm [https://seekent.co.uk/listing/halloween-community-events-thanet/]\nMilebush Farm PYO Pumpkin Patch, Maidstone Maidstone October 23, 2026 10:00 am - 4:00 pm [https://seekent.co.uk/listing/pumpkin-patch-in-maidstone-and-milebush-farm-pyo/]\nHalloween & Half Term at Walmer Castle Deal October 23, 2026 10:00 am - 5:00 pm [https://seekent.co.uk/listing/halloween-half-term-walmer-castle-deal/]\nWalmer Castle [https://seekent.co.uk/listing/walmer-castle/]\nQuick view\nBookmark\nPumpkin Picking at Pumpkin Moon in Rainham Rainham October 23, 2026 10:00 am - 4:00 pm [https://seekent.co.uk/listing/pumpkin-patches-in-rainham-and-pumpkin-moon/]\nPumpkin Festival At Riverhill Himalayan Gardens Sevenoaks October 23, 2026 10:00 am - 4:00 pm [https://seekent.co.uk/listing/halloween-in-sevenoaks-and-pumpkin-festival-at-riverhill-himalayan-gardens/]\nRiverhill Himalayan Gardens in Sevenoaks [https://seekent.co.uk/listing/riverhill-himalayan-gardens/]\nQuick view\nBookmark\n",
+  "schema": {
+    "$defs": {
+      "ListingSchema": {
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "listing_type": {
+            "title": "Listing Type",
+            "type": "string"
+          },
+          "is_holiday_camp": {
+            "default": false,
+            "title": "Is Holiday Camp",
+            "type": "boolean"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Category"
+          },
+          "start_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start Date"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Date"
+          },
+          "schedule_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Schedule Text"
+          },
+          "occurrence_dates": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Occurrence Dates"
+          },
+          "time_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Text"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "venue_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Venue Name"
+          },
+          "venue_address": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Venue Address"
+          },
+          "postcode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Postcode"
+          },
+          "event_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Url"
+          },
+          "cost_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cost Text"
+          },
+          "age_range": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Age Range"
+          },
+          "recurrence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recurrence"
+          },
+          "family_relevance": {
+            "title": "Family Relevance",
+            "type": "integer"
+          },
+          "confidence": {
+            "title": "Confidence",
+            "type": "number"
+          },
+          "audience": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Audience"
+          },
+          "family_evidence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Family Evidence"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "listing_type",
+          "start_date",
+          "end_date",
+          "time_text",
+          "location",
+          "event_url",
+          "cost_text",
+          "age_range",
+          "recurrence",
+          "family_relevance",
+          "confidence"
+        ],
+        "title": "ListingSchema",
+        "type": "object"
+      }
+    },
+    "items": {
+      "$ref": "#/$defs/ListingSchema"
+    },
+    "type": "array"
+  },
+  "settings": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "rebuilt_offline": true,
+    "rebuilt_on": "2026-10-23",
+    "fetch_engine": "requests"
+  },
+  "raw": [
+    {
+      "title": "PYO Pumpkins at Spadework near West Malling",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    },
+    {
+      "title": "Lime Tree Farm Pumpkin Patch on Romney Marsh",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    },
+    {
+      "title": "Pumpkin Festival & Pumpkin Nights at Lower Ladysden Farm",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    },
+    {
+      "title": "Autumn Adventures at Port Lympne Reserve near Hythe",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    },
+    {
+      "title": "Room on the Broom Trail at Bedgebury",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    },
+    {
+      "title": "Pumpkin Picking at Pumpkin Moon in Maidstone",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    },
+    {
+      "title": "Halloween Half-term Trail At Scotney Castle",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    },
+    {
+      "title": "Halloween & Half Term At Howletts",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    },
+    {
+      "title": "Horrible Histories Halloween at Leeds Castle in Maidstone",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    },
+    {
+      "title": "PYO Pumpkins at Loddington Farm near Maidstone",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    },
+    {
+      "title": "Pumpkin Picking at Meopham PYO near Gravesend",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    },
+    {
+      "title": "Milebush Farm PYO Pumpkin Patch, Maidstone",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    },
+    {
+      "title": "Halloween & Half Term at Walmer Castle",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    },
+    {
+      "title": "Pumpkin Picking at Pumpkin Moon in Rainham",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    },
+    {
+      "title": "Pumpkin Festival At Riverhill Himalayan Gardens",
+      "listing_type": "event",
+      "start_date": "2026-10-23"
+    }
+  ],
+  "usage": {},
+  "reference": {
+    "kind": "source-reviewed",
+    "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+    "reviewer_type": "ai",
+    "parent_prompt_sha256": "8f84117215710f51799042e90078884697424e374097f33ccf455d4927d26e9f",
+    "chunk_index": 0,
+    "source_start": 0,
+    "source_end": 4063,
+    "source_chars": 4063,
+    "expected": [
+      {
+        "id": "kent-spadework",
+        "evidence": "PYO Pumpkins at Spadework near West Malling",
+        "fields": {
+          "title": "PYO Pumpkins at Spadework near West Malling",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      },
+      {
+        "id": "kent-lime-tree",
+        "evidence": "Lime Tree Farm Pumpkin Patch on Romney Marsh",
+        "fields": {
+          "title": "Lime Tree Farm Pumpkin Patch on Romney Marsh",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      },
+      {
+        "id": "kent-ladysden",
+        "evidence": "Pumpkin Festival & Pumpkin Nights at Lower Ladysden Farm",
+        "fields": {
+          "title": "Pumpkin Festival & Pumpkin Nights at Lower Ladysden Farm",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      },
+      {
+        "id": "kent-port-lympne",
+        "evidence": "Autumn Adventures at Port Lympne Reserve near Hythe",
+        "fields": {
+          "title": "Autumn Adventures at Port Lympne Reserve near Hythe",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      },
+      {
+        "id": "kent-room-on-the-broom",
+        "evidence": "Room on the Broom Trail at Bedgebury",
+        "fields": {
+          "title": "Room on the Broom Trail at Bedgebury",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      },
+      {
+        "id": "kent-pumpkin-moon-maidstone",
+        "evidence": "Pumpkin Picking at Pumpkin Moon in Maidstone",
+        "fields": {
+          "title": "Pumpkin Picking at Pumpkin Moon in Maidstone",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      },
+      {
+        "id": "kent-scotney",
+        "evidence": "Halloween Half-term Trail At Scotney Castle",
+        "fields": {
+          "title": "Halloween Half-term Trail At Scotney Castle",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      },
+      {
+        "id": "kent-howletts",
+        "evidence": "Halloween & Half Term At Howletts",
+        "fields": {
+          "title": "Halloween & Half Term At Howletts",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      },
+      {
+        "id": "kent-leeds-castle",
+        "evidence": "Horrible Histories Halloween at Leeds Castle in Maidstone",
+        "fields": {
+          "title": "Horrible Histories Halloween at Leeds Castle in Maidstone",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      },
+      {
+        "id": "kent-loddington",
+        "evidence": "PYO Pumpkins at Loddington Farm near Maidstone",
+        "fields": {
+          "title": "PYO Pumpkins at Loddington Farm near Maidstone",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      },
+      {
+        "id": "kent-meopham",
+        "evidence": "Pumpkin Picking at Meopham PYO near Gravesend",
+        "fields": {
+          "title": "Pumpkin Picking at Meopham PYO near Gravesend",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      },
+      {
+        "id": "kent-milebush",
+        "evidence": "Milebush Farm PYO Pumpkin Patch, Maidstone",
+        "fields": {
+          "title": "Milebush Farm PYO Pumpkin Patch, Maidstone",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      },
+      {
+        "id": "kent-walmer",
+        "evidence": "Halloween & Half Term at Walmer Castle",
+        "fields": {
+          "title": "Halloween & Half Term at Walmer Castle",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      },
+      {
+        "id": "kent-pumpkin-moon-rainham",
+        "evidence": "Pumpkin Picking at Pumpkin Moon in Rainham",
+        "fields": {
+          "title": "Pumpkin Picking at Pumpkin Moon in Rainham",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      },
+      {
+        "id": "kent-riverhill",
+        "evidence": "Pumpkin Festival At Riverhill Himalayan Gardens",
+        "fields": {
+          "title": "Pumpkin Festival At Riverhill Himalayan Gardens",
+          "listing_type": "event",
+          "start_date": "2026-10-23"
+        }
+      }
+    ],
+    "excluded": [
+      {
+        "id": "kent-treasure-island",
+        "evidence": "January 23, 2026 2:30 pm - January 23, 2027 4:00 pm",
+        "reason": "Placeholder year-long range; no actual performance date"
+      },
+      {
+        "id": "kent-canterbury-festival",
+        "evidence": "Canterbury Festival Canterbury October 23, 2026",
+        "reason": "General arts festival; no child or family evidence in the supplied text"
+      },
+      {
+        "id": "kent-chartwell",
+        "evidence": "Events At Chartwell In Sevenoaks",
+        "reason": "Round-up or guide page, not a specific event"
+      },
+      {
+        "id": "kent-halloween-roundup",
+        "evidence": "Halloween Events In Kent 2026",
+        "reason": "Round-up or guide page, not a specific event"
+      },
+      {
+        "id": "kent-thanet-roundup",
+        "evidence": "Halloween Community Events in Thanet",
+        "reason": "Round-up or guide page, not a specific event"
+      }
+    ],
+    "baseline_cost_comparable": false,
+    "selection": {
+      "kind": "selected-complete-records",
+      "original_prompt_sha256": "c9722fc64efcbee37db256274edda4120369e6d35b9222591261020d463ea0ea",
+      "original_source_chars": 18059,
+      "original_source_spans": [
+        {
+          "start": 7207,
+          "end": 11270
+        }
+      ],
+      "rebuilt_offline": true,
+      "source": {
+        "id": "ed06de23-da3d-4e24-8c6c-6e74b617f117",
+        "name": "Kent County Council",
+        "url": "https://seekent.co.uk/whats-on/?type=event&search_keywords=family&sort=order-by-date",
+        "category": "councils",
+        "nation": "England",
+        "region": "South East"
+      },
+      "notes": "Family-search results: specific seasonal family events versus round-up pages, a general festival and a placeholder date range. Multi-day events show today as their listed date."
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "prompt_sha256": "b1ec5edb67ff6a3678a194b7019656e70cc403ba5db1e5393f80d1faf2858a58",
+  "reviewer": "Claude AI source review, 23 Oct 2026; owner spot-check pending",
+  "reviewer_type": "ai",
+  "chunks": [
+    {
+      "start": 0,
+      "end": 4128,
+      "complete_records": true,
+      "all_candidates_reviewed": true,
+      "expected": [
+        {
+          "id": "hoop-baby-ballet-1530",
+          "evidence": "Regal Ballet: Baby Ballet (18 months to 2½ years)",
+          "fields": {
+            "title": "Regal Ballet: Baby Ballet (18 months to 2½ years)",
+            "listing_type": "activity"
+          }
+        },
+        {
+          "id": "hoop-tiny-dancers-1530",
+          "evidence": "23 October at 15:30 Tiny Dancers",
+          "fields": {
+            "title": "Tiny Dancers",
+            "listing_type": "activity"
+          }
+        },
+        {
+          "id": "hoop-pre-primary-1530",
+          "evidence": "23 October at 15:30 Regal Ballet: Pre-Primary Ballet",
+          "fields": {
+            "title": "Regal Ballet: Pre-Primary Ballet (3½ to 5 years)",
+            "listing_type": "activity"
+          }
+        },
+        {
+          "id": "hoop-big-small",
+          "evidence": "Big & Small For children aged 2 upwards",
+          "fields": {
+            "title": "Big & Small",
+            "listing_type": "activity"
+          }
+        },
+        {
+          "id": "hoop-pre-primary-1555",
+          "evidence": "23 October at 15:55 Regal Ballet: Pre-Primary Ballet",
+          "fields": {
+            "title": "Regal Ballet: Pre-Primary Ballet (3½ to 5 years)",
+            "listing_type": "activity"
+          }
+        },
+        {
+          "id": "hoop-ballet-2-3-1555",
+          "evidence": "23 October at 15:55 Regal Ballet: Ballet for 2½ to 3½ years",
+          "fields": {
+            "title": "Regal Ballet: Ballet for 2½ to 3½ years",
+            "listing_type": "activity"
+          }
+        },
+        {
+          "id": "hoop-moving-waves",
+          "evidence": "Moving Waves Performing arts classes",
+          "fields": {
+            "title": "Moving Waves",
+            "listing_type": "activity"
+          }
+        },
+        {
+          "id": "hoop-kids-gym",
+          "evidence": "Kids Gym Club - Official HYROX Training Club",
+          "fields": {
+            "title": "Kids Gym Club - Official HYROX Training Club",
+            "listing_type": "activity"
+          }
+        },
+        {
+          "id": "hoop-mini-street",
+          "evidence": "Mini Street Music, energy and great moves!",
+          "fields": {
+            "title": "Mini Street",
+            "listing_type": "activity"
+          }
+        },
+        {
+          "id": "hoop-tiny-dancers-1600",
+          "evidence": "23 October at 16:00 Tiny Dancers",
+          "fields": {
+            "title": "Tiny Dancers",
+            "listing_type": "activity"
+          }
+        },
+        {
+          "id": "hoop-rising-stars",
+          "evidence": "Rising Stars Reception children and school year 1",
+          "fields": {
+            "title": "Rising Stars",
+            "listing_type": "activity"
+          }
+        }
+      ],
+      "excluded": []
+    }
+  ]
+}
