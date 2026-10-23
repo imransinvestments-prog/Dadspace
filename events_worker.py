@@ -560,6 +560,16 @@ def process_source(source, extract, today):
             return ('ok' if rows else 'ok_zero'),rows,new_hash,f'ClassForKids: {len(rows)} classes; zero model calls',stats
         except Exception as exc:
             return base.classify_fetch_error(str(exc)),[],None,str(exc),stats
+    if source.get('source_adapter')=='openactive_feed':
+        from openactive_feed import collect
+        stats={}
+        try:
+            raw,new_hash=collect(source,today,base.robots_allows,stats)
+            rows=clean_events(raw,source,source['url'],'openactive_feed',today,stats)
+            # Re-clean every run: an unchanged hash must not renew a series the feed dropped.
+            return ('ok' if rows else 'ok_zero'),rows,new_hash,f"OpenActive: {stats.get('openactive_series_eligible',0)} eligible series as {len(rows)} activities; zero model calls",stats
+        except Exception as exc:
+            return base.classify_fetch_error(str(exc)),[],None,str(exc),stats
     if source.get('source_adapter')=='library_portal':
         from library_portal import collect_portal, fetch_portal
         stats={}
