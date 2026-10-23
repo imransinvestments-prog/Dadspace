@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Council discovery: the top family spots per UK council from OpenStreetMap.
+"""Council discovery: new family places per UK council from OpenStreetMap.
 
 Responsibilities:
 - take councils from geography_areas (latest geography release)
 - fetch named family places inside each council's OSM boundary (ref:gss = ONS code)
-- rank deterministically and keep the top 10, at most 3 per category
-- keep only places not already in public.venues
-- draft a dad-focused description and typical busy times from OSM tags only,
-  stored as unverified review notes, never as venue facts
-- write a strict JSON array per run and, when not a dry run, insert hidden
-  discovered venues for the /ops review desk. Nothing is made public here.
+- keep every place not already in public.venues, ranked deterministically (no cap)
+- draft a dad-focused description and typical busy times from OSM tags only for the
+  top 10 per council, stored as unverified review notes, never as venue facts
+- write a strict JSON array per run and, when not a dry run, insert the venues:
+  clear-cut types are published like the main OSM import; attractions, castles,
+  arts centres and anything flagged go in hidden for the /ops review desk.
 
 Map data © OpenStreetMap contributors, ODbL.
 """
@@ -39,28 +39,41 @@ POSTCODES_API = "https://api.postcodes.io/postcodes"
 UA = os.environ.get("USER_AGENT", "DadspaceVenueBot/2.0 (+https://www.dad-space.co.uk)")
 SOURCE = "OpenStreetMap council discovery"
 PROVENANCE = "osm-council-discovery"
-TOP_N = 10
-PER_CATEGORY = 3
+# Owner decision 23 Oct 2026 (#243): no cap on places per council; AI notes only for the top 10.
+NOTES_TOP_N = 10
 NEAR_MISS_METRES = 150
 NEAR_MISS_SCORE = 0.55
 REFRESH_DAYS = int(os.environ.get("COUNCIL_DISCOVERY_REFRESH_DAYS", "180") or 180)
 NO_BOUNDARY_RETRY_DAYS = 7
 
-# Labels match the categories already stored for OSM venues, so the site's
-# category artwork and filters treat new rows the same way.
+# Labels match the categories already stored for OSM venues where one exists, so the site's
+# category artwork and filters treat new rows the same way. Order matters: a maze is often also
+# tagged tourism=attraction, so the specific rules come before the generic attraction rule.
 CATEGORY_RULES = [
     ("tourism", "museum", "Museum", 5),
     ("tourism", "zoo", "Zoo / animal park", 5),
     ("tourism", "aquarium", "Aquarium", 5),
     ("tourism", "theme_park", "Theme park", 5),
+    ("amenity", "planetarium", "Planetarium", 5),
     ("leisure", "water_park", "Water park", 4),
     ("leisure", "indoor_play", "Indoor / soft play centre", 4),
-    ("leisure", "park", "Park", 4),
+    ("leisure", "trampoline_park", "Trampoline venue", 4),
+    ("leisure", "high_ropes_course", "Adventure / high ropes", 4),
+    ("attraction", "maze", "Maze", 3),
+    ("leisure", "miniature_golf", "Mini golf", 3),
     ("leisure", "nature_reserve", "Nature reserve", 3),
-    ("leisure", "playground", "Children’s playground", 2),
+    ("historic", "castle", "Castle", 3),
+    ("amenity", "arts_centre", "Arts centre", 3),
+    ("tourism", "attraction", "Attraction", 3),
 ]
-# Libraries are not discovered here (owner decision 23 Oct 2026, #243): the Public Library Open Data
-# reference source already covers them and they rarely change.
+# Owner decisions (#243): libraries are not discovered (23 Oct 2026; the Public Library Open Data
+# reference source covers them), nor are parks and playgrounds (23 Oct 2026; they rarely change).
+# These types are less certain, so they go in hidden for review rather than being published.
+REVIEW_CATEGORIES = {"Attraction", "Castle", "Arts centre"}
+# tourism=attraction also tags single rides and zoo enclosures, which are parts of other places.
+NOT_A_PLACE_ATTRACTIONS = {"amusement_ride", "roller_coaster", "water_slide", "carousel", "log_flume",
+                           "animal", "kiddie_ride", "big_wheel", "swing_carousel", "bumper_car", "drop_tower",
+                           "pirate_ship", "dark_ride", "train", "summer_toboggan", "boat_ride"}
 FARM_LABEL, FARM_WEIGHT = "Farm", 5
 # Owner decision 22 Oct 2026 (#243): Northern Ireland is left out for now (no ONS-coded OSM boundaries).
 EXCLUDED_COUNCIL_PREFIXES = ("N",)
@@ -92,8 +105,11 @@ def overpass_query(code: str) -> str:
 area["ref:gss"="{code}"]["boundary"="administrative"]->.a;
 .a out ids;
 (
-  nwr["leisure"~"^(playground|park|nature_reserve|water_park|indoor_play)$"]["name"](area.a);
-  nwr["tourism"~"^(museum|zoo|aquarium|theme_park)$"]["name"](area.a);
+  nwr["leisure"~"^(nature_reserve|water_park|indoor_play|trampoline_park|high_ropes_course|miniature_golf)$"]["name"](area.a);
+  nwr["tourism"~"^(museum|zoo|aquarium|theme_park|attraction)$"]["name"](area.a);
+  nwr["amenity"~"^(planetarium|arts_centre)$"]["name"](area.a);
+  nwr["historic"="castle"]["name"](area.a);
+  nwr["attraction"="maze"]["name"](area.a);
 );
 out tags center bb;"""
 
@@ -120,8 +136,19 @@ def classify(tags: dict) -> tuple[str, int] | None:
         return FARM_LABEL, FARM_WEIGHT
     for key, value, label, weight in CATEGORY_RULES:
         if tags.get(key) == value:
-            return label, weight
+            return (label, weight) if worth_listing(label, tags) else None
     return None
+
+
+def worth_listing(label: str, tags: dict) -> bool:
+    """Filters for the broad types: a visitable place leaves a trace (website, Wikidata, hours)."""
+    website = tags.get("website") or tags.get("contact:website")
+    if label == "Attraction":
+        return tags.get("attraction") not in NOT_A_PLACE_ATTRACTIONS and bool(website or tags.get("wikidata"))
+    if label == "Castle":
+        # Most castle tags are ruins and earthworks; one with a website or opening hours can be visited.
+        return bool(website or tags.get("opening_hours"))
+    return True
 
 
 def bbox_area_km2(bounds: dict | None) -> float:
@@ -143,7 +170,7 @@ def score(tags: dict, weight: int, bounds: dict | None, label: str) -> float:
     s += 1 if tags.get("toilets") == "yes" else 0
     s += 1 if tags.get("wheelchair") == "yes" else 0
     s += 1 if tags.get("baby_feeding") in ("yes", "room") else 0
-    if label in ("Park", "Nature reserve"):
+    if label == "Nature reserve":
         s += min(3.0, math.log1p(bbox_area_km2(bounds) * 10))
     return round(s, 3)
 
@@ -187,15 +214,9 @@ def ordered(spots: list[dict]) -> list[dict]:
     return sorted(spots, key=lambda s: (-s["score"], s["osm_type"], s["osm_id"]))
 
 
-def rank(spots: list[dict], limit: int = TOP_N, per_category: int = PER_CATEGORY) -> list[dict]:
-    kept, counts = [], {}
-    for s in ordered(spots):
-        if counts.get(s["category"], 0) >= per_category:
-            continue
-        counts[s["category"]] = counts.get(s["category"], 0) + 1
-        kept.append(s)
-        if len(kept) == limit:
-            break
+def rank(spots: list[dict]) -> list[dict]:
+    """Every spot, best first. The rank picks which get AI notes; nothing is dropped."""
+    kept = ordered(spots)
     for i, s in enumerate(kept, 1):
         s["rank"] = i
     return kept
@@ -447,8 +468,17 @@ def validate_record(record: dict):
         raise ValueError("output record needs coordinates")
 
 
+def needs_review(record: dict) -> bool:
+    """Owner decision 23 Oct 2026 (#243): clear-cut types are published like the main OSM import;
+    uncertain types, possible duplicates and places whose postcode is in a neighbour are reviewed."""
+    return (record["category"] in REVIEW_CATEGORIES or bool(record["possible_duplicate_of"])
+            or record["council_check"] == "postcode_other_council")
+
+
 def review_reason(record: dict) -> str:
     parts = [f"Council discovery {record['council_code']}: new OSM candidate; AI description and busy times unverified"]
+    if record["category"] in REVIEW_CATEGORIES:
+        parts.append(f"{record['category'].lower()} type needs a check that it is a family place")
     if record["postcode_source"] == "reverse_nearest":
         parts.append(f"nearest postcode {record['postcode']} inferred, not stored")
     if record["council_check"] == "postcode_other_council":
@@ -460,15 +490,17 @@ def review_reason(record: dict) -> str:
 
 
 def venue_row(record: dict) -> dict:
-    """Hidden discovered venue. This path never publishes."""
+    """Published for clear-cut types, hidden for review otherwise. AI notes never reach this row;
+    they stay unverified in venue_sources."""
+    review = needs_review(record)
     return {
         "venue_name": record["name"], "category": record["category"], "address": record["address"],
         "town_city": record["council_name"],
         "postcode": record["postcode"] if record["postcode_source"] == "osm_tag" else None,
         "latitude": record["lat"], "longitude": record["lng"], "source": SOURCE,
         "source_url": record["source_url"], "discovered_source_url": record["source_url"],
-        "licence": "ODbL", "discovery_status": "discovered", "public_visible": False,
-        "review_reason": review_reason(record),
+        "licence": "ODbL", "discovery_status": "discovered" if review else "existing",
+        "public_visible": not review, "review_reason": review_reason(record) if review else None,
     }
 
 
@@ -547,14 +579,10 @@ def make_generator(enabled: bool):
 
 
 def select_new(spots: list[dict], index: VenueIndex) -> tuple[list[dict], dict, dict]:
-    """Walk the ranked pool, skipping known venues, until the category-capped top list has slack."""
-    picked, possible_for, counts = [], {}, {}
+    """Walk the ranked pool, skipping known venues. There is no cap: every new spot is kept."""
+    picked, possible_for = [], {}
     stats = {"existing": 0, "possible": 0}
     for spot in ordered(spots):
-        if len(picked) >= TOP_N * 2:  # slack for spots postcode checks place in a neighbouring council
-            break
-        if counts.get(spot["category"], 0) >= PER_CATEGORY * 2:
-            continue
         outcome, venue = match_existing(spot, index)
         if outcome == "existing":
             stats["existing"] += 1
@@ -562,7 +590,6 @@ def select_new(spots: list[dict], index: VenueIndex) -> tuple[list[dict], dict, 
         if outcome == "possible":
             possible_for[spot_key(spot)] = venue
             stats["possible"] += 1
-        counts[spot["category"]] = counts.get(spot["category"], 0) + 1
         picked.append(spot)
     return picked, possible_for, stats
 
@@ -617,7 +644,7 @@ def discover_council(council: dict, index: VenueIndex, generator, fetch=None,
     notes = {}
     if generator is not None and top:
         try:
-            notes = draft_notes(generator, council["name"], top)
+            notes = draft_notes(generator, council["name"], top[:NOTES_TOP_N])
         except Exception as exc:  # noqa: BLE001 - notes are optional; the places are still useful
             stats["notes_error"] = type(exc).__name__
             if type(exc).__name__ in ("BudgetExhausted", "FatalLLMError"):
@@ -695,14 +722,14 @@ def write_artifact(records: list[dict], out_dir: str, run_id: str) -> str:
 
 
 def insert_records(db, records: list[tuple[dict, dict]]) -> int:
-    """Insert hidden venues. Possible duplicates go in too, named in the review reason, so a
+    """Insert venues. Possible duplicates go in too, hidden and named in the review reason, so a
     reviewer can merge or approve them rather than the place being lost with the artifact."""
     inserted = 0
     for offset in range(0, len(records), 100):
         batch = records[offset:offset + 100]
         rows = [venue_row(r) for r, _ in batch]
-        if any(row["public_visible"] is not False for row in rows):
-            raise RuntimeError("council discovery must not publish venues")
+        if any(row["public_visible"] and needs_review(r) for row, (r, _) in zip(rows, batch)):
+            raise RuntimeError("council discovery must not publish a place that needs review")
         saved = db.table("venues").upsert(rows, on_conflict="source_url", ignore_duplicates=True).execute().data or []
         ids = {x["source_url"]: x["id"] for x in saved if x.get("source_url") and x.get("id")}
         provs = [provenance_row(ids[r["source_url"]], r, s) for r, s in batch if r["source_url"] in ids]
