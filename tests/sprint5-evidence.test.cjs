@@ -67,6 +67,27 @@ test('#34 shows the cohort as scored: 25 reviewed originals unchanged, then the 
   const result=progress.venueProgress([comment(1,rows[0]),comment(2,rows[49]),comment(3,{...rows[49],title:'edited'})],rows)
   assert.equal(result.reviewed,2);assert.equal(result.passed,2)
 })
+test('#34 scoring applies the owner ruling and the recorded failures',()=>{
+  const venues=load('lib/operations/sprint11-venues.ts'),rows=venues.REVIEW34_ROWS,fp=row=>createHash('sha256').update(JSON.stringify(row)).digest('hex')
+  const progress=load('lib/operations/venue-checks.ts',{'server-only':{},'./venue-check-labels':load('lib/operations/venue-check-labels.ts')})
+  const failures=JSON.parse(fs.readFileSync('artefacts/data/venue-review-34-scoring-2026-10-22.json','utf8')).failures.map(f=>f.id)
+  assert.equal(failures.length,7);assert.ok(failures.every(id=>rows.some(r=>r.id===id)))
+  const review=(id,row,decision,checks)=>({id,user:{login:'imransinvestments-prog'},body:`Dadspace owner review v1\n\nDecision: ${decision}\n${checks?`Venue quality checks: ${checks}\n`:''}Reviewed record: ${row.id}\nSnapshot SHA-256: ${fp(row)}\n`})
+  const unknown=JSON.stringify({identity:'unknown',location:'unknown',source:'unknown',access:'unknown',visitor_facts:'unknown',photo_rights:'unknown'})
+  const no=JSON.stringify({identity:'no',location:'yes',source:'yes',access:'unknown',visitor_facts:'unknown',photo_rights:'unknown'})
+  const plain=rows.filter(r=>!failures.includes(r.id)),failure=rows.find(r=>r.id===failures[0])
+  const result=progress.venueProgress([
+    review(1,plain[0],'Approved for stated scope'),           // approval without ticks passes
+    review(2,plain[1],'Approved for stated scope',unknown),   // unknown ticks do not undo an approval
+    review(3,plain[2],'Changes requested'),                   // audience-only change request passes
+    review(4,plain[3],'Approved for stated scope',no),        // an explicit no is scored as given
+    review(5,plain[4],'Blocked — more evidence needed'),
+    review(6,failure,'Approved for stated scope'),            // recorded failure, remediated
+    review(7,plain[5],'Approved for stated scope','{"identity":"yes"}'), // malformed checks never count
+  ],rows)
+  assert.equal(result.reviewed,6);assert.equal(result.passed,3);assert.equal(result.remediated,1);assert.equal(result.afterRemediation,4)
+  assert.equal(result.qualityGate,false)
+})
 const dealLabels=load('lib/operations/deal-check-labels.ts')
 const dealReviews=load('lib/operations/deal-checks.ts',{'server-only':{},'./deal-check-labels':dealLabels})
 test('Deal scores bind owner and frozen fingerprint, count once and keep unknown/failed checks out of passes',()=>{
