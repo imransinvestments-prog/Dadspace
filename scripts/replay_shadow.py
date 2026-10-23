@@ -4,6 +4,7 @@ import json
 import math
 import os
 import re
+from difflib import SequenceMatcher
 from pathlib import Path
 import sys
 
@@ -62,8 +63,29 @@ def compare(before, after):
                         if any(left[k].get(f) != right[k].get(f) for f in FIELDS)]}
 
 
+# Owner-approved ceilings for a manual reviewed-cohort dispatch (#145, 23 Oct 2026). The automatic
+# shadow keeps its defaults: 4 samples, 60k tokens, 3,000 output tokens.
+CEILINGS = {'SHADOW_MAX_SAMPLES': 16, 'LLM_RUN_MAX_ATTEMPTS': 16,
+            'LLM_RUN_TOKEN_BUDGET': 250_000, 'LLM_MAX_OUTPUT_TOKENS': 8_000}
+
+
+def max_samples():
+    value = int(os.environ.get('SHADOW_MAX_SAMPLES') or 4)
+    if not 1 <= value <= CEILINGS['SHADOW_MAX_SAMPLES']:
+        raise ValueError('SHADOW_MAX_SAMPLES must be 1-16')
+    return value
+
+
+def check_ceilings():
+    for name, ceiling in CEILINGS.items():
+        value = os.environ.get(name)
+        if value and not 0 < int(value) <= ceiling:
+            raise ValueError(f'{name} must be between 1 and {ceiling}')
+
+
 def select_samples(directory):
     """Interleave workers before spending; one worker cannot take every slot."""
+    limit = max_samples()
     groups = {}
     for path in sorted(directory.rglob('sample-*.json')):
         if path.stat().st_size > 500_000:
@@ -71,37 +93,117 @@ def select_samples(directory):
         snapshot = json.loads(path.read_text(encoding='utf-8'))
         groups.setdefault(snapshot['worker'], []).append((path, snapshot))
     selected = []
-    while any(groups.values()) and len(selected) < 4:
+    while any(groups.values()) and len(selected) < limit:
         for worker in sorted(groups):
-            if groups[worker] and len(selected) < 4:
+            if groups[worker] and len(selected) < limit:
                 selected.append(groups[worker].pop(0))
     return selected
 
 
+def _text(value):
+    value = str(value or '').casefold().replace('’', "'").replace('&', ' and ')
+    return ' '.join(re.sub(r'[^\w\s\'½]', ' ', value).split())
+
+
+def _url(value):
+    value = str(value or '').strip()
+    return re.sub(r'[?#].*$', '', value).rstrip('/').lower()  # query strings vary between runs
+
+
+def _postcode(value):
+    return re.sub(r'\s+', '', str(value or '')).upper()
+
+
+def _similar(a, b, threshold=0.85):
+    a, b = _text(a), _text(b)
+    if not a or not b:
+        return False
+    return (len(min(a, b, key=len)) >= 6 and (a in b or b in a)) or SequenceMatcher(None, a, b).ratio() >= threshold
+
+
+def _field_ok(key, expected, row):
+    got = row.get(key)
+    if expected is None:
+        return got in (None, '', [])
+    if key in ('start_date', 'end_date'):
+        return str(got or '')[:10] == expected
+    if key == 'event_url':
+        return _url(got) == _url(expected)
+    if key == 'postcode':  # a postcode is right if the output carries it anywhere in its location fields
+        return _postcode(expected) in _postcode(' '.join(str(row.get(k) or '') for k in ('postcode', 'venue_address', 'location')))
+    if key == 'title':
+        return _similar(got, expected)
+    if key == 'venue_name':
+        return any(_similar(row.get(k), expected, 0.8) for k in ('venue_name', 'location', 'venue_address'))
+    if key == 'age_range':  # "4 years to 12 years" and "4-12" are the same range
+        numbers = lambda v: re.findall(r'\d+(?:\.\d+)?|½', str(v or ''))
+        return bool(numbers(expected)) and numbers(got) == numbers(expected)
+    return _text(got) == _text(expected)
+
+
+def _identity(fields, row):
+    """How strongly an output row is the referenced record; None when it cannot be."""
+    if fields.get('event_url') and _url(row.get('event_url')) == _url(fields['event_url']):
+        score = 3
+    elif fields.get('title') and _similar(row.get('title'), fields['title']):
+        score = 1
+    else:
+        return None
+    for key in ('venue_name', 'postcode', 'start_date'):
+        if fields.get(key):
+            if _field_ok(key, fields[key], row):
+                score += 1
+            elif row.get(key) and key != 'venue_name':
+                return None  # a different explicit date or postcode is a different record
+    return score
+
+
 def score_reference(reference, rows):
-    """Conservative exact evidence scoring; ambiguity never becomes acceptance."""
+    """Identity-aware scoring against the source-reviewed reference; ambiguity stays a review item.
+
+    Records pair one-to-one: by URL where the reference has one, otherwise by fuzzy title
+    plus any listed venue, postcode or date. Only the fields a reference lists are scored.
+    """
     if reference.get('kind') != 'source-reviewed':
         return None
-    scores = []
-    used = set()
-    for candidate in reference['expected']:
-        fields = candidate['fields']
-        matches = [(i, row) for i, row in enumerate(rows)
-                   if fields.get('event_url') and row.get('event_url') == fields['event_url']
-                   and row.get('start_date') == fields.get('start_date')]
+    expected = reference['expected']
+    pairs = sorted(((score, -e, -r) for e, candidate in enumerate(expected) for r, row in enumerate(rows)
+                    if isinstance(row, dict) and (score := _identity(candidate['fields'], row)) is not None), reverse=True)
+    matched, used = {}, set()
+    for _, e, r in pairs:
+        if -e not in matched and -r not in used:
+            matched[-e] = -r
+            used.add(-r)
+    scores, checked, correct, typed, typed_ok = [], 0, 0, 0, 0
+    for e, candidate in enumerate(expected):
         result = {'id': candidate['id'], 'evidence': candidate['evidence']}
-        if len(matches) != 1:
-            result.update(status='missing-or-ambiguous; review required', matches=len(matches))
+        if e not in matched:
+            result.update(status='missing; review required', differing_fields=None)
         else:
-            index, row = matches[0]
-            used.add(index)
-            differences = [key for key, value in fields.items() if row.get(key) != value]
-            result.update(status='field-differences; review required' if differences else 'exact-reviewed-fields',
-                          differing_fields=differences)
+            row = rows[matched[e]]
+            differences = [key for key, value in candidate['fields'].items() if not _field_ok(key, value, row)]
+            checked += len(candidate['fields'])
+            correct += len(candidate['fields']) - len(differences)
+            if 'listing_type' in candidate['fields']:
+                typed += 1
+                typed_ok += 'listing_type' not in differences
+            result.update(status='field-differences; review required' if differences else 'reviewed-fields-match',
+                          output_index=matched[e], differing_fields=differences)
         scores.append(result)
-    return {'candidates': scores, 'unmatched_output_indices': [i for i in range(len(rows)) if i not in used],
+    unmatched = [i for i in range(len(rows)) if i not in used]
+    excluded_returned = [{'id': item['id'], 'output_index': i, 'reason': item['reason']}
+                         for item in reference.get('excluded', []) for i in unmatched
+                         if isinstance(rows[i], dict) and _similar(rows[i].get('title'), item['evidence'], 0.75)]
+    flagged = {x['output_index'] for x in excluded_returned}
+    return {'candidates': scores, 'unmatched_output_indices': unmatched,
+            'excluded_returned': excluded_returned,
+            'extra_output_indices': [i for i in unmatched if i not in flagged],
+            'summary': {'expected': len(expected), 'matched': len(matched), 'fields_checked': checked,
+                        'fields_correct': correct, 'classification_checked': typed, 'classification_correct': typed_ok,
+                        'excluded_returned': len(excluded_returned), 'extras': len(unmatched) - len(flagged)},
             'accepted_listing_count': None,
-            'note': 'Exact field checks only; resolve aliases, exclusions and semantic differences with source review'}
+            'note': 'Scored against AI-drafted references the owner spot-checked; review misses, extras and '
+                    'returned exclusions against the source text before drawing conclusions'}
 
 
 def replay(directory, output, generator, configure=None):
@@ -111,7 +213,7 @@ def replay(directory, output, generator, configure=None):
               'variant': os.environ.get('SHADOW_VARIANT', 'openai-non-reasoning')}
     output.mkdir(parents=True, exist_ok=True)
     report['capture_count'] = len(list(directory.rglob('sample-*.json')))
-    report['unselected_count'] = max(0, report['capture_count'] - 4)
+    report['unselected_count'] = max(0, report['capture_count'] - max_samples())
     try:
         for prefix in ('BASELINE', 'SHADOW'):
             estimate({'prompt_tokens': 0, 'output_tokens': 0}, prefix)
@@ -170,6 +272,9 @@ def replay(directory, output, generator, configure=None):
                 'source_score': score_reference(snapshot.get('reference', {}), raw),
                 'comparison': compare(snapshot['raw'], raw), 'baseline_raw': snapshot['raw'], 'shadow_raw': raw})
         report['content_failures'] = len(failures)
+        summaries = [s['source_score']['summary'] for s in report['samples'] if (s.get('source_score') or {}).get('summary')]
+        if summaries:
+            report['score_summary'] = {key: sum(x[key] for x in summaries) for key in summaries[0]}
         report['coverage_status'] = ('incomplete; review required' if failures or report['unselected_count'] or any(
             s.get('status') for s in report['samples']) else 'completed; quality review required')
     except Exception as exc:
@@ -182,6 +287,7 @@ def replay(directory, output, generator, configure=None):
 
 
 if __name__ == '__main__':
+    check_ceilings()
     cohort = os.environ.get('SHADOW_REVIEWED_COHORT', '')
     if cohort and not re.fullmatch(r'artefacts/shadow-cohorts/[A-Za-z0-9_-]+', cohort):
         raise ValueError('Reviewed cohort must be a named directory under artefacts/shadow-cohorts')
