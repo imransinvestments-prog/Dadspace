@@ -8,8 +8,8 @@ Responsibilities:
 - draft a dad-focused description and typical busy times from OSM tags only for the
   top 10 per council, stored as unverified review notes, never as venue facts
 - write a strict JSON array per run and, when not a dry run, insert the venues:
-  clear-cut types are published like the main OSM import; attractions, castles,
-  arts centres and anything flagged go in hidden for the /ops review desk.
+  every type is published like the main OSM import; possible duplicates and places
+  whose postcode is in a neighbouring council go in hidden for the /ops review desk.
 
 Map data © OpenStreetMap contributors, ODbL.
 """
@@ -68,8 +68,6 @@ CATEGORY_RULES = [
 ]
 # Owner decisions (#243): libraries are not discovered (23 Oct 2026; the Public Library Open Data
 # reference source covers them), nor are parks and playgrounds (23 Oct 2026; they rarely change).
-# These types are less certain, so they go in hidden for review rather than being published.
-REVIEW_CATEGORIES = {"Attraction", "Castle", "Arts centre"}
 # tourism=attraction also tags single rides and zoo enclosures, which are parts of other places.
 NOT_A_PLACE_ATTRACTIONS = {"amusement_ride", "roller_coaster", "water_slide", "carousel", "log_flume",
                            "animal", "kiddie_ride", "big_wheel", "swing_carousel", "bumper_car", "drop_tower",
@@ -469,16 +467,13 @@ def validate_record(record: dict):
 
 
 def needs_review(record: dict) -> bool:
-    """Owner decision 23 Oct 2026 (#243): clear-cut types are published like the main OSM import;
-    uncertain types, possible duplicates and places whose postcode is in a neighbour are reviewed."""
-    return (record["category"] in REVIEW_CATEGORIES or bool(record["possible_duplicate_of"])
-            or record["council_check"] == "postcode_other_council")
+    """Owner decisions 23 Oct 2026 (#243): every discovered type is published like the main OSM
+    import; only possible duplicates and places whose postcode is in a neighbour are reviewed."""
+    return bool(record["possible_duplicate_of"]) or record["council_check"] == "postcode_other_council"
 
 
 def review_reason(record: dict) -> str:
     parts = [f"Council discovery {record['council_code']}: new OSM candidate; AI description and busy times unverified"]
-    if record["category"] in REVIEW_CATEGORIES:
-        parts.append(f"{record['category'].lower()} type needs a check that it is a family place")
     if record["postcode_source"] == "reverse_nearest":
         parts.append(f"nearest postcode {record['postcode']} inferred, not stored")
     if record["council_check"] == "postcode_other_council":

@@ -392,8 +392,8 @@ class DatabaseTests(TempDirTest):
         # A GB council with a missing boundary is retried after a week; Northern Ireland waits the full refresh.
         self.assertEqual([c['code'] for c in cd.due_councils(db, councils, 10)], ['B', 'C', 'E', 'F'])
 
-    def test_clear_types_are_published_and_the_rest_are_hidden_for_review(self):
-        # Owner decision 23 Oct 2026 (#243).
+    def test_every_type_is_published_and_flagged_places_are_hidden_for_review(self):
+        # Owner decisions 23 Oct 2026 (#243): attractions, castles and arts centres go live too.
         _, records = discover()
         farm = next(r for r, _ in records if r['name'] == 'Northolt City Farm')
         farm['possible_duplicate_of'] = {'venue_id': 'v9', 'venue_name': 'Something'}
@@ -402,15 +402,14 @@ class DatabaseTests(TempDirTest):
         inserted = cd.insert_records(db, records)
         venue_rows = {row['venue_name']: row for row in next(p for table, _, p in db.calls if table == 'venues')}
         self.assertEqual(inserted, len(records))
-        for name in ('Pitzhanger Manor House and Gallery', 'Horsenden Hill', 'Ash Mini Golf', 'Hedge Maze'):
+        for name in ('Pitzhanger Manor House and Gallery', 'Horsenden Hill', 'Ash Mini Golf', 'Hedge Maze',
+                     'Ealing Film Studios Tour', 'Example Castle', 'Questors Arts Centre'):
             row = venue_rows[name]
             self.assertEqual((row['public_visible'], row['discovery_status'], row['review_reason']),
                              (True, 'existing', None), name)
-        for name in ('Ealing Film Studios Tour', 'Example Castle', 'Questors Arts Centre', 'Northolt City Farm'):
-            row = venue_rows[name]
-            self.assertEqual((row['public_visible'], row['discovery_status']), (False, 'discovered'), name)
-        self.assertIn('castle type needs a check', venue_rows['Example Castle']['review_reason'])
-        self.assertIn('possible duplicate of Something (v9)', venue_rows['Northolt City Farm']['review_reason'])
+        farm_row = venue_rows['Northolt City Farm']
+        self.assertEqual((farm_row['public_visible'], farm_row['discovery_status']), (False, 'discovered'))
+        self.assertIn('possible duplicate of Something (v9)', farm_row['review_reason'])
         self.assertTrue(all('description' not in row for row in venue_rows.values()))  # AI notes never published
         provenance = next(p for table, _, p in db.calls if table == 'venue_sources')
         self.assertEqual(provenance[0]['source_payload']['draft']['claims_status'], 'unverified')

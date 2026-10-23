@@ -2,7 +2,7 @@
 
 Owner request, 22 October 2026: make sure there are enough places for every UK postcode by finding the top 10 dad-and-kid-friendly weekend spots in each council, keeping only places that are not already in `venues`, output as a strict JSON array, as part of the venue worker.
 
-**Changed by owner decision, 23 October 2026 (#243):** there is no cap, so every new place is kept. Parks and playgrounds are left out because they rarely change, and attractions, castles, arts centres, planetariums, high ropes, trampoline parks, mini golf and mazes are added. Clear-cut types are published, and the less certain ones are reviewed first (see Outputs). AI notes are drafted for the top 10 per council only.
+**Changed by owner decision, 23 October 2026 (#243):** there is no cap, so every new place is kept. Parks and playgrounds are left out because they rarely change, and attractions, castles, arts centres, planetariums, high ropes, trampoline parks, mini golf and mazes are added. Every type is published, and only flagged places are reviewed first (see Outputs). AI notes are drafted for the top 10 per council only.
 
 `venue_council_discovery.py` does this. It runs from the venue reference loader (`venue_reference_loader_v2.py`) once its source is activated, or on its own for one council. The ranking measures how notable and well documented a place is in OpenStreetMap, not how good it is for families, so public copy must not call these places "top" or "best".
 
@@ -36,8 +36,8 @@ Owner request, 22 October 2026: make sure there are enough places for every UK p
 
 - **JSON array:** `review/council-discovery/<run-id>.json`, uploaded as the `council-discovery-<run>` workflow artifact. Each item has `name`, `category`, `address`, `description` and `peak_busy_times`, plus the council, `postcode` and `postcode_source`, coordinates, OSM id and URL, `claims_status`, `evidence_tags`, `rank`, `possible_duplicate_of`, `council_check` and `note_rejected`.
 - **Venues** (not in dry runs), `licence = 'ODbL'`. Existing venues are never updated.
-  - **Published** (owner decision, 23 Oct, #243): clear-cut types go live like the main OSM import. They get `public_visible = true`, `discovery_status = 'existing'` and no review reason. Only OSM facts reach the venue; the AI notes stay in provenance.
-  - **Hidden for review**: attractions, castles and arts centres, plus any possible duplicate or point whose postcode is in a neighbouring council. They get `public_visible = false` and `discovery_status = 'discovered'`, and wait in `/ops/review`. The review reason names the council, the unverified notes, the type check, any inferred postcode, any neighbouring-council postcode and any possible duplicate.
+  - **Published** (owner decisions, 23 Oct, #243): every type, including attractions, castles and arts centres, goes live like the main OSM import. They get `public_visible = true`, `discovery_status = 'existing'` and no review reason. Only OSM facts reach the venue; the AI notes stay in provenance.
+  - **Hidden for review**: any possible duplicate, or point whose postcode is in a neighbouring council. They get `public_visible = false` and `discovery_status = 'discovered'`, and wait in `/ops/review`. The review reason names the council, the unverified notes, any inferred postcode, any neighbouring-council postcode and any possible duplicate.
   - A new public museum or soft play centre inside an approved `/places` cohort changes that cohort, so the page drops out of the sitemap until it is re-approved.
   - The draft notes, OSM tags, postcode source and checks are kept in `venue_sources.source_payload` (`source_name = 'osm-council-discovery'`), not in venue columns, so nothing unverified becomes a venue fact.
 - **Run log:** `venue_council_discovery_runs`. Each run takes the next councils without a successful run in the last 180 days (`COUNCIL_DISCOVERY_REFRESH_DAYS`). At 10 per run and two scheduled runs a day, all 350 GB councils are **queried** within about 18 days. Being queried does not mean a council has good coverage. A council whose boundary was not found is retried after 7 days.
@@ -58,7 +58,7 @@ Google's terms limit storing Places content beyond the place ID, and caching Goo
            'venue_reference', 'event_listing', 'venue_reference', 'osm_council_discovery', true);
    ```
 
-   The scheduled loader then runs 10 councils each time. It publishes the clear-cut types and inserts the rest hidden for review.
+   The scheduled loader then runs 10 councils each time. It publishes new places and inserts flagged ones hidden for review.
 4. Optional repository variables:
    - `COUNCIL_DISCOVERY_PER_RUN`
    - `COUNCIL_DISCOVERY_MAX_LLM_CALLS`
