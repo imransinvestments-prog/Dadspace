@@ -49,6 +49,32 @@ class OriginalContentTests(unittest.TestCase):
             self.assertEqual(worker.reviewed_post('brief', 'daily', []), draft())
             self.assertEqual(generate.call_count, 3)
             self.assertIn('Invalid word count', generate.call_args_list[1].args[0])
+            self.assertIn('add at least', generate.call_args_list[1].args[0])
+    def test_draft_inside_validator_band_but_short_of_brief_is_revised_with_exact_gap(self):
+        # #249: 23 Oct 07:17. ~150 words passed validate() (130–300) but the editor rejects below the brief's 160.
+        short = draft()
+        short['sections'][0]['paragraphs'] = ["Try " + "a shared drawing idea " * 27]  # 109 + 41 = 150 words
+        self.assertEqual(worker.body_words(short), 150)
+        worker.validate(short, "daily")
+        with patch.object(worker, "gemini", side_effect=[short, draft(), {"approved": True}]) as generate:
+            self.assertEqual(worker.reviewed_post('brief', 'daily', []), draft())
+        self.assertEqual(generate.call_count, 3)  # no editor call spent on the short draft
+        revision = generate.call_args_list[1].args[0]
+        self.assertIn("Body word count 150 is outside the brief's 160–230", revision)
+        self.assertIn('add at least 10 words', revision)
+        self.assertIn('measure 182 words', generate.call_args_list[2].args[0])  # editor gets the measured count
+    def test_two_short_drafts_publish_nothing_and_skip_the_editor(self):
+        short = draft()
+        short['sections'][0]['paragraphs'] = ["Try " + "a shared drawing idea " * 27]
+        with patch.object(worker, "gemini", side_effect=[short, short]) as generate:
+            with self.assertRaisesRegex(ValueError, 'outside the brief'):
+                worker.reviewed_post('brief', 'daily', [])
+        self.assertEqual(generate.call_count, 2)
+    def test_brief_states_the_paragraph_word_target(self):
+        env = {"SUPABASE_URL": "https://example.com", "SUPABASE_SERVICE_KEY": "test", "GEMINI_API_KEY": "test"}
+        with patch.dict(worker.os.environ, env), patch.object(worker, "due_slots", return_value=[("daily", datetime.now().date())]), patch.object(worker, "api", side_effect=[[], []]), patch.object(worker, "gemini", side_effect=[draft(), {"approved": True, "reason": "ok"}]) as generate:
+            worker.run(dry_run=True)
+        self.assertIn("section paragraphs total 160–230 words (the title, summary and headings don't count)", generate.call_args_list[0].args[0])
     def test_remote_denial_is_not_retried(self):
         for status in (401, 402, 403, 429):
             with self.subTest(status=status), patch.object(worker, "gemini", side_effect=RuntimeError(f'Remote service returned HTTP {status}')) as generate:
