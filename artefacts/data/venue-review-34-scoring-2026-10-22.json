@@ -1,0 +1,9 @@
+{"scored_at":"2026-10-22T16:36:53Z","source":"https://github.com/imransinvestments-prog/Dadspace/issues/34#issuecomment-6345987953","remediation_source":"https://github.com/imransinvestments-prog/Dadspace/issues/34#issuecomment-6346019225","ruling":"Owner ruling, 22 Oct 2026: a review approved as relevant counts as a pass for identity, source and location; explicit ticks are scored as given. Audience verdicts (adult-only, more for parents) are not identity errors and pass the data-quality checks.","failures":[
+{"id":"38b652a7-9f42-4051-86f5-9cfe313ff48e","reason":"Wrong or missing name","remediation":"Renamed St Mary's Open Space Playground"},
+{"id":"03d0b21c-1b3c-4385-a12c-88fe93c157fc","reason":"Wrong or missing name","remediation":"Renamed Springfield Gardens Playground"},
+{"id":"96925266-061f-433f-b4c9-5797d6412f4b","reason":"Wrong or missing name","remediation":"Renamed The King's Gallery"},
+{"id":"d532f2e7-32e8-4a4d-b3cc-28afeff34a28","reason":"Wrong or missing name","remediation":"Renamed Langtry Walk Playground"},
+{"id":"5bcd0aa9-8cd0-4ee9-988c-42cb0cd40fea","reason":"Closed","remediation":"Hidden as closed"},
+{"id":"019d63f4-3478-4a23-b968-9e1bc9b93840","reason":"Closed","remediation":"Hidden as closed"},
+{"id":"fe5493a6-cb59-4535-90d6-209091552f03","reason":"Duplicate of the Museum of the Royal Philatelic Society London","remediation":"Merged into the Museum of the Royal Philatelic Society London"}
+]}
