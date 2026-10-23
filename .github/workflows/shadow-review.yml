@@ -47,6 +47,36 @@ jobs:
             model: gemini-3.6-flash
             input_rate: SHADOW_GEMINI_INPUT_USD_PER_MILLION
             output_rate: SHADOW_GEMINI_OUTPUT_USD_PER_MILLION
+          # Provider comparison arms (#145, owner-approved 23 Oct 2026). They run only on a manual
+          # reviewed-cohort dispatch, never on the automatic shadow, so they add no daily spend.
+          # Set the *_MODEL repo variable to override a model without a code change.
+          - variant: gemini-production
+            provider: gemini
+            model: gemini-3.6-flash
+            dispatch_only: true
+            input_rate: SHADOW_GEMINI_INPUT_USD_PER_MILLION
+            output_rate: SHADOW_GEMINI_OUTPUT_USD_PER_MILLION
+          - variant: claude-haiku
+            provider: anthropic
+            model: claude-haiku-5-5
+            model_var: SHADOW_ANTHROPIC_MODEL
+            dispatch_only: true
+            input_rate: SHADOW_ANTHROPIC_INPUT_USD_PER_MILLION
+            output_rate: SHADOW_ANTHROPIC_OUTPUT_USD_PER_MILLION
+          - variant: deepseek
+            provider: deepseek
+            model: deepseek-chat
+            model_var: SHADOW_DEEPSEEK_MODEL
+            dispatch_only: true
+            input_rate: SHADOW_DEEPSEEK_INPUT_USD_PER_MILLION
+            output_rate: SHADOW_DEEPSEEK_OUTPUT_USD_PER_MILLION
+          - variant: openrouter-free
+            provider: openrouter
+            model: ''  # required: set SHADOW_OPENROUTER_MODEL (a free model id) before dispatch
+            model_var: SHADOW_OPENROUTER_MODEL
+            dispatch_only: true
+            input_rate: SHADOW_OPENROUTER_INPUT_USD_PER_MILLION
+            output_rate: SHADOW_OPENROUTER_OUTPUT_USD_PER_MILLION
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -54,7 +84,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install jsonschema
+      - run: pip install jsonschema ${{ matrix.provider == 'anthropic' && 'anthropic' || '' }}
       - uses: actions/download-artifact@v5
         if: github.event_name == 'workflow_run'
         with:
@@ -64,12 +94,18 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Replay captured prompts only
+        if: matrix.dispatch_only != true || github.event_name == 'workflow_dispatch'
         run: python scripts/replay_shadow.py
         env:
           OPENAI_API_KEY: ${{ matrix.provider == 'openai' && secrets.OPENAI_API_KEY || '' }}
           GEMINI_API_KEY: ${{ matrix.provider == 'gemini' && secrets.GEMINI_API_KEY || '' }}
+          ANTHROPIC_API_KEY: ${{ matrix.provider == 'anthropic' && secrets.ANTHROPIC_API_KEY || '' }}
+          DEEPSEEK_API_KEY: ${{ matrix.provider == 'deepseek' && secrets.DEEPSEEK_API_KEY || '' }}
+          OPENROUTER_API_KEY: ${{ matrix.provider == 'openrouter' && secrets.OPENROUTER_API_KEY || '' }}
           EXTRACTION_LLM_PROVIDER: ${{ matrix.provider }}
-          EXTRACTION_LLM_MODEL: ${{ matrix.model }}
+          EXTRACTION_LLM_MODEL: ${{ matrix.model_var && vars[matrix.model_var] || matrix.model }}
+          # The production arm uses production's thinking setting; other Gemini arms set their own.
+          GEMINI_THINKING_LEVEL: ${{ matrix.variant == 'gemini-production' && vars.GEMINI_EXTRACTION_THINKING_LEVEL || '' }}
           SHADOW_VARIANT: ${{ matrix.variant }}
           SHADOW_REVIEWED_COHORT: ${{ github.event_name == 'workflow_dispatch' && inputs.reviewed_cohort || '' }}
           LLM_RUN_MAX_ATTEMPTS: '4'

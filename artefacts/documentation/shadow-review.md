@@ -1,5 +1,34 @@
 # Extraction shadow comparison (#65)
 
+## Provider comparison arms — 23 October 2026 (#145)
+
+Four arms run **only on a manual reviewed-cohort dispatch**, never on the automatic
+shadow after each collection, so they add no daily spend. Gemini stays the production
+default; nothing here changes a production provider variable.
+
+| Variant | Provider | Model (repo variable override) | Secret |
+|---|---|---|---|
+| `gemini-production` | gemini | `gemini-3.6-flash`, thinking from `GEMINI_EXTRACTION_THINKING_LEVEL` as in production | `GEMINI_API_KEY` |
+| `claude-haiku` | anthropic | `claude-haiku-5-5` (`SHADOW_ANTHROPIC_MODEL`), adaptive thinking at effort `medium` | `ANTHROPIC_API_KEY` |
+| `deepseek` | deepseek | `deepseek-chat` (`SHADOW_DEEPSEEK_MODEL`) | `DEEPSEEK_API_KEY` |
+| `openrouter-free` | openrouter | none by default: set `SHADOW_OPENROUTER_MODEL` to a free model id | `OPENROUTER_API_KEY` |
+
+Each key is passed only to its own arm. Optional rate variables
+`SHADOW_<PROVIDER>_INPUT_USD_PER_MILLION` and `_OUTPUT_` feed the usage estimate.
+Billed cost still comes from each provider's dashboard.
+
+- **Claude** goes through `llm_claude.py`, using the official `anthropic` SDK with its
+  own retries off. It uses structured outputs (`output_config.format`, JSON schema);
+  unsupported keywords such as `minLength` and `minimum` are dropped from the schema
+  sent, and the reply is still validated against the full schema. `max_tokens` is
+  rejected as incomplete, and a refusal is rejected. Thinking is billed inside output
+  tokens and is recorded as unknown, not zero. 429 and 5xx responses use the bounded
+  retries; any other status is fatal.
+- **DeepSeek and OpenRouter** share the OpenAI-compatible chat path: `json_object` mode,
+  the schema in the prompt, and validation on return. Only OpenRouter model ids may
+  contain `/`.
+- **Rollback:** delete the arm from the matrix. No production worker reads these settings.
+
 ## Diagnostic and evaluation repair — 15 October 2026
 
 Production provider, thinking, publication and source settings are unchanged.
