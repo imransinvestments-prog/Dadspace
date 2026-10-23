@@ -1,8 +1,8 @@
 {
-  "date": "2026-10-22",
-  "generated_at": "2026-10-22T10:13:14.722Z",
+  "date": "2026-10-23",
+  "generated_at": "2026-10-23T09:13:43.018Z",
   "status": "success",
-  "snapshot": "reporting/snapshots/2026-10-22/",
-  "previous_success_at": "2026-10-21T14:05:21.785Z",
-  "limitations": "Late generation; no22October morning run visible. Latest Deals run failed on expired Matalan terms. Merged performance changes are not fresh performance/coverage certification. Geography frozen; full billing unavailable."
+  "snapshot": "reporting/snapshots/2026-10-23/",
+  "previous_success_at": "2026-10-22T10:13:14.722Z",
+  "limitations": "Late brief; timer workers started on time. Originals rejection then daily/weekly retry logged. Measured usage excludes council calls, Originals and shadow. Inserts are not accepted/public supply; geography baseline is historical."
 }
