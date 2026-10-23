@@ -6,6 +6,9 @@ on:
       - 'collection_evidence.py'
       - 'mylibrary_calendar.py'
       - 'activity_eligibility.py'
+      - 'openactive.py'
+      - 'scripts/survey_openactive.py'
+      - 'tests/test_openactive.py'
       - 'scripts/replay-activity-identity.mjs'
       - 'scripts/build-activity-eligibility.py'
       - 'tests/activity-identity-replay.test.mjs'
@@ -32,6 +35,7 @@ jobs:
       - run: python -m unittest discover -s tests -p test_activity_renewal.py -v
       - run: python -m unittest discover -s tests -p test_activity_eligibility.py -v
       - run: python -m unittest discover -s tests -p test_mylibrary_calendar.py -v
+      - run: python -m unittest discover -s tests -p test_openactive.py -v
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
