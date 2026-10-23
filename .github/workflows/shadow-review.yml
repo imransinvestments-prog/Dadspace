@@ -3,8 +3,21 @@ on:
   workflow_dispatch:
     inputs:
       reviewed_cohort:
-        description: Reviewed directory under artefacts/shadow-cohorts (paid, existing caps)
+        description: Reviewed directory under artefacts/shadow-cohorts (paid)
         required: true
+        type: string
+      # Owner-approved 23 Oct 2026 (#145). replay_shadow.py rejects values above 16 / 250000 / 8000.
+      max_samples:
+        description: Samples per arm (1 for a dry run; at most 16)
+        default: '16'
+        type: string
+      token_budget:
+        description: Reported-token budget per arm (at most 250000)
+        default: '120000'
+        type: string
+      max_output_tokens:
+        description: Output-token cap per call, including thinking (at most 8000)
+        default: '3000'
         type: string
   workflow_run:
     workflows:
@@ -109,9 +122,10 @@ jobs:
           GEMINI_THINKING_LEVEL: ${{ matrix.variant == 'gemini-production' && vars.GEMINI_EXTRACTION_THINKING_LEVEL || '' }}
           SHADOW_VARIANT: ${{ matrix.variant }}
           SHADOW_REVIEWED_COHORT: ${{ github.event_name == 'workflow_dispatch' && inputs.reviewed_cohort || '' }}
-          LLM_RUN_MAX_ATTEMPTS: '4'
-          LLM_RUN_TOKEN_BUDGET: '60000'
-          LLM_MAX_OUTPUT_TOKENS: '3000'
+          SHADOW_MAX_SAMPLES: ${{ github.event_name == 'workflow_dispatch' && inputs.max_samples || '4' }}
+          LLM_RUN_MAX_ATTEMPTS: ${{ github.event_name == 'workflow_dispatch' && inputs.max_samples || '4' }}
+          LLM_RUN_TOKEN_BUDGET: ${{ github.event_name == 'workflow_dispatch' && inputs.token_budget || '60000' }}
+          LLM_MAX_OUTPUT_TOKENS: ${{ github.event_name == 'workflow_dispatch' && inputs.max_output_tokens || '3000' }}
           LLM_MAX_RETRIES: '0'
           UPSTREAM_RUN_ID: ${{ github.event.workflow_run.id }}
           BASELINE_INPUT_USD_PER_MILLION: ${{ vars.SHADOW_GEMINI_INPUT_USD_PER_MILLION }}

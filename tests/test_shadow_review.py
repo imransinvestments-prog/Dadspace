@@ -172,6 +172,69 @@ class ShadowReviewTests(unittest.TestCase):
                                     'BASELINE_OUTPUT_USD_PER_MILLION': '1'}):
             self.assertIsNone(estimate({}, 'BASELINE'))
 
+    def test_identity_scoring_pairs_same_titles_by_venue_and_normalises_fields(self):
+        reference = {'kind': 'source-reviewed', 'expected': [
+            {'id': 'camden', 'evidence': 'x', 'fields': {'title': 'Rhyme Time', 'listing_type': 'activity', 'venue_name': 'Camden Town Library', 'postcode': 'NW1 1BD'}},
+            {'id': 'kilburn', 'evidence': 'x', 'fields': {'title': 'Rhyme Time', 'listing_type': 'activity', 'venue_name': 'Kilburn Library', 'postcode': 'NW6 5UH'}},
+            {'id': 'class', 'evidence': 'x', 'fields': {'title': 'El Recreo Spanish', 'age_range': '4 years to 12 years',
+                                                         'event_url': 'https://x.org/classes/'}},
+            {'id': 'missing', 'evidence': 'x', 'fields': {'title': 'Toy Library'}}],
+            'excluded': [{'id': 'adult', 'evidence': 'Murder Mystery Halloween Dinner', 'reason': 'Adult dinner event'}]}
+        rows = [{'title': 'Rhyme time', 'listing_type': 'activity', 'venue_name': 'Kilburn Library', 'venue_address': '12-22 Kilburn High Road, NW6 5UH'},
+                {'title': 'Rhyme Time (under 5s)', 'listing_type': 'event', 'location': 'Camden Town Library, 218 Eversholt Street', 'postcode': 'nw11bd'},
+                {'title': 'El Recreo Spanish Online for Kids', 'age_range': '4-12', 'event_url': 'https://x.org/classes?utm=1'},
+                {'title': 'Murder Mystery Halloween Dinner', 'listing_type': 'event'},
+                {'title': 'Antiques fair'}]
+        score = score_reference(reference, rows)
+        by_id = {c['id']: c for c in score['candidates']}
+        self.assertEqual(by_id['camden']['output_index'], 1)
+        self.assertEqual(by_id['camden']['differing_fields'], ['listing_type'])
+        self.assertEqual((by_id['kilburn']['output_index'], by_id['kilburn']['differing_fields']), (0, []))
+        self.assertEqual((by_id['class']['output_index'], by_id['class']['differing_fields']), (2, []))
+        self.assertEqual(by_id['missing']['status'], 'missing; review required')
+        self.assertEqual([x['id'] for x in score['excluded_returned']], ['adult'])
+        self.assertEqual(score['extra_output_indices'], [4])
+        self.assertEqual(score['summary'], {'expected': 4, 'matched': 3, 'fields_checked': 11, 'fields_correct': 10,
+            'classification_checked': 2, 'classification_correct': 1, 'excluded_returned': 1, 'extras': 1})
+        self.assertIsNone(score['accepted_listing_count'])
+
+    def test_a_different_explicit_date_or_postcode_is_a_different_record(self):
+        reference = {'kind': 'source-reviewed', 'expected': [
+            {'id': 'a', 'evidence': 'x', 'fields': {'title': 'Pumpkin Patch', 'start_date': '2026-10-23'}},
+            {'id': 'b', 'evidence': 'x', 'fields': {'title': 'Pumpkin Patch', 'postcode': 'M3 5DW'}}]}
+        score = score_reference(reference, [{'title': 'Pumpkin Patch', 'start_date': '2026-11-01', 'postcode': 'M4 4DR'}])
+        self.assertEqual(score['summary']['matched'], 0)
+
+    def test_every_cohort_reference_identifies_its_own_records(self):
+        cohort = Path(__file__).resolve().parents[1] / 'artefacts' / 'shadow-cohorts' / 'quality-2026-10-23'
+        samples = sorted(cohort.glob('sample-*.json'))
+        self.assertEqual(len(samples), 15)
+        for path in samples:
+            reference = json.loads(path.read_text(encoding='utf-8'))['reference']
+            perfect = [dict(item['fields']) for item in reference['expected']]
+            summary = score_reference(reference, perfect)['summary']
+            with self.subTest(sample=path.name):
+                self.assertEqual(summary['matched'], summary['expected'])
+                self.assertEqual(summary['fields_correct'], summary['fields_checked'])
+                self.assertEqual((summary['extras'], summary['excluded_returned']), (0, 0))
+
+    def test_dispatch_sample_cap_and_ceilings(self):
+        from scripts.replay_shadow import max_samples, check_ceilings
+        with patch.dict(os.environ, {}):
+            os.environ.pop('SHADOW_MAX_SAMPLES', None)
+            self.assertEqual(max_samples(), 4)  # the automatic shadow keeps its old cap
+        for value, ok in (('16', True), ('17', False), ('0', False)):
+            with patch.dict(os.environ, {'SHADOW_MAX_SAMPLES': value}):
+                if ok:
+                    self.assertEqual(max_samples(), 16)
+                else:
+                    self.assertRaises(ValueError, max_samples)
+        for name, bad in (('LLM_RUN_TOKEN_BUDGET', '250001'), ('LLM_MAX_OUTPUT_TOKENS', '8001'), ('LLM_RUN_MAX_ATTEMPTS', '17')):
+            with patch.dict(os.environ, {name: bad}):
+                self.assertRaises(ValueError, check_ceilings)
+        with patch.dict(os.environ, {'LLM_RUN_TOKEN_BUDGET': '250000', 'LLM_MAX_OUTPUT_TOKENS': '8000', 'LLM_RUN_MAX_ATTEMPTS': '16'}):
+            check_ceilings()
+
 
 if __name__ == '__main__':
     unittest.main()
