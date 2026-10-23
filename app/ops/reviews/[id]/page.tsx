@@ -8,7 +8,7 @@ import { evidenceUrl } from "@/lib/operations/evidence-shared"
 import { NEWS_SAMPLE, newsProgress, newsGeography } from "@/lib/operations/news-sample"
 import { dealProgress } from "@/lib/operations/deal-checks"
 import { venueProgress } from "@/lib/operations/venue-checks"
-import { SPRINT11_VENUE_ROWS } from "@/lib/operations/sprint11-venues"
+import { REVIEW34_ROWS } from "@/lib/operations/sprint11-venues"
 import { previousOriginalsChecks, originalBodyWords } from "@/lib/operations/originals-checks"
 import { pageMetadata } from "@/lib/seo"
 import DatabaseEvidence from "../../database-evidence"
@@ -46,7 +46,7 @@ export default async function TaskReviewPage({ params, searchParams }: { params:
   const body = data?.issue.body.split("<!-- /dadspace-weekly-planning -->").at(-1)?.split("<details>")[0]
   const progress = task.id === 126 && data ? newsProgress(data.history) : null
   const deals = task.id === 130 && data ? dealProgress(data.history) : null
-  const venues = task.id === 34 && data ? venueProgress(data.history,SPRINT11_VENUE_ROWS) : null
+  const venues = task.id === 34 && data ? venueProgress(data.history,REVIEW34_ROWS) : null
   const nextIndex = progress ? NEWS_SAMPLE.rows.findIndex(row => !progress.reviews[row.id]) : -1
   const nextReview = nextIndex >= 0 ? `/ops/reviews/126?page=${Math.floor(nextIndex / MATERIAL_PAGE_SIZE) + 1}#record-${NEWS_SAMPLE.rows[nextIndex].id}` : null
   return <div className="space-y-6">
