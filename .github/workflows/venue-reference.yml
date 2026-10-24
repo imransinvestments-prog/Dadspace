@@ -33,6 +33,16 @@ on:
         type: choice
         options: ["true", "false"]
         default: "true"
+      council_discovery_only:
+        description: "Run only the next council discovery batch, skipping Active Places and libraries"
+        required: false
+        type: choice
+        options: ["true", "false"]
+        default: "false"
+      timer_slot:
+        description: "Set by the Supabase timer: the Europe/London slot it is running (leave blank for a manual run)"
+        required: false
+        default: ""
   workflow_call:
     inputs:
       dry_run:
@@ -48,6 +58,13 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    # 15-minute council batches never overlap: a slow batch makes the next one wait (GitHub keeps
+    # one waiting run and drops older ones). Other runs get their own group, so a timer batch can
+    # never displace the twice-daily workers run. Overlap with that run is harmless: inserts skip
+    # existing source_urls.
+    concurrency:
+      group: ${{ inputs.council_discovery_only == 'true' && 'council-discovery-timer' || format('venue-reference-{0}', github.run_id) }}
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -57,7 +74,7 @@ jobs:
       - name: Syntax check
         run: python -m py_compile venue_reference_loader_v2.py venue_council_discovery.py
       - name: Reconcile venue reference datasets
-        if: ${{ !inputs.council }}
+        if: ${{ !inputs.council && inputs.council_discovery_only != 'true' }}
         run: python venue_reference_loader_v2.py
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
@@ -67,6 +84,22 @@ jobs:
           COUNCILS_PER_RUN: ${{ inputs.councils_per_run || vars.COUNCIL_DISCOVERY_PER_RUN || '10' }}
           # Push-triggered dry runs never spend LLM budget.
           COUNCIL_DISCOVERY_LLM: ${{ github.event_name == 'push' && 'false' || inputs.council_llm || 'true' }}
+          COUNCIL_DISCOVERY_MAX_LLM_CALLS: ${{ vars.COUNCIL_DISCOVERY_MAX_LLM_CALLS || '0' }}
+          VENUE_DISCOVERY_LLM_PROVIDER: ${{ vars.VENUE_DISCOVERY_LLM_PROVIDER }}
+          VENUE_DISCOVERY_LLM_MODEL: ${{ vars.VENUE_DISCOVERY_LLM_MODEL }}
+          LLM_RUN_TOKEN_BUDGET: ${{ vars.COUNCIL_DISCOVERY_TOKEN_BUDGET }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OVERPASS_URL: ${{ vars.OVERPASS_URL || 'https://overpass-api.de/api/interpreter' }}
+      # The Supabase timer runs this every 15 minutes until every council has been queried.
+      - name: Council discovery batch
+        if: ${{ !inputs.council && inputs.council_discovery_only == 'true' }}
+        run: python venue_council_discovery.py
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          DRY_RUN: ${{ inputs.dry_run || 'true' }}
+          COUNCILS_PER_RUN: ${{ inputs.councils_per_run || vars.COUNCIL_DISCOVERY_PER_RUN || '10' }}
+          COUNCIL_DISCOVERY_LLM: ${{ inputs.council_llm || 'true' }}
           COUNCIL_DISCOVERY_MAX_LLM_CALLS: ${{ vars.COUNCIL_DISCOVERY_MAX_LLM_CALLS || '0' }}
           VENUE_DISCOVERY_LLM_PROVIDER: ${{ vars.VENUE_DISCOVERY_LLM_PROVIDER }}
           VENUE_DISCOVERY_LLM_MODEL: ${{ vars.VENUE_DISCOVERY_LLM_MODEL }}
