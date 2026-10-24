@@ -94,3 +94,33 @@ test('the schedules are registered and only the owner can run the token-reading 
     assert.equal((await db.query('select count(*)::int n from cron.jobs')).rows[0].n, 3)
   } finally { await db.close() }
 })
+
+test('the council discovery timer dispatches a council-only batch every 15 minutes until no council is due', async () => {
+  const db = await database()
+  try {
+    await db.exec(`
+      create table public.geography_releases(id text primary key, imported_at timestamptz);
+      create table public.geography_areas(code text, name text, kind text, release_id text);
+      create table public.venue_council_discovery_runs(council_code text, status text, ran_at timestamptz default now());
+      insert into public.geography_releases values ('old', '2026-01-01'), ('new', '2026-10-18');
+      insert into public.geography_areas values ('E06000001', 'Hartlepool', 'council', 'new'),
+        ('N09000003', 'Belfast', 'council', 'new'), ('E99999999', 'Old area', 'council', 'old');`)
+    await db.exec(fs.readFileSync('supabase/migrations/20261024120000_council_discovery_timer.sql', 'utf8'))
+    const job = (await db.query("select schedule, command from cron.jobs where name = 'dadspace-council-discovery-timer'")).rows[0]
+    assert.equal(job.schedule, '*/15 * * * *')
+    // pg_cron runs the command at now(); any quarter hour is a slot.
+    await db.exec(job.command)
+    const call = (await db.query('select url, body from net.calls')).rows[0]
+    assert.match(call.url, /workflows\/venue-reference\.yml\/dispatches$/)
+    assert.equal(call.body.inputs.dry_run, 'false')
+    assert.equal(call.body.inputs.council_discovery_only, 'true')
+    // Northern Ireland and older releases never keep it running; a failed run does not count as done.
+    await db.exec("insert into public.venue_council_discovery_runs (council_code, status) values ('E06000001', 'failed')")
+    assert.equal((await db.query('select public.dadspace_council_discovery_pending() as p')).rows[0].p, true)
+    await db.exec("insert into public.venue_council_discovery_runs (council_code, status) values ('E06000001', 'ok')")
+    assert.equal((await db.query('select public.dadspace_council_discovery_pending() as p')).rows[0].p, false)
+    await db.exec('delete from public.scheduled_dispatches')
+    await db.exec(job.command)
+    assert.equal((await db.query('select count(*)::int n from net.calls')).rows[0].n, 1)
+  } finally { await db.close() }
+})
