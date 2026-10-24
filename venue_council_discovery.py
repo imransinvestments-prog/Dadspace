@@ -29,6 +29,7 @@ import urllib.request
 from pathlib import Path
 
 import requests
+from postgrest.exceptions import APIError
 
 from venue_country import lookup_postcodes, normalize_postcode
 from venue_reference_worker import Candidate, choose_match, distance_m, norm_name, norm_postcode
@@ -687,7 +688,9 @@ def run(db, *, dry_run: bool, councils_per_run: int = 10, council: str | None = 
                 print(f"LLM stopped at {c['code']}: {type(exc).__name__}", file=sys.stderr)
                 generator = use = None
                 stats, found = discover_council(c, index, None, known=known)
-        except (requests.RequestException, RuntimeError, ValueError) as exc:
+        # APIError: a database lookup timing out (statement timeout, 23 Oct) fails this council
+        # only, so it is retried next run instead of losing the whole batch.
+        except (requests.RequestException, RuntimeError, ValueError, APIError) as exc:
             stats, found = {"code": c["code"], "name": c["name"], "status": "failed",
                             "error": type(exc).__name__}, []
         llm_calls += 1 if use is not None and found else 0

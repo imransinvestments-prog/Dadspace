@@ -6,6 +6,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from postgrest.exceptions import APIError
+
 import venue_council_discovery as cd
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -434,6 +436,18 @@ class DatabaseTests(TempDirTest):
             summary = cd.run(db, dry_run=True, llm=False, venue_rows=[], councils=[EALING], out_dir=self.out)
         self.assertEqual(summary['councils'][0]['status'], 'ok')
         self.assertEqual([c for c in db.calls if c[2] is not None], [])
+
+    def test_database_timeout_fails_one_council_not_the_run(self):
+        # 23 Oct 19:17: a statement timeout in the stored-URL lookup ended the whole batch.
+        timeout = APIError({'message': 'canceling statement due to statement timeout', 'code': '57014'})
+        with patch.object(cd, 'fetch_overpass', return_value=SAMPLE), \
+                patch.object(cd, 'resolve_postcodes', side_effect=keep_postcodes), \
+                patch.object(cd, 'stored_osm_urls', side_effect=[timeout, set()]):
+            summary = cd.run(FakeDB(), dry_run=True, llm=False, venue_rows=[], out_dir=self.out,
+                             councils=[{'code': 'E09000008', 'name': 'Croydon'}, EALING])
+        self.assertEqual([(c['code'], c['status']) for c in summary['councils']],
+                         [('E09000008', 'failed'), ('E09000009', 'ok')])
+        self.assertEqual(summary['councils'][0]['error'], 'APIError')
 
 
 if __name__ == '__main__':
